@@ -34,5 +34,11 @@ namespace $.$$ {
 			this.catalog_link( land.link().str )
 		}
 
+		settings_button_title() {
+			return this.settings_open()
+				? this.Return_title()
+				: this.Settings_title()
+		}
+
 	}
 }
