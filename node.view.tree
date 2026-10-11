@@ -76,6 +76,8 @@ $mol_paragraph $mol_view
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
+$mol_row $mol_view
+
 $mol_ghost $mol_view
 	Sub $mol_view
 
@@ -411,10 +413,28 @@ $bog_nka_settings $mol_page
 		<= Account_id $mol_paragraph
 			title <= account_id \
 
+$mol_card $mol_list
+	attr *
+		^
+		mol_card_status_type <= status \
+	rows /$mol_view
+		<= Content $mol_view
+			sub <= content /$mol_view_content
+				<= title
+		<= Status $mol_view
+			minimal_height 30
+			sub /
+				<= status_text <= status \
+
+$bog_nka_product_card $mol_card
+	title <= product_link \
+
 $bog_nka_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
 	title null - поле в настройках
+	Product_card* $bog_nka_product_card
+		product_link <= product_link* \
 	tools /
 		<= Settings_button $mol_button_minor
 			title <= settings_button_title \
@@ -434,4 +454,6 @@ $bog_nka_app $mol_page
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
+				<= Product_cards $mol_row
+					sub <= product_cards /
 		<= Settings $bog_nka_settings

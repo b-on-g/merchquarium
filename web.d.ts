@@ -2338,6 +2338,17 @@ declare namespace $ {
 
 //# sourceMappingURL=major.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_row extends $mol_view {
+	}
+	
+}
+
+//# sourceMappingURL=row.view.tree.d.ts.map
+declare namespace $ {
 
 	export class $mol_ghost extends $mol_view {
 		Sub( ): $mol_view
@@ -45842,6 +45853,61 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	type $mol_view__sub_mol_card_1 = $mol_type_enforce<
+		ReturnType< $mol_card['content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__minimal_height_mol_card_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_card_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_card extends $mol_list {
+		status( ): string
+		content( ): readonly($mol_view_content)[]
+		Content( ): $mol_view
+		status_text( ): ReturnType< $mol_card['status'] >
+		Status( ): $mol_view
+		attr( ): ({ 
+			'mol_card_status_type': ReturnType< $mol_card['status'] >,
+		})  & ReturnType< $mol_list['attr'] >
+		rows( ): readonly($mol_view)[]
+	}
+	
+}
+
+//# sourceMappingURL=card.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Represents a common card. It can has several statuses at bottom line.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
+     */
+    class $mol_card extends $.$mol_card {
+        rows(): readonly $mol_view[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $bog_nka_product_card extends $mol_card {
+		product_link( ): string
+		title( ): ReturnType< $bog_nka_product_card['product_link'] >
+	}
+	
+}
+
+//# sourceMappingURL=card.view.tree.d.ts.map
+declare namespace $ {
     const $bog_nka_catalog_base: Omit<typeof $giper_baza_dict, "prototype"> & {
         new (...args: any[]): $mol_type_override<$giper_baza_dict, {
             readonly Products: (auto?: any) => {
@@ -48004,12 +48070,23 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_view__sub_bog_nka_app_10 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_app_10 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['product_cards'] >
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	type $mol_view__sub_bog_nka_app_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
+	type $bog_nka_product_card__product_link_bog_nka_app_12 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['product_link'] >
+		,
+		ReturnType< $bog_nka_product_card['product_link'] >
+	>
 	export class $bog_nka_app extends $mol_page {
+		product_link( id: any): string
 		settings_button_title( ): string
 		settings_toggle( next?: any ): any
 		Settings_button( ): $mol_button_minor
@@ -48021,12 +48098,15 @@ declare namespace $ {
 		Catalog_selected_text( ): $mol_paragraph
 		product_add( next?: any ): any
 		Product_add( ): $mol_button_major
+		product_cards( ): readonly(any)[]
+		Product_cards( ): $mol_row
 		Catalog_selected( ): $mol_view
 		Settings( ): $bog_nka_settings
 		content( ): readonly(any)[]
 		Settings_title( ): string
 		Return_title( ): string
 		title( ): any
+		Product_card( id: any): $bog_nka_product_card
 		tools( ): readonly(any)[]
 		body( ): ReturnType< $bog_nka_app['content'] >
 	}
@@ -48045,6 +48125,8 @@ declare namespace $.$$ {
         settings_button_title(): string;
         catalog(): $bog_nka_catalog | null;
         product_add(): void;
+        product_cards(): $bog_nka_product_card[];
+        product_link(link: string): string;
     }
 }
 

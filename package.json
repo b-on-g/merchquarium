@@ -160,6 +160,7 @@
     "$mol_charset_buffer",
     "$mol_file_transaction",
     "$mol_button_major",
+    "$mol_row",
     "$bog_nka_settings",
     "$giper_baza_status",
     "$giper_baza",
@@ -332,8 +333,10 @@
     "$mol_memory_pool",
     "$mol_memory",
     "$mol_bus",
-    "$bog_nka_catalog",
-    "$bog_nka_product"
+    "$bog_nka_product_card",
+    "$bog_nka_product",
+    "$mol_card",
+    "$bog_nka_catalog"
   ],
   "dependencies": {
     "autoinstall": "*",

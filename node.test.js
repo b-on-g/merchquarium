@@ -6194,6 +6194,21 @@ var $;
 
 
 ;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
 	($.$mol_ghost) = class $mol_ghost extends ($.$mol_view) {
 		Sub(){
 			const obj = new this.$.$mol_view();
@@ -18918,7 +18933,107 @@ var $;
 })($ || ($ = {}));
 
 ;
+"use strict";
+var $;
+(function ($) {
+    class $bog_nka_product extends $giper_baza_dict.with({
+        Title: $giper_baza_atom_text,
+        Price: $giper_baza_atom_real,
+        Description: $giper_baza_atom_text,
+        Photos: $giper_baza_list_link.to(() => $giper_baza_file),
+        Category: $giper_baza_atom_text,
+        Available: $giper_baza_atom_bool,
+    }) {
+    }
+    $.$bog_nka_product = $bog_nka_product;
+})($ || ($ = {}));
+
+;
+	($.$mol_card) = class $mol_card extends ($.$mol_list) {
+		status(){
+			return "";
+		}
+		content(){
+			return [(this.title())];
+		}
+		Content(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.content()));
+			return obj;
+		}
+		status_text(){
+			return (this.status());
+		}
+		Status(){
+			const obj = new this.$.$mol_view();
+			(obj.minimal_height) = () => (30);
+			(obj.sub) = () => ([(this.status_text())]);
+			return obj;
+		}
+		attr(){
+			return {...(super.attr()), "mol_card_status_type": (this.status())};
+		}
+		rows(){
+			return [(this.Content()), (this.Status())];
+		}
+	};
+	($mol_mem(($.$mol_card.prototype), "Content"));
+	($mol_mem(($.$mol_card.prototype), "Status"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Represents a common card. It can has several statuses at bottom line.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
+         */
+        class $mol_card extends $.$mol_card {
+            rows() {
+                return [
+                    this.Content(),
+                    ...this.status_text() ? [this.Status()] : [],
+                ];
+            }
+        }
+        $$.$mol_card = $mol_card;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/card/card.view.css", "[mol_card] {\n\tbackground: var(--mol_theme_card);\n\tcolor: var(--mol_theme_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tflex-direction: column;\n\tposition: relative;\n\tbox-shadow: 0 0 0.5rem 0rem hsla(0,0%,0%,.125);\n\t/* overflow: hidden; */\n}\n\n[mol_card_content] {\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tmargin: 0;\n\tpadding: var(--mol_gap_block);\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n\tpadding: var(--mol_gap_text);\n\tmargin: 0;\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
+		product_link(){
+			return "";
+		}
+		title(){
+			return (this.product_link());
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
 	($.$bog_nka_app) = class $bog_nka_app extends ($.$mol_page) {
+		product_link(id){
+			return "";
+		}
 		settings_button_title(){
 			return "";
 		}
@@ -18970,9 +19085,21 @@ var $;
 			(obj.click) = (next) => ((this.product_add(next)));
 			return obj;
 		}
+		product_cards(){
+			return [];
+		}
+		Product_cards(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ((this.product_cards()));
+			return obj;
+		}
 		Catalog_selected(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Catalog_selected_text()), (this.Product_add())]);
+			(obj.sub) = () => ([
+				(this.Catalog_selected_text()), 
+				(this.Product_add()), 
+				(this.Product_cards())
+			]);
 			return obj;
 		}
 		Settings(){
@@ -18995,6 +19122,11 @@ var $;
 		title(){
 			return null;
 		}
+		Product_card(id){
+			const obj = new this.$.$bog_nka_product_card();
+			(obj.product_link) = () => ((this.product_link(id)));
+			return obj;
+		}
 		tools(){
 			return [(this.Settings_button())];
 		}
@@ -19011,25 +19143,11 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected_text"));
 	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
+	($mol_mem(($.$bog_nka_app.prototype), "Product_cards"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Product_card"));
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $bog_nka_product extends $giper_baza_dict.with({
-        Title: $giper_baza_atom_text,
-        Price: $giper_baza_atom_real,
-        Description: $giper_baza_atom_text,
-        Photos: $giper_baza_list_link.to(() => $giper_baza_file),
-        Category: $giper_baza_atom_text,
-        Available: $giper_baza_atom_bool,
-    }) {
-    }
-    $.$bog_nka_product = $bog_nka_product;
-})($ || ($ = {}));
 
 ;
 "use strict";
@@ -19101,6 +19219,13 @@ var $;
                 if (!catalog)
                     return;
                 catalog.Products(null)?.make(null);
+            }
+            product_cards() {
+                const products = this.catalog()?.Products()?.remote_list() ?? [];
+                return products.map(product => this.Product_card(product.link().str));
+            }
+            product_link(link) {
+                return link;
             }
         }
         __decorate([
