@@ -48025,6 +48025,7 @@ declare namespace $.$$ {
         catalog_selected_text(): string;
         catalog_create(): void;
         settings_button_title(): string;
+        catalog(): $bog_nka_catalog | null;
     }
 }
 
