@@ -34,13 +34,6 @@ $mol_page $mol_view
 			dom_name \footer
 			sub <= foot /$mol_view
 
-$mol_paragraph $mol_view
-	line_height 24
-	letter_width 7
-	width_limit +Infinity
-	row_width 0
-	sub / <= title
-
 $mol_speck $mol_view
 	theme \$mol_theme_accent
 	sub /
@@ -73,11 +66,24 @@ $mol_button_typed $mol_button
 
 $mol_button_minor $mol_button_typed
 
+$bog_nka_settings $mol_button_minor
+	title @ \Settings
+	click? <=> settings_toggle? null
+
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
 $bog_nka_app $mol_page
 	title null - поле в настройках
+	tools /
+		<= Settings_button $bog_nka_settings
 	body <= content /
 		<= Catalog_missing $mol_view
 			sub /

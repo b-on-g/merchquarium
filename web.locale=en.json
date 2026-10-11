@@ -1,6 +1,7 @@
 {
 	"$bog_nka_app_Catalog_create_title": "Create catalog",
 	"$bog_nka_app_Catalog_missing_text_title": "No catalog selected:",
+	"$bog_nka_settings_title": "Settings",
 	"$giper_baza_flex_field_Link_new_dictionary_deny": "🔐 Private",
 	"$giper_baza_flex_field_Link_new_dictionary_local": "💼 Local",
 	"$giper_baza_flex_field_Link_new_dictionary_post": "✍ All post",
