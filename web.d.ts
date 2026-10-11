@@ -2300,6 +2300,1336 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	export class $mol_paragraph extends $mol_view {
+		line_height( ): number
+		letter_width( ): number
+		width_limit( ): number
+		row_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=paragraph.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_paragraph extends $.$mol_paragraph {
+        maximal_width(): number;
+        width_limit(): number;
+        minimal_width(): number;
+        row_width(): number;
+        minimal_height(): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_major extends $mol_button_minor {
+		theme( ): string
+	}
+	
+}
+
+//# sourceMappingURL=major.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_ghost extends $mol_view {
+		Sub( ): $mol_view
+	}
+	
+}
+
+//# sourceMappingURL=ghost.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Mixin view logic to DOM node of another component.
+     */
+    class $mol_ghost extends $.$mol_ghost {
+        dom_node_external(next?: Element): Element;
+        dom_node_actual(): Element;
+        dom_tree(): Element;
+        title(): string;
+        minimal_width(): number;
+        minimal_height(): number;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_follower extends $mol_ghost {
+		transform( ): string
+		Anchor( ): $mol_view
+		align( ): readonly(number)[]
+		offset( ): readonly(number)[]
+		style( ): ({ 
+			'transform': ReturnType< $mol_follower['transform'] >,
+		})  & ReturnType< $mol_ghost['style'] >
+	}
+	
+}
+
+//# sourceMappingURL=follower.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Marker on top of another component with tracking of its position.
+     */
+    class $mol_follower extends $.$mol_follower {
+        pos(): {
+            left: number;
+            top: number;
+        } | null;
+        transform(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_pop_bubble__content_mol_pop_1 = $mol_type_enforce<
+		ReturnType< $mol_pop['bubble_content'] >
+		,
+		ReturnType< $mol_pop_bubble['content'] >
+	>
+	type $mol_pop_bubble__height_max_mol_pop_2 = $mol_type_enforce<
+		ReturnType< $mol_pop['height_max'] >
+		,
+		ReturnType< $mol_pop_bubble['height_max'] >
+	>
+	type $mol_follower__offset_mol_pop_3 = $mol_type_enforce<
+		ReturnType< $mol_pop['bubble_offset'] >
+		,
+		ReturnType< $mol_follower['offset'] >
+	>
+	type $mol_follower__align_mol_pop_4 = $mol_type_enforce<
+		ReturnType< $mol_pop['bubble_align'] >
+		,
+		ReturnType< $mol_follower['align'] >
+	>
+	type $mol_follower__Anchor_mol_pop_5 = $mol_type_enforce<
+		ReturnType< $mol_pop['Anchor'] >
+		,
+		ReturnType< $mol_follower['Anchor'] >
+	>
+	type $mol_follower__Sub_mol_pop_6 = $mol_type_enforce<
+		ReturnType< $mol_pop['Bubble'] >
+		,
+		ReturnType< $mol_follower['Sub'] >
+	>
+	export class $mol_pop extends $mol_view {
+		align( ): string
+		bubble( ): any
+		Anchor( ): any
+		bubble_offset( ): readonly(number)[]
+		bubble_align( ): readonly(number)[]
+		bubble_content( ): readonly($mol_view_content)[]
+		height_max( ): number
+		Bubble( ): $mol_pop_bubble
+		Follower( ): $mol_follower
+		showed( next?: boolean ): boolean
+		align_vert( ): string
+		align_hor( ): string
+		direction( ): string
+		align_enriched( ): ReturnType< $mol_pop['align'] >
+		prefer( ): string
+		auto( ): readonly(any)[]
+		sub( ): readonly(any)[]
+		sub_visible( ): readonly(any)[]
+	}
+	
+	export class $mol_pop_bubble extends $mol_view {
+		content( ): readonly($mol_view_content)[]
+		height_max( ): number
+		sub( ): ReturnType< $mol_pop_bubble['content'] >
+		style( ): ({ 
+			'maxHeight': ReturnType< $mol_pop_bubble['height_max'] >,
+		})  & ReturnType< $mol_view['style'] >
+		attr( ): ({ 
+			'tabindex': number,
+			'popover': string,
+		})  & ReturnType< $mol_view['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=pop.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * `Bubble` that can be shown anchored to `Anchor` element.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_pop_demo
+     */
+    class $mol_pop extends $.$mol_pop {
+        showed(next?: boolean): boolean;
+        sub_visible(): any[];
+        height_max(): number;
+        align(): string;
+        align_vert(): "suspense" | "top" | "bottom";
+        align_hor(): "suspense" | "left" | "right";
+        direction(): "ltr" | "rtl";
+        align_enriched(): string;
+        bubble_offset(): number[];
+        bubble_align(): number[];
+        bubble(): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_dom_event<EventType extends Event> extends $mol_object {
+        readonly native: EventType;
+        constructor(native: EventType);
+        prevented(next?: boolean): boolean;
+        static wrap<EventType extends Event>(event: EventType): $mol_dom_event<EventType>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_check extends $mol_button_minor {
+		checked( next?: boolean ): boolean
+		aria_checked( ): string
+		aria_role( ): string
+		Icon( ): any
+		title( ): string
+		Title( ): $mol_view
+		label( ): readonly(any)[]
+		attr( ): ({ 
+			'mol_check_checked': ReturnType< $mol_check['checked'] >,
+			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
+			'role': ReturnType< $mol_check['aria_role'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		sub( ): readonly($mol_view_content)[]
+	}
+	
+}
+
+//# sourceMappingURL=check.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Checkbox UI component. See Variants for more concrete implementations.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_box_demo
+     */
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+        aria_checked(): string;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_check__minimal_width_mol_pick_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_width'] >
+	>
+	type $mol_check__minimal_height_mol_pick_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_height'] >
+	>
+	type $mol_check__enabled_mol_pick_3 = $mol_type_enforce<
+		ReturnType< $mol_pick['trigger_enabled'] >
+		,
+		ReturnType< $mol_check['enabled'] >
+	>
+	type $mol_check__checked_mol_pick_4 = $mol_type_enforce<
+		ReturnType< $mol_pick['showed'] >
+		,
+		ReturnType< $mol_check['checked'] >
+	>
+	type $mol_check__clicks_mol_pick_5 = $mol_type_enforce<
+		ReturnType< $mol_pick['clicks'] >
+		,
+		ReturnType< $mol_check['clicks'] >
+	>
+	type $mol_check__sub_mol_pick_6 = $mol_type_enforce<
+		ReturnType< $mol_pick['trigger_content'] >
+		,
+		ReturnType< $mol_check['sub'] >
+	>
+	type $mol_check__hint_mol_pick_7 = $mol_type_enforce<
+		ReturnType< $mol_pick['hint'] >
+		,
+		ReturnType< $mol_check['hint'] >
+	>
+	export class $mol_pick extends $mol_pop {
+		keydown( next?: any ): any
+		trigger_enabled( ): boolean
+		clicks( next?: any ): any
+		trigger_content( ): readonly($mol_view_content)[]
+		hint( ): string
+		Trigger( ): $mol_check
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_pick['keydown'] > ): ReturnType< $mol_pick['keydown'] >,
+		})  & ReturnType< $mol_pop['event'] >
+		Anchor( ): ReturnType< $mol_pick['Trigger'] >
+	}
+	
+}
+
+//# sourceMappingURL=pick.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Pop-up display and hide by mouse click, also hide by unfocus.
+     * Based on [mol_pop](https://mol.hyoo.ru/#!section=demos/demo=mol_pop_demo) component.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_pick_demo
+     */
+    class $mol_pick extends $.$mol_pick {
+        keydown(event: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    /**
+     * Return `unknown` when `A` and `B` are the same type. `never` otherwise.
+     *
+     * 	$mol_type_equals< unknown , any > & number // true
+     * 	$mol_type_equals< never , never > & number // false
+     */
+    type $mol_type_equals<A, B> = (<X>() => X extends A ? 1 : 2) extends (<X>() => X extends B ? 1 : 2) ? true : false;
+}
+
+declare namespace $ {
+    /**
+     * Reqursive converts intersection of records to record of intersections
+     *
+     * 	// { a : { x : 1 , y : 2 } }
+     * 	$mol_type_merge< { a : { x : 1 } }&{ a : { y : 2 } } >
+     */
+    type $mol_type_merge<Intersection> = Intersection extends (...a: any[]) => any ? Intersection : Intersection extends new (...a: any[]) => any ? Intersection : Intersection extends object ? $mol_type_merge_object<Intersection> extends Intersection ? true extends $mol_type_equals<{
+        [Key in keyof Intersection]: Intersection[Key];
+    }, Intersection> ? Intersection : {
+        [Key in keyof Intersection]: $mol_type_merge<Intersection[Key]>;
+    } : Intersection : Intersection;
+    /**
+     * Flat converts intersection of records to record of intersections
+     *
+     * 	// { a: 1, b: 2 }
+     * 	$mol_type_merge< { a: 1 } & { b: 2 } >
+     */
+    type $mol_type_merge_object<Intersection> = {
+        [Key in keyof Intersection]: Intersection[Key];
+    };
+}
+
+declare namespace $ {
+    /**
+     * Converts union of types to intersection of same types
+     *
+     * 	$mol_type_intersect< number | string > // number & string
+     */
+    type $mol_type_intersect<Union> = (Union extends any ? (_: Union) => void : never) extends ((_: infer Intersection) => void) ? Intersection : never;
+}
+
+declare namespace $ {
+    type $mol_unicode_category = [$mol_unicode_category_binary] | ['General_Category', $mol_char_category_general] | ['Script', $mol_unicode_category_script] | ['Script_Extensions', $mol_unicode_category_script];
+    type $mol_unicode_category_binary = 'ASCII' | 'ASCII_Hex_Digit' | 'Alphabetic' | 'Any' | 'Assigned' | 'Bidi_Control' | 'Bidi_Mirrored' | 'Case_Ignorable' | 'Cased' | 'Changes_When_Casefolded' | 'Changes_When_Casemapped' | 'Changes_When_Lowercased' | 'Changes_When_NFKC_Casefolded' | 'Changes_When_Titlecased' | 'Changes_When_Uppercased' | 'Dash' | 'Default_Ignorable_Code_Point' | 'Deprecated' | 'Diacritic' | 'Emoji' | 'Emoji_Component' | 'Emoji_Modifier' | 'Emoji_Modifier_Base' | 'Emoji_Presentation' | 'Extended_Pictographic' | 'Extender' | 'Grapheme_Base' | 'Grapheme_Extend' | 'Hex_Digit' | 'IDS_Binary_Operator' | 'IDS_Trinary_Operator' | 'ID_Continue' | 'ID_Start' | 'Ideographic' | 'Join_Control' | 'Logical_Order_Exception' | 'Lowercase' | 'Math' | 'Noncharacter_Code_Point' | 'Pattern_Syntax' | 'Pattern_White_Space' | 'Quotation_Mark' | 'Radical' | 'Regional_Indicator' | 'Sentence_Terminal' | 'Soft_Dotted' | 'Terminal_Punctuation' | 'Unified_Ideograph' | 'Uppercase' | 'Variation_Selector' | 'White_Space' | 'XID_Continue' | 'XID_Start';
+    type $mol_char_category_general = 'Cased_Letter' | 'Close_Punctuation' | 'Connector_Punctuation' | 'Control' | 'Currency_Symbol' | 'Dash_Punctuation' | 'Decimal_Number' | 'Enclosing_Mark' | 'Final_Punctuation' | 'Format' | 'Initial_Punctuation' | 'Letter' | 'Letter_Number' | 'Line_Separator' | 'Lowercase_Letter' | 'Mark' | 'Math_Symbol' | 'Modifier_Letter' | 'Modifier_Symbol' | 'Nonspacing_Mark' | 'Number' | 'Open_Punctuation' | 'Other' | 'Other_Letter' | 'Other_Number' | 'Other_Punctuation' | 'Other_Symbol' | 'Paragraph_Separator' | 'Private_Use' | 'Punctuation' | 'Separator' | 'Space_Separator' | 'Spacing_Mark' | 'Surrogate' | 'Symbol' | 'Titlecase_Letter' | 'Unassigned' | 'Uppercase_Letter';
+    type $mol_unicode_category_script = 'Adlam' | 'Ahom' | 'Anatolian_Hieroglyphs' | 'Arabic' | 'Armenian' | 'Avestan' | 'Balinese' | 'Bamum' | 'Bassa_Vah' | 'Batak' | 'Bengali' | 'Bhaiksuki' | 'Bopomofo' | 'Brahmi' | 'Braille' | 'Buginese' | 'Buhid' | 'Canadian_Aboriginal' | 'Carian' | 'Caucasian_Albanian' | 'Chakma' | 'Cham' | 'Chorasmian' | 'Cherokee' | 'Common' | 'Coptic' | 'Cuneiform' | 'Cypriot' | 'Cyrillic' | 'Deseret' | 'Devanagari' | 'Dives_Akuru' | 'Dogra' | 'Duployan' | 'Egyptian_Hieroglyphs' | 'Elbasan' | 'Elymaic' | 'Ethiopic' | 'Georgian' | 'Glagolitic' | 'Gothic' | 'Grantha' | 'Greek' | 'Gujarati' | 'Gunjala_Gondi' | 'Gurmukhi' | 'Han' | 'Hangul' | 'Hanifi_Rohingya' | 'Hanunoo' | 'Hatran' | 'Hebrew' | 'Hiragana' | 'Imperial_Aramaic' | 'Inherited' | 'Inscriptional_Pahlavi' | 'Inscriptional_Parthian' | 'Javanese' | 'Kaithi' | 'Kannada' | 'Katakana' | 'Kayah_Li' | 'Kharoshthi' | 'Khitan_Small_Script' | 'Khmer' | 'Khojki' | 'Khudawadi' | 'Lao' | 'Latin' | 'Lepcha' | 'Limbu' | 'Linear_A' | 'Linear_B' | 'Lisu' | 'Lycian' | 'Lydian' | 'Mahajani' | 'Makasar' | 'Malayalam' | 'Mandaic' | 'Manichaean' | 'Marchen' | 'Medefaidrin' | 'Masaram_Gondi' | 'Meetei_Mayek' | 'Mende_Kikakui' | 'Meroitic_Cursive' | 'Meroitic_Hieroglyphs' | 'Miao' | 'Modi' | 'Mongolian' | 'Mro' | 'Multani' | 'Myanmar' | 'Nabataean' | 'Nandinagari' | 'New_Tai_Lue' | 'Newa' | 'Nko' | 'Nushu' | 'Nyiakeng_Puachue_Hmong' | 'Ogham' | 'Ol_Chiki' | 'Old_Hungarian' | 'Old_Italic' | 'Old_North_Arabian' | 'Old_Permic' | 'Old_Persian' | 'Old_Sogdian' | 'Old_South_Arabian' | 'Old_Turkic' | 'Oriya' | 'Osage' | 'Osmanya' | 'Pahawh_Hmong' | 'Palmyrene' | 'Pau_Cin_Hau' | 'Phags_Pa' | 'Phoenician' | 'Psalter_Pahlavi' | 'Rejang' | 'Runic' | 'Samaritan' | 'Saurashtra' | 'Sharada' | 'Shavian' | 'Siddham' | 'SignWriting' | 'Sinhala' | 'Sogdian' | 'Sora_Sompeng' | 'Soyombo' | 'Sundanese' | 'Syloti_Nagri' | 'Syriac' | 'Tagalog' | 'Tagbanwa' | 'Tai_Le' | 'Tai_Tham' | 'Tai_Viet' | 'Takri' | 'Tamil' | 'Tangut' | 'Telugu' | 'Thaana' | 'Thai' | 'Tibetan' | 'Tifinagh' | 'Tirhuta' | 'Ugaritic' | 'Vai' | 'Wancho' | 'Warang_Citi' | 'Yezidi' | 'Yi' | 'Zanabazar_Square';
+}
+
+interface String {
+    match<RE extends RegExp>(regexp: RE): ReturnType<RE[typeof Symbol.match]>;
+    matchAll<RE extends RegExp>(regexp: RE): ReturnType<RE[typeof Symbol.matchAll]>;
+}
+declare namespace $ {
+    type Groups_to_params<T> = {
+        [P in keyof T]?: T[P] | boolean | undefined;
+    };
+    export type $mol_regexp_source = number | string | RegExp | {
+        [key in string]: $mol_regexp_source;
+    } | readonly [$mol_regexp_source, ...$mol_regexp_source[]];
+    export type $mol_regexp_groups<Source extends $mol_regexp_source> = Source extends number ? {} : Source extends string ? {} : Source extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{
+        [key in Extract<keyof Source, number>]: $mol_regexp_groups<Source[key]>;
+    }[Extract<keyof Source, number>]>> : Source extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<Source['exec']>>['groups']> ? {} : NonNullable<NonNullable<ReturnType<Source['exec']>>['groups']> : Source extends {
+        readonly [key in string]: $mol_regexp_source;
+    } ? $mol_type_merge<$mol_type_intersect<{
+        [key in keyof Source]: $mol_type_merge<$mol_type_override<{
+            readonly [k in Extract<keyof Source, string>]: string;
+        }, {
+            readonly [k in key]: Source[key] extends string ? Source[key] : string;
+        }> & $mol_regexp_groups<Source[key]>>;
+    }[keyof Source]>> : never;
+    /** Type safe reguar expression builder */
+    export class $mol_regexp<Groups extends Record<string, string>> extends RegExp {
+        readonly groups: (Extract<keyof Groups, string>)[];
+        /** Prefer to use $mol_regexp.from */
+        constructor(source: string, flags?: string, groups?: (Extract<keyof Groups, string>)[]);
+        [Symbol.matchAll](str: string): RegExpStringIterator<RegExpExecArray & $mol_type_override<RegExpExecArray, {
+            groups?: {
+                [key in keyof Groups]: string;
+            };
+        }>>;
+        /** Parses input and returns found capture groups or null */
+        [Symbol.match](str: string): null | RegExpMatchArray;
+        /** Splits string by regexp edges */
+        [Symbol.split](str: string): string[];
+        test(str: string): boolean;
+        exec(str: string): RegExpExecArray & $mol_type_override<RegExpExecArray, {
+            groups?: {
+                [key in keyof Groups]: string;
+            };
+        }> | null;
+        generate(params: Groups_to_params<Groups>): string | null;
+        get native(): RegExp;
+        /** Makes regexp that greedy repeats this pattern with delimiter */
+        static separated<Chunk extends $mol_regexp_source, Sep extends $mol_regexp_source>(chunk: Chunk, sep: Sep): $mol_regexp<[$mol_regexp<[[Chunk], Sep] extends infer T ? T extends [[Chunk], Sep] ? T extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{ [key in Extract<keyof T, number>]: $mol_regexp_groups<T[key]>; }[Extract<keyof T, number>]>> : T extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<T["exec"]>>["groups"]> ? {} : NonNullable<NonNullable<ReturnType<T["exec"]>>["groups"]> : T extends {
+            readonly [x: string]: $mol_regexp_source;
+        } ? $mol_type_merge<$mol_type_intersect<{ [key_1 in keyof T]: $mol_type_merge<Omit<{ readonly [k in Extract<keyof T, string>]: string; }, key_1> & { readonly [k_1 in key_1]: T[key_1] extends string ? T[key_1] : string; } & $mol_regexp_groups<T[key_1]>>; }[keyof T]>> : never : never : never>, Chunk] extends infer T_1 ? T_1 extends [$mol_regexp<[[Chunk], Sep] extends infer T_2 ? T_2 extends [[Chunk], Sep] ? T_2 extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{ [key_4 in Extract<keyof T_2, number>]: $mol_regexp_groups<T_2[key_4]>; }[Extract<keyof T_2, number>]>> : T_2 extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<T_2["exec"]>>["groups"]> ? {} : NonNullable<NonNullable<ReturnType<T_2["exec"]>>["groups"]> : T_2 extends {
+            readonly [x: string]: $mol_regexp_source;
+        } ? $mol_type_merge<$mol_type_intersect<{ [key_5 in keyof T_2]: $mol_type_merge<Omit<{ readonly [k in Extract<keyof T_2, string>]: string; }, key_5> & { readonly [k_1 in key_5]: T_2[key_5] extends string ? T_2[key_5] : string; } & $mol_regexp_groups<T_2[key_5]>>; }[keyof T_2]>> : never : never : never>, Chunk] ? T_1 extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{ [key_2 in Extract<keyof T_1, number>]: $mol_regexp_groups<T_1[key_2]>; }[Extract<keyof T_1, number>]>> : T_1 extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<T_1["exec"]>>["groups"]> ? {} : NonNullable<NonNullable<ReturnType<T_1["exec"]>>["groups"]> : T_1 extends {
+            readonly [x: string]: $mol_regexp_source;
+        } ? $mol_type_merge<$mol_type_intersect<{ [key_3 in keyof T_1]: $mol_type_merge<Omit<{ readonly [k in Extract<keyof T_1, string>]: string; }, key_3> & { readonly [k_1 in key_3]: T_1[key_3] extends string ? T_1[key_3] : string; } & $mol_regexp_groups<T_1[key_3]>>; }[keyof T_1]>> : never : never : never>;
+        /** Makes regexp that non-greedy repeats this pattern from min to max count */
+        static repeat<Source extends $mol_regexp_source>(source: Source, min?: number, max?: number): $mol_regexp<$mol_regexp_groups<Source>>;
+        /** Makes regexp that greedy repeats this pattern from min to max count */
+        static repeat_greedy<Source extends $mol_regexp_source>(source: Source, min?: number, max?: number): $mol_regexp<$mol_regexp_groups<Source>>;
+        /** Makes regexp that match any of options */
+        static vary<Sources extends readonly $mol_regexp_source[]>(sources: Sources, flags?: string): $mol_regexp<$mol_regexp_groups<Sources[number]>>;
+        /** Makes regexp that allow absent of this pattern */
+        static optional<Source extends $mol_regexp_source>(source: Source): $mol_regexp<$mol_regexp_groups<Source>>;
+        /** Makes regexp that look ahead for pattern */
+        static force_after(source: $mol_regexp_source): $mol_regexp<Record<string, string>>;
+        /** Makes regexp that look ahead for pattern */
+        static forbid_after(source: $mol_regexp_source): $mol_regexp<Record<string, string>>;
+        /** Converts some js values to regexp */
+        static from<Source extends $mol_regexp_source>(source: Source, { ignoreCase, multiline }?: Partial<Pick<RegExp, 'ignoreCase' | 'multiline'>>): $mol_regexp<$mol_regexp_groups<Source>>;
+        /** Makes regexp which includes only unicode category */
+        static unicode_only(...category: $mol_unicode_category): $mol_regexp<Record<string, string>>;
+        /** Makes regexp which excludes unicode category */
+        static unicode_except(...category: $mol_unicode_category): $mol_regexp<Record<string, string>>;
+        static char_range(from: number, to: number): $mol_regexp<{}>;
+        static char_only(...allowed: readonly [$mol_regexp_source, ...$mol_regexp_source[]]): $mol_regexp<{}>;
+        static char_except(...forbidden: readonly [$mol_regexp_source, ...$mol_regexp_source[]]): $mol_regexp<{}>;
+        static decimal_only: $mol_regexp<{}>;
+        static decimal_except: $mol_regexp<{}>;
+        static latin_only: $mol_regexp<{}>;
+        static latin_except: $mol_regexp<{}>;
+        static space_only: $mol_regexp<{}>;
+        static space_except: $mol_regexp<{}>;
+        static word_break_only: $mol_regexp<{}>;
+        static word_break_except: $mol_regexp<{}>;
+        static tab: $mol_regexp<{}>;
+        static slash_back: $mol_regexp<{}>;
+        static nul: $mol_regexp<{}>;
+        static char_any: $mol_regexp<{}>;
+        static begin: $mol_regexp<{}>;
+        static end: $mol_regexp<{}>;
+        static or: $mol_regexp<{}>;
+        static line_end: $mol_regexp<{
+            readonly win_end: string;
+            readonly mac_end: string;
+        }>;
+    }
+    export {};
+}
+
+declare namespace $ {
+
+	type $mol_paragraph__sub_mol_dimmer_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_paragraph['sub'] >
+	>
+	type $mol_paragraph__sub_mol_dimmer_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_paragraph['sub'] >
+	>
+	export class $mol_dimmer extends $mol_paragraph {
+		parts( ): readonly($mol_view_content)[]
+		string( id: any): string
+		haystack( ): string
+		needle( ): string
+		sub( ): ReturnType< $mol_dimmer['parts'] >
+		Low( id: any): $mol_paragraph
+		High( id: any): $mol_paragraph
+	}
+	
+}
+
+//# sourceMappingURL=dimmer.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Output text with dimmed mismatched substrings.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_dimmer_demo
+     */
+    class $mol_dimmer extends $.$mol_dimmer {
+        parts(): any[];
+        strings(): string[];
+        string(index: number): string;
+        view_find(check: (path: $mol_view, text?: string) => boolean, path?: $mol_view[]): Generator<$mol_view[]>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_nav extends $mol_plugin {
+		event_key( next?: any ): any
+		cycle( next?: boolean ): boolean
+		mod_ctrl( ): boolean
+		mod_shift( ): boolean
+		mod_alt( ): boolean
+		keys_x( next?: readonly(any)[] ): readonly(any)[]
+		keys_y( next?: readonly(any)[] ): readonly(any)[]
+		current_x( next?: any ): any
+		current_y( next?: any ): any
+		event_up( next?: any ): any
+		event_down( next?: any ): any
+		event_left( next?: any ): any
+		event_right( next?: any ): any
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_nav['event_key'] > ): ReturnType< $mol_nav['event_key'] >,
+		})  & ReturnType< $mol_plugin['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=nav.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Plugin which can navigate in list of items
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_nav_demo
+     */
+    class $mol_nav extends $.$mol_nav {
+        event_key(event?: KeyboardEvent): undefined;
+        event_up(event?: KeyboardEvent): undefined;
+        event_down(event?: KeyboardEvent): undefined;
+        event_left(event?: KeyboardEvent): undefined;
+        event_right(event?: KeyboardEvent): undefined;
+        index_y(): number | null;
+        index_x(): number | null;
+    }
+}
+
+declare namespace $ {
+    function $mol_support_css_overflow_anchor(this: $): boolean;
+}
+
+declare namespace $ {
+
+	type $mol_view__style_mol_list_1 = $mol_type_enforce<
+		({ 
+			'paddingTop': ReturnType< $mol_list['gap_before'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	type $mol_view__style_mol_list_2 = $mol_type_enforce<
+		({ 
+			'paddingTop': ReturnType< $mol_list['gap_after'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	export class $mol_list extends $mol_view {
+		gap_before( ): number
+		Gap_before( ): $mol_view
+		Empty( ): $mol_view
+		gap_after( ): number
+		Gap_after( ): $mol_view
+		rows( ): readonly($mol_view)[]
+		render_visible_only( ): boolean
+		render_over( ): number
+		sub( ): ReturnType< $mol_list['rows'] >
+		item_height_min( id: any): number
+		item_width_min( id: any): number
+		view_window_shift( next?: number ): number
+		view_window( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=list.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
+     * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
+     */
+    class $mol_list extends $.$mol_list {
+        sub(): readonly $mol_view[];
+        render_visible_only(): boolean;
+        _view_window_last: number[];
+        view_window(next?: [number, number]): [number, number];
+        item_height_min(index: number): number;
+        row_width_min(index: number): number;
+        gap_before(): number;
+        gap_after(): number;
+        sub_visible(): $mol_view[];
+        minimal_height(): number;
+        minimal_width(): number;
+        force_render(path: Set<$mol_view>): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_hotkey2 extends $mol_plugin {
+		keydown( next?: any ): any
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_hotkey2['keydown'] > ): ReturnType< $mol_hotkey2['keydown'] >,
+		})  & ReturnType< $mol_plugin['event'] >
+		action( ): Record<string, any>
+	}
+	
+}
+
+//# sourceMappingURL=hotkey2.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Plugin which adds handlers for keyboard keys.
+     * @see [mol_keyboard_code](../keyboard/code/code.ts)
+     */
+    class $mol_hotkey2 extends $.$mol_hotkey2 {
+        keydown(event?: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_hotkey extends $mol_hotkey2 {
+		key( ): Record<string, any>
+		mod_ctrl( ): boolean
+		mod_alt( ): boolean
+		mod_shift( ): boolean
+	}
+	
+}
+
+//# sourceMappingURL=hotkey.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Plugin which adds handlers for keyboard keys.
+     * @deprecated Use $mol_hotkey2
+     * @see [mol_keyboard_code](../keyboard/code/code.ts)
+     */
+    class $mol_hotkey extends $.$mol_hotkey {
+        action(): {
+            [k: string]: any;
+        };
+    }
+}
+
+declare namespace $ {
+
+	type $mol_hotkey__mod_ctrl_mol_string_1 = $mol_type_enforce<
+		ReturnType< $mol_string['submit_with_ctrl'] >
+		,
+		ReturnType< $mol_hotkey['mod_ctrl'] >
+	>
+	type $mol_hotkey__key_mol_string_2 = $mol_type_enforce<
+		({ 
+			enter( next?: ReturnType< $mol_string['submit'] > ): ReturnType< $mol_string['submit'] >,
+		}) 
+		,
+		ReturnType< $mol_hotkey['key'] >
+	>
+	export class $mol_string extends $mol_view {
+		selection_watcher( ): any
+		error_report( ): any
+		disabled( ): boolean
+		value( next?: string ): string
+		value_changed( next?: ReturnType< $mol_string['value'] > ): ReturnType< $mol_string['value'] >
+		hint( ): string
+		hint_visible( ): ReturnType< $mol_string['hint'] >
+		spellcheck( ): boolean
+		autocomplete_native( ): string
+		selection_end( ): number
+		selection_start( ): number
+		keyboard( ): string
+		enter( ): string
+		length_max( ): number
+		type( next?: string ): string
+		event_change( next?: any ): any
+		submit_with_ctrl( ): boolean
+		submit( next?: any ): any
+		Submit( ): $mol_hotkey
+		dom_name( ): string
+		enabled( ): boolean
+		minimal_height( ): number
+		autocomplete( ): boolean
+		selection( next?: readonly(number)[] ): readonly(number)[]
+		auto( ): readonly(any)[]
+		field( ): ({ 
+			'disabled': ReturnType< $mol_string['disabled'] >,
+			'value': ReturnType< $mol_string['value_changed'] >,
+			'placeholder': ReturnType< $mol_string['hint_visible'] >,
+			'spellcheck': ReturnType< $mol_string['spellcheck'] >,
+			'autocomplete': ReturnType< $mol_string['autocomplete_native'] >,
+			'selectionEnd': ReturnType< $mol_string['selection_end'] >,
+			'selectionStart': ReturnType< $mol_string['selection_start'] >,
+			'inputMode': ReturnType< $mol_string['keyboard'] >,
+			'enterkeyhint': ReturnType< $mol_string['enter'] >,
+		})  & ReturnType< $mol_view['field'] >
+		attr( ): ({ 
+			'maxlength': ReturnType< $mol_string['length_max'] >,
+			'type': ReturnType< $mol_string['type'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		event( ): ({ 
+			input( next?: ReturnType< $mol_string['event_change'] > ): ReturnType< $mol_string['event_change'] >,
+		})  & ReturnType< $mol_view['event'] >
+		plugins( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=string.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * An input field for entering single line text.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_string_demo
+     */
+    class $mol_string extends $.$mol_string {
+        event_change(next?: Event): void;
+        value_changed(next?: string): string;
+        error_report(): void;
+        hint_visible(): string;
+        disabled(): boolean;
+        autocomplete_native(): "on" | "off";
+        selection_watcher(): $mol_dom_listener;
+        selection_change(event: Event): void;
+        selection_start(): number;
+        selection_end(): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_svg extends $mol_view {
+		dom_name( ): string
+		dom_name_space( ): string
+		font_size( ): number
+		font_family( ): string
+		style_size( ): Record<string, any>
+	}
+	
+}
+
+//# sourceMappingURL=svg.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Base SVG component to display SVG images or icons. */
+    class $mol_svg extends $.$mol_svg {
+        computed_style(): Record<string, any>;
+        font_size(): number;
+        font_family(): any;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_svg_root extends $mol_svg {
+		view_box( ): string
+		aspect( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
+			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=root.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_svg_path extends $mol_svg {
+		geometry( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'd': ReturnType< $mol_svg_path['geometry'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=path.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
+		ReturnType< $mol_icon['path'] >
+		,
+		ReturnType< $mol_svg_path['geometry'] >
+	>
+	export class $mol_icon extends $mol_svg_root {
+		path( ): string
+		Path( ): $mol_svg_path
+		view_box( ): string
+		minimal_width( ): number
+		minimal_height( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=icon.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_close extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=close.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_hotkey__key_mol_search_1 = $mol_type_enforce<
+		({ 
+			escape( next?: ReturnType< $mol_search['clear'] > ): ReturnType< $mol_search['clear'] >,
+		}) 
+		,
+		ReturnType< $mol_hotkey['key'] >
+	>
+	type $mol_nav__keys_y_mol_search_2 = $mol_type_enforce<
+		ReturnType< $mol_search['nav_components'] >
+		,
+		ReturnType< $mol_nav['keys_y'] >
+	>
+	type $mol_nav__current_y_mol_search_3 = $mol_type_enforce<
+		ReturnType< $mol_search['nav_focused'] >
+		,
+		ReturnType< $mol_nav['current_y'] >
+	>
+	type $mol_string__value_mol_search_4 = $mol_type_enforce<
+		ReturnType< $mol_search['query'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__hint_mol_search_5 = $mol_type_enforce<
+		ReturnType< $mol_search['hint'] >
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__submit_mol_search_6 = $mol_type_enforce<
+		ReturnType< $mol_search['submit'] >
+		,
+		ReturnType< $mol_string['submit'] >
+	>
+	type $mol_string__enabled_mol_search_7 = $mol_type_enforce<
+		ReturnType< $mol_search['enabled'] >
+		,
+		ReturnType< $mol_string['enabled'] >
+	>
+	type $mol_string__keyboard_mol_search_8 = $mol_type_enforce<
+		ReturnType< $mol_search['keyboard'] >
+		,
+		ReturnType< $mol_string['keyboard'] >
+	>
+	type $mol_string__enter_mol_search_9 = $mol_type_enforce<
+		ReturnType< $mol_search['enter'] >
+		,
+		ReturnType< $mol_string['enter'] >
+	>
+	type $mol_button_minor__hint_mol_search_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__enabled_mol_search_11 = $mol_type_enforce<
+		ReturnType< $mol_search['enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__click_mol_search_12 = $mol_type_enforce<
+		ReturnType< $mol_search['clear'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_mol_search_13 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_list__rows_mol_search_14 = $mol_type_enforce<
+		ReturnType< $mol_search['menu_items'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_scroll__sub_mol_search_15 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_dimmer__haystack_mol_search_16 = $mol_type_enforce<
+		ReturnType< $mol_search['suggest_label'] >
+		,
+		ReturnType< $mol_dimmer['haystack'] >
+	>
+	type $mol_dimmer__needle_mol_search_17 = $mol_type_enforce<
+		ReturnType< $mol_search['query'] >
+		,
+		ReturnType< $mol_dimmer['needle'] >
+	>
+	type $mol_search_plugins__18 = $mol_type_enforce<
+		ReturnType< $mol_pop['plugins'] >[number]
+		,
+		$mol_plugin
+	>
+	type $mol_view__sub_mol_search_19 = $mol_type_enforce<
+		ReturnType< $mol_search['anchor_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button_minor__click_mol_search_20 = $mol_type_enforce<
+		ReturnType< $mol_search['suggest_select'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_mol_search_21 = $mol_type_enforce<
+		ReturnType< $mol_search['suggest_content'] >
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	export class $mol_search extends $mol_pop {
+		clear( next?: any ): any
+		Hotkey( ): $mol_hotkey
+		nav_components( ): readonly($mol_view)[]
+		nav_focused( next?: any ): any
+		Nav( ): $mol_nav
+		suggests_showed( next?: boolean ): boolean
+		query( next?: string ): string
+		hint( ): string
+		submit( next?: any ): any
+		enabled( ): boolean
+		keyboard( ): string
+		enter( ): string
+		bring( ): ReturnType< ReturnType< $mol_search['Query'] >['bring'] >
+		Query( ): $mol_string
+		Clear_icon( ): $mol_icon_close
+		Clear( ): $mol_button_minor
+		anchor_content( ): readonly(any)[]
+		menu_items( ): readonly($mol_view)[]
+		Menu( ): $mol_list
+		Bubble_pane( ): $mol_scroll
+		suggest_select( id: any, next?: any ): any
+		suggest_label( id: any): string
+		Suggest_label( id: any): $mol_dimmer
+		suggest_content( id: any): readonly($mol_view_content)[]
+		suggests( ): readonly(string)[]
+		plugins( ): readonly($mol_plugin)[]
+		showed( next?: ReturnType< $mol_search['suggests_showed'] > ): ReturnType< $mol_search['suggests_showed'] >
+		align_hor( ): string
+		Anchor( ): $mol_view
+		bubble_content( ): readonly($mol_view_content)[]
+		Suggest( id: any): $mol_button_minor
+	}
+	
+}
+
+//# sourceMappingURL=search.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Search input with suggest and clear button.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_search_demo
+     */
+    class $mol_search extends $.$mol_search {
+        anchor_content(): ($mol_button_minor | $.$mol_string)[];
+        suggests_showed(next?: boolean): boolean;
+        suggest_selected(next?: string): void;
+        nav_components(): ($mol_button_minor | $.$mol_string)[];
+        nav_focused(component?: $mol_view): $mol_view | $.$mol_string | null;
+        suggest_label(key: string): string;
+        menu_items(): $mol_button_minor[];
+        suggest_select(id: string, event?: MouseEvent): void;
+        clear(event?: Event): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_dots_vertical extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=vertical.view.tree.d.ts.map
+declare namespace $ {
+    function $mol_match_text<Variant>(query: string, values: (variant: Variant) => readonly string[]): (variant: Variant) => boolean;
+}
+
+declare namespace $ {
+
+	type $mol_dimmer__haystack_mol_select_1 = $mol_type_enforce<
+		ReturnType< $mol_select['option_label'] >
+		,
+		ReturnType< $mol_dimmer['haystack'] >
+	>
+	type $mol_dimmer__needle_mol_select_2 = $mol_type_enforce<
+		ReturnType< $mol_select['filter_pattern'] >
+		,
+		ReturnType< $mol_dimmer['needle'] >
+	>
+	type $mol_nav__keys_y_mol_select_3 = $mol_type_enforce<
+		ReturnType< $mol_select['nav_components'] >
+		,
+		ReturnType< $mol_nav['keys_y'] >
+	>
+	type $mol_nav__current_y_mol_select_4 = $mol_type_enforce<
+		ReturnType< $mol_select['option_focused'] >
+		,
+		ReturnType< $mol_nav['current_y'] >
+	>
+	type $mol_nav__cycle_mol_select_5 = $mol_type_enforce<
+		ReturnType< $mol_select['nav_cycle'] >
+		,
+		ReturnType< $mol_nav['cycle'] >
+	>
+	type $mol_list__rows_mol_select_6 = $mol_type_enforce<
+		ReturnType< $mol_select['menu_content'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_scroll__sub_mol_select_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $mol_button_minor__enabled_mol_select_8 = $mol_type_enforce<
+		ReturnType< $mol_select['enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__event_click_mol_select_9 = $mol_type_enforce<
+		ReturnType< $mol_select['event_select'] >
+		,
+		ReturnType< $mol_button_minor['event_click'] >
+	>
+	type $mol_button_minor__hint_mol_select_10 = $mol_type_enforce<
+		ReturnType< $mol_select['option_hint'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__sub_mol_select_11 = $mol_type_enforce<
+		ReturnType< $mol_select['option_content'] >
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_view__sub_mol_select_12 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_search__query_mol_select_13 = $mol_type_enforce<
+		ReturnType< $mol_select['filter_pattern'] >
+		,
+		ReturnType< $mol_search['query'] >
+	>
+	type $mol_search__hint_mol_select_14 = $mol_type_enforce<
+		ReturnType< $mol_select['filter_hint'] >
+		,
+		ReturnType< $mol_search['hint'] >
+	>
+	type $mol_search__submit_mol_select_15 = $mol_type_enforce<
+		ReturnType< $mol_select['submit'] >
+		,
+		ReturnType< $mol_search['submit'] >
+	>
+	type $mol_search__enabled_mol_select_16 = $mol_type_enforce<
+		ReturnType< $mol_select['enabled'] >
+		,
+		ReturnType< $mol_search['enabled'] >
+	>
+	export class $mol_select extends $mol_pick {
+		enabled( ): boolean
+		event_select( id: any, next?: any ): any
+		option_hint( id: any): any
+		option_label( id: any): string
+		filter_pattern( next?: string ): string
+		Option_label( id: any): $mol_dimmer
+		option_content( id: any): readonly(any)[]
+		no_options_message( ): string
+		nav_components( ): readonly($mol_view)[]
+		option_focused( next?: any ): any
+		nav_cycle( next?: boolean ): boolean
+		Nav( ): $mol_nav
+		menu_content( ): readonly($mol_view)[]
+		Menu( ): $mol_list
+		Bubble_pane( ): $mol_scroll
+		filter_hint( ): string
+		submit( next?: any ): any
+		dictionary( next?: Record<string, any> ): Record<string, any>
+		options( ): readonly(string)[]
+		value( next?: string ): string
+		option_label_default( ): string
+		Option_row( id: any): $mol_button_minor
+		No_options( ): $mol_view
+		plugins( ): readonly(any)[]
+		hint( ): string
+		bubble_content( ): readonly(any)[]
+		Filter( ): $mol_search
+		Trigger_icon( ): $mol_icon_dots_vertical
+		trigger_enabled( ): ReturnType< $mol_select['enabled'] >
+	}
+	
+}
+
+//# sourceMappingURL=select.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Allow user to select value from various options and displays current value.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_select_demo_colors
+     */
+    class $mol_select extends $.$mol_select {
+        filter_pattern(next?: string): string;
+        open(): void;
+        options(): readonly string[];
+        options_filtered(): readonly string[];
+        option_label(id: string): any;
+        option_hint(id: string): string;
+        option_rows(): $mol_button_minor[];
+        option_focused(component?: $mol_view): $mol_view | $.$mol_search | null;
+        event_select(id: string, event?: MouseEvent): void;
+        nav_components(): ($mol_button_minor | $.$mol_search)[];
+        trigger_content(): readonly $mol_view_content[];
+        menu_content(): $mol_view[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    /**
+     * 48-bit streamable array hash function
+     * Based on cyrb53: https://stackoverflow.com/a/52171480
+     */
+    function $mol_hash_numbers(buff: ArrayLike<number>, seed?: number): number;
+}
+
+declare namespace $ {
+    /**
+     * 48-bit streamable string hash function
+     * Based on cyrb53: https://stackoverflow.com/a/52171480
+     */
+    function $mol_hash_string(str: string, seed?: number): number;
+}
+
+declare namespace $ {
+
+	export class $mol_avatar extends $mol_icon {
+		view_box( ): string
+		id( ): string
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=avatar.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Avatar uniquely-generated by id string
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_avatar_demo
+     */
+    class $mol_avatar extends $.$mol_avatar {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_sync extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=sync.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_sync_off extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=off.view.tree.d.ts.map
+declare namespace $ {
+    /** State of arguments like `#foo=bar/xxx` or `?foo=bar&xxx` */
+    class $mol_state_arg extends $mol_object {
+        prefix: string;
+        static href(next?: string): string;
+        static href_normal(): string;
+        static href_absolute(): string;
+        static dict(next?: {
+            [key: string]: string | null;
+        }): Readonly<{
+            [key: string]: string;
+        }>;
+        static dict_cut(except: string[]): {
+            [key: string]: string;
+        };
+        static value(key: string, next?: string | null): string | null;
+        static link(next: Record<string, string | null>): string;
+        static prolog: string;
+        static separator: string;
+        static make_link(next: {
+            [key: string]: string | null;
+        }): string;
+        static commit(): void;
+        static go(next: {
+            [key: string]: string | null;
+        }): void;
+        static encode(str: string): string;
+        constructor(prefix?: string);
+        value(key: string, next?: string): string | null;
+        sub(postfix: string): $mol_state_arg;
+        link(next: Record<string, string | null>): string;
+    }
+}
+
+declare namespace $ {
+    function $mol_dom_safe_uri(uri: string): string;
+    function $mol_dom_safe_attr(val: string): string;
+    let $mol_dom_safe_rules: Record<string, Record<string, (val: string) => string>>;
+    function $mol_dom_safe(this: $, nodes: ChildNode[]): ChildNode[];
+}
+
+declare namespace $ {
+
+	export class $mol_link extends $mol_view {
+		uri_toggle( ): string
+		uri_unsafe( ): ReturnType< $mol_link['uri_toggle'] >
+		hint( ): string
+		hint_safe( ): ReturnType< $mol_link['hint'] >
+		target( ): string
+		file_name( ): string
+		current( ): boolean
+		relation( ): string
+		event_click( next?: any ): any
+		click( next?: ReturnType< $mol_link['event_click'] > ): ReturnType< $mol_link['event_click'] >
+		uri( ): string
+		dom_name( ): string
+		uri_off( ): string
+		uri_native( ): any
+		external( ): boolean
+		attr( ): ({ 
+			'href': ReturnType< $mol_link['uri_unsafe'] >,
+			'title': ReturnType< $mol_link['hint_safe'] >,
+			'target': ReturnType< $mol_link['target'] >,
+			'download': ReturnType< $mol_link['file_name'] >,
+			'mol_link_current': ReturnType< $mol_link['current'] >,
+			'rel': ReturnType< $mol_link['relation'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly($mol_view_content)[]
+		arg( ): Record<string, any>
+		event( ): ({ 
+			click( next?: ReturnType< $mol_link['click'] > ): ReturnType< $mol_link['click'] >,
+		})  & ReturnType< $mol_view['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=link.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Dynamic hyperlink. It can add, change or remove parameters. A link that leads to the current page has [mol_link_current] attribute set to true.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_link_demo
+     */
+    class $mol_link extends $.$mol_link {
+        uri_toggle(): string;
+        uri(): string;
+        uri_off(): string;
+        uri_native(): URL;
+        current(): boolean;
+        file_name(): string;
+        minimal_height(): number;
+        external(): boolean;
+        target(): '_self' | '_blank' | '_top' | '_parent' | string;
+        hint_safe(): string;
+        uri_unsafe(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    /** Reactive Set */
+    class $mol_wire_set<Value> extends Set<Value> {
+        pub: $mol_wire_pub;
+        has(value: Value): boolean;
+        entries(): SetIterator<[Value, Value]>;
+        keys(): SetIterator<Value>;
+        values(): SetIterator<Value>;
+        forEach(task: (value: Value, value2: Value, set: Set<Value>) => void, self?: any): void;
+        [Symbol.iterator](): SetIterator<Value>;
+        get size(): number;
+        add(value: Value): this;
+        delete(value: Value): boolean;
+        clear(): void;
+        item(val: Value, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
+    function $mol_dom_serialize(node: Node): string;
+}
+
+declare namespace $ {
+    type $mol_rest_port_mime_hi = 'text' | 'application' | 'font' | 'audio' | 'video' | 'image' | 'model';
+    type $mol_rest_port_mime = `${$mol_rest_port_mime_hi}/${string}`;
+    class $mol_rest_port extends $mol_object {
+        send_code(code: $mol_rest_code): void;
+        send_type(mime: $mol_rest_port_mime): void;
+        send_name(name: string): void;
+        origin(): string;
+        address(): string;
+        send_data(data: null | string | Uint8Array<ArrayBuffer> | Element | object): void;
+        send_nil(): void;
+        send_bin(data: Uint8Array<ArrayBuffer>): void;
+        send_text(data: string): void;
+        send_json(data: object): void;
+        send_dom(data: Element): void;
+        static make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+    }
+}
+
+declare namespace $ {
     function $mol_base64_encode(src: Uint8Array<ArrayBuffer>): string;
 }
 
@@ -2880,138 +4210,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-
-	export class $bog_nka_settings extends $mol_button_minor {
-		settings_toggle( next?: any ): any
-		title( ): string
-		click( next?: ReturnType< $bog_nka_settings['settings_toggle'] > ): ReturnType< $bog_nka_settings['settings_toggle'] >
-	}
-	
-}
-
-//# sourceMappingURL=settings.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_nka_settings extends $.$bog_nka_settings {
-        settings_open(next?: boolean): boolean;
-        settings_toggle(): void;
-        account_id(): string;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_paragraph extends $mol_view {
-		line_height( ): number
-		letter_width( ): number
-		width_limit( ): number
-		row_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=paragraph.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_paragraph extends $.$mol_paragraph {
-        maximal_width(): number;
-        width_limit(): number;
-        minimal_width(): number;
-        row_width(): number;
-        minimal_height(): number;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_major extends $mol_button_minor {
-		theme( ): string
-	}
-	
-}
-
-//# sourceMappingURL=major.view.tree.d.ts.map
-declare namespace $ {
-    /** State of arguments like `#foo=bar/xxx` or `?foo=bar&xxx` */
-    class $mol_state_arg extends $mol_object {
-        prefix: string;
-        static href(next?: string): string;
-        static href_normal(): string;
-        static href_absolute(): string;
-        static dict(next?: {
-            [key: string]: string | null;
-        }): Readonly<{
-            [key: string]: string;
-        }>;
-        static dict_cut(except: string[]): {
-            [key: string]: string;
-        };
-        static value(key: string, next?: string | null): string | null;
-        static link(next: Record<string, string | null>): string;
-        static prolog: string;
-        static separator: string;
-        static make_link(next: {
-            [key: string]: string | null;
-        }): string;
-        static commit(): void;
-        static go(next: {
-            [key: string]: string | null;
-        }): void;
-        static encode(str: string): string;
-        constructor(prefix?: string);
-        value(key: string, next?: string): string | null;
-        sub(postfix: string): $mol_state_arg;
-        link(next: Record<string, string | null>): string;
-    }
-}
-
-declare namespace $ {
-    /** Reactive Set */
-    class $mol_wire_set<Value> extends Set<Value> {
-        pub: $mol_wire_pub;
-        has(value: Value): boolean;
-        entries(): SetIterator<[Value, Value]>;
-        keys(): SetIterator<Value>;
-        values(): SetIterator<Value>;
-        forEach(task: (value: Value, value2: Value, set: Set<Value>) => void, self?: any): void;
-        [Symbol.iterator](): SetIterator<Value>;
-        get size(): number;
-        add(value: Value): this;
-        delete(value: Value): boolean;
-        clear(): void;
-        item(val: Value, next?: boolean): boolean;
-    }
-}
-
-declare namespace $ {
-    function $mol_dom_serialize(node: Node): string;
-}
-
-declare namespace $ {
-    type $mol_rest_port_mime_hi = 'text' | 'application' | 'font' | 'audio' | 'video' | 'image' | 'model';
-    type $mol_rest_port_mime = `${$mol_rest_port_mime_hi}/${string}`;
-    class $mol_rest_port extends $mol_object {
-        send_code(code: $mol_rest_code): void;
-        send_type(mime: $mol_rest_port_mime): void;
-        send_name(name: string): void;
-        origin(): string;
-        address(): string;
-        send_data(data: null | string | Uint8Array<ArrayBuffer> | Element | object): void;
-        send_nil(): void;
-        send_bin(data: Uint8Array<ArrayBuffer>): void;
-        send_text(data: string): void;
-        send_json(data: object): void;
-        send_dom(data: Element): void;
-        static make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-    }
-}
-
-declare namespace $ {
     class $mol_rest_port_ws extends $mol_rest_port {
     }
 }
@@ -3500,14 +4698,6 @@ declare namespace $ {
         clear(): void;
         item(key: Key, next?: Value | null): NonNullable<Value> | null;
     }
-}
-
-declare namespace $ {
-    /**
-     * 48-bit streamable array hash function
-     * Based on cyrb53: https://stackoverflow.com/a/52171480
-     */
-    function $mol_hash_numbers(buff: ArrayLike<number>, seed?: number): number;
 }
 
 declare namespace $ {
@@ -10813,14 +12003,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
-    /**
-     * 48-bit streamable string hash function
-     * Based on cyrb53: https://stackoverflow.com/a/52171480
-     */
-    function $mol_hash_string(str: string, seed?: number): number;
 }
 
 declare namespace $ {
@@ -34220,6138 +35402,65 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    /**
-     * Checks for some of given runtype or throws error.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_variant_demo
-     */
-    function $mol_data_variant<Sub extends $mol_data_value[]>(...sub: Sub): ((val: Parameters<Sub[number]>[0]) => ReturnType<Sub[number]>) & {
-        config: Sub;
-        Value: ReturnType<Sub[number]>;
-    };
+
+	type $mol_avatar__id_giper_baza_status_1 = $mol_type_enforce<
+		ReturnType< $giper_baza_status['master_id'] >
+		,
+		ReturnType< $mol_avatar['id'] >
+	>
+	type $mol_avatar__id_giper_baza_status_2 = $mol_type_enforce<
+		ReturnType< $giper_baza_status['master_link'] >
+		,
+		ReturnType< $mol_avatar['id'] >
+	>
+	type $mol_link__uri_giper_baza_status_3 = $mol_type_enforce<
+		ReturnType< $giper_baza_status['master_link'] >
+		,
+		ReturnType< $mol_link['uri'] >
+	>
+	type $mol_link__sub_giper_baza_status_4 = $mol_type_enforce<
+		ReturnType< $giper_baza_status['link_content'] >
+		,
+		ReturnType< $mol_link['sub'] >
+	>
+	type $mol_link__hint_giper_baza_status_5 = $mol_type_enforce<
+		ReturnType< $giper_baza_status['message'] >
+		,
+		ReturnType< $mol_link['hint'] >
+	>
+	export class $giper_baza_status extends $mol_select {
+		master_id( id: any): string
+		Option_logo( id: any): $mol_avatar
+		master_link( ): string
+		Well( ): $mol_avatar
+		Fail( ): $mol_icon_sync_off
+		link_content( ): readonly(any)[]
+		hint( ): string
+		message( ): ReturnType< $giper_baza_status['hint'] >
+		Link( ): $mol_link
+		minimal_width( ): number
+		minimal_height( ): number
+		Filter( ): any
+		option_content( id: any): readonly(any)[]
+		trigger_content( ): readonly(any)[]
+	}
+	
 }
 
-declare namespace $ {
-    /**
-     * Checks for string and returns string type.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_string_demo
-     */
-    let $mol_data_string: (val: string) => string;
-}
-
-declare namespace $ {
-    /**
-     * Checks for undefined or passing given runtype.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_optional_demo
-     */
-    function $mol_data_optional<Sub extends $mol_data_value, Fallback extends undefined | (() => ReturnType<Sub>)>(sub: Sub, fallback?: Fallback): ((val: Parameters<Sub>[0] | undefined) => ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>)) & {
-        config: {
-            sub: Sub;
-            fallback: Fallback | undefined;
-        };
-        Value: ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>);
-    };
-}
-
-declare namespace $ {
-    /**
-     * Return `unknown` when `A` and `B` are the same type. `never` otherwise.
-     *
-     * 	$mol_type_equals< unknown , any > & number // true
-     * 	$mol_type_equals< never , never > & number // false
-     */
-    type $mol_type_equals<A, B> = (<X>() => X extends A ? 1 : 2) extends (<X>() => X extends B ? 1 : 2) ? true : false;
-}
-
-declare namespace $ {
-    /**
-     * Reqursive converts intersection of records to record of intersections
-     *
-     * 	// { a : { x : 1 , y : 2 } }
-     * 	$mol_type_merge< { a : { x : 1 } }&{ a : { y : 2 } } >
-     */
-    type $mol_type_merge<Intersection> = Intersection extends (...a: any[]) => any ? Intersection : Intersection extends new (...a: any[]) => any ? Intersection : Intersection extends object ? $mol_type_merge_object<Intersection> extends Intersection ? true extends $mol_type_equals<{
-        [Key in keyof Intersection]: Intersection[Key];
-    }, Intersection> ? Intersection : {
-        [Key in keyof Intersection]: $mol_type_merge<Intersection[Key]>;
-    } : Intersection : Intersection;
-    /**
-     * Flat converts intersection of records to record of intersections
-     *
-     * 	// { a: 1, b: 2 }
-     * 	$mol_type_merge< { a: 1 } & { b: 2 } >
-     */
-    type $mol_type_merge_object<Intersection> = {
-        [Key in keyof Intersection]: Intersection[Key];
-    };
-}
-
-declare namespace $ {
-    /**
-     * Fields that can be set to undefined makes optional
-     *
-     * 	type User = $mol_type_partial_undefined<{ name : string , age : number | undefined }> // { name : string , age? : number | undefined }
-     */
-    type $mol_type_partial_undefined<Val> = $mol_type_merge<$mol_type_override<Partial<Val>, Pick<Val, {
-        [Field in keyof Val]: undefined extends Val[Field] ? never : Field;
-    }[keyof Val]>>>;
-}
-
-declare namespace $ {
-    /**
-     * Checks for record of given fields with by its runtypes and returns expected type.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_record_demo
-     */
-    function $mol_data_record<Sub extends Record<string, $mol_data_value>>(sub: Sub): ((val: $mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }>, Pick<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }, { [Field in keyof { [key in keyof Sub]: Parameters<Sub[key]>[0]; }]: undefined extends { [key in keyof Sub]: Parameters<Sub[key]>[0]; }[Field] ? never : Field; }[keyof Sub]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }>, Pick<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }, { [Field_1 in keyof { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }]: undefined extends { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }[Field_1] ? never : Field_1; }[keyof Sub]>>>>) & {
-        config: Sub;
-        Value: Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: ReturnType<Sub[key]>; }>, Pick<{ [key in keyof Sub]: ReturnType<Sub[key]>; }, { [Field in keyof { [key in keyof Sub]: ReturnType<Sub[key]>; }]: undefined extends { [key in keyof Sub]: ReturnType<Sub[key]>; }[Field] ? never : Field; }[keyof Sub]>>>>;
-    };
-}
-
-declare namespace $ {
-    /**
-     * Checks for array of given runtype and returns expected type.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_array_demo
-     */
-    function $mol_data_array<Sub extends $mol_data_value>(sub: Sub): ((val: readonly Parameters<Sub>[0][]) => readonly ReturnType<Sub>[]) & {
-        config: Sub;
-        Value: readonly ReturnType<Sub>[];
-    };
-}
-
-declare namespace $ {
-    /**
-     * Checks for boolean and returns boolean type.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_boolean_demo
-     */
-    let $mol_data_boolean: (val: boolean) => boolean;
-}
-
-declare namespace $ {
-    /** Creates lexer by dictionary of lexems. Lexem that started first wins. Then lexem that declared earlier wins. Use regexp capture to take parts of token. */
-    class $mol_syntax2<Lexems extends {
-        [name: string]: RegExp;
-    } = {}> {
-        lexems: Lexems;
-        constructor(lexems: Lexems);
-        rules: Array<{
-            regExp: RegExp;
-            name: string;
-            size: number;
-        }>;
-        regexp: RegExp;
-        tokenize(text: string, handle: (name: string, found: string, chunks: string[], offset: number) => void): void;
-        parse(text: string, handlers: {
-            [key in keyof Lexems | '']: (found: string, chunks: string[], offset: number) => void;
-        }): void;
+//# sourceMappingURL=status.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $giper_baza_status extends $.$giper_baza_status {
+        message(): string;
+        link_content(): $mol_icon_sync_off[];
+        options(): string[];
+        master_link(): string;
+        master_id(uri: string): string;
+        option_label(uri: string): string;
+        value(next?: string): string;
     }
 }
 
 declare namespace $ {
-    type $hyoo_harp_query<Field extends string = string> = {
-        [field in Field]: $hyoo_harp_query<never>;
-    } & {
-        '+'?: boolean;
-        '='?: any[][];
-        '!='?: any[][];
-    };
-}
-
-declare namespace $ {
-    function $hyoo_harp_from_string(uri: string): $hyoo_harp_query;
-}
-
-declare namespace $ {
-    function $hyoo_harp_to_string<Query extends $hyoo_harp_query>(query: Query): string;
-}
-
-declare namespace $ {
-    function $hyoo_harp_scheme<Sub extends Record<string, $mol_data_value<any, any>>, Value extends $mol_data_value<any, any> = typeof $mol_data_integer>(sub: Sub, value?: Value): ((val: $mol_type_merge<$mol_type_override<Partial<Sub & {
-        '+': ((val: boolean | undefined) => boolean | undefined) & {
-            config: {
-                sub: (val: boolean) => boolean;
-                fallback: (() => boolean) | undefined;
-            };
-            Value: boolean | undefined;
-        };
-        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        _num: ((val: {
-            '=': readonly (readonly (string | number)[])[];
-        } | undefined) => Readonly<{
-            '=': readonly (readonly number[])[];
-        }> | undefined) & {
-            config: {
-                sub: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                }) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) & {
-                    config: {
-                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                config: ((this: any, input: string | number) => number) & {
-                                    config: {
-                                        funcs: [((val: string | number) => string | number) & {
-                                            config: [(val: string) => string, typeof $mol_data_integer];
-                                            Value: string | number;
-                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                    };
-                                    Value: number;
-                                };
-                                Value: readonly number[];
-                            };
-                            Value: readonly (readonly number[])[];
-                        };
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>;
-                };
-                fallback: (() => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) | undefined;
-            };
-            Value: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-        };
-        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-    } extends infer T ? { [key in keyof T]: Parameters<T[key]>[0]; } : never>, Pick<Sub & {
-        '+': ((val: boolean | undefined) => boolean | undefined) & {
-            config: {
-                sub: (val: boolean) => boolean;
-                fallback: (() => boolean) | undefined;
-            };
-            Value: boolean | undefined;
-        };
-        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        _num: ((val: {
-            '=': readonly (readonly (string | number)[])[];
-        } | undefined) => Readonly<{
-            '=': readonly (readonly number[])[];
-        }> | undefined) & {
-            config: {
-                sub: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                }) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) & {
-                    config: {
-                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                config: ((this: any, input: string | number) => number) & {
-                                    config: {
-                                        funcs: [((val: string | number) => string | number) & {
-                                            config: [(val: string) => string, typeof $mol_data_integer];
-                                            Value: string | number;
-                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                    };
-                                    Value: number;
-                                };
-                                Value: readonly number[];
-                            };
-                            Value: readonly (readonly number[])[];
-                        };
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>;
-                };
-                fallback: (() => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) | undefined;
-            };
-            Value: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-        };
-        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-    } extends infer T_1 ? { [key in keyof T_1]: Parameters<T_1[key]>[0]; } : never, ((Sub & {
-        '+': ((val: boolean | undefined) => boolean | undefined) & {
-            config: {
-                sub: (val: boolean) => boolean;
-                fallback: (() => boolean) | undefined;
-            };
-            Value: boolean | undefined;
-        };
-        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        _num: ((val: {
-            '=': readonly (readonly (string | number)[])[];
-        } | undefined) => Readonly<{
-            '=': readonly (readonly number[])[];
-        }> | undefined) & {
-            config: {
-                sub: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                }) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) & {
-                    config: {
-                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                config: ((this: any, input: string | number) => number) & {
-                                    config: {
-                                        funcs: [((val: string | number) => string | number) & {
-                                            config: [(val: string) => string, typeof $mol_data_integer];
-                                            Value: string | number;
-                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                    };
-                                    Value: number;
-                                };
-                                Value: readonly number[];
-                            };
-                            Value: readonly (readonly number[])[];
-                        };
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>;
-                };
-                fallback: (() => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) | undefined;
-            };
-            Value: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-        };
-        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-    } extends infer T_3 ? { [key in keyof T_3]: Parameters<T_3[key]>[0]; } : never) extends infer T_2 ? { [Field in keyof T_2]: undefined extends T_2[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
-        '+': ((val: boolean | undefined) => boolean | undefined) & {
-            config: {
-                sub: (val: boolean) => boolean;
-                fallback: (() => boolean) | undefined;
-            };
-            Value: boolean | undefined;
-        };
-        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        _num: ((val: {
-            '=': readonly (readonly (string | number)[])[];
-        } | undefined) => Readonly<{
-            '=': readonly (readonly number[])[];
-        }> | undefined) & {
-            config: {
-                sub: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                }) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) & {
-                    config: {
-                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                config: ((this: any, input: string | number) => number) & {
-                                    config: {
-                                        funcs: [((val: string | number) => string | number) & {
-                                            config: [(val: string) => string, typeof $mol_data_integer];
-                                            Value: string | number;
-                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                    };
-                                    Value: number;
-                                };
-                                Value: readonly number[];
-                            };
-                            Value: readonly (readonly number[])[];
-                        };
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>;
-                };
-                fallback: (() => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) | undefined;
-            };
-            Value: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-        };
-        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-    } extends infer T_4 ? { [key_1 in keyof T_4]: ReturnType<T_4[key_1]>; } : never>, Pick<Sub & {
-        '+': ((val: boolean | undefined) => boolean | undefined) & {
-            config: {
-                sub: (val: boolean) => boolean;
-                fallback: (() => boolean) | undefined;
-            };
-            Value: boolean | undefined;
-        };
-        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        _num: ((val: {
-            '=': readonly (readonly (string | number)[])[];
-        } | undefined) => Readonly<{
-            '=': readonly (readonly number[])[];
-        }> | undefined) & {
-            config: {
-                sub: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                }) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) & {
-                    config: {
-                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                config: ((this: any, input: string | number) => number) & {
-                                    config: {
-                                        funcs: [((val: string | number) => string | number) & {
-                                            config: [(val: string) => string, typeof $mol_data_integer];
-                                            Value: string | number;
-                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                    };
-                                    Value: number;
-                                };
-                                Value: readonly number[];
-                            };
-                            Value: readonly (readonly number[])[];
-                        };
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>;
-                };
-                fallback: (() => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) | undefined;
-            };
-            Value: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-        };
-        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-    } extends infer T_5 ? { [key_1 in keyof T_5]: ReturnType<T_5[key_1]>; } : never, ((Sub & {
-        '+': ((val: boolean | undefined) => boolean | undefined) & {
-            config: {
-                sub: (val: boolean) => boolean;
-                fallback: (() => boolean) | undefined;
-            };
-            Value: boolean | undefined;
-        };
-        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-            config: {
-                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                        config: Value;
-                        Value: readonly ReturnType<Value>[];
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[];
-                };
-                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-            };
-            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-        };
-        _num: ((val: {
-            '=': readonly (readonly (string | number)[])[];
-        } | undefined) => Readonly<{
-            '=': readonly (readonly number[])[];
-        }> | undefined) & {
-            config: {
-                sub: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                }) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) & {
-                    config: {
-                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                config: ((this: any, input: string | number) => number) & {
-                                    config: {
-                                        funcs: [((val: string | number) => string | number) & {
-                                            config: [(val: string) => string, typeof $mol_data_integer];
-                                            Value: string | number;
-                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                    };
-                                    Value: number;
-                                };
-                                Value: readonly number[];
-                            };
-                            Value: readonly (readonly number[])[];
-                        };
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>;
-                };
-                fallback: (() => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }>) | undefined;
-            };
-            Value: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-        };
-        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-    } extends infer T_7 ? { [key_1 in keyof T_7]: ReturnType<T_7[key_1]>; } : never) extends infer T_6 ? { [Field_1 in keyof T_6]: undefined extends T_6[Field_1] ? never : Field_1; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>) & {
-        config: Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        };
-        Value: Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T]: ReturnType<T[key]>; } : never>, Pick<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_1 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_1]: ReturnType<T_1[key]>; } : never, ((Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_3 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_3]: ReturnType<T_3[key]>; } : never) extends infer T_2 ? { [Field in keyof T_2]: undefined extends T_2[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>;
-    } & {
-        parse(str: string): Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_4 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_4]: ReturnType<T_4[key]>; } : never>, Pick<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_5 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_5]: ReturnType<T_5[key]>; } : never, ((Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_7 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_7]: ReturnType<T_7[key]>; } : never) extends infer T_6 ? { [Field in keyof T_6]: undefined extends T_6[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>;
-        build(query: Parameters<((val: $mol_type_merge<$mol_type_override<Partial<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_4 ? { [key_1 in keyof T_4]: Parameters<T_4[key_1]>[0]; } : never>, Pick<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_5 ? { [key_1 in keyof T_5]: Parameters<T_5[key_1]>[0]; } : never, ((Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_7 ? { [key_1 in keyof T_7]: Parameters<T_7[key_1]>[0]; } : never) extends infer T_6 ? { [Field_1 in keyof T_6]: undefined extends T_6[Field_1] ? never : Field_1; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_8 ? { [key in keyof T_8]: ReturnType<T_8[key]>; } : never>, Pick<Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_9 ? { [key in keyof T_9]: ReturnType<T_9[key]>; } : never, ((Sub & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                            config: Value;
-                            Value: readonly ReturnType<Value>[];
-                        };
-                        Value: readonly (readonly ReturnType<Value>[])[];
-                    };
-                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                };
-                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-        } extends infer T_11 ? { [key in keyof T_11]: ReturnType<T_11[key]>; } : never) extends infer T_10 ? { [Field in keyof T_10]: undefined extends T_10[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>) & {
-            config: Sub & {
-                '+': ((val: boolean | undefined) => boolean | undefined) & {
-                    config: {
-                        sub: (val: boolean) => boolean;
-                        fallback: (() => boolean) | undefined;
-                    };
-                    Value: boolean | undefined;
-                };
-                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                _num: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined) & {
-                    config: {
-                        sub: ((val: {
-                            '=': readonly (readonly (string | number)[])[];
-                        }) => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) & {
-                            config: {
-                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                        config: ((this: any, input: string | number) => number) & {
-                                            config: {
-                                                funcs: [((val: string | number) => string | number) & {
-                                                    config: [(val: string) => string, typeof $mol_data_integer];
-                                                    Value: string | number;
-                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                            };
-                                            Value: number;
-                                        };
-                                        Value: readonly number[];
-                                    };
-                                    Value: readonly (readonly number[])[];
-                                };
-                            };
-                            Value: Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>;
-                        };
-                        fallback: (() => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) | undefined;
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                };
-                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            };
-            Value: Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
-                '+': ((val: boolean | undefined) => boolean | undefined) & {
-                    config: {
-                        sub: (val: boolean) => boolean;
-                        fallback: (() => boolean) | undefined;
-                    };
-                    Value: boolean | undefined;
-                };
-                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                _num: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined) & {
-                    config: {
-                        sub: ((val: {
-                            '=': readonly (readonly (string | number)[])[];
-                        }) => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) & {
-                            config: {
-                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                        config: ((this: any, input: string | number) => number) & {
-                                            config: {
-                                                funcs: [((val: string | number) => string | number) & {
-                                                    config: [(val: string) => string, typeof $mol_data_integer];
-                                                    Value: string | number;
-                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                            };
-                                            Value: number;
-                                        };
-                                        Value: readonly number[];
-                                    };
-                                    Value: readonly (readonly number[])[];
-                                };
-                            };
-                            Value: Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>;
-                        };
-                        fallback: (() => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) | undefined;
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                };
-                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            } extends infer T_4 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_4]: ReturnType<T_4[key]>; } : never>, Pick<Sub & {
-                '+': ((val: boolean | undefined) => boolean | undefined) & {
-                    config: {
-                        sub: (val: boolean) => boolean;
-                        fallback: (() => boolean) | undefined;
-                    };
-                    Value: boolean | undefined;
-                };
-                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                _num: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined) & {
-                    config: {
-                        sub: ((val: {
-                            '=': readonly (readonly (string | number)[])[];
-                        }) => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) & {
-                            config: {
-                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                        config: ((this: any, input: string | number) => number) & {
-                                            config: {
-                                                funcs: [((val: string | number) => string | number) & {
-                                                    config: [(val: string) => string, typeof $mol_data_integer];
-                                                    Value: string | number;
-                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                            };
-                                            Value: number;
-                                        };
-                                        Value: readonly number[];
-                                    };
-                                    Value: readonly (readonly number[])[];
-                                };
-                            };
-                            Value: Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>;
-                        };
-                        fallback: (() => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) | undefined;
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                };
-                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            } extends infer T_5 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_5]: ReturnType<T_5[key]>; } : never, ((Sub & {
-                '+': ((val: boolean | undefined) => boolean | undefined) & {
-                    config: {
-                        sub: (val: boolean) => boolean;
-                        fallback: (() => boolean) | undefined;
-                    };
-                    Value: boolean | undefined;
-                };
-                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
-                    config: {
-                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
-                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
-                                config: Value;
-                                Value: readonly ReturnType<Value>[];
-                            };
-                            Value: readonly (readonly ReturnType<Value>[])[];
-                        };
-                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
-                    };
-                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
-                };
-                _num: ((val: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined) => Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined) & {
-                    config: {
-                        sub: ((val: {
-                            '=': readonly (readonly (string | number)[])[];
-                        }) => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) & {
-                            config: {
-                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                        config: ((this: any, input: string | number) => number) & {
-                                            config: {
-                                                funcs: [((val: string | number) => string | number) & {
-                                                    config: [(val: string) => string, typeof $mol_data_integer];
-                                                    Value: string | number;
-                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                            };
-                                            Value: number;
-                                        };
-                                        Value: readonly number[];
-                                    };
-                                    Value: readonly (readonly number[])[];
-                                };
-                            };
-                            Value: Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>;
-                        };
-                        fallback: (() => Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>) | undefined;
-                    };
-                    Value: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                };
-                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
-            } extends infer T_7 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_7]: ReturnType<T_7[key]>; } : never) extends infer T_6 ? { [Field in keyof T_6]: undefined extends T_6[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>;
-        }>[0]): string;
-    };
-}
-
-declare namespace $ {
-    type $mol_blob = Blob;
-    let $mol_blob: {
-        prototype: Blob;
-        new (blobParts?: readonly BlobPart[], options?: BlobPropertyBag): Blob;
-    };
-}
-
-declare namespace $ {
-    export function $giper_baza_file_mime_safe(type: string): string;
-    export const $giper_baza_file_query: ((val: {
-        '+'?: boolean | undefined;
-        '='?: readonly (readonly number[])[] | undefined;
-        '!='?: readonly (readonly number[])[] | undefined;
-        _num?: {
-            '=': readonly (readonly (string | number)[])[];
-        } | undefined;
-        _len?: Readonly<{
-            BAZA: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-            file: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-        }> | undefined;
-        _max?: Readonly<{
-            BAZA: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-            file: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-        }> | undefined;
-        _min?: Readonly<{
-            BAZA: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-            file: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-        }> | undefined;
-        _sum?: Readonly<{
-            BAZA: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-            file: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-        }> | undefined;
-        BAZA: {
-            '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
-            _num?: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined;
-            _len?: Readonly<{}> | undefined;
-            _max?: Readonly<{}> | undefined;
-            _min?: Readonly<{}> | undefined;
-            _sum?: Readonly<{}> | undefined;
-        };
-        file: {
-            '+'?: boolean | undefined;
-            '='?: readonly (readonly string[])[] | undefined;
-            '!='?: readonly (readonly string[])[] | undefined;
-            _num?: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined;
-            _len?: Readonly<{}> | undefined;
-            _max?: Readonly<{}> | undefined;
-            _min?: Readonly<{}> | undefined;
-            _sum?: Readonly<{}> | undefined;
-        };
-    }) => Readonly<{
-        '+'?: boolean | undefined;
-        '='?: readonly (readonly number[])[] | undefined;
-        '!='?: readonly (readonly number[])[] | undefined;
-        _num?: Readonly<{
-            '=': readonly (readonly number[])[];
-        }> | undefined;
-        _len?: Readonly<{
-            BAZA: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-            file: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-        }> | undefined;
-        _max?: Readonly<{
-            BAZA: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-            file: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-        }> | undefined;
-        _min?: Readonly<{
-            BAZA: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-            file: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-        }> | undefined;
-        _sum?: Readonly<{
-            BAZA: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-            file: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-        }> | undefined;
-        BAZA: Readonly<{
-            '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
-            _num?: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-            _len?: Readonly<{}> | undefined;
-            _max?: Readonly<{}> | undefined;
-            _min?: Readonly<{}> | undefined;
-            _sum?: Readonly<{}> | undefined;
-        }>;
-        file: Readonly<{
-            '+'?: boolean | undefined;
-            '='?: readonly (readonly string[])[] | undefined;
-            '!='?: readonly (readonly string[])[] | undefined;
-            _num?: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-            _len?: Readonly<{}> | undefined;
-            _max?: Readonly<{}> | undefined;
-            _min?: Readonly<{}> | undefined;
-            _sum?: Readonly<{}> | undefined;
-        }>;
-    }>) & {
-        config: {
-            BAZA: ((val: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }) => Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>) & {
-                config: {
-                    '+': ((val: boolean | undefined) => boolean | undefined) & {
-                        config: {
-                            sub: (val: boolean) => boolean;
-                            fallback: (() => boolean) | undefined;
-                        };
-                        Value: boolean | undefined;
-                    };
-                    '=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
-                        config: {
-                            sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly number[]) => readonly number[]) & {
-                                    config: typeof $mol_data_integer;
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                            fallback: (() => readonly (readonly number[])[]) | undefined;
-                        };
-                        Value: readonly (readonly number[])[] | undefined;
-                    };
-                    '!=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
-                        config: {
-                            sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly number[]) => readonly number[]) & {
-                                    config: typeof $mol_data_integer;
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                            fallback: (() => readonly (readonly number[])[]) | undefined;
-                        };
-                        Value: readonly (readonly number[])[] | undefined;
-                    };
-                    _num: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined) & {
-                        config: {
-                            sub: ((val: {
-                                '=': readonly (readonly (string | number)[])[];
-                            }) => Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>) & {
-                                config: {
-                                    '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                        config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                            config: ((this: any, input: string | number) => number) & {
-                                                config: {
-                                                    funcs: [((val: string | number) => string | number) & {
-                                                        config: [(val: string) => string, typeof $mol_data_integer];
-                                                        Value: string | number;
-                                                    }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                                };
-                                                Value: number;
-                                            };
-                                            Value: readonly number[];
-                                        };
-                                        Value: readonly (readonly number[])[];
-                                    };
-                                };
-                                Value: Readonly<{
-                                    '=': readonly (readonly number[])[];
-                                }>;
-                            };
-                            fallback: (() => Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>) | undefined;
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }> | undefined;
-                    };
-                    _len: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                    _max: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                    _min: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                    _sum: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                };
-                Value: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            } & {
-                parse(str: string): Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                build(query: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }): string;
-            };
-            file: ((val: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }) => Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>) & {
-                config: {
-                    '+': ((val: boolean | undefined) => boolean | undefined) & {
-                        config: {
-                            sub: (val: boolean) => boolean;
-                            fallback: (() => boolean) | undefined;
-                        };
-                        Value: boolean | undefined;
-                    };
-                    '=': ((val: readonly (readonly string[])[] | undefined) => readonly (readonly string[])[] | undefined) & {
-                        config: {
-                            sub: ((val: readonly (readonly string[])[]) => readonly (readonly string[])[]) & {
-                                config: ((val: readonly string[]) => readonly string[]) & {
-                                    config: (val: string) => string;
-                                    Value: readonly string[];
-                                };
-                                Value: readonly (readonly string[])[];
-                            };
-                            fallback: (() => readonly (readonly string[])[]) | undefined;
-                        };
-                        Value: readonly (readonly string[])[] | undefined;
-                    };
-                    '!=': ((val: readonly (readonly string[])[] | undefined) => readonly (readonly string[])[] | undefined) & {
-                        config: {
-                            sub: ((val: readonly (readonly string[])[]) => readonly (readonly string[])[]) & {
-                                config: ((val: readonly string[]) => readonly string[]) & {
-                                    config: (val: string) => string;
-                                    Value: readonly string[];
-                                };
-                                Value: readonly (readonly string[])[];
-                            };
-                            fallback: (() => readonly (readonly string[])[]) | undefined;
-                        };
-                        Value: readonly (readonly string[])[] | undefined;
-                    };
-                    _num: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined) & {
-                        config: {
-                            sub: ((val: {
-                                '=': readonly (readonly (string | number)[])[];
-                            }) => Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>) & {
-                                config: {
-                                    '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                        config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                            config: ((this: any, input: string | number) => number) & {
-                                                config: {
-                                                    funcs: [((val: string | number) => string | number) & {
-                                                        config: [(val: string) => string, typeof $mol_data_integer];
-                                                        Value: string | number;
-                                                    }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                                };
-                                                Value: number;
-                                            };
-                                            Value: readonly number[];
-                                        };
-                                        Value: readonly (readonly number[])[];
-                                    };
-                                };
-                                Value: Readonly<{
-                                    '=': readonly (readonly number[])[];
-                                }>;
-                            };
-                            fallback: (() => Readonly<{
-                                '=': readonly (readonly number[])[];
-                            }>) | undefined;
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }> | undefined;
-                    };
-                    _len: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                    _max: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                    _min: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                    _sum: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
-                };
-                Value: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            } & {
-                parse(str: string): Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                build(query: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }): string;
-            };
-        } & {
-            '+': ((val: boolean | undefined) => boolean | undefined) & {
-                config: {
-                    sub: (val: boolean) => boolean;
-                    fallback: (() => boolean) | undefined;
-                };
-                Value: boolean | undefined;
-            };
-            '=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
-                        config: ((val: readonly number[]) => readonly number[]) & {
-                            config: typeof $mol_data_integer;
-                            Value: readonly number[];
-                        };
-                        Value: readonly (readonly number[])[];
-                    };
-                    fallback: (() => readonly (readonly number[])[]) | undefined;
-                };
-                Value: readonly (readonly number[])[] | undefined;
-            };
-            '!=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
-                config: {
-                    sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
-                        config: ((val: readonly number[]) => readonly number[]) & {
-                            config: typeof $mol_data_integer;
-                            Value: readonly number[];
-                        };
-                        Value: readonly (readonly number[])[];
-                    };
-                    fallback: (() => readonly (readonly number[])[]) | undefined;
-                };
-                Value: readonly (readonly number[])[] | undefined;
-            };
-            _num: ((val: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined) => Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined) & {
-                config: {
-                    sub: ((val: {
-                        '=': readonly (readonly (string | number)[])[];
-                    }) => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) & {
-                        config: {
-                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
-                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
-                                    config: ((this: any, input: string | number) => number) & {
-                                        config: {
-                                            funcs: [((val: string | number) => string | number) & {
-                                                config: [(val: string) => string, typeof $mol_data_integer];
-                                                Value: string | number;
-                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
-                                        };
-                                        Value: number;
-                                    };
-                                    Value: readonly number[];
-                                };
-                                Value: readonly (readonly number[])[];
-                            };
-                        };
-                        Value: Readonly<{
-                            '=': readonly (readonly number[])[];
-                        }>;
-                    };
-                    fallback: (() => Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }>) | undefined;
-                };
-                Value: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-            };
-            _len: $mol_data_value<Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined, Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined>;
-            _max: $mol_data_value<Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined, Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined>;
-            _min: $mol_data_value<Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined, Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined>;
-            _sum: $mol_data_value<Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined, Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined>;
-        };
-        Value: Readonly<{
-            '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
-            _num?: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-            _len?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            _max?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            _min?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            _sum?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            BAZA: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-            file: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-        }>;
-    } & {
-        parse(str: string): Readonly<{
-            '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
-            _num?: Readonly<{
-                '=': readonly (readonly number[])[];
-            }> | undefined;
-            _len?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            _max?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            _min?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            _sum?: Readonly<{
-                BAZA: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-                file: Readonly<{
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: Readonly<{
-                        '=': readonly (readonly number[])[];
-                    }> | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                }>;
-            }> | undefined;
-            BAZA: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-            file: Readonly<{
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: Readonly<{
-                    '=': readonly (readonly number[])[];
-                }> | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            }>;
-        }>;
-        build(query: {
-            '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
-            _num?: {
-                '=': readonly (readonly (string | number)[])[];
-            } | undefined;
-            _len?: Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined;
-            _max?: Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined;
-            _min?: Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined;
-            _sum?: Readonly<{
-                BAZA: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly number[])[] | undefined;
-                    '!='?: readonly (readonly number[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-                file: {
-                    '+'?: boolean | undefined;
-                    '='?: readonly (readonly string[])[] | undefined;
-                    '!='?: readonly (readonly string[])[] | undefined;
-                    _num?: {
-                        '=': readonly (readonly (string | number)[])[];
-                    } | undefined;
-                    _len?: Readonly<{}> | undefined;
-                    _max?: Readonly<{}> | undefined;
-                    _min?: Readonly<{}> | undefined;
-                    _sum?: Readonly<{}> | undefined;
-                };
-            }> | undefined;
-            BAZA: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-            file: {
-                '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
-                _num?: {
-                    '=': readonly (readonly (string | number)[])[];
-                } | undefined;
-                _len?: Readonly<{}> | undefined;
-                _max?: Readonly<{}> | undefined;
-                _min?: Readonly<{}> | undefined;
-                _sum?: Readonly<{}> | undefined;
-            };
-        }): string;
-    };
-    const $giper_baza_file_base: Omit<typeof $giper_baza_dict, "prototype"> & {
-        new (...args: any[]): $mol_type_override<$giper_baza_dict, {
-            readonly Name: (auto?: any) => $giper_baza_atom_text | null;
-            readonly Type: (auto?: any) => $giper_baza_atom_text | null;
-            readonly Chunks: (auto?: any) => $giper_baza_list_bin | null;
-        }>;
-        path: string;
-    } & {
-        schema: {
-            [x: string]: typeof $giper_baza_pawn;
-        } & {
-            /** File name */
-            readonly Name: typeof $giper_baza_atom_text;
-            /** File Content-Type */
-            readonly Type: typeof $giper_baza_atom_text;
-            /** File content in chunks - list of binaries */
-            readonly Chunks: typeof $giper_baza_list_bin;
-        };
-    };
-    export class $giper_baza_file extends $giper_baza_file_base {
-        /** Persistent URI to file content */
-        uri(): string;
-        /** File name */
-        name(next?: string | null): string;
-        /** Mime type */
-        type(next?: string | null): string;
-        /** Blob, File etc. */
-        blob(next?: $mol_blob): $mol_blob;
-        /** Solid byte buffer. */
-        buffer(next?: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer>;
-        chunks(next?: readonly Uint8Array<ArrayBuffer>[]): Uint8Array<ArrayBuffer>[];
-        str(next?: string, type?: string): string;
-        json(next?: any, type?: string): any;
-    }
-    export {};
-}
-
-declare namespace $ {
-    function $mol_offline(): void;
-}
-
-declare namespace $ {
-    /** Installs service worker proxy, which caches all requests and respond from cache on http errors. */
-    function $mol_offline_web(): void;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    const $bog_nka_product_base: Omit<typeof $giper_baza_dict, "prototype"> & {
-        new (...args: any[]): $mol_type_override<$giper_baza_dict, {
-            readonly Title: (auto?: any) => $giper_baza_atom_text | null;
-            readonly Price: (auto?: any) => $giper_baza_atom_real | null;
-            readonly Description: (auto?: any) => $giper_baza_atom_text | null;
-            readonly Photos: (auto?: any) => {
-                Value: Value;
-                remote_list(next?: readonly $giper_baza_file[] | undefined): readonly $giper_baza_file[];
-                remote_add(item: $giper_baza_file & $giper_baza_pawn): void;
-                make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file;
-                items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
-                items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                cut(vary: $giper_baza_vary_type): void;
-                move(from: number, to: number): void;
-                wipe(seat: number): void;
-                pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                [$mol_dev_format_head](): any[];
-                land(): $giper_baza_land;
-                head(): $giper_baza_link;
-                land_link(): $giper_baza_link;
-                link(): $giper_baza_link;
-                toJSON(): string;
-                cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                units(): $giper_baza_unit_sand[];
-                units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                meta(next?: $giper_baza_link): $giper_baza_link | null;
-                meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                filled(): boolean;
-                can_change(): boolean;
-                last_change(): $mol_time_moment | null;
-                authors(): $giper_baza_auth_pass[];
-                get $(): $;
-                set $(next: $);
-                destructor(): void;
-                toString(): string;
-                [Symbol.toStringTag]: string;
-                [$mol_ambient_ref]: $;
-                [Symbol.dispose](): void;
-            } | null;
-            readonly Category: (auto?: any) => $giper_baza_atom_text | null;
-            readonly Available: (auto?: any) => $giper_baza_atom_bool | null;
-        }>;
-        path: string;
-    } & {
-        schema: {
-            [x: string]: typeof $giper_baza_pawn;
-        } & {
-            readonly Title: typeof $giper_baza_atom_text;
-            readonly Price: typeof $giper_baza_atom_real;
-            readonly Description: typeof $giper_baza_atom_text;
-            readonly Photos: {
-                new (): {
-                    Value: () => typeof $giper_baza_file;
-                    remote_list(next?: readonly $giper_baza_file[] | undefined): readonly $giper_baza_file[];
-                    remote_add(item: $giper_baza_file & $giper_baza_pawn): void;
-                    make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file;
-                    items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
-                    items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                    splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                    find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                    has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                    add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                    cut(vary: $giper_baza_vary_type): void;
-                    move(from: number, to: number): void;
-                    wipe(seat: number): void;
-                    pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                    [$mol_dev_format_head](): any[];
-                    land(): $giper_baza_land;
-                    head(): $giper_baza_link;
-                    land_link(): $giper_baza_link;
-                    link(): $giper_baza_link;
-                    toJSON(): string;
-                    cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                    pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                    units(): $giper_baza_unit_sand[];
-                    units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                    meta(next?: $giper_baza_link): $giper_baza_link | null;
-                    meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                    filled(): boolean;
-                    can_change(): boolean;
-                    last_change(): $mol_time_moment | null;
-                    authors(): $giper_baza_auth_pass[];
-                    get $(): $;
-                    set $(next: $);
-                    destructor(): void;
-                    toString(): string;
-                    [Symbol.toStringTag]: string;
-                    [$mol_ambient_ref]: $;
-                    [Symbol.dispose](): void;
-                };
-                toString(): any;
-                to<const Value extends unknown>(Value: Value): {
-                    new (): {
-                        Value: Value;
-                        remote_list(next?: readonly $mol_type_result<$mol_type_result<Value>>[] | undefined): readonly $mol_type_result<$mol_type_result<Value>>[];
-                        remote_add(item: $mol_type_result<$mol_type_result<Value>> & $giper_baza_pawn): void;
-                        make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>>;
-                        items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
-                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        cut(vary: $giper_baza_vary_type): void;
-                        move(from: number, to: number): void;
-                        wipe(seat: number): void;
-                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                        [$mol_dev_format_head](): any[];
-                        land(): $giper_baza_land;
-                        head(): $giper_baza_link;
-                        land_link(): $giper_baza_link;
-                        link(): $giper_baza_link;
-                        toJSON(): string;
-                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                        units(): $giper_baza_unit_sand[];
-                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                        meta(next?: $giper_baza_link): $giper_baza_link | null;
-                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                        filled(): boolean;
-                        can_change(): boolean;
-                        last_change(): $mol_time_moment | null;
-                        authors(): $giper_baza_auth_pass[];
-                        get $(): $;
-                        set $(next: $);
-                        destructor(): void;
-                        toString(): string;
-                        [Symbol.toStringTag]: string;
-                        [$mol_ambient_ref]: $;
-                        [Symbol.dispose](): void;
-                    };
-                    toString(): any;
-                    to<const Value extends unknown>(Value: Value): /*elided*/ any;
-                    Item: {
-                        new (value?: any): {
-                            constructor: Function;
-                            toString(): string;
-                            toLocaleString(): string;
-                            valueOf(): Object;
-                            hasOwnProperty(v: PropertyKey): boolean;
-                            isPrototypeOf(v: Object): boolean;
-                            propertyIsEnumerable(v: PropertyKey): boolean;
-                        };
-                        Class: typeof $giper_baza_link;
-                        toString(): string;
-                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                        default: $giper_baza_link;
-                        check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                        [Symbol.toStringTag]: string;
-                        [$mol_key_handle](): string;
-                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                        getPrototypeOf(o: any): any;
-                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                        getOwnPropertyNames(o: any): string[];
-                        create(o: object | null): any;
-                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                        seal<T>(o: T): T;
-                        freeze<T extends Function>(f: T): T;
-                        freeze<T extends {
-                            [idx: string]: U | null | undefined | object;
-                        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                        freeze<T>(o: T): Readonly<T>;
-                        preventExtensions<T>(o: T): T;
-                        isSealed(o: any): boolean;
-                        isFrozen(o: any): boolean;
-                        isExtensible(o: any): boolean;
-                        keys(o: object): string[];
-                        keys(o: {}): string[];
-                        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-                        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-                        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-                        assign(target: object, ...sources: any[]): any;
-                        getOwnPropertySymbols(o: any): symbol[];
-                        is(value1: any, value2: any): boolean;
-                        setPrototypeOf(o: any, proto: object | null): any;
-                        values<T>(o: {
-                            [s: string]: T;
-                        } | ArrayLike<T>): T[];
-                        values(o: {}): any[];
-                        entries<T>(o: {
-                            [s: string]: T;
-                        } | ArrayLike<T>): [string, T][];
-                        entries(o: {}): [string, any][];
-                        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                            [x: string]: PropertyDescriptor;
-                        };
-                        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                            [k: string]: T;
-                        };
-                        fromEntries(entries: Iterable<readonly any[]>): any;
-                        hasOwn(o: object, v: PropertyKey): boolean;
-                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    };
-                    tag: keyof typeof $giper_baza_unit_sand_tag;
-                    of<Init extends new (...args: any[]) => any>(init: Init): {
-                        new (): {
-                            items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"][];
-                            items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                            splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                            find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                            has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                            add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                            cut(vary: $giper_baza_vary_type): void;
-                            move(from: number, to: number): void;
-                            wipe(seat: number): void;
-                            pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                            [$mol_dev_format_head](): any[];
-                            land(): $giper_baza_land;
-                            head(): $giper_baza_link;
-                            land_link(): $giper_baza_link;
-                            link(): $giper_baza_link;
-                            toJSON(): string;
-                            cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                            pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                            units(): $giper_baza_unit_sand[];
-                            units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                            meta(next?: $giper_baza_link): $giper_baza_link | null;
-                            meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                            filled(): boolean;
-                            can_change(): boolean;
-                            last_change(): $mol_time_moment | null;
-                            authors(): $giper_baza_auth_pass[];
-                            get $(): $;
-                            set $(next: $);
-                            destructor(): void;
-                            toString(): string;
-                            [Symbol.toStringTag]: string;
-                            [$mol_ambient_ref]: $;
-                            [Symbol.dispose](): void;
-                        };
-                        Item: Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        };
-                        toString(): any;
-                        tag: keyof typeof $giper_baza_unit_sand_tag;
-                        of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
-                        meta: null | $giper_baza_link;
-                        make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                        $: $;
-                        create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                        toJSON(): any;
-                        destructor(): void;
-                        [Symbol.toPrimitive](): any;
-                        [$mol_key_handle](): any;
-                    };
-                    meta: null | $giper_baza_link;
-                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                    $: $;
-                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                    toJSON(): any;
-                    destructor(): void;
-                    [Symbol.toPrimitive](): any;
-                    [$mol_key_handle](): any;
-                };
-                Item: {
-                    new (value?: any): {
-                        constructor: Function;
-                        toString(): string;
-                        toLocaleString(): string;
-                        valueOf(): Object;
-                        hasOwnProperty(v: PropertyKey): boolean;
-                        isPrototypeOf(v: Object): boolean;
-                        propertyIsEnumerable(v: PropertyKey): boolean;
-                    };
-                    Class: typeof $giper_baza_link;
-                    toString(): string;
-                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                    cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                    default: $giper_baza_link;
-                    check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                    [Symbol.toStringTag]: string;
-                    [$mol_key_handle](): string;
-                    [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                    getPrototypeOf(o: any): any;
-                    getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                    getOwnPropertyNames(o: any): string[];
-                    create(o: object | null): any;
-                    create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                    defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                    defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                    seal<T>(o: T): T;
-                    freeze<T extends Function>(f: T): T;
-                    freeze<T extends {
-                        [idx: string]: U | null | undefined | object;
-                    }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                    freeze<T>(o: T): Readonly<T>;
-                    preventExtensions<T>(o: T): T;
-                    isSealed(o: any): boolean;
-                    isFrozen(o: any): boolean;
-                    isExtensible(o: any): boolean;
-                    keys(o: object): string[];
-                    keys(o: {}): string[];
-                    assign<T extends {}, U>(target: T, source: U): T & U;
-                    assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
-                    assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
-                    assign(target: object, ...sources: any[]): any;
-                    getOwnPropertySymbols(o: any): symbol[];
-                    is(value1: any, value2: any): boolean;
-                    setPrototypeOf(o: any, proto: object | null): any;
-                    values<T>(o: {
-                        [s: string]: T;
-                    } | ArrayLike<T>): T[];
-                    values(o: {}): any[];
-                    entries<T>(o: {
-                        [s: string]: T;
-                    } | ArrayLike<T>): [string, T][];
-                    entries(o: {}): [string, any][];
-                    getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                        [x: string]: PropertyDescriptor;
-                    };
-                    fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                        [k: string]: T;
-                    };
-                    fromEntries(entries: Iterable<readonly any[]>): any;
-                    hasOwn(o: object, v: PropertyKey): boolean;
-                    groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                };
-                tag: keyof typeof $giper_baza_unit_sand_tag;
-                of<Init extends new (...args: any[]) => any>(init: Init): {
-                    new (): {
-                        items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                            seal<T>(o: T): T;
-                            freeze<T extends Function>(f: T): T;
-                            freeze<T extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                            freeze<T>(o: T): Readonly<T>;
-                            preventExtensions<T>(o: T): T;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): T[];
-                            values(o: {}): any[];
-                            entries<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): [string, T][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                                [k: string]: T;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"][];
-                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        cut(vary: $giper_baza_vary_type): void;
-                        move(from: number, to: number): void;
-                        wipe(seat: number): void;
-                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                        [$mol_dev_format_head](): any[];
-                        land(): $giper_baza_land;
-                        head(): $giper_baza_link;
-                        land_link(): $giper_baza_link;
-                        link(): $giper_baza_link;
-                        toJSON(): string;
-                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                        units(): $giper_baza_unit_sand[];
-                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                        meta(next?: $giper_baza_link): $giper_baza_link | null;
-                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                        filled(): boolean;
-                        can_change(): boolean;
-                        last_change(): $mol_time_moment | null;
-                        authors(): $giper_baza_auth_pass[];
-                        get $(): $;
-                        set $(next: $);
-                        destructor(): void;
-                        toString(): string;
-                        [Symbol.toStringTag]: string;
-                        [$mol_ambient_ref]: $;
-                        [Symbol.dispose](): void;
-                    };
-                    Item: Init extends typeof $mol_schema_any ? Init : {
-                        new (value?: any): {
-                            constructor: Function;
-                            toString(): string;
-                            toLocaleString(): string;
-                            valueOf(): Object;
-                            hasOwnProperty(v: PropertyKey): boolean;
-                            isPrototypeOf(v: Object): boolean;
-                            propertyIsEnumerable(v: PropertyKey): boolean;
-                        };
-                        Class: Init;
-                        toString(): string;
-                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                        default: InstanceType<Init>;
-                        check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                        [Symbol.toStringTag]: string;
-                        [$mol_key_handle](): string;
-                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                        getPrototypeOf(o: any): any;
-                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                        getOwnPropertyNames(o: any): string[];
-                        create(o: object | null): any;
-                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                        seal<T_1>(o: T_1): T_1;
-                        freeze<T_1 extends Function>(f: T_1): T_1;
-                        freeze<T_1 extends {
-                            [idx: string]: U | null | undefined | object;
-                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                        freeze<T_1>(o: T_1): Readonly<T_1>;
-                        preventExtensions<T_1>(o: T_1): T_1;
-                        isSealed(o: any): boolean;
-                        isFrozen(o: any): boolean;
-                        isExtensible(o: any): boolean;
-                        keys(o: object): string[];
-                        keys(o: {}): string[];
-                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                        assign(target: object, ...sources: any[]): any;
-                        getOwnPropertySymbols(o: any): symbol[];
-                        is(value1: any, value2: any): boolean;
-                        setPrototypeOf(o: any, proto: object | null): any;
-                        values<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): T_1[];
-                        values(o: {}): any[];
-                        entries<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): [string, T_1][];
-                        entries(o: {}): [string, any][];
-                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                            [x: string]: PropertyDescriptor;
-                        };
-                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                            [k: string]: T_1;
-                        };
-                        fromEntries(entries: Iterable<readonly any[]>): any;
-                        hasOwn(o: object, v: PropertyKey): boolean;
-                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    };
-                    toString(): any;
-                    tag: keyof typeof $giper_baza_unit_sand_tag;
-                    of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
-                    meta: null | $giper_baza_link;
-                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                    $: $;
-                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                    toJSON(): any;
-                    destructor(): void;
-                    [Symbol.toPrimitive](): any;
-                    [$mol_key_handle](): any;
-                };
-                meta: null | $giper_baza_link;
-                make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                $: $;
-                create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                toJSON(): any;
-                destructor(): void;
-                [Symbol.toPrimitive](): any;
-                [$mol_key_handle](): any;
-            };
-            readonly Category: typeof $giper_baza_atom_text;
-            readonly Available: typeof $giper_baza_atom_bool;
-        };
-    };
-    export class $bog_nka_product extends $bog_nka_product_base {
-    }
-    export {};
-}
-
-declare namespace $ {
-    const $bog_nka_catalog_base: Omit<typeof $giper_baza_dict, "prototype"> & {
-        new (...args: any[]): $mol_type_override<$giper_baza_dict, {
-            readonly Products: (auto?: any) => {
-                Value: Value;
-                remote_list(next?: readonly $bog_nka_product[] | undefined): readonly $bog_nka_product[];
-                remote_add(item: $bog_nka_product & $giper_baza_pawn): void;
-                make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $bog_nka_product;
-                items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
-                items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                cut(vary: $giper_baza_vary_type): void;
-                move(from: number, to: number): void;
-                wipe(seat: number): void;
-                pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                [$mol_dev_format_head](): any[];
-                land(): $giper_baza_land;
-                head(): $giper_baza_link;
-                land_link(): $giper_baza_link;
-                link(): $giper_baza_link;
-                toJSON(): string;
-                cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                units(): $giper_baza_unit_sand[];
-                units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                meta(next?: $giper_baza_link): $giper_baza_link | null;
-                meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                filled(): boolean;
-                can_change(): boolean;
-                last_change(): $mol_time_moment | null;
-                authors(): $giper_baza_auth_pass[];
-                get $(): $;
-                set $(next: $);
-                destructor(): void;
-                toString(): string;
-                [Symbol.toStringTag]: string;
-                [$mol_ambient_ref]: $;
-                [Symbol.dispose](): void;
-            } | null;
-            readonly Categories: (auto?: any) => $giper_baza_list_str | null;
-            readonly Telegram: (auto?: any) => $giper_baza_atom_text | null;
-            readonly TelegramText: (auto?: any) => $giper_baza_atom_text | null;
-            readonly SoldOutImage: (auto?: any) => {
-                Value: Value;
-                remote(next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
-                remote_of(peer: $giper_baza_link | null, next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
-                ensure(config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
-                ensure_of(peer: $giper_baza_link | null, config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
-                ensure_here(peer: $giper_baza_link | null): void;
-                ensure_area(peer: $giper_baza_link | null, land: $giper_baza_land): void;
-                ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
-                remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_file | null;
-                local_ensure(): $giper_baza_file | null;
-                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
-                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
-                pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
-                vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
-                [$mol_dev_format_head](): any[];
-                land(): $giper_baza_land;
-                head(): $giper_baza_link;
-                land_link(): $giper_baza_link;
-                link(): $giper_baza_link;
-                toJSON(): string;
-                cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                units(): $giper_baza_unit_sand[];
-                units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                meta(next?: $giper_baza_link): $giper_baza_link | null;
-                meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                filled(): boolean;
-                can_change(): boolean;
-                last_change(): $mol_time_moment | null;
-                authors(): $giper_baza_auth_pass[];
-                get $(): $;
-                set $(next: $);
-                destructor(): void;
-                toString(): string;
-                [Symbol.toStringTag]: string;
-                [$mol_ambient_ref]: $;
-                [Symbol.dispose](): void;
-            } | null;
-        }>;
-        path: string;
-    } & {
-        schema: {
-            [x: string]: typeof $giper_baza_pawn;
-        } & {
-            readonly Products: {
-                new (): {
-                    Value: () => typeof $bog_nka_product;
-                    remote_list(next?: readonly $bog_nka_product[] | undefined): readonly $bog_nka_product[];
-                    remote_add(item: $bog_nka_product & $giper_baza_pawn): void;
-                    make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $bog_nka_product;
-                    items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
-                    items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                    splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                    find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                    has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                    add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                    cut(vary: $giper_baza_vary_type): void;
-                    move(from: number, to: number): void;
-                    wipe(seat: number): void;
-                    pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                    [$mol_dev_format_head](): any[];
-                    land(): $giper_baza_land;
-                    head(): $giper_baza_link;
-                    land_link(): $giper_baza_link;
-                    link(): $giper_baza_link;
-                    toJSON(): string;
-                    cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                    pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                    units(): $giper_baza_unit_sand[];
-                    units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                    meta(next?: $giper_baza_link): $giper_baza_link | null;
-                    meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                    filled(): boolean;
-                    can_change(): boolean;
-                    last_change(): $mol_time_moment | null;
-                    authors(): $giper_baza_auth_pass[];
-                    get $(): $;
-                    set $(next: $);
-                    destructor(): void;
-                    toString(): string;
-                    [Symbol.toStringTag]: string;
-                    [$mol_ambient_ref]: $;
-                    [Symbol.dispose](): void;
-                };
-                toString(): any;
-                to<const Value extends unknown>(Value: Value): {
-                    new (): {
-                        Value: Value;
-                        remote_list(next?: readonly $mol_type_result<$mol_type_result<Value>>[] | undefined): readonly $mol_type_result<$mol_type_result<Value>>[];
-                        remote_add(item: $mol_type_result<$mol_type_result<Value>> & $giper_baza_pawn): void;
-                        make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>>;
-                        items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
-                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        cut(vary: $giper_baza_vary_type): void;
-                        move(from: number, to: number): void;
-                        wipe(seat: number): void;
-                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                        [$mol_dev_format_head](): any[];
-                        land(): $giper_baza_land;
-                        head(): $giper_baza_link;
-                        land_link(): $giper_baza_link;
-                        link(): $giper_baza_link;
-                        toJSON(): string;
-                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                        units(): $giper_baza_unit_sand[];
-                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                        meta(next?: $giper_baza_link): $giper_baza_link | null;
-                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                        filled(): boolean;
-                        can_change(): boolean;
-                        last_change(): $mol_time_moment | null;
-                        authors(): $giper_baza_auth_pass[];
-                        get $(): $;
-                        set $(next: $);
-                        destructor(): void;
-                        toString(): string;
-                        [Symbol.toStringTag]: string;
-                        [$mol_ambient_ref]: $;
-                        [Symbol.dispose](): void;
-                    };
-                    toString(): any;
-                    to<const Value extends unknown>(Value: Value): /*elided*/ any;
-                    Item: {
-                        new (value?: any): {
-                            constructor: Function;
-                            toString(): string;
-                            toLocaleString(): string;
-                            valueOf(): Object;
-                            hasOwnProperty(v: PropertyKey): boolean;
-                            isPrototypeOf(v: Object): boolean;
-                            propertyIsEnumerable(v: PropertyKey): boolean;
-                        };
-                        Class: typeof $giper_baza_link;
-                        toString(): string;
-                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                        default: $giper_baza_link;
-                        check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                        [Symbol.toStringTag]: string;
-                        [$mol_key_handle](): string;
-                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                        getPrototypeOf(o: any): any;
-                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                        getOwnPropertyNames(o: any): string[];
-                        create(o: object | null): any;
-                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                        seal<T>(o: T): T;
-                        freeze<T extends Function>(f: T): T;
-                        freeze<T extends {
-                            [idx: string]: U | null | undefined | object;
-                        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                        freeze<T>(o: T): Readonly<T>;
-                        preventExtensions<T>(o: T): T;
-                        isSealed(o: any): boolean;
-                        isFrozen(o: any): boolean;
-                        isExtensible(o: any): boolean;
-                        keys(o: object): string[];
-                        keys(o: {}): string[];
-                        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-                        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-                        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-                        assign(target: object, ...sources: any[]): any;
-                        getOwnPropertySymbols(o: any): symbol[];
-                        is(value1: any, value2: any): boolean;
-                        setPrototypeOf(o: any, proto: object | null): any;
-                        values<T>(o: {
-                            [s: string]: T;
-                        } | ArrayLike<T>): T[];
-                        values(o: {}): any[];
-                        entries<T>(o: {
-                            [s: string]: T;
-                        } | ArrayLike<T>): [string, T][];
-                        entries(o: {}): [string, any][];
-                        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                            [x: string]: PropertyDescriptor;
-                        };
-                        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                            [k: string]: T;
-                        };
-                        fromEntries(entries: Iterable<readonly any[]>): any;
-                        hasOwn(o: object, v: PropertyKey): boolean;
-                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    };
-                    tag: keyof typeof $giper_baza_unit_sand_tag;
-                    of<Init extends new (...args: any[]) => any>(init: Init): {
-                        new (): {
-                            items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"][];
-                            items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                            splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                            find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                            has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                            add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                            cut(vary: $giper_baza_vary_type): void;
-                            move(from: number, to: number): void;
-                            wipe(seat: number): void;
-                            pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                            [$mol_dev_format_head](): any[];
-                            land(): $giper_baza_land;
-                            head(): $giper_baza_link;
-                            land_link(): $giper_baza_link;
-                            link(): $giper_baza_link;
-                            toJSON(): string;
-                            cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                            pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                            units(): $giper_baza_unit_sand[];
-                            units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                            meta(next?: $giper_baza_link): $giper_baza_link | null;
-                            meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                            filled(): boolean;
-                            can_change(): boolean;
-                            last_change(): $mol_time_moment | null;
-                            authors(): $giper_baza_auth_pass[];
-                            get $(): $;
-                            set $(next: $);
-                            destructor(): void;
-                            toString(): string;
-                            [Symbol.toStringTag]: string;
-                            [$mol_ambient_ref]: $;
-                            [Symbol.dispose](): void;
-                        };
-                        Item: Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        };
-                        toString(): any;
-                        tag: keyof typeof $giper_baza_unit_sand_tag;
-                        of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
-                        meta: null | $giper_baza_link;
-                        make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                        $: $;
-                        create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                        toJSON(): any;
-                        destructor(): void;
-                        [Symbol.toPrimitive](): any;
-                        [$mol_key_handle](): any;
-                    };
-                    meta: null | $giper_baza_link;
-                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                    $: $;
-                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                    toJSON(): any;
-                    destructor(): void;
-                    [Symbol.toPrimitive](): any;
-                    [$mol_key_handle](): any;
-                };
-                Item: {
-                    new (value?: any): {
-                        constructor: Function;
-                        toString(): string;
-                        toLocaleString(): string;
-                        valueOf(): Object;
-                        hasOwnProperty(v: PropertyKey): boolean;
-                        isPrototypeOf(v: Object): boolean;
-                        propertyIsEnumerable(v: PropertyKey): boolean;
-                    };
-                    Class: typeof $giper_baza_link;
-                    toString(): string;
-                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                    cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                    default: $giper_baza_link;
-                    check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                    [Symbol.toStringTag]: string;
-                    [$mol_key_handle](): string;
-                    [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                    getPrototypeOf(o: any): any;
-                    getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                    getOwnPropertyNames(o: any): string[];
-                    create(o: object | null): any;
-                    create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                    defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                    defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                    seal<T>(o: T): T;
-                    freeze<T extends Function>(f: T): T;
-                    freeze<T extends {
-                        [idx: string]: U | null | undefined | object;
-                    }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                    freeze<T>(o: T): Readonly<T>;
-                    preventExtensions<T>(o: T): T;
-                    isSealed(o: any): boolean;
-                    isFrozen(o: any): boolean;
-                    isExtensible(o: any): boolean;
-                    keys(o: object): string[];
-                    keys(o: {}): string[];
-                    assign<T extends {}, U>(target: T, source: U): T & U;
-                    assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
-                    assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
-                    assign(target: object, ...sources: any[]): any;
-                    getOwnPropertySymbols(o: any): symbol[];
-                    is(value1: any, value2: any): boolean;
-                    setPrototypeOf(o: any, proto: object | null): any;
-                    values<T>(o: {
-                        [s: string]: T;
-                    } | ArrayLike<T>): T[];
-                    values(o: {}): any[];
-                    entries<T>(o: {
-                        [s: string]: T;
-                    } | ArrayLike<T>): [string, T][];
-                    entries(o: {}): [string, any][];
-                    getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                        [x: string]: PropertyDescriptor;
-                    };
-                    fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                        [k: string]: T;
-                    };
-                    fromEntries(entries: Iterable<readonly any[]>): any;
-                    hasOwn(o: object, v: PropertyKey): boolean;
-                    groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                };
-                tag: keyof typeof $giper_baza_unit_sand_tag;
-                of<Init extends new (...args: any[]) => any>(init: Init): {
-                    new (): {
-                        items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                            seal<T>(o: T): T;
-                            freeze<T extends Function>(f: T): T;
-                            freeze<T extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                            freeze<T>(o: T): Readonly<T>;
-                            preventExtensions<T>(o: T): T;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): T[];
-                            values(o: {}): any[];
-                            entries<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): [string, T][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                                [k: string]: T;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"][];
-                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
-                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
-                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
-                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
-                        cut(vary: $giper_baza_vary_type): void;
-                        move(from: number, to: number): void;
-                        wipe(seat: number): void;
-                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
-                        [$mol_dev_format_head](): any[];
-                        land(): $giper_baza_land;
-                        head(): $giper_baza_link;
-                        land_link(): $giper_baza_link;
-                        link(): $giper_baza_link;
-                        toJSON(): string;
-                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                        units(): $giper_baza_unit_sand[];
-                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                        meta(next?: $giper_baza_link): $giper_baza_link | null;
-                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                        filled(): boolean;
-                        can_change(): boolean;
-                        last_change(): $mol_time_moment | null;
-                        authors(): $giper_baza_auth_pass[];
-                        get $(): $;
-                        set $(next: $);
-                        destructor(): void;
-                        toString(): string;
-                        [Symbol.toStringTag]: string;
-                        [$mol_ambient_ref]: $;
-                        [Symbol.dispose](): void;
-                    };
-                    Item: Init extends typeof $mol_schema_any ? Init : {
-                        new (value?: any): {
-                            constructor: Function;
-                            toString(): string;
-                            toLocaleString(): string;
-                            valueOf(): Object;
-                            hasOwnProperty(v: PropertyKey): boolean;
-                            isPrototypeOf(v: Object): boolean;
-                            propertyIsEnumerable(v: PropertyKey): boolean;
-                        };
-                        Class: Init;
-                        toString(): string;
-                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                        default: InstanceType<Init>;
-                        check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                        [Symbol.toStringTag]: string;
-                        [$mol_key_handle](): string;
-                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                        getPrototypeOf(o: any): any;
-                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                        getOwnPropertyNames(o: any): string[];
-                        create(o: object | null): any;
-                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                        seal<T_1>(o: T_1): T_1;
-                        freeze<T_1 extends Function>(f: T_1): T_1;
-                        freeze<T_1 extends {
-                            [idx: string]: U | null | undefined | object;
-                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                        freeze<T_1>(o: T_1): Readonly<T_1>;
-                        preventExtensions<T_1>(o: T_1): T_1;
-                        isSealed(o: any): boolean;
-                        isFrozen(o: any): boolean;
-                        isExtensible(o: any): boolean;
-                        keys(o: object): string[];
-                        keys(o: {}): string[];
-                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                        assign(target: object, ...sources: any[]): any;
-                        getOwnPropertySymbols(o: any): symbol[];
-                        is(value1: any, value2: any): boolean;
-                        setPrototypeOf(o: any, proto: object | null): any;
-                        values<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): T_1[];
-                        values(o: {}): any[];
-                        entries<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): [string, T_1][];
-                        entries(o: {}): [string, any][];
-                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                            [x: string]: PropertyDescriptor;
-                        };
-                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                            [k: string]: T_1;
-                        };
-                        fromEntries(entries: Iterable<readonly any[]>): any;
-                        hasOwn(o: object, v: PropertyKey): boolean;
-                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    };
-                    toString(): any;
-                    tag: keyof typeof $giper_baza_unit_sand_tag;
-                    of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
-                    meta: null | $giper_baza_link;
-                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                    $: $;
-                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                    toJSON(): any;
-                    destructor(): void;
-                    [Symbol.toPrimitive](): any;
-                    [$mol_key_handle](): any;
-                };
-                meta: null | $giper_baza_link;
-                make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                $: $;
-                create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                toJSON(): any;
-                destructor(): void;
-                [Symbol.toPrimitive](): any;
-                [$mol_key_handle](): any;
-            };
-            readonly Categories: typeof $giper_baza_list_str;
-            readonly Telegram: typeof $giper_baza_atom_text;
-            readonly TelegramText: typeof $giper_baza_atom_text;
-            readonly SoldOutImage: {
-                new (): {
-                    Value: () => typeof $giper_baza_file;
-                    remote(next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
-                    remote_of(peer: $giper_baza_link | null, next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
-                    ensure(config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
-                    ensure_of(peer: $giper_baza_link | null, config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
-                    ensure_here(peer: $giper_baza_link | null): void;
-                    ensure_area(peer: $giper_baza_link | null, land: $giper_baza_land): void;
-                    ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
-                    remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_file | null;
-                    local_ensure(): $giper_baza_file | null;
-                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
-                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
-                    pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
-                    vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                    vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                    selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
-                    [$mol_dev_format_head](): any[];
-                    land(): $giper_baza_land;
-                    head(): $giper_baza_link;
-                    land_link(): $giper_baza_link;
-                    link(): $giper_baza_link;
-                    toJSON(): string;
-                    cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                    pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                    units(): $giper_baza_unit_sand[];
-                    units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                    meta(next?: $giper_baza_link): $giper_baza_link | null;
-                    meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                    filled(): boolean;
-                    can_change(): boolean;
-                    last_change(): $mol_time_moment | null;
-                    authors(): $giper_baza_auth_pass[];
-                    get $(): $;
-                    set $(next: $);
-                    destructor(): void;
-                    toString(): string;
-                    [Symbol.toStringTag]: string;
-                    [$mol_ambient_ref]: $;
-                    [Symbol.dispose](): void;
-                };
-                toString(): any;
-                to<const Value extends unknown>(Value: Value): {
-                    new (): {
-                        Value: Value;
-                        remote(next?: $mol_type_result<$mol_type_result<Value>> | null | undefined): $mol_type_result<$mol_type_result<Value>> | null;
-                        remote_of(peer: $giper_baza_link | null, next?: $mol_type_result<$mol_type_result<Value>> | null | undefined): $mol_type_result<$mol_type_result<Value>> | null;
-                        ensure(config?: null | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>> | null;
-                        ensure_of(peer: $giper_baza_link | null, config?: null | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>> | null;
-                        ensure_here(peer: $giper_baza_link | null): void;
-                        ensure_area(peer: $giper_baza_link | null, land: $giper_baza_land): void;
-                        ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
-                        remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
-                        local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
-                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
-                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
-                        pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
-                        vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                        vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                        selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
-                        [$mol_dev_format_head](): any[];
-                        land(): $giper_baza_land;
-                        head(): $giper_baza_link;
-                        land_link(): $giper_baza_link;
-                        link(): $giper_baza_link;
-                        toJSON(): string;
-                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                        units(): $giper_baza_unit_sand[];
-                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                        meta(next?: $giper_baza_link): $giper_baza_link | null;
-                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                        filled(): boolean;
-                        can_change(): boolean;
-                        last_change(): $mol_time_moment | null;
-                        authors(): $giper_baza_auth_pass[];
-                        get $(): $;
-                        set $(next: $);
-                        destructor(): void;
-                        toString(): string;
-                        [Symbol.toStringTag]: string;
-                        [$mol_ambient_ref]: $;
-                        [Symbol.dispose](): void;
-                    };
-                    toString(): any;
-                    to<const Value extends unknown>(Value: Value): /*elided*/ any;
-                    Schema: {
-                        new (value?: any): {
-                            constructor: Function;
-                            toString(): string;
-                            toLocaleString(): string;
-                            valueOf(): Object;
-                            hasOwnProperty(v: PropertyKey): boolean;
-                            isPrototypeOf(v: Object): boolean;
-                            propertyIsEnumerable(v: PropertyKey): boolean;
-                        };
-                        Some: {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: typeof $giper_baza_link;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: $giper_baza_link;
-                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                            seal<T>(o: T): T;
-                            freeze<T extends Function>(f: T): T;
-                            freeze<T extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                            freeze<T>(o: T): Readonly<T>;
-                            preventExtensions<T>(o: T): T;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): T[];
-                            values(o: {}): any[];
-                            entries<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): [string, T][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                                [k: string]: T;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        };
-                        toString(): string;
-                        guard<This extends typeof $mol_schema_any, Value_4>(this: This, value: Value_4): Value_4 & This["default"];
-                        default: $giper_baza_link | null;
-                        check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                        [Symbol.toStringTag]: string;
-                        [$mol_key_handle](): string;
-                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                        getPrototypeOf(o: any): any;
-                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                        getOwnPropertyNames(o: any): string[];
-                        create(o: object | null): any;
-                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                        seal<T_1>(o: T_1): T_1;
-                        freeze<T_1 extends Function>(f: T_1): T_1;
-                        freeze<T_1 extends {
-                            [idx: string]: U | null | undefined | object;
-                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                        freeze<T_1>(o: T_1): Readonly<T_1>;
-                        preventExtensions<T_1>(o: T_1): T_1;
-                        isSealed(o: any): boolean;
-                        isFrozen(o: any): boolean;
-                        isExtensible(o: any): boolean;
-                        keys(o: object): string[];
-                        keys(o: {}): string[];
-                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                        assign(target: object, ...sources: any[]): any;
-                        getOwnPropertySymbols(o: any): symbol[];
-                        is(value1: any, value2: any): boolean;
-                        setPrototypeOf(o: any, proto: object | null): any;
-                        values<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): T_1[];
-                        values(o: {}): any[];
-                        entries<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): [string, T_1][];
-                        entries(o: {}): [string, any][];
-                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                            [x: string]: PropertyDescriptor;
-                        };
-                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                            [k: string]: T_1;
-                        };
-                        fromEntries(entries: Iterable<readonly any[]>): any;
-                        hasOwn(o: object, v: PropertyKey): boolean;
-                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    };
-                    tag: keyof typeof $giper_baza_unit_sand_tag;
-                    of<Init extends new (...args: any[]) => any>(init: Init): {
-                        new (): {
-                            val(next?: (Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null) | null;
-                            val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null) | null;
-                            pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
-                            vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                            vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                            selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
-                            [$mol_dev_format_head](): any[];
-                            land(): $giper_baza_land;
-                            head(): $giper_baza_link;
-                            land_link(): $giper_baza_link;
-                            link(): $giper_baza_link;
-                            toJSON(): string;
-                            cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                            pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                            units(): $giper_baza_unit_sand[];
-                            units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                            meta(next?: $giper_baza_link): $giper_baza_link | null;
-                            meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                            filled(): boolean;
-                            can_change(): boolean;
-                            last_change(): $mol_time_moment | null;
-                            authors(): $giper_baza_auth_pass[];
-                            get $(): $;
-                            set $(next: $);
-                            destructor(): void;
-                            toString(): string;
-                            [Symbol.toStringTag]: string;
-                            [$mol_ambient_ref]: $;
-                            [Symbol.dispose](): void;
-                        };
-                        Schema: {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Some: Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            };
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value_4>(this: This, value: Value_4): Value_4 & This["default"];
-                            default: (Init extends typeof $mol_schema_any ? Init : {
-                                new (value?: any): {
-                                    constructor: Function;
-                                    toString(): string;
-                                    toLocaleString(): string;
-                                    valueOf(): Object;
-                                    hasOwnProperty(v: PropertyKey): boolean;
-                                    isPrototypeOf(v: Object): boolean;
-                                    propertyIsEnumerable(v: PropertyKey): boolean;
-                                };
-                                Class: Init;
-                                toString(): string;
-                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
-                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                                default: InstanceType<Init>;
-                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                                [Symbol.toStringTag]: string;
-                                [$mol_key_handle](): string;
-                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                                getPrototypeOf(o: any): any;
-                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                                getOwnPropertyNames(o: any): string[];
-                                create(o: object | null): any;
-                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                                seal<T_1>(o: T_1): T_1;
-                                freeze<T_1 extends Function>(f: T_1): T_1;
-                                freeze<T_1 extends {
-                                    [idx: string]: U | null | undefined | object;
-                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                                freeze<T_1>(o: T_1): Readonly<T_1>;
-                                preventExtensions<T_1>(o: T_1): T_1;
-                                isSealed(o: any): boolean;
-                                isFrozen(o: any): boolean;
-                                isExtensible(o: any): boolean;
-                                keys(o: object): string[];
-                                keys(o: {}): string[];
-                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                                assign(target: object, ...sources: any[]): any;
-                                getOwnPropertySymbols(o: any): symbol[];
-                                is(value1: any, value2: any): boolean;
-                                setPrototypeOf(o: any, proto: object | null): any;
-                                values<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): T_1[];
-                                values(o: {}): any[];
-                                entries<T_1>(o: {
-                                    [s: string]: T_1;
-                                } | ArrayLike<T_1>): [string, T_1][];
-                                entries(o: {}): [string, any][];
-                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                    [x: string]: PropertyDescriptor;
-                                };
-                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                    [k: string]: T_1;
-                                };
-                                fromEntries(entries: Iterable<readonly any[]>): any;
-                                hasOwn(o: object, v: PropertyKey): boolean;
-                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                            })["default"] | null;
-                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        };
-                        toString(): any;
-                        tag: keyof typeof $giper_baza_unit_sand_tag;
-                        of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
-                        meta: null | $giper_baza_link;
-                        make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                        $: $;
-                        create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                        toJSON(): any;
-                        destructor(): void;
-                        [Symbol.toPrimitive](): any;
-                        [$mol_key_handle](): any;
-                    };
-                    meta: null | $giper_baza_link;
-                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                    $: $;
-                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                    toJSON(): any;
-                    destructor(): void;
-                    [Symbol.toPrimitive](): any;
-                    [$mol_key_handle](): any;
-                };
-                Schema: {
-                    new (value?: any): {
-                        constructor: Function;
-                        toString(): string;
-                        toLocaleString(): string;
-                        valueOf(): Object;
-                        hasOwnProperty(v: PropertyKey): boolean;
-                        isPrototypeOf(v: Object): boolean;
-                        propertyIsEnumerable(v: PropertyKey): boolean;
-                    };
-                    Some: {
-                        new (value?: any): {
-                            constructor: Function;
-                            toString(): string;
-                            toLocaleString(): string;
-                            valueOf(): Object;
-                            hasOwnProperty(v: PropertyKey): boolean;
-                            isPrototypeOf(v: Object): boolean;
-                            propertyIsEnumerable(v: PropertyKey): boolean;
-                        };
-                        Class: typeof $giper_baza_link;
-                        toString(): string;
-                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                        default: $giper_baza_link;
-                        check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                        [Symbol.toStringTag]: string;
-                        [$mol_key_handle](): string;
-                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                        getPrototypeOf(o: any): any;
-                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                        getOwnPropertyNames(o: any): string[];
-                        create(o: object | null): any;
-                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                        seal<T>(o: T): T;
-                        freeze<T extends Function>(f: T): T;
-                        freeze<T extends {
-                            [idx: string]: U | null | undefined | object;
-                        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                        freeze<T>(o: T): Readonly<T>;
-                        preventExtensions<T>(o: T): T;
-                        isSealed(o: any): boolean;
-                        isFrozen(o: any): boolean;
-                        isExtensible(o: any): boolean;
-                        keys(o: object): string[];
-                        keys(o: {}): string[];
-                        assign<T extends {}, U>(target: T, source: U): T & U;
-                        assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
-                        assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
-                        assign(target: object, ...sources: any[]): any;
-                        getOwnPropertySymbols(o: any): symbol[];
-                        is(value1: any, value2: any): boolean;
-                        setPrototypeOf(o: any, proto: object | null): any;
-                        values<T>(o: {
-                            [s: string]: T;
-                        } | ArrayLike<T>): T[];
-                        values(o: {}): any[];
-                        entries<T>(o: {
-                            [s: string]: T;
-                        } | ArrayLike<T>): [string, T][];
-                        entries(o: {}): [string, any][];
-                        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                            [x: string]: PropertyDescriptor;
-                        };
-                        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                            [k: string]: T;
-                        };
-                        fromEntries(entries: Iterable<readonly any[]>): any;
-                        hasOwn(o: object, v: PropertyKey): boolean;
-                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    };
-                    toString(): string;
-                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                    default: $giper_baza_link | null;
-                    check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                    cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                    [Symbol.toStringTag]: string;
-                    [$mol_key_handle](): string;
-                    [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
-                    getPrototypeOf(o: any): any;
-                    getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                    getOwnPropertyNames(o: any): string[];
-                    create(o: object | null): any;
-                    create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                    defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                    defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                    seal<T>(o: T): T;
-                    freeze<T extends Function>(f: T): T;
-                    freeze<T extends {
-                        [idx: string]: U | null | undefined | object;
-                    }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                    freeze<T>(o: T): Readonly<T>;
-                    preventExtensions<T>(o: T): T;
-                    isSealed(o: any): boolean;
-                    isFrozen(o: any): boolean;
-                    isExtensible(o: any): boolean;
-                    keys(o: object): string[];
-                    keys(o: {}): string[];
-                    assign<T extends {}, U>(target: T, source: U): T & U;
-                    assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
-                    assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
-                    assign(target: object, ...sources: any[]): any;
-                    getOwnPropertySymbols(o: any): symbol[];
-                    is(value1: any, value2: any): boolean;
-                    setPrototypeOf(o: any, proto: object | null): any;
-                    values<T>(o: {
-                        [s: string]: T;
-                    } | ArrayLike<T>): T[];
-                    values(o: {}): any[];
-                    entries<T>(o: {
-                        [s: string]: T;
-                    } | ArrayLike<T>): [string, T][];
-                    entries(o: {}): [string, any][];
-                    getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                        [x: string]: PropertyDescriptor;
-                    };
-                    fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                        [k: string]: T;
-                    };
-                    fromEntries(entries: Iterable<readonly any[]>): any;
-                    hasOwn(o: object, v: PropertyKey): boolean;
-                    groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                };
-                tag: keyof typeof $giper_baza_unit_sand_tag;
-                of<Init extends new (...args: any[]) => any>(init: Init): {
-                    new (): {
-                        val(next?: (Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
-                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
-                            seal<T>(o: T): T;
-                            freeze<T extends Function>(f: T): T;
-                            freeze<T extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
-                            freeze<T>(o: T): Readonly<T>;
-                            preventExtensions<T>(o: T): T;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
-                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
-                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): T[];
-                            values(o: {}): any[];
-                            entries<T>(o: {
-                                [s: string]: T;
-                            } | ArrayLike<T>): [string, T][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
-                                [k: string]: T;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null) | null;
-                        val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null) | null;
-                        pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
-                        vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                        vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
-                        selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
-                        [$mol_dev_format_head](): any[];
-                        land(): $giper_baza_land;
-                        head(): $giper_baza_link;
-                        land_link(): $giper_baza_link;
-                        link(): $giper_baza_link;
-                        toJSON(): string;
-                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
-                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
-                        units(): $giper_baza_unit_sand[];
-                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
-                        meta(next?: $giper_baza_link): $giper_baza_link | null;
-                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
-                        filled(): boolean;
-                        can_change(): boolean;
-                        last_change(): $mol_time_moment | null;
-                        authors(): $giper_baza_auth_pass[];
-                        get $(): $;
-                        set $(next: $);
-                        destructor(): void;
-                        toString(): string;
-                        [Symbol.toStringTag]: string;
-                        [$mol_ambient_ref]: $;
-                        [Symbol.dispose](): void;
-                    };
-                    Schema: {
-                        new (value?: any): {
-                            constructor: Function;
-                            toString(): string;
-                            toLocaleString(): string;
-                            valueOf(): Object;
-                            hasOwnProperty(v: PropertyKey): boolean;
-                            isPrototypeOf(v: Object): boolean;
-                            propertyIsEnumerable(v: PropertyKey): boolean;
-                        };
-                        Some: Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        };
-                        toString(): string;
-                        guard<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): Value_3 & This["default"];
-                        default: (Init extends typeof $mol_schema_any ? Init : {
-                            new (value?: any): {
-                                constructor: Function;
-                                toString(): string;
-                                toLocaleString(): string;
-                                valueOf(): Object;
-                                hasOwnProperty(v: PropertyKey): boolean;
-                                isPrototypeOf(v: Object): boolean;
-                                propertyIsEnumerable(v: PropertyKey): boolean;
-                            };
-                            Class: Init;
-                            toString(): string;
-                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
-                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                            default: InstanceType<Init>;
-                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                            [Symbol.toStringTag]: string;
-                            [$mol_key_handle](): string;
-                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                            getPrototypeOf(o: any): any;
-                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                            getOwnPropertyNames(o: any): string[];
-                            create(o: object | null): any;
-                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                            seal<T_1>(o: T_1): T_1;
-                            freeze<T_1 extends Function>(f: T_1): T_1;
-                            freeze<T_1 extends {
-                                [idx: string]: U | null | undefined | object;
-                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                            freeze<T_1>(o: T_1): Readonly<T_1>;
-                            preventExtensions<T_1>(o: T_1): T_1;
-                            isSealed(o: any): boolean;
-                            isFrozen(o: any): boolean;
-                            isExtensible(o: any): boolean;
-                            keys(o: object): string[];
-                            keys(o: {}): string[];
-                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                            assign(target: object, ...sources: any[]): any;
-                            getOwnPropertySymbols(o: any): symbol[];
-                            is(value1: any, value2: any): boolean;
-                            setPrototypeOf(o: any, proto: object | null): any;
-                            values<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): T_1[];
-                            values(o: {}): any[];
-                            entries<T_1>(o: {
-                                [s: string]: T_1;
-                            } | ArrayLike<T_1>): [string, T_1][];
-                            entries(o: {}): [string, any][];
-                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                                [x: string]: PropertyDescriptor;
-                            };
-                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                                [k: string]: T_1;
-                            };
-                            fromEntries(entries: Iterable<readonly any[]>): any;
-                            hasOwn(o: object, v: PropertyKey): boolean;
-                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                        })["default"] | null;
-                        check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
-                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
-                        [Symbol.toStringTag]: string;
-                        [$mol_key_handle](): string;
-                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
-                        getPrototypeOf(o: any): any;
-                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
-                        getOwnPropertyNames(o: any): string[];
-                        create(o: object | null): any;
-                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
-                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
-                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
-                        seal<T_1>(o: T_1): T_1;
-                        freeze<T_1 extends Function>(f: T_1): T_1;
-                        freeze<T_1 extends {
-                            [idx: string]: U | null | undefined | object;
-                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
-                        freeze<T_1>(o: T_1): Readonly<T_1>;
-                        preventExtensions<T_1>(o: T_1): T_1;
-                        isSealed(o: any): boolean;
-                        isFrozen(o: any): boolean;
-                        isExtensible(o: any): boolean;
-                        keys(o: object): string[];
-                        keys(o: {}): string[];
-                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
-                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
-                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
-                        assign(target: object, ...sources: any[]): any;
-                        getOwnPropertySymbols(o: any): symbol[];
-                        is(value1: any, value2: any): boolean;
-                        setPrototypeOf(o: any, proto: object | null): any;
-                        values<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): T_1[];
-                        values(o: {}): any[];
-                        entries<T_1>(o: {
-                            [s: string]: T_1;
-                        } | ArrayLike<T_1>): [string, T_1][];
-                        entries(o: {}): [string, any][];
-                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
-                            [x: string]: PropertyDescriptor;
-                        };
-                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
-                            [k: string]: T_1;
-                        };
-                        fromEntries(entries: Iterable<readonly any[]>): any;
-                        hasOwn(o: object, v: PropertyKey): boolean;
-                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
-                    };
-                    toString(): any;
-                    tag: keyof typeof $giper_baza_unit_sand_tag;
-                    of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
-                    meta: null | $giper_baza_link;
-                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                    $: $;
-                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                    toJSON(): any;
-                    destructor(): void;
-                    [Symbol.toPrimitive](): any;
-                    [$mol_key_handle](): any;
-                };
-                meta: null | $giper_baza_link;
-                make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
-                $: $;
-                create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-                toJSON(): any;
-                destructor(): void;
-                [Symbol.toPrimitive](): any;
-                [$mol_key_handle](): any;
-            };
-        };
-    };
-    export class $bog_nka_catalog extends $bog_nka_catalog_base {
-    }
-    export {};
 }
 
 declare namespace $ {
@@ -40400,864 +35509,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_ghost extends $mol_view {
-		Sub( ): $mol_view
-	}
-	
-}
-
-//# sourceMappingURL=ghost.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Mixin view logic to DOM node of another component.
-     */
-    class $mol_ghost extends $.$mol_ghost {
-        dom_node_external(next?: Element): Element;
-        dom_node_actual(): Element;
-        dom_tree(): Element;
-        title(): string;
-        minimal_width(): number;
-        minimal_height(): number;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_follower extends $mol_ghost {
-		transform( ): string
-		Anchor( ): $mol_view
-		align( ): readonly(number)[]
-		offset( ): readonly(number)[]
-		style( ): ({ 
-			'transform': ReturnType< $mol_follower['transform'] >,
-		})  & ReturnType< $mol_ghost['style'] >
-	}
-	
-}
-
-//# sourceMappingURL=follower.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Marker on top of another component with tracking of its position.
-     */
-    class $mol_follower extends $.$mol_follower {
-        pos(): {
-            left: number;
-            top: number;
-        } | null;
-        transform(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_pop_bubble__content_mol_pop_1 = $mol_type_enforce<
-		ReturnType< $mol_pop['bubble_content'] >
-		,
-		ReturnType< $mol_pop_bubble['content'] >
-	>
-	type $mol_pop_bubble__height_max_mol_pop_2 = $mol_type_enforce<
-		ReturnType< $mol_pop['height_max'] >
-		,
-		ReturnType< $mol_pop_bubble['height_max'] >
-	>
-	type $mol_follower__offset_mol_pop_3 = $mol_type_enforce<
-		ReturnType< $mol_pop['bubble_offset'] >
-		,
-		ReturnType< $mol_follower['offset'] >
-	>
-	type $mol_follower__align_mol_pop_4 = $mol_type_enforce<
-		ReturnType< $mol_pop['bubble_align'] >
-		,
-		ReturnType< $mol_follower['align'] >
-	>
-	type $mol_follower__Anchor_mol_pop_5 = $mol_type_enforce<
-		ReturnType< $mol_pop['Anchor'] >
-		,
-		ReturnType< $mol_follower['Anchor'] >
-	>
-	type $mol_follower__Sub_mol_pop_6 = $mol_type_enforce<
-		ReturnType< $mol_pop['Bubble'] >
-		,
-		ReturnType< $mol_follower['Sub'] >
-	>
-	export class $mol_pop extends $mol_view {
-		align( ): string
-		bubble( ): any
-		Anchor( ): any
-		bubble_offset( ): readonly(number)[]
-		bubble_align( ): readonly(number)[]
-		bubble_content( ): readonly($mol_view_content)[]
-		height_max( ): number
-		Bubble( ): $mol_pop_bubble
-		Follower( ): $mol_follower
-		showed( next?: boolean ): boolean
-		align_vert( ): string
-		align_hor( ): string
-		direction( ): string
-		align_enriched( ): ReturnType< $mol_pop['align'] >
-		prefer( ): string
-		auto( ): readonly(any)[]
-		sub( ): readonly(any)[]
-		sub_visible( ): readonly(any)[]
-	}
-	
-	export class $mol_pop_bubble extends $mol_view {
-		content( ): readonly($mol_view_content)[]
-		height_max( ): number
-		sub( ): ReturnType< $mol_pop_bubble['content'] >
-		style( ): ({ 
-			'maxHeight': ReturnType< $mol_pop_bubble['height_max'] >,
-		})  & ReturnType< $mol_view['style'] >
-		attr( ): ({ 
-			'tabindex': number,
-			'popover': string,
-		})  & ReturnType< $mol_view['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=pop.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * `Bubble` that can be shown anchored to `Anchor` element.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_pop_demo
-     */
-    class $mol_pop extends $.$mol_pop {
-        showed(next?: boolean): boolean;
-        sub_visible(): any[];
-        height_max(): number;
-        align(): string;
-        align_vert(): "suspense" | "top" | "bottom";
-        align_hor(): "suspense" | "left" | "right";
-        direction(): "ltr" | "rtl";
-        align_enriched(): string;
-        bubble_offset(): number[];
-        bubble_align(): number[];
-        bubble(): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_hotkey2 extends $mol_plugin {
-		keydown( next?: any ): any
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_hotkey2['keydown'] > ): ReturnType< $mol_hotkey2['keydown'] >,
-		})  & ReturnType< $mol_plugin['event'] >
-		action( ): Record<string, any>
-	}
-	
-}
-
-//# sourceMappingURL=hotkey2.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Plugin which adds handlers for keyboard keys.
-     * @see [mol_keyboard_code](../keyboard/code/code.ts)
-     */
-    class $mol_hotkey2 extends $.$mol_hotkey2 {
-        keydown(event?: KeyboardEvent): void;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_hotkey extends $mol_hotkey2 {
-		key( ): Record<string, any>
-		mod_ctrl( ): boolean
-		mod_alt( ): boolean
-		mod_shift( ): boolean
-	}
-	
-}
-
-//# sourceMappingURL=hotkey.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Plugin which adds handlers for keyboard keys.
-     * @deprecated Use $mol_hotkey2
-     * @see [mol_keyboard_code](../keyboard/code/code.ts)
-     */
-    class $mol_hotkey extends $.$mol_hotkey {
-        action(): {
-            [k: string]: any;
-        };
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_nav extends $mol_plugin {
-		event_key( next?: any ): any
-		cycle( next?: boolean ): boolean
-		mod_ctrl( ): boolean
-		mod_shift( ): boolean
-		mod_alt( ): boolean
-		keys_x( next?: readonly(any)[] ): readonly(any)[]
-		keys_y( next?: readonly(any)[] ): readonly(any)[]
-		current_x( next?: any ): any
-		current_y( next?: any ): any
-		event_up( next?: any ): any
-		event_down( next?: any ): any
-		event_left( next?: any ): any
-		event_right( next?: any ): any
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_nav['event_key'] > ): ReturnType< $mol_nav['event_key'] >,
-		})  & ReturnType< $mol_plugin['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=nav.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Plugin which can navigate in list of items
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_nav_demo
-     */
-    class $mol_nav extends $.$mol_nav {
-        event_key(event?: KeyboardEvent): undefined;
-        event_up(event?: KeyboardEvent): undefined;
-        event_down(event?: KeyboardEvent): undefined;
-        event_left(event?: KeyboardEvent): undefined;
-        event_right(event?: KeyboardEvent): undefined;
-        index_y(): number | null;
-        index_x(): number | null;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_hotkey__mod_ctrl_mol_string_1 = $mol_type_enforce<
-		ReturnType< $mol_string['submit_with_ctrl'] >
-		,
-		ReturnType< $mol_hotkey['mod_ctrl'] >
-	>
-	type $mol_hotkey__key_mol_string_2 = $mol_type_enforce<
-		({ 
-			enter( next?: ReturnType< $mol_string['submit'] > ): ReturnType< $mol_string['submit'] >,
-		}) 
-		,
-		ReturnType< $mol_hotkey['key'] >
-	>
-	export class $mol_string extends $mol_view {
-		selection_watcher( ): any
-		error_report( ): any
-		disabled( ): boolean
-		value( next?: string ): string
-		value_changed( next?: ReturnType< $mol_string['value'] > ): ReturnType< $mol_string['value'] >
-		hint( ): string
-		hint_visible( ): ReturnType< $mol_string['hint'] >
-		spellcheck( ): boolean
-		autocomplete_native( ): string
-		selection_end( ): number
-		selection_start( ): number
-		keyboard( ): string
-		enter( ): string
-		length_max( ): number
-		type( next?: string ): string
-		event_change( next?: any ): any
-		submit_with_ctrl( ): boolean
-		submit( next?: any ): any
-		Submit( ): $mol_hotkey
-		dom_name( ): string
-		enabled( ): boolean
-		minimal_height( ): number
-		autocomplete( ): boolean
-		selection( next?: readonly(number)[] ): readonly(number)[]
-		auto( ): readonly(any)[]
-		field( ): ({ 
-			'disabled': ReturnType< $mol_string['disabled'] >,
-			'value': ReturnType< $mol_string['value_changed'] >,
-			'placeholder': ReturnType< $mol_string['hint_visible'] >,
-			'spellcheck': ReturnType< $mol_string['spellcheck'] >,
-			'autocomplete': ReturnType< $mol_string['autocomplete_native'] >,
-			'selectionEnd': ReturnType< $mol_string['selection_end'] >,
-			'selectionStart': ReturnType< $mol_string['selection_start'] >,
-			'inputMode': ReturnType< $mol_string['keyboard'] >,
-			'enterkeyhint': ReturnType< $mol_string['enter'] >,
-		})  & ReturnType< $mol_view['field'] >
-		attr( ): ({ 
-			'maxlength': ReturnType< $mol_string['length_max'] >,
-			'type': ReturnType< $mol_string['type'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		event( ): ({ 
-			input( next?: ReturnType< $mol_string['event_change'] > ): ReturnType< $mol_string['event_change'] >,
-		})  & ReturnType< $mol_view['event'] >
-		plugins( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=string.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * An input field for entering single line text.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_string_demo
-     */
-    class $mol_string extends $.$mol_string {
-        event_change(next?: Event): void;
-        value_changed(next?: string): string;
-        error_report(): void;
-        hint_visible(): string;
-        disabled(): boolean;
-        autocomplete_native(): "on" | "off";
-        selection_watcher(): $mol_dom_listener;
-        selection_change(event: Event): void;
-        selection_start(): number;
-        selection_end(): number;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_svg extends $mol_view {
-		dom_name( ): string
-		dom_name_space( ): string
-		font_size( ): number
-		font_family( ): string
-		style_size( ): Record<string, any>
-	}
-	
-}
-
-//# sourceMappingURL=svg.view.tree.d.ts.map
-declare namespace $.$$ {
-    /** Base SVG component to display SVG images or icons. */
-    class $mol_svg extends $.$mol_svg {
-        computed_style(): Record<string, any>;
-        font_size(): number;
-        font_family(): any;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_svg_root extends $mol_svg {
-		view_box( ): string
-		aspect( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
-			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=root.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_svg_path extends $mol_svg {
-		geometry( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'd': ReturnType< $mol_svg_path['geometry'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=path.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
-		ReturnType< $mol_icon['path'] >
-		,
-		ReturnType< $mol_svg_path['geometry'] >
-	>
-	export class $mol_icon extends $mol_svg_root {
-		path( ): string
-		Path( ): $mol_svg_path
-		view_box( ): string
-		minimal_width( ): number
-		minimal_height( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=icon.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_close extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=close.view.tree.d.ts.map
-declare namespace $ {
-    function $mol_support_css_overflow_anchor(this: $): boolean;
-}
-
-declare namespace $ {
-
-	type $mol_view__style_mol_list_1 = $mol_type_enforce<
-		({ 
-			'paddingTop': ReturnType< $mol_list['gap_before'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	type $mol_view__style_mol_list_2 = $mol_type_enforce<
-		({ 
-			'paddingTop': ReturnType< $mol_list['gap_after'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	export class $mol_list extends $mol_view {
-		gap_before( ): number
-		Gap_before( ): $mol_view
-		Empty( ): $mol_view
-		gap_after( ): number
-		Gap_after( ): $mol_view
-		rows( ): readonly($mol_view)[]
-		render_visible_only( ): boolean
-		render_over( ): number
-		sub( ): ReturnType< $mol_list['rows'] >
-		item_height_min( id: any): number
-		item_width_min( id: any): number
-		view_window_shift( next?: number ): number
-		view_window( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
-     * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
-     */
-    class $mol_list extends $.$mol_list {
-        sub(): readonly $mol_view[];
-        render_visible_only(): boolean;
-        _view_window_last: number[];
-        view_window(next?: [number, number]): [number, number];
-        item_height_min(index: number): number;
-        row_width_min(index: number): number;
-        gap_before(): number;
-        gap_after(): number;
-        sub_visible(): $mol_view[];
-        minimal_height(): number;
-        minimal_width(): number;
-        force_render(path: Set<$mol_view>): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    /**
-     * Converts union of types to intersection of same types
-     *
-     * 	$mol_type_intersect< number | string > // number & string
-     */
-    type $mol_type_intersect<Union> = (Union extends any ? (_: Union) => void : never) extends ((_: infer Intersection) => void) ? Intersection : never;
-}
-
-declare namespace $ {
-    type $mol_unicode_category = [$mol_unicode_category_binary] | ['General_Category', $mol_char_category_general] | ['Script', $mol_unicode_category_script] | ['Script_Extensions', $mol_unicode_category_script];
-    type $mol_unicode_category_binary = 'ASCII' | 'ASCII_Hex_Digit' | 'Alphabetic' | 'Any' | 'Assigned' | 'Bidi_Control' | 'Bidi_Mirrored' | 'Case_Ignorable' | 'Cased' | 'Changes_When_Casefolded' | 'Changes_When_Casemapped' | 'Changes_When_Lowercased' | 'Changes_When_NFKC_Casefolded' | 'Changes_When_Titlecased' | 'Changes_When_Uppercased' | 'Dash' | 'Default_Ignorable_Code_Point' | 'Deprecated' | 'Diacritic' | 'Emoji' | 'Emoji_Component' | 'Emoji_Modifier' | 'Emoji_Modifier_Base' | 'Emoji_Presentation' | 'Extended_Pictographic' | 'Extender' | 'Grapheme_Base' | 'Grapheme_Extend' | 'Hex_Digit' | 'IDS_Binary_Operator' | 'IDS_Trinary_Operator' | 'ID_Continue' | 'ID_Start' | 'Ideographic' | 'Join_Control' | 'Logical_Order_Exception' | 'Lowercase' | 'Math' | 'Noncharacter_Code_Point' | 'Pattern_Syntax' | 'Pattern_White_Space' | 'Quotation_Mark' | 'Radical' | 'Regional_Indicator' | 'Sentence_Terminal' | 'Soft_Dotted' | 'Terminal_Punctuation' | 'Unified_Ideograph' | 'Uppercase' | 'Variation_Selector' | 'White_Space' | 'XID_Continue' | 'XID_Start';
-    type $mol_char_category_general = 'Cased_Letter' | 'Close_Punctuation' | 'Connector_Punctuation' | 'Control' | 'Currency_Symbol' | 'Dash_Punctuation' | 'Decimal_Number' | 'Enclosing_Mark' | 'Final_Punctuation' | 'Format' | 'Initial_Punctuation' | 'Letter' | 'Letter_Number' | 'Line_Separator' | 'Lowercase_Letter' | 'Mark' | 'Math_Symbol' | 'Modifier_Letter' | 'Modifier_Symbol' | 'Nonspacing_Mark' | 'Number' | 'Open_Punctuation' | 'Other' | 'Other_Letter' | 'Other_Number' | 'Other_Punctuation' | 'Other_Symbol' | 'Paragraph_Separator' | 'Private_Use' | 'Punctuation' | 'Separator' | 'Space_Separator' | 'Spacing_Mark' | 'Surrogate' | 'Symbol' | 'Titlecase_Letter' | 'Unassigned' | 'Uppercase_Letter';
-    type $mol_unicode_category_script = 'Adlam' | 'Ahom' | 'Anatolian_Hieroglyphs' | 'Arabic' | 'Armenian' | 'Avestan' | 'Balinese' | 'Bamum' | 'Bassa_Vah' | 'Batak' | 'Bengali' | 'Bhaiksuki' | 'Bopomofo' | 'Brahmi' | 'Braille' | 'Buginese' | 'Buhid' | 'Canadian_Aboriginal' | 'Carian' | 'Caucasian_Albanian' | 'Chakma' | 'Cham' | 'Chorasmian' | 'Cherokee' | 'Common' | 'Coptic' | 'Cuneiform' | 'Cypriot' | 'Cyrillic' | 'Deseret' | 'Devanagari' | 'Dives_Akuru' | 'Dogra' | 'Duployan' | 'Egyptian_Hieroglyphs' | 'Elbasan' | 'Elymaic' | 'Ethiopic' | 'Georgian' | 'Glagolitic' | 'Gothic' | 'Grantha' | 'Greek' | 'Gujarati' | 'Gunjala_Gondi' | 'Gurmukhi' | 'Han' | 'Hangul' | 'Hanifi_Rohingya' | 'Hanunoo' | 'Hatran' | 'Hebrew' | 'Hiragana' | 'Imperial_Aramaic' | 'Inherited' | 'Inscriptional_Pahlavi' | 'Inscriptional_Parthian' | 'Javanese' | 'Kaithi' | 'Kannada' | 'Katakana' | 'Kayah_Li' | 'Kharoshthi' | 'Khitan_Small_Script' | 'Khmer' | 'Khojki' | 'Khudawadi' | 'Lao' | 'Latin' | 'Lepcha' | 'Limbu' | 'Linear_A' | 'Linear_B' | 'Lisu' | 'Lycian' | 'Lydian' | 'Mahajani' | 'Makasar' | 'Malayalam' | 'Mandaic' | 'Manichaean' | 'Marchen' | 'Medefaidrin' | 'Masaram_Gondi' | 'Meetei_Mayek' | 'Mende_Kikakui' | 'Meroitic_Cursive' | 'Meroitic_Hieroglyphs' | 'Miao' | 'Modi' | 'Mongolian' | 'Mro' | 'Multani' | 'Myanmar' | 'Nabataean' | 'Nandinagari' | 'New_Tai_Lue' | 'Newa' | 'Nko' | 'Nushu' | 'Nyiakeng_Puachue_Hmong' | 'Ogham' | 'Ol_Chiki' | 'Old_Hungarian' | 'Old_Italic' | 'Old_North_Arabian' | 'Old_Permic' | 'Old_Persian' | 'Old_Sogdian' | 'Old_South_Arabian' | 'Old_Turkic' | 'Oriya' | 'Osage' | 'Osmanya' | 'Pahawh_Hmong' | 'Palmyrene' | 'Pau_Cin_Hau' | 'Phags_Pa' | 'Phoenician' | 'Psalter_Pahlavi' | 'Rejang' | 'Runic' | 'Samaritan' | 'Saurashtra' | 'Sharada' | 'Shavian' | 'Siddham' | 'SignWriting' | 'Sinhala' | 'Sogdian' | 'Sora_Sompeng' | 'Soyombo' | 'Sundanese' | 'Syloti_Nagri' | 'Syriac' | 'Tagalog' | 'Tagbanwa' | 'Tai_Le' | 'Tai_Tham' | 'Tai_Viet' | 'Takri' | 'Tamil' | 'Tangut' | 'Telugu' | 'Thaana' | 'Thai' | 'Tibetan' | 'Tifinagh' | 'Tirhuta' | 'Ugaritic' | 'Vai' | 'Wancho' | 'Warang_Citi' | 'Yezidi' | 'Yi' | 'Zanabazar_Square';
-}
-
-interface String {
-    match<RE extends RegExp>(regexp: RE): ReturnType<RE[typeof Symbol.match]>;
-    matchAll<RE extends RegExp>(regexp: RE): ReturnType<RE[typeof Symbol.matchAll]>;
-}
-declare namespace $ {
-    type Groups_to_params<T> = {
-        [P in keyof T]?: T[P] | boolean | undefined;
-    };
-    export type $mol_regexp_source = number | string | RegExp | {
-        [key in string]: $mol_regexp_source;
-    } | readonly [$mol_regexp_source, ...$mol_regexp_source[]];
-    export type $mol_regexp_groups<Source extends $mol_regexp_source> = Source extends number ? {} : Source extends string ? {} : Source extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{
-        [key in Extract<keyof Source, number>]: $mol_regexp_groups<Source[key]>;
-    }[Extract<keyof Source, number>]>> : Source extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<Source['exec']>>['groups']> ? {} : NonNullable<NonNullable<ReturnType<Source['exec']>>['groups']> : Source extends {
-        readonly [key in string]: $mol_regexp_source;
-    } ? $mol_type_merge<$mol_type_intersect<{
-        [key in keyof Source]: $mol_type_merge<$mol_type_override<{
-            readonly [k in Extract<keyof Source, string>]: string;
-        }, {
-            readonly [k in key]: Source[key] extends string ? Source[key] : string;
-        }> & $mol_regexp_groups<Source[key]>>;
-    }[keyof Source]>> : never;
-    /** Type safe reguar expression builder */
-    export class $mol_regexp<Groups extends Record<string, string>> extends RegExp {
-        readonly groups: (Extract<keyof Groups, string>)[];
-        /** Prefer to use $mol_regexp.from */
-        constructor(source: string, flags?: string, groups?: (Extract<keyof Groups, string>)[]);
-        [Symbol.matchAll](str: string): RegExpStringIterator<RegExpExecArray & $mol_type_override<RegExpExecArray, {
-            groups?: {
-                [key in keyof Groups]: string;
-            };
-        }>>;
-        /** Parses input and returns found capture groups or null */
-        [Symbol.match](str: string): null | RegExpMatchArray;
-        /** Splits string by regexp edges */
-        [Symbol.split](str: string): string[];
-        test(str: string): boolean;
-        exec(str: string): RegExpExecArray & $mol_type_override<RegExpExecArray, {
-            groups?: {
-                [key in keyof Groups]: string;
-            };
-        }> | null;
-        generate(params: Groups_to_params<Groups>): string | null;
-        get native(): RegExp;
-        /** Makes regexp that greedy repeats this pattern with delimiter */
-        static separated<Chunk extends $mol_regexp_source, Sep extends $mol_regexp_source>(chunk: Chunk, sep: Sep): $mol_regexp<[$mol_regexp<[[Chunk], Sep] extends infer T ? T extends [[Chunk], Sep] ? T extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{ [key in Extract<keyof T, number>]: $mol_regexp_groups<T[key]>; }[Extract<keyof T, number>]>> : T extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<T["exec"]>>["groups"]> ? {} : NonNullable<NonNullable<ReturnType<T["exec"]>>["groups"]> : T extends {
-            readonly [x: string]: $mol_regexp_source;
-        } ? $mol_type_merge<$mol_type_intersect<{ [key_1 in keyof T]: $mol_type_merge<Omit<{ readonly [k in Extract<keyof T, string>]: string; }, key_1> & { readonly [k_1 in key_1]: T[key_1] extends string ? T[key_1] : string; } & $mol_regexp_groups<T[key_1]>>; }[keyof T]>> : never : never : never>, Chunk] extends infer T_1 ? T_1 extends [$mol_regexp<[[Chunk], Sep] extends infer T_2 ? T_2 extends [[Chunk], Sep] ? T_2 extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{ [key_4 in Extract<keyof T_2, number>]: $mol_regexp_groups<T_2[key_4]>; }[Extract<keyof T_2, number>]>> : T_2 extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<T_2["exec"]>>["groups"]> ? {} : NonNullable<NonNullable<ReturnType<T_2["exec"]>>["groups"]> : T_2 extends {
-            readonly [x: string]: $mol_regexp_source;
-        } ? $mol_type_merge<$mol_type_intersect<{ [key_5 in keyof T_2]: $mol_type_merge<Omit<{ readonly [k in Extract<keyof T_2, string>]: string; }, key_5> & { readonly [k_1 in key_5]: T_2[key_5] extends string ? T_2[key_5] : string; } & $mol_regexp_groups<T_2[key_5]>>; }[keyof T_2]>> : never : never : never>, Chunk] ? T_1 extends $mol_regexp_source[] ? $mol_type_merge<$mol_type_intersect<{ [key_2 in Extract<keyof T_1, number>]: $mol_regexp_groups<T_1[key_2]>; }[Extract<keyof T_1, number>]>> : T_1 extends RegExp ? Record<string, string> extends NonNullable<NonNullable<ReturnType<T_1["exec"]>>["groups"]> ? {} : NonNullable<NonNullable<ReturnType<T_1["exec"]>>["groups"]> : T_1 extends {
-            readonly [x: string]: $mol_regexp_source;
-        } ? $mol_type_merge<$mol_type_intersect<{ [key_3 in keyof T_1]: $mol_type_merge<Omit<{ readonly [k in Extract<keyof T_1, string>]: string; }, key_3> & { readonly [k_1 in key_3]: T_1[key_3] extends string ? T_1[key_3] : string; } & $mol_regexp_groups<T_1[key_3]>>; }[keyof T_1]>> : never : never : never>;
-        /** Makes regexp that non-greedy repeats this pattern from min to max count */
-        static repeat<Source extends $mol_regexp_source>(source: Source, min?: number, max?: number): $mol_regexp<$mol_regexp_groups<Source>>;
-        /** Makes regexp that greedy repeats this pattern from min to max count */
-        static repeat_greedy<Source extends $mol_regexp_source>(source: Source, min?: number, max?: number): $mol_regexp<$mol_regexp_groups<Source>>;
-        /** Makes regexp that match any of options */
-        static vary<Sources extends readonly $mol_regexp_source[]>(sources: Sources, flags?: string): $mol_regexp<$mol_regexp_groups<Sources[number]>>;
-        /** Makes regexp that allow absent of this pattern */
-        static optional<Source extends $mol_regexp_source>(source: Source): $mol_regexp<$mol_regexp_groups<Source>>;
-        /** Makes regexp that look ahead for pattern */
-        static force_after(source: $mol_regexp_source): $mol_regexp<Record<string, string>>;
-        /** Makes regexp that look ahead for pattern */
-        static forbid_after(source: $mol_regexp_source): $mol_regexp<Record<string, string>>;
-        /** Converts some js values to regexp */
-        static from<Source extends $mol_regexp_source>(source: Source, { ignoreCase, multiline }?: Partial<Pick<RegExp, 'ignoreCase' | 'multiline'>>): $mol_regexp<$mol_regexp_groups<Source>>;
-        /** Makes regexp which includes only unicode category */
-        static unicode_only(...category: $mol_unicode_category): $mol_regexp<Record<string, string>>;
-        /** Makes regexp which excludes unicode category */
-        static unicode_except(...category: $mol_unicode_category): $mol_regexp<Record<string, string>>;
-        static char_range(from: number, to: number): $mol_regexp<{}>;
-        static char_only(...allowed: readonly [$mol_regexp_source, ...$mol_regexp_source[]]): $mol_regexp<{}>;
-        static char_except(...forbidden: readonly [$mol_regexp_source, ...$mol_regexp_source[]]): $mol_regexp<{}>;
-        static decimal_only: $mol_regexp<{}>;
-        static decimal_except: $mol_regexp<{}>;
-        static latin_only: $mol_regexp<{}>;
-        static latin_except: $mol_regexp<{}>;
-        static space_only: $mol_regexp<{}>;
-        static space_except: $mol_regexp<{}>;
-        static word_break_only: $mol_regexp<{}>;
-        static word_break_except: $mol_regexp<{}>;
-        static tab: $mol_regexp<{}>;
-        static slash_back: $mol_regexp<{}>;
-        static nul: $mol_regexp<{}>;
-        static char_any: $mol_regexp<{}>;
-        static begin: $mol_regexp<{}>;
-        static end: $mol_regexp<{}>;
-        static or: $mol_regexp<{}>;
-        static line_end: $mol_regexp<{
-            readonly win_end: string;
-            readonly mac_end: string;
-        }>;
-    }
-    export {};
-}
-
-declare namespace $ {
-
-	type $mol_paragraph__sub_mol_dimmer_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_paragraph['sub'] >
-	>
-	type $mol_paragraph__sub_mol_dimmer_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_paragraph['sub'] >
-	>
-	export class $mol_dimmer extends $mol_paragraph {
-		parts( ): readonly($mol_view_content)[]
-		string( id: any): string
-		haystack( ): string
-		needle( ): string
-		sub( ): ReturnType< $mol_dimmer['parts'] >
-		Low( id: any): $mol_paragraph
-		High( id: any): $mol_paragraph
-	}
-	
-}
-
-//# sourceMappingURL=dimmer.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Output text with dimmed mismatched substrings.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_dimmer_demo
-     */
-    class $mol_dimmer extends $.$mol_dimmer {
-        parts(): any[];
-        strings(): string[];
-        string(index: number): string;
-        view_find(check: (path: $mol_view, text?: string) => boolean, path?: $mol_view[]): Generator<$mol_view[]>;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_hotkey__key_mol_search_1 = $mol_type_enforce<
-		({ 
-			escape( next?: ReturnType< $mol_search['clear'] > ): ReturnType< $mol_search['clear'] >,
-		}) 
-		,
-		ReturnType< $mol_hotkey['key'] >
-	>
-	type $mol_nav__keys_y_mol_search_2 = $mol_type_enforce<
-		ReturnType< $mol_search['nav_components'] >
-		,
-		ReturnType< $mol_nav['keys_y'] >
-	>
-	type $mol_nav__current_y_mol_search_3 = $mol_type_enforce<
-		ReturnType< $mol_search['nav_focused'] >
-		,
-		ReturnType< $mol_nav['current_y'] >
-	>
-	type $mol_string__value_mol_search_4 = $mol_type_enforce<
-		ReturnType< $mol_search['query'] >
-		,
-		ReturnType< $mol_string['value'] >
-	>
-	type $mol_string__hint_mol_search_5 = $mol_type_enforce<
-		ReturnType< $mol_search['hint'] >
-		,
-		ReturnType< $mol_string['hint'] >
-	>
-	type $mol_string__submit_mol_search_6 = $mol_type_enforce<
-		ReturnType< $mol_search['submit'] >
-		,
-		ReturnType< $mol_string['submit'] >
-	>
-	type $mol_string__enabled_mol_search_7 = $mol_type_enforce<
-		ReturnType< $mol_search['enabled'] >
-		,
-		ReturnType< $mol_string['enabled'] >
-	>
-	type $mol_string__keyboard_mol_search_8 = $mol_type_enforce<
-		ReturnType< $mol_search['keyboard'] >
-		,
-		ReturnType< $mol_string['keyboard'] >
-	>
-	type $mol_string__enter_mol_search_9 = $mol_type_enforce<
-		ReturnType< $mol_search['enter'] >
-		,
-		ReturnType< $mol_string['enter'] >
-	>
-	type $mol_button_minor__hint_mol_search_10 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['hint'] >
-	>
-	type $mol_button_minor__enabled_mol_search_11 = $mol_type_enforce<
-		ReturnType< $mol_search['enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__click_mol_search_12 = $mol_type_enforce<
-		ReturnType< $mol_search['clear'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__sub_mol_search_13 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $mol_list__rows_mol_search_14 = $mol_type_enforce<
-		ReturnType< $mol_search['menu_items'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $mol_scroll__sub_mol_search_15 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $mol_dimmer__haystack_mol_search_16 = $mol_type_enforce<
-		ReturnType< $mol_search['suggest_label'] >
-		,
-		ReturnType< $mol_dimmer['haystack'] >
-	>
-	type $mol_dimmer__needle_mol_search_17 = $mol_type_enforce<
-		ReturnType< $mol_search['query'] >
-		,
-		ReturnType< $mol_dimmer['needle'] >
-	>
-	type $mol_search_plugins__18 = $mol_type_enforce<
-		ReturnType< $mol_pop['plugins'] >[number]
-		,
-		$mol_plugin
-	>
-	type $mol_view__sub_mol_search_19 = $mol_type_enforce<
-		ReturnType< $mol_search['anchor_content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_button_minor__click_mol_search_20 = $mol_type_enforce<
-		ReturnType< $mol_search['suggest_select'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__sub_mol_search_21 = $mol_type_enforce<
-		ReturnType< $mol_search['suggest_content'] >
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	export class $mol_search extends $mol_pop {
-		clear( next?: any ): any
-		Hotkey( ): $mol_hotkey
-		nav_components( ): readonly($mol_view)[]
-		nav_focused( next?: any ): any
-		Nav( ): $mol_nav
-		suggests_showed( next?: boolean ): boolean
-		query( next?: string ): string
-		hint( ): string
-		submit( next?: any ): any
-		enabled( ): boolean
-		keyboard( ): string
-		enter( ): string
-		bring( ): ReturnType< ReturnType< $mol_search['Query'] >['bring'] >
-		Query( ): $mol_string
-		Clear_icon( ): $mol_icon_close
-		Clear( ): $mol_button_minor
-		anchor_content( ): readonly(any)[]
-		menu_items( ): readonly($mol_view)[]
-		Menu( ): $mol_list
-		Bubble_pane( ): $mol_scroll
-		suggest_select( id: any, next?: any ): any
-		suggest_label( id: any): string
-		Suggest_label( id: any): $mol_dimmer
-		suggest_content( id: any): readonly($mol_view_content)[]
-		suggests( ): readonly(string)[]
-		plugins( ): readonly($mol_plugin)[]
-		showed( next?: ReturnType< $mol_search['suggests_showed'] > ): ReturnType< $mol_search['suggests_showed'] >
-		align_hor( ): string
-		Anchor( ): $mol_view
-		bubble_content( ): readonly($mol_view_content)[]
-		Suggest( id: any): $mol_button_minor
-	}
-	
-}
-
-//# sourceMappingURL=search.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Search input with suggest and clear button.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_search_demo
-     */
-    class $mol_search extends $.$mol_search {
-        anchor_content(): ($mol_button_minor | $.$mol_string)[];
-        suggests_showed(next?: boolean): boolean;
-        suggest_selected(next?: string): void;
-        nav_components(): ($mol_button_minor | $.$mol_string)[];
-        nav_focused(component?: $mol_view): $mol_view | $.$mol_string | null;
-        suggest_label(key: string): string;
-        menu_items(): $mol_button_minor[];
-        suggest_select(id: string, event?: MouseEvent): void;
-        clear(event?: Event): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    function $mol_dom_safe_uri(uri: string): string;
-    function $mol_dom_safe_attr(val: string): string;
-    let $mol_dom_safe_rules: Record<string, Record<string, (val: string) => string>>;
-    function $mol_dom_safe(this: $, nodes: ChildNode[]): ChildNode[];
-}
-
-declare namespace $ {
-
-	export class $mol_link extends $mol_view {
-		uri_toggle( ): string
-		uri_unsafe( ): ReturnType< $mol_link['uri_toggle'] >
-		hint( ): string
-		hint_safe( ): ReturnType< $mol_link['hint'] >
-		target( ): string
-		file_name( ): string
-		current( ): boolean
-		relation( ): string
-		event_click( next?: any ): any
-		click( next?: ReturnType< $mol_link['event_click'] > ): ReturnType< $mol_link['event_click'] >
-		uri( ): string
-		dom_name( ): string
-		uri_off( ): string
-		uri_native( ): any
-		external( ): boolean
-		attr( ): ({ 
-			'href': ReturnType< $mol_link['uri_unsafe'] >,
-			'title': ReturnType< $mol_link['hint_safe'] >,
-			'target': ReturnType< $mol_link['target'] >,
-			'download': ReturnType< $mol_link['file_name'] >,
-			'mol_link_current': ReturnType< $mol_link['current'] >,
-			'rel': ReturnType< $mol_link['relation'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		sub( ): readonly($mol_view_content)[]
-		arg( ): Record<string, any>
-		event( ): ({ 
-			click( next?: ReturnType< $mol_link['click'] > ): ReturnType< $mol_link['click'] >,
-		})  & ReturnType< $mol_view['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=link.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Dynamic hyperlink. It can add, change or remove parameters. A link that leads to the current page has [mol_link_current] attribute set to true.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_link_demo
-     */
-    class $mol_link extends $.$mol_link {
-        uri_toggle(): string;
-        uri(): string;
-        uri_off(): string;
-        uri_native(): URL;
-        current(): boolean;
-        file_name(): string;
-        minimal_height(): number;
-        external(): boolean;
-        target(): '_self' | '_blank' | '_top' | '_parent' | string;
-        hint_safe(): string;
-        uri_unsafe(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    function $mol_match_text<Variant>(query: string, values: (variant: Variant) => readonly string[]): (variant: Variant) => boolean;
 }
 
 declare namespace $ {
@@ -41450,378 +35701,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=source.view.tree.d.ts.map
-declare namespace $ {
-    class $mol_dom_event<EventType extends Event> extends $mol_object {
-        readonly native: EventType;
-        constructor(native: EventType);
-        prevented(next?: boolean): boolean;
-        static wrap<EventType extends Event>(event: EventType): $mol_dom_event<EventType>;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_check extends $mol_button_minor {
-		checked( next?: boolean ): boolean
-		aria_checked( ): string
-		aria_role( ): string
-		Icon( ): any
-		title( ): string
-		Title( ): $mol_view
-		label( ): readonly(any)[]
-		attr( ): ({ 
-			'mol_check_checked': ReturnType< $mol_check['checked'] >,
-			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
-			'role': ReturnType< $mol_check['aria_role'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-		sub( ): readonly($mol_view_content)[]
-	}
-	
-}
-
-//# sourceMappingURL=check.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Checkbox UI component. See Variants for more concrete implementations.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_box_demo
-     */
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
-}
-
-declare namespace $ {
-
-	type $mol_check__minimal_width_mol_pick_1 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_check['minimal_width'] >
-	>
-	type $mol_check__minimal_height_mol_pick_2 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_check['minimal_height'] >
-	>
-	type $mol_check__enabled_mol_pick_3 = $mol_type_enforce<
-		ReturnType< $mol_pick['trigger_enabled'] >
-		,
-		ReturnType< $mol_check['enabled'] >
-	>
-	type $mol_check__checked_mol_pick_4 = $mol_type_enforce<
-		ReturnType< $mol_pick['showed'] >
-		,
-		ReturnType< $mol_check['checked'] >
-	>
-	type $mol_check__clicks_mol_pick_5 = $mol_type_enforce<
-		ReturnType< $mol_pick['clicks'] >
-		,
-		ReturnType< $mol_check['clicks'] >
-	>
-	type $mol_check__sub_mol_pick_6 = $mol_type_enforce<
-		ReturnType< $mol_pick['trigger_content'] >
-		,
-		ReturnType< $mol_check['sub'] >
-	>
-	type $mol_check__hint_mol_pick_7 = $mol_type_enforce<
-		ReturnType< $mol_pick['hint'] >
-		,
-		ReturnType< $mol_check['hint'] >
-	>
-	export class $mol_pick extends $mol_pop {
-		keydown( next?: any ): any
-		trigger_enabled( ): boolean
-		clicks( next?: any ): any
-		trigger_content( ): readonly($mol_view_content)[]
-		hint( ): string
-		Trigger( ): $mol_check
-		event( ): ({ 
-			keydown( next?: ReturnType< $mol_pick['keydown'] > ): ReturnType< $mol_pick['keydown'] >,
-		})  & ReturnType< $mol_pop['event'] >
-		Anchor( ): ReturnType< $mol_pick['Trigger'] >
-	}
-	
-}
-
-//# sourceMappingURL=pick.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Pop-up display and hide by mouse click, also hide by unfocus.
-     * Based on [mol_pop](https://mol.hyoo.ru/#!section=demos/demo=mol_pop_demo) component.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_pick_demo
-     */
-    class $mol_pick extends $.$mol_pick {
-        keydown(event: KeyboardEvent): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_dots_vertical extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=vertical.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_dimmer__haystack_mol_select_1 = $mol_type_enforce<
-		ReturnType< $mol_select['option_label'] >
-		,
-		ReturnType< $mol_dimmer['haystack'] >
-	>
-	type $mol_dimmer__needle_mol_select_2 = $mol_type_enforce<
-		ReturnType< $mol_select['filter_pattern'] >
-		,
-		ReturnType< $mol_dimmer['needle'] >
-	>
-	type $mol_nav__keys_y_mol_select_3 = $mol_type_enforce<
-		ReturnType< $mol_select['nav_components'] >
-		,
-		ReturnType< $mol_nav['keys_y'] >
-	>
-	type $mol_nav__current_y_mol_select_4 = $mol_type_enforce<
-		ReturnType< $mol_select['option_focused'] >
-		,
-		ReturnType< $mol_nav['current_y'] >
-	>
-	type $mol_nav__cycle_mol_select_5 = $mol_type_enforce<
-		ReturnType< $mol_select['nav_cycle'] >
-		,
-		ReturnType< $mol_nav['cycle'] >
-	>
-	type $mol_list__rows_mol_select_6 = $mol_type_enforce<
-		ReturnType< $mol_select['menu_content'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $mol_scroll__sub_mol_select_7 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $mol_button_minor__enabled_mol_select_8 = $mol_type_enforce<
-		ReturnType< $mol_select['enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__event_click_mol_select_9 = $mol_type_enforce<
-		ReturnType< $mol_select['event_select'] >
-		,
-		ReturnType< $mol_button_minor['event_click'] >
-	>
-	type $mol_button_minor__hint_mol_select_10 = $mol_type_enforce<
-		ReturnType< $mol_select['option_hint'] >
-		,
-		ReturnType< $mol_button_minor['hint'] >
-	>
-	type $mol_button_minor__sub_mol_select_11 = $mol_type_enforce<
-		ReturnType< $mol_select['option_content'] >
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $mol_view__sub_mol_select_12 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_search__query_mol_select_13 = $mol_type_enforce<
-		ReturnType< $mol_select['filter_pattern'] >
-		,
-		ReturnType< $mol_search['query'] >
-	>
-	type $mol_search__hint_mol_select_14 = $mol_type_enforce<
-		ReturnType< $mol_select['filter_hint'] >
-		,
-		ReturnType< $mol_search['hint'] >
-	>
-	type $mol_search__submit_mol_select_15 = $mol_type_enforce<
-		ReturnType< $mol_select['submit'] >
-		,
-		ReturnType< $mol_search['submit'] >
-	>
-	type $mol_search__enabled_mol_select_16 = $mol_type_enforce<
-		ReturnType< $mol_select['enabled'] >
-		,
-		ReturnType< $mol_search['enabled'] >
-	>
-	export class $mol_select extends $mol_pick {
-		enabled( ): boolean
-		event_select( id: any, next?: any ): any
-		option_hint( id: any): any
-		option_label( id: any): string
-		filter_pattern( next?: string ): string
-		Option_label( id: any): $mol_dimmer
-		option_content( id: any): readonly(any)[]
-		no_options_message( ): string
-		nav_components( ): readonly($mol_view)[]
-		option_focused( next?: any ): any
-		nav_cycle( next?: boolean ): boolean
-		Nav( ): $mol_nav
-		menu_content( ): readonly($mol_view)[]
-		Menu( ): $mol_list
-		Bubble_pane( ): $mol_scroll
-		filter_hint( ): string
-		submit( next?: any ): any
-		dictionary( next?: Record<string, any> ): Record<string, any>
-		options( ): readonly(string)[]
-		value( next?: string ): string
-		option_label_default( ): string
-		Option_row( id: any): $mol_button_minor
-		No_options( ): $mol_view
-		plugins( ): readonly(any)[]
-		hint( ): string
-		bubble_content( ): readonly(any)[]
-		Filter( ): $mol_search
-		Trigger_icon( ): $mol_icon_dots_vertical
-		trigger_enabled( ): ReturnType< $mol_select['enabled'] >
-	}
-	
-}
-
-//# sourceMappingURL=select.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Allow user to select value from various options and displays current value.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_select_demo_colors
-     */
-    class $mol_select extends $.$mol_select {
-        filter_pattern(next?: string): string;
-        open(): void;
-        options(): readonly string[];
-        options_filtered(): readonly string[];
-        option_label(id: string): any;
-        option_hint(id: string): string;
-        option_rows(): $mol_button_minor[];
-        option_focused(component?: $mol_view): $mol_view | $.$mol_search | null;
-        event_select(id: string, event?: MouseEvent): void;
-        nav_components(): ($mol_button_minor | $.$mol_search)[];
-        trigger_content(): readonly $mol_view_content[];
-        menu_content(): $mol_view[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_avatar extends $mol_icon {
-		view_box( ): string
-		id( ): string
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=avatar.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Avatar uniquely-generated by id string
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_avatar_demo
-     */
-    class $mol_avatar extends $.$mol_avatar {
-        path(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_sync extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=sync.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_sync_off extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=off.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_avatar__id_giper_baza_status_1 = $mol_type_enforce<
-		ReturnType< $giper_baza_status['master_id'] >
-		,
-		ReturnType< $mol_avatar['id'] >
-	>
-	type $mol_avatar__id_giper_baza_status_2 = $mol_type_enforce<
-		ReturnType< $giper_baza_status['master_link'] >
-		,
-		ReturnType< $mol_avatar['id'] >
-	>
-	type $mol_link__uri_giper_baza_status_3 = $mol_type_enforce<
-		ReturnType< $giper_baza_status['master_link'] >
-		,
-		ReturnType< $mol_link['uri'] >
-	>
-	type $mol_link__sub_giper_baza_status_4 = $mol_type_enforce<
-		ReturnType< $giper_baza_status['link_content'] >
-		,
-		ReturnType< $mol_link['sub'] >
-	>
-	type $mol_link__hint_giper_baza_status_5 = $mol_type_enforce<
-		ReturnType< $giper_baza_status['message'] >
-		,
-		ReturnType< $mol_link['hint'] >
-	>
-	export class $giper_baza_status extends $mol_select {
-		master_id( id: any): string
-		Option_logo( id: any): $mol_avatar
-		master_link( ): string
-		Well( ): $mol_avatar
-		Fail( ): $mol_icon_sync_off
-		link_content( ): readonly(any)[]
-		hint( ): string
-		message( ): ReturnType< $giper_baza_status['hint'] >
-		Link( ): $mol_link
-		minimal_width( ): number
-		minimal_height( ): number
-		Filter( ): any
-		option_content( id: any): readonly(any)[]
-		trigger_content( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=status.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $giper_baza_status extends $.$giper_baza_status {
-        message(): string;
-        link_content(): $mol_icon_sync_off[];
-        options(): string[];
-        master_link(): string;
-        master_id(uri: string): string;
-        option_label(uri: string): string;
-        value(next?: string): string;
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
     function $mol_wait_timeout_async(this: $, timeout: number): Promise<void>;
     function $mol_wait_timeout(this: $, timeout: number): void;
@@ -42879,6 +36758,26 @@ declare namespace $ {
 
 //# sourceMappingURL=stack.view.tree.d.ts.map
 declare namespace $ {
+    /** Creates lexer by dictionary of lexems. Lexem that started first wins. Then lexem that declared earlier wins. Use regexp capture to take parts of token. */
+    class $mol_syntax2<Lexems extends {
+        [name: string]: RegExp;
+    } = {}> {
+        lexems: Lexems;
+        constructor(lexems: Lexems);
+        rules: Array<{
+            regExp: RegExp;
+            name: string;
+            size: number;
+        }>;
+        regexp: RegExp;
+        tokenize(text: string, handle: (name: string, found: string, chunks: string[], offset: number) => void): void;
+        parse(text: string, handlers: {
+            [key in keyof Lexems | '']: (found: string, chunks: string[], offset: number) => void;
+        }): void;
+    }
+}
+
+declare namespace $ {
 
 	export class $mol_text_code_token extends $mol_dimmer {
 		type( ): string
@@ -43051,6 +36950,14 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
+}
+
+declare namespace $ {
+    type $mol_blob = Blob;
+    let $mol_blob: {
+        prototype: Blob;
+        new (blobParts?: readonly BlobPart[], options?: BlobPropertyBag): Blob;
+    };
 }
 
 declare namespace $ {
@@ -47950,39 +41857,6153 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	type $mol_paragraph__title_bog_nka_app_1 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_1 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['account_id'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	export class $bog_nka_settings extends $mol_page {
+		Sync( ): $giper_baza_status
+		account_id( ): string
+		Account_id( ): $mol_paragraph
+		title( ): string
+		text_id( ): string
+		tools( ): readonly(any)[]
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=settings.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_nka_settings extends $.$bog_nka_settings {
+        settings_open(next?: boolean): boolean;
+        settings_toggle(): void;
+        account_id(): string;
+    }
+}
+
+declare namespace $ {
+    /**
+     * Checks for some of given runtype or throws error.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_variant_demo
+     */
+    function $mol_data_variant<Sub extends $mol_data_value[]>(...sub: Sub): ((val: Parameters<Sub[number]>[0]) => ReturnType<Sub[number]>) & {
+        config: Sub;
+        Value: ReturnType<Sub[number]>;
+    };
+}
+
+declare namespace $ {
+    /**
+     * Checks for string and returns string type.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_string_demo
+     */
+    let $mol_data_string: (val: string) => string;
+}
+
+declare namespace $ {
+    /**
+     * Checks for undefined or passing given runtype.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_optional_demo
+     */
+    function $mol_data_optional<Sub extends $mol_data_value, Fallback extends undefined | (() => ReturnType<Sub>)>(sub: Sub, fallback?: Fallback): ((val: Parameters<Sub>[0] | undefined) => ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>)) & {
+        config: {
+            sub: Sub;
+            fallback: Fallback | undefined;
+        };
+        Value: ReturnType<Sub> | (Fallback extends undefined ? undefined : ReturnType<Extract<Fallback, () => any>>);
+    };
+}
+
+declare namespace $ {
+    /**
+     * Fields that can be set to undefined makes optional
+     *
+     * 	type User = $mol_type_partial_undefined<{ name : string , age : number | undefined }> // { name : string , age? : number | undefined }
+     */
+    type $mol_type_partial_undefined<Val> = $mol_type_merge<$mol_type_override<Partial<Val>, Pick<Val, {
+        [Field in keyof Val]: undefined extends Val[Field] ? never : Field;
+    }[keyof Val]>>>;
+}
+
+declare namespace $ {
+    /**
+     * Checks for record of given fields with by its runtypes and returns expected type.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_record_demo
+     */
+    function $mol_data_record<Sub extends Record<string, $mol_data_value>>(sub: Sub): ((val: $mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }>, Pick<{ [key in keyof Sub]: Parameters<Sub[key]>[0]; }, { [Field in keyof { [key in keyof Sub]: Parameters<Sub[key]>[0]; }]: undefined extends { [key in keyof Sub]: Parameters<Sub[key]>[0]; }[Field] ? never : Field; }[keyof Sub]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }>, Pick<{ [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }, { [Field_1 in keyof { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }]: undefined extends { [key_1 in keyof Sub]: ReturnType<Sub[key_1]>; }[Field_1] ? never : Field_1; }[keyof Sub]>>>>) & {
+        config: Sub;
+        Value: Readonly<$mol_type_merge<$mol_type_override<Partial<{ [key in keyof Sub]: ReturnType<Sub[key]>; }>, Pick<{ [key in keyof Sub]: ReturnType<Sub[key]>; }, { [Field in keyof { [key in keyof Sub]: ReturnType<Sub[key]>; }]: undefined extends { [key in keyof Sub]: ReturnType<Sub[key]>; }[Field] ? never : Field; }[keyof Sub]>>>>;
+    };
+}
+
+declare namespace $ {
+    /**
+     * Checks for array of given runtype and returns expected type.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_array_demo
+     */
+    function $mol_data_array<Sub extends $mol_data_value>(sub: Sub): ((val: readonly Parameters<Sub>[0][]) => readonly ReturnType<Sub>[]) & {
+        config: Sub;
+        Value: readonly ReturnType<Sub>[];
+    };
+}
+
+declare namespace $ {
+    /**
+     * Checks for boolean and returns boolean type.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_data_boolean_demo
+     */
+    let $mol_data_boolean: (val: boolean) => boolean;
+}
+
+declare namespace $ {
+    type $hyoo_harp_query<Field extends string = string> = {
+        [field in Field]: $hyoo_harp_query<never>;
+    } & {
+        '+'?: boolean;
+        '='?: any[][];
+        '!='?: any[][];
+    };
+}
+
+declare namespace $ {
+    function $hyoo_harp_from_string(uri: string): $hyoo_harp_query;
+}
+
+declare namespace $ {
+    function $hyoo_harp_to_string<Query extends $hyoo_harp_query>(query: Query): string;
+}
+
+declare namespace $ {
+    function $hyoo_harp_scheme<Sub extends Record<string, $mol_data_value<any, any>>, Value extends $mol_data_value<any, any> = typeof $mol_data_integer>(sub: Sub, value?: Value): ((val: $mol_type_merge<$mol_type_override<Partial<Sub & {
+        '+': ((val: boolean | undefined) => boolean | undefined) & {
+            config: {
+                sub: (val: boolean) => boolean;
+                fallback: (() => boolean) | undefined;
+            };
+            Value: boolean | undefined;
+        };
+        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        _num: ((val: {
+            '=': readonly (readonly (string | number)[])[];
+        } | undefined) => Readonly<{
+            '=': readonly (readonly number[])[];
+        }> | undefined) & {
+            config: {
+                sub: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                }) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) & {
+                    config: {
+                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                config: ((this: any, input: string | number) => number) & {
+                                    config: {
+                                        funcs: [((val: string | number) => string | number) & {
+                                            config: [(val: string) => string, typeof $mol_data_integer];
+                                            Value: string | number;
+                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                    };
+                                    Value: number;
+                                };
+                                Value: readonly number[];
+                            };
+                            Value: readonly (readonly number[])[];
+                        };
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>;
+                };
+                fallback: (() => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) | undefined;
+            };
+            Value: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+        };
+        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+    } extends infer T ? { [key in keyof T]: Parameters<T[key]>[0]; } : never>, Pick<Sub & {
+        '+': ((val: boolean | undefined) => boolean | undefined) & {
+            config: {
+                sub: (val: boolean) => boolean;
+                fallback: (() => boolean) | undefined;
+            };
+            Value: boolean | undefined;
+        };
+        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        _num: ((val: {
+            '=': readonly (readonly (string | number)[])[];
+        } | undefined) => Readonly<{
+            '=': readonly (readonly number[])[];
+        }> | undefined) & {
+            config: {
+                sub: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                }) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) & {
+                    config: {
+                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                config: ((this: any, input: string | number) => number) & {
+                                    config: {
+                                        funcs: [((val: string | number) => string | number) & {
+                                            config: [(val: string) => string, typeof $mol_data_integer];
+                                            Value: string | number;
+                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                    };
+                                    Value: number;
+                                };
+                                Value: readonly number[];
+                            };
+                            Value: readonly (readonly number[])[];
+                        };
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>;
+                };
+                fallback: (() => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) | undefined;
+            };
+            Value: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+        };
+        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+    } extends infer T_1 ? { [key in keyof T_1]: Parameters<T_1[key]>[0]; } : never, ((Sub & {
+        '+': ((val: boolean | undefined) => boolean | undefined) & {
+            config: {
+                sub: (val: boolean) => boolean;
+                fallback: (() => boolean) | undefined;
+            };
+            Value: boolean | undefined;
+        };
+        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        _num: ((val: {
+            '=': readonly (readonly (string | number)[])[];
+        } | undefined) => Readonly<{
+            '=': readonly (readonly number[])[];
+        }> | undefined) & {
+            config: {
+                sub: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                }) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) & {
+                    config: {
+                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                config: ((this: any, input: string | number) => number) & {
+                                    config: {
+                                        funcs: [((val: string | number) => string | number) & {
+                                            config: [(val: string) => string, typeof $mol_data_integer];
+                                            Value: string | number;
+                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                    };
+                                    Value: number;
+                                };
+                                Value: readonly number[];
+                            };
+                            Value: readonly (readonly number[])[];
+                        };
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>;
+                };
+                fallback: (() => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) | undefined;
+            };
+            Value: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+        };
+        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+    } extends infer T_3 ? { [key in keyof T_3]: Parameters<T_3[key]>[0]; } : never) extends infer T_2 ? { [Field in keyof T_2]: undefined extends T_2[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
+        '+': ((val: boolean | undefined) => boolean | undefined) & {
+            config: {
+                sub: (val: boolean) => boolean;
+                fallback: (() => boolean) | undefined;
+            };
+            Value: boolean | undefined;
+        };
+        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        _num: ((val: {
+            '=': readonly (readonly (string | number)[])[];
+        } | undefined) => Readonly<{
+            '=': readonly (readonly number[])[];
+        }> | undefined) & {
+            config: {
+                sub: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                }) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) & {
+                    config: {
+                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                config: ((this: any, input: string | number) => number) & {
+                                    config: {
+                                        funcs: [((val: string | number) => string | number) & {
+                                            config: [(val: string) => string, typeof $mol_data_integer];
+                                            Value: string | number;
+                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                    };
+                                    Value: number;
+                                };
+                                Value: readonly number[];
+                            };
+                            Value: readonly (readonly number[])[];
+                        };
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>;
+                };
+                fallback: (() => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) | undefined;
+            };
+            Value: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+        };
+        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+    } extends infer T_4 ? { [key_1 in keyof T_4]: ReturnType<T_4[key_1]>; } : never>, Pick<Sub & {
+        '+': ((val: boolean | undefined) => boolean | undefined) & {
+            config: {
+                sub: (val: boolean) => boolean;
+                fallback: (() => boolean) | undefined;
+            };
+            Value: boolean | undefined;
+        };
+        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        _num: ((val: {
+            '=': readonly (readonly (string | number)[])[];
+        } | undefined) => Readonly<{
+            '=': readonly (readonly number[])[];
+        }> | undefined) & {
+            config: {
+                sub: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                }) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) & {
+                    config: {
+                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                config: ((this: any, input: string | number) => number) & {
+                                    config: {
+                                        funcs: [((val: string | number) => string | number) & {
+                                            config: [(val: string) => string, typeof $mol_data_integer];
+                                            Value: string | number;
+                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                    };
+                                    Value: number;
+                                };
+                                Value: readonly number[];
+                            };
+                            Value: readonly (readonly number[])[];
+                        };
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>;
+                };
+                fallback: (() => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) | undefined;
+            };
+            Value: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+        };
+        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+    } extends infer T_5 ? { [key_1 in keyof T_5]: ReturnType<T_5[key_1]>; } : never, ((Sub & {
+        '+': ((val: boolean | undefined) => boolean | undefined) & {
+            config: {
+                sub: (val: boolean) => boolean;
+                fallback: (() => boolean) | undefined;
+            };
+            Value: boolean | undefined;
+        };
+        '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+            config: {
+                sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                    config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                        config: Value;
+                        Value: readonly ReturnType<Value>[];
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[];
+                };
+                fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+            };
+            Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+        };
+        _num: ((val: {
+            '=': readonly (readonly (string | number)[])[];
+        } | undefined) => Readonly<{
+            '=': readonly (readonly number[])[];
+        }> | undefined) & {
+            config: {
+                sub: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                }) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) & {
+                    config: {
+                        '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                            config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                config: ((this: any, input: string | number) => number) & {
+                                    config: {
+                                        funcs: [((val: string | number) => string | number) & {
+                                            config: [(val: string) => string, typeof $mol_data_integer];
+                                            Value: string | number;
+                                        }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                    };
+                                    Value: number;
+                                };
+                                Value: readonly number[];
+                            };
+                            Value: readonly (readonly number[])[];
+                        };
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>;
+                };
+                fallback: (() => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }>) | undefined;
+            };
+            Value: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+        };
+        _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+    } extends infer T_7 ? { [key_1 in keyof T_7]: ReturnType<T_7[key_1]>; } : never) extends infer T_6 ? { [Field_1 in keyof T_6]: undefined extends T_6[Field_1] ? never : Field_1; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>) & {
+        config: Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        };
+        Value: Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T]: ReturnType<T[key]>; } : never>, Pick<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_1 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_1]: ReturnType<T_1[key]>; } : never, ((Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_3 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_3]: ReturnType<T_3[key]>; } : never) extends infer T_2 ? { [Field in keyof T_2]: undefined extends T_2[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>;
+    } & {
+        parse(str: string): Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_4 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_4]: ReturnType<T_4[key]>; } : never>, Pick<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_5 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_5]: ReturnType<T_5[key]>; } : never, ((Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_7 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_7]: ReturnType<T_7[key]>; } : never) extends infer T_6 ? { [Field in keyof T_6]: undefined extends T_6[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>;
+        build(query: Parameters<((val: $mol_type_merge<$mol_type_override<Partial<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_4 ? { [key_1 in keyof T_4]: Parameters<T_4[key_1]>[0]; } : never>, Pick<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_5 ? { [key_1 in keyof T_5]: Parameters<T_5[key_1]>[0]; } : never, ((Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_7 ? { [key_1 in keyof T_7]: Parameters<T_7[key_1]>[0]; } : never) extends infer T_6 ? { [Field_1 in keyof T_6]: undefined extends T_6[Field_1] ? never : Field_1; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>) => Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_8 ? { [key in keyof T_8]: ReturnType<T_8[key]>; } : never>, Pick<Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_9 ? { [key in keyof T_9]: ReturnType<T_9[key]>; } : never, ((Sub & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                        config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                            config: Value;
+                            Value: readonly ReturnType<Value>[];
+                        };
+                        Value: readonly (readonly ReturnType<Value>[])[];
+                    };
+                    fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                };
+                Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+        } extends infer T_11 ? { [key in keyof T_11]: ReturnType<T_11[key]>; } : never) extends infer T_10 ? { [Field in keyof T_10]: undefined extends T_10[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>) & {
+            config: Sub & {
+                '+': ((val: boolean | undefined) => boolean | undefined) & {
+                    config: {
+                        sub: (val: boolean) => boolean;
+                        fallback: (() => boolean) | undefined;
+                    };
+                    Value: boolean | undefined;
+                };
+                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                _num: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined) & {
+                    config: {
+                        sub: ((val: {
+                            '=': readonly (readonly (string | number)[])[];
+                        }) => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) & {
+                            config: {
+                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                        config: ((this: any, input: string | number) => number) & {
+                                            config: {
+                                                funcs: [((val: string | number) => string | number) & {
+                                                    config: [(val: string) => string, typeof $mol_data_integer];
+                                                    Value: string | number;
+                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                            };
+                                            Value: number;
+                                        };
+                                        Value: readonly number[];
+                                    };
+                                    Value: readonly (readonly number[])[];
+                                };
+                            };
+                            Value: Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>;
+                        };
+                        fallback: (() => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) | undefined;
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                };
+                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            };
+            Value: Readonly<$mol_type_merge<$mol_type_override<Partial<Sub & {
+                '+': ((val: boolean | undefined) => boolean | undefined) & {
+                    config: {
+                        sub: (val: boolean) => boolean;
+                        fallback: (() => boolean) | undefined;
+                    };
+                    Value: boolean | undefined;
+                };
+                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                _num: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined) & {
+                    config: {
+                        sub: ((val: {
+                            '=': readonly (readonly (string | number)[])[];
+                        }) => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) & {
+                            config: {
+                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                        config: ((this: any, input: string | number) => number) & {
+                                            config: {
+                                                funcs: [((val: string | number) => string | number) & {
+                                                    config: [(val: string) => string, typeof $mol_data_integer];
+                                                    Value: string | number;
+                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                            };
+                                            Value: number;
+                                        };
+                                        Value: readonly number[];
+                                    };
+                                    Value: readonly (readonly number[])[];
+                                };
+                            };
+                            Value: Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>;
+                        };
+                        fallback: (() => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) | undefined;
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                };
+                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            } extends infer T_4 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_4]: ReturnType<T_4[key]>; } : never>, Pick<Sub & {
+                '+': ((val: boolean | undefined) => boolean | undefined) & {
+                    config: {
+                        sub: (val: boolean) => boolean;
+                        fallback: (() => boolean) | undefined;
+                    };
+                    Value: boolean | undefined;
+                };
+                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                _num: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined) & {
+                    config: {
+                        sub: ((val: {
+                            '=': readonly (readonly (string | number)[])[];
+                        }) => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) & {
+                            config: {
+                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                        config: ((this: any, input: string | number) => number) & {
+                                            config: {
+                                                funcs: [((val: string | number) => string | number) & {
+                                                    config: [(val: string) => string, typeof $mol_data_integer];
+                                                    Value: string | number;
+                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                            };
+                                            Value: number;
+                                        };
+                                        Value: readonly number[];
+                                    };
+                                    Value: readonly (readonly number[])[];
+                                };
+                            };
+                            Value: Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>;
+                        };
+                        fallback: (() => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) | undefined;
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                };
+                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            } extends infer T_5 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_5]: ReturnType<T_5[key]>; } : never, ((Sub & {
+                '+': ((val: boolean | undefined) => boolean | undefined) & {
+                    config: {
+                        sub: (val: boolean) => boolean;
+                        fallback: (() => boolean) | undefined;
+                    };
+                    Value: boolean | undefined;
+                };
+                '=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                '!=': ((val: readonly (readonly Parameters<Value>[0][])[] | undefined) => readonly (readonly ReturnType<Value>[])[] | undefined) & {
+                    config: {
+                        sub: ((val: readonly (readonly Parameters<Value>[0][])[]) => readonly (readonly ReturnType<Value>[])[]) & {
+                            config: ((val: readonly Parameters<Value>[0][]) => readonly ReturnType<Value>[]) & {
+                                config: Value;
+                                Value: readonly ReturnType<Value>[];
+                            };
+                            Value: readonly (readonly ReturnType<Value>[])[];
+                        };
+                        fallback: (() => readonly (readonly ReturnType<Value>[])[]) | undefined;
+                    };
+                    Value: readonly (readonly ReturnType<Value>[])[] | undefined;
+                };
+                _num: ((val: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined) => Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined) & {
+                    config: {
+                        sub: ((val: {
+                            '=': readonly (readonly (string | number)[])[];
+                        }) => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) & {
+                            config: {
+                                '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                    config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                        config: ((this: any, input: string | number) => number) & {
+                                            config: {
+                                                funcs: [((val: string | number) => string | number) & {
+                                                    config: [(val: string) => string, typeof $mol_data_integer];
+                                                    Value: string | number;
+                                                }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                            };
+                                            Value: number;
+                                        };
+                                        Value: readonly number[];
+                                    };
+                                    Value: readonly (readonly number[])[];
+                                };
+                            };
+                            Value: Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>;
+                        };
+                        fallback: (() => Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>) | undefined;
+                    };
+                    Value: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                };
+                _len: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _max: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _min: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+                _sum: $mol_data_value<Readonly<{ [Key in keyof Sub]: Parameters<Sub[Key]>[0]; }> | undefined, Readonly<{ [Key_1 in keyof Sub]: ReturnType<Sub[Key_1]>; }> | undefined>;
+            } extends infer T_7 extends Record<string, $mol_data_value<any, any>> ? { [key in keyof T_7]: ReturnType<T_7[key]>; } : never) extends infer T_6 ? { [Field in keyof T_6]: undefined extends T_6[Field] ? never : Field; } : never)["+" | "=" | "!=" | "_num" | keyof Sub | "_len" | "_max" | "_min" | "_sum"]>>>>;
+        }>[0]): string;
+    };
+}
+
+declare namespace $ {
+    export function $giper_baza_file_mime_safe(type: string): string;
+    export const $giper_baza_file_query: ((val: {
+        '+'?: boolean | undefined;
+        '='?: readonly (readonly number[])[] | undefined;
+        '!='?: readonly (readonly number[])[] | undefined;
+        _num?: {
+            '=': readonly (readonly (string | number)[])[];
+        } | undefined;
+        _len?: Readonly<{
+            BAZA: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+            file: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+        }> | undefined;
+        _max?: Readonly<{
+            BAZA: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+            file: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+        }> | undefined;
+        _min?: Readonly<{
+            BAZA: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+            file: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+        }> | undefined;
+        _sum?: Readonly<{
+            BAZA: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+            file: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+        }> | undefined;
+        BAZA: {
+            '+'?: boolean | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
+            _num?: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined;
+            _len?: Readonly<{}> | undefined;
+            _max?: Readonly<{}> | undefined;
+            _min?: Readonly<{}> | undefined;
+            _sum?: Readonly<{}> | undefined;
+        };
+        file: {
+            '+'?: boolean | undefined;
+            '='?: readonly (readonly string[])[] | undefined;
+            '!='?: readonly (readonly string[])[] | undefined;
+            _num?: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined;
+            _len?: Readonly<{}> | undefined;
+            _max?: Readonly<{}> | undefined;
+            _min?: Readonly<{}> | undefined;
+            _sum?: Readonly<{}> | undefined;
+        };
+    }) => Readonly<{
+        '+'?: boolean | undefined;
+        '='?: readonly (readonly number[])[] | undefined;
+        '!='?: readonly (readonly number[])[] | undefined;
+        _num?: Readonly<{
+            '=': readonly (readonly number[])[];
+        }> | undefined;
+        _len?: Readonly<{
+            BAZA: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+            file: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+        }> | undefined;
+        _max?: Readonly<{
+            BAZA: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+            file: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+        }> | undefined;
+        _min?: Readonly<{
+            BAZA: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+            file: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+        }> | undefined;
+        _sum?: Readonly<{
+            BAZA: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+            file: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+        }> | undefined;
+        BAZA: Readonly<{
+            '+'?: boolean | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
+            _num?: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+            _len?: Readonly<{}> | undefined;
+            _max?: Readonly<{}> | undefined;
+            _min?: Readonly<{}> | undefined;
+            _sum?: Readonly<{}> | undefined;
+        }>;
+        file: Readonly<{
+            '+'?: boolean | undefined;
+            '='?: readonly (readonly string[])[] | undefined;
+            '!='?: readonly (readonly string[])[] | undefined;
+            _num?: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+            _len?: Readonly<{}> | undefined;
+            _max?: Readonly<{}> | undefined;
+            _min?: Readonly<{}> | undefined;
+            _sum?: Readonly<{}> | undefined;
+        }>;
+    }>) & {
+        config: {
+            BAZA: ((val: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }) => Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>) & {
+                config: {
+                    '+': ((val: boolean | undefined) => boolean | undefined) & {
+                        config: {
+                            sub: (val: boolean) => boolean;
+                            fallback: (() => boolean) | undefined;
+                        };
+                        Value: boolean | undefined;
+                    };
+                    '=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
+                        config: {
+                            sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly number[]) => readonly number[]) & {
+                                    config: typeof $mol_data_integer;
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                            fallback: (() => readonly (readonly number[])[]) | undefined;
+                        };
+                        Value: readonly (readonly number[])[] | undefined;
+                    };
+                    '!=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
+                        config: {
+                            sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly number[]) => readonly number[]) & {
+                                    config: typeof $mol_data_integer;
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                            fallback: (() => readonly (readonly number[])[]) | undefined;
+                        };
+                        Value: readonly (readonly number[])[] | undefined;
+                    };
+                    _num: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined) & {
+                        config: {
+                            sub: ((val: {
+                                '=': readonly (readonly (string | number)[])[];
+                            }) => Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>) & {
+                                config: {
+                                    '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                        config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                            config: ((this: any, input: string | number) => number) & {
+                                                config: {
+                                                    funcs: [((val: string | number) => string | number) & {
+                                                        config: [(val: string) => string, typeof $mol_data_integer];
+                                                        Value: string | number;
+                                                    }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                                };
+                                                Value: number;
+                                            };
+                                            Value: readonly number[];
+                                        };
+                                        Value: readonly (readonly number[])[];
+                                    };
+                                };
+                                Value: Readonly<{
+                                    '=': readonly (readonly number[])[];
+                                }>;
+                            };
+                            fallback: (() => Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>) | undefined;
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }> | undefined;
+                    };
+                    _len: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                    _max: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                    _min: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                    _sum: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                };
+                Value: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            } & {
+                parse(str: string): Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                build(query: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }): string;
+            };
+            file: ((val: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }) => Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>) & {
+                config: {
+                    '+': ((val: boolean | undefined) => boolean | undefined) & {
+                        config: {
+                            sub: (val: boolean) => boolean;
+                            fallback: (() => boolean) | undefined;
+                        };
+                        Value: boolean | undefined;
+                    };
+                    '=': ((val: readonly (readonly string[])[] | undefined) => readonly (readonly string[])[] | undefined) & {
+                        config: {
+                            sub: ((val: readonly (readonly string[])[]) => readonly (readonly string[])[]) & {
+                                config: ((val: readonly string[]) => readonly string[]) & {
+                                    config: (val: string) => string;
+                                    Value: readonly string[];
+                                };
+                                Value: readonly (readonly string[])[];
+                            };
+                            fallback: (() => readonly (readonly string[])[]) | undefined;
+                        };
+                        Value: readonly (readonly string[])[] | undefined;
+                    };
+                    '!=': ((val: readonly (readonly string[])[] | undefined) => readonly (readonly string[])[] | undefined) & {
+                        config: {
+                            sub: ((val: readonly (readonly string[])[]) => readonly (readonly string[])[]) & {
+                                config: ((val: readonly string[]) => readonly string[]) & {
+                                    config: (val: string) => string;
+                                    Value: readonly string[];
+                                };
+                                Value: readonly (readonly string[])[];
+                            };
+                            fallback: (() => readonly (readonly string[])[]) | undefined;
+                        };
+                        Value: readonly (readonly string[])[] | undefined;
+                    };
+                    _num: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined) & {
+                        config: {
+                            sub: ((val: {
+                                '=': readonly (readonly (string | number)[])[];
+                            }) => Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>) & {
+                                config: {
+                                    '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                        config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                            config: ((this: any, input: string | number) => number) & {
+                                                config: {
+                                                    funcs: [((val: string | number) => string | number) & {
+                                                        config: [(val: string) => string, typeof $mol_data_integer];
+                                                        Value: string | number;
+                                                    }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                                };
+                                                Value: number;
+                                            };
+                                            Value: readonly number[];
+                                        };
+                                        Value: readonly (readonly number[])[];
+                                    };
+                                };
+                                Value: Readonly<{
+                                    '=': readonly (readonly number[])[];
+                                }>;
+                            };
+                            fallback: (() => Readonly<{
+                                '=': readonly (readonly number[])[];
+                            }>) | undefined;
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }> | undefined;
+                    };
+                    _len: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                    _max: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                    _min: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                    _sum: $mol_data_value<Readonly<{}> | undefined, Readonly<{}> | undefined>;
+                };
+                Value: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            } & {
+                parse(str: string): Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                build(query: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }): string;
+            };
+        } & {
+            '+': ((val: boolean | undefined) => boolean | undefined) & {
+                config: {
+                    sub: (val: boolean) => boolean;
+                    fallback: (() => boolean) | undefined;
+                };
+                Value: boolean | undefined;
+            };
+            '=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
+                        config: ((val: readonly number[]) => readonly number[]) & {
+                            config: typeof $mol_data_integer;
+                            Value: readonly number[];
+                        };
+                        Value: readonly (readonly number[])[];
+                    };
+                    fallback: (() => readonly (readonly number[])[]) | undefined;
+                };
+                Value: readonly (readonly number[])[] | undefined;
+            };
+            '!=': ((val: readonly (readonly number[])[] | undefined) => readonly (readonly number[])[] | undefined) & {
+                config: {
+                    sub: ((val: readonly (readonly number[])[]) => readonly (readonly number[])[]) & {
+                        config: ((val: readonly number[]) => readonly number[]) & {
+                            config: typeof $mol_data_integer;
+                            Value: readonly number[];
+                        };
+                        Value: readonly (readonly number[])[];
+                    };
+                    fallback: (() => readonly (readonly number[])[]) | undefined;
+                };
+                Value: readonly (readonly number[])[] | undefined;
+            };
+            _num: ((val: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined) => Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined) & {
+                config: {
+                    sub: ((val: {
+                        '=': readonly (readonly (string | number)[])[];
+                    }) => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) & {
+                        config: {
+                            '=': ((val: readonly (readonly (string | number)[])[]) => readonly (readonly number[])[]) & {
+                                config: ((val: readonly (string | number)[]) => readonly number[]) & {
+                                    config: ((this: any, input: string | number) => number) & {
+                                        config: {
+                                            funcs: [((val: string | number) => string | number) & {
+                                                config: [(val: string) => string, typeof $mol_data_integer];
+                                                Value: string | number;
+                                            }, NumberConstructor] & [(input: string | number) => any, (input: any) => unknown];
+                                        };
+                                        Value: number;
+                                    };
+                                    Value: readonly number[];
+                                };
+                                Value: readonly (readonly number[])[];
+                            };
+                        };
+                        Value: Readonly<{
+                            '=': readonly (readonly number[])[];
+                        }>;
+                    };
+                    fallback: (() => Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }>) | undefined;
+                };
+                Value: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+            };
+            _len: $mol_data_value<Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined, Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined>;
+            _max: $mol_data_value<Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined, Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined>;
+            _min: $mol_data_value<Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined, Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined>;
+            _sum: $mol_data_value<Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined, Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined>;
+        };
+        Value: Readonly<{
+            '+'?: boolean | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
+            _num?: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+            _len?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            _max?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            _min?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            _sum?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            BAZA: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+            file: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+        }>;
+    } & {
+        parse(str: string): Readonly<{
+            '+'?: boolean | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
+            _num?: Readonly<{
+                '=': readonly (readonly number[])[];
+            }> | undefined;
+            _len?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            _max?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            _min?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            _sum?: Readonly<{
+                BAZA: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+                file: Readonly<{
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: Readonly<{
+                        '=': readonly (readonly number[])[];
+                    }> | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                }>;
+            }> | undefined;
+            BAZA: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+            file: Readonly<{
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: Readonly<{
+                    '=': readonly (readonly number[])[];
+                }> | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            }>;
+        }>;
+        build(query: {
+            '+'?: boolean | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
+            _num?: {
+                '=': readonly (readonly (string | number)[])[];
+            } | undefined;
+            _len?: Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined;
+            _max?: Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined;
+            _min?: Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined;
+            _sum?: Readonly<{
+                BAZA: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly number[])[] | undefined;
+                    '!='?: readonly (readonly number[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+                file: {
+                    '+'?: boolean | undefined;
+                    '='?: readonly (readonly string[])[] | undefined;
+                    '!='?: readonly (readonly string[])[] | undefined;
+                    _num?: {
+                        '=': readonly (readonly (string | number)[])[];
+                    } | undefined;
+                    _len?: Readonly<{}> | undefined;
+                    _max?: Readonly<{}> | undefined;
+                    _min?: Readonly<{}> | undefined;
+                    _sum?: Readonly<{}> | undefined;
+                };
+            }> | undefined;
+            BAZA: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+            file: {
+                '+'?: boolean | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
+                _num?: {
+                    '=': readonly (readonly (string | number)[])[];
+                } | undefined;
+                _len?: Readonly<{}> | undefined;
+                _max?: Readonly<{}> | undefined;
+                _min?: Readonly<{}> | undefined;
+                _sum?: Readonly<{}> | undefined;
+            };
+        }): string;
+    };
+    const $giper_baza_file_base: Omit<typeof $giper_baza_dict, "prototype"> & {
+        new (...args: any[]): $mol_type_override<$giper_baza_dict, {
+            readonly Name: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Type: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Chunks: (auto?: any) => $giper_baza_list_bin | null;
+        }>;
+        path: string;
+    } & {
+        schema: {
+            [x: string]: typeof $giper_baza_pawn;
+        } & {
+            /** File name */
+            readonly Name: typeof $giper_baza_atom_text;
+            /** File Content-Type */
+            readonly Type: typeof $giper_baza_atom_text;
+            /** File content in chunks - list of binaries */
+            readonly Chunks: typeof $giper_baza_list_bin;
+        };
+    };
+    export class $giper_baza_file extends $giper_baza_file_base {
+        /** Persistent URI to file content */
+        uri(): string;
+        /** File name */
+        name(next?: string | null): string;
+        /** Mime type */
+        type(next?: string | null): string;
+        /** Blob, File etc. */
+        blob(next?: $mol_blob): $mol_blob;
+        /** Solid byte buffer. */
+        buffer(next?: Uint8Array<ArrayBuffer>): Uint8Array<ArrayBuffer>;
+        chunks(next?: readonly Uint8Array<ArrayBuffer>[]): Uint8Array<ArrayBuffer>[];
+        str(next?: string, type?: string): string;
+        json(next?: any, type?: string): any;
+    }
+    export {};
+}
+
+declare namespace $ {
+    function $mol_offline(): void;
+}
+
+declare namespace $ {
+    /** Installs service worker proxy, which caches all requests and respond from cache on http errors. */
+    function $mol_offline_web(): void;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    const $bog_nka_product_base: Omit<typeof $giper_baza_dict, "prototype"> & {
+        new (...args: any[]): $mol_type_override<$giper_baza_dict, {
+            readonly Title: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Price: (auto?: any) => $giper_baza_atom_real | null;
+            readonly Description: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Photos: (auto?: any) => {
+                Value: Value;
+                remote_list(next?: readonly $giper_baza_file[] | undefined): readonly $giper_baza_file[];
+                remote_add(item: $giper_baza_file & $giper_baza_pawn): void;
+                make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file;
+                items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
+                items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                cut(vary: $giper_baza_vary_type): void;
+                move(from: number, to: number): void;
+                wipe(seat: number): void;
+                pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                [$mol_dev_format_head](): any[];
+                land(): $giper_baza_land;
+                head(): $giper_baza_link;
+                land_link(): $giper_baza_link;
+                link(): $giper_baza_link;
+                toJSON(): string;
+                cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                units(): $giper_baza_unit_sand[];
+                units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                meta(next?: $giper_baza_link): $giper_baza_link | null;
+                meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                filled(): boolean;
+                can_change(): boolean;
+                last_change(): $mol_time_moment | null;
+                authors(): $giper_baza_auth_pass[];
+                get $(): $;
+                set $(next: $);
+                destructor(): void;
+                toString(): string;
+                [Symbol.toStringTag]: string;
+                [$mol_ambient_ref]: $;
+                [Symbol.dispose](): void;
+            } | null;
+            readonly Category: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Available: (auto?: any) => $giper_baza_atom_bool | null;
+        }>;
+        path: string;
+    } & {
+        schema: {
+            [x: string]: typeof $giper_baza_pawn;
+        } & {
+            readonly Title: typeof $giper_baza_atom_text;
+            readonly Price: typeof $giper_baza_atom_real;
+            readonly Description: typeof $giper_baza_atom_text;
+            readonly Photos: {
+                new (): {
+                    Value: () => typeof $giper_baza_file;
+                    remote_list(next?: readonly $giper_baza_file[] | undefined): readonly $giper_baza_file[];
+                    remote_add(item: $giper_baza_file & $giper_baza_pawn): void;
+                    make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file;
+                    items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
+                    items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                    splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                    find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                    has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                    add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                    cut(vary: $giper_baza_vary_type): void;
+                    move(from: number, to: number): void;
+                    wipe(seat: number): void;
+                    pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                    [$mol_dev_format_head](): any[];
+                    land(): $giper_baza_land;
+                    head(): $giper_baza_link;
+                    land_link(): $giper_baza_link;
+                    link(): $giper_baza_link;
+                    toJSON(): string;
+                    cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                    pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                    units(): $giper_baza_unit_sand[];
+                    units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                    meta(next?: $giper_baza_link): $giper_baza_link | null;
+                    meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                    filled(): boolean;
+                    can_change(): boolean;
+                    last_change(): $mol_time_moment | null;
+                    authors(): $giper_baza_auth_pass[];
+                    get $(): $;
+                    set $(next: $);
+                    destructor(): void;
+                    toString(): string;
+                    [Symbol.toStringTag]: string;
+                    [$mol_ambient_ref]: $;
+                    [Symbol.dispose](): void;
+                };
+                toString(): any;
+                to<const Value extends unknown>(Value: Value): {
+                    new (): {
+                        Value: Value;
+                        remote_list(next?: readonly $mol_type_result<$mol_type_result<Value>>[] | undefined): readonly $mol_type_result<$mol_type_result<Value>>[];
+                        remote_add(item: $mol_type_result<$mol_type_result<Value>> & $giper_baza_pawn): void;
+                        make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>>;
+                        items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
+                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        cut(vary: $giper_baza_vary_type): void;
+                        move(from: number, to: number): void;
+                        wipe(seat: number): void;
+                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                        [$mol_dev_format_head](): any[];
+                        land(): $giper_baza_land;
+                        head(): $giper_baza_link;
+                        land_link(): $giper_baza_link;
+                        link(): $giper_baza_link;
+                        toJSON(): string;
+                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                        units(): $giper_baza_unit_sand[];
+                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                        meta(next?: $giper_baza_link): $giper_baza_link | null;
+                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                        filled(): boolean;
+                        can_change(): boolean;
+                        last_change(): $mol_time_moment | null;
+                        authors(): $giper_baza_auth_pass[];
+                        get $(): $;
+                        set $(next: $);
+                        destructor(): void;
+                        toString(): string;
+                        [Symbol.toStringTag]: string;
+                        [$mol_ambient_ref]: $;
+                        [Symbol.dispose](): void;
+                    };
+                    toString(): any;
+                    to<const Value extends unknown>(Value: Value): /*elided*/ any;
+                    Item: {
+                        new (value?: any): {
+                            constructor: Function;
+                            toString(): string;
+                            toLocaleString(): string;
+                            valueOf(): Object;
+                            hasOwnProperty(v: PropertyKey): boolean;
+                            isPrototypeOf(v: Object): boolean;
+                            propertyIsEnumerable(v: PropertyKey): boolean;
+                        };
+                        Class: typeof $giper_baza_link;
+                        toString(): string;
+                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                        default: $giper_baza_link;
+                        check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                        [Symbol.toStringTag]: string;
+                        [$mol_key_handle](): string;
+                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                        getPrototypeOf(o: any): any;
+                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                        getOwnPropertyNames(o: any): string[];
+                        create(o: object | null): any;
+                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                        seal<T>(o: T): T;
+                        freeze<T extends Function>(f: T): T;
+                        freeze<T extends {
+                            [idx: string]: U | null | undefined | object;
+                        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                        freeze<T>(o: T): Readonly<T>;
+                        preventExtensions<T>(o: T): T;
+                        isSealed(o: any): boolean;
+                        isFrozen(o: any): boolean;
+                        isExtensible(o: any): boolean;
+                        keys(o: object): string[];
+                        keys(o: {}): string[];
+                        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+                        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+                        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+                        assign(target: object, ...sources: any[]): any;
+                        getOwnPropertySymbols(o: any): symbol[];
+                        is(value1: any, value2: any): boolean;
+                        setPrototypeOf(o: any, proto: object | null): any;
+                        values<T>(o: {
+                            [s: string]: T;
+                        } | ArrayLike<T>): T[];
+                        values(o: {}): any[];
+                        entries<T>(o: {
+                            [s: string]: T;
+                        } | ArrayLike<T>): [string, T][];
+                        entries(o: {}): [string, any][];
+                        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                            [x: string]: PropertyDescriptor;
+                        };
+                        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                            [k: string]: T;
+                        };
+                        fromEntries(entries: Iterable<readonly any[]>): any;
+                        hasOwn(o: object, v: PropertyKey): boolean;
+                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                    };
+                    tag: keyof typeof $giper_baza_unit_sand_tag;
+                    of<Init extends new (...args: any[]) => any>(init: Init): {
+                        new (): {
+                            items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"][];
+                            items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                            splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                            find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                            has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                            add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                            cut(vary: $giper_baza_vary_type): void;
+                            move(from: number, to: number): void;
+                            wipe(seat: number): void;
+                            pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                            [$mol_dev_format_head](): any[];
+                            land(): $giper_baza_land;
+                            head(): $giper_baza_link;
+                            land_link(): $giper_baza_link;
+                            link(): $giper_baza_link;
+                            toJSON(): string;
+                            cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                            pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                            units(): $giper_baza_unit_sand[];
+                            units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                            meta(next?: $giper_baza_link): $giper_baza_link | null;
+                            meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                            filled(): boolean;
+                            can_change(): boolean;
+                            last_change(): $mol_time_moment | null;
+                            authors(): $giper_baza_auth_pass[];
+                            get $(): $;
+                            set $(next: $);
+                            destructor(): void;
+                            toString(): string;
+                            [Symbol.toStringTag]: string;
+                            [$mol_ambient_ref]: $;
+                            [Symbol.dispose](): void;
+                        };
+                        Item: Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        };
+                        toString(): any;
+                        tag: keyof typeof $giper_baza_unit_sand_tag;
+                        of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
+                        meta: null | $giper_baza_link;
+                        make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                        $: $;
+                        create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                        toJSON(): any;
+                        destructor(): void;
+                        [Symbol.toPrimitive](): any;
+                        [$mol_key_handle](): any;
+                    };
+                    meta: null | $giper_baza_link;
+                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                    $: $;
+                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                    toJSON(): any;
+                    destructor(): void;
+                    [Symbol.toPrimitive](): any;
+                    [$mol_key_handle](): any;
+                };
+                Item: {
+                    new (value?: any): {
+                        constructor: Function;
+                        toString(): string;
+                        toLocaleString(): string;
+                        valueOf(): Object;
+                        hasOwnProperty(v: PropertyKey): boolean;
+                        isPrototypeOf(v: Object): boolean;
+                        propertyIsEnumerable(v: PropertyKey): boolean;
+                    };
+                    Class: typeof $giper_baza_link;
+                    toString(): string;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                    default: $giper_baza_link;
+                    check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                    [Symbol.toStringTag]: string;
+                    [$mol_key_handle](): string;
+                    [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                    getPrototypeOf(o: any): any;
+                    getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                    getOwnPropertyNames(o: any): string[];
+                    create(o: object | null): any;
+                    create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                    defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                    defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                    seal<T>(o: T): T;
+                    freeze<T extends Function>(f: T): T;
+                    freeze<T extends {
+                        [idx: string]: U | null | undefined | object;
+                    }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                    freeze<T>(o: T): Readonly<T>;
+                    preventExtensions<T>(o: T): T;
+                    isSealed(o: any): boolean;
+                    isFrozen(o: any): boolean;
+                    isExtensible(o: any): boolean;
+                    keys(o: object): string[];
+                    keys(o: {}): string[];
+                    assign<T extends {}, U>(target: T, source: U): T & U;
+                    assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
+                    assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+                    assign(target: object, ...sources: any[]): any;
+                    getOwnPropertySymbols(o: any): symbol[];
+                    is(value1: any, value2: any): boolean;
+                    setPrototypeOf(o: any, proto: object | null): any;
+                    values<T>(o: {
+                        [s: string]: T;
+                    } | ArrayLike<T>): T[];
+                    values(o: {}): any[];
+                    entries<T>(o: {
+                        [s: string]: T;
+                    } | ArrayLike<T>): [string, T][];
+                    entries(o: {}): [string, any][];
+                    getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                        [x: string]: PropertyDescriptor;
+                    };
+                    fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                        [k: string]: T;
+                    };
+                    fromEntries(entries: Iterable<readonly any[]>): any;
+                    hasOwn(o: object, v: PropertyKey): boolean;
+                    groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                };
+                tag: keyof typeof $giper_baza_unit_sand_tag;
+                of<Init extends new (...args: any[]) => any>(init: Init): {
+                    new (): {
+                        items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                            seal<T>(o: T): T;
+                            freeze<T extends Function>(f: T): T;
+                            freeze<T extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                            freeze<T>(o: T): Readonly<T>;
+                            preventExtensions<T>(o: T): T;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): T[];
+                            values(o: {}): any[];
+                            entries<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): [string, T][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                                [k: string]: T;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"][];
+                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        cut(vary: $giper_baza_vary_type): void;
+                        move(from: number, to: number): void;
+                        wipe(seat: number): void;
+                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                        [$mol_dev_format_head](): any[];
+                        land(): $giper_baza_land;
+                        head(): $giper_baza_link;
+                        land_link(): $giper_baza_link;
+                        link(): $giper_baza_link;
+                        toJSON(): string;
+                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                        units(): $giper_baza_unit_sand[];
+                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                        meta(next?: $giper_baza_link): $giper_baza_link | null;
+                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                        filled(): boolean;
+                        can_change(): boolean;
+                        last_change(): $mol_time_moment | null;
+                        authors(): $giper_baza_auth_pass[];
+                        get $(): $;
+                        set $(next: $);
+                        destructor(): void;
+                        toString(): string;
+                        [Symbol.toStringTag]: string;
+                        [$mol_ambient_ref]: $;
+                        [Symbol.dispose](): void;
+                    };
+                    Item: Init extends typeof $mol_schema_any ? Init : {
+                        new (value?: any): {
+                            constructor: Function;
+                            toString(): string;
+                            toLocaleString(): string;
+                            valueOf(): Object;
+                            hasOwnProperty(v: PropertyKey): boolean;
+                            isPrototypeOf(v: Object): boolean;
+                            propertyIsEnumerable(v: PropertyKey): boolean;
+                        };
+                        Class: Init;
+                        toString(): string;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                        default: InstanceType<Init>;
+                        check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                        [Symbol.toStringTag]: string;
+                        [$mol_key_handle](): string;
+                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                        getPrototypeOf(o: any): any;
+                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                        getOwnPropertyNames(o: any): string[];
+                        create(o: object | null): any;
+                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                        seal<T_1>(o: T_1): T_1;
+                        freeze<T_1 extends Function>(f: T_1): T_1;
+                        freeze<T_1 extends {
+                            [idx: string]: U | null | undefined | object;
+                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                        freeze<T_1>(o: T_1): Readonly<T_1>;
+                        preventExtensions<T_1>(o: T_1): T_1;
+                        isSealed(o: any): boolean;
+                        isFrozen(o: any): boolean;
+                        isExtensible(o: any): boolean;
+                        keys(o: object): string[];
+                        keys(o: {}): string[];
+                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                        assign(target: object, ...sources: any[]): any;
+                        getOwnPropertySymbols(o: any): symbol[];
+                        is(value1: any, value2: any): boolean;
+                        setPrototypeOf(o: any, proto: object | null): any;
+                        values<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): T_1[];
+                        values(o: {}): any[];
+                        entries<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): [string, T_1][];
+                        entries(o: {}): [string, any][];
+                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                            [x: string]: PropertyDescriptor;
+                        };
+                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                            [k: string]: T_1;
+                        };
+                        fromEntries(entries: Iterable<readonly any[]>): any;
+                        hasOwn(o: object, v: PropertyKey): boolean;
+                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                    };
+                    toString(): any;
+                    tag: keyof typeof $giper_baza_unit_sand_tag;
+                    of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
+                    meta: null | $giper_baza_link;
+                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                    $: $;
+                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                    toJSON(): any;
+                    destructor(): void;
+                    [Symbol.toPrimitive](): any;
+                    [$mol_key_handle](): any;
+                };
+                meta: null | $giper_baza_link;
+                make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                $: $;
+                create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                toJSON(): any;
+                destructor(): void;
+                [Symbol.toPrimitive](): any;
+                [$mol_key_handle](): any;
+            };
+            readonly Category: typeof $giper_baza_atom_text;
+            readonly Available: typeof $giper_baza_atom_bool;
+        };
+    };
+    export class $bog_nka_product extends $bog_nka_product_base {
+    }
+    export {};
+}
+
+declare namespace $ {
+    const $bog_nka_catalog_base: Omit<typeof $giper_baza_dict, "prototype"> & {
+        new (...args: any[]): $mol_type_override<$giper_baza_dict, {
+            readonly Products: (auto?: any) => {
+                Value: Value;
+                remote_list(next?: readonly $bog_nka_product[] | undefined): readonly $bog_nka_product[];
+                remote_add(item: $bog_nka_product & $giper_baza_pawn): void;
+                make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $bog_nka_product;
+                items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
+                items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                cut(vary: $giper_baza_vary_type): void;
+                move(from: number, to: number): void;
+                wipe(seat: number): void;
+                pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                [$mol_dev_format_head](): any[];
+                land(): $giper_baza_land;
+                head(): $giper_baza_link;
+                land_link(): $giper_baza_link;
+                link(): $giper_baza_link;
+                toJSON(): string;
+                cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                units(): $giper_baza_unit_sand[];
+                units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                meta(next?: $giper_baza_link): $giper_baza_link | null;
+                meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                filled(): boolean;
+                can_change(): boolean;
+                last_change(): $mol_time_moment | null;
+                authors(): $giper_baza_auth_pass[];
+                get $(): $;
+                set $(next: $);
+                destructor(): void;
+                toString(): string;
+                [Symbol.toStringTag]: string;
+                [$mol_ambient_ref]: $;
+                [Symbol.dispose](): void;
+            } | null;
+            readonly Categories: (auto?: any) => $giper_baza_list_str | null;
+            readonly Telegram: (auto?: any) => $giper_baza_atom_text | null;
+            readonly TelegramText: (auto?: any) => $giper_baza_atom_text | null;
+            readonly SoldOutImage: (auto?: any) => {
+                Value: Value;
+                remote(next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
+                remote_of(peer: $giper_baza_link | null, next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
+                ensure(config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
+                ensure_of(peer: $giper_baza_link | null, config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
+                ensure_here(peer: $giper_baza_link | null): void;
+                ensure_area(peer: $giper_baza_link | null, land: $giper_baza_land): void;
+                ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
+                remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_file | null;
+                local_ensure(): $giper_baza_file | null;
+                val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
+                vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
+                [$mol_dev_format_head](): any[];
+                land(): $giper_baza_land;
+                head(): $giper_baza_link;
+                land_link(): $giper_baza_link;
+                link(): $giper_baza_link;
+                toJSON(): string;
+                cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                units(): $giper_baza_unit_sand[];
+                units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                meta(next?: $giper_baza_link): $giper_baza_link | null;
+                meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                filled(): boolean;
+                can_change(): boolean;
+                last_change(): $mol_time_moment | null;
+                authors(): $giper_baza_auth_pass[];
+                get $(): $;
+                set $(next: $);
+                destructor(): void;
+                toString(): string;
+                [Symbol.toStringTag]: string;
+                [$mol_ambient_ref]: $;
+                [Symbol.dispose](): void;
+            } | null;
+        }>;
+        path: string;
+    } & {
+        schema: {
+            [x: string]: typeof $giper_baza_pawn;
+        } & {
+            readonly Products: {
+                new (): {
+                    Value: () => typeof $bog_nka_product;
+                    remote_list(next?: readonly $bog_nka_product[] | undefined): readonly $bog_nka_product[];
+                    remote_add(item: $bog_nka_product & $giper_baza_pawn): void;
+                    make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $bog_nka_product;
+                    items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
+                    items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                    splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                    find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                    has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                    add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                    cut(vary: $giper_baza_vary_type): void;
+                    move(from: number, to: number): void;
+                    wipe(seat: number): void;
+                    pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                    [$mol_dev_format_head](): any[];
+                    land(): $giper_baza_land;
+                    head(): $giper_baza_link;
+                    land_link(): $giper_baza_link;
+                    link(): $giper_baza_link;
+                    toJSON(): string;
+                    cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                    pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                    units(): $giper_baza_unit_sand[];
+                    units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                    meta(next?: $giper_baza_link): $giper_baza_link | null;
+                    meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                    filled(): boolean;
+                    can_change(): boolean;
+                    last_change(): $mol_time_moment | null;
+                    authors(): $giper_baza_auth_pass[];
+                    get $(): $;
+                    set $(next: $);
+                    destructor(): void;
+                    toString(): string;
+                    [Symbol.toStringTag]: string;
+                    [$mol_ambient_ref]: $;
+                    [Symbol.dispose](): void;
+                };
+                toString(): any;
+                to<const Value extends unknown>(Value: Value): {
+                    new (): {
+                        Value: Value;
+                        remote_list(next?: readonly $mol_type_result<$mol_type_result<Value>>[] | undefined): readonly $mol_type_result<$mol_type_result<Value>>[];
+                        remote_add(item: $mol_type_result<$mol_type_result<Value>> & $giper_baza_pawn): void;
+                        make(config: null | number | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>>;
+                        items(next?: readonly $giper_baza_link[] | undefined): readonly $giper_baza_link[];
+                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        cut(vary: $giper_baza_vary_type): void;
+                        move(from: number, to: number): void;
+                        wipe(seat: number): void;
+                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                        [$mol_dev_format_head](): any[];
+                        land(): $giper_baza_land;
+                        head(): $giper_baza_link;
+                        land_link(): $giper_baza_link;
+                        link(): $giper_baza_link;
+                        toJSON(): string;
+                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                        units(): $giper_baza_unit_sand[];
+                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                        meta(next?: $giper_baza_link): $giper_baza_link | null;
+                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                        filled(): boolean;
+                        can_change(): boolean;
+                        last_change(): $mol_time_moment | null;
+                        authors(): $giper_baza_auth_pass[];
+                        get $(): $;
+                        set $(next: $);
+                        destructor(): void;
+                        toString(): string;
+                        [Symbol.toStringTag]: string;
+                        [$mol_ambient_ref]: $;
+                        [Symbol.dispose](): void;
+                    };
+                    toString(): any;
+                    to<const Value extends unknown>(Value: Value): /*elided*/ any;
+                    Item: {
+                        new (value?: any): {
+                            constructor: Function;
+                            toString(): string;
+                            toLocaleString(): string;
+                            valueOf(): Object;
+                            hasOwnProperty(v: PropertyKey): boolean;
+                            isPrototypeOf(v: Object): boolean;
+                            propertyIsEnumerable(v: PropertyKey): boolean;
+                        };
+                        Class: typeof $giper_baza_link;
+                        toString(): string;
+                        guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                        default: $giper_baza_link;
+                        check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                        [Symbol.toStringTag]: string;
+                        [$mol_key_handle](): string;
+                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                        getPrototypeOf(o: any): any;
+                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                        getOwnPropertyNames(o: any): string[];
+                        create(o: object | null): any;
+                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                        seal<T>(o: T): T;
+                        freeze<T extends Function>(f: T): T;
+                        freeze<T extends {
+                            [idx: string]: U | null | undefined | object;
+                        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                        freeze<T>(o: T): Readonly<T>;
+                        preventExtensions<T>(o: T): T;
+                        isSealed(o: any): boolean;
+                        isFrozen(o: any): boolean;
+                        isExtensible(o: any): boolean;
+                        keys(o: object): string[];
+                        keys(o: {}): string[];
+                        assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+                        assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+                        assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+                        assign(target: object, ...sources: any[]): any;
+                        getOwnPropertySymbols(o: any): symbol[];
+                        is(value1: any, value2: any): boolean;
+                        setPrototypeOf(o: any, proto: object | null): any;
+                        values<T>(o: {
+                            [s: string]: T;
+                        } | ArrayLike<T>): T[];
+                        values(o: {}): any[];
+                        entries<T>(o: {
+                            [s: string]: T;
+                        } | ArrayLike<T>): [string, T][];
+                        entries(o: {}): [string, any][];
+                        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                            [x: string]: PropertyDescriptor;
+                        };
+                        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                            [k: string]: T;
+                        };
+                        fromEntries(entries: Iterable<readonly any[]>): any;
+                        hasOwn(o: object, v: PropertyKey): boolean;
+                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                    };
+                    tag: keyof typeof $giper_baza_unit_sand_tag;
+                    of<Init extends new (...args: any[]) => any>(init: Init): {
+                        new (): {
+                            items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"][];
+                            items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                            splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                            find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                            has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                            add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                            cut(vary: $giper_baza_vary_type): void;
+                            move(from: number, to: number): void;
+                            wipe(seat: number): void;
+                            pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                            [$mol_dev_format_head](): any[];
+                            land(): $giper_baza_land;
+                            head(): $giper_baza_link;
+                            land_link(): $giper_baza_link;
+                            link(): $giper_baza_link;
+                            toJSON(): string;
+                            cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                            pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                            units(): $giper_baza_unit_sand[];
+                            units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                            meta(next?: $giper_baza_link): $giper_baza_link | null;
+                            meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                            filled(): boolean;
+                            can_change(): boolean;
+                            last_change(): $mol_time_moment | null;
+                            authors(): $giper_baza_auth_pass[];
+                            get $(): $;
+                            set $(next: $);
+                            destructor(): void;
+                            toString(): string;
+                            [Symbol.toStringTag]: string;
+                            [$mol_ambient_ref]: $;
+                            [Symbol.dispose](): void;
+                        };
+                        Item: Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        };
+                        toString(): any;
+                        tag: keyof typeof $giper_baza_unit_sand_tag;
+                        of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
+                        meta: null | $giper_baza_link;
+                        make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                        $: $;
+                        create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                        toJSON(): any;
+                        destructor(): void;
+                        [Symbol.toPrimitive](): any;
+                        [$mol_key_handle](): any;
+                    };
+                    meta: null | $giper_baza_link;
+                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                    $: $;
+                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                    toJSON(): any;
+                    destructor(): void;
+                    [Symbol.toPrimitive](): any;
+                    [$mol_key_handle](): any;
+                };
+                Item: {
+                    new (value?: any): {
+                        constructor: Function;
+                        toString(): string;
+                        toLocaleString(): string;
+                        valueOf(): Object;
+                        hasOwnProperty(v: PropertyKey): boolean;
+                        isPrototypeOf(v: Object): boolean;
+                        propertyIsEnumerable(v: PropertyKey): boolean;
+                    };
+                    Class: typeof $giper_baza_link;
+                    toString(): string;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                    default: $giper_baza_link;
+                    check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                    [Symbol.toStringTag]: string;
+                    [$mol_key_handle](): string;
+                    [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                    getPrototypeOf(o: any): any;
+                    getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                    getOwnPropertyNames(o: any): string[];
+                    create(o: object | null): any;
+                    create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                    defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                    defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                    seal<T>(o: T): T;
+                    freeze<T extends Function>(f: T): T;
+                    freeze<T extends {
+                        [idx: string]: U | null | undefined | object;
+                    }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                    freeze<T>(o: T): Readonly<T>;
+                    preventExtensions<T>(o: T): T;
+                    isSealed(o: any): boolean;
+                    isFrozen(o: any): boolean;
+                    isExtensible(o: any): boolean;
+                    keys(o: object): string[];
+                    keys(o: {}): string[];
+                    assign<T extends {}, U>(target: T, source: U): T & U;
+                    assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
+                    assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+                    assign(target: object, ...sources: any[]): any;
+                    getOwnPropertySymbols(o: any): symbol[];
+                    is(value1: any, value2: any): boolean;
+                    setPrototypeOf(o: any, proto: object | null): any;
+                    values<T>(o: {
+                        [s: string]: T;
+                    } | ArrayLike<T>): T[];
+                    values(o: {}): any[];
+                    entries<T>(o: {
+                        [s: string]: T;
+                    } | ArrayLike<T>): [string, T][];
+                    entries(o: {}): [string, any][];
+                    getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                        [x: string]: PropertyDescriptor;
+                    };
+                    fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                        [k: string]: T;
+                    };
+                    fromEntries(entries: Iterable<readonly any[]>): any;
+                    hasOwn(o: object, v: PropertyKey): boolean;
+                    groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                };
+                tag: keyof typeof $giper_baza_unit_sand_tag;
+                of<Init extends new (...args: any[]) => any>(init: Init): {
+                    new (): {
+                        items(next?: readonly (Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                            seal<T>(o: T): T;
+                            freeze<T extends Function>(f: T): T;
+                            freeze<T extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                            freeze<T>(o: T): Readonly<T>;
+                            preventExtensions<T>(o: T): T;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): T[];
+                            values(o: {}): any[];
+                            entries<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): [string, T][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                                [k: string]: T;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"][]): readonly (Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"][];
+                        items_vary(next?: readonly $giper_baza_vary_type[], tag?: keyof typeof $giper_baza_unit_sand_tag): readonly $giper_baza_vary_type[];
+                        splice(next: readonly $giper_baza_vary_type[], from?: number, to?: number, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        find(vary: $giper_baza_vary_type): $giper_baza_unit_sand | null;
+                        has(vary: $giper_baza_vary_type, next?: boolean, tag?: keyof typeof $giper_baza_unit_sand_tag): boolean;
+                        add(vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): void;
+                        cut(vary: $giper_baza_vary_type): void;
+                        move(from: number, to: number): void;
+                        wipe(seat: number): void;
+                        pawn_make<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1, vary: $giper_baza_vary_type, tag?: keyof typeof $giper_baza_unit_sand_tag): InstanceType<Pawn_1>;
+                        [$mol_dev_format_head](): any[];
+                        land(): $giper_baza_land;
+                        head(): $giper_baza_link;
+                        land_link(): $giper_baza_link;
+                        link(): $giper_baza_link;
+                        toJSON(): string;
+                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                        units(): $giper_baza_unit_sand[];
+                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                        meta(next?: $giper_baza_link): $giper_baza_link | null;
+                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                        filled(): boolean;
+                        can_change(): boolean;
+                        last_change(): $mol_time_moment | null;
+                        authors(): $giper_baza_auth_pass[];
+                        get $(): $;
+                        set $(next: $);
+                        destructor(): void;
+                        toString(): string;
+                        [Symbol.toStringTag]: string;
+                        [$mol_ambient_ref]: $;
+                        [Symbol.dispose](): void;
+                    };
+                    Item: Init extends typeof $mol_schema_any ? Init : {
+                        new (value?: any): {
+                            constructor: Function;
+                            toString(): string;
+                            toLocaleString(): string;
+                            valueOf(): Object;
+                            hasOwnProperty(v: PropertyKey): boolean;
+                            isPrototypeOf(v: Object): boolean;
+                            propertyIsEnumerable(v: PropertyKey): boolean;
+                        };
+                        Class: Init;
+                        toString(): string;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                        default: InstanceType<Init>;
+                        check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                        [Symbol.toStringTag]: string;
+                        [$mol_key_handle](): string;
+                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                        getPrototypeOf(o: any): any;
+                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                        getOwnPropertyNames(o: any): string[];
+                        create(o: object | null): any;
+                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                        seal<T_1>(o: T_1): T_1;
+                        freeze<T_1 extends Function>(f: T_1): T_1;
+                        freeze<T_1 extends {
+                            [idx: string]: U | null | undefined | object;
+                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                        freeze<T_1>(o: T_1): Readonly<T_1>;
+                        preventExtensions<T_1>(o: T_1): T_1;
+                        isSealed(o: any): boolean;
+                        isFrozen(o: any): boolean;
+                        isExtensible(o: any): boolean;
+                        keys(o: object): string[];
+                        keys(o: {}): string[];
+                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                        assign(target: object, ...sources: any[]): any;
+                        getOwnPropertySymbols(o: any): symbol[];
+                        is(value1: any, value2: any): boolean;
+                        setPrototypeOf(o: any, proto: object | null): any;
+                        values<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): T_1[];
+                        values(o: {}): any[];
+                        entries<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): [string, T_1][];
+                        entries(o: {}): [string, any][];
+                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                            [x: string]: PropertyDescriptor;
+                        };
+                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                            [k: string]: T_1;
+                        };
+                        fromEntries(entries: Iterable<readonly any[]>): any;
+                        hasOwn(o: object, v: PropertyKey): boolean;
+                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                    };
+                    toString(): any;
+                    tag: keyof typeof $giper_baza_unit_sand_tag;
+                    of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
+                    meta: null | $giper_baza_link;
+                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                    $: $;
+                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                    toJSON(): any;
+                    destructor(): void;
+                    [Symbol.toPrimitive](): any;
+                    [$mol_key_handle](): any;
+                };
+                meta: null | $giper_baza_link;
+                make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                $: $;
+                create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                toJSON(): any;
+                destructor(): void;
+                [Symbol.toPrimitive](): any;
+                [$mol_key_handle](): any;
+            };
+            readonly Categories: typeof $giper_baza_list_str;
+            readonly Telegram: typeof $giper_baza_atom_text;
+            readonly TelegramText: typeof $giper_baza_atom_text;
+            readonly SoldOutImage: {
+                new (): {
+                    Value: () => typeof $giper_baza_file;
+                    remote(next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
+                    remote_of(peer: $giper_baza_link | null, next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
+                    ensure(config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
+                    ensure_of(peer: $giper_baza_link | null, config?: null | $giper_baza_rank_preset | $giper_baza_land): $giper_baza_file | null;
+                    ensure_here(peer: $giper_baza_link | null): void;
+                    ensure_area(peer: $giper_baza_link | null, land: $giper_baza_land): void;
+                    ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
+                    remote_ensure(preset?: $giper_baza_rank_preset): $giper_baza_file | null;
+                    local_ensure(): $giper_baza_file | null;
+                    val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                    pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
+                    vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                    vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                    selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
+                    [$mol_dev_format_head](): any[];
+                    land(): $giper_baza_land;
+                    head(): $giper_baza_link;
+                    land_link(): $giper_baza_link;
+                    link(): $giper_baza_link;
+                    toJSON(): string;
+                    cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                    pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                    units(): $giper_baza_unit_sand[];
+                    units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                    meta(next?: $giper_baza_link): $giper_baza_link | null;
+                    meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                    filled(): boolean;
+                    can_change(): boolean;
+                    last_change(): $mol_time_moment | null;
+                    authors(): $giper_baza_auth_pass[];
+                    get $(): $;
+                    set $(next: $);
+                    destructor(): void;
+                    toString(): string;
+                    [Symbol.toStringTag]: string;
+                    [$mol_ambient_ref]: $;
+                    [Symbol.dispose](): void;
+                };
+                toString(): any;
+                to<const Value extends unknown>(Value: Value): {
+                    new (): {
+                        Value: Value;
+                        remote(next?: $mol_type_result<$mol_type_result<Value>> | null | undefined): $mol_type_result<$mol_type_result<Value>> | null;
+                        remote_of(peer: $giper_baza_link | null, next?: $mol_type_result<$mol_type_result<Value>> | null | undefined): $mol_type_result<$mol_type_result<Value>> | null;
+                        ensure(config?: null | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>> | null;
+                        ensure_of(peer: $giper_baza_link | null, config?: null | $giper_baza_rank_preset | $giper_baza_land): $mol_type_result<$mol_type_result<Value>> | null;
+                        ensure_here(peer: $giper_baza_link | null): void;
+                        ensure_area(peer: $giper_baza_link | null, land: $giper_baza_land): void;
+                        ensure_lord(peer: $giper_baza_link | null, preset: $giper_baza_rank_preset): void;
+                        remote_ensure(preset?: $giper_baza_rank_preset): $mol_type_result<$mol_type_result<Value>> | null;
+                        local_ensure(): $mol_type_result<$mol_type_result<Value>> | null;
+                        val(next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        val_of(peer: $giper_baza_link | null, next?: $giper_baza_link | null | undefined): $giper_baza_link | null;
+                        pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
+                        vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                        vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                        selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
+                        [$mol_dev_format_head](): any[];
+                        land(): $giper_baza_land;
+                        head(): $giper_baza_link;
+                        land_link(): $giper_baza_link;
+                        link(): $giper_baza_link;
+                        toJSON(): string;
+                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                        units(): $giper_baza_unit_sand[];
+                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                        meta(next?: $giper_baza_link): $giper_baza_link | null;
+                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                        filled(): boolean;
+                        can_change(): boolean;
+                        last_change(): $mol_time_moment | null;
+                        authors(): $giper_baza_auth_pass[];
+                        get $(): $;
+                        set $(next: $);
+                        destructor(): void;
+                        toString(): string;
+                        [Symbol.toStringTag]: string;
+                        [$mol_ambient_ref]: $;
+                        [Symbol.dispose](): void;
+                    };
+                    toString(): any;
+                    to<const Value extends unknown>(Value: Value): /*elided*/ any;
+                    Schema: {
+                        new (value?: any): {
+                            constructor: Function;
+                            toString(): string;
+                            toLocaleString(): string;
+                            valueOf(): Object;
+                            hasOwnProperty(v: PropertyKey): boolean;
+                            isPrototypeOf(v: Object): boolean;
+                            propertyIsEnumerable(v: PropertyKey): boolean;
+                        };
+                        Some: {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: typeof $giper_baza_link;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: $giper_baza_link;
+                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                            seal<T>(o: T): T;
+                            freeze<T extends Function>(f: T): T;
+                            freeze<T extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                            freeze<T>(o: T): Readonly<T>;
+                            preventExtensions<T>(o: T): T;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): T[];
+                            values(o: {}): any[];
+                            entries<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): [string, T][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                                [k: string]: T;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        };
+                        toString(): string;
+                        guard<This extends typeof $mol_schema_any, Value_4>(this: This, value: Value_4): Value_4 & This["default"];
+                        default: $giper_baza_link | null;
+                        check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                        [Symbol.toStringTag]: string;
+                        [$mol_key_handle](): string;
+                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                        getPrototypeOf(o: any): any;
+                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                        getOwnPropertyNames(o: any): string[];
+                        create(o: object | null): any;
+                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                        seal<T_1>(o: T_1): T_1;
+                        freeze<T_1 extends Function>(f: T_1): T_1;
+                        freeze<T_1 extends {
+                            [idx: string]: U | null | undefined | object;
+                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                        freeze<T_1>(o: T_1): Readonly<T_1>;
+                        preventExtensions<T_1>(o: T_1): T_1;
+                        isSealed(o: any): boolean;
+                        isFrozen(o: any): boolean;
+                        isExtensible(o: any): boolean;
+                        keys(o: object): string[];
+                        keys(o: {}): string[];
+                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                        assign(target: object, ...sources: any[]): any;
+                        getOwnPropertySymbols(o: any): symbol[];
+                        is(value1: any, value2: any): boolean;
+                        setPrototypeOf(o: any, proto: object | null): any;
+                        values<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): T_1[];
+                        values(o: {}): any[];
+                        entries<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): [string, T_1][];
+                        entries(o: {}): [string, any][];
+                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                            [x: string]: PropertyDescriptor;
+                        };
+                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                            [k: string]: T_1;
+                        };
+                        fromEntries(entries: Iterable<readonly any[]>): any;
+                        hasOwn(o: object, v: PropertyKey): boolean;
+                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                    };
+                    tag: keyof typeof $giper_baza_unit_sand_tag;
+                    of<Init extends new (...args: any[]) => any>(init: Init): {
+                        new (): {
+                            val(next?: (Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"] | null) | null;
+                            val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"] | null) | null;
+                            pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
+                            vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                            vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                            selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
+                            [$mol_dev_format_head](): any[];
+                            land(): $giper_baza_land;
+                            head(): $giper_baza_link;
+                            land_link(): $giper_baza_link;
+                            link(): $giper_baza_link;
+                            toJSON(): string;
+                            cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                            pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                            units(): $giper_baza_unit_sand[];
+                            units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                            meta(next?: $giper_baza_link): $giper_baza_link | null;
+                            meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                            filled(): boolean;
+                            can_change(): boolean;
+                            last_change(): $mol_time_moment | null;
+                            authors(): $giper_baza_auth_pass[];
+                            get $(): $;
+                            set $(next: $);
+                            destructor(): void;
+                            toString(): string;
+                            [Symbol.toStringTag]: string;
+                            [$mol_ambient_ref]: $;
+                            [Symbol.dispose](): void;
+                        };
+                        Schema: {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Some: Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            };
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value_4>(this: This, value: Value_4): Value_4 & This["default"];
+                            default: (Init extends typeof $mol_schema_any ? Init : {
+                                new (value?: any): {
+                                    constructor: Function;
+                                    toString(): string;
+                                    toLocaleString(): string;
+                                    valueOf(): Object;
+                                    hasOwnProperty(v: PropertyKey): boolean;
+                                    isPrototypeOf(v: Object): boolean;
+                                    propertyIsEnumerable(v: PropertyKey): boolean;
+                                };
+                                Class: Init;
+                                toString(): string;
+                                guard<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): Value_1 & This["default"];
+                                cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                                default: InstanceType<Init>;
+                                check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                                [Symbol.toStringTag]: string;
+                                [$mol_key_handle](): string;
+                                [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                                getPrototypeOf(o: any): any;
+                                getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                                getOwnPropertyNames(o: any): string[];
+                                create(o: object | null): any;
+                                create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                                defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                                defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                                seal<T_1>(o: T_1): T_1;
+                                freeze<T_1 extends Function>(f: T_1): T_1;
+                                freeze<T_1 extends {
+                                    [idx: string]: U | null | undefined | object;
+                                }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                                freeze<T_1>(o: T_1): Readonly<T_1>;
+                                preventExtensions<T_1>(o: T_1): T_1;
+                                isSealed(o: any): boolean;
+                                isFrozen(o: any): boolean;
+                                isExtensible(o: any): boolean;
+                                keys(o: object): string[];
+                                keys(o: {}): string[];
+                                assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                                assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                                assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                                assign(target: object, ...sources: any[]): any;
+                                getOwnPropertySymbols(o: any): symbol[];
+                                is(value1: any, value2: any): boolean;
+                                setPrototypeOf(o: any, proto: object | null): any;
+                                values<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): T_1[];
+                                values(o: {}): any[];
+                                entries<T_1>(o: {
+                                    [s: string]: T_1;
+                                } | ArrayLike<T_1>): [string, T_1][];
+                                entries(o: {}): [string, any][];
+                                getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                    [x: string]: PropertyDescriptor;
+                                };
+                                fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                    [k: string]: T_1;
+                                };
+                                fromEntries(entries: Iterable<readonly any[]>): any;
+                                hasOwn(o: object, v: PropertyKey): boolean;
+                                groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                            })["default"] | null;
+                            check<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): value is Value_3 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        };
+                        toString(): any;
+                        tag: keyof typeof $giper_baza_unit_sand_tag;
+                        of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
+                        meta: null | $giper_baza_link;
+                        make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                        $: $;
+                        create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                        toJSON(): any;
+                        destructor(): void;
+                        [Symbol.toPrimitive](): any;
+                        [$mol_key_handle](): any;
+                    };
+                    meta: null | $giper_baza_link;
+                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                    $: $;
+                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                    toJSON(): any;
+                    destructor(): void;
+                    [Symbol.toPrimitive](): any;
+                    [$mol_key_handle](): any;
+                };
+                Schema: {
+                    new (value?: any): {
+                        constructor: Function;
+                        toString(): string;
+                        toLocaleString(): string;
+                        valueOf(): Object;
+                        hasOwnProperty(v: PropertyKey): boolean;
+                        isPrototypeOf(v: Object): boolean;
+                        propertyIsEnumerable(v: PropertyKey): boolean;
+                    };
+                    Some: {
+                        new (value?: any): {
+                            constructor: Function;
+                            toString(): string;
+                            toLocaleString(): string;
+                            valueOf(): Object;
+                            hasOwnProperty(v: PropertyKey): boolean;
+                            isPrototypeOf(v: Object): boolean;
+                            propertyIsEnumerable(v: PropertyKey): boolean;
+                        };
+                        Class: typeof $giper_baza_link;
+                        toString(): string;
+                        guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                        default: $giper_baza_link;
+                        check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                        [Symbol.toStringTag]: string;
+                        [$mol_key_handle](): string;
+                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                        getPrototypeOf(o: any): any;
+                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                        getOwnPropertyNames(o: any): string[];
+                        create(o: object | null): any;
+                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                        defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                        defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                        seal<T>(o: T): T;
+                        freeze<T extends Function>(f: T): T;
+                        freeze<T extends {
+                            [idx: string]: U | null | undefined | object;
+                        }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                        freeze<T>(o: T): Readonly<T>;
+                        preventExtensions<T>(o: T): T;
+                        isSealed(o: any): boolean;
+                        isFrozen(o: any): boolean;
+                        isExtensible(o: any): boolean;
+                        keys(o: object): string[];
+                        keys(o: {}): string[];
+                        assign<T extends {}, U>(target: T, source: U): T & U;
+                        assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
+                        assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+                        assign(target: object, ...sources: any[]): any;
+                        getOwnPropertySymbols(o: any): symbol[];
+                        is(value1: any, value2: any): boolean;
+                        setPrototypeOf(o: any, proto: object | null): any;
+                        values<T>(o: {
+                            [s: string]: T;
+                        } | ArrayLike<T>): T[];
+                        values(o: {}): any[];
+                        entries<T>(o: {
+                            [s: string]: T;
+                        } | ArrayLike<T>): [string, T][];
+                        entries(o: {}): [string, any][];
+                        getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                            [x: string]: PropertyDescriptor;
+                        };
+                        fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                            [k: string]: T;
+                        };
+                        fromEntries(entries: Iterable<readonly any[]>): any;
+                        hasOwn(o: object, v: PropertyKey): boolean;
+                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                    };
+                    toString(): string;
+                    guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                    default: $giper_baza_link | null;
+                    check<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                    cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                    [Symbol.toStringTag]: string;
+                    [$mol_key_handle](): string;
+                    [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value>(this: This, value: Value): value is Value & This["default"];
+                    getPrototypeOf(o: any): any;
+                    getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                    getOwnPropertyNames(o: any): string[];
+                    create(o: object | null): any;
+                    create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                    defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                    defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                    seal<T>(o: T): T;
+                    freeze<T extends Function>(f: T): T;
+                    freeze<T extends {
+                        [idx: string]: U | null | undefined | object;
+                    }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                    freeze<T>(o: T): Readonly<T>;
+                    preventExtensions<T>(o: T): T;
+                    isSealed(o: any): boolean;
+                    isFrozen(o: any): boolean;
+                    isExtensible(o: any): boolean;
+                    keys(o: object): string[];
+                    keys(o: {}): string[];
+                    assign<T extends {}, U>(target: T, source: U): T & U;
+                    assign<T extends {}, U, V>(target: T, source1: U, source2: V): T & U & V;
+                    assign<T extends {}, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+                    assign(target: object, ...sources: any[]): any;
+                    getOwnPropertySymbols(o: any): symbol[];
+                    is(value1: any, value2: any): boolean;
+                    setPrototypeOf(o: any, proto: object | null): any;
+                    values<T>(o: {
+                        [s: string]: T;
+                    } | ArrayLike<T>): T[];
+                    values(o: {}): any[];
+                    entries<T>(o: {
+                        [s: string]: T;
+                    } | ArrayLike<T>): [string, T][];
+                    entries(o: {}): [string, any][];
+                    getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                        [x: string]: PropertyDescriptor;
+                    };
+                    fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                        [k: string]: T;
+                    };
+                    fromEntries(entries: Iterable<readonly any[]>): any;
+                    hasOwn(o: object, v: PropertyKey): boolean;
+                    groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                };
+                tag: keyof typeof $giper_baza_unit_sand_tag;
+                of<Init extends new (...args: any[]) => any>(init: Init): {
+                    new (): {
+                        val(next?: (Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T;
+                            defineProperties<T>(o: T, properties: PropertyDescriptorMap & ThisType<any>): T;
+                            seal<T>(o: T): T;
+                            freeze<T extends Function>(f: T): T;
+                            freeze<T extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T): Readonly<T>;
+                            freeze<T>(o: T): Readonly<T>;
+                            preventExtensions<T>(o: T): T;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T extends {}, U_1>(target: T, source: U_1): T & U_1;
+                            assign<T extends {}, U_2, V>(target: T, source1: U_2, source2: V): T & U_2 & V;
+                            assign<T extends {}, U_3, V_1, W>(target: T, source1: U_3, source2: V_1, source3: W): T & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): T[];
+                            values(o: {}): any[];
+                            entries<T>(o: {
+                                [s: string]: T;
+                            } | ArrayLike<T>): [string, T][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T>(o: T): { [P in keyof T]: TypedPropertyDescriptor<T[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T = any>(entries: Iterable<readonly [PropertyKey, T]>): {
+                                [k: string]: T;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"] | null) | null;
+                        val_of(peer: $giper_baza_link | null, next?: (Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"] | null): ((Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"] | null) | null;
+                        pick_unit(peer: $giper_baza_link | null): $giper_baza_unit_sand | undefined;
+                        vary(next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                        vary_of(peer: $giper_baza_link | null, next?: $giper_baza_vary_type): $giper_baza_vary_type;
+                        selection(lord: $giper_baza_link, next?: readonly [begin: number, end: number]): number[] | readonly [begin: number, end: number];
+                        [$mol_dev_format_head](): any[];
+                        land(): $giper_baza_land;
+                        head(): $giper_baza_link;
+                        land_link(): $giper_baza_link;
+                        link(): $giper_baza_link;
+                        toJSON(): string;
+                        cast<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1): InstanceType<Pawn_1>;
+                        pawns<Pawn_1 extends typeof $giper_baza_pawn>(Pawn: Pawn_1 | null): readonly InstanceType<Pawn_1>[];
+                        units(): $giper_baza_unit_sand[];
+                        units_of(peer: $giper_baza_link | null): $giper_baza_unit_sand[];
+                        meta(next?: $giper_baza_link): $giper_baza_link | null;
+                        meta_of(peer: $giper_baza_link | null): $giper_baza_link | null;
+                        filled(): boolean;
+                        can_change(): boolean;
+                        last_change(): $mol_time_moment | null;
+                        authors(): $giper_baza_auth_pass[];
+                        get $(): $;
+                        set $(next: $);
+                        destructor(): void;
+                        toString(): string;
+                        [Symbol.toStringTag]: string;
+                        [$mol_ambient_ref]: $;
+                        [Symbol.dispose](): void;
+                    };
+                    Schema: {
+                        new (value?: any): {
+                            constructor: Function;
+                            toString(): string;
+                            toLocaleString(): string;
+                            valueOf(): Object;
+                            hasOwnProperty(v: PropertyKey): boolean;
+                            isPrototypeOf(v: Object): boolean;
+                            propertyIsEnumerable(v: PropertyKey): boolean;
+                        };
+                        Some: Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        };
+                        toString(): string;
+                        guard<This extends typeof $mol_schema_any, Value_3>(this: This, value: Value_3): Value_3 & This["default"];
+                        default: (Init extends typeof $mol_schema_any ? Init : {
+                            new (value?: any): {
+                                constructor: Function;
+                                toString(): string;
+                                toLocaleString(): string;
+                                valueOf(): Object;
+                                hasOwnProperty(v: PropertyKey): boolean;
+                                isPrototypeOf(v: Object): boolean;
+                                propertyIsEnumerable(v: PropertyKey): boolean;
+                            };
+                            Class: Init;
+                            toString(): string;
+                            guard<This extends typeof $mol_schema_any, Value>(this: This, value: Value): Value & This["default"];
+                            cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                            default: InstanceType<Init>;
+                            check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                            [Symbol.toStringTag]: string;
+                            [$mol_key_handle](): string;
+                            [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                            getPrototypeOf(o: any): any;
+                            getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                            getOwnPropertyNames(o: any): string[];
+                            create(o: object | null): any;
+                            create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                            defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                            defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                            seal<T_1>(o: T_1): T_1;
+                            freeze<T_1 extends Function>(f: T_1): T_1;
+                            freeze<T_1 extends {
+                                [idx: string]: U | null | undefined | object;
+                            }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                            freeze<T_1>(o: T_1): Readonly<T_1>;
+                            preventExtensions<T_1>(o: T_1): T_1;
+                            isSealed(o: any): boolean;
+                            isFrozen(o: any): boolean;
+                            isExtensible(o: any): boolean;
+                            keys(o: object): string[];
+                            keys(o: {}): string[];
+                            assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                            assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                            assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                            assign(target: object, ...sources: any[]): any;
+                            getOwnPropertySymbols(o: any): symbol[];
+                            is(value1: any, value2: any): boolean;
+                            setPrototypeOf(o: any, proto: object | null): any;
+                            values<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): T_1[];
+                            values(o: {}): any[];
+                            entries<T_1>(o: {
+                                [s: string]: T_1;
+                            } | ArrayLike<T_1>): [string, T_1][];
+                            entries(o: {}): [string, any][];
+                            getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                                [x: string]: PropertyDescriptor;
+                            };
+                            fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                                [k: string]: T_1;
+                            };
+                            fromEntries(entries: Iterable<readonly any[]>): any;
+                            hasOwn(o: object, v: PropertyKey): boolean;
+                            groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                        })["default"] | null;
+                        check<This extends typeof $mol_schema_any, Value_1>(this: This, value: Value_1): value is Value_1 & This["default"];
+                        cast<This extends typeof $mol_schema_any>(this: This, value: unknown): This["default"];
+                        [Symbol.toStringTag]: string;
+                        [$mol_key_handle](): string;
+                        [Symbol.hasInstance]<This extends typeof $mol_schema_any, Value_2>(this: This, value: Value_2): value is Value_2 & This["default"];
+                        getPrototypeOf(o: any): any;
+                        getOwnPropertyDescriptor(o: any, p: PropertyKey): PropertyDescriptor | undefined;
+                        getOwnPropertyNames(o: any): string[];
+                        create(o: object | null): any;
+                        create(o: object | null, properties: PropertyDescriptorMap & ThisType<any>): any;
+                        defineProperty<T_1>(o: T_1, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>): T_1;
+                        defineProperties<T_1>(o: T_1, properties: PropertyDescriptorMap & ThisType<any>): T_1;
+                        seal<T_1>(o: T_1): T_1;
+                        freeze<T_1 extends Function>(f: T_1): T_1;
+                        freeze<T_1 extends {
+                            [idx: string]: U | null | undefined | object;
+                        }, U extends string | bigint | number | boolean | symbol>(o: T_1): Readonly<T_1>;
+                        freeze<T_1>(o: T_1): Readonly<T_1>;
+                        preventExtensions<T_1>(o: T_1): T_1;
+                        isSealed(o: any): boolean;
+                        isFrozen(o: any): boolean;
+                        isExtensible(o: any): boolean;
+                        keys(o: object): string[];
+                        keys(o: {}): string[];
+                        assign<T_1 extends {}, U_1>(target: T_1, source: U_1): T_1 & U_1;
+                        assign<T_1 extends {}, U_2, V>(target: T_1, source1: U_2, source2: V): T_1 & U_2 & V;
+                        assign<T_1 extends {}, U_3, V_1, W>(target: T_1, source1: U_3, source2: V_1, source3: W): T_1 & U_3 & V_1 & W;
+                        assign(target: object, ...sources: any[]): any;
+                        getOwnPropertySymbols(o: any): symbol[];
+                        is(value1: any, value2: any): boolean;
+                        setPrototypeOf(o: any, proto: object | null): any;
+                        values<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): T_1[];
+                        values(o: {}): any[];
+                        entries<T_1>(o: {
+                            [s: string]: T_1;
+                        } | ArrayLike<T_1>): [string, T_1][];
+                        entries(o: {}): [string, any][];
+                        getOwnPropertyDescriptors<T_1>(o: T_1): { [P in keyof T_1]: TypedPropertyDescriptor<T_1[P]>; } & {
+                            [x: string]: PropertyDescriptor;
+                        };
+                        fromEntries<T_1 = any>(entries: Iterable<readonly [PropertyKey, T_1]>): {
+                            [k: string]: T_1;
+                        };
+                        fromEntries(entries: Iterable<readonly any[]>): any;
+                        hasOwn(o: object, v: PropertyKey): boolean;
+                        groupBy<K extends PropertyKey, T>(items: Iterable<T>, keySelector: (item: T, index: number) => K): Partial<Record<K, T[]>>;
+                    };
+                    toString(): any;
+                    tag: keyof typeof $giper_baza_unit_sand_tag;
+                    of<Init extends new (...args: any[]) => any>(init: Init): /*elided*/ any;
+                    meta: null | $giper_baza_link;
+                    make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                    $: $;
+                    create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                    toJSON(): any;
+                    destructor(): void;
+                    [Symbol.toPrimitive](): any;
+                    [$mol_key_handle](): any;
+                };
+                meta: null | $giper_baza_link;
+                make<This extends typeof $mol_object>(this: This, config: Partial<InstanceType<This>>): InstanceType<This>;
+                $: $;
+                create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
+                toJSON(): any;
+                destructor(): void;
+                [Symbol.toPrimitive](): any;
+                [$mol_key_handle](): any;
+            };
+        };
+    };
+    export class $bog_nka_catalog extends $bog_nka_catalog_base {
+    }
+    export {};
+}
+
+declare namespace $ {
+
+	type $mol_button_minor__title_bog_nka_app_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_bog_nka_app_2 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['settings_toggle'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_paragraph__title_bog_nka_app_3 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_major__title_bog_nka_app_2 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_app_4 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_app_3 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_app_5 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['catalog_create'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_view__sub_bog_nka_app_4 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_app_6 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_paragraph__title_bog_nka_app_5 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_app_7 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['catalog_selected_text'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
 	export class $bog_nka_app extends $mol_page {
-		Settings_button( ): $bog_nka_settings
+		settings_toggle( next?: any ): any
+		Settings_button( ): $mol_button_minor
 		Catalog_missing_text( ): $mol_paragraph
 		catalog_create( next?: any ): any
 		Catalog_create( ): $mol_button_major
 		Catalog_missing( ): $mol_view
 		catalog_selected_text( ): string
 		Catalog_selected( ): $mol_paragraph
+		Settings( ): $bog_nka_settings
 		content( ): readonly(any)[]
 		title( ): any
 		tools( ): readonly(any)[]
@@ -47995,7 +48016,9 @@ declare namespace $ {
 declare namespace $.$$ {
     class $bog_nka_app extends $.$bog_nka_app {
         catalog_link(next?: string): string;
-        content(): $mol_view[] | $.$mol_paragraph[];
+        settings_open(next?: boolean): boolean;
+        settings_toggle(): void;
+        content(): $mol_view[] | $.$bog_nka_settings[] | $.$mol_paragraph[];
         catalog_selected_text(): string;
         catalog_create(): void;
     }

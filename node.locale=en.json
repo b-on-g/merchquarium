@@ -1,5 +1,12 @@
 {
 	"$bog_nka_app_Catalog_create_title": "Create catalog",
 	"$bog_nka_app_Catalog_missing_text_title": "No catalog selected:",
-	"$bog_nka_settings_title": "Settings"
+	"$bog_nka_app_Settings_button_title": "Settings",
+	"$bog_nka_settings_text_id": "Your Id is: ",
+	"$bog_nka_settings_title": "Settings",
+	"$mol_search_Clear_hint": "Clear",
+	"$mol_search_hint": "Search...",
+	"$mol_select_filter_hint": "Filter..",
+	"$mol_select_hint": "Pick..",
+	"$mol_select_no_options_message": "No options"
 }
