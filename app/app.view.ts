@@ -24,7 +24,12 @@ namespace $.$$ {
 		}
 
 		catalog_selected_text() {
-			return `Catalog: ${ this.catalog_link() }`
+			const catalog = this.catalog()
+			if( !catalog ) return 'Catalog missing'
+		
+			const products = catalog.Products()?.remote_list() ?? []
+		
+			return `Catalog: ${ catalog.link().str }; Products: ${ products.length }`
 		}
 
 		@ $mol_action
@@ -38,6 +43,18 @@ namespace $.$$ {
 				? this.Return_title()
 				: this.Settings_title()
 		}
+
+		catalog() {
+			const link = this.catalog_link()
+			if( !link ) return null
+		
+			const land = this.$.$giper_baza_glob.Land(
+				new this.$.$giper_baza_link( link ),
+			)
+		
+			return land.Data( $bog_nka_catalog )
+		}
+
 
 	}
 }
