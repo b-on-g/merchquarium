@@ -1,1 +1,6 @@
 $bog_nka_app $mol_page
+	body <= content /
+		<= Catalog_missing $mol_paragraph
+			text @ \No catalog selected. We’ll add catalog creation next.
+		<= Catalog_selected $mol_paragraph
+			text <= catalog_selected_text \
