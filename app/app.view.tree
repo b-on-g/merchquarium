@@ -1,11 +1,12 @@
 $bog_nka_app $mol_page
+	title null - поле в настройках
 	body <= content /
 		<= Catalog_missing $mol_view
 			sub /
 				<= Catalog_missing_text $mol_paragraph
-					text @ \No catalog selected.
+					title @ \No catalog selected:
 				<= Catalog_create $mol_button_major
 					title @ \Create catalog
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_paragraph
-			text <= catalog_selected_text \
+			title <= catalog_selected_text \
