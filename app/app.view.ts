@@ -30,7 +30,6 @@ namespace $.$$ {
 		@ $mol_action
 		catalog_create() {
 			const land = this.$.$giper_baza_glob.land_grab()
-			land.Data( $bog_nka_catalog )
 			this.catalog_link( land.link().str )
 		}
 
