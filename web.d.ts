@@ -1892,6 +1892,32 @@ declare namespace $ {
 
 //# sourceMappingURL=minor.view.tree.d.ts.map
 declare namespace $ {
+
+	export class $mol_paragraph extends $mol_view {
+		line_height( ): number
+		letter_width( ): number
+		width_limit( ): number
+		row_width( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=paragraph.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_paragraph extends $.$mol_paragraph {
+        maximal_width(): number;
+        width_limit(): number;
+        minimal_width(): number;
+        row_width(): number;
+        minimal_height(): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $mol_storage extends $mol_object2 {
         /** Is storage a long term. */
         static persisted(next?: boolean): boolean;
@@ -2297,32 +2323,6 @@ declare namespace $ {
         static text(key: string): string;
         static warn(key: string): null;
     }
-}
-
-declare namespace $ {
-
-	export class $mol_paragraph extends $mol_view {
-		line_height( ): number
-		letter_width( ): number
-		width_limit( ): number
-		row_width( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=paragraph.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $mol_paragraph extends $.$mol_paragraph {
-        maximal_width(): number;
-        width_limit(): number;
-        minimal_width(): number;
-        row_width(): number;
-        minimal_height(): number;
-    }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -47960,7 +47960,7 @@ declare namespace $ {
 declare namespace $ {
 
 	type $mol_button_minor__title_bog_nka_app_1 = $mol_type_enforce<
-		string
+		ReturnType< $bog_nka_app['settings_button_title'] >
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
@@ -47995,6 +47995,7 @@ declare namespace $ {
 		ReturnType< $mol_paragraph['title'] >
 	>
 	export class $bog_nka_app extends $mol_page {
+		settings_button_title( ): string
 		settings_toggle( next?: any ): any
 		Settings_button( ): $mol_button_minor
 		Catalog_missing_text( ): $mol_paragraph
@@ -48005,6 +48006,8 @@ declare namespace $ {
 		Catalog_selected( ): $mol_paragraph
 		Settings( ): $bog_nka_settings
 		content( ): readonly(any)[]
+		Settings_title( ): string
+		Return_title( ): string
 		title( ): any
 		tools( ): readonly(any)[]
 		body( ): ReturnType< $bog_nka_app['content'] >
@@ -48021,6 +48024,7 @@ declare namespace $.$$ {
         content(): $mol_view[] | $.$bog_nka_settings[] | $.$mol_paragraph[];
         catalog_selected_text(): string;
         catalog_create(): void;
+        settings_button_title(): string;
     }
 }
 

@@ -412,10 +412,12 @@ $bog_nka_settings $mol_page
 			title <= account_id \
 
 $bog_nka_app $mol_page
+	Settings_title @ \Settings
+	Return_title @ \Return
 	title null - поле в настройках
 	tools /
 		<= Settings_button $mol_button_minor
-			title @ \Settings
+			title <= settings_button_title \
 			click? <=> settings_toggle? null
 	body <= content /
 		<= Catalog_missing $mol_view
@@ -427,5 +429,4 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_paragraph
 			title <= catalog_selected_text \
-		<= Settings $bog_nka_settings 
-
+		<= Settings $bog_nka_settings
