@@ -76,7 +76,12 @@ $mol_paragraph $mol_view
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
-$mol_row $mol_view
+$mol_gallery $mol_view
+	sub <= items /$mol_view
+	Side* $mol_gallery
+		style *
+			flexGrow <= side_size* \1
+		items <= side_items* /$mol_view
 
 $mol_ghost $mol_view
 	Sub $mol_view
@@ -1669,13 +1674,6 @@ $mol_plot_line $mol_plot_graph
 		color <= color
 		type <= type
 
-$mol_gallery $mol_view
-	sub <= items /$mol_view
-	Side* $mol_gallery
-		style *
-			flexGrow <= side_size* \1
-		items <= side_items* /$mol_view
-
 $mol_chart_legend $mol_scroll
 	graphs /$mol_plot_graph
 	graphs_front /$mol_plot_graph
@@ -2165,6 +2163,6 @@ $bog_nka_app $mol_page
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
-				<= Product_cards $mol_row
-					sub <= product_cards /
+				<= Product_cards $mol_gallery
+					items <= product_cards /
 		<= Settings $bog_nka_settings
