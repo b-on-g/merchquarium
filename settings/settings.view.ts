@@ -12,7 +12,7 @@ namespace $.$$ {
 		}
 
 		account_id() {
-			return this.$.$giper_baza_auth.current().pass().lord().str
+			return this.text_id() +  this.$.$giper_baza_auth.current().pass().lord().str
 		}
 
 	}

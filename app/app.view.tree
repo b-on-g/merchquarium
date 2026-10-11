@@ -1,7 +1,9 @@
 $bog_nka_app $mol_page
 	title null - поле в настройках
 	tools /
-		<= Settings_button $bog_nka_settings
+		<= Settings_button $mol_button_minor
+			title @ \Settings
+			click? <=> settings_toggle? null
 	body <= content /
 		<= Catalog_missing $mol_view
 			sub /
@@ -12,3 +14,5 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_paragraph
 			title <= catalog_selected_text \
+		<= Settings $bog_nka_settings 
+

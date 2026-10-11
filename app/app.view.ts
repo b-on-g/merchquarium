@@ -5,7 +5,19 @@ namespace $.$$ {
 			return this.$.$mol_state_arg.value( 'catalog', next ) ?? ''
 		}
 
+		@ $mol_mem
+		settings_open( next?: boolean ) {
+			return next ?? false
+		}
+		
+		@ $mol_action
+		settings_toggle() {
+			this.settings_open( !this.settings_open() )
+		}
+		
 		content() {
+			if( this.settings_open() ) return [ this.Settings() ]
+		
 			return this.catalog_link()
 				? [ this.Catalog_selected() ]
 				: [ this.Catalog_missing() ]
