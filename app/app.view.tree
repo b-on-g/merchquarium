@@ -21,4 +21,6 @@ $bog_nka_app $mol_page
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
+				<= Product_card* $bog_nka_product_card
+					product_link <= product_link* \
 		<= Settings $bog_nka_settings

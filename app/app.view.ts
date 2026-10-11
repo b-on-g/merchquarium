@@ -63,5 +63,10 @@ namespace $.$$ {
 			catalog.Products( null )?.make( null )
 		}
 
+		product_link( id: number ) {
+			return this.catalog()?.Products()?.remote_list()[ id ]?.link().str ?? ''
+		}
+
+
 	}
 }
