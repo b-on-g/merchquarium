@@ -55,6 +55,13 @@ namespace $.$$ {
 			return land.Data( $bog_nka_catalog )
 		}
 
+		@ $mol_action
+		product_add() {
+			const catalog = this.catalog()
+			if( !catalog ) return
+		
+			catalog.Products( null )?.make( null )
+		}
 
 	}
 }
