@@ -427,6 +427,11 @@ $bog_nka_app $mol_page
 				<= Catalog_create $mol_button_major
 					title @ \Create catalog
 					click? <=> catalog_create? null
-		<= Catalog_selected $mol_paragraph
-			title <= catalog_selected_text \
+		<= Catalog_selected $mol_view
+			sub /
+				<= Catalog_selected_text $mol_paragraph
+					title <= catalog_selected_text \
+				<= Product_add $mol_button_major
+					title @ \Add product
+					click? <=> product_add? null
 		<= Settings $bog_nka_settings

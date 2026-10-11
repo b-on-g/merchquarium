@@ -18964,9 +18964,24 @@ var $;
 		catalog_selected_text(){
 			return "";
 		}
-		Catalog_selected(){
+		Catalog_selected_text(){
 			const obj = new this.$.$mol_paragraph();
 			(obj.title) = () => ((this.catalog_selected_text()));
+			return obj;
+		}
+		product_add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Product_add(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Product_add_title")));
+			(obj.click) = (next) => ((this.product_add(next)));
+			return obj;
+		}
+		Catalog_selected(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Catalog_selected_text()), (this.Product_add())]);
 			return obj;
 		}
 		Settings(){
@@ -19002,6 +19017,9 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_missing"));
+	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected_text"));
+	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
+	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings"));
 
@@ -19087,6 +19105,12 @@ var $;
                 const land = this.$.$giper_baza_glob.Land(new this.$.$giper_baza_link(link));
                 return land.Data($bog_nka_catalog);
             }
+            product_add() {
+                const catalog = this.catalog();
+                if (!catalog)
+                    return;
+                catalog.Products(null)?.make(null);
+            }
         }
         __decorate([
             $mol_mem
@@ -19097,6 +19121,9 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_app.prototype, "catalog_create", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_app.prototype, "product_add", null);
         $$.$bog_nka_app = $bog_nka_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

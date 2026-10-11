@@ -41670,6 +41670,21 @@ declare namespace $ {
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
+	type $mol_button_major__title_bog_nka_app_8 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_app_9 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['product_add'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_view__sub_bog_nka_app_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
 	export class $bog_nka_app extends $mol_page {
 		settings_button_title( ): string
 		settings_toggle( next?: any ): any
@@ -41679,7 +41694,10 @@ declare namespace $ {
 		Catalog_create( ): $mol_button_major
 		Catalog_missing( ): $mol_view
 		catalog_selected_text( ): string
-		Catalog_selected( ): $mol_paragraph
+		Catalog_selected_text( ): $mol_paragraph
+		product_add( next?: any ): any
+		Product_add( ): $mol_button_major
+		Catalog_selected( ): $mol_view
 		Settings( ): $bog_nka_settings
 		content( ): readonly(any)[]
 		Settings_title( ): string
@@ -41697,11 +41715,12 @@ declare namespace $.$$ {
         catalog_link(next?: string): string;
         settings_open(next?: boolean): boolean;
         settings_toggle(): void;
-        content(): $mol_view[] | $.$bog_nka_settings[] | $.$mol_paragraph[];
+        content(): $mol_view[] | $.$bog_nka_settings[];
         catalog_selected_text(): string;
         catalog_create(): void;
         settings_button_title(): string;
         catalog(): $bog_nka_catalog | null;
+        product_add(): void;
     }
 }
 
