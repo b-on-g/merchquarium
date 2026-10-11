@@ -63,10 +63,14 @@ namespace $.$$ {
 			catalog.Products( null )?.make( null )
 		}
 
-		product_link( id: number ) {
-			return this.catalog()?.Products()?.remote_list()[ id ]?.link().str ?? ''
+		product_cards() {
+			const products = this.catalog()?.Products()?.remote_list() ?? []
+			return products.map( product => this.Product_card( product.link().str ) )
 		}
-
+		
+		product_link( link: string ) {
+			return link
+		}
 
 	}
 }

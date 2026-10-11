@@ -2,6 +2,8 @@ $bog_nka_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
 	title null - поле в настройках
+	Product_card* $bog_nka_product_card
+		product_link <= product_link* \
 	tools /
 		<= Settings_button $mol_button_minor
 			title <= settings_button_title \
@@ -21,6 +23,6 @@ $bog_nka_app $mol_page
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
-				<= Product_card* $bog_nka_product_card
-					product_link <= product_link* \
+				<= Product_cards $mol_row
+					sub <= product_cards /
 		<= Settings $bog_nka_settings
