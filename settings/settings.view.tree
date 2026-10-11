@@ -1,0 +1,3 @@
+$bog_nka_settings $mol_button_minor
+	title @ \Settings
+	click? <=> settings_toggle? null

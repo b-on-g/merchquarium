@@ -1,5 +1,7 @@
 $bog_nka_app $mol_page
 	title null - поле в настройках
+	tools /
+		<= Settings_button $bog_nka_settings
 	body <= content /
 		<= Catalog_missing $mol_view
 			sub /
