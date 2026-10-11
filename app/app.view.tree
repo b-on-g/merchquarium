@@ -23,6 +23,6 @@ $bog_nka_app $mol_page
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
-				<= Product_cards $mol_row
-					sub <= product_cards /
+				<= Product_cards $mol_gallery
+					items <= product_cards /
 		<= Settings $bog_nka_settings
