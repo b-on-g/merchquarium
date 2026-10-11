@@ -34,4 +34,57 @@ $mol_page $mol_view
 			dom_name \footer
 			sub <= foot /$mol_view
 
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
+$mol_speck $mol_view
+	theme \$mol_theme_accent
+	sub /
+		<= value null
+
+$mol_button $mol_view
+	enabled true
+	click? null
+	event_click? null
+	status? /
+	event *
+		^
+		click? <=> activate? <=> event_activate? null
+		dblclick? <=> clicks? null
+		keydown? <=> key_press? <=> event_key_press? null
+	attr *
+		^
+		disabled <= disabled false
+		role \button
+		tabindex <= tab_index 0
+		title <= hint_safe <= hint \
+	sub /$mol_view_content
+		<= title
+	Speck $mol_speck
+		value <= error \
+
+$mol_button_typed $mol_button
+	minimal_height 40
+	minimal_width 40
+
+$mol_button_minor $mol_button_typed
+
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
+
 $bog_nka_app $mol_page
+	title null - поле в настройках
+	body <= content /
+		<= Catalog_missing $mol_view
+			sub /
+				<= Catalog_missing_text $mol_paragraph
+					title @ \No catalog selected:
+				<= Catalog_create $mol_button_major
+					title @ \Create catalog
+					click? <=> catalog_create? null
+		<= Catalog_selected $mol_paragraph
+			title <= catalog_selected_text \
