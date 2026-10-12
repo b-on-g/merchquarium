@@ -19439,26 +19439,14 @@ var $;
 
 ;
 "use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $bog_nka_number extends $.$bog_nka_number {
-        }
-        $$.$bog_nka_number = $bog_nka_number;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
 var $;
 (function ($) {
     $mol_style_attach("bog/nka/number/number.view.css", "[bog_nka_number] [mol_string]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}\n[bog_nka_number] [mol_button_minor] {\n\tdisplay: none;\n}\n\n[bog_nka_number]:focus-within [mol_button_minor] {\n\tdisplay: inline-flex;\n}\n");
 })($ || ($ = {}));
+
+;
+"use strict";
+
 
 ;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {

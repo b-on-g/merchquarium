@@ -45898,6 +45898,9 @@ declare namespace $ {
 
 //# sourceMappingURL=button.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $ {
 
 	export class $bog_nka_number extends $mol_number {
 	}
@@ -45905,14 +45908,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=number.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_nka_number extends $.$bog_nka_number {
-    }
-}
-
-declare namespace $ {
-}
-
 declare namespace $ {
 
 	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
