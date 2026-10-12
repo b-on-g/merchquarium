@@ -36,5 +36,18 @@ namespace $.$$ {
 			return next
 		}
 
+		description(next?: string): string {
+			const product = this.product()
+		
+			if (next === undefined) return product.Description()?.val() ?? ''
+		
+			const title = product.Description(null)
+			if (!title) return ''
+			
+			title.val(next)
+			return next
+		}
+
+
 	}
 }
