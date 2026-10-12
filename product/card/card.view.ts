@@ -48,6 +48,18 @@ namespace $.$$ {
 			return next
 		}
 
+		available(next?: boolean): boolean {
+			const product = this.product()
+		
+			if (next === undefined) return product.Available()?.val() ?? false
+		
+			const atom = product.Available(null)
+			if (!atom) return false
+		
+			atom.val(next)
+			return next
+		}
+
 
 	}
 }
