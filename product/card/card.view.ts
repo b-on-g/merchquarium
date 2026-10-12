@@ -13,11 +13,13 @@ namespace $.$$ {
 		}
 
 		title_btn(next?: string): string {
-			const title = this.product().Title()
+			const product = this.product()
 		
-			if (!title) return next ?? ''
-			if (next === undefined) return title.val() ?? ''
+			if (next === undefined) return product.Title()?.val() ?? ''
 		
+			const title = product.Title(null)
+			if (!title) return ''
+			
 			title.val(next)
 			return next
 		}
