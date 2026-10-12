@@ -45887,15 +45887,53 @@ declare namespace $ {
 }
 
 declare namespace $ {
+}
 
+declare namespace $ {
+
+	export class $mol_string_button extends $mol_string {
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['title_btn'] >
+		,
+		ReturnType< $mol_string_button['value'] >
+	>
+	type $mol_string_button__hint_bog_nka_product_card_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string_button['hint'] >
+	>
+	type $mol_string_button__enabled_bog_nka_product_card_3 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $mol_string_button['enabled'] >
+	>
 	export class $bog_nka_product_card extends $mol_card {
 		product_link( ): string
+		title_btn( next?: string ): string
+		changed( ): boolean
+		Title( ): $mol_string_button
 		title( ): ReturnType< $bog_nka_product_card['product_link'] >
+		sub( ): readonly(any)[]
 	}
 	
 }
 
 //# sourceMappingURL=card.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_nka_product_card extends $.$bog_nka_product_card {
+        product(): $bog_nka_product;
+        changed(): boolean;
+        title_btn(next?: string): string;
+    }
+}
+
 declare namespace $ {
     const $bog_nka_catalog_base: Omit<typeof $giper_baza_dict, "prototype"> & {
         new (...args: any[]): $mol_type_override<$giper_baza_dict, {
@@ -48114,7 +48152,7 @@ declare namespace $.$$ {
         settings_button_title(): string;
         catalog(): $bog_nka_catalog | null;
         product_add(): void;
-        product_cards(): $bog_nka_product_card[];
+        product_cards(): $.$bog_nka_product_card[];
         product_link(link: string): string;
     }
 }

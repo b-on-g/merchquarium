@@ -336,6 +336,7 @@
     "$bog_nka_product_card",
     "$bog_nka_product",
     "$mol_card",
+    "$mol_string_button",
     "$bog_nka_catalog"
   ],
   "dependencies": {

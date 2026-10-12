@@ -19086,19 +19086,80 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_string_button) = class $mol_string_button extends ($.$mol_string) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/string/button/button.view.css", "[mol_string_button]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
 		product_link(){
 			return "";
 		}
+		title_btn(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		changed(){
+			return true;
+		}
+		Title(){
+			const obj = new this.$.$mol_string_button();
+			(obj.value) = (next) => ((this.title_btn(next)));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Title_hint")));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
 		title(){
 			return (this.product_link());
 		}
+		sub(){
+			return [(this.Title())];
+		}
 	};
+	($mol_mem(($.$bog_nka_product_card.prototype), "title_btn"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Title"));
 
 
 ;
 "use strict";
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_nka_product_card extends $.$bog_nka_product_card {
+            product() {
+                return this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(this.product_link()), $bog_nka_product);
+            }
+            changed() {
+                return this.product().can_change();
+            }
+            title_btn(next) {
+                const title = this.product().Title();
+                if (!title)
+                    return next ?? '';
+                if (next === undefined)
+                    return title.val() ?? '';
+                title.val(next);
+                return next;
+            }
+        }
+        $$.$bog_nka_product_card = $bog_nka_product_card;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 	($.$bog_nka_app) = class $bog_nka_app extends ($.$mol_page) {
