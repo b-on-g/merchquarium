@@ -1,5 +1,6 @@
 $bog_nka_product_card $mol_card
-	link <= product_link \
+	product_link? \
+	catalog_link? \
 	sub /
 		<= Title $mol_string_button
 			value? <=> title? \
@@ -13,6 +14,10 @@ $bog_nka_product_card $mol_card
 		<= Description $mol_string_button
 			value? <=> description? \
 			hint @ \Description
+			enabled <= changed true
+		<= Category $mol_select
+			options <= category_list /
+			option_label @ \Category
 			enabled <= changed true
 		<= Available $mol_check_box
 			checked? <=> available? false

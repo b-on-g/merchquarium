@@ -41,10 +41,10 @@ namespace $.$$ {
 		
 			if (next === undefined) return product.Description()?.val() ?? ''
 		
-			const title = product.Description(null)
-			if (!title) return ''
+			const descr = product.Description(null)
+			if (!descr) return ''
 			
-			title.val(next)
+			descr.val(next)
 			return next
 		}
 
@@ -58,6 +58,18 @@ namespace $.$$ {
 		
 			atom.val(next)
 			return next
+		}
+
+		catalog() {
+			return this.$.$giper_baza_glob.Pawn(
+				new this.$.$giper_baza_link( this.catalog_link() ),
+				$bog_nka_catalog,
+			)
+		}
+		category_list() {
+			console.log(this.catalog().Categories()?.items())
+			console.log(this.catalog().Categories())
+			return []
 		}
 
 
