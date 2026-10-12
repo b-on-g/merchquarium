@@ -19148,11 +19148,12 @@ var $;
                 return this.product().can_change();
             }
             title_btn(next) {
-                const title = this.product().Title();
-                if (!title)
-                    return next ?? '';
+                const product = this.product();
                 if (next === undefined)
-                    return title.val() ?? '';
+                    return product.Title()?.val() ?? '';
+                const title = product.Title(null);
+                if (!title)
+                    return '';
                 title.val(next);
                 return next;
             }
