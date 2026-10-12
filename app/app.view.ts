@@ -6,8 +6,12 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
-		settings_open( next?: boolean ) {
-			return next ?? false
+		settings_open(next?: boolean) {
+			const state = this.$.$mol_state_arg.value(
+				'settings',
+				next === undefined ? undefined : next ? 'true' : '',
+			)
+			return state === 'true'
 		}
 		
 		@ $mol_action
