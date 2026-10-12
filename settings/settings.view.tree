@@ -1,8 +1,11 @@
 $bog_nka_settings $mol_page
 	title @ \Settings
 	text_id @ \Your Id is: 
+	catalog_link? \
 	tools /
 		<= Sync $giper_baza_status
 	body /
 		<= Account_id $mol_paragraph
 			title <= account_id \
+		<= Categories_text $mol_paragraph
+			title <= categories_text \
