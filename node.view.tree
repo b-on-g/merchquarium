@@ -492,8 +492,10 @@ $bog_nka_product_card $mol_card
 			hint @ \Price
 			value? <=> price? null
 			enabled <= changed true
-	
-
+		<= Description $mol_string_button
+			value? <=> description? \
+			hint @ \Description
+			enabled <= changed true
 
 $bog_nka_app $mol_page
 	Settings_title @ \Settings

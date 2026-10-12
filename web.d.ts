@@ -45945,6 +45945,21 @@ declare namespace $ {
 		,
 		ReturnType< $bog_nka_number['enabled'] >
 	>
+	type $mol_string_button__value_bog_nka_product_card_8 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['description'] >
+		,
+		ReturnType< $mol_string_button['value'] >
+	>
+	type $mol_string_button__hint_bog_nka_product_card_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string_button['hint'] >
+	>
+	type $mol_string_button__enabled_bog_nka_product_card_10 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $mol_string_button['enabled'] >
+	>
 	export class $bog_nka_product_card extends $mol_card {
 		product_link( ): string
 		title( next?: string ): string
@@ -45952,6 +45967,8 @@ declare namespace $ {
 		Title( ): $mol_string_button
 		price( next?: any ): any
 		Price( ): $bog_nka_number
+		description( next?: string ): string
+		Description( ): $mol_string_button
 		link( ): ReturnType< $bog_nka_product_card['product_link'] >
 		sub( ): readonly(any)[]
 	}
@@ -45965,6 +45982,7 @@ declare namespace $.$$ {
         changed(): boolean;
         title(next?: string): string;
         price(next?: number): number;
+        description(next?: string): string;
     }
 }
 

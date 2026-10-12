@@ -19488,17 +19488,34 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
+		description(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Description(){
+			const obj = new this.$.$mol_string_button();
+			(obj.value) = (next) => ((this.description(next)));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Description_hint")));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
 		link(){
 			return (this.product_link());
 		}
 		sub(){
-			return [(this.Title()), (this.Price())];
+			return [
+				(this.Title()), 
+				(this.Price()), 
+				(this.Description())
+			];
 		}
 	};
 	($mol_mem(($.$bog_nka_product_card.prototype), "title"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Title"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "price"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "description"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
 
 
 ;
@@ -19536,6 +19553,16 @@ var $;
                 if (!price)
                     return 0;
                 price.val(next);
+                return next;
+            }
+            description(next) {
+                const product = this.product();
+                if (next === undefined)
+                    return product.Description()?.val() ?? '';
+                const title = product.Description(null);
+                if (!title)
+                    return '';
+                title.val(next);
                 return next;
             }
         }
