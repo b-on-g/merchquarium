@@ -24,17 +24,16 @@ namespace $.$$ {
 			return next
 		}
 
-		price(next?: any) {
+		price(next?: number): number {
 			const product = this.product()
 		
-			if (next === undefined) return product.Price()?.val() ?? ''
+			if (next === undefined) return product.Price()?.val() ?? 0
 		
 			const price = product.Price(null)
-			if (!price) return ''
-			
+			if (!price) return 0
+		
 			price.val(next)
 			return next
-			
 		}
 
 	}
