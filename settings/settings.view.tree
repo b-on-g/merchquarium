@@ -7,5 +7,11 @@ $bog_nka_settings $mol_page
 	body /
 		<= Account_id $mol_paragraph
 			title <= account_id \
+		<= Category_input $mol_string
+			hint @ \New category
+			value? <=> category_draft? \
+		<= Category_add $mol_button_major
+			title @ \Add category
+			click? <=> category_add? null
 		<= Categories_text $mol_paragraph
 			title <= categories_text \

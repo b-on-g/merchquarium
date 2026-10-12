@@ -30,7 +30,22 @@ namespace $.$$ {
 		}
 
 
-
+		@ $mol_mem
+		category_draft(next?: string) {
+			return next ?? ''
+		}
+		
+		@ $mol_action
+		category_add() {
+			const name = this.category_draft().trim()
+			if (!name) return
+		
+			const categories = this.catalog()?.Categories(null)
+			if (!categories) return
+		
+			categories.add(name)
+			this.category_draft('')
+		}
 
 	}
 }
