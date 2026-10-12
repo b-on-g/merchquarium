@@ -47,5 +47,20 @@ namespace $.$$ {
 			this.category_draft('')
 		}
 
+		category_rows() {
+			const categories = this.catalog()?.Categories()?.items() ?? []
+			return categories.map(category => this.Category_row(category))
+		}
+		
+		category_title(category: string) {
+			return category
+		}
+		
+		@ $mol_action
+		category_remove(category: string) {
+			this.catalog()?.Categories()?.cut(category)
+		}
+
+
 	}
 }

@@ -13,5 +13,12 @@ $bog_nka_settings $mol_page
 		<= Category_add $mol_button_major
 			title @ \Add category
 			click? <=> category_add? null
-		<= Categories_text $mol_paragraph
-			title <= categories_text \
+		<= Categories_list $mol_list
+			rows <= category_rows /
+	Category_row* $mol_row
+		sub /
+			<= Category_title* $mol_paragraph
+				title <= category_title* \
+			<= Category_remove* $mol_button_minor
+				title @ \Remove
+				click? <=> category_remove*? null
