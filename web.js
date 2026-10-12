@@ -30593,7 +30593,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/nka/number/number.view.css", "[bog_nka_number] [mol_string]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}");
+    $mol_style_attach("bog/nka/number/number.view.css", "[bog_nka_number] [mol_string]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}\n[bog_nka_number] [mol_button_minor] {\n\tdisplay: none;\n}\n\n[bog_nka_number]:focus-within [mol_button_minor] {\n\tdisplay: inline-flex;\n}\n");
 })($ || ($ = {}));
 
 ;
