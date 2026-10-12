@@ -409,14 +409,32 @@ $giper_baza_status $mol_select
 				<= Fail $mol_icon_sync_off
 			hint <= message <= hint \Sync status
 
+$mol_row $mol_view
+
 $bog_nka_settings $mol_page
 	title @ \Settings
 	text_id @ \Your Id is: 
+	catalog_link? \
 	tools /
 		<= Sync $giper_baza_status
 	body /
 		<= Account_id $mol_paragraph
 			title <= account_id \
+		<= Category_input $mol_string
+			hint @ \New category
+			value? <=> category_draft? \
+		<= Category_add $mol_button_major
+			title @ \Add category
+			click? <=> category_add? null
+		<= Categories_list $mol_list
+			rows <= category_rows /
+	Category_row* $mol_row
+		sub /
+			<= Category_title* $mol_paragraph
+				title <= category_title* \
+			<= Category_remove* $mol_button_minor
+				title @ \Remove
+				click? <=> category_remove*? null
 
 $mol_card $mol_list
 	attr *
@@ -486,7 +504,8 @@ $mol_check_box $mol_check
 	Icon $mol_icon_tick
 
 $bog_nka_product_card $mol_card
-	link <= product_link \
+	product_link? \
+	catalog_link? \
 	sub /
 		<= Title $mol_string_button
 			value? <=> title? \
@@ -501,6 +520,11 @@ $bog_nka_product_card $mol_card
 			value? <=> description? \
 			hint @ \Description
 			enabled <= changed true
+		<= Category $mol_select
+			options <= category_list /
+			option_label_default @ \Category
+			enabled <= changed true
+			value? <=> category? null
 		<= Available $mol_check_box
 			checked? <=> available? false
 			title @ \Available
@@ -512,6 +536,7 @@ $bog_nka_app $mol_page
 	title null - поле в настройках
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
+		catalog_link <= catalog_link \
 	tools /
 		<= Settings_button $mol_button_minor
 			title <= settings_button_title \
@@ -534,3 +559,4 @@ $bog_nka_app $mol_page
 				<= Product_cards $mol_gallery
 					items <= product_cards /
 		<= Settings $bog_nka_settings
+			catalog_link <= catalog_link \

@@ -38765,33 +38765,16 @@ declare namespace $ {
 }
 
 declare namespace $ {
+}
 
-	type $mol_paragraph__title_bog_nka_settings_1 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['account_id'] >
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	export class $bog_nka_settings extends $mol_page {
-		Sync( ): $giper_baza_status
-		account_id( ): string
-		Account_id( ): $mol_paragraph
-		title( ): string
-		text_id( ): string
-		tools( ): readonly(any)[]
-		body( ): readonly(any)[]
+declare namespace $ {
+
+	export class $mol_row extends $mol_view {
 	}
 	
 }
 
-//# sourceMappingURL=settings.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_nka_settings extends $.$bog_nka_settings {
-        settings_open(next?: boolean): boolean;
-        settings_toggle(): void;
-        account_id(): string;
-    }
-}
-
+//# sourceMappingURL=row.view.tree.d.ts.map
 declare namespace $ {
     const $bog_nka_product_base: Omit<typeof $giper_baza_dict, "prototype"> & {
         new (...args: any[]): $mol_type_override<$giper_baza_dict, {
@@ -39554,369 +39537,6 @@ declare namespace $ {
     export class $bog_nka_product extends $bog_nka_product_base {
     }
     export {};
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_mol_card_1 = $mol_type_enforce<
-		ReturnType< $mol_card['content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__minimal_height_mol_card_2 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $mol_view['minimal_height'] >
-	>
-	type $mol_view__sub_mol_card_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_card extends $mol_list {
-		status( ): string
-		content( ): readonly($mol_view_content)[]
-		Content( ): $mol_view
-		status_text( ): ReturnType< $mol_card['status'] >
-		Status( ): $mol_view
-		attr( ): ({ 
-			'mol_card_status_type': ReturnType< $mol_card['status'] >,
-		})  & ReturnType< $mol_list['attr'] >
-		rows( ): readonly($mol_view)[]
-	}
-	
-}
-
-//# sourceMappingURL=card.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Represents a common card. It can has several statuses at bottom line.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
-     */
-    class $mol_card extends $.$mol_card {
-        rows(): readonly $mol_view[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_string_button extends $mol_string {
-	}
-	
-}
-
-//# sourceMappingURL=button.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_menu extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=menu.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_menu_down extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=down.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_menu_down_outline extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=outline.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_menu_up extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=up.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_menu_up_outline extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=outline.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_hotkey__key_mol_number_1 = $mol_type_enforce<
-		({ 
-			down( next?: ReturnType< $mol_number['event_dec'] > ): ReturnType< $mol_number['event_dec'] >,
-			up( next?: ReturnType< $mol_number['event_inc'] > ): ReturnType< $mol_number['event_inc'] >,
-			pageDown( next?: ReturnType< $mol_number['event_dec_boost'] > ): ReturnType< $mol_number['event_dec_boost'] >,
-			pageUp( next?: ReturnType< $mol_number['event_inc_boost'] > ): ReturnType< $mol_number['event_inc_boost'] >,
-		}) 
-		,
-		ReturnType< $mol_hotkey['key'] >
-	>
-	type $mol_string__type_mol_number_2 = $mol_type_enforce<
-		ReturnType< $mol_number['type'] >
-		,
-		ReturnType< $mol_string['type'] >
-	>
-	type $mol_string__keyboard_mol_number_3 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_string['keyboard'] >
-	>
-	type $mol_string__value_mol_number_4 = $mol_type_enforce<
-		ReturnType< $mol_number['value_string'] >
-		,
-		ReturnType< $mol_string['value'] >
-	>
-	type $mol_string__hint_mol_number_5 = $mol_type_enforce<
-		ReturnType< $mol_number['hint'] >
-		,
-		ReturnType< $mol_string['hint'] >
-	>
-	type $mol_string__enabled_mol_number_6 = $mol_type_enforce<
-		ReturnType< $mol_number['string_enabled'] >
-		,
-		ReturnType< $mol_string['enabled'] >
-	>
-	type $mol_string__submit_mol_number_7 = $mol_type_enforce<
-		ReturnType< $mol_number['submit'] >
-		,
-		ReturnType< $mol_string['submit'] >
-	>
-	type $mol_string__selection_mol_number_8 = $mol_type_enforce<
-		ReturnType< $mol_number['selection'] >
-		,
-		ReturnType< $mol_string['selection'] >
-	>
-	type $mol_button_minor__event_click_mol_number_9 = $mol_type_enforce<
-		ReturnType< $mol_number['event_dec'] >
-		,
-		ReturnType< $mol_button_minor['event_click'] >
-	>
-	type $mol_button_minor__enabled_mol_number_10 = $mol_type_enforce<
-		ReturnType< $mol_number['dec_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__sub_mol_number_11 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $mol_button_minor__event_click_mol_number_12 = $mol_type_enforce<
-		ReturnType< $mol_number['event_inc'] >
-		,
-		ReturnType< $mol_button_minor['event_click'] >
-	>
-	type $mol_button_minor__enabled_mol_number_13 = $mol_type_enforce<
-		ReturnType< $mol_number['inc_enabled'] >
-		,
-		ReturnType< $mol_button_minor['enabled'] >
-	>
-	type $mol_button_minor__sub_mol_number_14 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	export class $mol_number extends $mol_view {
-		precision( ): number
-		event_dec( next?: any ): any
-		event_inc( next?: any ): any
-		event_dec_boost( next?: any ): any
-		event_inc_boost( next?: any ): any
-		Hotkey( ): $mol_hotkey
-		type( ): string
-		value_string( next?: string ): string
-		hint( ): string
-		string_enabled( ): ReturnType< $mol_number['enabled'] >
-		submit( next?: any ): any
-		selection( next?: readonly(number)[] ): readonly(number)[]
-		String( ): $mol_string
-		dec_enabled( ): ReturnType< $mol_number['enabled'] >
-		dec_icon( ): $mol_icon_menu_down_outline
-		Dec( ): $mol_button_minor
-		inc_enabled( ): ReturnType< $mol_number['enabled'] >
-		inc_icon( ): $mol_icon_menu_up_outline
-		Inc( ): $mol_button_minor
-		precision_view( ): ReturnType< $mol_number['precision'] >
-		precision_change( ): ReturnType< $mol_number['precision'] >
-		boost( ): number
-		value_min( ): number
-		value_max( ): number
-		value( next?: number ): number
-		enabled( ): boolean
-		plugins( ): readonly(any)[]
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=number.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Component for entering, incrementing and decrementing numeric values.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_number_demo
-     */
-    class $mol_number extends $.$mol_number {
-        sub(): ($mol_button_minor | $.$mol_string)[];
-        value_limited(val?: number): number;
-        event_dec(next?: Event): void;
-        precision_change(): number;
-        event_inc(next?: Event): void;
-        event_dec_boost(next?: Event): void;
-        event_inc_boost(next?: Event): void;
-        round(val: number): string;
-        value_string(next?: string): string;
-        dec_enabled(): boolean;
-        inc_enabled(): boolean;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $bog_nka_number extends $mol_number {
-	}
-	
-}
-
-//# sourceMappingURL=number.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_tick extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=tick.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_check_box extends $mol_check {
-		Icon( ): $mol_icon_tick
-	}
-	
-}
-
-//# sourceMappingURL=box.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['title'] >
-		,
-		ReturnType< $mol_string_button['value'] >
-	>
-	type $mol_string_button__hint_bog_nka_product_card_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_string_button['hint'] >
-	>
-	type $mol_string_button__enabled_bog_nka_product_card_3 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['changed'] >
-		,
-		ReturnType< $mol_string_button['enabled'] >
-	>
-	type $bog_nka_number__value_min_bog_nka_product_card_4 = $mol_type_enforce<
-		number
-		,
-		ReturnType< $bog_nka_number['value_min'] >
-	>
-	type $bog_nka_number__hint_bog_nka_product_card_5 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $bog_nka_number['hint'] >
-	>
-	type $bog_nka_number__value_bog_nka_product_card_6 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['price'] >
-		,
-		ReturnType< $bog_nka_number['value'] >
-	>
-	type $bog_nka_number__enabled_bog_nka_product_card_7 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['changed'] >
-		,
-		ReturnType< $bog_nka_number['enabled'] >
-	>
-	type $mol_string_button__value_bog_nka_product_card_8 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['description'] >
-		,
-		ReturnType< $mol_string_button['value'] >
-	>
-	type $mol_string_button__hint_bog_nka_product_card_9 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_string_button['hint'] >
-	>
-	type $mol_string_button__enabled_bog_nka_product_card_10 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['changed'] >
-		,
-		ReturnType< $mol_string_button['enabled'] >
-	>
-	type $mol_check_box__checked_bog_nka_product_card_11 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['available'] >
-		,
-		ReturnType< $mol_check_box['checked'] >
-	>
-	type $mol_check_box__title_bog_nka_product_card_12 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_check_box['title'] >
-	>
-	type $mol_check_box__enabled_bog_nka_product_card_13 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['changed'] >
-		,
-		ReturnType< $mol_check_box['enabled'] >
-	>
-	export class $bog_nka_product_card extends $mol_card {
-		product_link( ): string
-		title( next?: string ): string
-		changed( ): boolean
-		Title( ): $mol_string_button
-		price( next?: any ): any
-		Price( ): $bog_nka_number
-		description( next?: string ): string
-		Description( ): $mol_string_button
-		available( next?: boolean ): boolean
-		Available( ): $mol_check_box
-		link( ): ReturnType< $bog_nka_product_card['product_link'] >
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=card.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_nka_product_card extends $.$bog_nka_product_card {
-        product(): $bog_nka_product;
-        changed(): boolean;
-        title(next?: string): string;
-        price(next?: number): number;
-        description(next?: string): string;
-        available(next?: boolean): boolean;
-    }
 }
 
 declare namespace $ {
@@ -42037,6 +41657,490 @@ declare namespace $ {
 
 declare namespace $ {
 
+	type $mol_paragraph__title_bog_nka_settings_1 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['account_id'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_string__hint_bog_nka_settings_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_nka_settings_3 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_draft'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_button_major__title_bog_nka_settings_4 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_settings_5 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_add'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_list__rows_bog_nka_settings_6 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_rows'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_7 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_title'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_button_minor__title_bog_nka_settings_8 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_bog_nka_settings_9 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_remove'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_row__sub_bog_nka_settings_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	export class $bog_nka_settings extends $mol_page {
+		Sync( ): $giper_baza_status
+		account_id( ): string
+		Account_id( ): $mol_paragraph
+		category_draft( next?: string ): string
+		Category_input( ): $mol_string
+		category_add( next?: any ): any
+		Category_add( ): $mol_button_major
+		category_rows( ): readonly(any)[]
+		Categories_list( ): $mol_list
+		category_title( id: any): string
+		Category_title( id: any): $mol_paragraph
+		category_remove( id: any, next?: any ): any
+		Category_remove( id: any): $mol_button_minor
+		title( ): string
+		text_id( ): string
+		catalog_link( next?: string ): string
+		tools( ): readonly(any)[]
+		body( ): readonly(any)[]
+		Category_row( id: any): $mol_row
+	}
+	
+}
+
+//# sourceMappingURL=settings.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_nka_settings extends $.$bog_nka_settings {
+        settings_open(next?: boolean): boolean;
+        settings_toggle(): void;
+        account_id(): string;
+        catalog(): $bog_nka_catalog | null;
+        categories_text(): string;
+        category_draft(next?: string): string;
+        category_add(): void;
+        category_rows(): $mol_row[];
+        category_title(category: string): string;
+        category_remove(category: string): void;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_card_1 = $mol_type_enforce<
+		ReturnType< $mol_card['content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__minimal_height_mol_card_2 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_view['minimal_height'] >
+	>
+	type $mol_view__sub_mol_card_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_card extends $mol_list {
+		status( ): string
+		content( ): readonly($mol_view_content)[]
+		Content( ): $mol_view
+		status_text( ): ReturnType< $mol_card['status'] >
+		Status( ): $mol_view
+		attr( ): ({ 
+			'mol_card_status_type': ReturnType< $mol_card['status'] >,
+		})  & ReturnType< $mol_list['attr'] >
+		rows( ): readonly($mol_view)[]
+	}
+	
+}
+
+//# sourceMappingURL=card.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Represents a common card. It can has several statuses at bottom line.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_card_demo/readme
+     */
+    class $mol_card extends $.$mol_card {
+        rows(): readonly $mol_view[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_string_button extends $mol_string {
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_menu extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=menu.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_menu_down extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=down.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_menu_down_outline extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_menu_up extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=up.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_menu_up_outline extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_hotkey__key_mol_number_1 = $mol_type_enforce<
+		({ 
+			down( next?: ReturnType< $mol_number['event_dec'] > ): ReturnType< $mol_number['event_dec'] >,
+			up( next?: ReturnType< $mol_number['event_inc'] > ): ReturnType< $mol_number['event_inc'] >,
+			pageDown( next?: ReturnType< $mol_number['event_dec_boost'] > ): ReturnType< $mol_number['event_dec_boost'] >,
+			pageUp( next?: ReturnType< $mol_number['event_inc_boost'] > ): ReturnType< $mol_number['event_inc_boost'] >,
+		}) 
+		,
+		ReturnType< $mol_hotkey['key'] >
+	>
+	type $mol_string__type_mol_number_2 = $mol_type_enforce<
+		ReturnType< $mol_number['type'] >
+		,
+		ReturnType< $mol_string['type'] >
+	>
+	type $mol_string__keyboard_mol_number_3 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['keyboard'] >
+	>
+	type $mol_string__value_mol_number_4 = $mol_type_enforce<
+		ReturnType< $mol_number['value_string'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__hint_mol_number_5 = $mol_type_enforce<
+		ReturnType< $mol_number['hint'] >
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__enabled_mol_number_6 = $mol_type_enforce<
+		ReturnType< $mol_number['string_enabled'] >
+		,
+		ReturnType< $mol_string['enabled'] >
+	>
+	type $mol_string__submit_mol_number_7 = $mol_type_enforce<
+		ReturnType< $mol_number['submit'] >
+		,
+		ReturnType< $mol_string['submit'] >
+	>
+	type $mol_string__selection_mol_number_8 = $mol_type_enforce<
+		ReturnType< $mol_number['selection'] >
+		,
+		ReturnType< $mol_string['selection'] >
+	>
+	type $mol_button_minor__event_click_mol_number_9 = $mol_type_enforce<
+		ReturnType< $mol_number['event_dec'] >
+		,
+		ReturnType< $mol_button_minor['event_click'] >
+	>
+	type $mol_button_minor__enabled_mol_number_10 = $mol_type_enforce<
+		ReturnType< $mol_number['dec_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__sub_mol_number_11 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__event_click_mol_number_12 = $mol_type_enforce<
+		ReturnType< $mol_number['event_inc'] >
+		,
+		ReturnType< $mol_button_minor['event_click'] >
+	>
+	type $mol_button_minor__enabled_mol_number_13 = $mol_type_enforce<
+		ReturnType< $mol_number['inc_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__sub_mol_number_14 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	export class $mol_number extends $mol_view {
+		precision( ): number
+		event_dec( next?: any ): any
+		event_inc( next?: any ): any
+		event_dec_boost( next?: any ): any
+		event_inc_boost( next?: any ): any
+		Hotkey( ): $mol_hotkey
+		type( ): string
+		value_string( next?: string ): string
+		hint( ): string
+		string_enabled( ): ReturnType< $mol_number['enabled'] >
+		submit( next?: any ): any
+		selection( next?: readonly(number)[] ): readonly(number)[]
+		String( ): $mol_string
+		dec_enabled( ): ReturnType< $mol_number['enabled'] >
+		dec_icon( ): $mol_icon_menu_down_outline
+		Dec( ): $mol_button_minor
+		inc_enabled( ): ReturnType< $mol_number['enabled'] >
+		inc_icon( ): $mol_icon_menu_up_outline
+		Inc( ): $mol_button_minor
+		precision_view( ): ReturnType< $mol_number['precision'] >
+		precision_change( ): ReturnType< $mol_number['precision'] >
+		boost( ): number
+		value_min( ): number
+		value_max( ): number
+		value( next?: number ): number
+		enabled( ): boolean
+		plugins( ): readonly(any)[]
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=number.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Component for entering, incrementing and decrementing numeric values.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_number_demo
+     */
+    class $mol_number extends $.$mol_number {
+        sub(): ($mol_button_minor | $.$mol_string)[];
+        value_limited(val?: number): number;
+        event_dec(next?: Event): void;
+        precision_change(): number;
+        event_inc(next?: Event): void;
+        event_dec_boost(next?: Event): void;
+        event_inc_boost(next?: Event): void;
+        round(val: number): string;
+        value_string(next?: string): string;
+        dec_enabled(): boolean;
+        inc_enabled(): boolean;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $bog_nka_number extends $mol_number {
+	}
+	
+}
+
+//# sourceMappingURL=number.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_tick extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=tick.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_box extends $mol_check {
+		Icon( ): $mol_icon_tick
+	}
+	
+}
+
+//# sourceMappingURL=box.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['title'] >
+		,
+		ReturnType< $mol_string_button['value'] >
+	>
+	type $mol_string_button__hint_bog_nka_product_card_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string_button['hint'] >
+	>
+	type $mol_string_button__enabled_bog_nka_product_card_3 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $mol_string_button['enabled'] >
+	>
+	type $bog_nka_number__value_min_bog_nka_product_card_4 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $bog_nka_number['value_min'] >
+	>
+	type $bog_nka_number__hint_bog_nka_product_card_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_nka_number['hint'] >
+	>
+	type $bog_nka_number__value_bog_nka_product_card_6 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['price'] >
+		,
+		ReturnType< $bog_nka_number['value'] >
+	>
+	type $bog_nka_number__enabled_bog_nka_product_card_7 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $bog_nka_number['enabled'] >
+	>
+	type $mol_string_button__value_bog_nka_product_card_8 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['description'] >
+		,
+		ReturnType< $mol_string_button['value'] >
+	>
+	type $mol_string_button__hint_bog_nka_product_card_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string_button['hint'] >
+	>
+	type $mol_string_button__enabled_bog_nka_product_card_10 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $mol_string_button['enabled'] >
+	>
+	type $mol_select__options_bog_nka_product_card_11 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['category_list'] >
+		,
+		ReturnType< $mol_select['options'] >
+	>
+	type $mol_select__option_label_default_bog_nka_product_card_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_select['option_label_default'] >
+	>
+	type $mol_select__enabled_bog_nka_product_card_13 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__value_bog_nka_product_card_14 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['category'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_check_box__checked_bog_nka_product_card_15 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['available'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_check_box__title_bog_nka_product_card_16 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__enabled_bog_nka_product_card_17 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $mol_check_box['enabled'] >
+	>
+	export class $bog_nka_product_card extends $mol_card {
+		title( next?: string ): string
+		changed( ): boolean
+		Title( ): $mol_string_button
+		price( next?: any ): any
+		Price( ): $bog_nka_number
+		description( next?: string ): string
+		Description( ): $mol_string_button
+		category_list( ): readonly(any)[]
+		category( next?: any ): any
+		Category( ): $mol_select
+		available( next?: boolean ): boolean
+		Available( ): $mol_check_box
+		product_link( next?: string ): string
+		catalog_link( next?: string ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=card.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_nka_product_card extends $.$bog_nka_product_card {
+        product(): $bog_nka_product;
+        changed(): boolean;
+        title(next?: string): string;
+        price(next?: number): number;
+        description(next?: string): string;
+        available(next?: boolean): boolean;
+        catalog(): $bog_nka_catalog | null;
+        category_list(): readonly string[];
+        category(next?: string | null): string | null;
+    }
+}
+
+declare namespace $ {
+
 	type $mol_button_minor__title_bog_nka_app_1 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['settings_button_title'] >
 		,
@@ -42092,13 +42196,24 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_nka_product_card__product_link_bog_nka_app_12 = $mol_type_enforce<
+	type $bog_nka_settings__catalog_link_bog_nka_app_12 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['catalog_link'] >
+		,
+		ReturnType< $bog_nka_settings['catalog_link'] >
+	>
+	type $bog_nka_product_card__product_link_bog_nka_app_13 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['product_link'] >
 		,
 		ReturnType< $bog_nka_product_card['product_link'] >
 	>
+	type $bog_nka_product_card__catalog_link_bog_nka_app_14 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['catalog_link'] >
+		,
+		ReturnType< $bog_nka_product_card['catalog_link'] >
+	>
 	export class $bog_nka_app extends $mol_page {
 		product_link( id: any): string
+		catalog_link( ): string
 		settings_button_title( ): string
 		settings_toggle( next?: any ): any
 		Settings_button( ): $mol_button_minor

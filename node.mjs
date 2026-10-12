@@ -18942,6 +18942,21 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
 	($.$bog_nka_settings) = class $bog_nka_settings extends ($.$mol_page) {
 		Sync(){
 			const obj = new this.$.$giper_baza_status();
@@ -18955,22 +18970,123 @@ var $;
 			(obj.title) = () => ((this.account_id()));
 			return obj;
 		}
+		category_draft(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Category_input(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_input_hint")));
+			(obj.value) = (next) => ((this.category_draft(next)));
+			return obj;
+		}
+		category_add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Category_add(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_add_title")));
+			(obj.click) = (next) => ((this.category_add(next)));
+			return obj;
+		}
+		category_rows(){
+			return [];
+		}
+		Categories_list(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.category_rows()));
+			return obj;
+		}
+		category_title(id){
+			return "";
+		}
+		Category_title(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.category_title(id)));
+			return obj;
+		}
+		category_remove(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Category_remove(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_remove_title")));
+			(obj.click) = (next) => ((this.category_remove(id, next)));
+			return obj;
+		}
 		title(){
 			return (this.$.$mol_locale.text("$bog_nka_settings_title"));
 		}
 		text_id(){
 			return (this.$.$mol_locale.text("$bog_nka_settings_text_id"));
 		}
+		catalog_link(next){
+			if(next !== undefined) return next;
+			return "";
+		}
 		tools(){
 			return [(this.Sync())];
 		}
 		body(){
-			return [(this.Account_id())];
+			return [
+				(this.Account_id()), 
+				(this.Category_input()), 
+				(this.Category_add()), 
+				(this.Categories_list())
+			];
+		}
+		Category_row(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Category_title(id)), (this.Category_remove(id))]);
+			return obj;
 		}
 	};
 	($mol_mem(($.$bog_nka_settings.prototype), "Sync"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_id"));
+	($mol_mem(($.$bog_nka_settings.prototype), "category_draft"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Category_input"));
+	($mol_mem(($.$bog_nka_settings.prototype), "category_add"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Category_add"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Categories_list"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_title"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "category_remove"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_remove"));
+	($mol_mem(($.$bog_nka_settings.prototype), "catalog_link"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_row"));
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $bog_nka_product extends $giper_baza_dict.with({
+        Title: $giper_baza_atom_text,
+        Price: $giper_baza_atom_real,
+        Description: $giper_baza_atom_text,
+        Photos: $giper_baza_list_link.to(() => $giper_baza_file),
+        Category: $giper_baza_atom_text,
+        Available: $giper_baza_atom_bool,
+    }) {
+    }
+    $.$bog_nka_product = $bog_nka_product;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $bog_nka_catalog extends $giper_baza_dict.with({
+        Products: $giper_baza_list_link.to(() => $bog_nka_product),
+        Categories: $giper_baza_list_str,
+        Telegram: $giper_baza_atom_text,
+        TelegramText: $giper_baza_atom_text,
+        SoldOutImage: $giper_baza_atom_link.to(() => $giper_baza_file),
+    }) {
+    }
+    $.$bog_nka_catalog = $bog_nka_catalog;
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -18992,6 +19108,39 @@ var $;
             account_id() {
                 return this.text_id() + this.$.$giper_baza_auth.current().pass().lord().str;
             }
+            catalog() {
+                const link = this.catalog_link();
+                if (!link)
+                    return null;
+                const land = this.$.$giper_baza_glob.Land(new this.$.$giper_baza_link(link));
+                return land.Data($bog_nka_catalog);
+            }
+            categories_text() {
+                return this.catalog()?.Categories()?.items().join(', ') ?? '';
+            }
+            category_draft(next) {
+                return next ?? '';
+            }
+            category_add() {
+                const name = this.category_draft().trim();
+                if (!name)
+                    return;
+                const categories = this.catalog()?.Categories(null);
+                if (!categories)
+                    return;
+                categories.add(name);
+                this.category_draft('');
+            }
+            category_rows() {
+                const categories = this.catalog()?.Categories()?.items() ?? [];
+                return categories.map(category => this.Category_row(category));
+            }
+            category_title(category) {
+                return category;
+            }
+            category_remove(category) {
+                this.catalog()?.Categories()?.cut(category);
+            }
         }
         __decorate([
             $mol_mem
@@ -18999,6 +19148,15 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_settings.prototype, "settings_toggle", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "category_draft", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "category_add", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "category_remove", null);
         $$.$bog_nka_settings = $bog_nka_settings;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -19007,16 +19165,17 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    class $bog_nka_product extends $giper_baza_dict.with({
-        Title: $giper_baza_atom_text,
-        Price: $giper_baza_atom_real,
-        Description: $giper_baza_atom_text,
-        Photos: $giper_baza_list_link.to(() => $giper_baza_file),
-        Category: $giper_baza_atom_text,
-        Available: $giper_baza_atom_bool,
-    }) {
-    }
-    $.$bog_nka_product = $bog_nka_product;
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_settings, {
+            Category_row: {
+                alignItems: 'center',
+                flex: { wrap: 'nowrap' },
+                padding: 0,
+                gap: $mol_gap.block,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
@@ -19492,9 +19651,6 @@ var $;
 
 ;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
-		product_link(){
-			return "";
-		}
 		title(next){
 			if(next !== undefined) return next;
 			return "";
@@ -19532,6 +19688,21 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
+		category_list(){
+			return [];
+		}
+		category(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Category(){
+			const obj = new this.$.$mol_select();
+			(obj.options) = () => ((this.category_list()));
+			(obj.option_label_default) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Category_option_label_default")));
+			(obj.enabled) = () => ((this.changed()));
+			(obj.value) = (next) => ((this.category(next)));
+			return obj;
+		}
 		available(next){
 			if(next !== undefined) return next;
 			return false;
@@ -19543,14 +19714,20 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
-		link(){
-			return (this.product_link());
+		product_link(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		catalog_link(next){
+			if(next !== undefined) return next;
+			return "";
 		}
 		sub(){
 			return [
 				(this.Title()), 
 				(this.Price()), 
 				(this.Description()), 
+				(this.Category()), 
 				(this.Available())
 			];
 		}
@@ -19561,8 +19738,12 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "description"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "category"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Category"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "product_link"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "catalog_link"));
 
 
 ;
@@ -19606,10 +19787,10 @@ var $;
                 const product = this.product();
                 if (next === undefined)
                     return product.Description()?.val() ?? '';
-                const title = product.Description(null);
-                if (!title)
+                const descr = product.Description(null);
+                if (!descr)
                     return '';
-                title.val(next);
+                descr.val(next);
                 return next;
             }
             available(next) {
@@ -19622,6 +19803,27 @@ var $;
                 atom.val(next);
                 return next;
             }
+            catalog() {
+                const link = this.catalog_link();
+                if (!link)
+                    return null;
+                const land = this.$.$giper_baza_glob.Land(new this.$.$giper_baza_link(link));
+                return land.Data($bog_nka_catalog);
+            }
+            category_list() {
+                return this.catalog()?.Categories()?.items() ?? [];
+            }
+            category(next) {
+                const product = this.product();
+                if (next === undefined || next === null) {
+                    return product.Category()?.val() ?? null;
+                }
+                const atom = product.Category(null);
+                if (!atom)
+                    return null;
+                atom.val(next);
+                return next;
+            }
         }
         $$.$bog_nka_product_card = $bog_nka_product_card;
     })($$ = $.$$ || ($.$$ = {}));
@@ -19630,6 +19832,9 @@ var $;
 ;
 	($.$bog_nka_app) = class $bog_nka_app extends ($.$mol_page) {
 		product_link(id){
+			return "";
+		}
+		catalog_link(){
 			return "";
 		}
 		settings_button_title(){
@@ -19702,6 +19907,7 @@ var $;
 		}
 		Settings(){
 			const obj = new this.$.$bog_nka_settings();
+			(obj.catalog_link) = () => ((this.catalog_link()));
 			return obj;
 		}
 		content(){
@@ -19723,6 +19929,7 @@ var $;
 		Product_card(id){
 			const obj = new this.$.$bog_nka_product_card();
 			(obj.product_link) = () => ((this.product_link(id)));
+			(obj.catalog_link) = () => ((this.catalog_link()));
 			return obj;
 		}
 		tools(){
@@ -19749,21 +19956,6 @@ var $;
 
 ;
 "use strict";
-var $;
-(function ($) {
-    class $bog_nka_catalog extends $giper_baza_dict.with({
-        Products: $giper_baza_list_link.to(() => $bog_nka_product),
-        Categories: $giper_baza_list_str,
-        Telegram: $giper_baza_atom_text,
-        TelegramText: $giper_baza_atom_text,
-        SoldOutImage: $giper_baza_atom_link.to(() => $giper_baza_file),
-    }) {
-    }
-    $.$bog_nka_catalog = $bog_nka_catalog;
-})($ || ($ = {}));
-
-;
-"use strict";
 
 
 ;
@@ -19777,7 +19969,8 @@ var $;
                 return this.$.$mol_state_arg.value('catalog', next) ?? '';
             }
             settings_open(next) {
-                return next ?? false;
+                const state = this.$.$mol_state_arg.value('settings', next === undefined ? undefined : next ? 'true' : '');
+                return state === 'true';
             }
             settings_toggle() {
                 this.settings_open(!this.settings_open());
