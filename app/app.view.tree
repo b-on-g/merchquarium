@@ -4,7 +4,7 @@ $bog_nka_app $mol_page
 	title null - поле в настройках
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
-		catalog_link <= catalog_link* \
+		catalog_link <= catalog_link \
 	tools /
 		<= Settings_button $mol_button_minor
 			title <= settings_button_title \
