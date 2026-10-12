@@ -45899,8 +45899,24 @@ declare namespace $ {
 //# sourceMappingURL=button.view.tree.d.ts.map
 declare namespace $ {
 
+	export class $bog_nka_number extends $mol_number {
+	}
+	
+}
+
+//# sourceMappingURL=number.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_nka_number extends $.$bog_nka_number {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
 	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['title_btn'] >
+		ReturnType< $bog_nka_product_card['title'] >
 		,
 		ReturnType< $mol_string_button['value'] >
 	>
@@ -45914,12 +45930,34 @@ declare namespace $ {
 		,
 		ReturnType< $mol_string_button['enabled'] >
 	>
+	type $bog_nka_number__value_min_bog_nka_product_card_4 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $bog_nka_number['value_min'] >
+	>
+	type $bog_nka_number__hint_bog_nka_product_card_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_nka_number['hint'] >
+	>
+	type $bog_nka_number__value_bog_nka_product_card_6 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['price'] >
+		,
+		ReturnType< $bog_nka_number['value'] >
+	>
+	type $bog_nka_number__enabled_bog_nka_product_card_7 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $bog_nka_number['enabled'] >
+	>
 	export class $bog_nka_product_card extends $mol_card {
 		product_link( ): string
-		title_btn( next?: string ): string
+		title( next?: string ): string
 		changed( ): boolean
 		Title( ): $mol_string_button
-		title( ): ReturnType< $bog_nka_product_card['product_link'] >
+		price( next?: any ): any
+		Price( ): $bog_nka_number
+		link( ): ReturnType< $bog_nka_product_card['product_link'] >
 		sub( ): readonly(any)[]
 	}
 	
@@ -45930,7 +45968,8 @@ declare namespace $.$$ {
     class $bog_nka_product_card extends $.$bog_nka_product_card {
         product(): $bog_nka_product;
         changed(): boolean;
-        title_btn(next?: string): string;
+        title(next?: string): string;
+        price(next?: number): number;
     }
 }
 

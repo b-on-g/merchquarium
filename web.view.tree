@@ -2137,13 +2137,22 @@ $mol_card $mol_list
 
 $mol_string_button $mol_string
 
+$bog_nka_number $mol_number
+
 $bog_nka_product_card $mol_card
-	title <= product_link \
+	link <= product_link \
 	sub /
 		<= Title $mol_string_button
-			value? <=> title_btn? \
+			value? <=> title? \
 			hint @ \Title
 			enabled <= changed true
+		<= Price $bog_nka_number
+			value_min 0
+			hint @ \Price
+			value? <=> price? null
+			enabled <= changed true
+	
+
 
 $bog_nka_app $mol_page
 	Settings_title @ \Settings

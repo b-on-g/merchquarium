@@ -30570,11 +30570,38 @@ var $;
 
 
 ;
+	($.$bog_nka_number) = class $bog_nka_number extends ($.$mol_number) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_nka_number extends $.$bog_nka_number {
+        }
+        $$.$bog_nka_number = $bog_nka_number;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/nka/number/number.view.css", "[bog_nka_number] [mol_string]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}");
+})($ || ($ = {}));
+
+;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
 		product_link(){
 			return "";
 		}
-		title_btn(next){
+		title(next){
 			if(next !== undefined) return next;
 			return "";
 		}
@@ -30583,20 +30610,34 @@ var $;
 		}
 		Title(){
 			const obj = new this.$.$mol_string_button();
-			(obj.value) = (next) => ((this.title_btn(next)));
+			(obj.value) = (next) => ((this.title(next)));
 			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Title_hint")));
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
-		title(){
+		price(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Price(){
+			const obj = new this.$.$bog_nka_number();
+			(obj.value_min) = () => (0);
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Price_hint")));
+			(obj.value) = (next) => ((this.price(next)));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
+		link(){
 			return (this.product_link());
 		}
 		sub(){
-			return [(this.Title())];
+			return [(this.Title()), (this.Price())];
 		}
 	};
-	($mol_mem(($.$bog_nka_product_card.prototype), "title_btn"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "title"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Title"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "price"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
 
 
 ;
@@ -30616,7 +30657,7 @@ var $;
             changed() {
                 return this.product().can_change();
             }
-            title_btn(next) {
+            title(next) {
                 const product = this.product();
                 if (next === undefined)
                     return product.Title()?.val() ?? '';
@@ -30624,6 +30665,16 @@ var $;
                 if (!title)
                     return '';
                 title.val(next);
+                return next;
+            }
+            price(next) {
+                const product = this.product();
+                if (next === undefined)
+                    return product.Price()?.val() ?? 0;
+                const price = product.Price(null);
+                if (!price)
+                    return 0;
+                price.val(next);
                 return next;
             }
         }

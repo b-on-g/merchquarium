@@ -337,6 +337,13 @@
     "$bog_nka_product",
     "$mol_card",
     "$mol_string_button",
+    "$bog_nka_number",
+    "$mol_number",
+    "$mol_icon_menu_down_outline",
+    "$mol_icon_menu_down",
+    "$mol_icon_menu",
+    "$mol_icon_menu_up_outline",
+    "$mol_icon_menu_up",
     "$bog_nka_catalog"
   ],
   "dependencies": {
