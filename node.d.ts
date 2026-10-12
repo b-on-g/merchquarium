@@ -39804,6 +39804,27 @@ declare namespace $ {
 //# sourceMappingURL=number.view.tree.d.ts.map
 declare namespace $ {
 
+	export class $mol_icon_tick extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=tick.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_box extends $mol_check {
+		Icon( ): $mol_icon_tick
+	}
+	
+}
+
+//# sourceMappingURL=box.view.tree.d.ts.map
+declare namespace $ {
+
 	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['title'] >
 		,
@@ -39854,6 +39875,21 @@ declare namespace $ {
 		,
 		ReturnType< $mol_string_button['enabled'] >
 	>
+	type $mol_check_box__checked_bog_nka_product_card_11 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['available'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_check_box__title_bog_nka_product_card_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__enabled_bog_nka_product_card_13 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $mol_check_box['enabled'] >
+	>
 	export class $bog_nka_product_card extends $mol_card {
 		product_link( ): string
 		title( next?: string ): string
@@ -39863,6 +39899,8 @@ declare namespace $ {
 		Price( ): $bog_nka_number
 		description( next?: string ): string
 		Description( ): $mol_string_button
+		available( next?: boolean ): boolean
+		Available( ): $mol_check_box
 		link( ): ReturnType< $bog_nka_product_card['product_link'] >
 		sub( ): readonly(any)[]
 	}
@@ -39877,6 +39915,7 @@ declare namespace $.$$ {
         title(next?: string): string;
         price(next?: number): number;
         description(next?: string): string;
+        available(next?: boolean): boolean;
     }
 }
 

@@ -30626,6 +30626,17 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
+		available(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Available(){
+			const obj = new this.$.$mol_check_box();
+			(obj.checked) = (next) => ((this.available(next)));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Available_title")));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
 		link(){
 			return (this.product_link());
 		}
@@ -30633,7 +30644,8 @@ var $;
 			return [
 				(this.Title()), 
 				(this.Price()), 
-				(this.Description())
+				(this.Description()), 
+				(this.Available())
 			];
 		}
 	};
@@ -30643,6 +30655,8 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "description"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
 
 
 ;
@@ -30690,6 +30704,16 @@ var $;
                 if (!title)
                     return '';
                 title.val(next);
+                return next;
+            }
+            available(next) {
+                const product = this.product();
+                if (next === undefined)
+                    return product.Available()?.val() ?? false;
+                const atom = product.Available(null);
+                if (!atom)
+                    return false;
+                atom.val(next);
                 return next;
             }
         }

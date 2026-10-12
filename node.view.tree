@@ -480,6 +480,11 @@ $mol_number $mol_view
 
 $bog_nka_number $mol_number
 
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
 $bog_nka_product_card $mol_card
 	link <= product_link \
 	sub /
@@ -495,6 +500,10 @@ $bog_nka_product_card $mol_card
 		<= Description $mol_string_button
 			value? <=> description? \
 			hint @ \Description
+			enabled <= changed true
+		<= Available $mol_check_box
+			checked? <=> available? false
+			title @ \Available
 			enabled <= changed true
 
 $bog_nka_app $mol_page

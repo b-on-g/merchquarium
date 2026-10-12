@@ -344,6 +344,8 @@
     "$mol_icon_menu",
     "$mol_icon_menu_up_outline",
     "$mol_icon_menu_up",
+    "$mol_check_box",
+    "$mol_icon_tick",
     "$bog_nka_catalog"
   ],
   "dependencies": {

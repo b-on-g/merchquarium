@@ -19458,6 +19458,39 @@ var $;
 
 
 ;
+	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
+		path(){
+			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
+		Icon(){
+			const obj = new this.$.$mol_icon_tick();
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_check_box.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
 		product_link(){
 			return "";
@@ -19499,6 +19532,17 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
+		available(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Available(){
+			const obj = new this.$.$mol_check_box();
+			(obj.checked) = (next) => ((this.available(next)));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Available_title")));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
 		link(){
 			return (this.product_link());
 		}
@@ -19506,7 +19550,8 @@ var $;
 			return [
 				(this.Title()), 
 				(this.Price()), 
-				(this.Description())
+				(this.Description()), 
+				(this.Available())
 			];
 		}
 	};
@@ -19516,6 +19561,8 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "description"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
 
 
 ;
@@ -19563,6 +19610,16 @@ var $;
                 if (!title)
                     return '';
                 title.val(next);
+                return next;
+            }
+            available(next) {
+                const product = this.product();
+                if (next === undefined)
+                    return product.Available()?.val() ?? false;
+                const atom = product.Available(null);
+                if (!atom)
+                    return false;
+                atom.val(next);
                 return next;
             }
         }
