@@ -61,15 +61,18 @@ namespace $.$$ {
 		}
 
 		catalog() {
-			return this.$.$giper_baza_glob.Pawn(
-				new this.$.$giper_baza_link( this.catalog_link() ),
-				$bog_nka_catalog,
+			const link = this.catalog_link()
+			if (!link) return null
+		
+			const land = this.$.$giper_baza_glob.Land(
+				new this.$.$giper_baza_link(link),
 			)
+		
+			return land.Data($bog_nka_catalog)
 		}
+		
 		category_list() {
-			console.log(this.catalog().Categories()?.items())
-			console.log(this.catalog().Categories())
-			return []
+			return this.catalog()?.Categories()?.items() ?? []
 		}
 
 
