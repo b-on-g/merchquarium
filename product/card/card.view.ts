@@ -12,5 +12,15 @@ namespace $.$$ {
 			return this.product().can_change()
 		}
 
+		title_btn(next?: string): string {
+			const title = this.product().Title()
+		
+			if (!title) return next ?? ''
+			if (next === undefined) return title.val() ?? ''
+		
+			title.val(next)
+			return next
+		}
+
 	}
 }
