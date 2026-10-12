@@ -19,6 +19,7 @@ $bog_nka_product_card $mol_card
 			options <= category_list /
 			option_label_default @ \Category
 			enabled <= changed true
+			value? <=> category? null
 		<= Available $mol_check_box
 			checked? <=> available? false
 			title @ \Available

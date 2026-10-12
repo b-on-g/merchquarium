@@ -75,6 +75,20 @@ namespace $.$$ {
 			return this.catalog()?.Categories()?.items() ?? []
 		}
 
+		category(next?: string | null): string | null {
+			const product = this.product()
+		
+			if (next === undefined || next === null) {
+				return product.Category()?.val() ?? null
+			}
+		
+			const atom = product.Category(null)
+			if (!atom) return null
+		
+			atom.val(next)
+			return next
+		}
+
 
 	}
 }
