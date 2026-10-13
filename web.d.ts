@@ -48693,6 +48693,7 @@ declare namespace $.$$ {
         buy_enabled(): boolean;
         buy(): void;
         social_url(): URL | null;
+        Available(): $mol_check_box;
     }
 }
 

@@ -31728,10 +31728,16 @@ var $;
                     return null;
                 }
             }
+            Available() {
+                return this.changed() ? super.Available() : null;
+            }
         }
         __decorate([
             $mol_action
         ], $bog_nka_product_card.prototype, "buy", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "Available", null);
         $$.$bog_nka_product_card = $bog_nka_product_card;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

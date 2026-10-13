@@ -590,6 +590,7 @@ $bog_nka_product_card $mol_card
 			title <= buy_title \
 			click? <=> buy? null
 			enabled <= buy_enabled true
+		- далее скрытые от клиента поля
 		<= Available $mol_check_box
 			checked? <=> available? false
 			title @ \Available
