@@ -106,7 +106,11 @@ namespace $.$$ {
 		}
 
 		is_admin() {
-			return !this.catalog()?.can_change()
+			return this.catalog()?.can_change() 
+		}
+		
+		is_not_admin() {
+			return !this.is_admin()
 		}
 
 
