@@ -104,6 +104,9 @@ $mol_button_typed $mol_button
 
 $mol_button_minor $mol_button_typed
 
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
+
 $mol_check $mol_button_minor
 	attr *
 		^
@@ -148,9 +151,6 @@ $mol_paragraph $mol_view
 	width_limit +Infinity
 	row_width 0
 	sub / <= title
-
-$mol_button_major $mol_button_minor
-	theme \$mol_theme_base
 
 $mol_gallery $mol_view
 	sub <= items /$mol_view
@@ -2296,6 +2296,9 @@ $bog_nka_app $mol_page
 		<= Ico $bog_favicon
 			Icon <= ico $mol_icon_all_inclusive
 	head /
+		<= Product_add $mol_button_major
+			title @ \Add product
+			click? <=> product_add? null
 		<= Category_filter $mol_switch
 			options <= category_filter_options *
 			value? <=> category_filter? \all
@@ -2315,9 +2318,6 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_view
 			sub /
-				<= Product_add $mol_button_major
-					title @ \Add product
-					click? <=> product_add? null
 				<= Product_cards $mol_gallery
 					items <= product_cards /
 		<= Settings $bog_nka_settings

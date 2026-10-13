@@ -6439,6 +6439,112 @@ var $;
 
 
 ;
+	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
+		theme(){
+			return "$mol_theme_base";
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /**
+     * Localisation in $mol framework
+     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
+     */
+    class $mol_locale extends $mol_object {
+        static lang_default() {
+            return 'en';
+        }
+        static lang(next) {
+            return this.$.$mol_state_local.value('locale', next) || $mol_dom_context.navigator.language.replace(/-.*/, '') || this.lang_default();
+        }
+        static langs_rtl() {
+            return ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'ug', 'sd'];
+        }
+        static direction() {
+            const lang = this.lang();
+            let direction;
+            try {
+                direction = new Intl.Locale(lang).getTextInfo().direction;
+            }
+            catch (e) {
+                $mol_fail_log(e);
+            }
+            return direction ?? (this.langs_rtl().includes(lang) ? 'rtl' : 'ltr');
+        }
+        static source(lang) {
+            return JSON.parse(this.$.$mol_file.relative(`web.locale=${lang}.json`).text().toString());
+        }
+        static texts(lang, next) {
+            if (next)
+                return next;
+            try {
+                return this.source(lang).valueOf();
+            }
+            catch (error) {
+                if ($mol_fail_catch(error)) {
+                    const def = this.lang_default();
+                    if (lang === def)
+                        throw error;
+                }
+            }
+            return {};
+        }
+        static text(key) {
+            const lang = this.lang();
+            const target = this.texts(lang)[key];
+            if (target)
+                return target;
+            this.warn(key);
+            const en = this.texts('en')[key];
+            if (!en)
+                return key;
+            return en;
+        }
+        static warn(key) {
+            console.warn(`Not translated to "${this.lang()}": ${key}`);
+            return null;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "lang_default", null);
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "lang", null);
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "direction", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "source", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "texts", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "text", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "warn", null);
+    $.$mol_locale = $mol_locale;
+})($ || ($ = {}));
+
+;
 	($.$mol_check) = class $mol_check extends ($.$mol_button_minor) {
 		checked(next){
 			if(next !== undefined) return next;
@@ -6780,93 +6886,6 @@ var $;
 
 
 ;
-"use strict";
-var $;
-(function ($) {
-    /**
-     * Localisation in $mol framework
-     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
-     */
-    class $mol_locale extends $mol_object {
-        static lang_default() {
-            return 'en';
-        }
-        static lang(next) {
-            return this.$.$mol_state_local.value('locale', next) || $mol_dom_context.navigator.language.replace(/-.*/, '') || this.lang_default();
-        }
-        static langs_rtl() {
-            return ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'ug', 'sd'];
-        }
-        static direction() {
-            const lang = this.lang();
-            let direction;
-            try {
-                direction = new Intl.Locale(lang).getTextInfo().direction;
-            }
-            catch (e) {
-                $mol_fail_log(e);
-            }
-            return direction ?? (this.langs_rtl().includes(lang) ? 'rtl' : 'ltr');
-        }
-        static source(lang) {
-            return JSON.parse(this.$.$mol_file.relative(`web.locale=${lang}.json`).text().toString());
-        }
-        static texts(lang, next) {
-            if (next)
-                return next;
-            try {
-                return this.source(lang).valueOf();
-            }
-            catch (error) {
-                if ($mol_fail_catch(error)) {
-                    const def = this.lang_default();
-                    if (lang === def)
-                        throw error;
-                }
-            }
-            return {};
-        }
-        static text(key) {
-            const lang = this.lang();
-            const target = this.texts(lang)[key];
-            if (target)
-                return target;
-            this.warn(key);
-            const en = this.texts('en')[key];
-            if (!en)
-                return key;
-            return en;
-        }
-        static warn(key) {
-            console.warn(`Not translated to "${this.lang()}": ${key}`);
-            return null;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang_default", null);
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang", null);
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "direction", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "source", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "texts", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "text", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "warn", null);
-    $.$mol_locale = $mol_locale;
-})($ || ($ = {}));
-
-;
 	($.$mol_lights_toggle) = class $mol_lights_toggle extends ($.$mol_check_icon) {
 		Lights_icon(){
 			const obj = new this.$.$mol_icon_brightness_4();
@@ -6991,25 +7010,6 @@ var $;
 (function ($) {
     $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
 })($ || ($ = {}));
-
-;
-	($.$mol_button_major) = class $mol_button_major extends ($.$mol_button_minor) {
-		theme(){
-			return "$mol_theme_base";
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/major/major.view.css", "[mol_button_major] {\n\tbackground-color: var(--mol_theme_back);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
 
 ;
 	($.$mol_gallery) = class $mol_gallery extends ($.$mol_view) {
@@ -20455,13 +20455,15 @@ var $;
                 const recipient = catalog?.Social()?.val()?.trim() ?? '';
                 if (!recipient)
                     return;
-                const link = recipient.startsWith('http')
-                    ? recipient.replace(/\/$/, '')
-                    : `https://t.me/${recipient.replace(/^@/, '')}`;
-                const template = catalog?.SocialText()?.val()
-                    || 'Добрый день, хотел бы приобрести {title}';
-                const message = template.replace(/\{title\}/g, this.title());
-                window.open(`${link}?text=${encodeURIComponent(message)}`, '_blank');
+                const url = new URL(recipient);
+                const host = url.hostname.replace(/^www\./, '');
+                if (host === 't.me' || host === 'telegram.me') {
+                    const template = catalog?.SocialText()?.val()
+                        || 'Добрый день, хотел бы приобрести {title}';
+                    const message = template.replace(/\{title\}/g, this.title());
+                    url.searchParams.set('text', message);
+                }
+                window.open(url.toString(), '_blank');
             }
         }
         __decorate([
@@ -20490,6 +20492,16 @@ var $;
 		Ico(){
 			const obj = new this.$.$bog_favicon();
 			(obj.Icon) = () => ((this.ico()));
+			return obj;
+		}
+		product_add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Product_add(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Product_add_title")));
+			(obj.click) = (next) => ((this.product_add(next)));
 			return obj;
 		}
 		category_filter_options(){
@@ -20542,16 +20554,6 @@ var $;
 			(obj.sub) = () => ([(this.Catalog_missing_text()), (this.Catalog_create())]);
 			return obj;
 		}
-		product_add(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Product_add(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Product_add_title")));
-			(obj.click) = (next) => ((this.product_add(next)));
-			return obj;
-		}
 		product_cards(){
 			return [];
 		}
@@ -20562,7 +20564,7 @@ var $;
 		}
 		Catalog_selected(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Product_add()), (this.Product_cards())]);
+			(obj.sub) = () => ([(this.Product_cards())]);
 			return obj;
 		}
 		Settings(){
@@ -20599,7 +20601,11 @@ var $;
 			return [(this.Theme_auto()), (this.Ico())];
 		}
 		head(){
-			return [(this.Category_filter()), ...(super.head())];
+			return [
+				(this.Product_add()), 
+				(this.Category_filter()), 
+				...(super.head())
+			];
 		}
 		tools(){
 			return [(this.Lights()), (this.Settings_button())];
@@ -20611,6 +20617,8 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Theme_auto"));
 	($mol_mem(($.$bog_nka_app.prototype), "ico"));
 	($mol_mem(($.$bog_nka_app.prototype), "Ico"));
+	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
+	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "category_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Category_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Lights"));
@@ -20620,8 +20628,6 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_missing"));
-	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
-	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_cards"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings"));
@@ -20689,6 +20695,7 @@ var $;
                 const category = this.category_filter();
                 const products = this.catalog()?.Products()?.remote_list() ?? [];
                 return products
+                    .filter(product => product.can_change() || product.Available()?.val())
                     .filter(product => category === 'all' || product.Category()?.val() === category)
                     .map(product => this.Product_card(product.link().str));
             }

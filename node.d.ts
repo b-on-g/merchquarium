@@ -2540,6 +2540,38 @@ declare namespace $ {
 
 //# sourceMappingURL=minor.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_major extends $mol_button_minor {
+		theme( ): string
+	}
+	
+}
+
+//# sourceMappingURL=major.view.tree.d.ts.map
+declare namespace $ {
+    interface $mol_locale_dict {
+        [key: string]: string;
+    }
+    /**
+     * Localisation in $mol framework
+     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
+     */
+    class $mol_locale extends $mol_object {
+        static lang_default(): string;
+        static lang(next?: string): string;
+        static langs_rtl(): string[];
+        static direction(): "ltr" | "rtl";
+        static source(lang: string): any;
+        static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
+        static text(key: string): string;
+        static warn(key: string): null;
+    }
+}
+
+declare namespace $ {
     class $mol_dom_event<EventType extends Event> extends $mol_object {
         readonly native: EventType;
         constructor(native: EventType);
@@ -2710,26 +2742,6 @@ declare namespace $ {
 
 //# sourceMappingURL=4.view.tree.d.ts.map
 declare namespace $ {
-    interface $mol_locale_dict {
-        [key: string]: string;
-    }
-    /**
-     * Localisation in $mol framework
-     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
-     */
-    class $mol_locale extends $mol_object {
-        static lang_default(): string;
-        static lang(next?: string): string;
-        static langs_rtl(): string[];
-        static direction(): "ltr" | "rtl";
-        static source(lang: string): any;
-        static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
-        static text(key: string): string;
-        static warn(key: string): null;
-    }
-}
-
-declare namespace $ {
 
 	export class $mol_lights_toggle extends $mol_check_icon {
 		Lights_icon( ): $mol_icon_brightness_4
@@ -2778,18 +2790,6 @@ declare namespace $.$$ {
 declare namespace $ {
 }
 
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_major extends $mol_button_minor {
-		theme( ): string
-	}
-	
-}
-
-//# sourceMappingURL=major.view.tree.d.ts.map
 declare namespace $ {
 
 	type $mol_gallery__style_mol_gallery_1 = $mol_type_enforce<
@@ -42469,55 +42469,55 @@ declare namespace $ {
 		,
 		ReturnType< $bog_favicon['Icon'] >
 	>
-	type $mol_switch__options_bog_nka_app_2 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_app_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_app_3 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['product_add'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_switch__options_bog_nka_app_4 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['category_filter_options'] >
 		,
 		ReturnType< $mol_switch['options'] >
 	>
-	type $mol_switch__value_bog_nka_app_3 = $mol_type_enforce<
+	type $mol_switch__value_bog_nka_app_5 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['category_filter'] >
 		,
 		ReturnType< $mol_switch['value'] >
 	>
-	type $mol_button_minor__title_bog_nka_app_4 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_app_6 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['settings_button_title'] >
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_app_5 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_app_7 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['settings_toggle'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_paragraph__title_bog_nka_app_6 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_app_8 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_major__title_bog_nka_app_7 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_app_9 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_app_8 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_app_10 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['catalog_create'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_view__sub_bog_nka_app_9 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_app_11 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_button_major__title_bog_nka_app_10 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_bog_nka_app_11 = $mol_type_enforce<
-		ReturnType< $bog_nka_app['product_add'] >
-		,
-		ReturnType< $mol_button_major['click'] >
 	>
 	type $mol_gallery__items_bog_nka_app_12 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['product_cards'] >
@@ -42550,6 +42550,8 @@ declare namespace $ {
 		Theme_auto( ): $mol_theme_auto
 		ico( ): $mol_icon_all_inclusive
 		Ico( ): $bog_favicon
+		product_add( next?: any ): any
+		Product_add( ): $mol_button_major
 		category_filter_options( ): Record<string, any>
 		category_filter( next?: string ): string
 		Category_filter( ): $mol_switch
@@ -42561,8 +42563,6 @@ declare namespace $ {
 		catalog_create( next?: any ): any
 		Catalog_create( ): $mol_button_major
 		Catalog_missing( ): $mol_view
-		product_add( next?: any ): any
-		Product_add( ): $mol_button_major
 		product_cards( ): readonly(any)[]
 		Product_cards( ): $mol_gallery
 		Catalog_selected( ): $mol_view
