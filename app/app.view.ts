@@ -99,7 +99,7 @@ namespace $.$$ {
 			}
 		
 			for (const category of this.catalog()?.Categories()?.items() ?? []) {
-				options[category] = category
+				options[`category:${category}`] = category
 			}
 		
 			return options

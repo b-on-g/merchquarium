@@ -11,7 +11,6 @@ namespace $.$$ {
 		},
 		Category_filter: {
 			flexWrap: 'nowrap',
-			flexDirection: 'row-reverse'
 			
 		}
 		
