@@ -10,6 +10,11 @@ $bog_nka_app $mol_page
 		<= Theme_auto $mol_theme_auto
 		<= Ico $bog_favicon
 			Icon <= ico $mol_icon_all_inclusive
+	head /
+		<= Category_filter $mol_switch
+			options <= category_filter_options *
+			value? <=> category_filter? \all
+		^ 
 	tools /
 		<= Lights $mol_lights_toggle
 		<= Settings_button $mol_button_minor
@@ -25,14 +30,9 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_view
 			sub /
-				- <= Catalog_selected_text $mol_paragraph
-					title <= catalog_selected_text \
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
-				<= Category_filter $mol_switch
-					options <= category_filter_options *
-					value? <=> category_filter? \all
 				<= Product_cards $mol_gallery
 					items <= product_cards /
 		<= Settings $bog_nka_settings
