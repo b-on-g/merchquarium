@@ -19,6 +19,23 @@ $bog_nka_settings $mol_page
 		sub /
 			<= Category_title* $mol_paragraph
 				title <= category_title* \
-			<= Category_remove* $mol_button_minor
-				title @ \Remove
-				click? <=> category_remove*? null
+			<= Category_remove* $mol_pop
+				Anchor <= Category_remove_button* $mol_button_minor
+					title @ \Remove
+					click? <=> category_remove*? null
+				showed <= category_remove_showed*
+				bubble_content /
+					<= Category_confirm_title* $mol_paragraph
+						title @ \Delete this category?
+					<= Category_confirm_info* $mol_paragraph
+						title @ \Deleting it will also clear the category from these products:
+					<= Category_confirm_count* $mol_paragraph
+						title <= category_product_count* \
+					<= Category_confirm_actions* $mol_row
+						sub /
+							<= Category_cancel* $mol_button_minor
+								title @ \Cancel
+								click? <=> category_remove_cancel*? null
+							<= Category_confirm* $mol_button_major
+								title @ \Delete category
+								click? <=> category_remove_confirm*? null
