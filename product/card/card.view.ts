@@ -89,6 +89,30 @@ namespace $.$$ {
 			return next
 		}
 
+		
+		buy_enabled() {
+			return this.available() && Boolean(this.catalog()?.Telegram()?.val()?.trim())
+		}
+		
+		@ $mol_action
+		buy() {
+			if (!this.buy_enabled()) return
+		
+			const catalog = this.catalog()
+			const recipient = catalog?.Telegram()?.val()?.trim() ?? ''
+			if (!recipient) return
+		
+			const link = recipient.startsWith('http')
+				? recipient.replace(/\/$/, '')
+				: `https://t.me/${recipient.replace(/^@/, '')}`
+		
+			const template = catalog?.TelegramText()?.val()
+				|| 'Добрый день, хотел бы приобрести {title}'
+			const message = template.replace(/\{title\}/g, this.title())
+		
+			window.open(`${link}?text=${encodeURIComponent(message)}`, '_blank')
+		}
+
 
 	}
 }

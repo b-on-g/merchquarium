@@ -20,6 +20,10 @@ $bog_nka_product_card $mol_card
 			option_label_default @ \Category
 			enabled <= changed true
 			value? <=> category? null
+		<= Buy $mol_button_major
+			title @ \Buy now!
+			click? <=> buy? null
+			enabled <= buy_enabled true
 		<= Available $mol_check_box
 			checked? <=> available? false
 			title @ \Available
