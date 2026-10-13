@@ -76,6 +76,35 @@ $mol_paragraph $mol_view
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked? false
+		aria-checked <= aria_checked \false
+		role <= aria_role \checkbox
+	sub /$mol_view_content
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
 $mol_gallery $mol_view
 	sub <= items /$mol_view
 	Side* $mol_gallery
@@ -132,19 +161,6 @@ $mol_pop_bubble $mol_view
 		^
 		tabindex 0
 		popover \manual
-
-$mol_check $mol_button_minor
-	attr *
-		^
-		mol_check_checked <= checked? false
-		aria-checked <= aria_checked \false
-		role <= aria_role \checkbox
-	sub /$mol_view_content
-		<= Icon null
-		<= label /
-			<= Title $mol_view
-				sub /
-					<= title \
 
 $mol_pick $mol_pop
 	event *
@@ -2136,9 +2152,25 @@ $bog_nka_settings $mol_page
 		sub /
 			<= Category_title* $mol_paragraph
 				title <= category_title* \
-			<= Category_remove* $mol_button_minor
-				title @ \Remove
-				click? <=> category_remove*? null
+			<= Category_remove* $mol_pop
+				Anchor <= Category_remove_button* $mol_button_minor
+					title @ \Remove
+					click? <=> category_remove*? null
+				bubble_content /
+					<= Category_confirm_title* $mol_paragraph
+						title @ \Delete this category?
+					<= Category_confirm_info* $mol_paragraph
+						title @ \Deleting it will also clear the category from these products:
+					<= Category_confirm_count* $mol_paragraph
+						title <= category_product_count* \
+					<= Category_confirm_actions* $mol_row
+						sub /
+							<= Category_cancel* $mol_button_minor
+								title @ \Cancel
+								click? <=> category_remove_cancel*? null
+							<= Category_confirm* $mol_button_major
+								title @ \Delete category
+								click? <=> category_remove_confirm*? null
 
 $mol_card $mol_list
 	attr *
@@ -2187,6 +2219,7 @@ $bog_nka_product_card $mol_card
 $bog_nka_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
+	Filter_all @ \All
 	title null - поле в настройках
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
@@ -2210,6 +2243,9 @@ $bog_nka_app $mol_page
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
+				<= Category_filter $mol_switch
+					options <= category_filter_options *
+					value? <=> category_filter? \all
 				<= Product_cards $mol_gallery
 					items <= product_cards /
 		<= Settings $bog_nka_settings

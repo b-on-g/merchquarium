@@ -2338,6 +2338,156 @@ declare namespace $ {
 
 //# sourceMappingURL=major.view.tree.d.ts.map
 declare namespace $ {
+    class $mol_dom_event<EventType extends Event> extends $mol_object {
+        readonly native: EventType;
+        constructor(native: EventType);
+        prevented(next?: boolean): boolean;
+        static wrap<EventType extends Event>(event: EventType): $mol_dom_event<EventType>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $mol_check extends $mol_button_minor {
+		checked( next?: boolean ): boolean
+		aria_checked( ): string
+		aria_role( ): string
+		Icon( ): any
+		title( ): string
+		Title( ): $mol_view
+		label( ): readonly(any)[]
+		attr( ): ({ 
+			'mol_check_checked': ReturnType< $mol_check['checked'] >,
+			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
+			'role': ReturnType< $mol_check['aria_role'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		sub( ): readonly($mol_view_content)[]
+	}
+	
+}
+
+//# sourceMappingURL=check.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Checkbox UI component. See Variants for more concrete implementations.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_box_demo
+     */
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+        aria_checked(): string;
+    }
+}
+
+declare namespace $ {
+
+	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_checked'] >
+		,
+		ReturnType< $mol_check['checked'] >
+	>
+	type $mol_check__label_mol_check_list_2 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_label'] >
+		,
+		ReturnType< $mol_check['label'] >
+	>
+	type $mol_check__enabled_mol_check_list_3 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_enabled'] >
+		,
+		ReturnType< $mol_check['enabled'] >
+	>
+	type $mol_check__hint_mol_check_list_4 = $mol_type_enforce<
+		ReturnType< $mol_check_list['option_hint'] >
+		,
+		ReturnType< $mol_check['hint'] >
+	>
+	type $mol_check__minimal_height_mol_check_list_5 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_check['minimal_height'] >
+	>
+	export class $mol_check_list extends $mol_view {
+		option_checked( id: any, next?: boolean ): boolean
+		option_title( id: any): string
+		option_label( id: any): readonly(any)[]
+		enabled( ): boolean
+		option_enabled( id: any): ReturnType< $mol_check_list['enabled'] >
+		option_hint( id: any): string
+		items( ): readonly($mol_check)[]
+		dictionary( ): Record<string, any>
+		Option( id: any): $mol_check
+		options( ): Record<string, any>
+		keys( ): readonly(string)[]
+		sub( ): ReturnType< $mol_check_list['items'] >
+	}
+	
+}
+
+//# sourceMappingURL=list.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * List of checkboxes
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
+     */
+    class $mol_check_list extends $.$mol_check_list {
+        options(): {
+            [key: string]: string;
+        };
+        dictionary(next?: Record<string, boolean>): Record<string, boolean>;
+        option_checked(id: string, next?: boolean | null): boolean;
+        keys(): readonly string[];
+        items(): $.$mol_check[];
+        option_title(key: string): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_state_session<Value> extends $mol_object {
+        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+        static native(): Storage | {
+            getItem(key: string): any;
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        };
+        static value<Value>(key: string, next?: Value): Value;
+        prefix(): string;
+        value(key: string, next?: Value): Value;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_switch extends $mol_check_list {
+		value( next?: string ): string
+	}
+	
+}
+
+//# sourceMappingURL=switch.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Buttons which switching the state
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
+     */
+    class $mol_switch extends $.$mol_switch {
+        value(next?: string): string;
+        option_checked(key: string, next?: boolean): boolean;
+    }
+}
+
+declare namespace $ {
 
 	type $mol_gallery__style_mol_gallery_1 = $mol_type_enforce<
 		({ 
@@ -2520,57 +2670,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
-    class $mol_dom_event<EventType extends Event> extends $mol_object {
-        readonly native: EventType;
-        constructor(native: EventType);
-        prevented(next?: boolean): boolean;
-        static wrap<EventType extends Event>(event: EventType): $mol_dom_event<EventType>;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_mol_check_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $mol_check extends $mol_button_minor {
-		checked( next?: boolean ): boolean
-		aria_checked( ): string
-		aria_role( ): string
-		Icon( ): any
-		title( ): string
-		Title( ): $mol_view
-		label( ): readonly(any)[]
-		attr( ): ({ 
-			'mol_check_checked': ReturnType< $mol_check['checked'] >,
-			'aria-checked': ReturnType< $mol_check['aria_checked'] >,
-			'role': ReturnType< $mol_check['aria_role'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-		sub( ): readonly($mol_view_content)[]
-	}
-	
-}
-
-//# sourceMappingURL=check.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Checkbox UI component. See Variants for more concrete implementations.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_box_demo
-     */
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): readonly $mol_view_content[];
-        label(): readonly any[];
-        aria_checked(): string;
-    }
 }
 
 declare namespace $ {
@@ -41693,20 +41792,6 @@ declare namespace $ {
 
 //# sourceMappingURL=icon.view.tree.d.ts.map
 declare namespace $ {
-    class $mol_state_session<Value> extends $mol_object {
-        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
-        static native(): Storage | {
-            getItem(key: string): any;
-            setItem(key: string, value: string): void;
-            removeItem(key: string): void;
-        };
-        static value<Value>(key: string, next?: Value): Value;
-        prefix(): string;
-        value(key: string, next?: Value): Value;
-    }
-}
-
-declare namespace $ {
 
 	type $mol_string__hint_giper_baza_auth_slot_1 = $mol_type_enforce<
 		string
@@ -47987,7 +48072,57 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_10 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_11 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_12 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_product_count'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_button_minor__title_bog_nka_settings_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_bog_nka_settings_14 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_remove_cancel'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_major__title_bog_nka_settings_15 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_settings_16 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_remove_confirm'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_row__sub_bog_nka_settings_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	type $mol_pop__Anchor_bog_nka_settings_18 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['Category_remove_button'] >
+		,
+		ReturnType< $mol_pop['Anchor'] >
+	>
+	type $mol_pop__bubble_content_bog_nka_settings_19 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_pop['bubble_content'] >
+	>
+	type $mol_row__sub_bog_nka_settings_20 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -48005,7 +48140,17 @@ declare namespace $ {
 		category_title( id: any): string
 		Category_title( id: any): $mol_paragraph
 		category_remove( id: any, next?: any ): any
-		Category_remove( id: any): $mol_button_minor
+		Category_remove_button( id: any): $mol_button_minor
+		Category_confirm_title( id: any): $mol_paragraph
+		Category_confirm_info( id: any): $mol_paragraph
+		category_product_count( id: any): string
+		Category_confirm_count( id: any): $mol_paragraph
+		category_remove_cancel( id: any, next?: any ): any
+		Category_cancel( id: any): $mol_button_minor
+		category_remove_confirm( id: any, next?: any ): any
+		Category_confirm( id: any): $mol_button_major
+		Category_confirm_actions( id: any): $mol_row
+		Category_remove( id: any): $mol_pop
 		title( ): string
 		text_id( ): string
 		catalog_link( next?: string ): string
@@ -48028,7 +48173,11 @@ declare namespace $.$$ {
         category_add(): void;
         category_rows(): $mol_row[];
         category_title(category: string): string;
+        category_products(category: string): $bog_nka_product[];
+        category_product_count(category: string): string;
         category_remove(category: string): void;
+        category_remove_cancel(category: string): void;
+        category_remove_confirm(category: string): void;
     }
 }
 
@@ -48271,27 +48420,37 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_gallery__items_bog_nka_app_10 = $mol_type_enforce<
+	type $mol_switch__options_bog_nka_app_10 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['category_filter_options'] >
+		,
+		ReturnType< $mol_switch['options'] >
+	>
+	type $mol_switch__value_bog_nka_app_11 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['category_filter'] >
+		,
+		ReturnType< $mol_switch['value'] >
+	>
+	type $mol_gallery__items_bog_nka_app_12 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['product_cards'] >
 		,
 		ReturnType< $mol_gallery['items'] >
 	>
-	type $mol_view__sub_bog_nka_app_11 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_app_13 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_nka_settings__catalog_link_bog_nka_app_12 = $mol_type_enforce<
+	type $bog_nka_settings__catalog_link_bog_nka_app_14 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['catalog_link'] >
 		,
 		ReturnType< $bog_nka_settings['catalog_link'] >
 	>
-	type $bog_nka_product_card__product_link_bog_nka_app_13 = $mol_type_enforce<
+	type $bog_nka_product_card__product_link_bog_nka_app_15 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['product_link'] >
 		,
 		ReturnType< $bog_nka_product_card['product_link'] >
 	>
-	type $bog_nka_product_card__catalog_link_bog_nka_app_14 = $mol_type_enforce<
+	type $bog_nka_product_card__catalog_link_bog_nka_app_16 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['catalog_link'] >
 		,
 		ReturnType< $bog_nka_product_card['catalog_link'] >
@@ -48310,6 +48469,9 @@ declare namespace $ {
 		Catalog_selected_text( ): $mol_paragraph
 		product_add( next?: any ): any
 		Product_add( ): $mol_button_major
+		category_filter_options( ): Record<string, any>
+		category_filter( next?: string ): string
+		Category_filter( ): $mol_switch
 		product_cards( ): readonly(any)[]
 		Product_cards( ): $mol_gallery
 		Catalog_selected( ): $mol_view
@@ -48317,6 +48479,7 @@ declare namespace $ {
 		content( ): readonly(any)[]
 		Settings_title( ): string
 		Return_title( ): string
+		Filter_all( ): string
 		title( ): any
 		Product_card( id: any): $bog_nka_product_card
 		tools( ): readonly(any)[]
@@ -48339,6 +48502,8 @@ declare namespace $.$$ {
         product_add(): void;
         product_cards(): $.$bog_nka_product_card[];
         product_link(link: string): string;
+        category_filter(next?: string): string;
+        category_filter_options(): Record<string, string>;
     }
 }
 
