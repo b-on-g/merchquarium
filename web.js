@@ -31715,8 +31715,8 @@ var $;
                 return this.$.$mol_state_arg.value('catalog', next) ?? '';
             }
             settings_open(next) {
-                const state = this.$.$mol_state_arg.value('settings', next === undefined ? undefined : next ? 'true' : '');
-                return state === 'true';
+                const state = this.$.$mol_state_arg.value('settings', next === undefined ? undefined : next ? '' : null);
+                return state !== null;
             }
             settings_toggle() {
                 this.settings_open(!this.settings_open());
