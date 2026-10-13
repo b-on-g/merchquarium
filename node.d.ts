@@ -41767,91 +41767,101 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_3 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['telegram_link'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__hint_bog_nka_settings_4 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_nka_settings_5 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_draft'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_4 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_5 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_7 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_add'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_list__rows_bog_nka_settings_6 = $mol_type_enforce<
+	type $mol_list__rows_bog_nka_settings_8 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_7 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_9 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_title'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_8 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_9 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_11 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_10 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_bog_nka_settings_11 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
 	type $mol_paragraph__title_bog_nka_settings_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_14 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_product_count'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_13 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_14 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_16 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_cancel'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_15 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_17 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_16 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_18 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_confirm'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_17 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_19 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_pop__Anchor_bog_nka_settings_18 = $mol_type_enforce<
+	type $mol_pop__Anchor_bog_nka_settings_20 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['Category_remove_button'] >
 		,
 		ReturnType< $mol_pop['Anchor'] >
 	>
-	type $mol_pop__bubble_content_bog_nka_settings_19 = $mol_type_enforce<
+	type $mol_pop__bubble_content_bog_nka_settings_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_pop['bubble_content'] >
 	>
-	type $mol_row__sub_bog_nka_settings_20 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_22 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -41860,6 +41870,8 @@ declare namespace $ {
 		Sync( ): $giper_baza_status
 		account_id( ): string
 		Account_id( ): $mol_paragraph
+		telegram_link( next?: string ): string
+		Telegram_link( ): $mol_string
 		category_draft( next?: string ): string
 		Category_input( ): $mol_string
 		category_add( next?: any ): any
@@ -41907,6 +41919,7 @@ declare namespace $.$$ {
         category_remove(category: string): void;
         category_remove_cancel(category: string): void;
         category_remove_confirm(category: string): void;
+        telegram_link(next?: string): string;
     }
 }
 

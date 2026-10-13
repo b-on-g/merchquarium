@@ -2140,6 +2140,9 @@ $bog_nka_settings $mol_page
 	body /
 		<= Account_id $mol_paragraph
 			title <= account_id \
+		<= Telegram_link $mol_string
+			hint @ \Telegram link
+			value? <=> telegram_link? \
 		<= Category_input $mol_string
 			hint @ \New category
 			value? <=> category_draft? \
