@@ -20319,8 +20319,11 @@ var $;
                 catalog.Products(null)?.make(null);
             }
             product_cards() {
+                const category = this.category_filter();
                 const products = this.catalog()?.Products()?.remote_list() ?? [];
-                return products.map(product => this.Product_card(product.link().str));
+                return products
+                    .filter(product => category === 'all' || product.Category()?.val() === category)
+                    .map(product => this.Product_card(product.link().str));
             }
             product_link(link) {
                 return link;
