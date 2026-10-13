@@ -20754,7 +20754,7 @@ var $;
                 return link;
             }
             category_filter(next) {
-                const categories = this.catalog()?.Categories()?.items() ?? [];
+                const categories = this.filter_categories() ?? [];
                 const value = next ?? 'all';
                 return value === 'all' || categories.includes(value)
                     ? value
@@ -20764,8 +20764,8 @@ var $;
                 const options = {
                     all: this.Filter_all(),
                 };
-                for (const category of this.catalog()?.Categories()?.items() ?? []) {
-                    options[`category:${category}`] = category;
+                for (const category of this.filter_categories() ?? []) {
+                    options[category] = category;
                 }
                 return options;
             }
@@ -20774,6 +20774,17 @@ var $;
             }
             is_not_admin() {
                 return !this.is_admin();
+            }
+            filter_categories() {
+                const catalog = this.catalog();
+                const products = catalog?.Products()?.remote_list() ?? [];
+                const categories = this.is_admin()
+                    ? catalog?.Categories()?.items() ?? []
+                    : products
+                        .filter(product => product.Available()?.val())
+                        .map(product => product.Category()?.val())
+                        .filter((category) => Boolean(category));
+                return [...new Set(categories)];
             }
         }
         __decorate([

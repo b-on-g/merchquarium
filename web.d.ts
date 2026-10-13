@@ -48844,6 +48844,7 @@ declare namespace $.$$ {
         category_filter_options(): Record<string, string>;
         is_admin(): boolean | undefined;
         is_not_admin(): boolean;
+        filter_categories(): string[];
     }
 }
 
