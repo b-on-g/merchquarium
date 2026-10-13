@@ -34,6 +34,10 @@ $mol_page $mol_view
 			dom_name \footer
 			sub <= foot /$mol_view
 
+$mol_theme_auto $mol_plugin
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
+
 $mol_speck $mol_view
 	theme \$mol_theme_accent
 	sub /
@@ -66,16 +70,6 @@ $mol_button_typed $mol_button
 
 $mol_button_minor $mol_button_typed
 
-$mol_paragraph $mol_view
-	line_height 24
-	letter_width 7
-	width_limit +Infinity
-	row_width 0
-	sub / <= title
-
-$mol_button_major $mol_button_minor
-	theme \$mol_theme_base
-
 $mol_check $mol_button_minor
 	attr *
 		^
@@ -88,6 +82,54 @@ $mol_check $mol_button_minor
 			<= Title $mol_view
 				sub /
 					<= title \
+
+$mol_check_icon $mol_check
+
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
+
+$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_4
+	hint @ \Toggle lights
+	checked? <=> lights? false
+
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
 
 $mol_check_list $mol_view
 	dictionary *
@@ -267,35 +309,6 @@ $mol_string $mol_view
 		<= Submit $mol_hotkey
 			mod_ctrl <= submit_with_ctrl false
 			key * enter? <=> submit? null
-
-$mol_svg $mol_view
-	dom_name \svg
-	dom_name_space \http://www.w3.org/2000/svg
-	font_size 16
-	font_family \
-	style_size *
-
-$mol_svg_root $mol_svg
-	dom_name \svg
-	attr *
-		^
-		viewBox <= view_box \0 0 100 100
-		preserveAspectRatio <= aspect \xMidYMid
-
-$mol_svg_path $mol_svg
-	dom_name \path
-	attr *
-		^
-		d <= geometry \
-
-
-$mol_icon $mol_svg_root
-	view_box \0 0 24 24
-	minimal_width 16
-	minimal_height 16
-	sub /
-		<= Path $mol_svg_path
-			geometry <= path \
 
 $mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
 
@@ -576,7 +589,10 @@ $bog_nka_app $mol_page
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
+	plugins /
+		<= Theme_auto $mol_theme_auto
 	tools /
+		<= Lights $mol_lights_toggle
 		<= Settings_button $mol_button_minor
 			title <= settings_button_title \
 			click? <=> settings_toggle? null
@@ -590,7 +606,7 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_view
 			sub /
-				<= Catalog_selected_text $mol_paragraph
+				- <= Catalog_selected_text $mol_paragraph
 					title <= catalog_selected_text \
 				<= Product_add $mol_button_major
 					title @ \Add product

@@ -62,6 +62,7 @@
 	"$mol_date_month_prev_hint": "Previous month",
 	"$mol_date_year_next_hint": "Next year",
 	"$mol_date_year_prev_hint": "Previous year",
+	"$mol_lights_toggle_hint": "Toggle lights",
 	"$mol_link_source_hint": "Source code",
 	"$mol_search_Clear_hint": "Clear",
 	"$mol_search_hint": "Search...",

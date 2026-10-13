@@ -33,6 +33,7 @@
 	"$mol_date_month_prev_hint": "Предыдущий месяц",
 	"$mol_date_year_next_hint": "Следующий год",
 	"$mol_date_year_prev_hint": "Предыдущий год",
+	"$mol_lights_toggle_hint": "Переключить освещение",
 	"$mol_link_source_hint": "Исходные коды",
 	"$mol_search_Clear_hint": "Очистить",
 	"$mol_search_hint": "Поиск..",
