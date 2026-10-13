@@ -1,6 +1,7 @@
 $bog_nka_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
+	Filter_all @ \All
 	title null - поле в настройках
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
@@ -24,6 +25,9 @@ $bog_nka_app $mol_page
 				<= Product_add $mol_button_major
 					title @ \Add product
 					click? <=> product_add? null
+				<= Category_filter $mol_switch
+					options <= category_filter_options *
+					value? <=> category_filter? \all
 				<= Product_cards $mol_gallery
 					items <= product_cards /
 		<= Settings $bog_nka_settings

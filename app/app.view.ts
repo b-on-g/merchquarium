@@ -76,5 +76,28 @@ namespace $.$$ {
 			return link
 		}
 
+		@ $mol_mem
+		category_filter(next?: string) {
+			const categories = this.catalog()?.Categories()?.items() ?? []
+			const value = next ?? 'all'
+		
+			return value === 'all' || categories.includes(value)
+				? value
+				: 'all'
+		}
+		
+		category_filter_options(): Record<string, string> {
+			const options: Record<string, string> = {
+				all: this.Filter_all(),
+			}
+		
+			for (const category of this.catalog()?.Categories()?.items() ?? []) {
+				options[category] = category
+			}
+		
+			return options
+		}
+
+
 	}
 }

@@ -61,46 +61,35 @@ namespace $.$$ {
 				.filter(product => product.Category()?.val() === category)
 		}
 		
-		@ $mol_mem
-		category_remove_pending(next?: string | null) {
-			return next ?? null
-		}
-		
-		category_remove_showed(category: string) {
-			return this.category_remove_pending() === category
-		}
-		
-		@ $mol_action
-		category_remove(category: string) {
-			const products = this.category_products(category)
-		
-			if (products.length === 0) {
-				this.catalog()?.Categories()?.cut(category)
-				return
-			}
-		
-			this.category_remove_pending(
-				this.category_remove_pending() === category ? null : category,
-			)
-		}
 		
 		category_product_count(category: string) {
 			return String(this.category_products(category).length)
 		}
 		
 		@ $mol_action
+		category_remove(category: string) {
+			if (this.category_products(category).length === 0) {
+				this.catalog()?.Categories()?.cut(category)
+				return
+			}
+		
+			this.Category_remove(category).showed(true)
+		}
+		
+		@ $mol_action
 		category_remove_cancel(category: string) {
-			this.category_remove_showed(category)
+			this.Category_remove(category).showed(false)
 		}
 		
 		@ $mol_action
 		category_remove_confirm(category: string) {
+			this.Category_remove(category).showed(false)
+		
 			for (const product of this.category_products(category)) {
 				product.Category(null)?.val('')
 			}
 		
 			this.catalog()?.Categories()?.cut(category)
-			this.category_remove_showed(category)
 		}
 
 
