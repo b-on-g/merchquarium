@@ -93,6 +93,20 @@ namespace $.$$ {
 		}
 
 
+		telegram_link(next?: string): string {
+			const catalog = this.catalog()
+			if (!catalog) return ''
+		
+			if (next === undefined) {
+				return catalog.Telegram()?.val() ?? ''
+			}
+		
+			const atom = catalog.Telegram(null)
+			if (!atom) return ''
+		
+			atom.val(next)
+			return next
+		}
 
 
 	}
