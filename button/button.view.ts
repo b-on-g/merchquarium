@@ -5,11 +5,12 @@ namespace $.$$ {
 			return next ?? false
 		}
 
-		attr() {
-			return {
-				...super.attr(),
-				hidden: this.hidden(),
-			}
+		style() {
+			const style = super.style()
+			return this.hidden()
+				? { ...style, display: 'none' }
+				: style
 		}
+
 	}
 }
