@@ -133,6 +133,12 @@ namespace $.$$ {
 			}
 		}
 
+		@ $mol_mem
+		Available() {
+			return this.changed() ? super.Available() : null!
+		}
+
+
 
 
 	}
