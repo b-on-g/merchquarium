@@ -58,8 +58,17 @@ namespace $.$$ {
 		
 		@ $mol_action
 		category_remove(category: string) {
-			this.catalog()?.Categories()?.cut(category)
+			if (this.category_products(category).length === 0) {
+				this.catalog()?.Categories()?.cut(category)
+			}
+			
 		}
+
+		category_products(category: string) {
+			return (this.catalog()?.Products()?.remote_list() ?? [])
+				.filter(product => product.Category()?.val() === category)
+		}
+
 
 
 	}
