@@ -46177,8 +46177,8 @@ declare namespace $ {
                 [Symbol.dispose](): void;
             } | null;
             readonly Categories: (auto?: any) => $giper_baza_list_str | null;
-            readonly Telegram: (auto?: any) => $giper_baza_atom_text | null;
-            readonly TelegramText: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Social: (auto?: any) => $giper_baza_atom_text | null;
+            readonly SocialText: (auto?: any) => $giper_baza_atom_text | null;
             readonly SoldOutImage: (auto?: any) => {
                 Value: Value;
                 remote(next?: $giper_baza_file | null | undefined): $giper_baza_file | null;
@@ -46926,8 +46926,8 @@ declare namespace $ {
                 [$mol_key_handle](): any;
             };
             readonly Categories: typeof $giper_baza_list_str;
-            readonly Telegram: typeof $giper_baza_atom_text;
-            readonly TelegramText: typeof $giper_baza_atom_text;
+            readonly Social: typeof $giper_baza_atom_text;
+            readonly SocialText: typeof $giper_baza_atom_text;
             readonly SoldOutImage: {
                 new (): {
                     Value: () => typeof $giper_baza_file;
@@ -48263,7 +48263,7 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_3 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['telegram_link'] >
+		ReturnType< $bog_nka_settings['social_link'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
@@ -48273,7 +48273,7 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_5 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['telegram_text'] >
+		ReturnType< $bog_nka_settings['social_text'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
@@ -48376,10 +48376,10 @@ declare namespace $ {
 		Sync( ): $giper_baza_status
 		account_id( ): string
 		Account_id( ): $mol_paragraph
-		telegram_link( next?: string ): string
-		Telegram_link( ): $mol_string
-		telegram_text( next?: string ): string
-		Telegram_text( ): $mol_string
+		social_link( next?: string ): string
+		Social_link( ): $mol_string
+		social_text( next?: string ): string
+		Social_text( ): $mol_string
 		category_draft( next?: string ): string
 		Category_input( ): $mol_string
 		category_add( next?: any ): any
@@ -48427,8 +48427,8 @@ declare namespace $.$$ {
         category_remove(category: string): void;
         category_remove_cancel(category: string): void;
         category_remove_confirm(category: string): void;
-        telegram_link(next?: string): string;
-        telegram_text(next?: string): string;
+        social_link(next?: string): string;
+        social_text(next?: string): string;
     }
 }
 
@@ -48574,17 +48574,32 @@ declare namespace $ {
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_check_box__checked_bog_nka_product_card_15 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_product_card_15 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['buy_title'] >
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_product_card_16 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['buy'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__enabled_bog_nka_product_card_17 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['buy_enabled'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_check_box__checked_bog_nka_product_card_18 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['available'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_check_box__title_bog_nka_product_card_16 = $mol_type_enforce<
+	type $mol_check_box__title_bog_nka_product_card_19 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_check_box['title'] >
 	>
-	type $mol_check_box__enabled_bog_nka_product_card_17 = $mol_type_enforce<
+	type $mol_check_box__enabled_bog_nka_product_card_20 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['changed'] >
 		,
 		ReturnType< $mol_check_box['enabled'] >
@@ -48600,10 +48615,16 @@ declare namespace $ {
 		category_list( ): readonly(any)[]
 		category( next?: any ): any
 		Category( ): $mol_select
+		buy_title( ): string
+		buy( next?: any ): any
+		buy_enabled( ): boolean
+		Buy( ): $mol_button_major
 		available( next?: boolean ): boolean
 		Available( ): $mol_check_box
 		product_link( next?: string ): string
 		catalog_link( next?: string ): string
+		Buy_title( ): string
+		Social_missing_title( ): string
 		sub( ): readonly(any)[]
 	}
 	
@@ -48621,6 +48642,9 @@ declare namespace $.$$ {
         catalog(): $bog_nka_catalog | null;
         category_list(): readonly string[];
         category(next?: string | null): string | null;
+        buy_title(): string;
+        buy_enabled(): boolean;
+        buy(): void;
     }
 }
 

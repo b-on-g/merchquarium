@@ -30351,24 +30351,24 @@ var $;
 			(obj.title) = () => ((this.account_id()));
 			return obj;
 		}
-		telegram_link(next){
+		social_link(next){
 			if(next !== undefined) return next;
 			return "";
 		}
-		Telegram_link(){
+		Social_link(){
 			const obj = new this.$.$mol_string();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Telegram_link_hint")));
-			(obj.value) = (next) => ((this.telegram_link(next)));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Social_link_hint")));
+			(obj.value) = (next) => ((this.social_link(next)));
 			return obj;
 		}
-		telegram_text(next){
+		social_text(next){
 			if(next !== undefined) return next;
 			return "";
 		}
-		Telegram_text(){
+		Social_text(){
 			const obj = new this.$.$mol_string();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Telegram_text_hint")));
-			(obj.value) = (next) => ((this.telegram_text(next)));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Social_text_hint")));
+			(obj.value) = (next) => ((this.social_text(next)));
 			return obj;
 		}
 		category_draft(next){
@@ -30487,8 +30487,8 @@ var $;
 		body(){
 			return [
 				(this.Account_id()), 
-				(this.Telegram_link()), 
-				(this.Telegram_text()), 
+				(this.Social_link()), 
+				(this.Social_text()), 
 				(this.Category_input()), 
 				(this.Category_add()), 
 				(this.Categories_list())
@@ -30502,10 +30502,10 @@ var $;
 	};
 	($mol_mem(($.$bog_nka_settings.prototype), "Sync"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_id"));
-	($mol_mem(($.$bog_nka_settings.prototype), "telegram_link"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Telegram_link"));
-	($mol_mem(($.$bog_nka_settings.prototype), "telegram_text"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Telegram_text"));
+	($mol_mem(($.$bog_nka_settings.prototype), "social_link"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
+	($mol_mem(($.$bog_nka_settings.prototype), "social_text"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Social_text"));
 	($mol_mem(($.$bog_nka_settings.prototype), "category_draft"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Category_input"));
 	($mol_mem(($.$bog_nka_settings.prototype), "category_add"));
@@ -31126,8 +31126,8 @@ var $;
     class $bog_nka_catalog extends $giper_baza_dict.with({
         Products: $giper_baza_list_link.to(() => $bog_nka_product),
         Categories: $giper_baza_list_str,
-        Telegram: $giper_baza_atom_text,
-        TelegramText: $giper_baza_atom_text,
+        Social: $giper_baza_atom_text,
+        SocialText: $giper_baza_atom_text,
         SoldOutImage: $giper_baza_atom_link.to(() => $giper_baza_file),
     }) {
     }
@@ -31208,27 +31208,27 @@ var $;
                 }
                 this.catalog()?.Categories()?.cut(category);
             }
-            telegram_link(next) {
+            social_link(next) {
                 const catalog = this.catalog();
                 if (!catalog)
                     return '';
                 if (next === undefined) {
-                    return catalog.Telegram()?.val() ?? '';
+                    return catalog.Social()?.val() ?? '';
                 }
-                const atom = catalog.Telegram(null);
+                const atom = catalog.Social(null);
                 if (!atom)
                     return '';
                 atom.val(next);
                 return next;
             }
-            telegram_text(next) {
+            social_text(next) {
                 const catalog = this.catalog();
                 if (!catalog)
                     return '';
                 if (next === undefined) {
-                    return catalog.TelegramText()?.val() ?? '';
+                    return catalog.SocialText()?.val() ?? '';
                 }
-                const atom = catalog.TelegramText(null);
+                const atom = catalog.SocialText(null);
                 if (!atom)
                     return '';
                 atom.val(next);
@@ -31427,6 +31427,23 @@ var $;
 			(obj.value) = (next) => ((this.category(next)));
 			return obj;
 		}
+		buy_title(){
+			return "";
+		}
+		buy(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		buy_enabled(){
+			return true;
+		}
+		Buy(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.buy_title()));
+			(obj.click) = (next) => ((this.buy(next)));
+			(obj.enabled) = () => ((this.buy_enabled()));
+			return obj;
+		}
 		available(next){
 			if(next !== undefined) return next;
 			return false;
@@ -31446,12 +31463,19 @@ var $;
 			if(next !== undefined) return next;
 			return "";
 		}
+		Buy_title(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Buy_title"));
+		}
+		Social_missing_title(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Social_missing_title"));
+		}
 		sub(){
 			return [
 				(this.Title()), 
 				(this.Price()), 
 				(this.Description()), 
 				(this.Category()), 
+				(this.Buy()), 
 				(this.Available())
 			];
 		}
@@ -31464,6 +31488,8 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "category"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Category"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "buy"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Buy"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_link"));
@@ -31548,7 +31574,33 @@ var $;
                 atom.val(next);
                 return next;
             }
+            buy_title() {
+                return this.catalog()?.Social()?.val()?.trim()
+                    ? this.Buy_title()
+                    : this.Social_missing_title();
+            }
+            buy_enabled() {
+                return this.available() && Boolean(this.catalog()?.Social()?.val()?.trim());
+            }
+            buy() {
+                if (!this.buy_enabled())
+                    return;
+                const catalog = this.catalog();
+                const recipient = catalog?.Social()?.val()?.trim() ?? '';
+                if (!recipient)
+                    return;
+                const link = recipient.startsWith('http')
+                    ? recipient.replace(/\/$/, '')
+                    : `https://t.me/${recipient.replace(/^@/, '')}`;
+                const template = catalog?.SocialText()?.val()
+                    || 'Добрый день, хотел бы приобрести {title}';
+                const message = template.replace(/\{title\}/g, this.title());
+                window.open(`${link}?text=${encodeURIComponent(message)}`, '_blank');
+            }
         }
+        __decorate([
+            $mol_action
+        ], $bog_nka_product_card.prototype, "buy", null);
         $$.$bog_nka_product_card = $bog_nka_product_card;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

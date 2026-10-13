@@ -449,12 +449,12 @@ $bog_nka_settings $mol_page
 	body /
 		<= Account_id $mol_paragraph
 			title <= account_id \
-		<= Telegram_link $mol_string
-			hint @ \Telegram link
-			value? <=> telegram_link? \
-		<= Telegram_text $mol_string
-			hint @ \Example: "Hello! I want to buy {title}!" 
-			value? <=> telegram_text? \
+		<= Social_link $mol_string
+			hint @ \social link
+			value? <=> social_link? \
+		<= Social_text $mol_string
+			hint @ \Example (used by default message ): "Hello! I want to buy {title}!" 
+			value? <=> social_text? \
 		<= Category_input $mol_string
 			hint @ \New category
 			value? <=> category_draft? \
@@ -557,6 +557,8 @@ $mol_check_box $mol_check
 $bog_nka_product_card $mol_card
 	product_link? \
 	catalog_link? \
+	Buy_title @ \Buy now!
+	Social_missing_title @ \Social link is not set
 	sub /
 		<= Title $mol_string_button
 			value? <=> title? \
@@ -576,6 +578,10 @@ $bog_nka_product_card $mol_card
 			option_label_default @ \Category
 			enabled <= changed true
 			value? <=> category? null
+		<= Buy $mol_button_major
+			title <= buy_title \
+			click? <=> buy? null
+			enabled <= buy_enabled true
 		<= Available $mol_check_box
 			checked? <=> available? false
 			title @ \Available
