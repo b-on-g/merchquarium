@@ -90,6 +90,12 @@ namespace $.$$ {
 		}
 
 		
+		buy_title() {
+			return this.catalog()?.Telegram()?.val()?.trim()
+				? this.Buy_title()
+				: this.Social_missing_title()
+		}
+		
 		buy_enabled() {
 			return this.available() && Boolean(this.catalog()?.Telegram()?.val()?.trim())
 		}

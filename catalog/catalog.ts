@@ -2,8 +2,8 @@ namespace $ {
 	export class $bog_nka_catalog extends $giper_baza_dict.with({
 		Products: $giper_baza_list_link.to( ()=> $bog_nka_product ),
 		Categories: $giper_baza_list_str,
-		Telegram: $giper_baza_atom_text,
-		TelegramText: $giper_baza_atom_text,
+		Social: $giper_baza_atom_text,
+		SocialText: $giper_baza_atom_text,
 		SoldOutImage: $giper_baza_atom_link.to( ()=> $giper_baza_file ),
 	}) {}
 }

@@ -93,30 +93,30 @@ namespace $.$$ {
 		}
 
 
-		telegram_link(next?: string): string {
+		social_link(next?: string): string {
 			const catalog = this.catalog()
 			if (!catalog) return ''
 		
 			if (next === undefined) {
-				return catalog.Telegram()?.val() ?? ''
+				return catalog.Social()?.val() ?? ''
 			}
 		
-			const atom = catalog.Telegram(null)
+			const atom = catalog.Social(null)
 			if (!atom) return ''
 		
 			atom.val(next)
 			return next
 		}
 		
-		telegram_text(next?: string): string {
+		social_text(next?: string): string {
 			const catalog = this.catalog()
 			if (!catalog) return ''
 		
 			if (next === undefined) {
-				return catalog.TelegramText()?.val() ?? ''
+				return catalog.SocialText()?.val() ?? ''
 			}
 		
-			const atom = catalog.TelegramText(null)
+			const atom = catalog.SocialText(null)
 			if (!atom) return ''
 		
 			atom.val(next)
