@@ -105,6 +105,10 @@ namespace $.$$ {
 			return options
 		}
 
+		is_admin() {
+			return !this.catalog()?.can_change()
+		}
+
 
 	}
 }

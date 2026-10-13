@@ -97,7 +97,7 @@ namespace $.$$ {
 		}
 		
 		buy_enabled() {
-			return this.available() && Boolean(this.catalog()?.Social()?.val()?.trim())
+			return this.available() && this.social_url() !== null
 		}
 		
 		@ $mol_action
@@ -105,21 +105,34 @@ namespace $.$$ {
 			if (!this.buy_enabled()) return
 		
 			const catalog = this.catalog()
-			const recipient = catalog?.Social()?.val()?.trim() ?? ''
-			if (!recipient) return
+			const url = this.social_url()
+			if (!catalog || !url) return
 		
-			const url = new URL(recipient)
 			const host = url.hostname.replace(/^www\./, '')
-			
+		
 			if (host === 't.me' || host === 'telegram.me') {
-				const template = catalog?.SocialText()?.val()
+				const template = catalog.SocialText()?.val()
 					|| 'Добрый день, хотел бы приобрести {title}'
 				const message = template.replace(/\{title\}/g, this.title())
 				url.searchParams.set('text', message)
 			}
-			
+		
 			window.open(url.toString(), '_blank')
 		}
+
+		social_url(): URL | null {
+			const value = this.catalog()?.Social()?.val()?.trim() ?? ''
+			if (!value) return null
+		
+			try {
+				const url = new URL(value)
+				if (url.protocol !== 'https:' && url.protocol !== 'http:') return null
+				return url
+			} catch {
+				return null
+			}
+		}
+
 
 
 	}

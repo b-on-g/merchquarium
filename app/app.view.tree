@@ -14,6 +14,7 @@ $bog_nka_app $mol_page
 		<= Product_add $mol_button_major
 			title @ \Add product
 			click? <=> product_add? null
+			hidden <= is_admin false
 		<= Category_filter $mol_switch
 			options <= category_filter_options *
 			value? <=> category_filter? \all
@@ -23,6 +24,7 @@ $bog_nka_app $mol_page
 		<= Settings_button $mol_button_minor
 			title <= settings_button_title \
 			click? <=> settings_toggle? null
+			hidden <= is_admin false
 	body <= content /
 		<= Catalog_missing $mol_view
 			sub /
