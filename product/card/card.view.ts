@@ -108,15 +108,17 @@ namespace $.$$ {
 			const recipient = catalog?.Social()?.val()?.trim() ?? ''
 			if (!recipient) return
 		
-			const link = recipient.startsWith('http')
-				? recipient.replace(/\/$/, '')
-				: `https://t.me/${recipient.replace(/^@/, '')}`
-		
-			const template = catalog?.SocialText()?.val()
-				|| 'Добрый день, хотел бы приобрести {title}'
-			const message = template.replace(/\{title\}/g, this.title())
-		
-			window.open(`${link}?text=${encodeURIComponent(message)}`, '_blank')
+			const url = new URL(recipient)
+			const host = url.hostname.replace(/^www\./, '')
+			
+			if (host === 't.me' || host === 'telegram.me') {
+				const template = catalog?.SocialText()?.val()
+					|| 'Добрый день, хотел бы приобрести {title}'
+				const message = template.replace(/\{title\}/g, this.title())
+				url.searchParams.set('text', message)
+			}
+			
+			window.open(url.toString(), '_blank')
 		}
 
 

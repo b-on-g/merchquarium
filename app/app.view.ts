@@ -72,6 +72,7 @@ namespace $.$$ {
 			const products = this.catalog()?.Products()?.remote_list() ?? []
 		
 			return products
+				.filter(product => product.can_change() || product.Available()?.val())
 				.filter(product =>
 					category === 'all' || product.Category()?.val() === category,
 				)
