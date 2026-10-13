@@ -6449,6 +6449,39 @@ var $;
 
 
 ;
+	($.$bog_nka_button) = class $bog_nka_button extends ($.$mol_button_major) {
+		hidden(){
+			return false;
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_nka_button extends $.$bog_nka_button {
+            hidden(next) {
+                return next ?? false;
+            }
+            style() {
+                return {
+                    ...super.style(),
+                    display: this.hidden() ? 'none' : '',
+                };
+            }
+        }
+        $$.$bog_nka_button = $bog_nka_button;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 "use strict";
 var $;
 (function ($) {
@@ -20437,24 +20470,37 @@ var $;
                     : this.Social_missing_title();
             }
             buy_enabled() {
-                return this.available() && Boolean(this.catalog()?.Social()?.val()?.trim());
+                return this.available() && this.social_url() !== null;
             }
             buy() {
                 if (!this.buy_enabled())
                     return;
                 const catalog = this.catalog();
-                const recipient = catalog?.Social()?.val()?.trim() ?? '';
-                if (!recipient)
+                const url = this.social_url();
+                if (!catalog || !url)
                     return;
-                const url = new URL(recipient);
                 const host = url.hostname.replace(/^www\./, '');
                 if (host === 't.me' || host === 'telegram.me') {
-                    const template = catalog?.SocialText()?.val()
+                    const template = catalog.SocialText()?.val()
                         || 'Добрый день, хотел бы приобрести {title}';
                     const message = template.replace(/\{title\}/g, this.title());
                     url.searchParams.set('text', message);
                 }
                 window.open(url.toString(), '_blank');
+            }
+            social_url() {
+                const value = this.catalog()?.Social()?.val()?.trim() ?? '';
+                if (!value)
+                    return null;
+                try {
+                    const url = new URL(value);
+                    if (url.protocol !== 'https:' && url.protocol !== 'http:')
+                        return null;
+                    return url;
+                }
+                catch {
+                    return null;
+                }
             }
         }
         __decorate([
@@ -20489,10 +20535,14 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
+		is_not_admin(){
+			return true;
+		}
 		Product_add(){
-			const obj = new this.$.$mol_button_major();
+			const obj = new this.$.$bog_nka_button();
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Product_add_title")));
 			(obj.click) = (next) => ((this.product_add(next)));
+			(obj.hidden) = () => ((this.is_not_admin()));
 			return obj;
 		}
 		category_filter_options(){
@@ -20520,9 +20570,10 @@ var $;
 			return null;
 		}
 		Settings_button(){
-			const obj = new this.$.$mol_button_minor();
+			const obj = new this.$.$bog_nka_button();
 			(obj.title) = () => ((this.settings_button_title()));
 			(obj.click) = (next) => ((this.settings_toggle(next)));
+			(obj.hidden) = () => ((this.is_not_admin()));
 			return obj;
 		}
 		Catalog_missing_text(){
@@ -20535,7 +20586,7 @@ var $;
 			return null;
 		}
 		Catalog_create(){
-			const obj = new this.$.$mol_button_major();
+			const obj = new this.$.$bog_nka_button();
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Catalog_create_title")));
 			(obj.click) = (next) => ((this.catalog_create(next)));
 			return obj;
@@ -20705,9 +20756,15 @@ var $;
                     all: this.Filter_all(),
                 };
                 for (const category of this.catalog()?.Categories()?.items() ?? []) {
-                    options[category] = category;
+                    options[`category:${category}`] = category;
                 }
                 return options;
+            }
+            is_admin() {
+                return this.catalog()?.can_change();
+            }
+            is_not_admin() {
+                return !this.is_admin();
             }
         }
         __decorate([
@@ -20746,7 +20803,6 @@ var $;
             },
             Category_filter: {
                 flexWrap: 'nowrap',
-                flexDirection: 'row-reverse'
             }
         });
     })($$ = $.$$ || ($.$$ = {}));

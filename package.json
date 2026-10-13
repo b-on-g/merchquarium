@@ -161,6 +161,7 @@
     "$mol_svg",
     "$mol_svg_path",
     "$bog_favicon",
+    "$bog_nka_button",
     "$mol_button_major",
     "$mol_button",
     "$mol_speck",

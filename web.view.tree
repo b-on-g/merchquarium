@@ -107,6 +107,9 @@ $mol_button_minor $mol_button_typed
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
+$bog_nka_button $mol_button_major
+	hidden false
+
 $mol_check $mol_button_minor
 	attr *
 		^
@@ -2296,24 +2299,26 @@ $bog_nka_app $mol_page
 		<= Ico $bog_favicon
 			Icon <= ico $mol_icon_all_inclusive
 	head /
-		<= Product_add $mol_button_major
+		<= Product_add $bog_nka_button
 			title @ \Add product
 			click? <=> product_add? null
+			hidden <= is_not_admin true
 		<= Category_filter $mol_switch
 			options <= category_filter_options *
 			value? <=> category_filter? \all
 		^ 
 	tools /
 		<= Lights $mol_lights_toggle
-		<= Settings_button $mol_button_minor
+		<= Settings_button $bog_nka_button
 			title <= settings_button_title \
 			click? <=> settings_toggle? null
+			hidden <= is_not_admin true 
 	body <= content /
 		<= Catalog_missing $mol_view
 			sub /
 				<= Catalog_missing_text $mol_paragraph
 					title @ \No catalog selected:
-				<= Catalog_create $mol_button_major
+				<= Catalog_create $bog_nka_button
 					title @ \Create catalog
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_view
