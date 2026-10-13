@@ -19169,6 +19169,16 @@ var $;
 			(obj.value) = (next) => ((this.telegram_link(next)));
 			return obj;
 		}
+		telegram_text(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Telegram_text(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Telegram_text_hint")));
+			(obj.value) = (next) => ((this.telegram_text(next)));
+			return obj;
+		}
 		category_draft(next){
 			if(next !== undefined) return next;
 			return "";
@@ -19286,6 +19296,7 @@ var $;
 			return [
 				(this.Account_id()), 
 				(this.Telegram_link()), 
+				(this.Telegram_text()), 
 				(this.Category_input()), 
 				(this.Category_add()), 
 				(this.Categories_list())
@@ -19301,6 +19312,8 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_id"));
 	($mol_mem(($.$bog_nka_settings.prototype), "telegram_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Telegram_link"));
+	($mol_mem(($.$bog_nka_settings.prototype), "telegram_text"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Telegram_text"));
 	($mol_mem(($.$bog_nka_settings.prototype), "category_draft"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Category_input"));
 	($mol_mem(($.$bog_nka_settings.prototype), "category_add"));
@@ -19435,6 +19448,19 @@ var $;
                     return catalog.Telegram()?.val() ?? '';
                 }
                 const atom = catalog.Telegram(null);
+                if (!atom)
+                    return '';
+                atom.val(next);
+                return next;
+            }
+            telegram_text(next) {
+                const catalog = this.catalog();
+                if (!catalog)
+                    return '';
+                if (next === undefined) {
+                    return catalog.TelegramText()?.val() ?? '';
+                }
+                const atom = catalog.TelegramText(null);
                 if (!atom)
                     return '';
                 atom.val(next);

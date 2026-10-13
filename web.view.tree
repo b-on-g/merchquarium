@@ -2182,6 +2182,9 @@ $bog_nka_settings $mol_page
 		<= Telegram_link $mol_string
 			hint @ \Telegram link
 			value? <=> telegram_link? \
+		<= Telegram_text $mol_string
+			hint @ \Example: "Hello! I want to buy {title}!" 
+			value? <=> telegram_text? \
 		<= Category_input $mol_string
 			hint @ \New category
 			value? <=> category_draft? \
