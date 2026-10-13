@@ -107,6 +107,21 @@ namespace $.$$ {
 			atom.val(next)
 			return next
 		}
+		
+		telegram_text(next?: string): string {
+			const catalog = this.catalog()
+			if (!catalog) return ''
+		
+			if (next === undefined) {
+				return catalog.TelegramText()?.val() ?? ''
+			}
+		
+			const atom = catalog.TelegramText(null)
+			if (!atom) return ''
+		
+			atom.val(next)
+			return next
+		}
 
 
 	}
