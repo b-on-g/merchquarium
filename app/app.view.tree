@@ -2,12 +2,14 @@ $bog_nka_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
 	Filter_all @ \All
-	title null - поле в настройках
+	title @ \Catalog 
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
 	plugins /
 		<= Theme_auto $mol_theme_auto
+		<= Ico $bog_favicon
+			Icon <= ico $mol_icon_all_inclusive
 	tools /
 		<= Lights $mol_lights_toggle
 		<= Settings_button $mol_button_minor
