@@ -91,13 +91,13 @@ namespace $.$$ {
 
 		
 		buy_title() {
-			return this.catalog()?.Telegram()?.val()?.trim()
+			return this.catalog()?.Social()?.val()?.trim()
 				? this.Buy_title()
 				: this.Social_missing_title()
 		}
 		
 		buy_enabled() {
-			return this.available() && Boolean(this.catalog()?.Telegram()?.val()?.trim())
+			return this.available() && Boolean(this.catalog()?.Social()?.val()?.trim())
 		}
 		
 		@ $mol_action
@@ -105,14 +105,14 @@ namespace $.$$ {
 			if (!this.buy_enabled()) return
 		
 			const catalog = this.catalog()
-			const recipient = catalog?.Telegram()?.val()?.trim() ?? ''
+			const recipient = catalog?.Social()?.val()?.trim() ?? ''
 			if (!recipient) return
 		
 			const link = recipient.startsWith('http')
 				? recipient.replace(/\/$/, '')
 				: `https://t.me/${recipient.replace(/^@/, '')}`
 		
-			const template = catalog?.TelegramText()?.val()
+			const template = catalog?.SocialText()?.val()
 				|| 'Добрый день, хотел бы приобрести {title}'
 			const message = template.replace(/\{title\}/g, this.title())
 		
