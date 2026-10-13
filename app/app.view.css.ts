@@ -8,7 +8,13 @@ namespace $.$$ {
 		Catalog_create: {
 			gap: $mol_gap.block,
 			marginTop: '1rem'
+		},
+		Category_filter: {
+			flexWrap: 'nowrap',
+			flexDirection: 'row-reverse'
+			
 		}
+		
 	})
 
 }

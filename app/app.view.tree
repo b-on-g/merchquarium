@@ -6,7 +6,10 @@ $bog_nka_app $mol_page
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
+	plugins /
+		<= Theme_auto $mol_theme_auto
 	tools /
+		<= Lights $mol_lights_toggle
 		<= Settings_button $mol_button_minor
 			title <= settings_button_title \
 			click? <=> settings_toggle? null
@@ -20,7 +23,7 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_view
 			sub /
-				<= Catalog_selected_text $mol_paragraph
+				- <= Catalog_selected_text $mol_paragraph
 					title <= catalog_selected_text \
 				<= Product_add $mol_button_major
 					title @ \Add product
