@@ -6,10 +6,10 @@ namespace $.$$ {
 		}
 
 		style() {
-			const style = super.style()
-			return this.hidden()
-				? { ...style, display: 'none' }
-				: style
+			return {
+				...super.style(),
+				display: this.hidden() ? 'none' : '',
+			}
 		}
 
 	}
