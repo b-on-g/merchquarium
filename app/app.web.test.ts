@@ -47,7 +47,7 @@ namespace $ {
 			if( !products ) throw new Error( 'Products list is missing' )
 
 			const app = $bog_nka_app.make({ $ })
-			app.focused = () => false
+			// app.focused = () => false
 			app.catalog_link = ()=> land.link().str
 
 			const titles = [
