@@ -2286,6 +2286,10 @@ $bog_nka_product_card $mol_card
 			checked? <=> available? false
 			title @ \Available
 			enabled <= changed true
+		<= Delete $mol_button_major
+			title @ \Delete
+			click? <=> product_delete? null
+
 
 $bog_nka_app $mol_page
 	Settings_title @ \Settings
@@ -2295,6 +2299,10 @@ $bog_nka_app $mol_page
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
+		product_delete? <=> product_delete*? null
+	Product_undo* $mol_button_major
+		title @ \Undo
+		click? <=> product_undo*? null
 	plugins /
 		<= Theme_auto $mol_theme_auto
 		<= Ico $bog_favicon

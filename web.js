@@ -31596,6 +31596,16 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
+		product_delete(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Delete(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Delete_title")));
+			(obj.click) = (next) => ((this.product_delete(next)));
+			return obj;
+		}
 		product_link(next){
 			if(next !== undefined) return next;
 			return "";
@@ -31617,7 +31627,8 @@ var $;
 				(this.Description()), 
 				(this.Category()), 
 				(this.Buy()), 
-				(this.Available())
+				(this.Available()), 
+				(this.Delete())
 			];
 		}
 	};
@@ -31633,6 +31644,8 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "Buy"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "product_delete"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_link"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "catalog_link"));
 
@@ -31756,6 +31769,9 @@ var $;
             Available() {
                 return this.changed() ? super.Available() : null;
             }
+            Delete() {
+                return this.changed() ? super.Delete() : null;
+            }
         }
         __decorate([
             $mol_action
@@ -31763,6 +31779,9 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_nka_product_card.prototype, "Available", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "Delete", null);
         $$.$bog_nka_product_card = $bog_nka_product_card;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -31774,6 +31793,14 @@ var $;
 		}
 		catalog_link(){
 			return "";
+		}
+		product_delete(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		product_undo(id, next){
+			if(next !== undefined) return next;
+			return null;
 		}
 		Theme_auto(){
 			const obj = new this.$.$mol_theme_auto();
@@ -31894,6 +31921,13 @@ var $;
 			const obj = new this.$.$bog_nka_product_card();
 			(obj.product_link) = () => ((this.product_link(id)));
 			(obj.catalog_link) = () => ((this.catalog_link()));
+			(obj.product_delete) = (next) => ((this.product_delete(id, next)));
+			return obj;
+		}
+		Product_undo(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Product_undo_title")));
+			(obj.click) = (next) => ((this.product_undo(id, next)));
 			return obj;
 		}
 		plugins(){
@@ -31913,6 +31947,8 @@ var $;
 			return (this.content());
 		}
 	};
+	($mol_mem_key(($.$bog_nka_app.prototype), "product_delete"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "product_undo"));
 	($mol_mem(($.$bog_nka_app.prototype), "Theme_auto"));
 	($mol_mem(($.$bog_nka_app.prototype), "ico"));
 	($mol_mem(($.$bog_nka_app.prototype), "Ico"));
@@ -31931,6 +31967,7 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings"));
 	($mol_mem_key(($.$bog_nka_app.prototype), "Product_card"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Product_undo"));
 
 
 ;
@@ -31990,14 +32027,6 @@ var $;
                     return;
                 catalog.Products(null)?.make(null);
             }
-            product_cards() {
-                const category = this.category_filter();
-                const products = this.catalog()?.Products()?.remote_list() ?? [];
-                return products
-                    .filter(product => product.can_change() || product.Available()?.val())
-                    .filter(product => category === 'all' || product.Category()?.val() === category)
-                    .map(product => this.Product_card(product.link().str));
-            }
             product_link(link) {
                 return link;
             }
@@ -32034,6 +32063,81 @@ var $;
                         .filter((category) => Boolean(category));
                 return [...new Set(categories)];
             }
+            product_cards() {
+                const catalog = this.catalog();
+                const products = catalog?.Products()?.remote_list() ?? [];
+                const by_link = new Map(products.map(product => [product.link().str, product]));
+                const catalog_link = this.catalog_link();
+                const deleted = new Set(this.deleted_products(catalog_link));
+                const order = [...this.product_order(catalog_link)];
+                const category = this.category_filter();
+                for (const product of products) {
+                    const link = product.link().str;
+                    if (!order.includes(link))
+                        order.push(link);
+                }
+                const cards = [];
+                for (const link of order) {
+                    const product = by_link.get(link);
+                    if (product) {
+                        if (!product.can_change() && !product.Available()?.val())
+                            continue;
+                        if (category !== 'all' && product.Category()?.val() !== category)
+                            continue;
+                        cards.push(this.Product_card(link));
+                        continue;
+                    }
+                    if (!this.is_admin() || !deleted.has(link))
+                        continue;
+                    const removed = this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(link), $bog_nka_product);
+                    if (category !== 'all' && removed.Category()?.val() !== category)
+                        continue;
+                    cards.push(this.Product_undo(link));
+                }
+                return cards;
+            }
+            deleted_products(catalog_link) {
+                if (!catalog_link)
+                    return [];
+                return [];
+            }
+            product_order(catalog_link) {
+                if (!catalog_link)
+                    return [];
+                return [];
+            }
+            product_delete(link) {
+                if (!this.is_admin())
+                    return;
+                const products = this.catalog()?.Products();
+                if (!products)
+                    return;
+                const catalog_link = this.catalog_link();
+                const order = this.product_order(catalog_link);
+                if (!order.length) {
+                    order.push(...products.remote_list().map(product => product.link().str));
+                }
+                if (!order.includes(link))
+                    order.push(link);
+                const deleted = this.deleted_products(catalog_link);
+                if (deleted.includes(link))
+                    return;
+                products.cut(new this.$.$giper_baza_link(link));
+                deleted.push(link);
+            }
+            product_undo(link) {
+                if (!this.is_admin())
+                    return;
+                const products = this.catalog()?.Products();
+                if (!products)
+                    return;
+                const deleted = this.deleted_products(this.catalog_link());
+                const index = deleted.indexOf(link);
+                if (index < 0)
+                    return;
+                products.add(new this.$.$giper_baza_link(link));
+                deleted.splice(index, 1);
+            }
         }
         __decorate([
             $mol_mem
@@ -32050,6 +32154,18 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_nka_app.prototype, "category_filter", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_nka_app.prototype, "deleted_products", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_nka_app.prototype, "product_order", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_app.prototype, "product_delete", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_app.prototype, "product_undo", null);
         $$.$bog_nka_app = $bog_nka_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

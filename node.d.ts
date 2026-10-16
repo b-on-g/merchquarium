@@ -42436,6 +42436,16 @@ declare namespace $ {
 		,
 		ReturnType< $mol_check_box['enabled'] >
 	>
+	type $mol_button_major__title_bog_nka_product_card_21 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_product_card_22 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['product_delete'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
 	export class $bog_nka_product_card extends $mol_card {
 		title( next?: string ): string
 		changed( ): boolean
@@ -42453,6 +42463,8 @@ declare namespace $ {
 		Buy( ): $mol_button_major
 		available( next?: boolean ): boolean
 		Available( ): $mol_check_box
+		product_delete( next?: any ): any
+		Delete( ): $mol_button_major
 		product_link( next?: string ): string
 		catalog_link( next?: string ): string
 		Buy_title( ): string
@@ -42479,6 +42491,7 @@ declare namespace $.$$ {
         buy(): void;
         social_url(): URL | null;
         Available(): $mol_check_box;
+        Delete(): $mol_button_major;
     }
 }
 
@@ -42574,9 +42587,26 @@ declare namespace $ {
 		,
 		ReturnType< $bog_nka_product_card['catalog_link'] >
 	>
+	type $bog_nka_product_card__product_delete_bog_nka_app_19 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['product_delete'] >
+		,
+		ReturnType< $bog_nka_product_card['product_delete'] >
+	>
+	type $mol_button_major__title_bog_nka_app_20 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_app_21 = $mol_type_enforce<
+		ReturnType< $bog_nka_app['product_undo'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
 	export class $bog_nka_app extends $mol_page {
 		product_link( id: any): string
 		catalog_link( ): string
+		product_delete( id: any, next?: any ): any
+		product_undo( id: any, next?: any ): any
 		Theme_auto( ): $mol_theme_auto
 		ico( ): $mol_icon_all_inclusive
 		Ico( ): $bog_favicon
@@ -42604,6 +42634,7 @@ declare namespace $ {
 		Filter_all( ): string
 		title( ): string
 		Product_card( id: any): $bog_nka_product_card
+		Product_undo( id: any): $mol_button_major
 		plugins( ): readonly(any)[]
 		head( ): readonly(any)[]
 		tools( ): readonly(any)[]
@@ -42624,13 +42655,17 @@ declare namespace $.$$ {
         settings_button_title(): string;
         catalog(): $bog_nka_catalog | null;
         product_add(): void;
-        product_cards(): $.$bog_nka_product_card[];
         product_link(link: string): string;
         category_filter(next?: string): string;
         category_filter_options(): Record<string, string>;
         is_admin(): boolean | undefined;
         is_not_admin(): boolean;
         filter_categories(): string[];
+        product_cards(): $mol_view[];
+        deleted_products(catalog_link: string): string[];
+        product_order(catalog_link: string): string[];
+        product_delete(link: string): void;
+        product_undo(link: string): void;
     }
 }
 
