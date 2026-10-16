@@ -3587,7 +3587,7 @@ var $;
                         }
                     }
                 }
-                else if (key === '@media' || key === '@container') {
+                else if (key === '@media' || key === '@container' || key === '@supports') {
                     const media = config[key];
                     for (let query of Object.keys(media).reverse()) {
                         rules.push('}\n');
@@ -4767,6 +4767,55 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_hotkey2) = class $mol_hotkey2 extends ($.$mol_plugin) {
+		keydown(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		event(){
+			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
+		}
+		action(){
+			return {};
+		}
+	};
+	($mol_mem(($.$mol_hotkey2.prototype), "keydown"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Plugin which adds handlers for keyboard keys.
+         * @see [mol_keyboard_code](../keyboard/code/code.ts)
+         */
+        class $mol_hotkey2 extends $.$mol_hotkey2 {
+            keydown(event) {
+                if (!event)
+                    return;
+                if (event.defaultPrevented)
+                    return;
+                const key = [...new Set([
+                        ...(event.ctrlKey || event.metaKey) ? ['ctrl'] : [],
+                        ...event.altKey ? ['alt'] : [],
+                        ...event.shiftKey ? ['shift'] : [],
+                        $mol_keyboard_code[event.keyCode] ?? '?',
+                    ])].join('_');
+                this.action()[key]?.(event);
+            }
+        }
+        $$.$mol_hotkey2 = $mol_hotkey2;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_speck) = class $mol_speck extends ($.$mol_view) {
 		value(){
 			return null;
@@ -5063,6 +5112,9 @@ var $;
                 };
             }
         }
+        __decorate([
+            $mol_mem
+        ], $bog_nka_button.prototype, "style", null);
         $$.$bog_nka_button = $bog_nka_button;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -8060,55 +8112,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_hotkey2) = class $mol_hotkey2 extends ($.$mol_plugin) {
-		keydown(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		event(){
-			return {...(super.event()), "keydown": (next) => (this.keydown(next))};
-		}
-		action(){
-			return {};
-		}
-	};
-	($mol_mem(($.$mol_hotkey2.prototype), "keydown"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Plugin which adds handlers for keyboard keys.
-         * @see [mol_keyboard_code](../keyboard/code/code.ts)
-         */
-        class $mol_hotkey2 extends $.$mol_hotkey2 {
-            keydown(event) {
-                if (!event)
-                    return;
-                if (event.defaultPrevented)
-                    return;
-                const key = [...new Set([
-                        ...(event.ctrlKey || event.metaKey) ? ['ctrl'] : [],
-                        ...event.altKey ? ['alt'] : [],
-                        ...event.shiftKey ? ['shift'] : [],
-                        $mol_keyboard_code[event.keyCode] ?? '?',
-                    ])].join('_');
-                this.action()[key]?.(event);
-            }
-        }
-        $$.$mol_hotkey2 = $mol_hotkey2;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_hotkey) = class $mol_hotkey extends ($.$mol_hotkey2) {
 		key(){
 			return {};
@@ -9307,7 +9310,7 @@ var $;
     $mol_style_define($mol_link, {
         textDecoration: 'none',
         color: $mol_theme.control,
-        stroke: 'currentcolor',
+        stroke: 'currentColor',
         cursor: 'pointer',
         padding: $mol_gap.text,
         boxSizing: 'border-box',
@@ -31815,6 +31818,15 @@ var $;
 			(obj.Icon) = () => ((this.ico()));
 			return obj;
 		}
+		undo_last(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Undo_hotkey(){
+			const obj = new this.$.$mol_hotkey2();
+			(obj.action) = () => ({"ctrl_Z": (next) => (this.undo_last(next))});
+			return obj;
+		}
 		product_add(next){
 			if(next !== undefined) return next;
 			return null;
@@ -31931,7 +31943,11 @@ var $;
 			return obj;
 		}
 		plugins(){
-			return [(this.Theme_auto()), (this.Ico())];
+			return [
+				(this.Theme_auto()), 
+				(this.Ico()), 
+				(this.Undo_hotkey())
+			];
 		}
 		head(){
 			return [
@@ -31952,6 +31968,8 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Theme_auto"));
 	($mol_mem(($.$bog_nka_app.prototype), "ico"));
 	($mol_mem(($.$bog_nka_app.prototype), "Ico"));
+	($mol_mem(($.$bog_nka_app.prototype), "undo_last"));
+	($mol_mem(($.$bog_nka_app.prototype), "Undo_hotkey"));
 	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "category_filter"));
@@ -32124,19 +32142,43 @@ var $;
                     return;
                 products.cut(new this.$.$giper_baza_link(link));
                 deleted.push(link);
+                this.focused(true);
             }
             product_undo(link) {
                 if (!this.is_admin())
                     return;
+                const catalog_link = this.catalog_link();
                 const products = this.catalog()?.Products();
                 if (!products)
                     return;
-                const deleted = this.deleted_products(this.catalog_link());
-                const index = deleted.indexOf(link);
-                if (index < 0)
+                const deleted = this.deleted_products(catalog_link);
+                const deleted_index = deleted.indexOf(link);
+                if (deleted_index < 0)
                     return;
-                products.add(new this.$.$giper_baza_link(link));
-                deleted.splice(index, 1);
+                const order = this.product_order(catalog_link);
+                const order_index = order.indexOf(link);
+                const items = products.items();
+                if (order_index < 0) {
+                    products.add(new this.$.$giper_baza_link(link));
+                }
+                else {
+                    const next_index = items.findIndex(item => {
+                        const item_index = order.indexOf(item.str);
+                        return item_index < 0 || item_index > order_index;
+                    });
+                    const insert_at = next_index < 0 ? items.length : next_index;
+                    const product_link = new this.$.$giper_baza_link(link);
+                    products.splice([product_link], insert_at, insert_at);
+                }
+                deleted.splice(deleted_index, 1);
+            }
+            undo_last(event) {
+                const deleted = this.deleted_products(this.catalog_link());
+                const link = deleted[deleted.length - 1];
+                if (!link)
+                    return;
+                event.preventDefault();
+                this.product_undo(link);
             }
         }
         __decorate([
@@ -32155,6 +32197,12 @@ var $;
             $mol_mem
         ], $bog_nka_app.prototype, "category_filter", null);
         __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "is_admin", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "is_not_admin", null);
+        __decorate([
             $mol_mem_key
         ], $bog_nka_app.prototype, "deleted_products", null);
         __decorate([
@@ -32166,6 +32214,9 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_app.prototype, "product_undo", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_app.prototype, "undo_last", null);
         $$.$bog_nka_app = $bog_nka_app;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));

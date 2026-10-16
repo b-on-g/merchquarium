@@ -72,6 +72,12 @@ $mol_icon_all_inclusive $mol_icon path \M18.6,6.62C17.16,6.62 15.8,7.18 14.83,8.
 $bog_favicon $mol_plugin
 	Icon $mol_view
 
+$mol_hotkey2 $mol_plugin
+	event *
+		^
+		keydown? <=> keydown? null
+	action *
+
 $mol_speck $mol_view
 	theme \$mol_theme_accent
 	sub /
@@ -271,12 +277,6 @@ $mol_list $mol_view
 	view_window /
 		0
 		0
-
-$mol_hotkey2 $mol_plugin
-	event *
-		^
-		keydown? <=> keydown? null
-	action *
 
 $mol_hotkey $mol_hotkey2
 	key *
@@ -616,6 +616,9 @@ $bog_nka_app $mol_page
 		<= Theme_auto $mol_theme_auto
 		<= Ico $bog_favicon
 			Icon <= ico $mol_icon_all_inclusive
+		<= Undo_hotkey $mol_hotkey2
+			action *
+				ctrl_Z? <=> undo_last? null
 	head /
 		<= Product_add $bog_nka_button
 			title @ \Add product
