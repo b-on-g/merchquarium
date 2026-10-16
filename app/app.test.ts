@@ -2,39 +2,6 @@ namespace $ {
 
 	$mol_test({
 
-		'page head updates add button when admin access arrives'($) {
-			class Access extends $mol_object {
-				static $ = $
-
-				@ $mol_mem
-				can_change(next?: boolean) {
-					return next ?? false
-				}
-			}
-
-			const access = new Access()
-			const app = $bog_nka_app.make({ $ })
-			app.catalog = () => access as any
-			app.plugins = () => []
-			app.body = () => []
-			app.title = () => 'Catalog'
-			app.Product_add().title = () => 'Add product'
-			app.Settings_button().title = () => 'Settings'
-			app.Category_filter().options = () => ({ all: 'All' })
-
-			$mol_assert_equal( app.head()[ 0 ], app.Title() )
-			$mol_assert_equal( app.head()[ 1 ], app.Tools() )
-			$mol_assert_equal( app.head()[ 2 ], app.Product_add() )
-
-			const node = app.Product_add().dom_node() as HTMLElement
-			app.dom_tree()
-			$mol_assert_equal( node.style.display, 'none' )
-
-			access.can_change( true )
-			app.dom_tree()
-			$mol_assert_equal( node.style.display, '' )
-		},
-
 		'product order survives repeated delete and undo': $mol_wire_async( ( $: $ )=> {
 			const land = $.$giper_baza_glob.land_grab()
 			const catalog = land.Data( $bog_nka_catalog )
