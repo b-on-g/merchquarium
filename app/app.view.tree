@@ -7,6 +7,9 @@ $bog_nka_app $mol_page
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
 		product_delete? <=> product_delete*? null
+	Product_undo* $mol_button_major
+		title @ \Undo
+		click? <=> product_undo*? null
 	plugins /
 		<= Theme_auto $mol_theme_auto
 		<= Ico $bog_favicon

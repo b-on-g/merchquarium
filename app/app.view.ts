@@ -66,18 +66,6 @@ namespace $.$$ {
 		
 			catalog.Products( null )?.make( null )
 		}
-
-		product_cards() {
-			const category = this.category_filter()
-			const products = this.catalog()?.Products()?.remote_list() ?? []
-		
-			return products
-				.filter(product => product.can_change() || product.Available()?.val())
-				.filter(product =>
-					category === 'all' || product.Category()?.val() === category,
-				)
-				.map(product => this.Product_card(product.link().str))
-		}
 		
 		product_link( link: string ) {
 			return link
@@ -126,6 +114,101 @@ namespace $.$$ {
 		
 			return [...new Set(categories)]
 		}
+
+		@ $mol_mem
+		deleted_product_link(next?: string | null) {
+			return next === undefined ? null : next
+		}
+		
+		undo_hidden() {
+			return !this.is_admin() || !this.deleted_product_link()
+		}
+
+		product_cards() {
+			const catalog = this.catalog()
+			const products = catalog?.Products()?.remote_list() ?? []
+			const by_link = new Map(
+				products.map(product => [product.link().str, product] as const),
+			)
+			const deleted = new Set(this.deleted_products())
+			const order = [...this.product_order()]
+			const category = this.category_filter()
+		
+			for (const product of products) {
+				const link = product.link().str
+				if (!order.includes(link)) order.push(link)
+			}
+		
+			const cards: $mol_view[] = []
+		
+			for (const link of order) {
+				const product = by_link.get(link)
+		
+				if (product) {
+					if (!product.can_change() && !product.Available()?.val()) continue
+					if (category !== 'all' && product.Category()?.val() !== category) continue
+		
+					cards.push(this.Product_card(link))
+					continue
+				}
+		
+				if (!this.is_admin() || !deleted.has(link)) continue
+		
+				const removed = this.$.$giper_baza_glob.Pawn(
+					new this.$.$giper_baza_link(link),
+					$bog_nka_product,
+				)
+		
+				if (category !== 'all' && removed.Category()?.val() !== category) continue
+		
+				cards.push(this.Product_undo(link))
+			}
+		
+			return cards
+		}
+		
+		@ $mol_mem
+		deleted_products(next?: string[]) {
+			return next ?? []
+		}
+		
+		@ $mol_mem
+		product_order(next?: string[]) {
+			if (next !== undefined) return next
+		
+			return (this.catalog()?.Products()?.remote_list() ?? [])
+				.map(product => product.link().str)
+		}
+		
+		@ $mol_action
+		product_delete(link: string) {
+			if (!this.is_admin()) return
+		
+			const products = this.catalog()?.Products()
+			if (!products) return
+		
+			const order = this.product_order()
+			if (!order.includes(link)) this.product_order([...order, link])
+		
+			const deleted = this.deleted_products()
+			if (deleted.includes(link)) return
+		
+			products.cut(new this.$.$giper_baza_link(link))
+			this.deleted_products([...deleted, link])
+		}
+		
+		@ $mol_action
+		product_undo(link: string) {
+			if (!this.is_admin()) return
+		
+			const products = this.catalog()?.Products()
+			const deleted = this.deleted_products()
+			if (!products || !deleted.includes(link)) return
+		
+			products.add(new this.$.$giper_baza_link(link))
+			this.deleted_products(deleted.filter(item => item !== link))
+		}
+
 
 
 	}
