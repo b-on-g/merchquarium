@@ -25,7 +25,13 @@ namespace $.$$ {
 			files.forEach((file, index) => {
 				const photo = photos.make(null)
 				photo.buffer(buffers[index])
-				photo.type(file.type || 'application/octet-stream')
+				const extension = file.name.split('.').pop()?.toLowerCase()
+				const type = file.type && file.type !== 'application/octet-stream'
+					? file.type
+					: extension === 'jpg' || extension === 'jpeg'
+						? 'image/jpeg'
+						: file.type || 'application/octet-stream'
+				photo.type(type)
 				photo.name(file.name)
 			})
 		}
