@@ -19,20 +19,37 @@ namespace $.$$ {
 		}
 
 		photos_save(files: readonly File[]) {
-			const buffers = files.map(file => new Uint8Array($mol_wire_sync(file).arrayBuffer()))
-			const photos = this.product().Photos('auto')!
-
-			files.forEach((file, index) => {
-				const photo = photos.make(null)
-				photo.buffer(buffers[index])
+			const prepared = files.map(file => {
 				const extension = file.name.split('.').pop()?.toLowerCase()
-				const type = file.type && file.type !== 'application/octet-stream'
-					? file.type
+				const detected_type = file.type.toLowerCase()
+				const type = detected_type.startsWith('image/')
+					? detected_type
 					: extension === 'jpg' || extension === 'jpeg'
 						? 'image/jpeg'
-						: file.type || 'application/octet-stream'
-				photo.type(type)
-				photo.name(file.name)
+						: extension === 'png'
+							? 'image/png'
+							: extension === 'webp'
+								? 'image/webp'
+								: detected_type
+				const source = new Blob([file], { type })
+				const picture = $mol_picture.fit(source, 1600)
+				const blob = picture.format('image/webp', .82)
+				if (!blob) return null
+
+				const buffer = new Uint8Array($mol_wire_sync(blob).arrayBuffer())
+				const output_extension = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/jpeg' ? 'jpg' : 'png'
+				return { file, blob, buffer, output_extension }
+			})
+
+			const photos = this.product().Photos('auto')!
+			prepared.forEach(item => {
+				if (!item) return
+
+				const { file, blob, buffer, output_extension } = item
+				const photo = photos.make(null)
+				photo.buffer(buffer)
+				photo.type(blob.type || 'image/png')
+				photo.name(`${file.name.replace(/\.[^/.]+$/, '')}.${output_extension}`)
 			})
 		}
 
