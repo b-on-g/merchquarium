@@ -31,3 +31,7 @@ $bog_nka_product_card $mol_card
 			checked? <=> available? false
 			title @ \Available
 			enabled <= changed true
+		<= Delete $mol_button_major
+			title @ \Delete
+			click? <=> product_delete? null
+

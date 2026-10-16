@@ -137,6 +137,12 @@ namespace $.$$ {
 		Available() {
 			return this.changed() ? super.Available() : null!
 		}
+		
+		@ $mol_mem
+		Delete() {
+			return this.changed() ? super.Delete() : null!
+		}
+
 
 
 

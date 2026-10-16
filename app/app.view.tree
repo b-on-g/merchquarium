@@ -6,6 +6,7 @@ $bog_nka_app $mol_page
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
+		product_delete? <=> product_delete*? null
 	plugins /
 		<= Theme_auto $mol_theme_auto
 		<= Ico $bog_favicon
