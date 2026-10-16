@@ -14,6 +14,9 @@ $bog_nka_app $mol_page
 		<= Theme_auto $mol_theme_auto
 		<= Ico $bog_favicon
 			Icon <= ico $mol_icon_all_inclusive
+		<= Undo_hotkey $mol_hotkey2
+			action *
+				ctrl_Z? <=> undo_last? null
 	head /
 		<= Product_add $bog_nka_button
 			title @ \Add product
