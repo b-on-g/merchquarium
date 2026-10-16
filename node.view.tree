@@ -168,6 +168,8 @@ $mol_gallery $mol_view
 			flexGrow <= side_size* \1
 		items <= side_items* /$mol_view
 
+$bog_nka_gallery $mol_gallery
+
 $mol_ghost $mol_view
 	Sub $mol_view
 
@@ -510,6 +512,63 @@ $mol_card $mol_list
 
 $mol_string_button $mol_string
 
+$mol_icon_camera $mol_icon path \M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z
+
+$mol_icon_camera_off $mol_icon path \M1.2,4.47L2.5,3.2L20,20.72L18.73,22L16.73,20H4A2,2 0 0,1 2,18V6C2,5.78 2.04,5.57 2.1,5.37L1.2,4.47M7,4L9,2H15L17,4H20A2,2 0 0,1 22,6V18C22,18.6 21.74,19.13 21.32,19.5L16.33,14.5C16.76,13.77 17,12.91 17,12A5,5 0 0,0 12,7C11.09,7 10.23,7.24 9.5,7.67L5.82,4H7M7,12A5,5 0 0,0 12,17C12.5,17 13.03,16.92 13.5,16.77L11.72,15C10.29,14.85 9.15,13.71 9,12.28L7.23,10.5C7.08,10.97 7,11.5 7,12M12,9A3,3 0 0,1 15,12C15,12.35 14.94,12.69 14.83,13L11,9.17C11.31,9.06 11.65,9 12,9Z
+
+$mol_image $mol_view
+	dom_name \img
+	attr *any
+		^
+		src <= uri \
+		title <= hint
+		alt <= title \
+		loading <= loading \lazy
+		decoding <= decoding \async
+		crossOrigin <= cors null
+		width <= natural_width 0
+		height <= natural_height 0
+	event *any
+		load? <=> load? null
+	minimal_width 16
+	minimal_height 16
+
+$yuf_carousel $mol_view
+	minimal_height 120
+	auto_scroll true
+	ids /string - ids or urls
+	sub <= images /$mol_view
+		<= Empty*0 $mol_icon_camera_off
+		<= Image*0 $mol_image
+			minimal_height 120
+			uri <= url* \
+	event *
+		^
+		mousemove? <=> event_move? null
+
+$bog_nka_carousel $yuf_carousel
+	selected_index 0
+
+$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
+
+$mol_button_open $mol_button_minor
+	sub /
+		<= Icon $mol_icon_upload
+		<= Native $mol_button_open_native
+			files? <=> files_handled? <=> files? /File
+			accept <= accept \
+			multiple <= multiple true
+
+$mol_button_open_native $mol_view
+	dom_name \input
+	files? /File
+	attr *
+		type \file
+		accept <= accept \
+		multiple <= multiple true
+	event *
+		change? <=> picked? null
+
 $mol_icon_menu $mol_icon path \M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z
 
 $mol_icon_menu_down $mol_icon path \M7,10L12,15L17,10H7Z
@@ -572,14 +631,26 @@ $bog_nka_product_card $mol_card
 			value? <=> title? \
 			hint @ \Title
 			enabled <= changed true
+		<= Photos $bog_nka_carousel
+			ids <= photo_ids /string
+			url* <= photo_url* \
+		<= Photos_controls $mol_row sub /
+			<= Photos_add $mol_button_open
+				files? <=> photos_add? /File
+				enabled <= changed true
+				accept \image/*
+			<= Photos_delete $mol_button_minor
+				title @ \Delete photo
+				click? <=> photo_delete? null
+				enabled <= photo_delete_enabled true
+		<= Description $mol_string_button
+			value? <=> description? \
+			hint @ \Description
+			enabled <= changed true
 		<= Price $bog_nka_number
 			value_min 0
 			hint @ \Price
 			value? <=> price? null
-			enabled <= changed true
-		<= Description $mol_string_button
-			value? <=> description? \
-			hint @ \Description
 			enabled <= changed true
 		<= Category $mol_select
 			options <= category_list /
@@ -598,7 +669,6 @@ $bog_nka_product_card $mol_card
 		<= Delete $mol_button_major
 			title @ \Delete
 			click? <=> product_delete? null
-
 
 $bog_nka_app $mol_page
 	Settings_title @ \Settings
@@ -644,7 +714,7 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_view
 			sub /
-				<= Product_cards $mol_gallery
+				<= Product_cards $bog_nka_gallery
 					items <= product_cards /
 		<= Settings $bog_nka_settings
 			catalog_link <= catalog_link \

@@ -6811,6 +6811,26 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_nka_gallery) = class $bog_nka_gallery extends ($.$mol_gallery) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_gallery, {
+            alignItems: 'flex-start',
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_ghost) = class $mol_ghost extends ($.$mol_view) {
 		Sub(){
 			const obj = new this.$.$mol_view();
@@ -14801,6 +14821,8 @@ var $;
         }
         encrypted(next) {
             $mol_wire_solid();
+            if (!this._gift.size)
+                this.loading();
             const gift = this._gift.get(this.link().str);
             const prev = gift?.code_exists() ?? false;
             if (next === undefined)
@@ -31014,7 +31036,7 @@ var $;
     }) {
         /** Persistent URI to file content */
         uri() {
-            return `?BAZA:file=${this.link()};name=${this.name()}`;
+            return `${this.name()}?BAZA:file=${this.link()}`;
         }
         /** File name */
         name(next) {
@@ -31503,6 +31525,369 @@ var $;
 
 
 ;
+	($.$mol_icon_camera) = class $mol_icon_camera extends ($.$mol_icon) {
+		path(){
+			return "M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_camera_off) = class $mol_icon_camera_off extends ($.$mol_icon) {
+		path(){
+			return "M1.2,4.47L2.5,3.2L20,20.72L18.73,22L16.73,20H4A2,2 0 0,1 2,18V6C2,5.78 2.04,5.57 2.1,5.37L1.2,4.47M7,4L9,2H15L17,4H20A2,2 0 0,1 22,6V18C22,18.6 21.74,19.13 21.32,19.5L16.33,14.5C16.76,13.77 17,12.91 17,12A5,5 0 0,0 12,7C11.09,7 10.23,7.24 9.5,7.67L5.82,4H7M7,12A5,5 0 0,0 12,17C12.5,17 13.03,16.92 13.5,16.77L11.72,15C10.29,14.85 9.15,13.71 9,12.28L7.23,10.5C7.08,10.97 7,11.5 7,12M12,9A3,3 0 0,1 15,12C15,12.35 14.94,12.69 14.83,13L11,9.17C11.31,9.06 11.65,9 12,9Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_image) = class $mol_image extends ($.$mol_view) {
+		uri(){
+			return "";
+		}
+		title(){
+			return "";
+		}
+		loading(){
+			return "lazy";
+		}
+		decoding(){
+			return "async";
+		}
+		cors(){
+			return null;
+		}
+		natural_width(){
+			return 0;
+		}
+		natural_height(){
+			return 0;
+		}
+		load(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "img";
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"src": (this.uri()), 
+				"title": (this.hint()), 
+				"alt": (this.title()), 
+				"loading": (this.loading()), 
+				"decoding": (this.decoding()), 
+				"crossOrigin": (this.cors()), 
+				"width": (this.natural_width()), 
+				"height": (this.natural_height())
+			};
+		}
+		event(){
+			return {"load": (next) => (this.load(next))};
+		}
+		minimal_width(){
+			return 16;
+		}
+		minimal_height(){
+			return 16;
+		}
+	};
+	($mol_mem(($.$mol_image.prototype), "load"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_image extends $.$mol_image {
+            natural_width(next) {
+                const dom = this.dom_node();
+                if (dom.naturalWidth)
+                    return dom.naturalWidth;
+                const found = this.uri().match(/\bwidth=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            natural_height(next) {
+                const dom = this.dom_node();
+                if (dom.naturalHeight)
+                    return dom.naturalHeight;
+                const found = this.uri().match(/\bheight=(\d+)/);
+                return found ? Number(found[1]) : null;
+            }
+            load() {
+                this.natural_width(null);
+                this.natural_height(null);
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_image.prototype, "natural_height", null);
+        $$.$mol_image = $mol_image;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/image/image.view.css", "[mol_image] {\n\tborder-radius: var(--mol_gap_round);\n\toverflow: hidden;\n\tflex: 0 1 auto;\n\tmax-width: 100%;\n\tobject-fit: cover;\n\theight: fit-content;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$yuf_carousel) = class $yuf_carousel extends ($.$mol_view) {
+		Empty(id){
+			const obj = new this.$.$mol_icon_camera_off();
+			return obj;
+		}
+		url(id){
+			return "";
+		}
+		Image(id){
+			const obj = new this.$.$mol_image();
+			(obj.minimal_height) = () => (120);
+			(obj.uri) = () => ((this.url(id)));
+			return obj;
+		}
+		images(){
+			return [(this.Empty("0")), (this.Image("0"))];
+		}
+		event_move(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		minimal_height(){
+			return 120;
+		}
+		auto_scroll(){
+			return true;
+		}
+		ids(){
+			return [];
+		}
+		sub(){
+			return (this.images());
+		}
+		event(){
+			return {...(super.event()), "mousemove": (next) => (this.event_move(next))};
+		}
+	};
+	($mol_mem_key(($.$yuf_carousel.prototype), "Empty"));
+	($mol_mem_key(($.$yuf_carousel.prototype), "Image"));
+	($mol_mem(($.$yuf_carousel.prototype), "event_move"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $yuf_carousel extends $.$yuf_carousel {
+            mouse_pos(next) {
+                return next ?? null;
+            }
+            event_move(e) {
+                if (!e)
+                    return null;
+                if (!this.auto_scroll())
+                    return null;
+                this.mouse_pos([e.pageX, e.pageY]);
+            }
+            part_size() {
+                return 1 / (this.ids().length || 1);
+            }
+            selected_index() {
+                const r = this.view_rect();
+                const [x, y] = this.mouse_pos() ?? [];
+                if (!r || x === undefined || y === undefined)
+                    return 0;
+                const part = (x - r.left) / r.width;
+                return Math.floor(part / this.part_size());
+            }
+            switched() {
+                const index = this.selected_index();
+                const r = this.view_rect();
+                if (!r)
+                    return null;
+                const left = r.width * index;
+                this.dom_node().scrollTo({ left });
+                return index;
+            }
+            auto() {
+                try {
+                    this.switched();
+                }
+                catch (e) {
+                    $mol_fail_log(e);
+                }
+            }
+            images() {
+                const items = this.ids().map(id => this.url_safe(id) ? this.Image(id) : this.Empty(id));
+                return items.length ? items : [this.Empty('0')];
+            }
+            url_safe(id) {
+                return $mol_error_fence(() => this.url(id), e => e.message === $mol_rest_code[$mol_rest_code['Not Found']] ? '' : e);
+            }
+            url(path) { return path; }
+        }
+        __decorate([
+            $mol_mem
+        ], $yuf_carousel.prototype, "mouse_pos", null);
+        __decorate([
+            $mol_mem
+        ], $yuf_carousel.prototype, "part_size", null);
+        __decorate([
+            $mol_mem
+        ], $yuf_carousel.prototype, "selected_index", null);
+        __decorate([
+            $mol_mem
+        ], $yuf_carousel.prototype, "switched", null);
+        __decorate([
+            $mol_mem
+        ], $yuf_carousel.prototype, "images", null);
+        $$.$yuf_carousel = $yuf_carousel;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($yuf_carousel, {
+            transition: 'none',
+            overflow: {
+                y: 'hidden',
+                x: 'auto',
+            },
+            scroll: {
+                snap: {
+                    type: ['x', 'mandatory'],
+                    stop: 'always',
+                    align: 'start',
+                },
+                marker: {
+                    group: 'after'
+                }
+            },
+            '::scroll-marker-group': {
+                display: 'flex',
+                justifyContent: 'center',
+                gap: $mol_gap.block,
+                width: '100%',
+                height: '.25rem',
+            },
+            ':not( :has( :nth-child(2) ) )': {
+                '>': {
+                    $mol_view: {
+                        '::scroll-marker': {
+                            visibility: 'hidden'
+                        }
+                    }
+                }
+            },
+            '@supports': {
+                '(scroll-marker-group: before)': {
+                    scrollbarWidth: 'none',
+                },
+            },
+            '>': {
+                $mol_view: {
+                    scroll: {
+                        snap: {
+                            type: 'none',
+                            stop: 'always',
+                            align: 'start',
+                        },
+                    },
+                    '::scroll-marker': {
+                        content: '""',
+                        display: 'block',
+                        width: $mol_gap.emoji,
+                        height: $mol_gap.emoji,
+                        border: {
+                            radius: $mol_gap.round
+                        },
+                        background: { color: $mol_theme.line },
+                        cursor: 'pointer',
+                        ':target-current': {
+                            background: { color: $mol_theme.shade },
+                            transform: 'scale(1.25)',
+                        },
+                    },
+                },
+            },
+            alignItems: 'center',
+            Image: {
+                width: '100%',
+                height: '100%',
+                minHeight: 'auto',
+                flex: {
+                    shrink: 0,
+                    grow: 0,
+                },
+                objectFit: 'contain',
+            },
+            Empty: {
+                width: '100%',
+                height: '100%',
+                minHeight: 'auto',
+            },
+            minHeight: '5rem',
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$bog_nka_carousel) = class $bog_nka_carousel extends ($.$yuf_carousel) {
+		selected_index(){
+			return 0;
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_carousel, {
+            Image: {
+                objectFit: 'cover',
+            }
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$bog_nka_number) = class $bog_nka_number extends ($.$mol_number) {};
 
 
@@ -31533,16 +31918,46 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
-		price(next){
+		photo_ids(){
+			return [];
+		}
+		photo_url(id){
+			return "";
+		}
+		Photos(){
+			const obj = new this.$.$bog_nka_carousel();
+			(obj.ids) = () => ((this.photo_ids()));
+			(obj.url) = (id) => ((this.photo_url(id)));
+			return obj;
+		}
+		photos_add(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		Photos_add(){
+			const obj = new this.$.$mol_button_open();
+			(obj.files) = (next) => ((this.photos_add(next)));
+			(obj.enabled) = () => ((this.changed()));
+			(obj.accept) = () => ("image/*");
+			return obj;
+		}
+		photo_delete(next){
 			if(next !== undefined) return next;
 			return null;
 		}
-		Price(){
-			const obj = new this.$.$bog_nka_number();
-			(obj.value_min) = () => (0);
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Price_hint")));
-			(obj.value) = (next) => ((this.price(next)));
-			(obj.enabled) = () => ((this.changed()));
+		photo_delete_enabled(){
+			return true;
+		}
+		Photos_delete(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Photos_delete_title")));
+			(obj.click) = (next) => ((this.photo_delete(next)));
+			(obj.enabled) = () => ((this.photo_delete_enabled()));
+			return obj;
+		}
+		Photos_controls(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Photos_add()), (this.Photos_delete())]);
 			return obj;
 		}
 		description(next){
@@ -31553,6 +31968,18 @@ var $;
 			const obj = new this.$.$mol_string_button();
 			(obj.value) = (next) => ((this.description(next)));
 			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Description_hint")));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
+		price(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Price(){
+			const obj = new this.$.$bog_nka_number();
+			(obj.value_min) = () => (0);
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Price_hint")));
+			(obj.value) = (next) => ((this.price(next)));
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
@@ -31626,8 +32053,10 @@ var $;
 		sub(){
 			return [
 				(this.Title()), 
-				(this.Price()), 
+				(this.Photos()), 
+				(this.Photos_controls()), 
 				(this.Description()), 
+				(this.Price()), 
 				(this.Category()), 
 				(this.Buy()), 
 				(this.Available()), 
@@ -31637,10 +32066,16 @@ var $;
 	};
 	($mol_mem(($.$bog_nka_product_card.prototype), "title"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Title"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "price"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Photos"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "photos_add"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_add"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "photo_delete"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_delete"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_controls"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "description"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "price"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "category"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Category"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "buy"));
@@ -31652,6 +32087,87 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_link"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "catalog_link"));
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Image processing. */
+    class $mol_picture extends $mol_object2 {
+        canvas;
+        constructor(canvas) {
+            super();
+            this.canvas = canvas;
+        }
+        get context() {
+            return this.canvas.getContext('2d');
+        }
+        get bitmap() {
+            return this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
+        }
+        static fit(image, width = Number.POSITIVE_INFINITY, height = width) {
+            if (image instanceof Blob)
+                image = $mol_wire_sync(URL).createObjectURL(image);
+            if (typeof image === 'string')
+                image = $mol_wire_sync(this).load(image);
+            let [w, h] = this.sizes(image);
+            if (w > width) {
+                h *= width / w;
+                w = width;
+            }
+            if (h > height) {
+                w *= height / h;
+                h = height;
+            }
+            return this.make(image, w, h);
+        }
+        static make(image, width, height = width) {
+            const canvas = $mol_dom_context.document.createElement('canvas');
+            Object.assign(canvas, { width, height });
+            const context = canvas.getContext('2d');
+            context.drawImage(image, 0, 0, width, height);
+            return new this(canvas);
+        }
+        static sizes(image) {
+            if (image instanceof HTMLVideoElement)
+                return [
+                    image.videoWidth,
+                    image.videoHeight,
+                ];
+            if (image instanceof SVGImageElement)
+                return [
+                    image.width.baseVal.value,
+                    image.height.baseVal.value,
+                ];
+            return [
+                image.width,
+                image.height,
+            ];
+        }
+        static async load(uri) {
+            const image = new Image;
+            image.src = uri;
+            await new Promise((onload, onerror) => Object.assign(image, { onload, onerror }));
+            return image;
+        }
+        format(type, quality = .9) {
+            return new Promise(done => this.canvas.toBlob(done, type, quality));
+        }
+        url(type = 'image/webp', quality = .9) {
+            return this.canvas.toDataURL(type, quality);
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $mol_picture.prototype, "format", null);
+    __decorate([
+        $mol_action
+    ], $mol_picture.prototype, "url", null);
+    __decorate([
+        $mol_action
+    ], $mol_picture, "fit", null);
+    $.$mol_picture = $mol_picture;
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -31669,6 +32185,68 @@ var $;
             }
             changed() {
                 return this.product().can_change();
+            }
+            photos_add(next) {
+                if (!next?.length || !this.changed())
+                    return [];
+                $mol_wire_async(this).photos_save(next);
+                return [];
+            }
+            photos_save(files) {
+                const prepared = files.map(file => {
+                    const extension = file.name.split('.').pop()?.toLowerCase();
+                    const detected_type = file.type.toLowerCase();
+                    const type = detected_type.startsWith('image/')
+                        ? detected_type
+                        : extension === 'jpg' || extension === 'jpeg'
+                            ? 'image/jpeg'
+                            : extension === 'png'
+                                ? 'image/png'
+                                : extension === 'webp'
+                                    ? 'image/webp'
+                                    : detected_type;
+                    const source = new Blob([file], { type });
+                    const picture = $mol_picture.fit(source, 1600);
+                    const blob = picture.format('image/webp', .82);
+                    if (!blob)
+                        return null;
+                    const buffer = new Uint8Array($mol_wire_sync(blob).arrayBuffer());
+                    const output_extension = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/jpeg' ? 'jpg' : 'png';
+                    return { file, blob, buffer, output_extension };
+                });
+                const photos = this.product().Photos('auto');
+                prepared.forEach(item => {
+                    if (!item)
+                        return;
+                    const { file, blob, buffer, output_extension } = item;
+                    const photo = photos.make(null);
+                    photo.buffer(buffer);
+                    photo.type(blob.type || 'image/png');
+                    photo.name(`${file.name.replace(/\.[^/.]+$/, '')}.${output_extension}`);
+                });
+            }
+            photo_ids() {
+                return this.product().Photos()?.remote_list().map(photo => photo.link().str) ?? [];
+            }
+            photo_url(link) {
+                const file = this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(link), $giper_baza_file);
+                const master = this.$.$giper_baza_glob.yard().master_current();
+                return master ? master.replace(/\/$/, '') + file.uri() : file.uri();
+            }
+            photo_delete_enabled() {
+                return this.changed() && this.photo_ids().length > 0;
+            }
+            photo_delete() {
+                if (!this.changed())
+                    return;
+                const ids = this.photo_ids();
+                if (!ids.length)
+                    return;
+                const index = this.Photos().selected_index();
+                const link = ids[index];
+                if (!link)
+                    return;
+                this.product().Photos('auto')?.cut(new this.$.$giper_baza_link(link));
             }
             title(next) {
                 const product = this.product();
@@ -31778,6 +32356,9 @@ var $;
         }
         __decorate([
             $mol_action
+        ], $bog_nka_product_card.prototype, "photo_delete", null);
+        __decorate([
+            $mol_action
         ], $bog_nka_product_card.prototype, "buy", null);
         __decorate([
             $mol_mem
@@ -31786,6 +32367,24 @@ var $;
             $mol_mem
         ], $bog_nka_product_card.prototype, "Delete", null);
         $$.$bog_nka_product_card = $bog_nka_product_card;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_product_card, {
+            flex: { grow: 1, shrink: 1, basis: '20rem' },
+            maxWidth: '32rem',
+            margin: '.5rem',
+            Photos: {
+                maxWidth: '22rem',
+                maxHeight: '18.1rem',
+            },
+        });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -31896,7 +32495,7 @@ var $;
 			return [];
 		}
 		Product_cards(){
-			const obj = new this.$.$mol_gallery();
+			const obj = new this.$.$bog_nka_gallery();
 			(obj.items) = () => ((this.product_cards()));
 			return obj;
 		}
@@ -32114,15 +32713,15 @@ var $;
                 }
                 return cards;
             }
-            deleted_products(catalog_link) {
+            deleted_products(catalog_link, next) {
                 if (!catalog_link)
                     return [];
-                return [];
+                return next ?? [];
             }
-            product_order(catalog_link) {
+            product_order(catalog_link, next) {
                 if (!catalog_link)
                     return [];
-                return [];
+                return next ?? [];
             }
             product_delete(link) {
                 if (!this.is_admin())
@@ -32131,17 +32730,19 @@ var $;
                 if (!products)
                     return;
                 const catalog_link = this.catalog_link();
-                const order = this.product_order(catalog_link);
-                if (!order.length) {
-                    order.push(...products.remote_list().map(product => product.link().str));
-                }
-                if (!order.includes(link))
-                    order.push(link);
                 const deleted = this.deleted_products(catalog_link);
                 if (deleted.includes(link))
                     return;
+                const product_links = products.remote_list().map(product => product.link().str);
+                if (!product_links.includes(link))
+                    return;
+                const saved_order = this.product_order(catalog_link);
+                const order = saved_order.length ? [...saved_order] : product_links;
+                if (!order.includes(link))
+                    order.push(link);
                 products.cut(new this.$.$giper_baza_link(link));
-                deleted.push(link);
+                this.product_order(catalog_link, order);
+                this.deleted_products(catalog_link, [...deleted, link]);
                 this.focused(true);
             }
             product_undo(link) {
@@ -32170,7 +32771,7 @@ var $;
                     const product_link = new this.$.$giper_baza_link(link);
                     products.splice([product_link], insert_at, insert_at);
                 }
-                deleted.splice(deleted_index, 1);
+                this.deleted_products(catalog_link, deleted.filter(item => item !== link));
             }
             undo_last(event) {
                 const deleted = this.deleted_products(this.catalog_link());

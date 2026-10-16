@@ -2792,6 +2792,17 @@ declare namespace $ {
 
 declare namespace $ {
 
+	export class $bog_nka_gallery extends $mol_gallery {
+	}
+	
+}
+
+//# sourceMappingURL=gallery.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
 	export class $mol_ghost extends $mol_view {
 		Sub( ): $mol_view
 	}
@@ -48551,6 +48562,115 @@ declare namespace $ {
 
 //# sourceMappingURL=button.view.tree.d.ts.map
 declare namespace $ {
+
+	export class $mol_icon_camera extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=camera.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_camera_off extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=off.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_image extends $mol_view {
+		uri( ): string
+		title( ): string
+		loading( ): string
+		decoding( ): string
+		cors( ): any
+		natural_width( ): number
+		natural_height( ): number
+		load( next?: any ): any
+		dom_name( ): string
+		attr( ): Record<string, any> & ReturnType< $mol_view['attr'] >
+		event( ): Record<string, any>
+		minimal_width( ): number
+		minimal_height( ): number
+	}
+	
+}
+
+//# sourceMappingURL=image.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_image extends $.$mol_image {
+        natural_width(next?: null): number;
+        natural_height(next?: null): number;
+        load(): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_image__minimal_height_yuf_carousel_1 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $mol_image['minimal_height'] >
+	>
+	type $mol_image__uri_yuf_carousel_2 = $mol_type_enforce<
+		ReturnType< $yuf_carousel['url'] >
+		,
+		ReturnType< $mol_image['uri'] >
+	>
+	export class $yuf_carousel extends $mol_view {
+		Empty( id: any): $mol_icon_camera_off
+		url( id: any): string
+		Image( id: any): $mol_image
+		images( ): readonly($mol_view)[]
+		event_move( next?: any ): any
+		minimal_height( ): number
+		auto_scroll( ): boolean
+		ids( ): readonly(string)[]
+		sub( ): ReturnType< $yuf_carousel['images'] >
+		event( ): ({ 
+			mousemove( next?: ReturnType< $yuf_carousel['event_move'] > ): ReturnType< $yuf_carousel['event_move'] >,
+		})  & ReturnType< $mol_view['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=carousel.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $yuf_carousel extends $.$yuf_carousel {
+        mouse_pos(next?: readonly [x: number, y: number]): readonly [x: number, y: number] | null;
+        event_move(e?: MouseEvent): null | undefined;
+        part_size(): number;
+        selected_index(): number;
+        switched(): number | null;
+        auto(): void;
+        images(): ($.$mol_image | $mol_icon_camera_off)[];
+        protected url_safe(id: string): string;
+        url(path: string): string;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	export class $bog_nka_carousel extends $yuf_carousel {
+		selected_index( ): number
+	}
+	
+}
+
+//# sourceMappingURL=carousel.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -48561,6 +48681,22 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=number.view.tree.d.ts.map
+declare namespace $ {
+    /** Image processing. */
+    class $mol_picture extends $mol_object2 {
+        readonly canvas: HTMLCanvasElement;
+        constructor(canvas: HTMLCanvasElement);
+        get context(): CanvasRenderingContext2D | null;
+        get bitmap(): ImageData;
+        static fit(image: Exclude<CanvasImageSource, VideoFrame> | Blob | string, width?: number, height?: number): $mol_picture;
+        static make(image: Exclude<CanvasImageSource, VideoFrame>, width: number, height?: number): $mol_picture;
+        static sizes(image: Exclude<CanvasImageSource, VideoFrame>): number[];
+        static load(uri: string): Promise<HTMLImageElement>;
+        format(type: 'image/png' | 'image/jpeg' | 'image/webp', quality?: number): Blob | null;
+        url(type?: "image/png" | "image/jpeg" | "image/webp", quality?: number): string;
+    }
+}
+
 declare namespace $ {
 
 	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
@@ -48578,97 +48714,142 @@ declare namespace $ {
 		,
 		ReturnType< $mol_string_button['enabled'] >
 	>
-	type $bog_nka_number__value_min_bog_nka_product_card_4 = $mol_type_enforce<
-		number
+	type $bog_nka_carousel__ids_bog_nka_product_card_4 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['photo_ids'] >
 		,
-		ReturnType< $bog_nka_number['value_min'] >
+		ReturnType< $bog_nka_carousel['ids'] >
 	>
-	type $bog_nka_number__hint_bog_nka_product_card_5 = $mol_type_enforce<
-		string
+	type $bog_nka_carousel__url_bog_nka_product_card_5 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['photo_url'] >
 		,
-		ReturnType< $bog_nka_number['hint'] >
+		ReturnType< $bog_nka_carousel['url'] >
 	>
-	type $bog_nka_number__value_bog_nka_product_card_6 = $mol_type_enforce<
-		ReturnType< $bog_nka_product_card['price'] >
+	type $mol_button_open__files_bog_nka_product_card_6 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['photos_add'] >
 		,
-		ReturnType< $bog_nka_number['value'] >
+		ReturnType< $mol_button_open['files'] >
 	>
-	type $bog_nka_number__enabled_bog_nka_product_card_7 = $mol_type_enforce<
+	type $mol_button_open__enabled_bog_nka_product_card_7 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['changed'] >
 		,
-		ReturnType< $bog_nka_number['enabled'] >
+		ReturnType< $mol_button_open['enabled'] >
 	>
-	type $mol_string_button__value_bog_nka_product_card_8 = $mol_type_enforce<
+	type $mol_button_open__accept_bog_nka_product_card_8 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_open['accept'] >
+	>
+	type $mol_button_minor__title_bog_nka_product_card_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_bog_nka_product_card_10 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['photo_delete'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__enabled_bog_nka_product_card_11 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['photo_delete_enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_row__sub_bog_nka_product_card_12 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_row['sub'] >
+	>
+	type $mol_string_button__value_bog_nka_product_card_13 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['description'] >
 		,
 		ReturnType< $mol_string_button['value'] >
 	>
-	type $mol_string_button__hint_bog_nka_product_card_9 = $mol_type_enforce<
+	type $mol_string_button__hint_bog_nka_product_card_14 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string_button['hint'] >
 	>
-	type $mol_string_button__enabled_bog_nka_product_card_10 = $mol_type_enforce<
+	type $mol_string_button__enabled_bog_nka_product_card_15 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['changed'] >
 		,
 		ReturnType< $mol_string_button['enabled'] >
 	>
-	type $mol_select__options_bog_nka_product_card_11 = $mol_type_enforce<
+	type $bog_nka_number__value_min_bog_nka_product_card_16 = $mol_type_enforce<
+		number
+		,
+		ReturnType< $bog_nka_number['value_min'] >
+	>
+	type $bog_nka_number__hint_bog_nka_product_card_17 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_nka_number['hint'] >
+	>
+	type $bog_nka_number__value_bog_nka_product_card_18 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['price'] >
+		,
+		ReturnType< $bog_nka_number['value'] >
+	>
+	type $bog_nka_number__enabled_bog_nka_product_card_19 = $mol_type_enforce<
+		ReturnType< $bog_nka_product_card['changed'] >
+		,
+		ReturnType< $bog_nka_number['enabled'] >
+	>
+	type $mol_select__options_bog_nka_product_card_20 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['category_list'] >
 		,
 		ReturnType< $mol_select['options'] >
 	>
-	type $mol_select__option_label_default_bog_nka_product_card_12 = $mol_type_enforce<
+	type $mol_select__option_label_default_bog_nka_product_card_21 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_select['option_label_default'] >
 	>
-	type $mol_select__enabled_bog_nka_product_card_13 = $mol_type_enforce<
+	type $mol_select__enabled_bog_nka_product_card_22 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['changed'] >
 		,
 		ReturnType< $mol_select['enabled'] >
 	>
-	type $mol_select__value_bog_nka_product_card_14 = $mol_type_enforce<
+	type $mol_select__value_bog_nka_product_card_23 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['category'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_button_major__title_bog_nka_product_card_15 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_product_card_24 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['buy_title'] >
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_product_card_16 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_product_card_25 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['buy'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__enabled_bog_nka_product_card_17 = $mol_type_enforce<
+	type $mol_button_major__enabled_bog_nka_product_card_26 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['buy_enabled'] >
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_check_box__checked_bog_nka_product_card_18 = $mol_type_enforce<
+	type $mol_check_box__checked_bog_nka_product_card_27 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['available'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_check_box__title_bog_nka_product_card_19 = $mol_type_enforce<
+	type $mol_check_box__title_bog_nka_product_card_28 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_check_box['title'] >
 	>
-	type $mol_check_box__enabled_bog_nka_product_card_20 = $mol_type_enforce<
+	type $mol_check_box__enabled_bog_nka_product_card_29 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['changed'] >
 		,
 		ReturnType< $mol_check_box['enabled'] >
 	>
-	type $mol_button_major__title_bog_nka_product_card_21 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_product_card_30 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_product_card_22 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_product_card_31 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['product_delete'] >
 		,
 		ReturnType< $mol_button_major['click'] >
@@ -48677,10 +48858,19 @@ declare namespace $ {
 		title( next?: string ): string
 		changed( ): boolean
 		Title( ): $mol_string_button
-		price( next?: any ): any
-		Price( ): $bog_nka_number
+		photo_ids( ): readonly(string)[]
+		photo_url( id: any): string
+		Photos( ): $bog_nka_carousel
+		photos_add( next?: readonly(File)[] ): readonly(File)[]
+		Photos_add( ): $mol_button_open
+		photo_delete( next?: any ): any
+		photo_delete_enabled( ): boolean
+		Photos_delete( ): $mol_button_minor
+		Photos_controls( ): $mol_row
 		description( next?: string ): string
 		Description( ): $mol_string_button
+		price( next?: any ): any
+		Price( ): $bog_nka_number
 		category_list( ): readonly(any)[]
 		category( next?: any ): any
 		Category( ): $mol_select
@@ -48706,6 +48896,12 @@ declare namespace $.$$ {
     class $bog_nka_product_card extends $.$bog_nka_product_card {
         product(): $bog_nka_product;
         changed(): boolean;
+        photos_add(next?: readonly File[]): readonly File[];
+        photos_save(files: readonly File[]): void;
+        photo_ids(): string[];
+        photo_url(link: string): string;
+        photo_delete_enabled(): boolean;
+        photo_delete(): void;
         title(next?: string): string;
         price(next?: number): number;
         description(next?: string): string;
@@ -48720,6 +48916,9 @@ declare namespace $.$$ {
         Available(): $mol_check_box;
         Delete(): $mol_button_major;
     }
+}
+
+declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -48796,10 +48995,10 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_gallery__items_bog_nka_app_15 = $mol_type_enforce<
+	type $bog_nka_gallery__items_bog_nka_app_15 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['product_cards'] >
 		,
-		ReturnType< $mol_gallery['items'] >
+		ReturnType< $bog_nka_gallery['items'] >
 	>
 	type $mol_view__sub_bog_nka_app_16 = $mol_type_enforce<
 		readonly(any)[]
@@ -48861,7 +49060,7 @@ declare namespace $ {
 		Catalog_create( ): $bog_nka_button
 		Catalog_missing( ): $mol_view
 		product_cards( ): readonly(any)[]
-		Product_cards( ): $mol_gallery
+		Product_cards( ): $bog_nka_gallery
 		Catalog_selected( ): $mol_view
 		Settings( ): $bog_nka_settings
 		content( ): readonly(any)[]
@@ -48898,8 +49097,8 @@ declare namespace $.$$ {
         is_not_admin(): boolean;
         filter_categories(): string[];
         product_cards(): $mol_view[];
-        deleted_products(catalog_link: string): string[];
-        product_order(catalog_link: string): string[];
+        deleted_products(catalog_link: string, next?: string[]): string[];
+        product_order(catalog_link: string, next?: string[]): string[];
         product_delete(link: string): void;
         product_undo(link: string): void;
         undo_last(event: KeyboardEvent): void;
