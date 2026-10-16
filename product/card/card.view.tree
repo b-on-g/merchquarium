@@ -8,23 +8,32 @@ $bog_nka_product_card $mol_card
 			value? <=> title? \
 			hint @ \Title
 			enabled <= changed true
-		<= Photos_add $mol_button_open
-			files? <=> photos_add? /File
-			accept \image/*
+		<= Photos $yuf_carousel
+			ids <= photo_ids /string
+			url* <= photo_url* \
+		<= Photos_controls $mol_row sub /
+			<= Photos_add $mol_button_open
+				files? <=> photos_add? /File
+				enabled <= changed true
+				accept \image/*
+			<= Photos_delete $mol_button_minor
+				title @ \Delete photo
+				click? <=> photo_delete? null
+				enabled <= photo_delete_enabled true
 		<= Description $mol_string_button
 			value? <=> description? \
 			hint @ \Description
+			enabled <= changed true
+		<= Price $bog_nka_number
+			value_min 0
+			hint @ \Price
+			value? <=> price? null
 			enabled <= changed true
 		<= Category $mol_select
 			options <= category_list /
 			option_label_default @ \Category
 			enabled <= changed true
 			value? <=> category? null
-		<= Price $bog_nka_number
-			value_min 0
-			hint @ \Price
-			value? <=> price? null
-			enabled <= changed true
 		<= Buy $mol_button_major
 			title <= buy_title \
 			click? <=> buy? null
@@ -37,4 +46,3 @@ $bog_nka_product_card $mol_card
 		<= Delete $mol_button_major
 			title @ \Delete
 			click? <=> product_delete? null
-

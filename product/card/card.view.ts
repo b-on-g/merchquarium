@@ -12,6 +12,55 @@ namespace $.$$ {
 			return this.product().can_change()
 		}
 
+		photos_add(next?: readonly File[]) {
+			if (!next?.length || !this.changed()) return [] as readonly File[]
+			$mol_wire_async(this).photos_save(next)
+			return [] as readonly File[]
+		}
+
+		photos_save(files: readonly File[]) {
+			const buffers = files.map(file => new Uint8Array($mol_wire_sync(file).arrayBuffer()))
+			const photos = this.product().Photos('auto')!
+
+			files.forEach((file, index) => {
+				const photo = photos.make(null)
+				photo.buffer(buffers[index])
+				photo.type(file.type || 'application/octet-stream')
+				photo.name(file.name)
+			})
+		}
+
+		photo_ids() {
+			return this.product().Photos()?.remote_list().map(photo => photo.link().str) ?? []
+		}
+
+		photo_url(link: string) {
+			const file = this.$.$giper_baza_glob.Pawn(
+				new this.$.$giper_baza_link(link),
+				$giper_baza_file,
+			)
+			const master = this.$.$giper_baza_glob.yard().master_current()
+			return master ? master.replace(/\/$/, '') + file.uri() : file.uri()
+		}
+
+		photo_delete_enabled() {
+			return this.changed() && this.photo_ids().length > 0
+		}
+
+		@ $mol_action
+		photo_delete() {
+			if (!this.changed()) return
+
+			const ids = this.photo_ids()
+			if (!ids.length) return
+
+			const index = this.Photos().selected_index()
+			const link = ids[index]
+			if (!link) return
+
+			this.product().Photos('auto')?.cut( new this.$.$giper_baza_link(link) )
+		}
+
 		title(next?: string): string {
 			const product = this.product()
 		
