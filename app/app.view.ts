@@ -115,14 +115,6 @@ namespace $.$$ {
 			return [...new Set(categories)]
 		}
 
-		@ $mol_mem
-		deleted_product_link(next?: string | null) {
-			return next === undefined ? null : next
-		}
-		
-		undo_hidden() {
-			return !this.is_admin() || !this.deleted_product_link()
-		}
 
 		product_cards() {
 			const catalog = this.catalog()
@@ -130,8 +122,9 @@ namespace $.$$ {
 			const by_link = new Map(
 				products.map(product => [product.link().str, product] as const),
 			)
-			const deleted = new Set(this.deleted_products())
-			const order = [...this.product_order()]
+			const catalog_link = this.catalog_link()
+			const deleted = new Set(this.deleted_products(catalog_link))
+			const order = [...this.product_order(catalog_link)]
 			const category = this.category_filter()
 		
 			for (const product of products) {
@@ -167,17 +160,16 @@ namespace $.$$ {
 			return cards
 		}
 		
-		@ $mol_mem
-		deleted_products(next?: string[]) {
-			return next ?? []
+		@ $mol_mem_key
+		deleted_products(catalog_link: string) {
+			if (!catalog_link) return []
+			return [] as string[]
 		}
 		
-		@ $mol_mem
-		product_order(next?: string[]) {
-			if (next !== undefined) return next
-		
-			return (this.catalog()?.Products()?.remote_list() ?? [])
-				.map(product => product.link().str)
+		@ $mol_mem_key
+		product_order(catalog_link: string) {
+			if (!catalog_link) return []
+			return [] as string[]
 		}
 		
 		@ $mol_action
@@ -187,14 +179,19 @@ namespace $.$$ {
 			const products = this.catalog()?.Products()
 			if (!products) return
 		
-			const order = this.product_order()
-			if (!order.includes(link)) this.product_order([...order, link])
+			const catalog_link = this.catalog_link()
+			const order = this.product_order(catalog_link)
 		
-			const deleted = this.deleted_products()
+			if (!order.length) {
+				order.push(...products.remote_list().map(product => product.link().str))
+			}
+			if (!order.includes(link)) order.push(link)
+		
+			const deleted = this.deleted_products(catalog_link)
 			if (deleted.includes(link)) return
 		
 			products.cut(new this.$.$giper_baza_link(link))
-			this.deleted_products([...deleted, link])
+			deleted.push(link)
 		}
 		
 		@ $mol_action
@@ -202,11 +199,14 @@ namespace $.$$ {
 			if (!this.is_admin()) return
 		
 			const products = this.catalog()?.Products()
-			const deleted = this.deleted_products()
-			if (!products || !deleted.includes(link)) return
+			if (!products) return
+		
+			const deleted = this.deleted_products(this.catalog_link())
+			const index = deleted.indexOf(link)
+			if (index < 0) return
 		
 			products.add(new this.$.$giper_baza_link(link))
-			this.deleted_products(deleted.filter(item => item !== link))
+			deleted.splice(index, 1)
 		}
 
 
