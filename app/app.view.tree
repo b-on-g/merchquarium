@@ -18,6 +18,7 @@ $bog_nka_app $mol_page
 			action *
 				ctrl_Z? <=> undo_last? null
 	head /
+		^
 		<= Product_add $bog_nka_button
 			title @ \Add product
 			click? <=> product_add? null
@@ -25,7 +26,6 @@ $bog_nka_app $mol_page
 		<= Category_filter $mol_switch
 			options <= category_filter_options *
 			value? <=> category_filter? \all
-		^ 
 	tools /
 		<= Lights $mol_lights_toggle
 		<= Settings_button $bog_nka_button

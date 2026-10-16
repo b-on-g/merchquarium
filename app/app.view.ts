@@ -95,7 +95,7 @@ namespace $.$$ {
 		
 		@ $mol_mem
 		is_admin() {
-			return this.catalog()?.can_change() 
+			return this.catalog()?.can_change()
 		}
 		
 		@ $mol_mem
