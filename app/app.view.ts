@@ -163,15 +163,15 @@ namespace $.$$ {
 		}
 		
 		@ $mol_mem_key
-		deleted_products(catalog_link: string) {
+		deleted_products(catalog_link: string, next?: string[]) {
 			if (!catalog_link) return []
-			return [] as string[]
+			return next ?? []
 		}
-		
+
 		@ $mol_mem_key
-		product_order(catalog_link: string) {
+		product_order(catalog_link: string, next?: string[]) {
 			if (!catalog_link) return []
-			return [] as string[]
+			return next ?? []
 		}
 		
 		@ $mol_action
@@ -182,18 +182,19 @@ namespace $.$$ {
 			if (!products) return
 		
 			const catalog_link = this.catalog_link()
-			const order = this.product_order(catalog_link)
-		
-			if (!order.length) {
-				order.push(...products.remote_list().map(product => product.link().str))
-			}
-			if (!order.includes(link)) order.push(link)
-		
 			const deleted = this.deleted_products(catalog_link)
 			if (deleted.includes(link)) return
+
+			const product_links = products.remote_list().map(product => product.link().str)
+			if (!product_links.includes(link)) return
+
+			const saved_order = this.product_order(catalog_link)
+			const order = saved_order.length ? [ ... saved_order ] : product_links
+			if (!order.includes(link)) order.push(link)
 		
 			products.cut(new this.$.$giper_baza_link(link))
-			deleted.push(link)
+			this.product_order(catalog_link, order)
+			this.deleted_products(catalog_link, [ ... deleted, link ])
 			this.focused(true)
 
 		}
@@ -227,7 +228,10 @@ namespace $.$$ {
 				products.splice([product_link], insert_at, insert_at)
 			}
 		
-			deleted.splice(deleted_index, 1)
+			this.deleted_products(
+				catalog_link,
+				deleted.filter( item => item !== link ),
+			)
 		}
 
 		@ $mol_action
