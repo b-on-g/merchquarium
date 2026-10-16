@@ -8,11 +8,9 @@ $bog_nka_product_card $mol_card
 			value? <=> title? \
 			hint @ \Title
 			enabled <= changed true
-		<= Price $bog_nka_number
-			value_min 0
-			hint @ \Price
-			value? <=> price? null
-			enabled <= changed true
+		<= Photos_add $mol_button_open
+			files? <=> photos_add? /File
+			accept \image/*
 		<= Description $mol_string_button
 			value? <=> description? \
 			hint @ \Description
@@ -22,6 +20,11 @@ $bog_nka_product_card $mol_card
 			option_label_default @ \Category
 			enabled <= changed true
 			value? <=> category? null
+		<= Price $bog_nka_number
+			value_min 0
+			hint @ \Price
+			value? <=> price? null
+			enabled <= changed true
 		<= Buy $mol_button_major
 			title <= buy_title \
 			click? <=> buy? null
