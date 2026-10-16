@@ -54,7 +54,7 @@ namespace $.$$ {
 			const ids = this.photo_ids()
 			if (!ids.length) return
 
-			const index = this.Photos().Image()
+			const index = this.Photos().selected_index()
 			const link = ids[index]
 			if (!link) return
 
