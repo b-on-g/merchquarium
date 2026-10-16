@@ -8,7 +8,7 @@ $bog_nka_product_card $mol_card
 			value? <=> title? \
 			hint @ \Title
 			enabled <= changed true
-		<= Photos $yuf_carousel
+		<= Photos $bog_nka_gallery
 			ids <= photo_ids /string
 			url* <= photo_url* \
 		<= Photos_controls $mol_row sub /
