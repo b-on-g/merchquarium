@@ -42,7 +42,7 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_view
 			sub /
-				<= Product_cards $mol_gallery
+				<= Product_cards $bog_nka_gallery
 					items <= product_cards /
 		<= Settings $bog_nka_settings
 			catalog_link <= catalog_link \
