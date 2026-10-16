@@ -92,11 +92,13 @@ namespace $.$$ {
 		
 			return options
 		}
-
+		
+		@ $mol_mem
 		is_admin() {
 			return this.catalog()?.can_change() 
 		}
 		
+		@ $mol_mem
 		is_not_admin() {
 			return !this.is_admin()
 		}
