@@ -213,15 +213,10 @@ namespace $.$$ {
 
 		@ $mol_action
 		undo_last(event: KeyboardEvent) {
-			console.log(111)
 			const deleted = this.deleted_products(this.catalog_link())
-			console.log(2)
 			const link = deleted[deleted.length - 1]
-			console.log(3)
 			if (!link) return
-			console.log(4)
 			event.preventDefault()
-			console.log(5)
 			this.product_undo(link)
 		}
 	}
