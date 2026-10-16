@@ -200,15 +200,32 @@ namespace $.$$ {
 		product_undo(link: string) {
 			if (!this.is_admin()) return
 		
+			const catalog_link = this.catalog_link()
 			const products = this.catalog()?.Products()
 			if (!products) return
 		
-			const deleted = this.deleted_products(this.catalog_link())
-			const index = deleted.indexOf(link)
-			if (index < 0) return
+			const deleted = this.deleted_products(catalog_link)
+			const deleted_index = deleted.indexOf(link)
+			if (deleted_index < 0) return
 		
-			products.add(new this.$.$giper_baza_link(link))
-			deleted.splice(index, 1)
+			const order = this.product_order(catalog_link)
+			const order_index = order.indexOf(link)
+			const items = products.items()
+		
+			if (order_index < 0) {
+				products.add(new this.$.$giper_baza_link(link))
+			} else {
+				const next_index = items.findIndex(item => {
+					const item_index = order.indexOf(item.str)
+					return item_index < 0 || item_index > order_index
+				})
+				const insert_at = next_index < 0 ? items.length : next_index
+				const product_link = new this.$.$giper_baza_link(link)
+		
+				products.splice([product_link], insert_at, insert_at)
+			}
+		
+			deleted.splice(deleted_index, 1)
 		}
 
 		@ $mol_action
