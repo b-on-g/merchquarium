@@ -23,7 +23,7 @@ namespace $.$$ {
 			const prepared = await Promise.all(files.map(async file => {
 				const picture = this.photo_picture(file)
 				if (!picture) return null
-				const blob = await picture.format('image/webp', .82) as unknown as Blob | null
+				const blob = picture.format('image/webp', .82) as unknown as Blob | null
 				if (!blob) return null
 
 				const buffer = new Uint8Array(await blob.arrayBuffer())
@@ -70,13 +70,14 @@ namespace $.$$ {
 			return this.product().Photos()?.remote_list().map(photo => photo.link().str) ?? []
 		}
 
-		photo_url(link: string) {
+		@ $mol_mem_key
+		photo_url(link: string): string {
 			const file = this.$.$giper_baza_glob.Pawn(
 				new this.$.$giper_baza_link(link),
 				$giper_baza_file,
 			)
-			const master = this.$.$giper_baza_glob.yard().master_current()
-			return master ? master.replace(/\/$/, '') + file.uri() : file.uri()
+			if (!file.filled()) return ''
+			return $yuf_url_object.from_blob(file.blob()) + ''
 		}
 
 		photo_delete_enabled() {
