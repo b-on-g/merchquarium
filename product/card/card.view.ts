@@ -18,28 +18,18 @@ namespace $.$$ {
 			return [] as readonly File[]
 		}
 
-		photos_save(files: readonly File[]) {
-			const prepared = files.map(file => {
-				const extension = file.name.split('.').pop()?.toLowerCase()
-				const detected_type = file.type.toLowerCase()
-				const type = detected_type.startsWith('image/')
-					? detected_type
-					: extension === 'jpg' || extension === 'jpeg'
-						? 'image/jpeg'
-						: extension === 'png'
-							? 'image/png'
-							: extension === 'webp'
-								? 'image/webp'
-								: detected_type
-				const source = new Blob([file], { type })
-				const picture = $mol_picture.fit(source, 1600)
-				const blob = picture.format('image/webp', .82)
+		@ $mol_action
+		async photos_save(files: readonly File[]) {
+			const prepared = await Promise.all(files.map(async file => {
+				const picture = this.photo_picture(file)
+				if (!picture) return null
+				const blob = await picture.format('image/webp', .82) as unknown as Blob | null
 				if (!blob) return null
 
-				const buffer = new Uint8Array($mol_wire_sync(blob).arrayBuffer())
+				const buffer = new Uint8Array(await blob.arrayBuffer())
 				const output_extension = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/jpeg' ? 'jpg' : 'png'
 				return { file, blob, buffer, output_extension }
-			})
+			}))
 
 			const photos = this.product().Photos('auto')!
 			prepared.forEach(item => {
@@ -51,6 +41,29 @@ namespace $.$$ {
 				photo.type(blob.type || 'image/png')
 				photo.name(`${file.name.replace(/\.[^/.]+$/, '')}.${output_extension}`)
 			})
+		}
+
+		@ $mol_mem
+		photo_source(file?: File): Blob {
+			if (!file) return new Blob()
+			const extension = file.name.split('.').pop()?.toLowerCase()
+			const detected_type = file.type.toLowerCase()
+			const type = detected_type.startsWith('image/')
+				? detected_type
+				: extension === 'jpg' || extension === 'jpeg'
+					? 'image/jpeg'
+					: extension === 'png'
+						? 'image/png'
+						: extension === 'webp'
+							? 'image/webp'
+							: detected_type
+			return new Blob([file], { type })
+		}
+
+		@ $mol_mem
+		photo_picture(file?: File) {
+			if (!file) return null
+			return $mol_picture.fit(this.photo_source(file), 1600)
 		}
 
 		photo_ids() {
