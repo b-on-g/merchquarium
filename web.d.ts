@@ -3898,6 +3898,7 @@ declare namespace $ {
         send_code(code: $mol_rest_code): void;
         send_type(mime: $mol_rest_port_mime): void;
         send_name(name: string): void;
+        send_prop(name: string, value: string): void;
         origin(): string;
         address(): string;
         send_data(data: null | string | Uint8Array<ArrayBuffer> | Element | object): void;
@@ -44146,7 +44147,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    export function $giper_baza_file_mime_safe(type: string): string;
+    export const $giper_baza_file_csp: readonly ["Content-Security-Policy", "sandbox; default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src data:; media-src data:; form-action 'none'"];
     export const $giper_baza_file_query: ((val: {
         '+'?: boolean | undefined;
         '='?: readonly (readonly number[])[] | undefined;

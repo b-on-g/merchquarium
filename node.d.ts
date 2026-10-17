@@ -4046,6 +4046,7 @@ declare namespace $ {
         send_code(code: $mol_rest_code): void;
         send_type(mime: $mol_rest_port_mime): void;
         send_name(name: string): void;
+        send_prop(name: string, value: string): void;
         origin(): string;
         address(): string;
         send_data(data: null | string | Uint8Array<ArrayBuffer> | Element | object): void;
@@ -35672,6 +35673,7 @@ declare namespace $ {
         send_code(code: $mol_rest_code): void;
         send_type(mime: $mol_rest_port_mime): void;
         send_name(name: string): void;
+        send_prop(name: string, value: string): void;
         send_bin(data: Uint8Array<ArrayBuffer>): void;
     }
 }
@@ -35686,7 +35688,8 @@ declare namespace $ {
         ws_upgrade(req: InstanceType<$node['http']['IncomingMessage']>, socket: InstanceType<$node['stream']['Duplex']>, head: Buffer<ArrayBuffer>): void;
         _ws_income_chunks: WeakMap<import("node:stream").Duplex, Uint8Array<ArrayBuffer>[]>;
         _ws_income_frames: WeakMap<import("node:stream").Duplex, (string | Uint8Array<ArrayBuffer>)[]>;
-        ws_income(chunk: Buffer<ArrayBuffer>, upgrade: $mol_rest_message, sock: InstanceType<typeof $node.stream.Duplex>): Promise<undefined>;
+        ws_message_size_max: number;
+        ws_income(chunk: Uint8Array<ArrayBuffer>, upgrade: $mol_rest_message, sock: InstanceType<typeof $node.stream.Duplex>): Promise<undefined>;
         root(resource?: $mol_rest_resource): $mol_rest_resource;
     }
 }
@@ -37634,7 +37637,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    export function $giper_baza_file_mime_safe(type: string): string;
+    export const $giper_baza_file_csp: readonly ["Content-Security-Policy", "sandbox; default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src data:; media-src data:; form-action 'none'"];
     export const $giper_baza_file_query: ((val: {
         '+'?: boolean | undefined;
         '='?: readonly (readonly number[])[] | undefined;
