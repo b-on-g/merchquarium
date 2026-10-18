@@ -1,12 +1,21 @@
 $bog_nka_settings $mol_page
 	title @ \Settings
-	text_id @ \Your Id is: 
 	catalog_link? \
 	tools /
 		<= Sync $giper_baza_status
 	body /
-		<= Account_id $mol_paragraph
+		<= Account_label $mol_paragraph
+			title @ \Your account id:
+		<= Account_id $mol_button_copy
 			title <= account_id \
+		<= Debug_info $mol_paragraph
+			title <= debug_info \
+		<= Grant_input $mol_string
+			hint @ \Account id to grant rights
+			value? <=> grant_draft? \
+		<= Grant_submit $mol_button_major
+			title @ \Grant rights
+			click? <=> grant? null
 		<= Social_link $mol_string
 			hint @ \social link
 			value? <=> social_link? \

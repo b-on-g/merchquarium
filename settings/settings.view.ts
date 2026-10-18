@@ -12,17 +12,69 @@ namespace $.$$ {
 		}
 
 		account_id() {
-			return this.text_id() +  this.$.$giper_baza_auth.current().pass().lord().str
+			return this.$.$giper_baza_auth.current().pass().toString()
 		}
 
 		catalog() {
+			const land = this.catalog_land()
+			return land?.Data($bog_nka_catalog) ?? null
+		}
+
+		catalog_land() {
 			const link = this.catalog_link()
 			if (!link) return null
-		
-			const land = this.$.$giper_baza_glob.Land(
+			return this.$.$giper_baza_glob.Land(
 				new this.$.$giper_baza_link(link),
 			)
-			return land.Data($bog_nka_catalog)
+		}
+
+		@ $mol_mem
+		debug_rank() {
+			const land = this.catalog_land()
+			if (!land) return '-'
+			const rank = land.lord_rank(land.auth().pass().lord())
+			return $giper_baza_rank_tier[ $giper_baza_rank_tier_of(rank) ]
+		}
+
+		@ $mol_mem
+		products_total() {
+			return this.catalog()?.Products()?.remote_list().length ?? 0
+		}
+
+		@ $mol_mem
+		products_available() {
+			return (this.catalog()?.Products()?.remote_list() ?? [])
+				.filter(product => product.Available()?.val())
+				.length
+		}
+
+		debug_info() {
+			return `Rank: ${ this.debug_rank() }; Products: ${ this.products_total() } (${ this.products_available() } available)`
+		}
+
+		@ $mol_mem
+		grant_draft(next?: string) {
+			return next ?? ''
+		}
+
+		@ $mol_action
+		grant( id = this.grant_draft().trim() ) {
+			const land = this.catalog_land()
+			if (!land || !id) return
+
+			let pass: $giper_baza_auth_pass | null = null
+			try {
+				pass = $giper_baza_auth_pass.like(
+					$giper_baza_auth_pass.from(id).asArray(),
+				)
+			} catch {
+				pass = null
+			}
+
+			if (!pass) return
+
+			land.give(pass, $giper_baza_rank_rule)
+			this.grant_draft('')
 		}
 		
 		categories_text() {
