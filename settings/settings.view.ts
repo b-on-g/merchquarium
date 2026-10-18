@@ -58,22 +58,48 @@ namespace $.$$ {
 		}
 
 		@ $mol_action
-		grant( id = this.grant_draft().trim() ) {
+		async grant( id: unknown = this.grant_draft() ) {
+			const raw = typeof id === 'string' ? id : this.grant_draft()
+			const id_str = raw.trim()
+
 			const land = this.catalog_land()
-			if (!land || !id) return
+			console.log('[grant] click', {
+				id: id_str,
+				catalog_link: this.catalog_link(),
+				land: land?.link().str,
+			})
+			if (!land || !id_str) return
 
 			let pass: $giper_baza_auth_pass | null = null
 			try {
-				pass = $giper_baza_auth_pass.like(
-					$giper_baza_auth_pass.from(id).asArray(),
-				)
-			} catch {
+				const candidate = $giper_baza_auth_pass.from(id_str)
+				console.log('[grant] parsed pass', id_str.length, {
+					bytes: candidate.byteLength,
+					first_byte: candidate.uint8(0),
+					lord: candidate.lord().str,
+				})
+				if (candidate.uint8(0) === 0xFF) pass = candidate
+			} catch (e) {
+				console.warn('[grant] cannot parse account id', id_str, String(e))
 				pass = null
 			}
 
-			if (!pass) return
+			if (!pass) {
+				console.warn('[grant] invalid account id, abort', id_str)
+				return
+			}
 
-			land.give(pass, $giper_baza_rank_rule)
+			try {
+				land.give(pass, $giper_baza_rank_rule)
+				console.log('[grant] gave', {
+					pass_lord: pass.lord().str,
+					their_rank: land.lord_rank(pass.lord()),
+				})
+			} catch (e) {
+				console.warn('[grant] give failed', String(e))
+				return
+			}
+
 			this.grant_draft('')
 		}
 		
