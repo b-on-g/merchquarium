@@ -91,7 +91,7 @@ namespace $.$$ {
 			const ids = this.photo_ids()
 			if (!ids.length) return
 
-			const index = this.Photos().selected_index()
+			const index = ( this.Photos() as $yuf_carousel ).selected_index()
 			const link = ids[index]
 			if (!link) return
 
