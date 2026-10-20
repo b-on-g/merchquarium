@@ -14822,8 +14822,7 @@ var $;
         }
         encrypted(next) {
             $mol_wire_solid();
-            if (!this._gift.size)
-                this.loading();
+            // if( !this._gift.size ) this.loading()
             const gift = this._gift.get(this.link().str);
             const prev = gift?.code_exists() ?? false;
             if (next === undefined)
@@ -15079,7 +15078,10 @@ var $;
                     graph.link(seal, nodes.get(seal.lord().str) ?? null, 0); // seal -> lord
                     graph.link(seal, null, 0); // seal -> every
                     for (const hash of seal.hash_list()) {
-                        graph.link(nodes.get(hash.str) ?? null, seal, 1); // unit => seal
+                        const node = nodes.get(hash.str);
+                        if (!node)
+                            continue;
+                        graph.link(node, seal, 1); // unit => seal
                     }
                 }
             });
@@ -18130,6 +18132,136 @@ var $;
 })($ || ($ = {}));
 
 ;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_blob = ($node.buffer?.Blob ?? $mol_dom_context.Blob);
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_clipboard) = class $mol_icon_clipboard extends ($.$mol_icon) {
+		path(){
+			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_clipboard_outline) = class $mol_icon_clipboard_outline extends ($.$mol_icon) {
+		path(){
+			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_button_copy) = class $mol_button_copy extends ($.$mol_button_minor) {
+		text(){
+			return (this.title());
+		}
+		text_blob(next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_blob([(this.text())], {"type": "text/plain"});
+			return obj;
+		}
+		html(){
+			return "";
+		}
+		html_blob(next){
+			if(next !== undefined) return next;
+			const obj = new this.$.$mol_blob([(this.html())], {"type": "text/html"});
+			return obj;
+		}
+		Icon(){
+			const obj = new this.$.$mol_icon_clipboard_outline();
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		blobs(){
+			return [(this.text_blob()), (this.html_blob())];
+		}
+		data(){
+			return {};
+		}
+		sub(){
+			return [(this.Icon()), (this.title())];
+		}
+	};
+	($mol_mem(($.$mol_button_copy.prototype), "text_blob"));
+	($mol_mem(($.$mol_button_copy.prototype), "html_blob"));
+	($mol_mem(($.$mol_button_copy.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    const mapping = {
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        '&': '&amp;',
+    };
+    function $mol_html_encode(text) {
+        return text.replace(/[&<">]/gi, str => mapping[str]);
+    }
+    $.$mol_html_encode = $mol_html_encode;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Button copy text() value to clipboard
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+         */
+        class $mol_button_copy extends $.$mol_button_copy {
+            data() {
+                return Object.fromEntries(this.blobs().map(blob => [blob.type, blob]));
+            }
+            html() {
+                return $mol_html_encode(this.text());
+            }
+            attachments() {
+                return [new ClipboardItem(this.data())];
+            }
+            click(event) {
+                const cb = $mol_wire_sync(this.$.$mol_dom_context.navigator.clipboard);
+                cb.writeText?.(this.text());
+                cb.write?.(this.attachments());
+                if (cb.writeText === undefined && cb.write === undefined) {
+                    throw new Error("doesn't support copy to clipoard");
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_button_copy.prototype, "html", null);
+        __decorate([
+            $mol_mem
+        ], $mol_button_copy.prototype, "attachments", null);
+        $$.$mol_button_copy = $mol_button_copy;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
 
 
@@ -21078,136 +21210,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-"use strict";
-var $;
-(function ($) {
-    $.$mol_blob = ($node.buffer?.Blob ?? $mol_dom_context.Blob);
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_clipboard) = class $mol_icon_clipboard extends ($.$mol_icon) {
-		path(){
-			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_clipboard_outline) = class $mol_icon_clipboard_outline extends ($.$mol_icon) {
-		path(){
-			return "M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_button_copy) = class $mol_button_copy extends ($.$mol_button_minor) {
-		text(){
-			return (this.title());
-		}
-		text_blob(next){
-			if(next !== undefined) return next;
-			const obj = new this.$.$mol_blob([(this.text())], {"type": "text/plain"});
-			return obj;
-		}
-		html(){
-			return "";
-		}
-		html_blob(next){
-			if(next !== undefined) return next;
-			const obj = new this.$.$mol_blob([(this.html())], {"type": "text/html"});
-			return obj;
-		}
-		Icon(){
-			const obj = new this.$.$mol_icon_clipboard_outline();
-			return obj;
-		}
-		title(){
-			return "";
-		}
-		blobs(){
-			return [(this.text_blob()), (this.html_blob())];
-		}
-		data(){
-			return {};
-		}
-		sub(){
-			return [(this.Icon()), (this.title())];
-		}
-	};
-	($mol_mem(($.$mol_button_copy.prototype), "text_blob"));
-	($mol_mem(($.$mol_button_copy.prototype), "html_blob"));
-	($mol_mem(($.$mol_button_copy.prototype), "Icon"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    const mapping = {
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        '&': '&amp;',
-    };
-    function $mol_html_encode(text) {
-        return text.replace(/[&<">]/gi, str => mapping[str]);
-    }
-    $.$mol_html_encode = $mol_html_encode;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Button copy text() value to clipboard
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
-         */
-        class $mol_button_copy extends $.$mol_button_copy {
-            data() {
-                return Object.fromEntries(this.blobs().map(blob => [blob.type, blob]));
-            }
-            html() {
-                return $mol_html_encode(this.text());
-            }
-            attachments() {
-                return [new ClipboardItem(this.data())];
-            }
-            click(event) {
-                const cb = $mol_wire_sync(this.$.$mol_dom_context.navigator.clipboard);
-                cb.writeText?.(this.text());
-                cb.write?.(this.attachments());
-                if (cb.writeText === undefined && cb.write === undefined) {
-                    throw new Error("doesn't support copy to clipoard");
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_button_copy.prototype, "html", null);
-        __decorate([
-            $mol_mem
-        ], $mol_button_copy.prototype, "attachments", null);
-        $$.$mol_button_copy = $mol_button_copy;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_text_code) = class $mol_text_code extends ($.$mol_stack) {
 		sidebar_showed(){
 			return false;
@@ -21494,7 +21496,6 @@ var $;
 		}
 		View(){
 			const obj = new this.$.$mol_text_code();
-			(obj.attr) = () => ({...(this.$.$mol_text_code.prototype.attr.call(obj)), "inert": ""});
 			(obj.text) = () => ((this.value()));
 			(obj.render_visible_only) = () => (false);
 			(obj.row_numb) = (id) => ((this.row_numb(id)));
@@ -21693,7 +21694,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n\tpointer-events: none;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n\tuser-select: none;\n}\n\n[mol_textarea_view_copy] {\n\tpointer-events: all;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n\tpointer-events: all;\n\tuser-select: auto;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n\tuser-select: none;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
+    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n    interactivity: inert;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n}\n\n[mol_textarea_view_copy] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n    interactivity: inert;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -30510,12 +30511,45 @@ var $;
 			const obj = new this.$.$giper_baza_status();
 			return obj;
 		}
+		Account_label(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Account_label_title")));
+			return obj;
+		}
 		account_id(){
 			return "";
 		}
 		Account_id(){
-			const obj = new this.$.$mol_paragraph();
+			const obj = new this.$.$mol_button_copy();
 			(obj.title) = () => ((this.account_id()));
+			return obj;
+		}
+		debug_info(){
+			return "";
+		}
+		Debug_info(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.debug_info()));
+			return obj;
+		}
+		grant_draft(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Grant_input(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Grant_input_hint")));
+			(obj.value) = (next) => ((this.grant_draft(next)));
+			return obj;
+		}
+		grant(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Grant_submit(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Grant_submit_title")));
+			(obj.click) = (next) => ((this.grant(next)));
 			return obj;
 		}
 		social_link(next){
@@ -30641,9 +30675,6 @@ var $;
 		title(){
 			return (this.$.$mol_locale.text("$bog_nka_settings_title"));
 		}
-		text_id(){
-			return (this.$.$mol_locale.text("$bog_nka_settings_text_id"));
-		}
 		catalog_link(next){
 			if(next !== undefined) return next;
 			return "";
@@ -30653,7 +30684,11 @@ var $;
 		}
 		body(){
 			return [
+				(this.Account_label()), 
 				(this.Account_id()), 
+				(this.Debug_info()), 
+				(this.Grant_input()), 
+				(this.Grant_submit()), 
 				(this.Social_link()), 
 				(this.Social_text()), 
 				(this.Category_input()), 
@@ -30668,7 +30703,13 @@ var $;
 		}
 	};
 	($mol_mem(($.$bog_nka_settings.prototype), "Sync"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Account_label"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_id"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Debug_info"));
+	($mol_mem(($.$bog_nka_settings.prototype), "grant_draft"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Grant_input"));
+	($mol_mem(($.$bog_nka_settings.prototype), "grant"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Grant_submit"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_text"));
@@ -31320,14 +31361,81 @@ var $;
                 this.settings_open(!this.settings_open());
             }
             account_id() {
-                return this.text_id() + this.$.$giper_baza_auth.current().pass().lord().str;
+                return this.$.$giper_baza_auth.current().pass().toString();
             }
             catalog() {
+                const land = this.catalog_land();
+                return land?.Data($bog_nka_catalog) ?? null;
+            }
+            catalog_land() {
                 const link = this.catalog_link();
                 if (!link)
                     return null;
-                const land = this.$.$giper_baza_glob.Land(new this.$.$giper_baza_link(link));
-                return land.Data($bog_nka_catalog);
+                return this.$.$giper_baza_glob.Land(new this.$.$giper_baza_link(link));
+            }
+            debug_rank() {
+                const land = this.catalog_land();
+                if (!land)
+                    return '-';
+                const rank = land.lord_rank(land.auth().pass().lord());
+                return $giper_baza_rank_tier[$giper_baza_rank_tier_of(rank)];
+            }
+            products_total() {
+                return this.catalog()?.Products()?.remote_list().length ?? 0;
+            }
+            products_available() {
+                return (this.catalog()?.Products()?.remote_list() ?? [])
+                    .filter(product => product.Available()?.val())
+                    .length;
+            }
+            debug_info() {
+                return `Rank: ${this.debug_rank()}; Products: ${this.products_total()} (${this.products_available()} available)`;
+            }
+            grant_draft(next) {
+                return next ?? '';
+            }
+            async grant(id = this.grant_draft()) {
+                const raw = typeof id === 'string' ? id : this.grant_draft();
+                const id_str = raw.trim();
+                const land = this.catalog_land();
+                console.log('[grant] click', {
+                    id: id_str,
+                    catalog_link: this.catalog_link(),
+                    land: land?.link().str,
+                });
+                if (!land || !id_str)
+                    return;
+                let pass = null;
+                try {
+                    const candidate = $giper_baza_auth_pass.from(id_str);
+                    console.log('[grant] parsed pass', id_str.length, {
+                        bytes: candidate.byteLength,
+                        first_byte: candidate.uint8(0),
+                        lord: candidate.lord().str,
+                    });
+                    if (candidate.uint8(0) === 0xFF)
+                        pass = candidate;
+                }
+                catch (e) {
+                    console.warn('[grant] cannot parse account id', id_str, String(e));
+                    pass = null;
+                }
+                if (!pass) {
+                    console.warn('[grant] invalid account id, abort', id_str);
+                    return;
+                }
+                try {
+                    land.give(pass, $giper_baza_rank_rule);
+                    console.log('[grant] gave', {
+                        pass_lord: pass.lord().str,
+                        their_rank: land.lord_rank(pass.lord()),
+                    });
+                }
+                catch (e) {
+                    console.warn('[grant] give failed', String(e));
+                    return;
+                }
+                this.grant_draft('');
             }
             categories_text() {
                 return this.catalog()?.Categories()?.items().join(', ') ?? '';
@@ -31409,6 +31517,21 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_settings.prototype, "settings_toggle", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "debug_rank", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "products_total", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "products_available", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "grant_draft", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "grant", null);
         __decorate([
             $mol_mem
         ], $bog_nka_settings.prototype, "category_draft", null);
@@ -31864,11 +31987,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$bog_nka_carousel) = class $bog_nka_carousel extends ($.$yuf_carousel) {
-		selected_index(){
-			return 0;
-		}
-	};
+	($.$bog_nka_carousel) = class $bog_nka_carousel extends ($.$yuf_carousel) {};
 
 
 ;
@@ -32173,6 +32292,28 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $yuf_url_object extends $mol_object {
+        blob;
+        url;
+        constructor(blob, url = URL.createObjectURL(blob)) {
+            super();
+            this.blob = blob;
+            this.url = url;
+        }
+        static from_blob(blob) { return new this(blob); }
+        toString() { return this.url; }
+        destructor() { URL.revokeObjectURL(this.url); }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $yuf_url_object, "from_blob", null);
+    $.$yuf_url_object = $yuf_url_object;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 
 ;
@@ -32194,28 +32335,18 @@ var $;
                 $mol_wire_async(this).photos_save(next);
                 return [];
             }
-            photos_save(files) {
-                const prepared = files.map(file => {
-                    const extension = file.name.split('.').pop()?.toLowerCase();
-                    const detected_type = file.type.toLowerCase();
-                    const type = detected_type.startsWith('image/')
-                        ? detected_type
-                        : extension === 'jpg' || extension === 'jpeg'
-                            ? 'image/jpeg'
-                            : extension === 'png'
-                                ? 'image/png'
-                                : extension === 'webp'
-                                    ? 'image/webp'
-                                    : detected_type;
-                    const source = new Blob([file], { type });
-                    const picture = $mol_picture.fit(source, 1600);
+            async photos_save(files) {
+                const prepared = await Promise.all(files.map(async (file) => {
+                    const picture = this.photo_picture(file);
+                    if (!picture)
+                        return null;
                     const blob = picture.format('image/webp', .82);
                     if (!blob)
                         return null;
-                    const buffer = new Uint8Array($mol_wire_sync(blob).arrayBuffer());
+                    const buffer = new Uint8Array(await blob.arrayBuffer());
                     const output_extension = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/jpeg' ? 'jpg' : 'png';
                     return { file, blob, buffer, output_extension };
-                });
+                }));
                 const photos = this.product().Photos('auto');
                 prepared.forEach(item => {
                     if (!item)
@@ -32227,13 +32358,35 @@ var $;
                     photo.name(`${file.name.replace(/\.[^/.]+$/, '')}.${output_extension}`);
                 });
             }
+            photo_source(file) {
+                if (!file)
+                    return new Blob();
+                const extension = file.name.split('.').pop()?.toLowerCase();
+                const detected_type = file.type.toLowerCase();
+                const type = detected_type.startsWith('image/')
+                    ? detected_type
+                    : extension === 'jpg' || extension === 'jpeg'
+                        ? 'image/jpeg'
+                        : extension === 'png'
+                            ? 'image/png'
+                            : extension === 'webp'
+                                ? 'image/webp'
+                                : detected_type;
+                return new Blob([file], { type });
+            }
+            photo_picture(file) {
+                if (!file)
+                    return null;
+                return $mol_picture.fit(this.photo_source(file), 1600);
+            }
             photo_ids() {
                 return this.product().Photos()?.remote_list().map(photo => photo.link().str) ?? [];
             }
             photo_url(link) {
                 const file = this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(link), $giper_baza_file);
-                const master = this.$.$giper_baza_glob.yard().master_current();
-                return master ? master.replace(/\/$/, '') + file.uri() : file.uri();
+                if (!file.filled())
+                    return '';
+                return $yuf_url_object.from_blob(file.blob()) + '';
             }
             photo_delete_enabled() {
                 return this.changed() && this.photo_ids().length > 0;
@@ -32358,6 +32511,18 @@ var $;
         }
         __decorate([
             $mol_action
+        ], $bog_nka_product_card.prototype, "photos_save", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "photo_source", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "photo_picture", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_nka_product_card.prototype, "photo_url", null);
+        __decorate([
+            $mol_action
         ], $bog_nka_product_card.prototype, "photo_delete", null);
         __decorate([
             $mol_action
@@ -32379,7 +32544,6 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_product_card, {
-            flex: { grow: 1, shrink: 1, basis: '20rem' },
             maxWidth: '32rem',
             margin: '.5rem',
             Photos: {

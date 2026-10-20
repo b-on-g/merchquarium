@@ -348,6 +348,11 @@
     "$mol_memory_pool",
     "$mol_memory",
     "$mol_bus",
+    "$mol_button_copy",
+    "$mol_icon_clipboard_outline",
+    "$mol_icon_clipboard",
+    "$mol_html_encode",
+    "$mol_html",
     "$mol_row",
     "$bog_nka_catalog",
     "$bog_nka_product",
@@ -372,7 +377,9 @@
     "$mol_icon_menu_up",
     "$mol_check_box",
     "$mol_icon_tick",
-    "$mol_picture"
+    "$mol_picture",
+    "$yuf_url_object",
+    "$yuf_url"
   ],
   "dependencies": {
     "autoinstall": "*",

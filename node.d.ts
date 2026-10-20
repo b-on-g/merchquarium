@@ -772,7 +772,7 @@ declare namespace $ {
         static calc<Value>(value: Value): $mol_style_func<"calc", Value>;
         static vary<Name extends string, Value extends string>(name: Name, defaultValue?: Value): $mol_style_func<"var", Name | (Name | Value)[]>;
         static url<Href extends string>(href: Href): $mol_style_func<"url", string>;
-        static hsla(hue: number | $mol_style_func<'var'>, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | `${number}%` | $mol_style_func<"var", unknown>)[]>;
+        static hsla(hue: number | $mol_style_func<'var'>, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | $mol_style_func<"var", unknown> | `${number}%`)[]>;
         static clamp(min: $mol_style_unit_str<any>, mid: $mol_style_unit_str<any>, max: $mol_style_unit_str<any>): $mol_style_func<"clamp", `${number}${any}`[]>;
         static rgba(red: number | $mol_style_func<'var'>, green: number | $mol_style_func<'var'>, blue: number | $mol_style_func<'var'>, alpha: number | $mol_style_func<'var'>): $mol_style_func<"rgba", (number | $mol_style_func<"var", unknown>)[]>;
         static scale(zoom: number): $mol_style_func<"scale", number[]>;
@@ -1291,7 +1291,7 @@ declare namespace $ {
      * Theme css variables
      * @see https://mol.hyoo.ru/#!section=demos/demo=mol_textarea_demo
      */
-    const $mol_theme: Record<"image" | "line" | "text" | "field" | "current" | "focus" | "hue" | "back" | "hover" | "card" | "special" | "control" | "shade" | "spirit" | "hue_spread", $mol_style_func<"var", unknown>>;
+    const $mol_theme: Record<"image" | "line" | "text" | "field" | "current" | "focus" | "back" | "hover" | "card" | "special" | "control" | "shade" | "spirit" | "hue" | "hue_spread", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
@@ -1302,7 +1302,7 @@ declare namespace $ {
      * Gap in CSS
      * @see https://page.hyoo.ru/#!=msdb74_bm7nsq
      */
-    let $mol_gap: Record<"text" | "blur" | "page" | "block" | "space" | "round" | "emoji", $mol_style_func<"var", unknown>>;
+    let $mol_gap: Record<"text" | "blur" | "page" | "block" | "emoji" | "round" | "space", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
@@ -4707,7 +4707,7 @@ declare namespace $ {
             op: keyof typeof $mol_websocket_frame_op;
             fin: boolean;
         } | {
-            op: "stop" | "txt" | "bin" | "con" | "ping" | "pong";
+            op: "stop" | "con" | "txt" | "bin" | "ping" | "pong";
             fin: number;
         };
         /** Payload info. */
@@ -5641,7 +5641,7 @@ declare namespace $ {
         hash(): $giper_baza_link;
         idea_seed(): number;
         dump(): {
-            kind: "sand" | "gift" | "seal";
+            kind: "seal" | "sand" | "gift";
             lord: $giper_baza_link;
             lead: $giper_baza_link;
             head: $giper_baza_link;
@@ -5674,7 +5674,7 @@ declare namespace $ {
         code(): Uint8Array<ArrayBuffer>;
         code_exists(): boolean;
         dump(): {
-            kind: "sand" | "gift" | "seal";
+            kind: "seal" | "sand" | "gift";
             lord: $giper_baza_link;
             mate: $giper_baza_link;
             tier: string;
@@ -37749,10 +37749,10 @@ declare namespace $ {
                 _sum?: Readonly<{}> | undefined;
             };
         }> | undefined;
-        BAZA: {
+        file: {
             '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
+            '='?: readonly (readonly string[])[] | undefined;
+            '!='?: readonly (readonly string[])[] | undefined;
             _num?: {
                 '=': readonly (readonly (string | number)[])[];
             } | undefined;
@@ -37761,10 +37761,10 @@ declare namespace $ {
             _min?: Readonly<{}> | undefined;
             _sum?: Readonly<{}> | undefined;
         };
-        file: {
+        BAZA: {
             '+'?: boolean | undefined;
-            '='?: readonly (readonly string[])[] | undefined;
-            '!='?: readonly (readonly string[])[] | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
             _num?: {
                 '=': readonly (readonly (string | number)[])[];
             } | undefined;
@@ -37884,10 +37884,10 @@ declare namespace $ {
                 _sum?: Readonly<{}> | undefined;
             }>;
         }> | undefined;
-        BAZA: Readonly<{
+        file: Readonly<{
             '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
+            '='?: readonly (readonly string[])[] | undefined;
+            '!='?: readonly (readonly string[])[] | undefined;
             _num?: Readonly<{
                 '=': readonly (readonly number[])[];
             }> | undefined;
@@ -37896,10 +37896,10 @@ declare namespace $ {
             _min?: Readonly<{}> | undefined;
             _sum?: Readonly<{}> | undefined;
         }>;
-        file: Readonly<{
+        BAZA: Readonly<{
             '+'?: boolean | undefined;
-            '='?: readonly (readonly string[])[] | undefined;
-            '!='?: readonly (readonly string[])[] | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
             _num?: Readonly<{
                 '=': readonly (readonly number[])[];
             }> | undefined;
@@ -38580,10 +38580,10 @@ declare namespace $ {
                     _sum?: Readonly<{}> | undefined;
                 }>;
             }> | undefined;
-            BAZA: Readonly<{
+            file: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38592,10 +38592,10 @@ declare namespace $ {
                 _min?: Readonly<{}> | undefined;
                 _sum?: Readonly<{}> | undefined;
             }>;
-            file: Readonly<{
+            BAZA: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38717,10 +38717,10 @@ declare namespace $ {
                     _sum?: Readonly<{}> | undefined;
                 }>;
             }> | undefined;
-            BAZA: Readonly<{
+            file: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38729,10 +38729,10 @@ declare namespace $ {
                 _min?: Readonly<{}> | undefined;
                 _sum?: Readonly<{}> | undefined;
             }>;
-            file: Readonly<{
+            BAZA: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38853,10 +38853,10 @@ declare namespace $ {
                     _sum?: Readonly<{}> | undefined;
                 };
             }> | undefined;
-            BAZA: {
+            file: {
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
                 _num?: {
                     '=': readonly (readonly (string | number)[])[];
                 } | undefined;
@@ -38865,10 +38865,10 @@ declare namespace $ {
                 _min?: Readonly<{}> | undefined;
                 _sum?: Readonly<{}> | undefined;
             };
-            file: {
+            BAZA: {
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
                 _num?: {
                     '=': readonly (readonly (string | number)[])[];
                 } | undefined;
@@ -39007,6 +39007,74 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_clipboard extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=clipboard.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_clipboard_outline extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=outline.view.tree.d.ts.map
+declare namespace $ {
+    function $mol_html_encode(text: string): string;
+}
+
+declare namespace $ {
+
+	type $mol_blob__mol_button_copy_1 = $mol_type_enforce<
+		[ readonly(BlobPart)[], ({ 
+			'type': string,
+		})  ]
+		,
+		ConstructorParameters< typeof $mol_blob >
+	>
+	type $mol_blob__mol_button_copy_2 = $mol_type_enforce<
+		[ readonly(BlobPart)[], ({ 
+			'type': string,
+		})  ]
+		,
+		ConstructorParameters< typeof $mol_blob >
+	>
+	export class $mol_button_copy extends $mol_button_minor {
+		text( ): ReturnType< $mol_button_copy['title'] >
+		text_blob( next?: $mol_blob ): $mol_blob
+		html( ): string
+		html_blob( next?: $mol_blob ): $mol_blob
+		Icon( ): $mol_icon_clipboard_outline
+		title( ): string
+		blobs( ): readonly($mol_blob)[]
+		data( ): Record<string, any>
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=copy.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Button copy text() value to clipboard
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+     */
+    class $mol_button_copy extends $.$mol_button_copy {
+        data(): {
+            [k: string]: Blob;
+        };
+        html(): string;
+        attachments(): ClipboardItem[];
+        click(event?: Event): void;
+    }
 }
 
 declare namespace $ {
@@ -41903,19 +41971,19 @@ declare namespace $ {
 declare namespace $ {
 
 	type $mol_paragraph__title_bog_nka_settings_1 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['account_id'] >
+		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_string__hint_bog_nka_settings_2 = $mol_type_enforce<
-		string
+	type $mol_button_copy__title_bog_nka_settings_2 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['account_id'] >
 		,
-		ReturnType< $mol_string['hint'] >
+		ReturnType< $mol_button_copy['title'] >
 	>
-	type $mol_string__value_bog_nka_settings_3 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_link'] >
+	type $mol_paragraph__title_bog_nka_settings_3 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['debug_info'] >
 		,
-		ReturnType< $mol_string['value'] >
+		ReturnType< $mol_paragraph['title'] >
 	>
 	type $mol_string__hint_bog_nka_settings_4 = $mol_type_enforce<
 		string
@@ -41923,109 +41991,146 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_5 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_text'] >
+		ReturnType< $bog_nka_settings['grant_draft'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_string__hint_bog_nka_settings_6 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_6 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_settings_7 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['grant'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_string__hint_bog_nka_settings_8 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_bog_nka_settings_7 = $mol_type_enforce<
+	type $mol_string__value_bog_nka_settings_9 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['social_link'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__hint_bog_nka_settings_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_nka_settings_11 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['social_text'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__hint_bog_nka_settings_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_nka_settings_13 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_draft'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_8 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_14 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_9 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_15 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_add'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_list__rows_bog_nka_settings_10 = $mol_type_enforce<
+	type $mol_list__rows_bog_nka_settings_16 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_11 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_17 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_title'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_12 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_18 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_13 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_19 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_14 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_20 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_15 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_21 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_16 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_22 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_product_count'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_17 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_23 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_18 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_24 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_cancel'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_19 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_25 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_20 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_26 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_confirm'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_21 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_27 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_pop__Anchor_bog_nka_settings_22 = $mol_type_enforce<
+	type $mol_pop__Anchor_bog_nka_settings_28 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['Category_remove_button'] >
 		,
 		ReturnType< $mol_pop['Anchor'] >
 	>
-	type $mol_pop__bubble_content_bog_nka_settings_23 = $mol_type_enforce<
+	type $mol_pop__bubble_content_bog_nka_settings_29 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_pop['bubble_content'] >
 	>
-	type $mol_row__sub_bog_nka_settings_24 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_30 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
 	export class $bog_nka_settings extends $mol_page {
 		Sync( ): $giper_baza_status
+		Account_label( ): $mol_paragraph
 		account_id( ): string
-		Account_id( ): $mol_paragraph
+		Account_id( ): $mol_button_copy
+		debug_info( ): string
+		Debug_info( ): $mol_paragraph
+		grant_draft( next?: string ): string
+		Grant_input( ): $mol_string
+		grant( next?: any ): any
+		Grant_submit( ): $mol_button_major
 		social_link( next?: string ): string
 		Social_link( ): $mol_string
 		social_text( next?: string ): string
@@ -42051,7 +42156,6 @@ declare namespace $ {
 		Category_confirm_actions( id: any): $mol_row
 		Category_remove( id: any): $mol_pop
 		title( ): string
-		text_id( ): string
 		catalog_link( next?: string ): string
 		tools( ): readonly(any)[]
 		body( ): readonly(any)[]
@@ -42067,6 +42171,13 @@ declare namespace $.$$ {
         settings_toggle(): void;
         account_id(): string;
         catalog(): $bog_nka_catalog | null;
+        catalog_land(): $giper_baza_land | null;
+        debug_rank(): string;
+        products_total(): number;
+        products_available(): number;
+        debug_info(): string;
+        grant_draft(next?: string): string;
+        grant(id?: unknown): Promise<void>;
         categories_text(): string;
         category_draft(next?: string): string;
         category_add(): void;
@@ -42245,7 +42356,6 @@ declare namespace $.$$ {
 declare namespace $ {
 
 	export class $bog_nka_carousel extends $yuf_carousel {
-		selected_index( ): number
 	}
 	
 }
@@ -42554,6 +42664,17 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $yuf_url_object extends $mol_object {
+        readonly blob: Blob;
+        readonly url: string;
+        constructor(blob: Blob, url?: string);
+        static from_blob(blob: Blob): $yuf_url_object;
+        toString(): string;
+        destructor(): void;
+    }
+}
+
+declare namespace $ {
 
 	type $mol_string_button__value_bog_nka_product_card_1 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['title'] >
@@ -42753,7 +42874,9 @@ declare namespace $.$$ {
         product(): $bog_nka_product;
         changed(): boolean;
         photos_add(next?: readonly File[]): readonly File[];
-        photos_save(files: readonly File[]): void;
+        photos_save(files: readonly File[]): Promise<void>;
+        photo_source(file?: File): Blob;
+        photo_picture(file?: File): $mol_picture | null;
         photo_ids(): string[];
         photo_url(link: string): string;
         photo_delete_enabled(): boolean;

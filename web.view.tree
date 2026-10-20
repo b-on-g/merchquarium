@@ -448,6 +448,23 @@ $giper_baza_status $mol_select
 				<= Fail $mol_icon_sync_off
 			hint <= message <= hint \Sync status
 
+$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
+
+$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
+
+$mol_button_copy $mol_button_minor
+	blobs /$mol_blob
+		<= text_blob? $mol_blob /
+			/BlobPart <= text <= title
+			* type \text/plain
+		<= html_blob? $mol_blob /
+			/BlobPart <= html \
+			* type \text/html
+	data *
+	sub /
+		<= Icon $mol_icon_clipboard_outline
+		<= title \
+
 $mol_row $mol_view
 
 $mol_book2 $mol_scroll
@@ -827,23 +844,6 @@ $mol_text_code_line $mol_paragraph
 		uri <= token_uri* \
 	find_pos* null
 
-$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
-
-$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
-
-$mol_button_copy $mol_button_minor
-	blobs /$mol_blob
-		<= text_blob? $mol_blob /
-			/BlobPart <= text <= title
-			* type \text/plain
-		<= html_blob? $mol_blob /
-			/BlobPart <= html \
-			* type \text/html
-	data *
-	sub /
-		<= Icon $mol_icon_clipboard_outline
-		<= title \
-
 $mol_text_code $mol_stack
 	attr *
 		^
@@ -889,9 +889,6 @@ $mol_textarea $mol_stack
 			submit? <=> submit? null
 			submit_with_ctrl <= submit_with_ctrl true
 		<= View $mol_text_code
-			attr *
-				^
-				inert \
 			text <= value
 			render_visible_only false
 			row_numb* <= row_numb* 0
@@ -2193,13 +2190,22 @@ $giper_baza_app $mol_book2_catalog
 
 $bog_nka_settings $mol_page
 	title @ \Settings
-	text_id @ \Your Id is: 
 	catalog_link? \
 	tools /
 		<= Sync $giper_baza_status
 	body /
-		<= Account_id $mol_paragraph
+		<= Account_label $mol_paragraph
+			title @ \Your account id:
+		<= Account_id $mol_button_copy
 			title <= account_id \
+		<= Debug_info $mol_paragraph
+			title <= debug_info \
+		<= Grant_input $mol_string
+			hint @ \Account id to grant rights
+			value? <=> grant_draft? \
+		<= Grant_submit $mol_button_major
+			title @ \Grant rights
+			click? <=> grant? null
 		<= Social_link $mol_string
 			hint @ \social link
 			value? <=> social_link? \
@@ -2288,7 +2294,6 @@ $yuf_carousel $mol_view
 		mousemove? <=> event_move? null
 
 $bog_nka_carousel $yuf_carousel
-	selected_index 0
 
 $bog_nka_number $mol_number
 
