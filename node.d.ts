@@ -772,7 +772,7 @@ declare namespace $ {
         static calc<Value>(value: Value): $mol_style_func<"calc", Value>;
         static vary<Name extends string, Value extends string>(name: Name, defaultValue?: Value): $mol_style_func<"var", Name | (Name | Value)[]>;
         static url<Href extends string>(href: Href): $mol_style_func<"url", string>;
-        static hsla(hue: number | $mol_style_func<'var'>, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | $mol_style_func<"var", unknown> | `${number}%`)[]>;
+        static hsla(hue: number | $mol_style_func<'var'>, saturation: number, lightness: number, alpha: number): $mol_style_func<"hsla", (number | `${number}%` | $mol_style_func<"var", unknown>)[]>;
         static clamp(min: $mol_style_unit_str<any>, mid: $mol_style_unit_str<any>, max: $mol_style_unit_str<any>): $mol_style_func<"clamp", `${number}${any}`[]>;
         static rgba(red: number | $mol_style_func<'var'>, green: number | $mol_style_func<'var'>, blue: number | $mol_style_func<'var'>, alpha: number | $mol_style_func<'var'>): $mol_style_func<"rgba", (number | $mol_style_func<"var", unknown>)[]>;
         static scale(zoom: number): $mol_style_func<"scale", number[]>;
@@ -1291,7 +1291,7 @@ declare namespace $ {
      * Theme css variables
      * @see https://mol.hyoo.ru/#!section=demos/demo=mol_textarea_demo
      */
-    const $mol_theme: Record<"image" | "line" | "text" | "field" | "current" | "focus" | "back" | "hover" | "card" | "special" | "control" | "shade" | "spirit" | "hue" | "hue_spread", $mol_style_func<"var", unknown>>;
+    const $mol_theme: Record<"image" | "line" | "text" | "field" | "current" | "focus" | "hue" | "back" | "hover" | "card" | "special" | "control" | "shade" | "spirit" | "hue_spread", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
@@ -1302,7 +1302,7 @@ declare namespace $ {
      * Gap in CSS
      * @see https://page.hyoo.ru/#!=msdb74_bm7nsq
      */
-    let $mol_gap: Record<"text" | "blur" | "page" | "block" | "emoji" | "round" | "space", $mol_style_func<"var", unknown>>;
+    let $mol_gap: Record<"text" | "blur" | "page" | "block" | "space" | "round" | "emoji", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
@@ -5641,7 +5641,7 @@ declare namespace $ {
         hash(): $giper_baza_link;
         idea_seed(): number;
         dump(): {
-            kind: "seal" | "sand" | "gift";
+            kind: "sand" | "gift" | "seal";
             lord: $giper_baza_link;
             lead: $giper_baza_link;
             head: $giper_baza_link;
@@ -5674,7 +5674,7 @@ declare namespace $ {
         code(): Uint8Array<ArrayBuffer>;
         code_exists(): boolean;
         dump(): {
-            kind: "seal" | "sand" | "gift";
+            kind: "sand" | "gift" | "seal";
             lord: $giper_baza_link;
             mate: $giper_baza_link;
             tier: string;
@@ -37749,10 +37749,10 @@ declare namespace $ {
                 _sum?: Readonly<{}> | undefined;
             };
         }> | undefined;
-        file: {
+        BAZA: {
             '+'?: boolean | undefined;
-            '='?: readonly (readonly string[])[] | undefined;
-            '!='?: readonly (readonly string[])[] | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
             _num?: {
                 '=': readonly (readonly (string | number)[])[];
             } | undefined;
@@ -37761,10 +37761,10 @@ declare namespace $ {
             _min?: Readonly<{}> | undefined;
             _sum?: Readonly<{}> | undefined;
         };
-        BAZA: {
+        file: {
             '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
+            '='?: readonly (readonly string[])[] | undefined;
+            '!='?: readonly (readonly string[])[] | undefined;
             _num?: {
                 '=': readonly (readonly (string | number)[])[];
             } | undefined;
@@ -37884,10 +37884,10 @@ declare namespace $ {
                 _sum?: Readonly<{}> | undefined;
             }>;
         }> | undefined;
-        file: Readonly<{
+        BAZA: Readonly<{
             '+'?: boolean | undefined;
-            '='?: readonly (readonly string[])[] | undefined;
-            '!='?: readonly (readonly string[])[] | undefined;
+            '='?: readonly (readonly number[])[] | undefined;
+            '!='?: readonly (readonly number[])[] | undefined;
             _num?: Readonly<{
                 '=': readonly (readonly number[])[];
             }> | undefined;
@@ -37896,10 +37896,10 @@ declare namespace $ {
             _min?: Readonly<{}> | undefined;
             _sum?: Readonly<{}> | undefined;
         }>;
-        BAZA: Readonly<{
+        file: Readonly<{
             '+'?: boolean | undefined;
-            '='?: readonly (readonly number[])[] | undefined;
-            '!='?: readonly (readonly number[])[] | undefined;
+            '='?: readonly (readonly string[])[] | undefined;
+            '!='?: readonly (readonly string[])[] | undefined;
             _num?: Readonly<{
                 '=': readonly (readonly number[])[];
             }> | undefined;
@@ -38580,10 +38580,10 @@ declare namespace $ {
                     _sum?: Readonly<{}> | undefined;
                 }>;
             }> | undefined;
-            file: Readonly<{
+            BAZA: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38592,10 +38592,10 @@ declare namespace $ {
                 _min?: Readonly<{}> | undefined;
                 _sum?: Readonly<{}> | undefined;
             }>;
-            BAZA: Readonly<{
+            file: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38717,10 +38717,10 @@ declare namespace $ {
                     _sum?: Readonly<{}> | undefined;
                 }>;
             }> | undefined;
-            file: Readonly<{
+            BAZA: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38729,10 +38729,10 @@ declare namespace $ {
                 _min?: Readonly<{}> | undefined;
                 _sum?: Readonly<{}> | undefined;
             }>;
-            BAZA: Readonly<{
+            file: Readonly<{
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
                 _num?: Readonly<{
                     '=': readonly (readonly number[])[];
                 }> | undefined;
@@ -38853,10 +38853,10 @@ declare namespace $ {
                     _sum?: Readonly<{}> | undefined;
                 };
             }> | undefined;
-            file: {
+            BAZA: {
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly string[])[] | undefined;
-                '!='?: readonly (readonly string[])[] | undefined;
+                '='?: readonly (readonly number[])[] | undefined;
+                '!='?: readonly (readonly number[])[] | undefined;
                 _num?: {
                     '=': readonly (readonly (string | number)[])[];
                 } | undefined;
@@ -38865,10 +38865,10 @@ declare namespace $ {
                 _min?: Readonly<{}> | undefined;
                 _sum?: Readonly<{}> | undefined;
             };
-            BAZA: {
+            file: {
                 '+'?: boolean | undefined;
-                '='?: readonly (readonly number[])[] | undefined;
-                '!='?: readonly (readonly number[])[] | undefined;
+                '='?: readonly (readonly string[])[] | undefined;
+                '!='?: readonly (readonly string[])[] | undefined;
                 _num?: {
                     '=': readonly (readonly (string | number)[])[];
                 } | undefined;
