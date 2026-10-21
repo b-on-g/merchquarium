@@ -42,6 +42,18 @@ namespace $.$$ {
 			this.catalog_link( land.link().str )
 		}
 
+		title() {
+			return this.catalog()?.Title()?.val()?.trim() || super.title()
+		}
+
+		@ $mol_mem
+		style() {
+			return {
+				... super.style(),
+				... $bog_nka_theme_style( this.catalog()?.Theme()?.val() ),
+			}
+		}
+
 		settings_button_sub() {
 			return [ this.settings_open() ? this.Return_icon() : this.Settings_icon() ]
 		}

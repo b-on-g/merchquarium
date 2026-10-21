@@ -44,7 +44,6 @@ namespace $.$$ {
 			font: {
 				size: '1.25rem',
 				weight: 'bold',
-				family: 'ui-rounded, system-ui, sans-serif',
 			},
 		},
 

@@ -144,6 +144,34 @@ namespace $.$$ {
 		}
 
 
+		catalog_title(next?: string): string {
+			const catalog = this.catalog()
+			if (!catalog) return ''
+			if (next === undefined) return catalog.Title()?.val() ?? ''
+			catalog.Title(null)?.val(next)
+			return next
+		}
+
+		theme_options(): Record<string, string> {
+			return {
+				sakura: this.Theme_sakura(),
+				lavender: this.Theme_lavender(),
+				mint: this.Theme_mint(),
+				peach: this.Theme_peach(),
+				sky: this.Theme_sky(),
+				milk: this.Theme_milk(),
+				classic: this.Theme_classic(),
+			} satisfies Record<$bog_nka_theme_name, string>
+		}
+
+		theme(next?: string): string {
+			const catalog = this.catalog()
+			if (!catalog) return 'sakura'
+			if (next === undefined) return catalog.Theme()?.val() || 'sakura'
+			catalog.Theme(null)?.val(next)
+			return next
+		}
+
 		social_link(next?: string): string {
 			const catalog = this.catalog()
 			if (!catalog) return ''

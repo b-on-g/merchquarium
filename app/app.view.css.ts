@@ -11,7 +11,6 @@ namespace $.$$ {
 		},
 		Title: {
 			font: {
-				family: 'ui-rounded, system-ui, sans-serif',
 				weight: 'bold',
 			},
 		},

@@ -8,6 +8,10 @@ namespace $.$$ {
 			},
 		},
 
+		Theme_switch: {
+			flex: { wrap: 'wrap' },
+		},
+
 		Category_form: {
 			flex: { wrap: 'nowrap' },
 			padding: 0,
