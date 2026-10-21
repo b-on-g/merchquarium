@@ -220,6 +220,11 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
+		Photos_controls() {
+			return this.changed() ? super.Photos_controls() : null!
+		}
+
+		@ $mol_mem
 		Available() {
 			return this.changed() ? super.Available() : null!
 		}

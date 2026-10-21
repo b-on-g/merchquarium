@@ -33,6 +33,26 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
+		is_admin() {
+			return this.catalog_land()?.Data($bog_nka_catalog).can_change() ?? false
+		}
+
+		body() {
+			if (this.is_admin()) return super.body()
+			return [
+				this.Account_label(),
+				this.Account_lord(),
+				this.Account_id(),
+				this.Categories_list(),
+			]
+		}
+
+		@ $mol_mem_key
+		Category_remove(category: string) {
+			return this.is_admin() ? super.Category_remove(category) : null!
+		}
+
+		@ $mol_mem
 		debug_rank() {
 			const land = this.catalog_land()
 			if (!land) return '-'
