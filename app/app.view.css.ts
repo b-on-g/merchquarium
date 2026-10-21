@@ -1,6 +1,10 @@
 namespace $.$$ {
 	
 	$mol_style_define($bog_nka_app, {
+		background: {
+			image: $mol_style_func.vary( '--bog_nka_pattern' ),
+			size: [ $mol_style_func.vary( '--bog_nka_pattern_size' ) ],
+		},
 		Catalog_missing: {
 			flexDirection: 'column',
 			display: 'block'

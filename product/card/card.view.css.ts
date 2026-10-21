@@ -2,6 +2,11 @@ namespace $.$$ {
 
 	$mol_style_define( $bog_nka_product_card, {
 		overflow: 'hidden',
+		border: {
+			style: $mol_style_func.vary( '--bog_nka_card_border_style' ),
+			width: $mol_style_func.vary( '--bog_nka_card_border_width' ),
+			color: $mol_theme.control,
+		},
 		gap: $mol_gap.block,
 		padding: {
 			bottom: $mol_gap.block,
@@ -9,17 +14,24 @@ namespace $.$$ {
 
 		Cover: {
 			display: 'block',
+			padding: $mol_style_func.vary( '--bog_nka_photo_inset' ),
 		},
 
 		Photos: {
 			Image: {
 				width: '100%',
 				aspectRatio: 1,
+				border: {
+					radius: $mol_style_func.vary( '--bog_nka_photo_round' ),
+				},
 			},
 		},
 
 		Photo_empty: {
 			aspectRatio: 1,
+			border: {
+				radius: $mol_style_func.vary( '--bog_nka_photo_round' ),
+			},
 			alignItems: 'center',
 			justifyContent: 'center',
 			background: {

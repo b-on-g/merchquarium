@@ -152,7 +152,7 @@ namespace $.$$ {
 			return next
 		}
 
-		theme_options(): Record<string, string> {
+		theme_names(): Record<$bog_nka_theme_name, string> {
 			return {
 				sakura: this.Theme_sakura(),
 				lavender: this.Theme_lavender(),
@@ -161,7 +161,27 @@ namespace $.$$ {
 				sky: this.Theme_sky(),
 				milk: this.Theme_milk(),
 				classic: this.Theme_classic(),
-			} satisfies Record<$bog_nka_theme_name, string>
+			}
+		}
+
+		theme_options() {
+			return Object.keys(this.theme_names()).map(name => this.Theme_option(name))
+		}
+
+		theme_name(name: $bog_nka_theme_name) {
+			return this.theme_names()[name]
+		}
+
+		theme_swatch(name: string) {
+			const ring = this.theme() === name
+				? '0 0 0 3px var(--mol_theme_current)'
+				: '0 0 0 1px var(--mol_theme_line)'
+			return { ... $bog_nka_theme_swatch(name), boxShadow: ring }
+		}
+
+		@ $mol_action
+		theme_select(name: string) {
+			this.theme(name)
 		}
 
 		theme(next?: string): string {
@@ -170,6 +190,47 @@ namespace $.$$ {
 			if (next === undefined) return catalog.Theme()?.val() || 'sakura'
 			catalog.Theme(null)?.val(next)
 			return next
+		}
+
+		import_prompt() {
+			return $bog_nka_import_prompt
+		}
+
+		@ $mol_mem
+		import_json(next?: string) {
+			return next ?? ''
+		}
+
+		@ $mol_mem
+		import_data() {
+			return $bog_nka_import_parse(this.import_json())
+		}
+
+		import_new_categories() {
+			const known = new Set(this.catalog()?.Categories()?.items() ?? [])
+			return this.import_data().categories.filter(category => !known.has(category))
+		}
+
+		import_preview() {
+			const data = this.import_data()
+			if (!this.import_json().trim()) return ''
+			const summary = this.Import_summary()
+				.replace('{products}', String(data.products.length))
+				.replace('{categories}', String(this.import_new_categories().length))
+			if (!data.errors.length) return summary
+			return summary + '. ' + this.Import_errors().replace('{errors}', data.errors.join('; '))
+		}
+
+		import_ready() {
+			return this.import_data().products.length > 0
+		}
+
+		@ $mol_action
+		import_run() {
+			const catalog = this.catalog()
+			if (!catalog || !this.import_ready()) return
+			$bog_nka_import_apply(catalog, this.import_data())
+			this.import_json('')
 		}
 
 		social_link(next?: string): string {

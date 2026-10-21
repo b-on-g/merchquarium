@@ -1,5 +1,7 @@
 $bog_nka_settings $mol_page
 	title @ \Settings
+	Import_summary @ \Will add products: {products}, new categories: {categories}
+	Import_errors @ \Problems: {errors}
 	Theme_sakura @ \Sakura
 	Theme_lavender @ \Lavender
 	Theme_mint @ \Mint
@@ -26,9 +28,8 @@ $bog_nka_settings $mol_page
 				<= Catalog_title $mol_string
 					hint @ \Catalog title
 					value? <=> catalog_title? \
-				<= Theme_switch $mol_switch
-					options <= theme_options *
-					value? <=> theme? \sakura
+				<= Themes $mol_view
+					sub <= theme_options /
 		<= Sales_section $mol_section
 			title @ \Sales
 			content /
@@ -51,6 +52,23 @@ $bog_nka_settings $mol_page
 							click? <=> category_add? null
 				<= Categories_list $mol_view
 					sub <= category_rows /
+		<= Import_section $mol_section
+			title @ \Bulk import
+			content /
+				<= Import_hint $mol_paragraph
+					title @ \Copy the prompt, talk to any AI chat and paste its JSON below. Upload photos to the cards afterwards.
+				<= Import_prompt $mol_button_copy
+					title @ \Copy prompt for AI
+					text <= import_prompt \
+				<= Import_json $mol_textarea
+					hint @ \Paste JSON here
+					value? <=> import_json? \
+				<= Import_preview $mol_paragraph
+					title <= import_preview \
+				<= Import_run $mol_button_major
+					title @ \Create products
+					click? <=> import_run? null
+					enabled <= import_ready false
 		<= Access_section $mol_section
 			title @ \Access
 			content /
@@ -83,3 +101,11 @@ $bog_nka_settings $mol_page
 							<= Category_confirm* $mol_button_major
 								title @ \Delete category
 								click? <=> category_remove_confirm*? null
+	Theme_option* $mol_button_minor
+		click? <=> theme_select*? null
+		sub /
+			<= Theme_swatch* $mol_view
+				style <= theme_swatch* *
+			<= Theme_name* $mol_view
+				sub /
+					<= theme_name* \

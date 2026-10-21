@@ -1,0 +1,4 @@
+[bog_nka_app_title]::before {
+	content: var(--bog_nka_decor);
+	margin-right: .5ch;
+}
