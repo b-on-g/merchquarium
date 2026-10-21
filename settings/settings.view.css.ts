@@ -1,6 +1,18 @@
 namespace $.$$ {
 
 	$mol_style_define($bog_nka_settings, {
+		Sales_section: {
+			Content: {
+				gap: $mol_gap.block,
+			},
+		},
+
+		Import_section: {
+			Content: {
+				gap: $mol_gap.block,
+			},
+		},
+
 		Account_lord: {
 			font: {
 				family: 'monospace',
