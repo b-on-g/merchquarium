@@ -23264,6 +23264,33 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    function $bog_nka_social_url(value) {
+        let text = value.trim();
+        if (!text)
+            return null;
+        if (/^@?[a-zA-Z][\w]{3,}$/.test(text))
+            text = `https://t.me/${text.replace(/^@/, '')}`;
+        else if (!/^[a-z][a-z\d+.-]*:/i.test(text))
+            text = `https://${text.replace(/^\/+/, '')}`;
+        try {
+            const url = new URL(text);
+            if (url.protocol !== 'https:' && url.protocol !== 'http:')
+                return null;
+            if (!url.hostname.includes('.'))
+                return null;
+            return url;
+        }
+        catch {
+            return null;
+        }
+    }
+    $.$bog_nka_social_url = $bog_nka_social_url;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 
 ;
@@ -23415,7 +23442,7 @@ var $;
                 return next;
             }
             buy_title() {
-                return this.catalog()?.Social()?.val()?.trim()
+                return this.social_url()
                     ? this.Buy_title()
                     : this.Social_missing_title();
             }
@@ -23434,42 +23461,12 @@ var $;
                     const template = catalog.SocialText()?.val()
                         || 'Добрый день, хотел бы приобрести {title}';
                     const message = template.replace(/\{title\}/g, this.title());
-                    url.searchParams.set('text', message);
+                    url.search = `?text=${encodeURIComponent(message)}`;
                 }
                 window.open(url.toString(), '_blank');
             }
             social_url() {
-                const value = this.catalog()?.Social()?.val()?.trim() ?? '';
-                if (!value)
-                    return null;
-                try {
-                    const url = new URL(value);
-                    if (url.protocol !== 'https:' && url.protocol !== 'http:')
-                        return null;
-                    return url;
-                }
-                catch {
-                    return null;
-                }
-            }
-            cover() {
-                return [this.photo_ids().length ? this.Photos() : this.Photo_empty()];
-            }
-            info_rows() {
-                if (this.changed())
-                    return [this.Title(), this.Price(), this.Description(), this.Category()];
-                return [
-                    this.Title(),
-                    ...this.price() ? [this.Price_text()] : [],
-                    ...this.description() ? [this.Description_text()] : [],
-                    ...this.category() ? [this.Category_text()] : [],
-                ];
-            }
-            price_text() {
-                return `${this.price().toLocaleString('ru-RU')} ₽`;
-            }
-            category_text() {
-                return this.category() ?? '';
+                return $bog_nka_social_url(this.catalog()?.Social()?.val() ?? '');
             }
             Admin() {
                 return this.changed() ? super.Admin() : null;

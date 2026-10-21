@@ -47838,6 +47838,10 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    function $bog_nka_social_url(value: string): URL | null;
+}
+
+declare namespace $ {
 
 	type $bog_nka_carousel__ids_bog_nka_product_card_1 = $mol_type_enforce<
 		ReturnType< $bog_nka_product_card['photo_ids'] >
@@ -48096,10 +48100,6 @@ declare namespace $.$$ {
         buy_enabled(): boolean;
         buy(): void;
         social_url(): URL | null;
-        cover(): $mol_view[];
-        info_rows(): ($.$mol_select | $mol_string_button | $bog_nka_number)[] | ($.$mol_paragraph | $mol_string_button)[];
-        price_text(): string;
-        category_text(): string;
         Admin(): $mol_row;
     }
 }

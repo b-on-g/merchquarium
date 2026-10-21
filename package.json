@@ -397,6 +397,7 @@
     "$mol_picture",
     "$yuf_url_object",
     "$yuf_url",
+    "$bog_nka_social",
     "$mol_fetch",
     "$mol_error_enriched"
   ],
