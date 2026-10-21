@@ -4,6 +4,8 @@ services:
     build: .
     environment:
       BOG_NKA_SEO_ORIGIN: https://${NKA_DOMAIN}
+      BOG_NKA_SEO_GOOGLE: ${NKA_GOOGLE:-}
+      BOG_NKA_SEO_YANDEX: ${NKA_YANDEX:-}
     logging:
       driver: "local"
     volumes:

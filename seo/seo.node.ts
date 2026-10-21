@@ -61,6 +61,20 @@ namespace $ {
 
 		}
 
+		verification() {
+			return Object.entries({
+				'google-site-verification': process.env.BOG_NKA_SEO_GOOGLE,
+				'yandex-verification': process.env.BOG_NKA_SEO_YANDEX,
+			})
+				.filter( ([ , token ])=> token )
+				.map( ([ name, token ])=> `<meta name="${ name }" content="${ $bog_nka_seo_escape( token! ) }" />` )
+				.join( '' )
+		}
+
+		html( msg: $mol_rest_message, html: string ) {
+			msg.reply( html.replace( '</head>', `${ this.verification() }</head>` ), { type: 'text/html;charset=utf-8' } )
+		}
+
 		GET( msg: $mol_rest_message ) {
 
 			const uri = msg.uri()
@@ -78,16 +92,17 @@ namespace $ {
 				return msg.reply( $bog_nka_seo_sitemap( urls ), { type: 'application/xml' } )
 			}
 
+			if( uri.pathname !== '/' ) return super.GET( msg )
+
+			const template = this._root().resolve( 'index.html' ).text()
+
 			const link = this.land_link( uri.searchParams.get( 'catalog' ) )
-			if( uri.pathname !== '/' || !link ) return super.GET( msg )
+			if( !link ) return this.html( msg, template )
 
 			this.remember( link )
 
 			const catalog = this.catalog( origin, link )
-			if( !catalog ) return super.GET( msg )
-
-			const template = this._root().resolve( 'index.html' ).text()
-			msg.reply( $bog_nka_seo_page( template, catalog ), { type: 'text/html;charset=utf-8' } )
+			this.html( msg, catalog ? $bog_nka_seo_page( template, catalog ) : template )
 
 		}
 
