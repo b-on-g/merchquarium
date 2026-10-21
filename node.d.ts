@@ -5508,7 +5508,7 @@ declare namespace $ {
          * Priority: time > lord > tick
          */
         static compare(left: $giper_baza_unit_base | undefined, right: $giper_baza_unit_base | undefined): number;
-        static narrow(buf: ArrayBuffer): $giper_baza_auth_pass | $giper_baza_unit_sand | $giper_baza_unit_seal | $giper_baza_unit_gift;
+        static narrow(buf: ArrayBuffer): $giper_baza_auth_pass | $giper_baza_unit_sand | $giper_baza_unit_gift | $giper_baza_unit_seal;
         constructor(buffer: ArrayBuffer, byteOffset?: number, byteLength?: number);
         kind(next?: keyof typeof $giper_baza_unit_kind): Exclude<keyof typeof $giper_baza_unit_kind, 'pass'>;
         choose<Res>(ways: {
@@ -39078,6 +39078,233 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+
+	export class $mol_icon_plus extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=plus.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $giper_baza_link_chip extends $mol_link {
+		icon( ): string
+		param( ): string
+		link( ): $giper_baza_link
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=chip.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $giper_baza_link_chip extends $.$giper_baza_link_chip {
+        subj(): $giper_baza_flex_subj | null;
+        meta(): $giper_baza_flex_meta | null;
+        icon(): string;
+        title(): string;
+        hint(): string;
+        arg(): {
+            [x: string]: string;
+        };
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_string__hint_giper_baza_land_rights_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_giper_baza_land_rights_2 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['add_key'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__submit_giper_baza_land_rights_3 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['add_commit'] >
+		,
+		ReturnType< $mol_string['submit'] >
+	>
+	type $mol_string__enabled_giper_baza_land_rights_4 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['enabled'] >
+		,
+		ReturnType< $mol_string['enabled'] >
+	>
+	type $mol_button_minor__click_giper_baza_land_rights_5 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['add_commit'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__enabled_giper_baza_land_rights_6 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['enabled'] >
+		,
+		ReturnType< $mol_button_minor['enabled'] >
+	>
+	type $mol_button_minor__sub_giper_baza_land_rights_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_view__sub_giper_baza_land_rights_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_select__hint_giper_baza_land_rights_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_select['hint'] >
+	>
+	type $mol_select__value_giper_baza_land_rights_10 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['gift_rate'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__enabled_giper_baza_land_rights_11 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_select__Filter_giper_baza_land_rights_12 = $mol_type_enforce<
+		any
+		,
+		ReturnType< $mol_select['Filter'] >
+	>
+	type $mol_select__dictionary_giper_baza_land_rights_13 = $mol_type_enforce<
+		({ 
+			'0': string,
+			'1': string,
+			'2': string,
+			'3': string,
+			'4': string,
+			'5': string,
+			'6': string,
+			'7': string,
+			'8': string,
+			'9': string,
+			'A': string,
+			'B': string,
+			'C': string,
+			'D': string,
+			'E': string,
+			'F': string,
+		}) 
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_select__hint_giper_baza_land_rights_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_select['hint'] >
+	>
+	type $mol_select__value_giper_baza_land_rights_15 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['gift_tier'] >
+		,
+		ReturnType< $mol_select['value'] >
+	>
+	type $mol_select__Filter_giper_baza_land_rights_16 = $mol_type_enforce<
+		any
+		,
+		ReturnType< $mol_select['Filter'] >
+	>
+	type $mol_select__dictionary_giper_baza_land_rights_17 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['tier_options'] >
+		,
+		ReturnType< $mol_select['dictionary'] >
+	>
+	type $mol_select__enabled_giper_baza_land_rights_18 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['enabled'] >
+		,
+		ReturnType< $mol_select['enabled'] >
+	>
+	type $mol_avatar__id_giper_baza_land_rights_19 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['peer_id'] >
+		,
+		ReturnType< $mol_avatar['id'] >
+	>
+	type $giper_baza_link_chip__param_giper_baza_land_rights_20 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['link_param'] >
+		,
+		ReturnType< $giper_baza_link_chip['param'] >
+	>
+	type $giper_baza_link_chip__link_giper_baza_land_rights_21 = $mol_type_enforce<
+		ReturnType< $giper_baza_land_rights['peer_link'] >
+		,
+		ReturnType< $giper_baza_link_chip['link'] >
+	>
+	type $giper_baza_link_chip__sub_giper_baza_land_rights_22 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $giper_baza_link_chip['sub'] >
+	>
+	type $mol_view__sub_giper_baza_land_rights_23 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $giper_baza_land_rights extends $mol_list {
+		add_key( next?: string ): string
+		add_commit( next?: any ): any
+		enabled( ): boolean
+		Add_key( ): $mol_string
+		Add_commit_icon( ): $mol_icon_plus
+		Add_commit( ): $mol_button_minor
+		Add( ): $mol_view
+		gift_rate( id: any, next?: string ): string
+		Gift_rate( id: any): $mol_select
+		gift_tier( id: any, next?: string ): string
+		tier_options( ): ({ 
+			'deny': string,
+			'read': string,
+			'post': string,
+			'pull': string,
+			'rule': string,
+		}) 
+		Gift_tier( id: any): $mol_select
+		link_param( ): string
+		peer_link( id: any): $giper_baza_link
+		peer_id( id: any): string
+		Gift_avatar( id: any): $mol_avatar
+		Gift_name( id: any): $giper_baza_link_chip
+		Gift( id: any): $mol_view
+		gifts( ): readonly(any)[]
+		land( ): $giper_baza_land
+		rows( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=rights.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $giper_baza_land_rights extends $.$giper_baza_land_rights {
+        rows(): readonly any[];
+        gifts(): $mol_view[];
+        peer_link(lord: $giper_baza_link): $giper_baza_link;
+        peer_id(lord: $giper_baza_link): string;
+        gift_tier(lord: $giper_baza_link, next?: keyof typeof $giper_baza_rank_tier): keyof typeof $giper_baza_rank_tier;
+        gift_rate(lord: $giper_baza_link, next?: string): string;
+        add_commit(): undefined;
+        tier_options(): {
+            deny: string;
+            read: string;
+            post: string;
+            pull: string;
+            rule: string;
+        };
+        enabled(): boolean;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -41975,35 +42202,35 @@ declare namespace $ {
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_copy__title_bog_nka_settings_2 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_2 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['account_lord'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_button_copy__title_bog_nka_settings_3 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['account_id'] >
 		,
 		ReturnType< $mol_button_copy['title'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_3 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_4 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['debug_info'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_string__hint_bog_nka_settings_4 = $mol_type_enforce<
+	type $giper_baza_land_rights__land_bog_nka_settings_5 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['catalog_land'] >
+		,
+		ReturnType< $giper_baza_land_rights['land'] >
+	>
+	type $mol_string__hint_bog_nka_settings_6 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_bog_nka_settings_5 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['grant_draft'] >
+	type $mol_string__value_bog_nka_settings_7 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['social_link'] >
 		,
 		ReturnType< $mol_string['value'] >
-	>
-	type $mol_button_major__title_bog_nka_settings_6 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_major['title'] >
-	>
-	type $mol_button_major__click_bog_nka_settings_7 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['grant'] >
-		,
-		ReturnType< $mol_button_major['click'] >
 	>
 	type $mol_string__hint_bog_nka_settings_8 = $mol_type_enforce<
 		string
@@ -42011,7 +42238,7 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_9 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_link'] >
+		ReturnType< $bog_nka_settings['social_text'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
@@ -42021,101 +42248,91 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_11 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_text'] >
-		,
-		ReturnType< $mol_string['value'] >
-	>
-	type $mol_string__hint_bog_nka_settings_12 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_string['hint'] >
-	>
-	type $mol_string__value_bog_nka_settings_13 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_draft'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_14 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_12 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_15 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_13 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_add'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_list__rows_bog_nka_settings_16 = $mol_type_enforce<
+	type $mol_list__rows_bog_nka_settings_14 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_17 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_15 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_title'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_18 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_16 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_19 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_17 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
+	type $mol_paragraph__title_bog_nka_settings_18 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_19 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
 	type $mol_paragraph__title_bog_nka_settings_20 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_bog_nka_settings_21 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_bog_nka_settings_22 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_product_count'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_23 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_21 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_24 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_22 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_cancel'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_25 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_23 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_26 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_24 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_confirm'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_27 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_25 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_pop__Anchor_bog_nka_settings_28 = $mol_type_enforce<
+	type $mol_pop__Anchor_bog_nka_settings_26 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['Category_remove_button'] >
 		,
 		ReturnType< $mol_pop['Anchor'] >
 	>
-	type $mol_pop__bubble_content_bog_nka_settings_29 = $mol_type_enforce<
+	type $mol_pop__bubble_content_bog_nka_settings_27 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_pop['bubble_content'] >
 	>
-	type $mol_row__sub_bog_nka_settings_30 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_28 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -42123,14 +42340,14 @@ declare namespace $ {
 	export class $bog_nka_settings extends $mol_page {
 		Sync( ): $giper_baza_status
 		Account_label( ): $mol_paragraph
+		account_lord( ): string
+		Account_lord( ): $mol_paragraph
 		account_id( ): string
 		Account_id( ): $mol_button_copy
 		debug_info( ): string
 		Debug_info( ): $mol_paragraph
-		grant_draft( next?: string ): string
-		Grant_input( ): $mol_string
-		grant( next?: any ): any
-		Grant_submit( ): $mol_button_major
+		catalog_land( ): any
+		Rights( ): $giper_baza_land_rights
 		social_link( next?: string ): string
 		Social_link( ): $mol_string
 		social_text( next?: string ): string
@@ -42170,14 +42387,13 @@ declare namespace $.$$ {
         settings_open(next?: boolean): boolean;
         settings_toggle(): void;
         account_id(): string;
+        account_lord(): string;
         catalog(): $bog_nka_catalog | null;
         catalog_land(): $giper_baza_land | null;
         debug_rank(): string;
         products_total(): number;
         products_available(): number;
         debug_info(): string;
-        grant_draft(next?: string): string;
-        grant(id?: unknown): Promise<void>;
         categories_text(): string;
         category_draft(next?: string): string;
         category_add(): void;
@@ -42324,12 +42540,17 @@ declare namespace $ {
 		Image( id: any): $mol_image
 		images( ): readonly($mol_view)[]
 		event_move( next?: any ): any
-		minimal_height( ): number
+		event_scroll( next?: any ): any
+		index( next?: number ): number
+		scroll_x( next?: number ): number
+		mouse_x( next?: number ): number
 		auto_scroll( ): boolean
+		minimal_height( ): number
 		ids( ): readonly(string)[]
 		sub( ): ReturnType< $yuf_carousel['images'] >
 		event( ): ({ 
 			mousemove( next?: ReturnType< $yuf_carousel['event_move'] > ): ReturnType< $yuf_carousel['event_move'] >,
+			scroll( next?: ReturnType< $yuf_carousel['event_scroll'] > ): ReturnType< $yuf_carousel['event_scroll'] >,
 		})  & ReturnType< $mol_view['event'] >
 	}
 	
@@ -42338,11 +42559,14 @@ declare namespace $ {
 //# sourceMappingURL=carousel.view.tree.d.ts.map
 declare namespace $.$$ {
     class $yuf_carousel extends $.$yuf_carousel {
-        mouse_pos(next?: readonly [x: number, y: number]): readonly [x: number, y: number] | null;
         event_move(e?: MouseEvent): null | undefined;
         part_size(): number;
-        selected_index(): number;
-        switched(): number | null;
+        mouse_index(): number | null;
+        scroll_x(next?: number | null, cache?: 'cache'): number;
+        event_scroll(next?: Event): void;
+        protected width(): number;
+        index(next?: number): number;
+        mouse_index_sync(next?: number): number;
         auto(): void;
         images(): ($.$mol_image | $mol_icon_camera_off)[];
         protected url_safe(id: string): string;

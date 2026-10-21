@@ -465,6 +465,72 @@ $mol_button_copy $mol_button_minor
 		<= Icon $mol_icon_clipboard_outline
 		<= title \
 
+$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
+
+$giper_baza_link_chip $mol_link
+	param \link
+	link $giper_baza_link
+	sub /
+		<= icon \
+		<= title
+
+$giper_baza_land_rights $mol_list
+	land $giper_baza_land
+	rows /
+		<= Add $mol_view sub /
+			<= Add_key $mol_string
+				hint @ \Public key
+				value? <=> add_key? \
+				submit? <=> add_commit? null
+				enabled <= enabled false
+			<= Add_commit $mol_button_minor
+				click? <=> add_commit? null
+				enabled <= enabled false
+				sub /
+					<= Add_commit_icon $mol_icon_plus
+		^ gifts /
+			<= Gift*0 $mol_view sub /
+				<= Gift_rate* $mol_select
+					hint @ \Speed
+					value? <=> gift_rate*? \0
+					enabled <= enabled false
+					Filter null
+					dictionary *
+						0 \0 🦼 ~1W
+						1 \1 🚲 ~3D
+						2 \2 🛵 ~1D
+						3 \3 🚜 ~D/2
+						4 \4 🏇 ~8h
+						5 \5 🚂 ~4h
+						6 \6 🚛 ~2h
+						7 \7 🚗 ~1h
+						8 \8 🏍️ ~h/2
+						9 \9 🏎️ ~5m
+						A \A 🚅 ~2m
+						B \B 🚁 ~m/2
+						C \C 🛩️ ~2s
+						D \D ✈️ ~s/2
+						E \E 🚀 ~50ms
+						F \F 🛸 ~1ms
+				<= Gift_tier* $mol_select
+					hint @ \Level
+					value? <=> gift_tier*? \deny
+					Filter null
+					dictionary <= tier_options *
+						deny @ \🛑 Deny
+						read @ \👀 Read
+						post @ \✍ Post
+						pull @ \🥂 Pull
+						rule @ \👑 Rule
+					enabled <= enabled false
+				<= Gift_name* $giper_baza_link_chip
+					param <= link_param \link
+					link <= peer_link* $giper_baza_link
+					sub /
+						^
+						<= Gift_avatar* $mol_avatar
+							id <= peer_id* \
+
 $mol_row $mol_view
 
 $mol_book2 $mol_scroll
@@ -562,13 +628,6 @@ $mol_frame $mol_embed_native
 $mol_icon_account $mol_icon path \M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z
 
 $mol_icon_security $mol_icon path \M12,12H19C18.47,16.11 15.72,19.78 12,20.92V12H5V6.3L12,3.19M12,1L3,5V11C3,16.55 6.84,21.73 12,23C17.16,21.73 21,16.55 21,11V5L12,1Z
-
-$giper_baza_link_chip $mol_link
-	param \link
-	link $giper_baza_link
-	sub /
-		<= icon \
-		<= title
 
 $mol_icon_link $mol_icon path \M3.9,12C3.9,10.29 5.29,8.9 7,8.9H11V7H7A5,5 0 0,0 2,12A5,5 0 0,0 7,17H11V15.1H7C5.29,15.1 3.9,13.71 3.9,12M8,13H16V11H8V13M17,7H13V8.9H17C18.71,8.9 20.1,10.29 20.1,12C20.1,13.71 18.71,15.1 17,15.1H13V17H17A5,5 0 0,0 22,12A5,5 0 0,0 17,7Z
 
@@ -952,8 +1011,6 @@ $mol_check_expand $mol_check
 		paddingLeft <= level_style \0px
 	checked? <=> expanded? false
 	enabled <= expandable false
-
-$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
 
 $mol_drag $mol_ghost
 	event *
@@ -1532,63 +1589,6 @@ $mol_button_open_native $mol_view
 		multiple <= multiple true
 	event *
 		change? <=> picked? null
-
-$giper_baza_land_rights $mol_list
-	land $giper_baza_land
-	rows /
-		<= Add $mol_view sub /
-			<= Add_key $mol_string
-				hint @ \Public key
-				value? <=> add_key? \
-				submit? <=> add_commit? null
-				enabled <= enabled false
-			<= Add_commit $mol_button_minor
-				click? <=> add_commit? null
-				enabled <= enabled false
-				sub /
-					<= Add_commit_icon $mol_icon_plus
-		^ gifts /
-			<= Gift*0 $mol_view sub /
-				<= Gift_rate* $mol_select
-					hint @ \Speed
-					value? <=> gift_rate*? \0
-					enabled <= enabled false
-					Filter null
-					dictionary *
-						0 \0 🦼 ~1W
-						1 \1 🚲 ~3D
-						2 \2 🛵 ~1D
-						3 \3 🚜 ~D/2
-						4 \4 🏇 ~8h
-						5 \5 🚂 ~4h
-						6 \6 🚛 ~2h
-						7 \7 🚗 ~1h
-						8 \8 🏍️ ~h/2
-						9 \9 🏎️ ~5m
-						A \A 🚅 ~2m
-						B \B 🚁 ~m/2
-						C \C 🛩️ ~2s
-						D \D ✈️ ~s/2
-						E \E 🚀 ~50ms
-						F \F 🛸 ~1ms
-				<= Gift_tier* $mol_select
-					hint @ \Level
-					value? <=> gift_tier*? \deny
-					Filter null
-					dictionary <= tier_options *
-						deny @ \🛑 Deny
-						read @ \👀 Read
-						post @ \✍ Post
-						pull @ \🥂 Pull
-						rule @ \👑 Rule
-					enabled <= enabled false
-				<= Gift_name* $giper_baza_link_chip
-					param <= link_param \link
-					link <= peer_link* $giper_baza_link
-					sub /
-						^
-						<= Gift_avatar* $mol_avatar
-							id <= peer_id* \
 
 $giper_baza_glob_book $mol_book2_catalog
 	menu_title \🌐 Database Explorer
@@ -2196,16 +2196,14 @@ $bog_nka_settings $mol_page
 	body /
 		<= Account_label $mol_paragraph
 			title @ \Your account id:
+		<= Account_lord $mol_paragraph
+			title <= account_lord \
 		<= Account_id $mol_button_copy
 			title <= account_id \
 		<= Debug_info $mol_paragraph
 			title <= debug_info \
-		<= Grant_input $mol_string
-			hint @ \Account id to grant rights
-			value? <=> grant_draft? \
-		<= Grant_submit $mol_button_major
-			title @ \Grant rights
-			click? <=> grant? null
+		<= Rights $giper_baza_land_rights
+			land <= catalog_land null
 		<= Social_link $mol_string
 			hint @ \social link
 			value? <=> social_link? \
@@ -2281,8 +2279,11 @@ $mol_image $mol_view
 	minimal_height 16
 
 $yuf_carousel $mol_view
-	minimal_height 120
+	index? 0
+	scroll_x? 0
+	mouse_x? 0
 	auto_scroll true
+	minimal_height 120
 	ids /string - ids or urls
 	sub <= images /$mol_view
 		<= Empty*0 $mol_icon_camera_off
@@ -2292,6 +2293,7 @@ $yuf_carousel $mol_view
 	event *
 		^
 		mousemove? <=> event_move? null
+		scroll? <=> event_scroll? null
 
 $bog_nka_carousel $yuf_carousel
 

@@ -24,8 +24,6 @@
 	"$bog_nka_settings_Category_confirm_title_title": "Delete this category?",
 	"$bog_nka_settings_Category_input_hint": "New category",
 	"$bog_nka_settings_Category_remove_button_title": "Remove",
-	"$bog_nka_settings_Grant_input_hint": "Account id to grant rights",
-	"$bog_nka_settings_Grant_submit_title": "Grant rights",
 	"$bog_nka_settings_Social_link_hint": "social link",
 	"$bog_nka_settings_Social_text_hint": "Example (used by default message ): \"Hello! I want to buy {title}!\" ",
 	"$bog_nka_settings_title": "Settings",

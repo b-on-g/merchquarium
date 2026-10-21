@@ -18262,6 +18262,385 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
+		path(){
+			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$giper_baza_link_chip) = class $giper_baza_link_chip extends ($.$mol_link) {
+		icon(){
+			return "";
+		}
+		param(){
+			return "link";
+		}
+		link(){
+			const obj = new this.$.$giper_baza_link();
+			return obj;
+		}
+		sub(){
+			return [(this.icon()), (this.title())];
+		}
+	};
+	($mol_mem(($.$giper_baza_link_chip.prototype), "link"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $giper_baza_link_chip extends $.$giper_baza_link_chip {
+            subj() {
+                const link = this.link();
+                if (!link.str)
+                    return null;
+                return this.$.$giper_baza_glob.Pawn(link, $giper_baza_flex_subj);
+            }
+            meta() {
+                const link = this.subj()?.meta();
+                if (!link)
+                    return null;
+                return this.$.$giper_baza_glob.Pawn(link, $giper_baza_flex_meta);
+            }
+            icon() {
+                return (this.subj()?.icon() || '💠') + ' ';
+            }
+            title() {
+                const link = this.link();
+                if (!link.str)
+                    return '______every______';
+                return this.subj()?.name() || link.str;
+            }
+            hint() {
+                return this.subj()?.hint() ?? '';
+            }
+            arg() {
+                return { [this.param()]: this.link().str };
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $giper_baza_link_chip.prototype, "subj", null);
+        __decorate([
+            $mol_mem
+        ], $giper_baza_link_chip.prototype, "meta", null);
+        __decorate([
+            $mol_mem
+        ], $giper_baza_link_chip.prototype, "icon", null);
+        __decorate([
+            $mol_mem
+        ], $giper_baza_link_chip.prototype, "title", null);
+        __decorate([
+            $mol_mem
+        ], $giper_baza_link_chip.prototype, "arg", null);
+        $$.$giper_baza_link_chip = $giper_baza_link_chip;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($giper_baza_link_chip, {
+            font: {
+                family: 'monospace',
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$giper_baza_land_rights) = class $giper_baza_land_rights extends ($.$mol_list) {
+		add_key(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		add_commit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		enabled(){
+			return false;
+		}
+		Add_key(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$giper_baza_land_rights_Add_key_hint")));
+			(obj.value) = (next) => ((this.add_key(next)));
+			(obj.submit) = (next) => ((this.add_commit(next)));
+			(obj.enabled) = () => ((this.enabled()));
+			return obj;
+		}
+		Add_commit_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Add_commit(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.add_commit(next)));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.sub) = () => ([(this.Add_commit_icon())]);
+			return obj;
+		}
+		Add(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Add_key()), (this.Add_commit())]);
+			return obj;
+		}
+		gift_rate(id, next){
+			if(next !== undefined) return next;
+			return "0";
+		}
+		Gift_rate(id){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$giper_baza_land_rights_Gift_rate_hint")));
+			(obj.value) = (next) => ((this.gift_rate(id, next)));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.Filter) = () => (null);
+			(obj.dictionary) = () => ({
+				"0": "0 🦼 ~1W", 
+				"1": "1 🚲 ~3D", 
+				"2": "2 🛵 ~1D", 
+				"3": "3 🚜 ~D/2", 
+				"4": "4 🏇 ~8h", 
+				"5": "5 🚂 ~4h", 
+				"6": "6 🚛 ~2h", 
+				"7": "7 🚗 ~1h", 
+				"8": "8 🏍️ ~h/2", 
+				"9": "9 🏎️ ~5m", 
+				"A": "A 🚅 ~2m", 
+				"B": "B 🚁 ~m/2", 
+				"C": "C 🛩️ ~2s", 
+				"D": "D ✈️ ~s/2", 
+				"E": "E 🚀 ~50ms", 
+				"F": "F 🛸 ~1ms"
+			});
+			return obj;
+		}
+		gift_tier(id, next){
+			if(next !== undefined) return next;
+			return "deny";
+		}
+		tier_options(){
+			return {
+				"deny": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_deny")), 
+				"read": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_read")), 
+				"post": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_post")), 
+				"pull": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_pull")), 
+				"rule": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_rule"))
+			};
+		}
+		Gift_tier(id){
+			const obj = new this.$.$mol_select();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$giper_baza_land_rights_Gift_tier_hint")));
+			(obj.value) = (next) => ((this.gift_tier(id, next)));
+			(obj.Filter) = () => (null);
+			(obj.dictionary) = () => ((this.tier_options()));
+			(obj.enabled) = () => ((this.enabled()));
+			return obj;
+		}
+		link_param(){
+			return "link";
+		}
+		peer_link(id){
+			const obj = new this.$.$giper_baza_link();
+			return obj;
+		}
+		peer_id(id){
+			return "";
+		}
+		Gift_avatar(id){
+			const obj = new this.$.$mol_avatar();
+			(obj.id) = () => ((this.peer_id(id)));
+			return obj;
+		}
+		Gift_name(id){
+			const obj = new this.$.$giper_baza_link_chip();
+			(obj.param) = () => ((this.link_param()));
+			(obj.link) = () => ((this.peer_link(id)));
+			(obj.sub) = () => ([...(this.$.$giper_baza_link_chip.prototype.sub.call(obj)), (this.Gift_avatar(id))]);
+			return obj;
+		}
+		Gift(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Gift_rate(id)), 
+				(this.Gift_tier(id)), 
+				(this.Gift_name(id))
+			]);
+			return obj;
+		}
+		gifts(){
+			return [(this.Gift("0"))];
+		}
+		land(){
+			const obj = new this.$.$giper_baza_land();
+			return obj;
+		}
+		rows(){
+			return [(this.Add()), ...(this.gifts())];
+		}
+	};
+	($mol_mem(($.$giper_baza_land_rights.prototype), "add_key"));
+	($mol_mem(($.$giper_baza_land_rights.prototype), "add_commit"));
+	($mol_mem(($.$giper_baza_land_rights.prototype), "Add_key"));
+	($mol_mem(($.$giper_baza_land_rights.prototype), "Add_commit_icon"));
+	($mol_mem(($.$giper_baza_land_rights.prototype), "Add_commit"));
+	($mol_mem(($.$giper_baza_land_rights.prototype), "Add"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "gift_rate"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_rate"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "gift_tier"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_tier"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "peer_link"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_avatar"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_name"));
+	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift"));
+	($mol_mem(($.$giper_baza_land_rights.prototype), "land"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $giper_baza_land_rights extends $.$giper_baza_land_rights {
+            rows() {
+                if (this.enabled())
+                    return super.rows();
+                else
+                    return this.gifts();
+            }
+            gifts() {
+                const land = this.land();
+                return [...land._gift.keys()]
+                    .filter(link => link !== land.link().lord().str)
+                    .reverse()
+                    .map(link => this.Gift(new $giper_baza_link(link)));
+            }
+            peer_link(lord) {
+                return lord;
+            }
+            peer_id(lord) {
+                return lord.str;
+            }
+            gift_tier(lord, next) {
+                const rank = this.land().lord_rank(lord, next && $giper_baza_rank_make(next, 'just'));
+                return $giper_baza_rank_tier[rank & 0b0_1111_0000];
+            }
+            gift_rate(lord, next) {
+                const arg = next ? $giper_baza_rank(this.land().lord_rank(lord) & 0b0_1111_0000 | parseInt(next, 16)) : undefined;
+                const rank = this.land().lord_rank(lord, arg);
+                return (rank & 0b1111).toString(16).toUpperCase();
+            }
+            add_commit() {
+                let key = this.add_key();
+                if (/^\w{8}_\w{8}$/.test(key)) {
+                    const link = new $giper_baza_link(key);
+                    const peer_land = this.$.$giper_baza_glob.Land(link);
+                    const pass = peer_land.lord_pass(link);
+                    if (!pass)
+                        return $mol_fail(new Error('No Pass for Lord'));
+                    this.land().give(pass, $giper_baza_rank_read);
+                }
+                else {
+                    const pass = $giper_baza_auth_pass.from(key);
+                    this.land().give(pass, $giper_baza_rank_read);
+                }
+                this.add_key('');
+            }
+            tier_options() {
+                if (this.land().encrypted())
+                    return super.tier_options();
+                const options = { ...super.tier_options() };
+                delete options.deny;
+                return options;
+            }
+            enabled() {
+                return this.land().lord_rank(this.land().auth().pass().lord()) >= $giper_baza_rank_rule;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $giper_baza_land_rights.prototype, "rows", null);
+        __decorate([
+            $mol_mem
+        ], $giper_baza_land_rights.prototype, "gifts", null);
+        __decorate([
+            $mol_mem_key
+        ], $giper_baza_land_rights.prototype, "gift_tier", null);
+        __decorate([
+            $mol_mem_key
+        ], $giper_baza_land_rights.prototype, "gift_rate", null);
+        __decorate([
+            $mol_mem
+        ], $giper_baza_land_rights.prototype, "tier_options", null);
+        __decorate([
+            $mol_mem
+        ], $giper_baza_land_rights.prototype, "enabled", null);
+        $$.$giper_baza_land_rights = $giper_baza_land_rights;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($giper_baza_land_rights, {
+            gap: $mol_gap.block,
+            Gift: {
+                flex: {
+                    wrap: 'wrap',
+                },
+                background: {
+                    color: $mol_theme.card,
+                },
+            },
+            Gift_name: {
+                flex: {
+                    grow: 1,
+                },
+            },
+            Gift_tier: {
+                flex: {
+                    grow: 0,
+                    basis: `7em`,
+                },
+                font: {
+                    family: 'monospace',
+                },
+            },
+            Gift_rate: {
+                flex: {
+                    grow: 0,
+                    basis: `8em`,
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
 
 
@@ -18989,97 +19368,6 @@ var $;
 ;
 "use strict";
 
-
-;
-	($.$giper_baza_link_chip) = class $giper_baza_link_chip extends ($.$mol_link) {
-		icon(){
-			return "";
-		}
-		param(){
-			return "link";
-		}
-		link(){
-			const obj = new this.$.$giper_baza_link();
-			return obj;
-		}
-		sub(){
-			return [(this.icon()), (this.title())];
-		}
-	};
-	($mol_mem(($.$giper_baza_link_chip.prototype), "link"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $giper_baza_link_chip extends $.$giper_baza_link_chip {
-            subj() {
-                const link = this.link();
-                if (!link.str)
-                    return null;
-                return this.$.$giper_baza_glob.Pawn(link, $giper_baza_flex_subj);
-            }
-            meta() {
-                const link = this.subj()?.meta();
-                if (!link)
-                    return null;
-                return this.$.$giper_baza_glob.Pawn(link, $giper_baza_flex_meta);
-            }
-            icon() {
-                return (this.subj()?.icon() || '💠') + ' ';
-            }
-            title() {
-                const link = this.link();
-                if (!link.str)
-                    return '______every______';
-                return this.subj()?.name() || link.str;
-            }
-            hint() {
-                return this.subj()?.hint() ?? '';
-            }
-            arg() {
-                return { [this.param()]: this.link().str };
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $giper_baza_link_chip.prototype, "subj", null);
-        __decorate([
-            $mol_mem
-        ], $giper_baza_link_chip.prototype, "meta", null);
-        __decorate([
-            $mol_mem
-        ], $giper_baza_link_chip.prototype, "icon", null);
-        __decorate([
-            $mol_mem
-        ], $giper_baza_link_chip.prototype, "title", null);
-        __decorate([
-            $mol_mem
-        ], $giper_baza_link_chip.prototype, "arg", null);
-        $$.$giper_baza_link_chip = $giper_baza_link_chip;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($giper_baza_link_chip, {
-            font: {
-                family: 'monospace',
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
 
 ;
 	($.$mol_icon_link) = class $mol_icon_link extends ($.$mol_icon) {
@@ -21762,18 +22050,6 @@ var $;
 (function ($) {
     $mol_style_attach("mol/check/expand/expand.view.css", "[mol_check_expand] {\n\tmin-width: 20px;\n}\n\n:where([mol_check_expand][disabled]) [mol_check_expand_icon] {\n\tvisibility: hidden;\n}\n\n[mol_check_expand_icon] {\n\tbox-shadow: none;\n\tmargin-inline-start: -0.375rem;\n}\n[mol_check_expand_icon] {\n\ttransform: rotateZ(0deg);\n}\n\n:where([mol_check_checked]) [mol_check_expand_icon] {\n\ttransform: rotateZ(90deg);\n}\n\n[mol_check_expand_icon] {\n\tvertical-align: text-top;\n}\n\n[mol_check_expand_label] {\n\tmargin-inline-start: 0;\n}\n");
 })($ || ($ = {}));
-
-;
-	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
-		path(){
-			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
-		}
-	};
-
-
-;
-"use strict";
-
 
 ;
 	($.$mol_drag) = class $mol_drag extends ($.$mol_ghost) {
@@ -26535,282 +26811,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$giper_baza_land_rights) = class $giper_baza_land_rights extends ($.$mol_list) {
-		add_key(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		add_commit(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		enabled(){
-			return false;
-		}
-		Add_key(){
-			const obj = new this.$.$mol_string();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$giper_baza_land_rights_Add_key_hint")));
-			(obj.value) = (next) => ((this.add_key(next)));
-			(obj.submit) = (next) => ((this.add_commit(next)));
-			(obj.enabled) = () => ((this.enabled()));
-			return obj;
-		}
-		Add_commit_icon(){
-			const obj = new this.$.$mol_icon_plus();
-			return obj;
-		}
-		Add_commit(){
-			const obj = new this.$.$mol_button_minor();
-			(obj.click) = (next) => ((this.add_commit(next)));
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.sub) = () => ([(this.Add_commit_icon())]);
-			return obj;
-		}
-		Add(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Add_key()), (this.Add_commit())]);
-			return obj;
-		}
-		gift_rate(id, next){
-			if(next !== undefined) return next;
-			return "0";
-		}
-		Gift_rate(id){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$giper_baza_land_rights_Gift_rate_hint")));
-			(obj.value) = (next) => ((this.gift_rate(id, next)));
-			(obj.enabled) = () => ((this.enabled()));
-			(obj.Filter) = () => (null);
-			(obj.dictionary) = () => ({
-				"0": "0 🦼 ~1W", 
-				"1": "1 🚲 ~3D", 
-				"2": "2 🛵 ~1D", 
-				"3": "3 🚜 ~D/2", 
-				"4": "4 🏇 ~8h", 
-				"5": "5 🚂 ~4h", 
-				"6": "6 🚛 ~2h", 
-				"7": "7 🚗 ~1h", 
-				"8": "8 🏍️ ~h/2", 
-				"9": "9 🏎️ ~5m", 
-				"A": "A 🚅 ~2m", 
-				"B": "B 🚁 ~m/2", 
-				"C": "C 🛩️ ~2s", 
-				"D": "D ✈️ ~s/2", 
-				"E": "E 🚀 ~50ms", 
-				"F": "F 🛸 ~1ms"
-			});
-			return obj;
-		}
-		gift_tier(id, next){
-			if(next !== undefined) return next;
-			return "deny";
-		}
-		tier_options(){
-			return {
-				"deny": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_deny")), 
-				"read": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_read")), 
-				"post": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_post")), 
-				"pull": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_pull")), 
-				"rule": (this.$.$mol_locale.text("$giper_baza_land_rights_tier_options_rule"))
-			};
-		}
-		Gift_tier(id){
-			const obj = new this.$.$mol_select();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$giper_baza_land_rights_Gift_tier_hint")));
-			(obj.value) = (next) => ((this.gift_tier(id, next)));
-			(obj.Filter) = () => (null);
-			(obj.dictionary) = () => ((this.tier_options()));
-			(obj.enabled) = () => ((this.enabled()));
-			return obj;
-		}
-		link_param(){
-			return "link";
-		}
-		peer_link(id){
-			const obj = new this.$.$giper_baza_link();
-			return obj;
-		}
-		peer_id(id){
-			return "";
-		}
-		Gift_avatar(id){
-			const obj = new this.$.$mol_avatar();
-			(obj.id) = () => ((this.peer_id(id)));
-			return obj;
-		}
-		Gift_name(id){
-			const obj = new this.$.$giper_baza_link_chip();
-			(obj.param) = () => ((this.link_param()));
-			(obj.link) = () => ((this.peer_link(id)));
-			(obj.sub) = () => ([...(this.$.$giper_baza_link_chip.prototype.sub.call(obj)), (this.Gift_avatar(id))]);
-			return obj;
-		}
-		Gift(id){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Gift_rate(id)), 
-				(this.Gift_tier(id)), 
-				(this.Gift_name(id))
-			]);
-			return obj;
-		}
-		gifts(){
-			return [(this.Gift("0"))];
-		}
-		land(){
-			const obj = new this.$.$giper_baza_land();
-			return obj;
-		}
-		rows(){
-			return [(this.Add()), ...(this.gifts())];
-		}
-	};
-	($mol_mem(($.$giper_baza_land_rights.prototype), "add_key"));
-	($mol_mem(($.$giper_baza_land_rights.prototype), "add_commit"));
-	($mol_mem(($.$giper_baza_land_rights.prototype), "Add_key"));
-	($mol_mem(($.$giper_baza_land_rights.prototype), "Add_commit_icon"));
-	($mol_mem(($.$giper_baza_land_rights.prototype), "Add_commit"));
-	($mol_mem(($.$giper_baza_land_rights.prototype), "Add"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "gift_rate"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_rate"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "gift_tier"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_tier"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "peer_link"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_avatar"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift_name"));
-	($mol_mem_key(($.$giper_baza_land_rights.prototype), "Gift"));
-	($mol_mem(($.$giper_baza_land_rights.prototype), "land"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $giper_baza_land_rights extends $.$giper_baza_land_rights {
-            rows() {
-                if (this.enabled())
-                    return super.rows();
-                else
-                    return this.gifts();
-            }
-            gifts() {
-                const land = this.land();
-                return [...land._gift.keys()]
-                    .filter(link => link !== land.link().lord().str)
-                    .reverse()
-                    .map(link => this.Gift(new $giper_baza_link(link)));
-            }
-            peer_link(lord) {
-                return lord;
-            }
-            peer_id(lord) {
-                return lord.str;
-            }
-            gift_tier(lord, next) {
-                const rank = this.land().lord_rank(lord, next && $giper_baza_rank_make(next, 'just'));
-                return $giper_baza_rank_tier[rank & 0b0_1111_0000];
-            }
-            gift_rate(lord, next) {
-                const arg = next ? $giper_baza_rank(this.land().lord_rank(lord) & 0b0_1111_0000 | parseInt(next, 16)) : undefined;
-                const rank = this.land().lord_rank(lord, arg);
-                return (rank & 0b1111).toString(16).toUpperCase();
-            }
-            add_commit() {
-                let key = this.add_key();
-                if (/^\w{8}_\w{8}$/.test(key)) {
-                    const link = new $giper_baza_link(key);
-                    const peer_land = this.$.$giper_baza_glob.Land(link);
-                    const pass = peer_land.lord_pass(link);
-                    if (!pass)
-                        return $mol_fail(new Error('No Pass for Lord'));
-                    this.land().give(pass, $giper_baza_rank_read);
-                }
-                else {
-                    const pass = $giper_baza_auth_pass.from(key);
-                    this.land().give(pass, $giper_baza_rank_read);
-                }
-                this.add_key('');
-            }
-            tier_options() {
-                if (this.land().encrypted())
-                    return super.tier_options();
-                const options = { ...super.tier_options() };
-                delete options.deny;
-                return options;
-            }
-            enabled() {
-                return this.land().lord_rank(this.land().auth().pass().lord()) >= $giper_baza_rank_rule;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $giper_baza_land_rights.prototype, "rows", null);
-        __decorate([
-            $mol_mem
-        ], $giper_baza_land_rights.prototype, "gifts", null);
-        __decorate([
-            $mol_mem_key
-        ], $giper_baza_land_rights.prototype, "gift_tier", null);
-        __decorate([
-            $mol_mem_key
-        ], $giper_baza_land_rights.prototype, "gift_rate", null);
-        __decorate([
-            $mol_mem
-        ], $giper_baza_land_rights.prototype, "tier_options", null);
-        __decorate([
-            $mol_mem
-        ], $giper_baza_land_rights.prototype, "enabled", null);
-        $$.$giper_baza_land_rights = $giper_baza_land_rights;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($giper_baza_land_rights, {
-            gap: $mol_gap.block,
-            Gift: {
-                flex: {
-                    wrap: 'wrap',
-                },
-                background: {
-                    color: $mol_theme.card,
-                },
-            },
-            Gift_name: {
-                flex: {
-                    grow: 1,
-                },
-            },
-            Gift_tier: {
-                flex: {
-                    grow: 0,
-                    basis: `7em`,
-                },
-                font: {
-                    family: 'monospace',
-                },
-            },
-            Gift_rate: {
-                flex: {
-                    grow: 0,
-                    basis: `8em`,
-                },
-            },
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$giper_baza_glob_book) = class $giper_baza_glob_book extends ($.$mol_book2_catalog) {
 		home_link(){
 			return "";
@@ -30516,6 +30516,14 @@ var $;
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Account_label_title")));
 			return obj;
 		}
+		account_lord(){
+			return "";
+		}
+		Account_lord(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.account_lord()));
+			return obj;
+		}
 		account_id(){
 			return "";
 		}
@@ -30532,24 +30540,12 @@ var $;
 			(obj.title) = () => ((this.debug_info()));
 			return obj;
 		}
-		grant_draft(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Grant_input(){
-			const obj = new this.$.$mol_string();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Grant_input_hint")));
-			(obj.value) = (next) => ((this.grant_draft(next)));
-			return obj;
-		}
-		grant(next){
-			if(next !== undefined) return next;
+		catalog_land(){
 			return null;
 		}
-		Grant_submit(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Grant_submit_title")));
-			(obj.click) = (next) => ((this.grant(next)));
+		Rights(){
+			const obj = new this.$.$giper_baza_land_rights();
+			(obj.land) = () => ((this.catalog_land()));
 			return obj;
 		}
 		social_link(next){
@@ -30685,10 +30681,10 @@ var $;
 		body(){
 			return [
 				(this.Account_label()), 
+				(this.Account_lord()), 
 				(this.Account_id()), 
 				(this.Debug_info()), 
-				(this.Grant_input()), 
-				(this.Grant_submit()), 
+				(this.Rights()), 
 				(this.Social_link()), 
 				(this.Social_text()), 
 				(this.Category_input()), 
@@ -30704,12 +30700,10 @@ var $;
 	};
 	($mol_mem(($.$bog_nka_settings.prototype), "Sync"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_label"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Account_lord"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_id"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Debug_info"));
-	($mol_mem(($.$bog_nka_settings.prototype), "grant_draft"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Grant_input"));
-	($mol_mem(($.$bog_nka_settings.prototype), "grant"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Grant_submit"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Rights"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_text"));
@@ -31363,6 +31357,9 @@ var $;
             account_id() {
                 return this.$.$giper_baza_auth.current().pass().toString();
             }
+            account_lord() {
+                return this.$.$giper_baza_auth.current().pass().lord().str;
+            }
             catalog() {
                 const land = this.catalog_land();
                 return land?.Data($bog_nka_catalog) ?? null;
@@ -31390,52 +31387,6 @@ var $;
             }
             debug_info() {
                 return `Rank: ${this.debug_rank()}; Products: ${this.products_total()} (${this.products_available()} available)`;
-            }
-            grant_draft(next) {
-                return next ?? '';
-            }
-            async grant(id = this.grant_draft()) {
-                const raw = typeof id === 'string' ? id : this.grant_draft();
-                const id_str = raw.trim();
-                const land = this.catalog_land();
-                console.log('[grant] click', {
-                    id: id_str,
-                    catalog_link: this.catalog_link(),
-                    land: land?.link().str,
-                });
-                if (!land || !id_str)
-                    return;
-                let pass = null;
-                try {
-                    const candidate = $giper_baza_auth_pass.from(id_str);
-                    console.log('[grant] parsed pass', id_str.length, {
-                        bytes: candidate.byteLength,
-                        first_byte: candidate.uint8(0),
-                        lord: candidate.lord().str,
-                    });
-                    if (candidate.uint8(0) === 0xFF)
-                        pass = candidate;
-                }
-                catch (e) {
-                    console.warn('[grant] cannot parse account id', id_str, String(e));
-                    pass = null;
-                }
-                if (!pass) {
-                    console.warn('[grant] invalid account id, abort', id_str);
-                    return;
-                }
-                try {
-                    land.give(pass, $giper_baza_rank_rule);
-                    console.log('[grant] gave', {
-                        pass_lord: pass.lord().str,
-                        their_rank: land.lord_rank(pass.lord()),
-                    });
-                }
-                catch (e) {
-                    console.warn('[grant] give failed', String(e));
-                    return;
-                }
-                this.grant_draft('');
             }
             categories_text() {
                 return this.catalog()?.Categories()?.items().join(', ') ?? '';
@@ -31526,12 +31477,6 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_nka_settings.prototype, "products_available", null);
-        __decorate([
-            $mol_mem
-        ], $bog_nka_settings.prototype, "grant_draft", null);
-        __decorate([
-            $mol_action
-        ], $bog_nka_settings.prototype, "grant", null);
         __decorate([
             $mol_mem
         ], $bog_nka_settings.prototype, "category_draft", null);
@@ -31798,11 +31743,27 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
-		minimal_height(){
-			return 120;
+		event_scroll(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		index(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		scroll_x(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		mouse_x(next){
+			if(next !== undefined) return next;
+			return 0;
 		}
 		auto_scroll(){
 			return true;
+		}
+		minimal_height(){
+			return 120;
 		}
 		ids(){
 			return [];
@@ -31811,12 +31772,20 @@ var $;
 			return (this.images());
 		}
 		event(){
-			return {...(super.event()), "mousemove": (next) => (this.event_move(next))};
+			return {
+				...(super.event()), 
+				"mousemove": (next) => (this.event_move(next)), 
+				"scroll": (next) => (this.event_scroll(next))
+			};
 		}
 	};
 	($mol_mem_key(($.$yuf_carousel.prototype), "Empty"));
 	($mol_mem_key(($.$yuf_carousel.prototype), "Image"));
 	($mol_mem(($.$yuf_carousel.prototype), "event_move"));
+	($mol_mem(($.$yuf_carousel.prototype), "event_scroll"));
+	($mol_mem(($.$yuf_carousel.prototype), "index"));
+	($mol_mem(($.$yuf_carousel.prototype), "scroll_x"));
+	($mol_mem(($.$yuf_carousel.prototype), "mouse_x"));
 
 
 ;
@@ -31830,39 +31799,50 @@ var $;
     var $$;
     (function ($$) {
         class $yuf_carousel extends $.$yuf_carousel {
-            mouse_pos(next) {
-                return next ?? null;
-            }
             event_move(e) {
                 if (!e)
                     return null;
                 if (!this.auto_scroll())
                     return null;
-                this.mouse_pos([e.pageX, e.pageY]);
+                this.mouse_x(e.pageX);
             }
-            part_size() {
-                return 1 / (this.ids().length || 1);
-            }
-            selected_index() {
-                const r = this.view_rect();
-                const [x, y] = this.mouse_pos() ?? [];
-                if (!r || x === undefined || y === undefined)
-                    return 0;
-                const part = (x - r.left) / r.width;
-                return Math.floor(part / this.part_size());
-            }
-            switched() {
-                const index = this.selected_index();
+            part_size() { return 1 / (this.ids().length || 1); }
+            mouse_index() {
                 const r = this.view_rect();
                 if (!r)
                     return null;
-                const left = r.width * index;
-                this.dom_node().scrollTo({ left });
+                const x = this.mouse_x();
+                if (!x)
+                    return null;
+                const part = (x - r.left) / r.width;
+                return Math.floor(part / this.part_size());
+            }
+            scroll_x(next, cache) {
+                const node = this.dom_node();
+                if ((next || next === 0) && !cache)
+                    node.scrollTo({ left: next });
+                return next ?? node.scrollLeft;
+            }
+            event_scroll(next) { this.scroll_x(null, 'cache'); }
+            width() { return this.view_rect()?.width ?? 0; }
+            index(next) {
+                if (next !== undefined)
+                    next = Math.max(Math.min(this.ids().length - 1, next), 0);
+                const width = this.width();
+                const x = this.scroll_x(next === undefined ? next : width * next);
+                const index = width > 0 ? Math.round(x / width) : 0;
                 return index;
+            }
+            mouse_index_sync(next) {
+                const mouse_index = this.mouse_index();
+                if (mouse_index === null)
+                    return 0;
+                const index = next ?? mouse_index;
+                return this.index(index);
             }
             auto() {
                 try {
-                    this.switched();
+                    this.mouse_index_sync();
                 }
                 catch (e) {
                     $mol_fail_log(e);
@@ -31879,16 +31859,16 @@ var $;
         }
         __decorate([
             $mol_mem
-        ], $yuf_carousel.prototype, "mouse_pos", null);
+        ], $yuf_carousel.prototype, "mouse_index", null);
         __decorate([
             $mol_mem
-        ], $yuf_carousel.prototype, "part_size", null);
+        ], $yuf_carousel.prototype, "scroll_x", null);
         __decorate([
             $mol_mem
-        ], $yuf_carousel.prototype, "selected_index", null);
+        ], $yuf_carousel.prototype, "index", null);
         __decorate([
             $mol_mem
-        ], $yuf_carousel.prototype, "switched", null);
+        ], $yuf_carousel.prototype, "mouse_index_sync", null);
         __decorate([
             $mol_mem
         ], $yuf_carousel.prototype, "images", null);
@@ -32401,7 +32381,7 @@ var $;
                 const ids = this.photo_ids();
                 if (!ids.length)
                     return;
-                const index = this.Photos().selected_index();
+                const index = this.Photos().index();
                 const link = ids[index];
                 if (!link)
                     return;
