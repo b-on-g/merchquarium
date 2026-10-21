@@ -1,9 +1,7 @@
 services:
 
   nka:
-    build:
-      context: ../../../..
-      dockerfile: bog/nka/seo/run/Dockerfile
+    build: .
     environment:
       BOG_NKA_SEO_ORIGIN: https://${NKA_DOMAIN}
     logging:

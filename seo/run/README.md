@@ -11,17 +11,21 @@
 
 ## Сборка
 
-Из корня MAM:
+Из корня MAM собрать приложение и сервер, затем сложить их в `dist` рядом с `Dockerfile`: сначала бандл приложения, поверх него бандл сервера (его `node.js` и `package.json` главнее).
 
 ```
 npx mam bog/nka/app bog/nka/seo/run
+rsync -a --delete --exclude '.baza' --exclude '*.map' --exclude '*test*' bog/nka/app/- bog/nka/seo/run/dist
+rsync -a --exclude '.baza' --exclude '*.map' bog/nka/seo/run/-/ bog/nka/seo/run/dist
 ```
 
 ## Запуск рядом с Базой (caddy-docker-proxy)
 
+На сервере в папке с `Dockerfile`, `docker-compose.yml` и `dist`:
+
 ```
-echo NKA_DOMAIN=cmyser-ru-nka.91.188.212.151.ip.giper.dev >> /etc/environment
-docker compose -f bog/nka/seo/run/docker-compose.yml up -d --build
+echo NKA_DOMAIN=cmyser-ru-nka.91.188.212.151.ip.giper.dev | sudo tee -a /etc/environment
+docker compose up -d --build
 ```
 
 После запуска прописать адрес в `bog/nka/app/app.view.tree`: `seo_server \https://<NKA_DOMAIN>/`.
