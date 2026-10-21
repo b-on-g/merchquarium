@@ -1,0 +1,23 @@
+services:
+
+  nka:
+    build:
+      context: ../../../..
+      dockerfile: bog/nka/seo/run/Dockerfile
+    environment:
+      BOG_NKA_SEO_ORIGIN: https://${NKA_DOMAIN}
+    logging:
+      driver: "local"
+    volumes:
+      - nka_public:/nka/.baza
+      - nka_private:/root/.local/share/mol_state_local
+    restart: unless-stopped
+    network_mode: host
+    labels:
+      caddy: ${NKA_DOMAIN}
+      caddy.encode: zstd gzip
+      caddy.reverse_proxy: ":9095"
+
+volumes:
+  nka_public:
+  nka_private:

@@ -177,7 +177,7 @@ namespace $.$$ {
 
 		
 		buy_title() {
-			return this.catalog()?.Social()?.val()?.trim()
+			return this.social_url()
 				? this.Buy_title()
 				: this.Social_missing_title()
 		}
@@ -200,45 +200,14 @@ namespace $.$$ {
 				const template = catalog.SocialText()?.val()
 					|| 'Добрый день, хотел бы приобрести {title}'
 				const message = template.replace(/\{title\}/g, this.title())
-				url.searchParams.set('text', message)
+				url.search = `?text=${ encodeURIComponent( message ) }`
 			}
 		
 			window.open(url.toString(), '_blank')
 		}
 
 		social_url(): URL | null {
-			const value = this.catalog()?.Social()?.val()?.trim() ?? ''
-			if (!value) return null
-		
-			try {
-				const url = new URL(value)
-				if (url.protocol !== 'https:' && url.protocol !== 'http:') return null
-				return url
-			} catch {
-				return null
-			}
-		}
-
-		cover() {
-			return [ this.photo_ids().length ? this.Photos() : this.Photo_empty() ]
-		}
-
-		info_rows() {
-			if( this.changed() ) return [ this.Title(), this.Price(), this.Description(), this.Category() ]
-			return [
-				this.Title(),
-				... this.price() ? [ this.Price_text() ] : [],
-				... this.description() ? [ this.Description_text() ] : [],
-				... this.category() ? [ this.Category_text() ] : [],
-			]
-		}
-
-		price_text() {
-			return `${ this.price().toLocaleString( 'ru-RU' ) } ₽`
-		}
-
-		category_text() {
-			return this.category() ?? ''
+			return $bog_nka_social_url( this.catalog()?.Social()?.val() ?? '' )
 		}
 
 		@ $mol_mem

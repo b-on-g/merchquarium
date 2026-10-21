@@ -15,6 +15,11 @@ namespace $ {
 			return this.$.$mol_state_local.value( 'bog_nka_seo_catalogs', next ) ?? []
 		}
 
+		land_link( text: string | null ) {
+			if( !text || !/^[\w-]{8}_[\w-]{8}$/.test( text.trim() ) ) return null
+			return $giper_baza_link.check( text.trim() )
+		}
+
 		remember( link: $giper_baza_link ) {
 			const known = this.known()
 			if( !known.includes( link.str ) ) this.known([ ... known, link.str ])
@@ -67,12 +72,13 @@ namespace $ {
 
 			if( uri.pathname === '/sitemap.xml' ) {
 				const urls = this.known()
-					.map( link => this.catalog( origin, new $giper_baza_link( link ) )?.url )
-					.filter( $mol_guard_defined )
+					.map( link => this.catalog( origin, new $giper_baza_link( link ) ) )
+					.filter( catalog => catalog?.products.length )
+					.map( catalog => catalog!.url )
 				return msg.reply( $bog_nka_seo_sitemap( urls ), { type: 'application/xml' } )
 			}
 
-			const link = $giper_baza_link.check( uri.searchParams.get( 'catalog' ) ?? '' )
+			const link = this.land_link( uri.searchParams.get( 'catalog' ) )
 			if( uri.pathname !== '/' || !link ) return super.GET( msg )
 
 			this.remember( link )
@@ -91,10 +97,10 @@ namespace $ {
 
 			msg.port.send_prop( 'access-control-allow-origin', '*' )
 
-			const link = $giper_baza_link.check( msg.text().trim() )
-			if( !link ) return msg.reply( null, { code: 400 } )
+			const link = this.land_link( msg.text() )
+			if( !link ) return msg.port.send_code( 400 )
 
-			if( this.$.$giper_baza_glob.Land( link ).encrypted() ) return msg.reply( null, { code: 403 } )
+			if( this.$.$giper_baza_glob.Land( link ).encrypted() ) return msg.port.send_code( 403 )
 
 			this.remember( link )
 			msg.reply( null )
