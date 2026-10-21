@@ -228,4 +228,5 @@
 \/giper/baza/file
 	include \/mol/offline/install
 \/bog/nka/app
+	include \/mol/offline/install
 	deploy \/bog/assets

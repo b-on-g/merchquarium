@@ -228,4 +228,5 @@
 	deploy \/giper/baza/diagram/network.png
 	deploy \/giper/baza/diagram/jepsen.png
 \/bog/nka/app
+	include \/mol/offline/install
 	deploy \/bog/assets
