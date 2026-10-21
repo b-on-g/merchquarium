@@ -6,16 +6,14 @@ $bog_nka_settings $mol_page
 	body /
 		<= Account_label $mol_paragraph
 			title @ \Your account id:
+		<= Account_lord $mol_paragraph
+			title <= account_lord \
 		<= Account_id $mol_button_copy
 			title <= account_id \
 		<= Debug_info $mol_paragraph
 			title <= debug_info \
-		<= Grant_input $mol_string
-			hint @ \Account id to grant rights
-			value? <=> grant_draft? \
-		<= Grant_submit $mol_button_major
-			title @ \Grant rights
-			click? <=> grant? null
+		<= Rights $giper_baza_land_rights
+			land <= catalog_land null
 		<= Social_link $mol_string
 			hint @ \social link
 			value? <=> social_link? \
