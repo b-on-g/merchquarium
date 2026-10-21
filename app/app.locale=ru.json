@@ -1,0 +1,11 @@
+{
+	"$bog_nka_app_Catalog_create_title": "Создать каталог",
+	"$bog_nka_app_Catalog_empty_title": "Товары скоро появятся",
+	"$bog_nka_app_Catalog_missing_text_title": "Каталог не выбран:",
+	"$bog_nka_app_Filter_all": "Все",
+	"$bog_nka_app_Product_add_title": "Добавить товар",
+	"$bog_nka_app_Product_undo_title": "Вернуть",
+	"$bog_nka_app_Return_title": "Назад",
+	"$bog_nka_app_Settings_title": "Настройки",
+	"$bog_nka_app_title": "Каталог"
+}

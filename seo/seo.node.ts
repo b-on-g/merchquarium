@@ -55,7 +55,7 @@ namespace $ {
 			return {
 				link: link.str,
 				url: `${ origin }/?catalog=${ link }`,
-				title: catalog.Title()?.val()?.trim() || 'Catalog',
+				title: catalog.Title()?.val()?.trim() || 'Каталог',
 				products,
 			}
 
