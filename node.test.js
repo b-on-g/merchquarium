@@ -6731,6 +6731,183 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_check_icon) = class $mol_check_icon extends ($.$mol_check) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/icon/icon.view.css", "[mol_check_icon]:where([mol_check_checked]) {\n\tcolor: var(--mol_theme_current);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_brightness_4) = class $mol_icon_brightness_4 extends ($.$mol_icon) {
+		path(){
+			return "M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_lights_toggle) = class $mol_lights_toggle extends ($.$mol_check_icon) {
+		Lights_icon(){
+			const obj = new this.$.$mol_icon_brightness_4();
+			return obj;
+		}
+		lights(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Icon(){
+			return (this.Lights_icon());
+		}
+		hint(){
+			return (this.$.$mol_locale.text("$mol_lights_toggle_hint"));
+		}
+		checked(next){
+			return (this.lights(next));
+		}
+	};
+	($mol_mem(($.$mol_lights_toggle.prototype), "Lights_icon"));
+	($mol_mem(($.$mol_lights_toggle.prototype), "lights"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Toggle for Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+         */
+        class $mol_lights_toggle extends $.$mol_lights_toggle {
+            lights(next) {
+                return this.$.$mol_lights(next);
+            }
+        }
+        $$.$mol_lights_toggle = $mol_lights_toggle;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_cog) = class $mol_icon_cog extends ($.$mol_icon) {
+		path(){
+			return "M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_arrow_left) = class $mol_icon_arrow_left extends ($.$mol_icon) {
+		path(){
+			return "M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
+		line_height(){
+			return 24;
+		}
+		letter_width(){
+			return 7;
+		}
+		width_limit(){
+			return +Infinity;
+		}
+		row_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_paragraph extends $.$mol_paragraph {
+            maximal_width() {
+                let width = 0;
+                const letter = this.letter_width();
+                for (const kid of this.sub()) {
+                    if (!kid)
+                        continue;
+                    if (kid instanceof $mol_view) {
+                        width += kid.maximal_width();
+                    }
+                    else if (typeof kid !== 'object') {
+                        width += String(kid).length * letter;
+                    }
+                }
+                return width;
+            }
+            width_limit() {
+                return this.$.$mol_window.size().width;
+            }
+            minimal_width() {
+                return this.letter_width();
+            }
+            row_width() {
+                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
+            }
+            minimal_height() {
+                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "maximal_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "row_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "minimal_height", null);
+        $$.$mol_paragraph = $mol_paragraph;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
 		option_checked(id, next){
 			if(next !== undefined) return next;
@@ -6929,237 +7106,14 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_check_icon) = class $mol_check_icon extends ($.$mol_check) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/icon/icon.view.css", "[mol_check_icon]:where([mol_check_checked]) {\n\tcolor: var(--mol_theme_current);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_brightness_4) = class $mol_icon_brightness_4 extends ($.$mol_icon) {
-		path(){
-			return "M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_lights_toggle) = class $mol_lights_toggle extends ($.$mol_check_icon) {
-		Lights_icon(){
-			const obj = new this.$.$mol_icon_brightness_4();
-			return obj;
-		}
-		lights(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		Icon(){
-			return (this.Lights_icon());
-		}
-		hint(){
-			return (this.$.$mol_locale.text("$mol_lights_toggle_hint"));
-		}
-		checked(next){
-			return (this.lights(next));
-		}
-	};
-	($mol_mem(($.$mol_lights_toggle.prototype), "Lights_icon"));
-	($mol_mem(($.$mol_lights_toggle.prototype), "lights"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Toggle for Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
-         */
-        class $mol_lights_toggle extends $.$mol_lights_toggle {
-            lights(next) {
-                return this.$.$mol_lights(next);
-            }
-        }
-        $$.$mol_lights_toggle = $mol_lights_toggle;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
-		line_height(){
-			return 24;
-		}
-		letter_width(){
-			return 7;
-		}
-		width_limit(){
-			return +Infinity;
-		}
-		row_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.title())];
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_paragraph extends $.$mol_paragraph {
-            maximal_width() {
-                let width = 0;
-                const letter = this.letter_width();
-                for (const kid of this.sub()) {
-                    if (!kid)
-                        continue;
-                    if (kid instanceof $mol_view) {
-                        width += kid.maximal_width();
-                    }
-                    else if (typeof kid !== 'object') {
-                        width += String(kid).length * letter;
-                    }
-                }
-                return width;
-            }
-            width_limit() {
-                return this.$.$mol_window.size().width;
-            }
-            minimal_width() {
-                return this.letter_width();
-            }
-            row_width() {
-                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
-            }
-            minimal_height() {
-                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "maximal_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "row_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "minimal_height", null);
-        $$.$mol_paragraph = $mol_paragraph;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_gallery) = class $mol_gallery extends ($.$mol_view) {
+	($.$bog_nka_gallery) = class $bog_nka_gallery extends ($.$mol_view) {
 		items(){
-			return [];
-		}
-		side_size(id){
-			return "1";
-		}
-		side_items(id){
 			return [];
 		}
 		sub(){
 			return (this.items());
 		}
-		Side(id){
-			const obj = new this.$.$mol_gallery();
-			(obj.style) = () => ({"flexGrow": (this.side_size(id))});
-			(obj.items) = () => ((this.side_items(id)));
-			return obj;
-		}
 	};
-	($mol_mem_key(($.$mol_gallery.prototype), "Side"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_gallery_demo
-         */
-        class $mol_gallery extends $.$mol_gallery {
-            sub() {
-                const items = this.items();
-                if (items.length <= 3)
-                    return items;
-                return [
-                    this.Side(0),
-                    this.Side(1),
-                ];
-            }
-            side_items(id) {
-                const items = this.items();
-                const middle = items.length % 2
-                    ? Math.ceil(items.length / 3)
-                    : items.length / 2;
-                return id
-                    ? items.slice(middle)
-                    : items.slice(0, middle);
-            }
-            side_size(id) {
-                return String(this.side_items(id).length);
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_gallery.prototype, "sub", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_gallery.prototype, "side_items", null);
-        $$.$mol_gallery = $mol_gallery;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/gallery/gallery.view.css", "[mol_gallery] {\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\talign-items: stretch;\n    align-content: stretch;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$bog_nka_gallery) = class $bog_nka_gallery extends ($.$mol_gallery) {};
 
 
 ;
@@ -7173,9 +7127,280 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_gallery, {
-            alignItems: 'flex-start',
+            display: 'grid',
+            gridTemplateColumns: 'repeat( auto-fill, minmax( min( 16rem, 100% ), 1fr ) )',
+            gap: $mol_gap.block,
+            padding: $mol_gap.block,
+            alignItems: 'start',
         });
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_list) = class $mol_list extends ($.$mol_view) {
+		gap_before(){
+			return 0;
+		}
+		Gap_before(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_before())});
+			return obj;
+		}
+		Empty(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		gap_after(){
+			return 0;
+		}
+		Gap_after(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_after())});
+			return obj;
+		}
+		rows(){
+			return [
+				(this.Gap_before()), 
+				(this.Empty()), 
+				(this.Gap_after())
+			];
+		}
+		render_visible_only(){
+			return true;
+		}
+		render_over(){
+			return 0.1;
+		}
+		sub(){
+			return (this.rows());
+		}
+		item_height_min(id){
+			return 1;
+		}
+		item_width_min(id){
+			return 1;
+		}
+		view_window_shift(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		view_window(){
+			return [0, 0];
+		}
+	};
+	($mol_mem(($.$mol_list.prototype), "Gap_before"));
+	($mol_mem(($.$mol_list.prototype), "Empty"));
+	($mol_mem(($.$mol_list.prototype), "Gap_after"));
+	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    let cache = null;
+    function $mol_support_css_overflow_anchor() {
+        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
+    }
+    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
+         * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
+         */
+        class $mol_list extends $.$mol_list {
+            sub() {
+                const rows = this.rows();
+                const next = (rows.length === 0) ? [this.Empty()] : rows;
+                const prev = $mol_mem_cached(() => this.sub());
+                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
+                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
+                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
+                    if (index >= 0)
+                        this.view_window_shift(index - start);
+                }
+                return next;
+            }
+            render_visible_only() {
+                return this.$.$mol_support_css_overflow_anchor();
+            }
+            _view_window_last = [0, 0];
+            view_window(next) {
+                const kids = this.sub();
+                if (kids.length < 3)
+                    return [0, kids.length];
+                if (this.$.$mol_print.active())
+                    return [0, kids.length];
+                const rect = this.view_rect();
+                if (next)
+                    return next;
+                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? this._view_window_last;
+                const shift = this.view_window_shift();
+                this.view_window_shift(0);
+                min += shift;
+                max += shift;
+                let max2 = max = Math.min(max, kids.length);
+                let min2 = min = Math.max(0, Math.min(min, max - 1));
+                const anchoring = this.render_visible_only();
+                const window_height = this.$.$mol_window.size().height + 40;
+                const over = Math.ceil(window_height * this.render_over());
+                const limit_top = -over;
+                const limit_bottom = window_height + over;
+                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
+                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
+                let top = Math.ceil(rect?.top ?? 0) + gap_before;
+                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
+                // change nothing when already covers all limits
+                if (top <= limit_top && bottom >= limit_bottom) {
+                    return [min2, max2];
+                }
+                // jumps when fully over limits
+                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
+                    min = 0;
+                    top = Math.ceil(rect?.top ?? 0);
+                    while (min < (kids.length - 1)) {
+                        const height = this.item_height_min(min);
+                        if (top + height >= limit_top)
+                            break;
+                        top += height;
+                        ++min;
+                    }
+                    min2 = min;
+                    max2 = max = min;
+                    bottom = top;
+                }
+                let top2 = top;
+                let bottom2 = bottom;
+                // force recalc min when overlapse top limit
+                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
+                    min2 = max;
+                    top2 = bottom;
+                }
+                // force recalc max when overlapse bottom limit
+                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
+                    max2 = min;
+                    bottom2 = top;
+                }
+                // extend min to cover top limit
+                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
+                    --min2;
+                    top2 -= this.item_height_min(min2);
+                }
+                // extend max to cover bottom limit
+                while (bottom2 < limit_bottom && max2 < kids.length) {
+                    bottom2 += this.item_height_min(max2);
+                    ++max2;
+                }
+                return [min2, max2];
+            }
+            item_height_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_height() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            row_width_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_width() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            gap_before() {
+                let gap = 0;
+                const skipped = this.view_window()[0];
+                for (let i = 0; i < skipped; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            gap_after() {
+                let gap = 0;
+                const from = this.view_window()[1];
+                const to = this.sub().length;
+                for (let i = from; i < to; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            sub_visible() {
+                return [
+                    ...this.gap_before() ? [this.Gap_before()] : [],
+                    ...this.sub().slice(...this._view_window_last = this.view_window()),
+                    ...this.gap_after() ? [this.Gap_after()] : [],
+                ];
+            }
+            minimal_height() {
+                let height = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    height += this.item_height_min(i);
+                return height;
+            }
+            minimal_width() {
+                let width = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    width = Math.max(width, this.item_width_min(i));
+                return width;
+            }
+            force_render(path) {
+                const kids = this.rows();
+                const index = kids.findIndex(item => path.has(item));
+                if (index >= 0) {
+                    const win = this.view_window();
+                    if (index < win[0] || index >= win[1]) {
+                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
+                    }
+                    kids[index].force_render(path);
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "view_window", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_before", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_after", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub_visible", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_height", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_width", null);
+        $$.$mol_list = $mol_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\t/* will-change: contents; */\n}\n\n[mol_list]:where([mol_view_error]) {\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -8210,273 +8435,6 @@ var $;
         }
         $$.$mol_nav = $mol_nav;
     })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_list) = class $mol_list extends ($.$mol_view) {
-		gap_before(){
-			return 0;
-		}
-		Gap_before(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_before())});
-			return obj;
-		}
-		Empty(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		gap_after(){
-			return 0;
-		}
-		Gap_after(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_after())});
-			return obj;
-		}
-		rows(){
-			return [
-				(this.Gap_before()), 
-				(this.Empty()), 
-				(this.Gap_after())
-			];
-		}
-		render_visible_only(){
-			return true;
-		}
-		render_over(){
-			return 0.1;
-		}
-		sub(){
-			return (this.rows());
-		}
-		item_height_min(id){
-			return 1;
-		}
-		item_width_min(id){
-			return 1;
-		}
-		view_window_shift(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		view_window(){
-			return [0, 0];
-		}
-	};
-	($mol_mem(($.$mol_list.prototype), "Gap_before"));
-	($mol_mem(($.$mol_list.prototype), "Empty"));
-	($mol_mem(($.$mol_list.prototype), "Gap_after"));
-	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    let cache = null;
-    function $mol_support_css_overflow_anchor() {
-        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
-    }
-    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
-         * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
-         */
-        class $mol_list extends $.$mol_list {
-            sub() {
-                const rows = this.rows();
-                const next = (rows.length === 0) ? [this.Empty()] : rows;
-                const prev = $mol_mem_cached(() => this.sub());
-                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
-                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
-                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
-                    if (index >= 0)
-                        this.view_window_shift(index - start);
-                }
-                return next;
-            }
-            render_visible_only() {
-                return this.$.$mol_support_css_overflow_anchor();
-            }
-            _view_window_last = [0, 0];
-            view_window(next) {
-                const kids = this.sub();
-                if (kids.length < 3)
-                    return [0, kids.length];
-                if (this.$.$mol_print.active())
-                    return [0, kids.length];
-                const rect = this.view_rect();
-                if (next)
-                    return next;
-                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? this._view_window_last;
-                const shift = this.view_window_shift();
-                this.view_window_shift(0);
-                min += shift;
-                max += shift;
-                let max2 = max = Math.min(max, kids.length);
-                let min2 = min = Math.max(0, Math.min(min, max - 1));
-                const anchoring = this.render_visible_only();
-                const window_height = this.$.$mol_window.size().height + 40;
-                const over = Math.ceil(window_height * this.render_over());
-                const limit_top = -over;
-                const limit_bottom = window_height + over;
-                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
-                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
-                let top = Math.ceil(rect?.top ?? 0) + gap_before;
-                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
-                // change nothing when already covers all limits
-                if (top <= limit_top && bottom >= limit_bottom) {
-                    return [min2, max2];
-                }
-                // jumps when fully over limits
-                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
-                    min = 0;
-                    top = Math.ceil(rect?.top ?? 0);
-                    while (min < (kids.length - 1)) {
-                        const height = this.item_height_min(min);
-                        if (top + height >= limit_top)
-                            break;
-                        top += height;
-                        ++min;
-                    }
-                    min2 = min;
-                    max2 = max = min;
-                    bottom = top;
-                }
-                let top2 = top;
-                let bottom2 = bottom;
-                // force recalc min when overlapse top limit
-                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
-                    min2 = max;
-                    top2 = bottom;
-                }
-                // force recalc max when overlapse bottom limit
-                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
-                    max2 = min;
-                    bottom2 = top;
-                }
-                // extend min to cover top limit
-                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
-                    --min2;
-                    top2 -= this.item_height_min(min2);
-                }
-                // extend max to cover bottom limit
-                while (bottom2 < limit_bottom && max2 < kids.length) {
-                    bottom2 += this.item_height_min(max2);
-                    ++max2;
-                }
-                return [min2, max2];
-            }
-            item_height_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_height() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            row_width_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_width() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            gap_before() {
-                let gap = 0;
-                const skipped = this.view_window()[0];
-                for (let i = 0; i < skipped; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            gap_after() {
-                let gap = 0;
-                const from = this.view_window()[1];
-                const to = this.sub().length;
-                for (let i = from; i < to; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            sub_visible() {
-                return [
-                    ...this.gap_before() ? [this.Gap_before()] : [],
-                    ...this.sub().slice(...this._view_window_last = this.view_window()),
-                    ...this.gap_after() ? [this.Gap_after()] : [],
-                ];
-            }
-            minimal_height() {
-                let height = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    height += this.item_height_min(i);
-                return height;
-            }
-            minimal_width() {
-                let width = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    width = Math.max(width, this.item_width_min(i));
-                return width;
-            }
-            force_render(path) {
-                const kids = this.rows();
-                const index = kids.findIndex(item => path.has(item));
-                if (index >= 0) {
-                    const win = this.view_window();
-                    if (index < win[0] || index >= win[1]) {
-                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
-                    }
-                    kids[index].force_render(path);
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "view_window", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_before", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_after", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub_visible", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_height", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_width", null);
-        $$.$mol_list = $mol_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\t/* will-change: contents; */\n}\n\n[mol_list]:where([mol_view_error]) {\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -19587,6 +19545,99 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_section) = class $mol_section extends ($.$mol_list) {
+		title_dom_name(){
+			return "h1";
+		}
+		Title(){
+			const obj = new this.$.$mol_view();
+			(obj.dom_name) = () => ((this.title_dom_name()));
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		tools(){
+			return [];
+		}
+		Tools(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.tools()));
+			return obj;
+		}
+		head(){
+			return [(this.Title()), (this.Tools())];
+		}
+		Head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.head()));
+			return obj;
+		}
+		content(){
+			return [];
+		}
+		Content(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.content()));
+			return obj;
+		}
+		level(){
+			return 1;
+		}
+		rows(){
+			return [(this.Head()), (this.Content())];
+		}
+	};
+	($mol_mem(($.$mol_section.prototype), "Title"));
+	($mol_mem(($.$mol_section.prototype), "Tools"));
+	($mol_mem(($.$mol_section.prototype), "Head"));
+	($mol_mem(($.$mol_section.prototype), "Content"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * The component which contains head and content.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_section_demo
+         */
+        class $mol_section extends $.$mol_section {
+            title_dom_name() {
+                return 'h' + this.level();
+            }
+        }
+        $$.$mol_section = $mol_section;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/section/section.view.css", "[mol_section_head] {\n\tjustify-content: space-between;\n\talign-items: flex-end;\n\tflex-wrap: wrap;\n}\n\n[mol_section_title] {\n\tmargin: 0;\n\tpadding: var(--mol_gap_text);\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n}\n\n[mol_section_title]:where(h1) {\n\tfont-size: 1.5rem;\n}\n\n[mol_section_title]:where(h2) {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h3) {\n\tfont-size: 1.25rem;\n}\n\n[mol_section_title]:where(h4) {\n\tfont-size: 1.25rem;\n\tfont-style: italic;\n}\n\n[mol_section_title]:where(h5) {\n\tfont-size: 1rem;\n}\n\n[mol_section_title]:where(h6) {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
 	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
 		path(){
 			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
@@ -19966,21 +20017,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/row/row.view.css", "[mol_row] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\talign-items: flex-start;\n\talign-content: flex-start;\n\tjustify-content: flex-start;\n\tpadding: var(--mol_gap_block);\n\tgap: var(--mol_gap_block);\n\tflex: 0 0 auto;\n\tbox-sizing: border-box;\n\tmax-width: 100%;\n}\n\n[mol_row] > * {\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
 	($.$bog_nka_settings) = class $bog_nka_settings extends ($.$mol_page) {
 		Sync(){
 			const obj = new this.$.$giper_baza_status();
@@ -20007,20 +20043,14 @@ var $;
 			(obj.title) = () => ((this.account_id()));
 			return obj;
 		}
-		debug_info(){
-			return "";
-		}
-		Debug_info(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.debug_info()));
-			return obj;
-		}
-		catalog_land(){
-			return null;
-		}
-		Rights(){
-			const obj = new this.$.$giper_baza_land_rights();
-			(obj.land) = () => ((this.catalog_land()));
+		Account_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Account_section_title")));
+			(obj.content) = () => ([
+				(this.Account_label()), 
+				(this.Account_lord()), 
+				(this.Account_id())
+			]);
 			return obj;
 		}
 		social_link(next){
@@ -20043,6 +20073,12 @@ var $;
 			(obj.value) = (next) => ((this.social_text(next)));
 			return obj;
 		}
+		Sales_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Sales_section_title")));
+			(obj.content) = () => ([(this.Social_link()), (this.Social_text())]);
+			return obj;
+		}
 		category_draft(next){
 			if(next !== undefined) return next;
 			return "";
@@ -20063,12 +20099,48 @@ var $;
 			(obj.click) = (next) => ((this.category_add(next)));
 			return obj;
 		}
+		Category_form(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Category_input()), (this.Category_add())]);
+			return obj;
+		}
 		category_rows(){
 			return [];
 		}
 		Categories_list(){
-			const obj = new this.$.$mol_list();
-			(obj.rows) = () => ((this.category_rows()));
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.category_rows()));
+			return obj;
+		}
+		categories_content(){
+			return [(this.Category_form()), (this.Categories_list())];
+		}
+		Categories_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Categories_section_title")));
+			(obj.content) = () => ((this.categories_content()));
+			return obj;
+		}
+		debug_info(){
+			return "";
+		}
+		Debug_info(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.debug_info()));
+			return obj;
+		}
+		catalog_land(){
+			return null;
+		}
+		Rights(){
+			const obj = new this.$.$giper_baza_land_rights();
+			(obj.land) = () => ((this.catalog_land()));
+			return obj;
+		}
+		Access_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Access_section_title")));
+			(obj.content) = () => ([(this.Debug_info()), (this.Rights())]);
 			return obj;
 		}
 		category_title(id){
@@ -20079,13 +20151,18 @@ var $;
 			(obj.title) = () => ((this.category_title(id)));
 			return obj;
 		}
+		Category_remove_icon(id){
+			const obj = new this.$.$mol_icon_close();
+			return obj;
+		}
 		category_remove(id, next){
 			if(next !== undefined) return next;
 			return null;
 		}
 		Category_remove_button(id){
 			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_remove_button_title")));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_remove_button_hint")));
+			(obj.sub) = () => ([(this.Category_remove_icon(id))]);
 			(obj.click) = (next) => ((this.category_remove(id, next)));
 			return obj;
 		}
@@ -20155,16 +20232,10 @@ var $;
 		}
 		body(){
 			return [
-				(this.Account_label()), 
-				(this.Account_lord()), 
-				(this.Account_id()), 
-				(this.Debug_info()), 
-				(this.Rights()), 
-				(this.Social_link()), 
-				(this.Social_text()), 
-				(this.Category_input()), 
-				(this.Category_add()), 
-				(this.Categories_list())
+				(this.Account_section()), 
+				(this.Sales_section()), 
+				(this.Categories_section()), 
+				(this.Access_section())
 			];
 		}
 		Category_row(id){
@@ -20177,18 +20248,24 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_label"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_lord"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_id"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Debug_info"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Rights"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Account_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_text"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_text"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Sales_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "category_draft"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Category_input"));
 	($mol_mem(($.$bog_nka_settings.prototype), "category_add"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Category_add"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Category_form"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Categories_list"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Categories_section"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Debug_info"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Rights"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Access_section"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_title"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_remove_icon"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "category_remove"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_remove_button"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm_title"));
@@ -20273,12 +20350,12 @@ var $;
             body() {
                 if (this.is_admin())
                     return super.body();
-                return [
-                    this.Account_label(),
-                    this.Account_lord(),
-                    this.Account_id(),
-                    this.Categories_list(),
-                ];
+                return [this.Account_section(), this.Categories_section()];
+            }
+            categories_content() {
+                if (this.is_admin())
+                    return super.categories_content();
+                return [this.Categories_list()];
             }
             Category_remove(category) {
                 return this.is_admin() ? super.Category_remove(category) : null;
@@ -20422,11 +20499,45 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_settings, {
-            Category_row: {
-                alignItems: 'center',
+            Account_lord: {
+                font: {
+                    family: 'monospace',
+                    size: '1.25rem',
+                },
+            },
+            Category_form: {
                 flex: { wrap: 'nowrap' },
                 padding: 0,
                 gap: $mol_gap.block,
+            },
+            Category_input: {
+                flex: { grow: 1 },
+            },
+            Categories_list: {
+                flex: { wrap: 'wrap' },
+                gap: $mol_gap.block,
+                padding: {
+                    top: $mol_gap.block,
+                    bottom: $mol_gap.block,
+                },
+            },
+            Category_row: {
+                alignItems: 'center',
+                flex: { wrap: 'nowrap', grow: 0 },
+                padding: {
+                    top: 0,
+                    bottom: 0,
+                    left: '.75rem',
+                    right: 0,
+                },
+                gap: 0,
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                boxShadow: `inset 0 0 0 1px ${$mol_theme.line}`,
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
@@ -20497,21 +20608,6 @@ var $;
 (function ($) {
     $mol_style_attach("mol/card/card.view.css", "[mol_card] {\n\tbackground: var(--mol_theme_card);\n\tcolor: var(--mol_theme_text);\n\tborder-radius: var(--mol_gap_round);\n\tdisplay: flex;\n\tflex: 0 1 auto;\n\tflex-direction: column;\n\tposition: relative;\n\tbox-shadow: 0 0 0.5rem 0rem hsla(0,0%,0%,.125);\n\t/* overflow: hidden; */\n}\n\n[mol_card_content] {\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tmargin: 0;\n\tpadding: var(--mol_gap_block);\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n\tpadding: var(--mol_gap_text);\n\tmargin: 0;\n}\n\n[mol_card_status] {\n\tbackground: var(--mol_theme_line);\n}\n");
 })($ || ($ = {}));
-
-;
-	($.$mol_string_button) = class $mol_string_button extends ($.$mol_string) {};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/string/button/button.view.css", "[mol_string_button]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
 
 ;
 	($.$mol_icon_camera) = class $mol_icon_camera extends ($.$mol_icon) {
@@ -20649,14 +20745,18 @@ var $;
 		url(id){
 			return "";
 		}
+		url_error(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		Image(id){
-			const obj = new this.$.$mol_image();
-			(obj.minimal_height) = () => (120);
+			const obj = new this.$.$yuf_carousel_image();
 			(obj.uri) = () => ((this.url(id)));
+			(obj.error) = (next) => ((this.url_error(id, next)));
 			return obj;
 		}
 		images(){
-			return [(this.Empty("0")), (this.Image("0"))];
+			return [(this.Image("0"))];
 		}
 		event_move(next){
 			if(next !== undefined) return next;
@@ -20683,6 +20783,9 @@ var $;
 		ids(){
 			return [];
 		}
+		empty(id){
+			return [(this.Empty(id))];
+		}
 		sub(){
 			return (this.images());
 		}
@@ -20695,11 +20798,25 @@ var $;
 		}
 	};
 	($mol_mem_key(($.$yuf_carousel.prototype), "Empty"));
+	($mol_mem_key(($.$yuf_carousel.prototype), "url_error"));
 	($mol_mem_key(($.$yuf_carousel.prototype), "Image"));
 	($mol_mem(($.$yuf_carousel.prototype), "event_move"));
 	($mol_mem(($.$yuf_carousel.prototype), "event_scroll"));
 	($mol_mem(($.$yuf_carousel.prototype), "index"));
 	($mol_mem(($.$yuf_carousel.prototype), "scroll_x"));
+	($.$yuf_carousel_image) = class $yuf_carousel_image extends ($.$mol_image) {
+		error(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		minimal_height(){
+			return 120;
+		}
+		event(){
+			return {...(super.event()), "error": (next) => (this.error(next))};
+		}
+	};
+	($mol_mem(($.$yuf_carousel_image.prototype), "error"));
 
 
 ;
@@ -20779,11 +20896,11 @@ var $;
                 return index;
             }
             images() {
-                const items = this.ids().map(id => this.url_safe(id) ? this.Image(id) : this.Empty(id));
-                return items.length ? items : [this.Empty('0')];
+                const items = this.ids().map(id => this.url_safe(id) ? this.Image(id) : this.empty(id)?.[0]);
+                return items.length ? items : this.empty('0');
             }
             url_safe(id) {
-                return $mol_error_fence(() => this.url(id), e => e.message === $mol_rest_code[$mol_rest_code['Not Found']] ? '' : e);
+                return $mol_error_fence(() => this.url_error(id) ? '' : this.url(id), e => e.message === $mol_rest_code[$mol_rest_code['Not Found']] ? '' : e);
             }
             url(path) { return path; }
             auto() {
@@ -20849,6 +20966,14 @@ var $;
             },
             '>': {
                 $mol_view: {
+                    width: '100%',
+                    height: '100%',
+                    minHeight: 'auto',
+                    flex: {
+                        shrink: 0,
+                        grow: 0,
+                    },
+                    objectFit: 'contain',
                     scroll: {
                         snap: {
                             type: 'none',
@@ -20872,22 +20997,6 @@ var $;
                         },
                     },
                 },
-            },
-            alignItems: 'center',
-            Image: {
-                width: '100%',
-                height: '100%',
-                minHeight: 'auto',
-                flex: {
-                    shrink: 0,
-                    grow: 0,
-                },
-                objectFit: 'contain',
-            },
-            Empty: {
-                width: '100%',
-                height: '100%',
-                minHeight: 'auto',
             },
             minHeight: '5rem',
         });
@@ -20921,9 +21030,9 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_upload) = class $mol_icon_upload extends ($.$mol_icon) {
+	($.$mol_icon_image) = class $mol_icon_image extends ($.$mol_icon) {
 		path(){
-			return "M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z";
+			return "M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z";
 		}
 	};
 
@@ -20933,121 +21042,31 @@ var $;
 
 
 ;
-	($.$mol_button_open) = class $mol_button_open extends ($.$mol_button_minor) {
-		Icon(){
-			const obj = new this.$.$mol_icon_upload();
-			return obj;
-		}
-		files(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		files_handled(next){
-			return (this.files(next));
-		}
-		accept(){
-			return "";
-		}
-		multiple(){
-			return true;
-		}
-		Native(){
-			const obj = new this.$.$mol_button_open_native();
-			(obj.files) = (next) => ((this.files_handled(next)));
-			(obj.accept) = () => ((this.accept()));
-			(obj.multiple) = () => ((this.multiple()));
-			return obj;
-		}
-		sub(){
-			return [(this.Icon()), (this.Native())];
+	($.$mol_icon_image_off) = class $mol_icon_image_off extends ($.$mol_icon) {
+		path(){
+			return "M21 17.2L6.8 3H19C20.1 3 21 3.9 21 5V17.2M20.7 22L19.7 21H5C3.9 21 3 20.1 3 19V4.3L2 3.3L3.3 2L22 20.7L20.7 22M16.8 18L12.9 14.1L11 16.5L8.5 13.5L5 18H16.8Z";
 		}
 	};
-	($mol_mem(($.$mol_button_open.prototype), "Icon"));
-	($mol_mem(($.$mol_button_open.prototype), "files"));
-	($mol_mem(($.$mol_button_open.prototype), "Native"));
-	($.$mol_button_open_native) = class $mol_button_open_native extends ($.$mol_view) {
-		accept(){
-			return "";
-		}
-		multiple(){
-			return true;
-		}
-		picked(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dom_name(){
-			return "input";
-		}
-		files(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		attr(){
-			return {
-				"type": "file", 
-				"accept": (this.accept()), 
-				"multiple": (this.multiple())
-			};
-		}
-		event(){
-			return {"change": (next) => (this.picked(next))};
-		}
-	};
-	($mol_mem(($.$mol_button_open_native.prototype), "picked"));
-	($mol_mem(($.$mol_button_open_native.prototype), "files"));
 
 
 ;
 "use strict";
+
+
+;
+	($.$mol_string_button) = class $mol_string_button extends ($.$mol_string) {};
 
 
 ;
 "use strict";
 var $;
 (function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_button_open extends $.$mol_button_open {
-            files_handled(next) {
-                try {
-                    const files = this.files(next);
-                    this.status([null]);
-                    return files;
-                }
-                catch (error) {
-                    // Calling actions from catch section, if throwing promise breaks idempotency
-                    Promise.resolve().then(() => this.status([error]));
-                    $mol_fail_hidden(error);
-                }
-            }
-        }
-        $$.$mol_button_open = $mol_button_open;
-        /**
-         * File open button
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
-         */
-        class $mol_button_open_native extends $.$mol_button_open_native {
-            dom_node() {
-                return super.dom_node();
-            }
-            picked() {
-                const files = this.dom_node().files;
-                if (!files || !files.length)
-                    return;
-                this.files([...files]);
-            }
-        }
-        $$.$mol_button_open_native = $mol_button_open_native;
-    })($$ = $.$$ || ($.$$ = {}));
+    $mol_style_attach("mol/string/button/button.view.css", "[mol_string_button]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {\n\tcolor: var(--mol_theme_control);\n\tbackground: transparent;\n\tbox-shadow: none;\n}\n");
 })($ || ($ = {}));
 
 ;
 "use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/open/open.view.css", "[mol_button_open_native] {\n\tposition: absolute;\n\tleft: 0;\n\ttop: -100%;\n\twidth: 100%;\n\theight: 200%;\n\tcursor: pointer;\n\topacity: 0;\n}\n");
-})($ || ($ = {}));
+
 
 ;
 	($.$mol_icon_menu) = class $mol_icon_menu extends ($.$mol_icon) {
@@ -21407,6 +21426,135 @@ var $;
 
 
 ;
+	($.$mol_icon_upload) = class $mol_icon_upload extends ($.$mol_icon) {
+		path(){
+			return "M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_button_open) = class $mol_button_open extends ($.$mol_button_minor) {
+		Icon(){
+			const obj = new this.$.$mol_icon_upload();
+			return obj;
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		files_handled(next){
+			return (this.files(next));
+		}
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		Native(){
+			const obj = new this.$.$mol_button_open_native();
+			(obj.files) = (next) => ((this.files_handled(next)));
+			(obj.accept) = () => ((this.accept()));
+			(obj.multiple) = () => ((this.multiple()));
+			return obj;
+		}
+		sub(){
+			return [(this.Icon()), (this.Native())];
+		}
+	};
+	($mol_mem(($.$mol_button_open.prototype), "Icon"));
+	($mol_mem(($.$mol_button_open.prototype), "files"));
+	($mol_mem(($.$mol_button_open.prototype), "Native"));
+	($.$mol_button_open_native) = class $mol_button_open_native extends ($.$mol_view) {
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		picked(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "input";
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		attr(){
+			return {
+				"type": "file", 
+				"accept": (this.accept()), 
+				"multiple": (this.multiple())
+			};
+		}
+		event(){
+			return {"change": (next) => (this.picked(next))};
+		}
+	};
+	($mol_mem(($.$mol_button_open_native.prototype), "picked"));
+	($mol_mem(($.$mol_button_open_native.prototype), "files"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_button_open extends $.$mol_button_open {
+            files_handled(next) {
+                try {
+                    const files = this.files(next);
+                    this.status([null]);
+                    return files;
+                }
+                catch (error) {
+                    // Calling actions from catch section, if throwing promise breaks idempotency
+                    Promise.resolve().then(() => this.status([error]));
+                    $mol_fail_hidden(error);
+                }
+            }
+        }
+        $$.$mol_button_open = $mol_button_open;
+        /**
+         * File open button
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+         */
+        class $mol_button_open_native extends $.$mol_button_open_native {
+            dom_node() {
+                return super.dom_node();
+            }
+            picked() {
+                const files = this.dom_node().files;
+                if (!files || !files.length)
+                    return;
+                this.files([...files]);
+            }
+        }
+        $$.$mol_button_open_native = $mol_button_open_native;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/open/open.view.css", "[mol_button_open_native] {\n\tposition: absolute;\n\tleft: 0;\n\ttop: -100%;\n\twidth: 100%;\n\theight: 200%;\n\tcursor: pointer;\n\topacity: 0;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
 		path(){
 			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
@@ -21441,6 +21589,35 @@ var $;
 
 ;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
+		photo_ids(){
+			return [];
+		}
+		photo_url(id){
+			return "";
+		}
+		Photos(){
+			const obj = new this.$.$bog_nka_carousel();
+			(obj.ids) = () => ((this.photo_ids()));
+			(obj.url) = (id) => ((this.photo_url(id)));
+			return obj;
+		}
+		Photo_empty_icon(){
+			const obj = new this.$.$mol_icon_image_off();
+			return obj;
+		}
+		Photo_empty(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Photo_empty_icon())]);
+			return obj;
+		}
+		cover(){
+			return [(this.Photos()), (this.Photo_empty())];
+		}
+		Cover(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.cover()));
+			return obj;
+		}
 		title(next){
 			if(next !== undefined) return next;
 			return "";
@@ -21455,16 +21632,95 @@ var $;
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
-		photo_ids(){
-			return [];
+		price(next){
+			if(next !== undefined) return next;
+			return null;
 		}
-		photo_url(id){
+		Price(){
+			const obj = new this.$.$bog_nka_number();
+			(obj.value_min) = () => (0);
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Price_hint")));
+			(obj.value) = (next) => ((this.price(next)));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
+		price_text(){
 			return "";
 		}
-		Photos(){
-			const obj = new this.$.$bog_nka_carousel();
-			(obj.ids) = () => ((this.photo_ids()));
-			(obj.url) = (id) => ((this.photo_url(id)));
+		Price_text(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.price_text()));
+			return obj;
+		}
+		description(){
+			return "";
+		}
+		Description(){
+			const obj = new this.$.$mol_string_button();
+			(obj.value) = (next) => ((this.description(next)));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Description_hint")));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
+		Description_text(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.description()));
+			return obj;
+		}
+		category_list(){
+			return [];
+		}
+		category(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Category(){
+			const obj = new this.$.$mol_select();
+			(obj.options) = () => ((this.category_list()));
+			(obj.option_label_default) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Category_option_label_default")));
+			(obj.enabled) = () => ((this.changed()));
+			(obj.value) = (next) => ((this.category(next)));
+			return obj;
+		}
+		category_text(){
+			return "";
+		}
+		Category_text(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.category_text()));
+			return obj;
+		}
+		info_rows(){
+			return [
+				(this.Title()), 
+				(this.Price()), 
+				(this.Price_text()), 
+				(this.Description()), 
+				(this.Description_text()), 
+				(this.Category()), 
+				(this.Category_text())
+			];
+		}
+		Info(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.info_rows()));
+			return obj;
+		}
+		buy_title(){
+			return "";
+		}
+		buy(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		buy_enabled(){
+			return true;
+		}
+		Buy(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.buy_title()));
+			(obj.click) = (next) => ((this.buy(next)));
+			(obj.enabled) = () => ((this.buy_enabled()));
 			return obj;
 		}
 		photos_add(next){
@@ -21492,66 +21748,6 @@ var $;
 			(obj.enabled) = () => ((this.photo_delete_enabled()));
 			return obj;
 		}
-		Photos_controls(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Photos_add()), (this.Photos_delete())]);
-			return obj;
-		}
-		description(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		Description(){
-			const obj = new this.$.$mol_string_button();
-			(obj.value) = (next) => ((this.description(next)));
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Description_hint")));
-			(obj.enabled) = () => ((this.changed()));
-			return obj;
-		}
-		price(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Price(){
-			const obj = new this.$.$bog_nka_number();
-			(obj.value_min) = () => (0);
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Price_hint")));
-			(obj.value) = (next) => ((this.price(next)));
-			(obj.enabled) = () => ((this.changed()));
-			return obj;
-		}
-		category_list(){
-			return [];
-		}
-		category(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Category(){
-			const obj = new this.$.$mol_select();
-			(obj.options) = () => ((this.category_list()));
-			(obj.option_label_default) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Category_option_label_default")));
-			(obj.enabled) = () => ((this.changed()));
-			(obj.value) = (next) => ((this.category(next)));
-			return obj;
-		}
-		buy_title(){
-			return "";
-		}
-		buy(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		buy_enabled(){
-			return true;
-		}
-		Buy(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.buy_title()));
-			(obj.click) = (next) => ((this.buy(next)));
-			(obj.enabled) = () => ((this.buy_enabled()));
-			return obj;
-		}
 		available(next){
 			if(next !== undefined) return next;
 			return false;
@@ -21568,9 +21764,19 @@ var $;
 			return null;
 		}
 		Delete(){
-			const obj = new this.$.$mol_button_major();
+			const obj = new this.$.$mol_button_minor();
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Delete_title")));
 			(obj.click) = (next) => ((this.product_delete(next)));
+			return obj;
+		}
+		Admin(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([
+				(this.Photos_add()), 
+				(this.Photos_delete()), 
+				(this.Available()), 
+				(this.Delete())
+			]);
 			return obj;
 		}
 		product_link(next){
@@ -21589,38 +21795,39 @@ var $;
 		}
 		sub(){
 			return [
-				(this.Title()), 
-				(this.Photos()), 
-				(this.Photos_controls()), 
-				(this.Description()), 
-				(this.Price()), 
-				(this.Category()), 
+				(this.Cover()), 
+				(this.Info()), 
 				(this.Buy()), 
-				(this.Available()), 
-				(this.Delete())
+				(this.Admin())
 			];
 		}
 	};
+	($mol_mem(($.$bog_nka_product_card.prototype), "Photos"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty_icon"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Cover"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "title"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Title"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Photos"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "price"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Price_text"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Description_text"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "category"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Category"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Category_text"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Info"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "buy"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Buy"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photo_delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_delete"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_controls"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "description"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Description"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "price"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Price"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "category"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Category"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "buy"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Buy"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Delete"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Admin"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_link"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "catalog_link"));
 
@@ -21918,14 +22125,27 @@ var $;
                     return null;
                 }
             }
-            Photos_controls() {
-                return this.changed() ? super.Photos_controls() : null;
+            cover() {
+                return [this.photo_ids().length ? this.Photos() : this.Photo_empty()];
             }
-            Available() {
-                return this.changed() ? super.Available() : null;
+            info_rows() {
+                if (this.changed())
+                    return [this.Title(), this.Price(), this.Description(), this.Category()];
+                return [
+                    this.Title(),
+                    ...this.price() ? [this.Price_text()] : [],
+                    ...this.description() ? [this.Description_text()] : [],
+                    ...this.category() ? [this.Category_text()] : [],
+                ];
             }
-            Delete() {
-                return this.changed() ? super.Delete() : null;
+            price_text() {
+                return `${this.price().toLocaleString('ru-RU')} ₽`;
+            }
+            category_text() {
+                return this.category() ?? '';
+            }
+            Admin() {
+                return this.changed() ? super.Admin() : null;
             }
         }
         __decorate([
@@ -21948,13 +22168,7 @@ var $;
         ], $bog_nka_product_card.prototype, "buy", null);
         __decorate([
             $mol_mem
-        ], $bog_nka_product_card.prototype, "Photos_controls", null);
-        __decorate([
-            $mol_mem
-        ], $bog_nka_product_card.prototype, "Available", null);
-        __decorate([
-            $mol_mem
-        ], $bog_nka_product_card.prototype, "Delete", null);
+        ], $bog_nka_product_card.prototype, "Admin", null);
         $$.$bog_nka_product_card = $bog_nka_product_card;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -21966,11 +22180,102 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_product_card, {
-            maxWidth: '32rem',
-            margin: '.5rem',
+            overflow: 'hidden',
+            gap: $mol_gap.block,
+            padding: {
+                bottom: $mol_gap.block,
+            },
+            Cover: {
+                display: 'block',
+            },
             Photos: {
-                maxWidth: '22rem',
-                maxHeight: '18.1rem',
+                Image: {
+                    width: '100%',
+                    aspectRatio: 1,
+                },
+            },
+            Photo_empty: {
+                aspectRatio: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: {
+                    color: $mol_theme.line,
+                },
+            },
+            Photo_empty_icon: {
+                width: '3rem',
+                height: '3rem',
+                color: $mol_theme.shade,
+            },
+            Info: {
+                padding: {
+                    left: $mol_gap.block,
+                    right: $mol_gap.block,
+                },
+            },
+            Title: {
+                font: {
+                    size: '1.25rem',
+                    weight: 'bold',
+                    family: 'ui-rounded, system-ui, sans-serif',
+                },
+            },
+            Price_text: {
+                padding: {
+                    left: '.75rem',
+                    right: '.75rem',
+                },
+                font: {
+                    size: '1.5rem',
+                    weight: 'bold',
+                },
+                color: $mol_theme.current,
+            },
+            Description_text: {
+                padding: {
+                    left: '.75rem',
+                    right: '.75rem',
+                },
+                color: $mol_theme.shade,
+            },
+            Category_text: {
+                padding: {
+                    left: '.75rem',
+                    right: '.75rem',
+                },
+                font: {
+                    size: '.875rem',
+                },
+                color: $mol_theme.shade,
+            },
+            Buy: {
+                justifyContent: 'center',
+                margin: {
+                    left: $mol_gap.block,
+                    right: $mol_gap.block,
+                },
+            },
+            Admin: {
+                flex: {
+                    wrap: 'wrap',
+                },
+                alignItems: 'center',
+                margin: {
+                    left: $mol_gap.block,
+                    right: $mol_gap.block,
+                },
+                border: {
+                    top: {
+                        width: '1px',
+                        style: 'dashed',
+                        color: $mol_theme.line,
+                    },
+                },
+            },
+            Delete: {
+                ':hover': {
+                    color: '#e53935',
+                },
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
@@ -22028,19 +22333,6 @@ var $;
 			(obj.hidden) = () => ((this.is_not_admin()));
 			return obj;
 		}
-		category_filter_options(){
-			return {};
-		}
-		category_filter(next){
-			if(next !== undefined) return next;
-			return "all";
-		}
-		Category_filter(){
-			const obj = new this.$.$mol_switch();
-			(obj.options) = () => ((this.category_filter_options()));
-			(obj.value) = (next) => ((this.category_filter(next)));
-			return obj;
-		}
 		Lights(){
 			const obj = new this.$.$mol_lights_toggle();
 			return obj;
@@ -22052,11 +22344,22 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
+		Settings_icon(){
+			const obj = new this.$.$mol_icon_cog();
+			return obj;
+		}
+		Return_icon(){
+			const obj = new this.$.$mol_icon_arrow_left();
+			return obj;
+		}
+		settings_button_sub(){
+			return [(this.Settings_icon()), (this.Return_icon())];
+		}
 		Settings_button(){
-			const obj = new this.$.$bog_nka_button();
-			(obj.title) = () => ((this.settings_button_title()));
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.settings_button_title()));
 			(obj.click) = (next) => ((this.settings_toggle(next)));
-			(obj.hidden) = () => ((this.is_not_admin()));
+			(obj.sub) = () => ((this.settings_button_sub()));
 			return obj;
 		}
 		Catalog_missing_text(){
@@ -22079,6 +22382,19 @@ var $;
 			(obj.sub) = () => ([(this.Catalog_missing_text()), (this.Catalog_create())]);
 			return obj;
 		}
+		category_filter_options(){
+			return {};
+		}
+		category_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Category_filter(){
+			const obj = new this.$.$mol_switch();
+			(obj.options) = () => ((this.category_filter_options()));
+			(obj.value) = (next) => ((this.category_filter(next)));
+			return obj;
+		}
 		product_cards(){
 			return [];
 		}
@@ -22087,9 +22403,21 @@ var $;
 			(obj.items) = () => ((this.product_cards()));
 			return obj;
 		}
+		Catalog_empty(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Catalog_empty_title")));
+			return obj;
+		}
+		catalog_rows(){
+			return [
+				(this.Category_filter()), 
+				(this.Product_cards()), 
+				(this.Catalog_empty())
+			];
+		}
 		Catalog_selected(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Product_cards())]);
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.catalog_rows()));
 			return obj;
 		}
 		Settings(){
@@ -22138,9 +22466,9 @@ var $;
 		}
 		head(){
 			return [
+				(this.Title()), 
 				(this.Product_add()), 
-				(this.Category_filter()), 
-				...(super.head())
+				(this.Tools())
 			];
 		}
 		tools(){
@@ -22159,16 +22487,19 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Undo_hotkey"));
 	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
-	($mol_mem(($.$bog_nka_app.prototype), "category_filter"));
-	($mol_mem(($.$bog_nka_app.prototype), "Category_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Lights"));
 	($mol_mem(($.$bog_nka_app.prototype), "settings_toggle"));
+	($mol_mem(($.$bog_nka_app.prototype), "Settings_icon"));
+	($mol_mem(($.$bog_nka_app.prototype), "Return_icon"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings_button"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_missing_text"));
 	($mol_mem(($.$bog_nka_app.prototype), "catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_missing"));
+	($mol_mem(($.$bog_nka_app.prototype), "category_filter"));
+	($mol_mem(($.$bog_nka_app.prototype), "Category_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_cards"));
+	($mol_mem(($.$bog_nka_app.prototype), "Catalog_empty"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings"));
 	($mol_mem_key(($.$bog_nka_app.prototype), "Product_card"));
@@ -22213,6 +22544,18 @@ var $;
             catalog_create() {
                 const land = this.$.$giper_baza_glob.land_grab();
                 this.catalog_link(land.link().str);
+            }
+            settings_button_sub() {
+                return [this.settings_open() ? this.Return_icon() : this.Settings_icon()];
+            }
+            Settings_button() {
+                return this.is_admin() || this.settings_open() ? super.Settings_button() : null;
+            }
+            catalog_rows() {
+                return [
+                    ...this.filter_categories().length ? [this.Category_filter()] : [],
+                    this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
+                ];
             }
             settings_button_title() {
                 return this.settings_open()
@@ -22380,6 +22723,9 @@ var $;
             $mol_action
         ], $bog_nka_app.prototype, "catalog_create", null);
         __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "Settings_button", null);
+        __decorate([
             $mol_action
         ], $bog_nka_app.prototype, "product_add", null);
         __decorate([
@@ -22414,6 +22760,13 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $mol_style_attach("bog/nka/app/app.view.css", "[bog_nka_app] {\n\t--mol_theme_hue: 340deg;\n\t--mol_theme_hue_spread: 60deg;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_app, {
@@ -22425,9 +22778,36 @@ var $;
                 gap: $mol_gap.block,
                 marginTop: '1rem'
             },
+            Title: {
+                font: {
+                    family: 'ui-rounded, system-ui, sans-serif',
+                    weight: 'bold',
+                },
+            },
             Category_filter: {
                 flexWrap: 'nowrap',
-            }
+                overflow: {
+                    x: 'auto',
+                },
+                scrollbarWidth: 'none',
+                padding: {
+                    left: $mol_gap.block,
+                    right: $mol_gap.block,
+                },
+            },
+            Catalog_empty: {
+                justifyContent: 'center',
+                textAlign: 'center',
+                color: $mol_theme.shade,
+                padding: {
+                    top: '4rem',
+                    bottom: '4rem',
+                },
+            },
+            Product_undo: {
+                justifyContent: 'center',
+                alignSelf: 'center',
+            },
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
