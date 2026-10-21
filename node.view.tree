@@ -995,7 +995,7 @@ $bog_nka_app $mol_page
 	Return_title @ \Return
 	Filter_all @ \All
 	title @ \Catalog 
-	seo_server \
+	seo_server \https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \

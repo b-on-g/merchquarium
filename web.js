@@ -33255,6 +33255,25 @@ var $;
             social_url() {
                 return $bog_nka_social_url(this.catalog()?.Social()?.val() ?? '');
             }
+            cover() {
+                return [this.photo_ids().length ? this.Photos() : this.Photo_empty()];
+            }
+            info_rows() {
+                if (this.changed())
+                    return [this.Title(), this.Price(), this.Description(), this.Category()];
+                return [
+                    this.Title(),
+                    ...this.price() ? [this.Price_text()] : [],
+                    ...this.description() ? [this.Description_text()] : [],
+                    ...this.category() ? [this.Category_text()] : [],
+                ];
+            }
+            price_text() {
+                return `${this.price().toLocaleString('ru-RU')} ₽`;
+            }
+            category_text() {
+                return this.category() ?? '';
+            }
             Admin() {
                 return this.changed() ? super.Admin() : null;
             }
@@ -33567,7 +33586,7 @@ var $;
 			return (this.$.$mol_locale.text("$bog_nka_app_title"));
 		}
 		seo_server(){
-			return "";
+			return "https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/";
 		}
 		Product_card(id){
 			const obj = new this.$.$bog_nka_product_card();

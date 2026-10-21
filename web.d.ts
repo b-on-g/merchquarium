@@ -48100,6 +48100,10 @@ declare namespace $.$$ {
         buy_enabled(): boolean;
         buy(): void;
         social_url(): URL | null;
+        cover(): $mol_view[];
+        info_rows(): ($.$mol_select | $mol_string_button | $bog_nka_number)[] | ($.$mol_paragraph | $mol_string_button)[];
+        price_text(): string;
+        category_text(): string;
         Admin(): $mol_row;
     }
 }
