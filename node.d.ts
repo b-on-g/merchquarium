@@ -1291,7 +1291,7 @@ declare namespace $ {
      * Theme css variables
      * @see https://mol.hyoo.ru/#!section=demos/demo=mol_textarea_demo
      */
-    const $mol_theme: Record<"image" | "line" | "text" | "field" | "current" | "focus" | "hue" | "back" | "hover" | "card" | "special" | "control" | "shade" | "spirit" | "hue_spread", $mol_style_func<"var", unknown>>;
+    const $mol_theme: Record<"image" | "line" | "text" | "field" | "current" | "hue" | "focus" | "back" | "hover" | "card" | "special" | "control" | "shade" | "spirit" | "hue_spread", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
@@ -1302,7 +1302,7 @@ declare namespace $ {
      * Gap in CSS
      * @see https://page.hyoo.ru/#!=msdb74_bm7nsq
      */
-    let $mol_gap: Record<"text" | "blur" | "page" | "block" | "space" | "round" | "emoji", $mol_style_func<"var", unknown>>;
+    let $mol_gap: Record<"text" | "round" | "blur" | "page" | "block" | "space" | "emoji", $mol_style_func<"var", unknown>>;
 }
 
 declare namespace $ {
@@ -39126,6 +39126,471 @@ declare namespace $ {
 
 //# sourceMappingURL=row.view.tree.d.ts.map
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_stack extends $mol_view {
+	}
+	
+}
+
+//# sourceMappingURL=stack.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_text_code_token extends $mol_dimmer {
+		type( ): string
+		attr( ): ({ 
+			'mol_text_code_token_type': ReturnType< $mol_text_code_token['type'] >,
+		})  & ReturnType< $mol_dimmer['attr'] >
+	}
+	
+	export class $mol_text_code_token_link extends $mol_text_code_token {
+		uri( ): string
+		dom_name( ): string
+		type( ): string
+		attr( ): ({ 
+			'href': ReturnType< $mol_text_code_token_link['uri'] >,
+			'target': string,
+		})  & ReturnType< $mol_text_code_token['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=token.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+    var $mol_syntax2_md_flow: $mol_syntax2<{
+        quote: RegExp;
+        spoiler: RegExp;
+        header: RegExp;
+        list: RegExp;
+        code: RegExp;
+        'code-indent': RegExp;
+        table: RegExp;
+        grid: RegExp;
+        cut: RegExp;
+        block: RegExp;
+    }>;
+    var $mol_syntax2_md_line: $mol_syntax2<{
+        strong: RegExp;
+        emphasis: RegExp;
+        code: RegExp;
+        insert: RegExp;
+        delete: RegExp;
+        embed: RegExp;
+        link: RegExp;
+        'image-link': RegExp;
+        'text-link': RegExp;
+        'text-link-http': RegExp;
+    }>;
+    const $mol_syntax2_md_code: $mol_syntax2<{
+        'code-indent': RegExp;
+        'code-docs': RegExp;
+        'code-comment-block': RegExp;
+        'code-link': RegExp;
+        'code-comment-inline': RegExp;
+        'code-string': RegExp;
+        'code-number': RegExp;
+        'code-call': RegExp;
+        'code-sexpr': RegExp;
+        'code-field': RegExp;
+        'code-keyword': RegExp;
+        'code-global': RegExp;
+        'code-word': RegExp;
+        'code-decorator': RegExp;
+        'code-tag': RegExp;
+        'code-punctuation': RegExp;
+    }>;
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_mol_text_code_line_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_text_code_token__type_mol_text_code_line_2 = $mol_type_enforce<
+		ReturnType< $mol_text_code_line['token_type'] >
+		,
+		ReturnType< $mol_text_code_token['type'] >
+	>
+	type $mol_text_code_token__haystack_mol_text_code_line_3 = $mol_type_enforce<
+		ReturnType< $mol_text_code_line['token_text'] >
+		,
+		ReturnType< $mol_text_code_token['haystack'] >
+	>
+	type $mol_text_code_token__needle_mol_text_code_line_4 = $mol_type_enforce<
+		ReturnType< $mol_text_code_line['highlight'] >
+		,
+		ReturnType< $mol_text_code_token['needle'] >
+	>
+	type $mol_text_code_token_link__haystack_mol_text_code_line_5 = $mol_type_enforce<
+		ReturnType< $mol_text_code_line['token_text'] >
+		,
+		ReturnType< $mol_text_code_token_link['haystack'] >
+	>
+	type $mol_text_code_token_link__needle_mol_text_code_line_6 = $mol_type_enforce<
+		ReturnType< $mol_text_code_line['highlight'] >
+		,
+		ReturnType< $mol_text_code_token_link['needle'] >
+	>
+	type $mol_text_code_token_link__uri_mol_text_code_line_7 = $mol_type_enforce<
+		ReturnType< $mol_text_code_line['token_uri'] >
+		,
+		ReturnType< $mol_text_code_token_link['uri'] >
+	>
+	export class $mol_text_code_line extends $mol_paragraph {
+		numb( ): number
+		token_type( id: any): string
+		token_text( id: any): string
+		highlight( ): string
+		token_uri( id: any): string
+		text( ): string
+		minimal_height( ): number
+		numb_showed( ): boolean
+		syntax( ): any
+		uri_resolve( id: any): string
+		Numb( ): $mol_view
+		Token( id: any): $mol_text_code_token
+		Token_link( id: any): $mol_text_code_token_link
+		find_pos( id: any): any
+	}
+	
+}
+
+//# sourceMappingURL=line.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_text_code_line extends $.$mol_text_code_line {
+        maximal_width(): number;
+        syntax(): $mol_syntax2<{
+            'code-indent': RegExp;
+            'code-docs': RegExp;
+            'code-comment-block': RegExp;
+            'code-link': RegExp;
+            'code-comment-inline': RegExp;
+            'code-string': RegExp;
+            'code-number': RegExp;
+            'code-call': RegExp;
+            'code-sexpr': RegExp;
+            'code-field': RegExp;
+            'code-keyword': RegExp;
+            'code-global': RegExp;
+            'code-word': RegExp;
+            'code-decorator': RegExp;
+            'code-tag': RegExp;
+            'code-punctuation': RegExp;
+        }>;
+        tokens(path: number[]): Readonly<{
+            name: string;
+            found: string;
+            chunks: string[];
+        }[]>;
+        sub(): (string | $mol_view)[];
+        row_content(path: number[]): string[] | $mol_text_code_token[];
+        Token(path: number[]): $mol_text_code_token;
+        token_type(path: number[]): string;
+        token_content(path: number[]): (string | $mol_text_code_token)[];
+        token_text(path: number[]): string;
+        token_uri(path: number[]): string;
+        view_find(check: (path: $mol_view, text?: string) => boolean, path?: $mol_view[]): Generator<$mol_view[]>;
+        find_pos(offset: number): {
+            token: $mol_text_code_token;
+            offset: number;
+        } | null;
+        find_token_pos([offset, ...path]: number[]): {
+            token: $mol_text_code_token;
+            offset: number;
+        } | null;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_text_code_line__numb_showed_mol_text_code_1 = $mol_type_enforce<
+		ReturnType< $mol_text_code['sidebar_showed'] >
+		,
+		ReturnType< $mol_text_code_line['numb_showed'] >
+	>
+	type $mol_text_code_line__numb_mol_text_code_2 = $mol_type_enforce<
+		ReturnType< $mol_text_code['row_numb'] >
+		,
+		ReturnType< $mol_text_code_line['numb'] >
+	>
+	type $mol_text_code_line__theme_mol_text_code_3 = $mol_type_enforce<
+		ReturnType< $mol_text_code['row_theme'] >
+		,
+		ReturnType< $mol_text_code_line['theme'] >
+	>
+	type $mol_text_code_line__text_mol_text_code_4 = $mol_type_enforce<
+		ReturnType< $mol_text_code['row_text'] >
+		,
+		ReturnType< $mol_text_code_line['text'] >
+	>
+	type $mol_text_code_line__syntax_mol_text_code_5 = $mol_type_enforce<
+		ReturnType< $mol_text_code['syntax'] >
+		,
+		ReturnType< $mol_text_code_line['syntax'] >
+	>
+	type $mol_text_code_line__uri_resolve_mol_text_code_6 = $mol_type_enforce<
+		ReturnType< $mol_text_code['uri_resolve'] >
+		,
+		ReturnType< $mol_text_code_line['uri_resolve'] >
+	>
+	type $mol_text_code_line__highlight_mol_text_code_7 = $mol_type_enforce<
+		ReturnType< $mol_text_code['highlight'] >
+		,
+		ReturnType< $mol_text_code_line['highlight'] >
+	>
+	type $mol_list__render_visible_only_mol_text_code_8 = $mol_type_enforce<
+		ReturnType< $mol_text_code['render_visible_only'] >
+		,
+		ReturnType< $mol_list['render_visible_only'] >
+	>
+	type $mol_list__rows_mol_text_code_9 = $mol_type_enforce<
+		ReturnType< $mol_text_code['rows'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_button_copy__hint_mol_text_code_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_copy['hint'] >
+	>
+	type $mol_button_copy__text_mol_text_code_11 = $mol_type_enforce<
+		ReturnType< $mol_text_code['text_export'] >
+		,
+		ReturnType< $mol_button_copy['text'] >
+	>
+	export class $mol_text_code extends $mol_stack {
+		sidebar_showed( ): boolean
+		render_visible_only( ): boolean
+		row_numb( id: any): number
+		row_theme( id: any): string
+		row_text( id: any): string
+		syntax( ): any
+		uri_resolve( id: any): string
+		highlight( ): string
+		Row( id: any): $mol_text_code_line
+		rows( ): readonly(any)[]
+		Rows( ): $mol_list
+		text_export( ): string
+		Copy( ): $mol_button_copy
+		attr( ): ({ 
+			'mol_text_code_sidebar_showed': ReturnType< $mol_text_code['sidebar_showed'] >,
+		})  & ReturnType< $mol_stack['attr'] >
+		text( ): string
+		text_lines( ): readonly(string)[]
+		find_pos( id: any): any
+		uri_base( ): string
+		row_themes( ): readonly(string)[]
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=code.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Code visualizer.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_text_code_demo
+     */
+    class $mol_text_code extends $.$mol_text_code {
+        render_visible_only(): boolean;
+        text_lines(): readonly string[];
+        rows(): $.$mol_text_code_line[];
+        row_text(index: number): string;
+        row_numb(index: number): number;
+        find_pos(offset: number): any;
+        sub(): ($.$mol_list | $.$mol_button_copy)[];
+        syntax(): $mol_syntax2<{
+            'code-indent': RegExp;
+            'code-docs': RegExp;
+            'code-comment-block': RegExp;
+            'code-link': RegExp;
+            'code-comment-inline': RegExp;
+            'code-string': RegExp;
+            'code-number': RegExp;
+            'code-call': RegExp;
+            'code-sexpr': RegExp;
+            'code-field': RegExp;
+            'code-keyword': RegExp;
+            'code-global': RegExp;
+            'code-word': RegExp;
+            'code-decorator': RegExp;
+            'code-tag': RegExp;
+            'code-punctuation': RegExp;
+        }>;
+        uri_base(): string;
+        uri_resolve(uri: string): string;
+        text_export(): string;
+        row_theme(row: number): string;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_textarea_edit__value_mol_textarea_1 = $mol_type_enforce<
+		ReturnType< $mol_textarea['value'] >
+		,
+		ReturnType< $mol_textarea_edit['value'] >
+	>
+	type $mol_textarea_edit__hint_mol_textarea_2 = $mol_type_enforce<
+		ReturnType< $mol_textarea['hint'] >
+		,
+		ReturnType< $mol_textarea_edit['hint'] >
+	>
+	type $mol_textarea_edit__enabled_mol_textarea_3 = $mol_type_enforce<
+		ReturnType< $mol_textarea['enabled'] >
+		,
+		ReturnType< $mol_textarea_edit['enabled'] >
+	>
+	type $mol_textarea_edit__spellcheck_mol_textarea_4 = $mol_type_enforce<
+		ReturnType< $mol_textarea['spellcheck'] >
+		,
+		ReturnType< $mol_textarea_edit['spellcheck'] >
+	>
+	type $mol_textarea_edit__length_max_mol_textarea_5 = $mol_type_enforce<
+		ReturnType< $mol_textarea['length_max'] >
+		,
+		ReturnType< $mol_textarea_edit['length_max'] >
+	>
+	type $mol_textarea_edit__selection_mol_textarea_6 = $mol_type_enforce<
+		ReturnType< $mol_textarea['selection'] >
+		,
+		ReturnType< $mol_textarea_edit['selection'] >
+	>
+	type $mol_textarea_edit__submit_mol_textarea_7 = $mol_type_enforce<
+		ReturnType< $mol_textarea['submit'] >
+		,
+		ReturnType< $mol_textarea_edit['submit'] >
+	>
+	type $mol_textarea_edit__submit_with_ctrl_mol_textarea_8 = $mol_type_enforce<
+		ReturnType< $mol_textarea['submit_with_ctrl'] >
+		,
+		ReturnType< $mol_textarea_edit['submit_with_ctrl'] >
+	>
+	type $mol_text_code__text_mol_textarea_9 = $mol_type_enforce<
+		ReturnType< $mol_textarea['value'] >
+		,
+		ReturnType< $mol_text_code['text'] >
+	>
+	type $mol_text_code__render_visible_only_mol_textarea_10 = $mol_type_enforce<
+		boolean
+		,
+		ReturnType< $mol_text_code['render_visible_only'] >
+	>
+	type $mol_text_code__row_numb_mol_textarea_11 = $mol_type_enforce<
+		ReturnType< $mol_textarea['row_numb'] >
+		,
+		ReturnType< $mol_text_code['row_numb'] >
+	>
+	type $mol_text_code__sidebar_showed_mol_textarea_12 = $mol_type_enforce<
+		ReturnType< $mol_textarea['sidebar_showed'] >
+		,
+		ReturnType< $mol_text_code['sidebar_showed'] >
+	>
+	type $mol_text_code__highlight_mol_textarea_13 = $mol_type_enforce<
+		ReturnType< $mol_textarea['highlight'] >
+		,
+		ReturnType< $mol_text_code['highlight'] >
+	>
+	type $mol_text_code__syntax_mol_textarea_14 = $mol_type_enforce<
+		ReturnType< $mol_textarea['syntax'] >
+		,
+		ReturnType< $mol_text_code['syntax'] >
+	>
+	export class $mol_textarea extends $mol_stack {
+		clickable( next?: boolean ): boolean
+		sidebar_showed( ): boolean
+		press( next?: any ): any
+		hover( next?: any ): any
+		value( next?: string ): string
+		hint( ): string
+		enabled( ): boolean
+		spellcheck( ): boolean
+		length_max( ): number
+		selection( next?: readonly(number)[] ): readonly(number)[]
+		bring( ): ReturnType< ReturnType< $mol_textarea['Edit'] >['bring'] >
+		submit( next?: any ): any
+		submit_with_ctrl( ): boolean
+		Edit( ): $mol_textarea_edit
+		row_numb( id: any): number
+		highlight( ): string
+		syntax( ): $mol_syntax2
+		View( ): $mol_text_code
+		attr( ): ({ 
+			'mol_textarea_clickable': ReturnType< $mol_textarea['clickable'] >,
+			'mol_textarea_sidebar_showed': ReturnType< $mol_textarea['sidebar_showed'] >,
+		})  & ReturnType< $mol_stack['attr'] >
+		event( ): ({ 
+			keydown( next?: ReturnType< $mol_textarea['press'] > ): ReturnType< $mol_textarea['press'] >,
+			pointermove( next?: ReturnType< $mol_textarea['hover'] > ): ReturnType< $mol_textarea['hover'] >,
+		}) 
+		sub( ): readonly(any)[]
+		symbols_alt( ): Record<string, string>
+		symbols_alt_ctrl( ): Record<string, string>
+		symbols_alt_shift( ): Record<string, string>
+	}
+	
+	export class $mol_textarea_edit extends $mol_string {
+		dom_name( ): string
+		enter( ): string
+		field( ): ({ 
+			'scrollTop': number,
+		})  & ReturnType< $mol_string['field'] >
+	}
+	
+}
+
+//# sourceMappingURL=textarea.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * An input field for entering multiline text.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_textarea_demo
+     */
+    class $mol_textarea extends $.$mol_textarea {
+        indent_inc(): void;
+        indent_dec(): void;
+        symbol_insert(event: KeyboardEvent): void;
+        clickable(next?: boolean): boolean;
+        hover(event: PointerEvent): void;
+        press(event: KeyboardEvent): void;
+        row_numb(index: number): number;
+        syntax(): $mol_syntax2<{
+            'code-indent': RegExp;
+            'code-docs': RegExp;
+            'code-comment-block': RegExp;
+            'code-link': RegExp;
+            'code-comment-inline': RegExp;
+            'code-string': RegExp;
+            'code-number': RegExp;
+            'code-call': RegExp;
+            'code-sexpr': RegExp;
+            'code-field': RegExp;
+            'code-keyword': RegExp;
+            'code-global': RegExp;
+            'code-word': RegExp;
+            'code-decorator': RegExp;
+            'code-tag': RegExp;
+            'code-punctuation': RegExp;
+        }>;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
 
 	export class $mol_icon_plus extends $mol_icon {
 		path( ): string
@@ -40886,6 +41351,10 @@ declare namespace $ {
         spread: number;
         round: string;
         font: string;
+        pattern: 'none' | 'decor' | 'dots' | 'grid' | 'stripes';
+        card: 'soft' | 'dashed' | 'outline';
+        photo: 'full' | 'polaroid' | 'round';
+        decor: string;
     };
     const $bog_nka_theme: {
         sakura: {
@@ -40893,42 +41362,70 @@ declare namespace $ {
             spread: number;
             round: string;
             font: string;
+            pattern: "decor";
+            card: "soft";
+            photo: "polaroid";
+            decor: string;
         };
         lavender: {
             hue: number;
             spread: number;
             round: string;
             font: string;
+            pattern: "dots";
+            card: "dashed";
+            photo: "round";
+            decor: string;
         };
         mint: {
             hue: number;
             spread: number;
             round: string;
             font: string;
+            pattern: "grid";
+            card: "soft";
+            photo: "full";
+            decor: string;
         };
         peach: {
             hue: number;
             spread: number;
             round: string;
             font: string;
+            pattern: "stripes";
+            card: "outline";
+            photo: "polaroid";
+            decor: string;
         };
         sky: {
             hue: number;
             spread: number;
             round: string;
             font: string;
+            pattern: "dots";
+            card: "soft";
+            photo: "round";
+            decor: string;
         };
         milk: {
             hue: number;
             spread: number;
             round: string;
             font: string;
+            pattern: "none";
+            card: "outline";
+            photo: "polaroid";
+            decor: string;
         };
         classic: {
             hue: number;
             spread: number;
             round: string;
             font: string;
+            pattern: "none";
+            card: "soft";
+            photo: "full";
+            decor: string;
         };
     };
     type $bog_nka_theme_name = keyof typeof $bog_nka_theme;
@@ -40937,8 +41434,37 @@ declare namespace $ {
         '--mol_theme_hue': string;
         '--mol_theme_hue_spread': string;
         '--mol_gap_round': string;
+        '--bog_nka_pattern': string;
+        '--bog_nka_pattern_size': string;
+        '--bog_nka_card_border_style': string;
+        '--bog_nka_card_border_width': string;
+        '--bog_nka_photo_inset': string;
+        '--bog_nka_photo_round': string;
+        '--bog_nka_decor': string;
         fontFamily: string;
     };
+    function $bog_nka_theme_swatch(name: string): {
+        background: string;
+    };
+}
+
+declare namespace $ {
+    type $bog_nka_import_product = {
+        title: string;
+        price: number;
+        description: string;
+        category: string;
+        available: boolean;
+    };
+    type $bog_nka_import_data = {
+        title: string;
+        categories: string[];
+        products: $bog_nka_import_product[];
+        errors: string[];
+    };
+    function $bog_nka_import_parse(json: string): $bog_nka_import_data;
+    function $bog_nka_import_apply(catalog: $bog_nka_catalog, data: $bog_nka_import_data): void;
+    const $bog_nka_import_prompt = "You help an artist fill an online merch catalog.\nAsk me short questions in my language, one at a time: what products I sell, their names, prices in rubles, short descriptions, categories and whether each one is in stock.\nWhen you have enough, reply with JSON only, no comments, in this format:\n{\n\t\"title\": \"Catalog name\",\n\t\"categories\": [ \"Category\" ],\n\t\"products\": [\n\t\t{ \"title\": \"Name\", \"price\": 1000, \"description\": \"Short description\", \"category\": \"Category\", \"available\": true }\n\t]\n}\nEvery product must have a title. Price is a number without currency. I will upload photos myself later.";
 }
 
 declare namespace $ {
@@ -40978,190 +41504,260 @@ declare namespace $ {
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_switch__options_bog_nka_settings_8 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_settings_8 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['theme_options'] >
 		,
-		ReturnType< $mol_switch['options'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_switch__value_bog_nka_settings_9 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['theme'] >
-		,
-		ReturnType< $mol_switch['value'] >
-	>
-	type $mol_section__title_bog_nka_settings_10 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_9 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_11 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_10 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_string__hint_bog_nka_settings_12 = $mol_type_enforce<
+	type $mol_string__hint_bog_nka_settings_11 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_bog_nka_settings_13 = $mol_type_enforce<
+	type $mol_string__value_bog_nka_settings_12 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['social_link'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_string__hint_bog_nka_settings_14 = $mol_type_enforce<
+	type $mol_string__hint_bog_nka_settings_13 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_bog_nka_settings_15 = $mol_type_enforce<
+	type $mol_string__value_bog_nka_settings_14 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['social_text'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_section__title_bog_nka_settings_16 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_17 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_16 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_string__hint_bog_nka_settings_18 = $mol_type_enforce<
+	type $mol_string__hint_bog_nka_settings_17 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_bog_nka_settings_19 = $mol_type_enforce<
+	type $mol_string__value_bog_nka_settings_18 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_draft'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_20 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_19 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_21 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_20 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_add'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_22 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_view__sub_bog_nka_settings_23 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_settings_22 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_rows'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_section__title_bog_nka_settings_24 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_23 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_25 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_24 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['categories_content'] >
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_26 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['debug_info'] >
+	type $mol_paragraph__title_bog_nka_settings_25 = $mol_type_enforce<
+		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $giper_baza_land_rights__land_bog_nka_settings_27 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['catalog_land'] >
-		,
-		ReturnType< $giper_baza_land_rights['land'] >
-	>
-	type $mol_section__title_bog_nka_settings_28 = $mol_type_enforce<
+	type $mol_button_copy__title_bog_nka_settings_26 = $mol_type_enforce<
 		string
 		,
-		ReturnType< $mol_section['title'] >
+		ReturnType< $mol_button_copy['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_29 = $mol_type_enforce<
-		readonly(any)[]
+	type $mol_button_copy__text_bog_nka_settings_27 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['import_prompt'] >
 		,
-		ReturnType< $mol_section['content'] >
+		ReturnType< $mol_button_copy['text'] >
+	>
+	type $mol_textarea__hint_bog_nka_settings_28 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_textarea['hint'] >
+	>
+	type $mol_textarea__value_bog_nka_settings_29 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['import_json'] >
+		,
+		ReturnType< $mol_textarea['value'] >
 	>
 	type $mol_paragraph__title_bog_nka_settings_30 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['category_title'] >
+		ReturnType< $bog_nka_settings['import_preview'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__hint_bog_nka_settings_31 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['hint'] >
-	>
-	type $mol_button_minor__sub_bog_nka_settings_32 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $mol_button_minor__click_bog_nka_settings_33 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['category_remove'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_paragraph__title_bog_nka_settings_34 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_bog_nka_settings_35 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_bog_nka_settings_36 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['category_product_count'] >
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_button_minor__title_bog_nka_settings_37 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_button_minor['title'] >
-	>
-	type $mol_button_minor__click_bog_nka_settings_38 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['category_remove_cancel'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_major__title_bog_nka_settings_39 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_31 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_40 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_32 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['import_run'] >
+		,
+		ReturnType< $mol_button_major['click'] >
+	>
+	type $mol_button_major__enabled_bog_nka_settings_33 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['import_ready'] >
+		,
+		ReturnType< $mol_button_major['enabled'] >
+	>
+	type $mol_section__title_bog_nka_settings_34 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_section['title'] >
+	>
+	type $mol_section__content_bog_nka_settings_35 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_section['content'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_36 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['debug_info'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $giper_baza_land_rights__land_bog_nka_settings_37 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['catalog_land'] >
+		,
+		ReturnType< $giper_baza_land_rights['land'] >
+	>
+	type $mol_section__title_bog_nka_settings_38 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_section['title'] >
+	>
+	type $mol_section__content_bog_nka_settings_39 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_section['content'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_40 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_title'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_button_minor__hint_bog_nka_settings_41 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__sub_bog_nka_settings_42 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__click_bog_nka_settings_43 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_remove'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_44 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_45 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_46 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_product_count'] >
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_button_minor__title_bog_nka_settings_47 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_bog_nka_settings_48 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['category_remove_cancel'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_major__title_bog_nka_settings_49 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_major['title'] >
+	>
+	type $mol_button_major__click_bog_nka_settings_50 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_confirm'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_41 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_51 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_pop__Anchor_bog_nka_settings_42 = $mol_type_enforce<
+	type $mol_pop__Anchor_bog_nka_settings_52 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['Category_remove_button'] >
 		,
 		ReturnType< $mol_pop['Anchor'] >
 	>
-	type $mol_pop__bubble_content_bog_nka_settings_43 = $mol_type_enforce<
+	type $mol_pop__bubble_content_bog_nka_settings_53 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_pop['bubble_content'] >
 	>
-	type $mol_row__sub_bog_nka_settings_44 = $mol_type_enforce<
+	type $mol_view__style_bog_nka_settings_54 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['theme_swatch'] >
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	type $mol_view__sub_bog_nka_settings_55 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_row__sub_bog_nka_settings_56 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
+	>
+	type $mol_button_minor__click_bog_nka_settings_57 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['theme_select'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_bog_nka_settings_58 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
 	>
 	export class $bog_nka_settings extends $mol_page {
 		Sync( ): $giper_baza_status
@@ -41173,9 +41769,8 @@ declare namespace $ {
 		Account_section( ): $mol_section
 		catalog_title( next?: string ): string
 		Catalog_title( ): $mol_string
-		theme_options( ): Record<string, any>
-		theme( next?: string ): string
-		Theme_switch( ): $mol_switch
+		theme_options( ): readonly(any)[]
+		Themes( ): $mol_view
 		Look_section( ): $mol_section
 		social_link( next?: string ): string
 		Social_link( ): $mol_string
@@ -41191,6 +41786,17 @@ declare namespace $ {
 		Categories_list( ): $mol_view
 		categories_content( ): readonly(any)[]
 		Categories_section( ): $mol_section
+		Import_hint( ): $mol_paragraph
+		import_prompt( ): string
+		Import_prompt( ): $mol_button_copy
+		import_json( next?: string ): string
+		Import_json( ): $mol_textarea
+		import_preview( ): string
+		Import_preview( ): $mol_paragraph
+		import_run( next?: any ): any
+		import_ready( ): boolean
+		Import_run( ): $mol_button_major
+		Import_section( ): $mol_section
 		debug_info( ): string
 		Debug_info( ): $mol_paragraph
 		catalog_land( ): any
@@ -41211,7 +41817,14 @@ declare namespace $ {
 		Category_confirm( id: any): $mol_button_major
 		Category_confirm_actions( id: any): $mol_row
 		Category_remove( id: any): $mol_pop
+		theme_select( id: any, next?: any ): any
+		theme_swatch( id: any): Record<string, any>
+		Theme_swatch( id: any): $mol_view
+		theme_name( id: any): string
+		Theme_name( id: any): $mol_view
 		title( ): string
+		Import_summary( ): string
+		Import_errors( ): string
 		Theme_sakura( ): string
 		Theme_lavender( ): string
 		Theme_mint( ): string
@@ -41223,6 +41836,7 @@ declare namespace $ {
 		tools( ): readonly(any)[]
 		body( ): readonly(any)[]
 		Category_row( id: any): $mol_row
+		Theme_option( id: any): $mol_button_minor
 	}
 	
 }
@@ -41255,8 +41869,22 @@ declare namespace $.$$ {
         category_remove_cancel(category: string): void;
         category_remove_confirm(category: string): void;
         catalog_title(next?: string): string;
-        theme_options(): Record<string, string>;
+        theme_names(): Record<$bog_nka_theme_name, string>;
+        theme_options(): $mol_button_minor[];
+        theme_name(name: $bog_nka_theme_name): string;
+        theme_swatch(name: string): {
+            boxShadow: string;
+            background: string;
+        };
+        theme_select(name: string): void;
         theme(next?: string): string;
+        import_prompt(): string;
+        import_json(next?: string): string;
+        import_data(): $bog_nka_import_data;
+        import_new_categories(): string[];
+        import_preview(): string;
+        import_ready(): boolean;
+        import_run(): void;
         social_link(next?: string): string;
         social_text(next?: string): string;
     }
@@ -42228,6 +42856,13 @@ declare namespace $.$$ {
             '--mol_theme_hue': string;
             '--mol_theme_hue_spread': string;
             '--mol_gap_round': string;
+            '--bog_nka_pattern': string;
+            '--bog_nka_pattern_size': string;
+            '--bog_nka_card_border_style': string;
+            '--bog_nka_card_border_width': string;
+            '--bog_nka_photo_inset': string;
+            '--bog_nka_photo_round': string;
+            '--bog_nka_decor': string;
             fontFamily: string;
         };
         settings_button_sub(): ($mol_icon_arrow_left | $mol_icon_cog)[];
@@ -42249,6 +42884,9 @@ declare namespace $.$$ {
         product_undo(link: string): void;
         undo_last(event: KeyboardEvent): void;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $.$$ {

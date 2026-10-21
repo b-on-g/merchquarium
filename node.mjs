@@ -19647,6 +19647,858 @@ var $;
 
 
 ;
+	($.$mol_stack) = class $mol_stack extends ($.$mol_view) {};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/stack/stack.view.css", "[mol_stack] {\n\tdisplay: grid;\n\t/* width: max-content; */\n\t/* height: max-content; */\n\talign-items: flex-start;\n\tjustify-items: flex-start;\n}\n\n[mol_stack] > * {\n\tgrid-area: 1/1;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_text_code_token) = class $mol_text_code_token extends ($.$mol_dimmer) {
+		type(){
+			return "";
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_code_token_type": (this.type())};
+		}
+	};
+	($.$mol_text_code_token_link) = class $mol_text_code_token_link extends ($.$mol_text_code_token) {
+		uri(){
+			return "";
+		}
+		dom_name(){
+			return "a";
+		}
+		type(){
+			return "code-link";
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"href": (this.uri()), 
+				"target": "_blank"
+			};
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { hsla } = $mol_style_func;
+        $mol_style_define($mol_text_code_token, {
+            display: 'inline',
+            textDecoration: 'none',
+            '@': {
+                mol_text_code_token_type: {
+                    'code-keyword': {
+                        color: hsla(0, 70, 60, 1),
+                    },
+                    'code-field': {
+                        color: hsla(300, 70, 50, 1),
+                    },
+                    'code-tag': {
+                        color: hsla(330, 70, 50, 1),
+                    },
+                    'code-global': {
+                        color: hsla(30, 80, 50, 1),
+                    },
+                    'code-decorator': {
+                        color: hsla(180, 40, 50, 1),
+                    },
+                    'code-punctuation': {
+                        color: hsla(0, 0, 50, 1),
+                    },
+                    'code-string': {
+                        color: hsla(90, 40, 50, 1),
+                    },
+                    'code-number': {
+                        color: hsla(55, 65, 45, 1),
+                    },
+                    'code-call': {
+                        color: hsla(270, 60, 50, 1),
+                    },
+                    'code-link': {
+                        color: hsla(210, 60, 50, 1),
+                    },
+                    'code-comment-inline': {
+                        opacity: .5,
+                    },
+                    'code-comment-block': {
+                        opacity: .5,
+                    },
+                    'code-docs': {
+                        opacity: .75,
+                    },
+                },
+            }
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_text_code_line) = class $mol_text_code_line extends ($.$mol_paragraph) {
+		numb(){
+			return 0;
+		}
+		token_type(id){
+			return "";
+		}
+		token_text(id){
+			return "";
+		}
+		highlight(){
+			return "";
+		}
+		token_uri(id){
+			return "";
+		}
+		text(){
+			return "";
+		}
+		minimal_height(){
+			return 24;
+		}
+		numb_showed(){
+			return true;
+		}
+		syntax(){
+			return null;
+		}
+		uri_resolve(id){
+			return "";
+		}
+		Numb(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.numb())]);
+			return obj;
+		}
+		Token(id){
+			const obj = new this.$.$mol_text_code_token();
+			(obj.type) = () => ((this.token_type(id)));
+			(obj.haystack) = () => ((this.token_text(id)));
+			(obj.needle) = () => ((this.highlight()));
+			return obj;
+		}
+		Token_link(id){
+			const obj = new this.$.$mol_text_code_token_link();
+			(obj.haystack) = () => ((this.token_text(id)));
+			(obj.needle) = () => ((this.highlight()));
+			(obj.uri) = () => ((this.token_uri(id)));
+			return obj;
+		}
+		find_pos(id){
+			return null;
+		}
+	};
+	($mol_mem(($.$mol_text_code_line.prototype), "Numb"));
+	($mol_mem_key(($.$mol_text_code_line.prototype), "Token"));
+	($mol_mem_key(($.$mol_text_code_line.prototype), "Token_link"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_syntax2_md_flow = new $mol_syntax2({
+        'quote': /^((?:(?:[>"] )(?:[^]*?)$(\r?\n?))+)([\n\r]*)/,
+        'spoiler': /^((?:(?:[\?] )(?:[^]*?)$(\r?\n?))+)([\n\r]*)/,
+        'header': /^([#=]+)(\s+)(.*?)$([\n\r]*)/,
+        'list': /^((?:(?: ?([*+-])|(?:\d+[\.\)])+) +(?:[^]*?)$(?:\r?\n?)(?:  (?:[^]*?)$(?:\r?\n?))*)+)((?:\r?\n)*)/,
+        'code': /^(```)([\w.-]*)[\r\n]+([^]*?)^(```)$([\n\r]*)/,
+        'code-indent': /^((?:(?: |\t)(?:[^]*?)$\r?\n?)+)([\n\r]*)/,
+        'table': /((?:^\|.+?$\r?\n?)+)([\n\r]*)/,
+        'grid': /((?:^ *! .*?$\r?\n?)+)([\n\r]*)/,
+        'cut': /^--+$((?:\r?\n)*)/,
+        'block': /^(.*?)$((?:\r?\n)*)/,
+    });
+    $.$mol_syntax2_md_line = new $mol_syntax2({
+        'strong': /\*\*(.+?)\*\*/,
+        'emphasis': /\*(?!\s)(.+?)\*|\/\/(?!\s)(.+?)\/\//,
+        'code': /```(.+?)```|;;(.+?);;|`(.+?)`/,
+        'insert': /\+\+(.+?)\+\+/,
+        'delete': /~~(.+?)~~|--(.+?)--/,
+        // 'remark' : /(\()(.+?)(\))/ ,
+        // 'quote' : /(")(.+?)(")/ ,
+        'embed': /""(?:(.*?)\\)?(.*?)""/,
+        'link': /\\\\(?:(.*?)\\)?(.*?)\\\\/,
+        'image-link': /!\[([^\[\]]*?)\]\((.*?)\)/,
+        'text-link': /\[(.*?(?:\[[^\[\]]*?\][^\[\]]*?)*)\]\((.*?)\)/,
+        'text-link-http': /\b(https?:\/\/[^\s,.;:!?")]+(?:[,.;:!?")][^\s,.;:!?")]+)+)/,
+    });
+    $.$mol_syntax2_md_code = new $mol_syntax2({
+        'code-indent': /\t+/,
+        'code-docs': /\/\/\/.*?$/,
+        'code-comment-block': /(?:\/\*[^]*?\*\/|\/\+[^]*?\+\/|<![^]*?>)/,
+        'code-link': /(?:\w+:\/\/|#)\S+?(?=\s|\\\\|""|$)/,
+        'code-comment-inline': /\/\/.*?(?:$|\/\/)|- \\(?!\\).*|(?<=^| )#!? .*/,
+        'code-string': /(?:".*?"|'.*?'|`.*?`| ?\\\\.+?\\\\|\/.+?\/[dygimsu]*(?!\p{Letter})|[ \t]*\\[^\n]*)/u,
+        'code-number': /[+-]?(?:\d*\.)?\d+(\uFE0F.|\w*)/,
+        'code-call': /\.?\w+(?=\()/,
+        'code-sexpr': /\((\w+ )/,
+        'code-field': /(?:(?<=\.|::|->)[a-z][\w-]*|(?<=[, \t] |\t)[\w-]+\??:(?!\/\/|:))/,
+        'code-keyword': /(?<=^|\t|[ )(}{=] )((throw|readonly|unknown|keyof|typeof|never|from|class|struct|interface|type|function|extends|implements|module|namespace|import|export|include|require|var|val|let|const|for|do|while|until|in|out|of|new|if|then|else|switch|case|return|async|await|yield|try|catch|break|continue|get|set|public|private|protected|void|int|float|ref)( |$|;))+/,
+        'code-global': /[$]+\w*|\b[A-Z][a-z0-9]+[A-Z]\w*/,
+        'code-word': /\w+/,
+        'code-decorator': /(?<=^|  |\t)@\s*\S+/,
+        'code-tag': /<\/?[\w-]+\/?>?|&\w+;/,
+        'code-punctuation': /[\-\[\]\{\}\(\)<=>~!\?@#%&\*_\+\\\/\|;:\.,\^]+?/,
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_text_code_line extends $.$mol_text_code_line {
+            maximal_width() {
+                return this.text().length * this.letter_width();
+            }
+            syntax() {
+                return this.$.$mol_syntax2_md_code;
+            }
+            tokens(path) {
+                const tokens = [];
+                const text = (path.length > 0)
+                    // @FIXME: this logic compatible only with `string`
+                    ? this.tokens(path.slice(0, path.length - 1))[path[path.length - 1]].found.slice(1, -1)
+                    : this.text();
+                this.syntax().tokenize(text, (name, found, chunks) => {
+                    if (name === 'code-sexpr') {
+                        tokens.push({ name: 'code-punctuation', found: '(', chunks: [] });
+                        tokens.push({ name: 'code-call', found: chunks[0], chunks: [] });
+                    }
+                    else {
+                        tokens.push({ name, found, chunks });
+                    }
+                });
+                return tokens;
+            }
+            sub() {
+                return [
+                    ...this.numb_showed() ? [this.Numb()] : [],
+                    ...this.row_content([])
+                ];
+            }
+            row_content(path) {
+                const content = this.tokens(path).map((t, i) => this.Token([...path, i]));
+                return content.length ? content : ['\n'];
+            }
+            Token(path) {
+                return this.token_type(path) === 'code-link' ? this.Token_link(path) : super.Token(path);
+            }
+            token_type(path) {
+                return this.tokens([...path.slice(0, path.length - 1)])[path[path.length - 1]].name;
+            }
+            token_content(path) {
+                const tokens = this.tokens([...path.slice(0, path.length - 1)]);
+                const token = tokens[path[path.length - 1]];
+                switch (token.name) {
+                    case 'code-string': return [
+                        token.found[0],
+                        ...this.row_content(path),
+                        token.found[token.found.length - 1],
+                    ];
+                    default: return [token.found];
+                }
+            }
+            token_text(path) {
+                const tokens = this.tokens([...path.slice(0, path.length - 1)]);
+                const token = tokens[path[path.length - 1]];
+                return token.found;
+            }
+            token_uri(path) {
+                const uri = this.token_text(path);
+                return this.uri_resolve(uri);
+            }
+            *view_find(check, path = []) {
+                if (check(this, this.text())) {
+                    yield [...path, this];
+                }
+            }
+            find_pos(offset) {
+                return this.find_token_pos([offset]);
+            }
+            find_token_pos([offset, ...path]) {
+                for (const [index, token] of this.tokens(path).entries()) {
+                    if (token.found.length >= offset) {
+                        const token = this.Token([...path, index]);
+                        return { token, offset };
+                    }
+                    else {
+                        offset -= token.found.length;
+                    }
+                }
+                return null;
+            }
+        }
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "tokens", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "row_content", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "token_type", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "token_content", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "token_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "token_uri", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "find_pos", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code_line.prototype, "find_token_pos", null);
+        $$.$mol_text_code_line = $mol_text_code_line;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($mol_text_code_line, {
+            display: 'block',
+            position: 'relative',
+            font: {
+                family: 'monospace',
+            },
+            Numb: {
+                textAlign: 'end',
+                color: $mol_theme.shade,
+                width: rem(3),
+                margin: {
+                    inlineStart: '-4rem',
+                },
+                display: 'inline-block',
+                whiteSpace: 'nowrap',
+                userSelect: 'none',
+                position: 'absolute',
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_text_code) = class $mol_text_code extends ($.$mol_stack) {
+		sidebar_showed(){
+			return false;
+		}
+		render_visible_only(){
+			return false;
+		}
+		row_numb(id){
+			return 0;
+		}
+		row_theme(id){
+			return "";
+		}
+		row_text(id){
+			return "";
+		}
+		syntax(){
+			return null;
+		}
+		uri_resolve(id){
+			return "";
+		}
+		highlight(){
+			return "";
+		}
+		Row(id){
+			const obj = new this.$.$mol_text_code_line();
+			(obj.numb_showed) = () => ((this.sidebar_showed()));
+			(obj.numb) = () => ((this.row_numb(id)));
+			(obj.theme) = () => ((this.row_theme(id)));
+			(obj.text) = () => ((this.row_text(id)));
+			(obj.syntax) = () => ((this.syntax()));
+			(obj.uri_resolve) = (id) => ((this.uri_resolve(id)));
+			(obj.highlight) = () => ((this.highlight()));
+			return obj;
+		}
+		rows(){
+			return [(this.Row("0"))];
+		}
+		Rows(){
+			const obj = new this.$.$mol_list();
+			(obj.render_visible_only) = () => ((this.render_visible_only()));
+			(obj.rows) = () => ((this.rows()));
+			return obj;
+		}
+		text_export(){
+			return "";
+		}
+		Copy(){
+			const obj = new this.$.$mol_button_copy();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$mol_text_code_Copy_hint")));
+			(obj.text) = () => ((this.text_export()));
+			return obj;
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_code_sidebar_showed": (this.sidebar_showed())};
+		}
+		text(){
+			return "";
+		}
+		text_lines(){
+			return [];
+		}
+		find_pos(id){
+			return null;
+		}
+		uri_base(){
+			return "";
+		}
+		row_themes(){
+			return [];
+		}
+		sub(){
+			return [(this.Rows()), (this.Copy())];
+		}
+	};
+	($mol_mem_key(($.$mol_text_code.prototype), "Row"));
+	($mol_mem(($.$mol_text_code.prototype), "Rows"));
+	($mol_mem(($.$mol_text_code.prototype), "Copy"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Code visualizer.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_text_code_demo
+         */
+        class $mol_text_code extends $.$mol_text_code {
+            render_visible_only() {
+                return this.$.$mol_support_css_overflow_anchor();
+            }
+            text_lines() {
+                return (this.text() ?? '').split('\n');
+            }
+            rows() {
+                return this.text_lines().map((_, index) => this.Row(index + 1));
+            }
+            row_text(index) {
+                return this.text_lines()[index - 1];
+            }
+            row_numb(index) {
+                return index;
+            }
+            find_pos(offset) {
+                for (const [index, line] of this.text_lines().entries()) {
+                    if (line.length >= offset) {
+                        return this.Row(index + 1).find_pos(offset);
+                    }
+                    else {
+                        offset -= line.length + 1;
+                    }
+                }
+                return null;
+            }
+            sub() {
+                return [
+                    this.Rows(),
+                    ...this.sidebar_showed() ? [this.Copy()] : []
+                ];
+            }
+            syntax() {
+                return this.$.$mol_syntax2_md_code;
+            }
+            uri_base() {
+                return $mol_dom_context.document.location.href;
+            }
+            uri_resolve(uri) {
+                if (/^(\w+script+:)+/.test(uri))
+                    return null;
+                try {
+                    const url = new URL(uri, this.uri_base());
+                    return url.toString();
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return null;
+                }
+            }
+            text_export() {
+                return this.text() + '\n';
+            }
+            row_theme(row) {
+                return this.row_themes()[row - 1];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_text_code.prototype, "text_lines", null);
+        __decorate([
+            $mol_mem
+        ], $mol_text_code.prototype, "rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code.prototype, "row_text", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code.prototype, "find_pos", null);
+        __decorate([
+            $mol_mem
+        ], $mol_text_code.prototype, "sub", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_text_code.prototype, "uri_resolve", null);
+        $$.$mol_text_code = $mol_text_code;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem, px } = $mol_style_unit;
+        $mol_style_define($mol_text_code, {
+            whiteSpace: 'pre-wrap',
+            font: {
+                family: 'monospace',
+            },
+            Rows: {
+                padding: $mol_gap.text,
+                minWidth: 0,
+            },
+            Row: {
+                font: {
+                    family: 'inherit',
+                },
+            },
+            Copy: {
+                alignSelf: 'flex-start',
+                justifySelf: 'flex-start',
+            },
+            '@': {
+                'mol_text_code_sidebar_showed': {
+                    true: {
+                        $mol_text_code_line: {
+                            margin: {
+                                inlineStart: '1.75rem',
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_textarea) = class $mol_textarea extends ($.$mol_stack) {
+		clickable(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		sidebar_showed(){
+			return false;
+		}
+		press(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		hover(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		hint(){
+			return " ";
+		}
+		enabled(){
+			return true;
+		}
+		spellcheck(){
+			return true;
+		}
+		length_max(){
+			return +Infinity;
+		}
+		selection(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		bring(){
+			return (this.Edit().bring());
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		submit_with_ctrl(){
+			return true;
+		}
+		Edit(){
+			const obj = new this.$.$mol_textarea_edit();
+			(obj.value) = (next) => ((this.value(next)));
+			(obj.hint) = () => ((this.hint()));
+			(obj.enabled) = () => ((this.enabled()));
+			(obj.spellcheck) = () => ((this.spellcheck()));
+			(obj.length_max) = () => ((this.length_max()));
+			(obj.selection) = (next) => ((this.selection(next)));
+			(obj.submit) = (next) => ((this.submit(next)));
+			(obj.submit_with_ctrl) = () => ((this.submit_with_ctrl()));
+			return obj;
+		}
+		row_numb(id){
+			return 0;
+		}
+		highlight(){
+			return "";
+		}
+		syntax(){
+			const obj = new this.$.$mol_syntax2();
+			return obj;
+		}
+		View(){
+			const obj = new this.$.$mol_text_code();
+			(obj.text) = () => ((this.value()));
+			(obj.render_visible_only) = () => (false);
+			(obj.row_numb) = (id) => ((this.row_numb(id)));
+			(obj.sidebar_showed) = () => ((this.sidebar_showed()));
+			(obj.highlight) = () => ((this.highlight()));
+			(obj.syntax) = () => ((this.syntax()));
+			return obj;
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"mol_textarea_clickable": (this.clickable()), 
+				"mol_textarea_sidebar_showed": (this.sidebar_showed())
+			};
+		}
+		event(){
+			return {"keydown": (next) => (this.press(next)), "pointermove": (next) => (this.hover(next))};
+		}
+		sub(){
+			return [(this.Edit()), (this.View())];
+		}
+		symbols_alt(){
+			return {
+				"comma": "<", 
+				"period": ">", 
+				"dash": "−", 
+				"equals": "≈", 
+				"graveAccent": "́", 
+				"forwardSlash": "÷", 
+				"E": "€", 
+				"V": "✔", 
+				"X": "×", 
+				"C": "©", 
+				"P": "§", 
+				"H": "₽", 
+				"key0": "°", 
+				"key8": "•", 
+				"key2": "@", 
+				"key3": "#", 
+				"key4": "$", 
+				"key6": "^", 
+				"key7": "&", 
+				"bracketOpen": "[", 
+				"bracketClose": "]", 
+				"slashBack": "|"
+			};
+		}
+		symbols_alt_ctrl(){
+			return {"space": " "};
+		}
+		symbols_alt_shift(){
+			return {
+				"V": "✅", 
+				"X": "❌", 
+				"O": "⭕", 
+				"key1": "❗", 
+				"key4": "💲", 
+				"key7": "❓", 
+				"comma": "«", 
+				"period": "»", 
+				"semicolon": "“", 
+				"quoteSingle": "”", 
+				"dash": "—", 
+				"equals": "≠", 
+				"graveAccent": "̱", 
+				"bracketOpen": "{", 
+				"bracketClose": "}"
+			};
+		}
+	};
+	($mol_mem(($.$mol_textarea.prototype), "clickable"));
+	($mol_mem(($.$mol_textarea.prototype), "press"));
+	($mol_mem(($.$mol_textarea.prototype), "hover"));
+	($mol_mem(($.$mol_textarea.prototype), "value"));
+	($mol_mem(($.$mol_textarea.prototype), "selection"));
+	($mol_mem(($.$mol_textarea.prototype), "submit"));
+	($mol_mem(($.$mol_textarea.prototype), "Edit"));
+	($mol_mem(($.$mol_textarea.prototype), "syntax"));
+	($mol_mem(($.$mol_textarea.prototype), "View"));
+	($.$mol_textarea_edit) = class $mol_textarea_edit extends ($.$mol_string) {
+		dom_name(){
+			return "textarea";
+		}
+		enter(){
+			return "enter";
+		}
+		field(){
+			return {...(super.field()), "scrollTop": 0};
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * An input field for entering multiline text.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_textarea_demo
+         */
+        class $mol_textarea extends $.$mol_textarea {
+            indent_inc() {
+                let text = this.value();
+                let [from, to] = this.selection();
+                const rows = text.split('\n');
+                let start = 0;
+                for (let i = 0; i < rows.length; ++i) {
+                    let end = start + rows[i].length;
+                    if (end >= from && start <= to) {
+                        if (to === from || start !== to) {
+                            rows[i] = '\t' + rows[i];
+                            to += 1;
+                            end += 1;
+                        }
+                    }
+                    start = end + 1;
+                }
+                this.value(rows.join('\n'));
+                this.selection([from + 1, to]);
+            }
+            indent_dec() {
+                let text = this.value();
+                let [from, to] = this.selection();
+                const rows = text.split('\n');
+                let start = 0;
+                for (let i = 0; i < rows.length; ++i) {
+                    const end = start + rows[i].length;
+                    if (end >= from && start <= to && rows[i].startsWith('\t')) {
+                        rows[i] = rows[i].slice(1);
+                        to -= 1;
+                        if (start < from)
+                            from -= 1;
+                    }
+                    start = end + 1;
+                }
+                this.value(rows.join('\n'));
+                this.selection([from, to]);
+            }
+            symbol_insert(event) {
+                const symbol = event.shiftKey
+                    ? this.symbols_alt_shift()[$mol_keyboard_code[event.keyCode]]
+                    : event.ctrlKey
+                        ? this.symbols_alt_ctrl()[$mol_keyboard_code[event.keyCode]]
+                        : this.symbols_alt()[$mol_keyboard_code[event.keyCode]];
+                if (!symbol)
+                    return;
+                event.preventDefault();
+                document.execCommand('insertText', false, symbol);
+            }
+            clickable(next) {
+                if (!this.enabled())
+                    return true;
+                return next ?? false;
+            }
+            hover(event) {
+                this.clickable(event.ctrlKey);
+            }
+            press(event) {
+                if (event.altKey) {
+                    this.symbol_insert(event);
+                }
+                else {
+                    switch (event.keyCode) {
+                        case !event.shiftKey && $mol_keyboard_code.tab:
+                            this.indent_inc();
+                            break;
+                        case event.shiftKey && $mol_keyboard_code.tab:
+                            this.indent_dec();
+                            break;
+                        default: return;
+                    }
+                    event.preventDefault();
+                }
+            }
+            row_numb(index) {
+                return index;
+            }
+            syntax() {
+                return this.$.$mol_syntax2_md_code;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_textarea.prototype, "clickable", null);
+        $$.$mol_textarea = $mol_textarea;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/textarea/textarea.view.css", "[mol_textarea] {\n\tflex: 1 0 auto;\n\tflex-direction: column;\n\tvertical-align: top;\n\tmin-height: max-content;\n\twhite-space: pre-wrap;\n\tword-break: break-word;\n\tborder-radius: var(--mol_gap_round);\n\tfont-family: monospace;\n\tposition: relative;\n\ttab-size: 4;\n}\n\n[mol_textarea_view] {\n    interactivity: inert;\n\twhite-space: inherit;\n\tfont-family: inherit;\n\ttab-size: inherit;\n}\n\n[mol_textarea_view_copy] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_view] {\n    interactivity: initial;\n}\n\n[mol_textarea_clickable] > [mol_textarea_edit] {\n    interactivity: inert;\n}\n\n[mol_textarea_edit] {\n\tfont-family: inherit;\n\tpadding: var(--mol_gap_text);\n\tcolor: transparent !important;\n\tcaret-color: var(--mol_theme_text);\n\tresize: none;\n\ttext-align: inherit;\n\twhite-space: inherit;\n\tborder-radius: inherit;\n\toverflow-anchor: none;\n\tposition: absolute;\n\theight: 100%;\n\twidth: 100%;\n\ttab-size: inherit;\n}\n\n[mol_textarea_sidebar_showed] [mol_textarea_edit] {\n\tleft: 1.75rem;\n\twidth: calc( 100% - 1.75rem );\n}\n\n[mol_textarea_edit]:hover + [mol_textarea_view] {\n\tz-index: var(--mol_layer_hover);\n}\n\n[mol_textarea_edit]:focus + [mol_textarea_view] {\n\tz-index: var(--mol_layer_focus);\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_icon_plus) = class $mol_icon_plus extends ($.$mol_icon) {
 		path(){
 			return "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
@@ -20073,22 +20925,17 @@ var $;
 			return obj;
 		}
 		theme_options(){
-			return {};
+			return [];
 		}
-		theme(next){
-			if(next !== undefined) return next;
-			return "sakura";
-		}
-		Theme_switch(){
-			const obj = new this.$.$mol_switch();
-			(obj.options) = () => ((this.theme_options()));
-			(obj.value) = (next) => ((this.theme(next)));
+		Themes(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.theme_options()));
 			return obj;
 		}
 		Look_section(){
 			const obj = new this.$.$mol_section();
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Look_section_title")));
-			(obj.content) = () => ([(this.Catalog_title()), (this.Theme_switch())]);
+			(obj.content) = () => ([(this.Catalog_title()), (this.Themes())]);
 			return obj;
 		}
 		social_link(next){
@@ -20157,6 +21004,64 @@ var $;
 			const obj = new this.$.$mol_section();
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Categories_section_title")));
 			(obj.content) = () => ((this.categories_content()));
+			return obj;
+		}
+		Import_hint(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Import_hint_title")));
+			return obj;
+		}
+		import_prompt(){
+			return "";
+		}
+		Import_prompt(){
+			const obj = new this.$.$mol_button_copy();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Import_prompt_title")));
+			(obj.text) = () => ((this.import_prompt()));
+			return obj;
+		}
+		import_json(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Import_json(){
+			const obj = new this.$.$mol_textarea();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Import_json_hint")));
+			(obj.value) = (next) => ((this.import_json(next)));
+			return obj;
+		}
+		import_preview(){
+			return "";
+		}
+		Import_preview(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.import_preview()));
+			return obj;
+		}
+		import_run(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		import_ready(){
+			return false;
+		}
+		Import_run(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Import_run_title")));
+			(obj.click) = (next) => ((this.import_run(next)));
+			(obj.enabled) = () => ((this.import_ready()));
+			return obj;
+		}
+		Import_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Import_section_title")));
+			(obj.content) = () => ([
+				(this.Import_hint()), 
+				(this.Import_prompt()), 
+				(this.Import_json()), 
+				(this.Import_preview()), 
+				(this.Import_run())
+			]);
 			return obj;
 		}
 		debug_info(){
@@ -20258,8 +21163,34 @@ var $;
 			]);
 			return obj;
 		}
+		theme_select(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		theme_swatch(id){
+			return {};
+		}
+		Theme_swatch(id){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ((this.theme_swatch(id)));
+			return obj;
+		}
+		theme_name(id){
+			return "";
+		}
+		Theme_name(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.theme_name(id))]);
+			return obj;
+		}
 		title(){
 			return (this.$.$mol_locale.text("$bog_nka_settings_title"));
+		}
+		Import_summary(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Import_summary"));
+		}
+		Import_errors(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Import_errors"));
 		}
 		Theme_sakura(){
 			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_sakura"));
@@ -20295,12 +21226,19 @@ var $;
 				(this.Look_section()), 
 				(this.Sales_section()), 
 				(this.Categories_section()), 
+				(this.Import_section()), 
 				(this.Access_section())
 			];
 		}
 		Category_row(id){
 			const obj = new this.$.$mol_row();
 			(obj.sub) = () => ([(this.Category_title(id)), (this.Category_remove(id))]);
+			return obj;
+		}
+		Theme_option(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.theme_select(id, next)));
+			(obj.sub) = () => ([(this.Theme_swatch(id)), (this.Theme_name(id))]);
 			return obj;
 		}
 	};
@@ -20311,8 +21249,7 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "catalog_title"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Catalog_title"));
-	($mol_mem(($.$bog_nka_settings.prototype), "theme"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Theme_switch"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Themes"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Look_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
@@ -20326,6 +21263,14 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Category_form"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Categories_list"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Categories_section"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Import_hint"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Import_prompt"));
+	($mol_mem(($.$bog_nka_settings.prototype), "import_json"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Import_json"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Import_preview"));
+	($mol_mem(($.$bog_nka_settings.prototype), "import_run"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Import_run"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Import_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Debug_info"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Rights"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Access_section"));
@@ -20342,8 +21287,12 @@ var $;
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm_actions"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_remove"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "theme_select"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Theme_swatch"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Theme_name"));
 	($mol_mem(($.$bog_nka_settings.prototype), "catalog_link"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_row"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Theme_option"));
 
 
 ;
@@ -20385,28 +21334,157 @@ var $;
     const rounded = 'ui-rounded, system-ui, sans-serif';
     const serif = 'ui-serif, Georgia, serif';
     $.$bog_nka_theme = {
-        sakura: { hue: 340, spread: 60, round: '1rem', font: rounded },
-        lavender: { hue: 290, spread: 50, round: '1rem', font: rounded },
-        mint: { hue: 165, spread: 60, round: '1rem', font: rounded },
-        peach: { hue: 30, spread: 40, round: '1rem', font: rounded },
-        sky: { hue: 220, spread: 50, round: '1rem', font: rounded },
-        milk: { hue: 60, spread: 30, round: '.5rem', font: serif },
-        classic: { hue: 240, spread: 90, round: '.25rem', font: 'system-ui, sans-serif' },
+        sakura: { hue: 340, spread: 60, round: '1rem', font: rounded, pattern: 'decor', card: 'soft', photo: 'polaroid', decor: '🌸' },
+        lavender: { hue: 290, spread: 50, round: '1rem', font: rounded, pattern: 'dots', card: 'dashed', photo: 'round', decor: '🦄' },
+        mint: { hue: 165, spread: 60, round: '1rem', font: rounded, pattern: 'grid', card: 'soft', photo: 'full', decor: '🌿' },
+        peach: { hue: 30, spread: 40, round: '1rem', font: rounded, pattern: 'stripes', card: 'outline', photo: 'polaroid', decor: '🍑' },
+        sky: { hue: 220, spread: 50, round: '1rem', font: rounded, pattern: 'dots', card: 'soft', photo: 'round', decor: '☁️' },
+        milk: { hue: 60, spread: 30, round: '.5rem', font: serif, pattern: 'none', card: 'outline', photo: 'polaroid', decor: '🐾' },
+        classic: { hue: 240, spread: 90, round: '.25rem', font: 'system-ui, sans-serif', pattern: 'none', card: 'soft', photo: 'full', decor: '' },
     };
     function $bog_nka_theme_of(name) {
         return $.$bog_nka_theme[name] ?? $.$bog_nka_theme.sakura;
     }
     $.$bog_nka_theme_of = $bog_nka_theme_of;
+    const tint = (alpha) => `oklch( 70% .12 var(--mol_theme_hue) / ${alpha} )`;
+    function pattern(preset) {
+        switch (preset.pattern) {
+            case 'decor': {
+                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><text x="8" y="28" font-size="18" opacity=".18">${preset.decor}</text><text x="40" y="60" font-size="14" opacity=".12">${preset.decor}</text></svg>`;
+                return { image: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`, size: '4rem 4rem' };
+            }
+            case 'dots': return { image: `radial-gradient( circle, ${tint(.35)} 1.5px, transparent 2px )`, size: '1.25rem 1.25rem' };
+            case 'grid': return {
+                image: `linear-gradient( ${tint(.15)} 1px, transparent 1px ), linear-gradient( 90deg, ${tint(.15)} 1px, transparent 1px )`,
+                size: '1.5rem 1.5rem',
+            };
+            case 'stripes': return { image: `repeating-linear-gradient( 45deg, ${tint(.1)} 0 .75rem, transparent .75rem 1.5rem )`, size: 'auto' };
+            default: return { image: 'none', size: 'auto' };
+        }
+    }
+    const card_border = {
+        soft: { style: 'none', width: '0' },
+        dashed: { style: 'dashed', width: '2px' },
+        outline: { style: 'solid', width: '2px' },
+    };
+    const photo_frame = {
+        full: { inset: '0', round: '0' },
+        polaroid: { inset: '.75rem', round: 'var(--mol_gap_round)' },
+        round: { inset: '.75rem', round: '50%' },
+    };
     function $bog_nka_theme_style(name) {
         const preset = $bog_nka_theme_of(name);
+        const back = pattern(preset);
+        const photo = photo_frame[preset.photo];
+        const border = card_border[preset.card];
         return {
             '--mol_theme_hue': `${preset.hue}deg`,
             '--mol_theme_hue_spread': `${preset.spread}deg`,
             '--mol_gap_round': preset.round,
+            '--bog_nka_pattern': back.image,
+            '--bog_nka_pattern_size': back.size,
+            '--bog_nka_card_border_style': border.style,
+            '--bog_nka_card_border_width': border.width,
+            '--bog_nka_photo_inset': photo.inset,
+            '--bog_nka_photo_round': photo.round,
+            '--bog_nka_decor': JSON.stringify(preset.decor),
             fontFamily: preset.font,
         };
     }
     $.$bog_nka_theme_style = $bog_nka_theme_style;
+    function $bog_nka_theme_swatch(name) {
+        const { hue } = $bog_nka_theme_of(name);
+        return {
+            background: `linear-gradient( 135deg, oklch( 93% .04 ${hue} ) 50%, oklch( 72% .15 ${hue} ) 50% )`,
+        };
+    }
+    $.$bog_nka_theme_swatch = $bog_nka_theme_swatch;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const text = (value) => typeof value === 'string' ? value.trim() : '';
+    function $bog_nka_import_parse(json) {
+        const data = { title: '', categories: [], products: [], errors: [] };
+        if (!json.trim())
+            return data;
+        let raw;
+        try {
+            raw = JSON.parse(json.trim().replace(/^```(?:json)?\s*|\s*```$/g, ''));
+        }
+        catch (error) {
+            data.errors.push(error.message);
+            return data;
+        }
+        if (!raw || typeof raw !== 'object') {
+            data.errors.push('Root must be an object');
+            return data;
+        }
+        data.title = text(raw.title);
+        const categories = new Set();
+        for (const category of Array.isArray(raw.categories) ? raw.categories : []) {
+            const name = text(category);
+            if (name)
+                categories.add(name);
+        }
+        const products = Array.isArray(raw.products) ? raw.products : [];
+        products.forEach((item, index) => {
+            const title = text(item?.title);
+            if (!title) {
+                data.errors.push(`Product ${index + 1} has no title`);
+                return;
+            }
+            const price = Number(item.price ?? 0);
+            if (!Number.isFinite(price) || price < 0)
+                data.errors.push(`Product "${title}" has wrong price`);
+            const category = text(item.category);
+            if (category)
+                categories.add(category);
+            data.products.push({
+                title,
+                price: Number.isFinite(price) && price > 0 ? price : 0,
+                description: text(item.description),
+                category,
+                available: item.available !== false,
+            });
+        });
+        data.categories = [...categories];
+        return data;
+    }
+    $.$bog_nka_import_parse = $bog_nka_import_parse;
+    function $bog_nka_import_apply(catalog, data) {
+        if (data.title)
+            catalog.Title('auto').val(data.title);
+        const categories = catalog.Categories('auto');
+        const known = new Set(categories.items());
+        for (const category of data.categories) {
+            if (!known.has(category))
+                categories.add(category);
+        }
+        const products = catalog.Products('auto');
+        for (const item of data.products) {
+            const product = products.make(null);
+            product.Title('auto').val(item.title);
+            product.Price('auto').val(item.price);
+            product.Description('auto').val(item.description);
+            product.Category('auto').val(item.category);
+            product.Available('auto').val(item.available);
+        }
+    }
+    $.$bog_nka_import_apply = $bog_nka_import_apply;
+    $.$bog_nka_import_prompt = `You help an artist fill an online merch catalog.
+Ask me short questions in my language, one at a time: what products I sell, their names, prices in rubles, short descriptions, categories and whether each one is in stock.
+When you have enough, reply with JSON only, no comments, in this format:
+{
+	"title": "Catalog name",
+	"categories": [ "Category" ],
+	"products": [
+		{ "title": "Name", "price": 1000, "description": "Short description", "category": "Category", "available": true }
+	]
+}
+Every product must have a title. Price is a number without currency. I will upload photos myself later.`;
 })($ || ($ = {}));
 
 ;
@@ -20532,7 +21610,7 @@ var $;
                 catalog.Title(null)?.val(next);
                 return next;
             }
-            theme_options() {
+            theme_names() {
                 return {
                     sakura: this.Theme_sakura(),
                     lavender: this.Theme_lavender(),
@@ -20543,6 +21621,21 @@ var $;
                     classic: this.Theme_classic(),
                 };
             }
+            theme_options() {
+                return Object.keys(this.theme_names()).map(name => this.Theme_option(name));
+            }
+            theme_name(name) {
+                return this.theme_names()[name];
+            }
+            theme_swatch(name) {
+                const ring = this.theme() === name
+                    ? '0 0 0 3px var(--mol_theme_current)'
+                    : '0 0 0 1px var(--mol_theme_line)';
+                return { ...$bog_nka_theme_swatch(name), boxShadow: ring };
+            }
+            theme_select(name) {
+                this.theme(name);
+            }
             theme(next) {
                 const catalog = this.catalog();
                 if (!catalog)
@@ -20551,6 +21644,40 @@ var $;
                     return catalog.Theme()?.val() || 'sakura';
                 catalog.Theme(null)?.val(next);
                 return next;
+            }
+            import_prompt() {
+                return $bog_nka_import_prompt;
+            }
+            import_json(next) {
+                return next ?? '';
+            }
+            import_data() {
+                return $bog_nka_import_parse(this.import_json());
+            }
+            import_new_categories() {
+                const known = new Set(this.catalog()?.Categories()?.items() ?? []);
+                return this.import_data().categories.filter(category => !known.has(category));
+            }
+            import_preview() {
+                const data = this.import_data();
+                if (!this.import_json().trim())
+                    return '';
+                const summary = this.Import_summary()
+                    .replace('{products}', String(data.products.length))
+                    .replace('{categories}', String(this.import_new_categories().length));
+                if (!data.errors.length)
+                    return summary;
+                return summary + '. ' + this.Import_errors().replace('{errors}', data.errors.join('; '));
+            }
+            import_ready() {
+                return this.import_data().products.length > 0;
+            }
+            import_run() {
+                const catalog = this.catalog();
+                if (!catalog || !this.import_ready())
+                    return;
+                $bog_nka_import_apply(catalog, this.import_data());
+                this.import_json('');
             }
             social_link(next) {
                 const catalog = this.catalog();
@@ -20615,6 +21742,18 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_settings.prototype, "category_remove_confirm", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "theme_select", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "import_json", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "import_data", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "import_run", null);
         $$.$bog_nka_settings = $bog_nka_settings;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -20632,8 +21771,30 @@ var $;
                     size: '1.25rem',
                 },
             },
-            Theme_switch: {
+            Themes: {
                 flex: { wrap: 'wrap' },
+                gap: $mol_gap.block,
+                padding: {
+                    top: $mol_gap.block,
+                    bottom: $mol_gap.block,
+                },
+            },
+            Theme_option: {
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: $mol_gap.space,
+            },
+            Theme_swatch: {
+                width: '2.5rem',
+                height: '2.5rem',
+                border: {
+                    radius: '50%',
+                },
+            },
+            Theme_name: {
+                font: {
+                    size: '.875rem',
+                },
             },
             Category_form: {
                 flex: { wrap: 'nowrap' },
@@ -22311,21 +23472,33 @@ var $;
     (function ($$) {
         $mol_style_define($bog_nka_product_card, {
             overflow: 'hidden',
+            border: {
+                style: $mol_style_func.vary('--bog_nka_card_border_style'),
+                width: $mol_style_func.vary('--bog_nka_card_border_width'),
+                color: $mol_theme.control,
+            },
             gap: $mol_gap.block,
             padding: {
                 bottom: $mol_gap.block,
             },
             Cover: {
                 display: 'block',
+                padding: $mol_style_func.vary('--bog_nka_photo_inset'),
             },
             Photos: {
                 Image: {
                     width: '100%',
                     aspectRatio: 1,
+                    border: {
+                        radius: $mol_style_func.vary('--bog_nka_photo_round'),
+                    },
                 },
             },
             Photo_empty: {
                 aspectRatio: 1,
+                border: {
+                    radius: $mol_style_func.vary('--bog_nka_photo_round'),
+                },
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: {
@@ -22901,9 +24074,20 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $mol_style_attach("bog/nka/app/app.view.css", "[bog_nka_app_title]::before {\n\tcontent: var(--bog_nka_decor);\n\tmargin-right: .5ch;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_app, {
+            background: {
+                image: $mol_style_func.vary('--bog_nka_pattern'),
+                size: [$mol_style_func.vary('--bog_nka_pattern_size')],
+            },
             Catalog_missing: {
                 flexDirection: 'column',
                 display: 'block'

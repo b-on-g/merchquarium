@@ -29,6 +29,13 @@
 	"$bog_nka_settings_Category_confirm_title_title": "Delete this category?",
 	"$bog_nka_settings_Category_input_hint": "New category",
 	"$bog_nka_settings_Category_remove_button_hint": "Remove",
+	"$bog_nka_settings_Import_errors": "Problems: {errors}",
+	"$bog_nka_settings_Import_hint_title": "Copy the prompt, talk to any AI chat and paste its JSON below. Upload photos to the cards afterwards.",
+	"$bog_nka_settings_Import_json_hint": "Paste JSON here",
+	"$bog_nka_settings_Import_prompt_title": "Copy prompt for AI",
+	"$bog_nka_settings_Import_run_title": "Create products",
+	"$bog_nka_settings_Import_section_title": "Bulk import",
+	"$bog_nka_settings_Import_summary": "Will add products: {products}, new categories: {categories}",
 	"$bog_nka_settings_Look_section_title": "Appearance",
 	"$bog_nka_settings_Sales_section_title": "Sales",
 	"$bog_nka_settings_Social_link_hint": "social link",
@@ -54,5 +61,6 @@
 	"$mol_search_hint": "Search...",
 	"$mol_select_filter_hint": "Filter..",
 	"$mol_select_hint": "Pick..",
-	"$mol_select_no_options_message": "No options"
+	"$mol_select_no_options_message": "No options",
+	"$mol_text_code_Copy_hint": "Copy whole code"
 }
