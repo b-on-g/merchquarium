@@ -41034,6 +41034,9 @@ declare namespace $.$$ {
         account_lord(): string;
         catalog(): $bog_nka_catalog | null;
         catalog_land(): $giper_baza_land | null;
+        is_admin(): boolean;
+        body(): readonly any[];
+        Category_remove(category: string): $.$mol_pop;
         debug_rank(): string;
         products_total(): number;
         products_available(): number;
@@ -41758,6 +41761,7 @@ declare namespace $.$$ {
         buy_enabled(): boolean;
         buy(): void;
         social_url(): URL | null;
+        Photos_controls(): $mol_row;
         Available(): $mol_check_box;
         Delete(): $mol_button_major;
     }

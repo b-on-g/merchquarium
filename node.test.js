@@ -20267,6 +20267,22 @@ var $;
                     return null;
                 return this.$.$giper_baza_glob.Land(new this.$.$giper_baza_link(link));
             }
+            is_admin() {
+                return this.catalog_land()?.Data($bog_nka_catalog).can_change() ?? false;
+            }
+            body() {
+                if (this.is_admin())
+                    return super.body();
+                return [
+                    this.Account_label(),
+                    this.Account_lord(),
+                    this.Account_id(),
+                    this.Categories_list(),
+                ];
+            }
+            Category_remove(category) {
+                return this.is_admin() ? super.Category_remove(category) : null;
+            }
             debug_rank() {
                 const land = this.catalog_land();
                 if (!land)
@@ -20365,6 +20381,12 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_settings.prototype, "settings_toggle", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "is_admin", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_nka_settings.prototype, "Category_remove", null);
         __decorate([
             $mol_mem
         ], $bog_nka_settings.prototype, "debug_rank", null);
@@ -21896,6 +21918,9 @@ var $;
                     return null;
                 }
             }
+            Photos_controls() {
+                return this.changed() ? super.Photos_controls() : null;
+            }
             Available() {
                 return this.changed() ? super.Available() : null;
             }
@@ -21921,6 +21946,9 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_product_card.prototype, "buy", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "Photos_controls", null);
         __decorate([
             $mol_mem
         ], $bog_nka_product_card.prototype, "Available", null);
