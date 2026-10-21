@@ -4,6 +4,5 @@ namespace $ {
 		Categories: $giper_baza_list_str,
 		Social: $giper_baza_atom_text,
 		SocialText: $giper_baza_atom_text,
-		SoldOutImage: $giper_baza_atom_link.to( ()=> $giper_baza_file ),
 	}) {}
 }
