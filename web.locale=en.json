@@ -36,6 +36,7 @@
 	"$bog_nka_settings_Import_run_title": "Create products",
 	"$bog_nka_settings_Import_section_title": "Bulk import",
 	"$bog_nka_settings_Import_summary": "Will add products: {products}, new categories: {categories}",
+	"$bog_nka_settings_Listed_title": "Show in search engines",
 	"$bog_nka_settings_Look_section_title": "Appearance",
 	"$bog_nka_settings_Sales_section_title": "Sales",
 	"$bog_nka_settings_Social_link_hint": "social link",

@@ -39115,6 +39115,27 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	export class $mol_icon_tick extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=tick.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_check_box extends $mol_check {
+		Icon( ): $mol_icon_tick
+	}
+	
+}
+
+//# sourceMappingURL=box.view.tree.d.ts.map
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -40628,6 +40649,7 @@ declare namespace $ {
             readonly SocialText: (auto?: any) => $giper_baza_atom_text | null;
             readonly Title: (auto?: any) => $giper_baza_atom_text | null;
             readonly Theme: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Hidden: (auto?: any) => $giper_baza_atom_bool | null;
         }>;
         path: string;
     } & {
@@ -41338,6 +41360,7 @@ declare namespace $ {
             readonly SocialText: typeof $giper_baza_atom_text;
             readonly Title: typeof $giper_baza_atom_text;
             readonly Theme: typeof $giper_baza_atom_text;
+            readonly Hidden: typeof $giper_baza_atom_bool;
         };
     };
     export class $bog_nka_catalog extends $bog_nka_catalog_base {
@@ -41509,25 +41532,25 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_section__title_bog_nka_settings_9 = $mol_type_enforce<
+	type $mol_check_box__title_bog_nka_settings_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_check_box['title'] >
+	>
+	type $mol_check_box__checked_bog_nka_settings_10 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['listed'] >
+		,
+		ReturnType< $mol_check_box['checked'] >
+	>
+	type $mol_section__title_bog_nka_settings_11 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_10 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_12 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['content'] >
-	>
-	type $mol_string__hint_bog_nka_settings_11 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_string['hint'] >
-	>
-	type $mol_string__value_bog_nka_settings_12 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_link'] >
-		,
-		ReturnType< $mol_string['value'] >
 	>
 	type $mol_string__hint_bog_nka_settings_13 = $mol_type_enforce<
 		string
@@ -41535,226 +41558,236 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_14 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_text'] >
+		ReturnType< $bog_nka_settings['social_link'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_section__title_bog_nka_settings_15 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_section['title'] >
-	>
-	type $mol_section__content_bog_nka_settings_16 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_section['content'] >
-	>
-	type $mol_string__hint_bog_nka_settings_17 = $mol_type_enforce<
+	type $mol_string__hint_bog_nka_settings_15 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_bog_nka_settings_18 = $mol_type_enforce<
+	type $mol_string__value_bog_nka_settings_16 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['social_text'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_section__title_bog_nka_settings_17 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_section['title'] >
+	>
+	type $mol_section__content_bog_nka_settings_18 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_section['content'] >
+	>
+	type $mol_string__hint_bog_nka_settings_19 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_nka_settings_20 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_draft'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_19 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_21 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_20 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_22 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_add'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_21 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_23 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_view__sub_bog_nka_settings_22 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_settings_24 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_rows'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_section__title_bog_nka_settings_23 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_25 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_24 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_26 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['categories_content'] >
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_25 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_27 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_copy__title_bog_nka_settings_26 = $mol_type_enforce<
+	type $mol_button_copy__title_bog_nka_settings_28 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_copy['title'] >
 	>
-	type $mol_button_copy__text_bog_nka_settings_27 = $mol_type_enforce<
+	type $mol_button_copy__text_bog_nka_settings_29 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['import_prompt'] >
 		,
 		ReturnType< $mol_button_copy['text'] >
 	>
-	type $mol_textarea__hint_bog_nka_settings_28 = $mol_type_enforce<
+	type $mol_textarea__hint_bog_nka_settings_30 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_textarea['hint'] >
 	>
-	type $mol_textarea__value_bog_nka_settings_29 = $mol_type_enforce<
+	type $mol_textarea__value_bog_nka_settings_31 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['import_json'] >
 		,
 		ReturnType< $mol_textarea['value'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_30 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_32 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['import_preview'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_31 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_33 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_32 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_34 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['import_run'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__enabled_bog_nka_settings_33 = $mol_type_enforce<
+	type $mol_button_major__enabled_bog_nka_settings_35 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['import_ready'] >
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $mol_section__title_bog_nka_settings_34 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_36 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_35 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_37 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_36 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_38 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['debug_info'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $giper_baza_land_rights__land_bog_nka_settings_37 = $mol_type_enforce<
+	type $giper_baza_land_rights__land_bog_nka_settings_39 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['catalog_land'] >
 		,
 		ReturnType< $giper_baza_land_rights['land'] >
 	>
-	type $mol_section__title_bog_nka_settings_38 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_40 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_39 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_41 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_40 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_42 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_title'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__hint_bog_nka_settings_41 = $mol_type_enforce<
+	type $mol_button_minor__hint_bog_nka_settings_43 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['hint'] >
 	>
-	type $mol_button_minor__sub_bog_nka_settings_42 = $mol_type_enforce<
+	type $mol_button_minor__sub_bog_nka_settings_44 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_button_minor['sub'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_43 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_45 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_44 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
-	type $mol_paragraph__title_bog_nka_settings_45 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_paragraph['title'] >
-	>
 	type $mol_paragraph__title_bog_nka_settings_46 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_47 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_paragraph['title'] >
+	>
+	type $mol_paragraph__title_bog_nka_settings_48 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_product_count'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_47 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_49 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_48 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_50 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_cancel'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_49 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_51 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_50 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_52 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_confirm'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_51 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_53 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_pop__Anchor_bog_nka_settings_52 = $mol_type_enforce<
+	type $mol_pop__Anchor_bog_nka_settings_54 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['Category_remove_button'] >
 		,
 		ReturnType< $mol_pop['Anchor'] >
 	>
-	type $mol_pop__bubble_content_bog_nka_settings_53 = $mol_type_enforce<
+	type $mol_pop__bubble_content_bog_nka_settings_55 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_pop['bubble_content'] >
 	>
-	type $mol_view__style_bog_nka_settings_54 = $mol_type_enforce<
+	type $mol_view__style_bog_nka_settings_56 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['theme_swatch'] >
 		,
 		ReturnType< $mol_view['style'] >
 	>
-	type $mol_view__sub_bog_nka_settings_55 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_settings_57 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_row__sub_bog_nka_settings_56 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_58 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_57 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_59 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['theme_select'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_minor__sub_bog_nka_settings_58 = $mol_type_enforce<
+	type $mol_button_minor__sub_bog_nka_settings_60 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_button_minor['sub'] >
@@ -41771,6 +41804,8 @@ declare namespace $ {
 		Catalog_title( ): $mol_string
 		theme_options( ): readonly(any)[]
 		Themes( ): $mol_view
+		listed( next?: boolean ): boolean
+		Listed( ): $mol_check_box
 		Look_section( ): $mol_section
 		social_link( next?: string ): string
 		Social_link( ): $mol_string
@@ -41878,6 +41913,7 @@ declare namespace $.$$ {
         };
         theme_select(name: string): void;
         theme(next?: string): string;
+        listed(next?: boolean): boolean;
         import_prompt(): string;
         import_json(next?: string): string;
         import_data(): $bog_nka_import_data;
@@ -42358,27 +42394,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-
-	export class $mol_icon_tick extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=tick.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_check_box extends $mol_check {
-		Icon( ): $mol_icon_tick
-	}
-	
-}
-
-//# sourceMappingURL=box.view.tree.d.ts.map
-declare namespace $ {
     /** Image processing. */
     class $mol_picture extends $mol_object2 {
         readonly canvas: HTMLCanvasElement;
@@ -42676,6 +42691,52 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    function $mol_error_enriched<V>(cause: {}, cb: () => V): V;
+}
+
+declare namespace $ {
+    class $mol_fetch_response extends $mol_object {
+        readonly native: Response;
+        readonly request: $mol_fetch_request;
+        status(): "unknown" | "success" | "inform" | "redirect" | "wrong" | "failed";
+        code(): number;
+        ok(): boolean;
+        message(): string;
+        headers(): Headers;
+        mime(): string | null;
+        stream(): ReadableStream<Uint8Array<ArrayBuffer>> | null;
+        text(): string;
+        json(): unknown;
+        blob(): Blob;
+        buffer(): ArrayBuffer;
+        xml(): Document;
+        xhtml(): Document;
+        html(): Document;
+    }
+    class $mol_fetch_request extends $mol_object {
+        readonly native: Request;
+        response_async(): Promise<Response> & {
+            destructor: () => void;
+        };
+        response(): $mol_fetch_response;
+        success(): $mol_fetch_response;
+    }
+    class $mol_fetch extends $mol_object {
+        static request(input: RequestInfo, init?: RequestInit): $mol_fetch_request;
+        static response(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
+        static success(input: RequestInfo, init?: RequestInit): $mol_fetch_response;
+        static stream(input: RequestInfo, init?: RequestInit): ReadableStream<Uint8Array<ArrayBuffer>> | null;
+        static text(input: RequestInfo, init?: RequestInit): string;
+        static json(input: RequestInfo, init?: RequestInit): unknown;
+        static blob(input: RequestInfo, init?: RequestInit): Blob;
+        static buffer(input: RequestInfo, init?: RequestInit): ArrayBuffer;
+        static xml(input: RequestInfo, init?: RequestInit): Document;
+        static xhtml(input: RequestInfo, init?: RequestInit): Document;
+        static html(input: RequestInfo, init?: RequestInit): Document;
+    }
+}
+
+declare namespace $ {
 
 	type $bog_favicon__Icon_bog_nka_app_1 = $mol_type_enforce<
 		ReturnType< $bog_nka_app['ico'] >
@@ -42832,6 +42893,7 @@ declare namespace $ {
 		Return_title( ): string
 		Filter_all( ): string
 		title( ): string
+		seo_server( ): string
 		Product_card( id: any): $bog_nka_product_card
 		Product_undo( id: any): $mol_button_major
 		plugins( ): readonly(any)[]
@@ -42851,6 +42913,8 @@ declare namespace $.$$ {
         content(): $mol_view[] | $.$bog_nka_settings[];
         catalog_selected_text(): string;
         catalog_create(): void;
+        auto(): boolean[];
+        seo_register(): boolean;
         title(): string;
         style(): {
             '--mol_theme_hue': string;

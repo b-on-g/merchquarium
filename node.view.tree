@@ -475,6 +475,11 @@ $mol_section $mol_list
 		<= Content $mol_list
 			rows <= content /
 
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
 $mol_row $mol_view
 
 $mol_stack $mol_view
@@ -709,6 +714,9 @@ $bog_nka_settings $mol_page
 					value? <=> catalog_title? \
 				<= Themes $mol_view
 					sub <= theme_options /
+				<= Listed $mol_check_box
+					title @ \Show in search engines
+					checked? <=> listed? true
 		<= Sales_section $mol_section
 			title @ \Sales
 			content /
@@ -919,11 +927,6 @@ $mol_button_open_native $mol_view
 	event *
 		change? <=> picked? null
 
-$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
-
-$mol_check_box $mol_check
-	Icon $mol_icon_tick
-
 $bog_nka_product_card $mol_card
 	product_link? \
 	catalog_link? \
@@ -992,6 +995,7 @@ $bog_nka_app $mol_page
 	Return_title @ \Return
 	Filter_all @ \All
 	title @ \Catalog 
+	seo_server \
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \

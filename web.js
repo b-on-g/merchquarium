@@ -18299,6 +18299,39 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
+		path(){
+			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
+		Icon(){
+			const obj = new this.$.$mol_icon_tick();
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_check_box.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
 	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
 
 
@@ -20620,39 +20653,6 @@ var $;
         $$.$mol_drop = $mol_drop;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
-		path(){
-			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
-		Icon(){
-			const obj = new this.$.$mol_icon_tick();
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_check_box.prototype), "Icon"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
 
 ;
 	($.$mol_icon_menu) = class $mol_icon_menu extends ($.$mol_icon) {
@@ -30807,10 +30807,24 @@ var $;
 			(obj.sub) = () => ((this.theme_options()));
 			return obj;
 		}
+		listed(next){
+			if(next !== undefined) return next;
+			return true;
+		}
+		Listed(){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Listed_title")));
+			(obj.checked) = (next) => ((this.listed(next)));
+			return obj;
+		}
 		Look_section(){
 			const obj = new this.$.$mol_section();
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Look_section_title")));
-			(obj.content) = () => ([(this.Catalog_title()), (this.Themes())]);
+			(obj.content) = () => ([
+				(this.Catalog_title()), 
+				(this.Themes()), 
+				(this.Listed())
+			]);
 			return obj;
 		}
 		social_link(next){
@@ -31125,6 +31139,8 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "catalog_title"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Catalog_title"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Themes"));
+	($mol_mem(($.$bog_nka_settings.prototype), "listed"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Listed"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Look_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
@@ -31641,6 +31657,7 @@ var $;
         SocialText: $giper_baza_atom_text,
         Title: $giper_baza_atom_text,
         Theme: $giper_baza_atom_text,
+        Hidden: $giper_baza_atom_bool,
     }) {
     }
     $.$bog_nka_catalog = $bog_nka_catalog;
@@ -31964,6 +31981,15 @@ var $;
                 catalog.Theme(null)?.val(next);
                 return next;
             }
+            listed(next) {
+                const catalog = this.catalog();
+                if (!catalog)
+                    return true;
+                if (next === undefined)
+                    return !catalog.Hidden()?.val();
+                catalog.Hidden(null)?.val(!next);
+                return next;
+            }
             import_prompt() {
                 return $bog_nka_import_prompt;
             }
@@ -32084,6 +32110,16 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_settings, {
+            Sales_section: {
+                Content: {
+                    gap: $mol_gap.block,
+                },
+            },
+            Import_section: {
+                Content: {
+                    gap: $mol_gap.block,
+                },
+            },
             Account_lord: {
                 font: {
                     family: 'monospace',
@@ -33533,6 +33569,9 @@ var $;
 		title(){
 			return (this.$.$mol_locale.text("$bog_nka_app_title"));
 		}
+		seo_server(){
+			return "";
+		}
 		Product_card(id){
 			const obj = new this.$.$bog_nka_product_card();
 			(obj.product_link) = () => ((this.product_link(id)));
@@ -33633,6 +33672,24 @@ var $;
             catalog_create() {
                 const land = this.$.$giper_baza_glob.land_grab();
                 this.catalog_link(land.link().str);
+            }
+            auto() {
+                return [this.seo_register()];
+            }
+            seo_register() {
+                const server = this.seo_server();
+                const link = this.catalog_link();
+                if (!server || !link)
+                    return false;
+                try {
+                    this.$.$mol_fetch.response(new URL('register', server).toString(), { method: 'POST', body: link });
+                    return true;
+                }
+                catch (error) {
+                    if ($mol_promise_like(error))
+                        $mol_fail_hidden(error);
+                    return false;
+                }
             }
             title() {
                 return this.catalog()?.Title()?.val()?.trim() || super.title();
@@ -33820,6 +33877,9 @@ var $;
         __decorate([
             $mol_action
         ], $bog_nka_app.prototype, "catalog_create", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "seo_register", null);
         __decorate([
             $mol_mem
         ], $bog_nka_app.prototype, "style", null);
