@@ -42,6 +42,22 @@ namespace $.$$ {
 			this.catalog_link( land.link().str )
 		}
 
+		settings_button_sub() {
+			return [ this.settings_open() ? this.Return_icon() : this.Settings_icon() ]
+		}
+
+		@ $mol_mem
+		Settings_button() {
+			return this.is_admin() || this.settings_open() ? super.Settings_button() : null!
+		}
+
+		catalog_rows() {
+			return [
+				... this.filter_categories().length ? [ this.Category_filter() ] : [],
+				this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
+			]
+		}
+
 		settings_button_title() {
 			return this.settings_open()
 				? this.Return_title()

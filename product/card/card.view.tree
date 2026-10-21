@@ -4,45 +4,59 @@ $bog_nka_product_card $mol_card
 	Buy_title @ \Buy now!
 	Social_missing_title @ \Social link is not set
 	sub /
-		<= Title $mol_string_button
-			value? <=> title? \
-			hint @ \Title
-			enabled <= changed true
-		<= Photos $bog_nka_carousel
-			ids <= photo_ids /string
-			url* <= photo_url* \
-		<= Photos_controls $mol_row sub /
-			<= Photos_add $mol_button_open
-				files? <=> photos_add? /File
-				enabled <= changed true
-				accept \image/*
-			<= Photos_delete $mol_button_minor
-				title @ \Delete photo
-				click? <=> photo_delete? null
-				enabled <= photo_delete_enabled true
-		<= Description $mol_string_button
-			value? <=> description? \
-			hint @ \Description
-			enabled <= changed true
-		<= Price $bog_nka_number
-			value_min 0
-			hint @ \Price
-			value? <=> price? null
-			enabled <= changed true
-		<= Category $mol_select
-			options <= category_list /
-			option_label_default @ \Category
-			enabled <= changed true
-			value? <=> category? null
+		<= Cover $mol_view
+			sub <= cover /
+				<= Photos $bog_nka_carousel
+					ids <= photo_ids /string
+					url* <= photo_url* \
+				<= Photo_empty $mol_view
+					sub /
+						<= Photo_empty_icon $mol_icon_image_off
+		<= Info $mol_list
+			rows <= info_rows /
+				<= Title $mol_string_button
+					value? <=> title? \
+					hint @ \Title
+					enabled <= changed true
+				<= Price $bog_nka_number
+					value_min 0
+					hint @ \Price
+					value? <=> price? null
+					enabled <= changed true
+				<= Price_text $mol_paragraph
+					title <= price_text \
+				<= Description $mol_string_button
+					value? <=> description? \
+					hint @ \Description
+					enabled <= changed true
+				<= Description_text $mol_paragraph
+					title <= description \
+				<= Category $mol_select
+					options <= category_list /
+					option_label_default @ \Category
+					enabled <= changed true
+					value? <=> category? null
+				<= Category_text $mol_paragraph
+					title <= category_text \
 		<= Buy $mol_button_major
 			title <= buy_title \
 			click? <=> buy? null
 			enabled <= buy_enabled true
 		- далее скрытые от клиента поля
-		<= Available $mol_check_box
-			checked? <=> available? false
-			title @ \Available
-			enabled <= changed true
-		<= Delete $mol_button_major
-			title @ \Delete
-			click? <=> product_delete? null
+		<= Admin $mol_row
+			sub /
+				<= Photos_add $mol_button_open
+					files? <=> photos_add? /File
+					enabled <= changed true
+					accept \image/*
+				<= Photos_delete $mol_button_minor
+					title @ \Delete photo
+					click? <=> photo_delete? null
+					enabled <= photo_delete_enabled true
+				<= Available $mol_check_box
+					checked? <=> available? false
+					title @ \Available
+					enabled <= changed true
+				<= Delete $mol_button_minor
+					title @ \Delete
+					click? <=> product_delete? null

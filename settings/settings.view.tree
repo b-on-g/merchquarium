@@ -4,37 +4,53 @@ $bog_nka_settings $mol_page
 	tools /
 		<= Sync $giper_baza_status
 	body /
-		<= Account_label $mol_paragraph
-			title @ \Your account id:
-		<= Account_lord $mol_paragraph
-			title <= account_lord \
-		<= Account_id $mol_button_copy
-			title <= account_id \
-		<= Debug_info $mol_paragraph
-			title <= debug_info \
-		<= Rights $giper_baza_land_rights
-			land <= catalog_land null
-		<= Social_link $mol_string
-			hint @ \social link
-			value? <=> social_link? \
-		<= Social_text $mol_string
-			hint @ \Example (used by default message ): "Hello! I want to buy {title}!" 
-			value? <=> social_text? \
-		<= Category_input $mol_string
-			hint @ \New category
-			value? <=> category_draft? \
-		<= Category_add $mol_button_major
-			title @ \Add category
-			click? <=> category_add? null
-		<= Categories_list $mol_list
-			rows <= category_rows /
+		<= Account_section $mol_section
+			title @ \Account
+			content /
+				<= Account_label $mol_paragraph
+					title @ \Your account id:
+				<= Account_lord $mol_paragraph
+					title <= account_lord \
+				<= Account_id $mol_button_copy
+					title <= account_id \
+		<= Sales_section $mol_section
+			title @ \Sales
+			content /
+				<= Social_link $mol_string
+					hint @ \social link
+					value? <=> social_link? \
+				<= Social_text $mol_string
+					hint @ \Example (used by default message ): "Hello! I want to buy {title}!" 
+					value? <=> social_text? \
+		<= Categories_section $mol_section
+			title @ \Categories
+			content <= categories_content /
+				<= Category_form $mol_row
+					sub /
+						<= Category_input $mol_string
+							hint @ \New category
+							value? <=> category_draft? \
+						<= Category_add $mol_button_major
+							title @ \Add category
+							click? <=> category_add? null
+				<= Categories_list $mol_view
+					sub <= category_rows /
+		<= Access_section $mol_section
+			title @ \Access
+			content /
+				<= Debug_info $mol_paragraph
+					title <= debug_info \
+				<= Rights $giper_baza_land_rights
+					land <= catalog_land null
 	Category_row* $mol_row
 		sub /
 			<= Category_title* $mol_paragraph
 				title <= category_title* \
 			<= Category_remove* $mol_pop
 				Anchor <= Category_remove_button* $mol_button_minor
-					title @ \Remove
+					hint @ \Remove
+					sub /
+						<= Category_remove_icon* $mol_icon_close
 					click? <=> category_remove*? null
 				bubble_content /
 					<= Category_confirm_title* $mol_paragraph

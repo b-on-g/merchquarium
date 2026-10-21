@@ -39,12 +39,12 @@ namespace $.$$ {
 
 		body() {
 			if (this.is_admin()) return super.body()
-			return [
-				this.Account_label(),
-				this.Account_lord(),
-				this.Account_id(),
-				this.Categories_list(),
-			]
+			return [ this.Account_section(), this.Categories_section() ]
+		}
+
+		categories_content() {
+			if (this.is_admin()) return super.categories_content()
+			return [ this.Categories_list() ]
 		}
 
 		@ $mol_mem_key

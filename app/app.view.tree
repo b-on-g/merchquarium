@@ -18,20 +18,20 @@ $bog_nka_app $mol_page
 			action *
 				ctrl_Z? <=> undo_last? null
 	head /
+		<= Title
 		<= Product_add $bog_nka_button
 			title @ \Add product
 			click? <=> product_add? null
 			hidden <= is_not_admin true
-		<= Category_filter $mol_switch
-			options <= category_filter_options *
-			value? <=> category_filter? \all
-		^ 
+		<= Tools
 	tools /
 		<= Lights $mol_lights_toggle
-		<= Settings_button $bog_nka_button
-			title <= settings_button_title \
+		<= Settings_button $mol_button_minor
+			hint <= settings_button_title \
 			click? <=> settings_toggle? null
-			hidden <= is_not_admin true 
+			sub <= settings_button_sub /
+				<= Settings_icon $mol_icon_cog
+				<= Return_icon $mol_icon_arrow_left
 	body <= content /
 		<= Catalog_missing $mol_view
 			sub /
@@ -40,9 +40,14 @@ $bog_nka_app $mol_page
 				<= Catalog_create $bog_nka_button
 					title @ \Create catalog
 					click? <=> catalog_create? null
-		<= Catalog_selected $mol_view
-			sub /
+		<= Catalog_selected $mol_list
+			rows <= catalog_rows /
+				<= Category_filter $mol_switch
+					options <= category_filter_options *
+					value? <=> category_filter? \all
 				<= Product_cards $bog_nka_gallery
 					items <= product_cards /
+				<= Catalog_empty $mol_paragraph
+					title @ \Products coming soon
 		<= Settings $bog_nka_settings
 			catalog_link <= catalog_link \

@@ -1,1 +1,2 @@
-$bog_nka_gallery $mol_gallery
+$bog_nka_gallery $mol_view
+	sub <= items /$mol_view
