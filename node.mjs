@@ -20062,6 +20062,35 @@ var $;
 			]);
 			return obj;
 		}
+		catalog_title(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Catalog_title(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Catalog_title_hint")));
+			(obj.value) = (next) => ((this.catalog_title(next)));
+			return obj;
+		}
+		theme_options(){
+			return {};
+		}
+		theme(next){
+			if(next !== undefined) return next;
+			return "sakura";
+		}
+		Theme_switch(){
+			const obj = new this.$.$mol_switch();
+			(obj.options) = () => ((this.theme_options()));
+			(obj.value) = (next) => ((this.theme(next)));
+			return obj;
+		}
+		Look_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Look_section_title")));
+			(obj.content) = () => ([(this.Catalog_title()), (this.Theme_switch())]);
+			return obj;
+		}
 		social_link(next){
 			if(next !== undefined) return next;
 			return "";
@@ -20232,6 +20261,27 @@ var $;
 		title(){
 			return (this.$.$mol_locale.text("$bog_nka_settings_title"));
 		}
+		Theme_sakura(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_sakura"));
+		}
+		Theme_lavender(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_lavender"));
+		}
+		Theme_mint(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_mint"));
+		}
+		Theme_peach(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_peach"));
+		}
+		Theme_sky(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_sky"));
+		}
+		Theme_milk(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_milk"));
+		}
+		Theme_classic(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Theme_classic"));
+		}
 		catalog_link(next){
 			if(next !== undefined) return next;
 			return "";
@@ -20242,6 +20292,7 @@ var $;
 		body(){
 			return [
 				(this.Account_section()), 
+				(this.Look_section()), 
 				(this.Sales_section()), 
 				(this.Categories_section()), 
 				(this.Access_section())
@@ -20258,6 +20309,11 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_lord"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_id"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_section"));
+	($mol_mem(($.$bog_nka_settings.prototype), "catalog_title"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Catalog_title"));
+	($mol_mem(($.$bog_nka_settings.prototype), "theme"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Theme_switch"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Look_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_text"));
@@ -20315,9 +20371,42 @@ var $;
         Categories: $giper_baza_list_str,
         Social: $giper_baza_atom_text,
         SocialText: $giper_baza_atom_text,
+        Title: $giper_baza_atom_text,
+        Theme: $giper_baza_atom_text,
     }) {
     }
     $.$bog_nka_catalog = $bog_nka_catalog;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const rounded = 'ui-rounded, system-ui, sans-serif';
+    const serif = 'ui-serif, Georgia, serif';
+    $.$bog_nka_theme = {
+        sakura: { hue: 340, spread: 60, round: '1rem', font: rounded },
+        lavender: { hue: 290, spread: 50, round: '1rem', font: rounded },
+        mint: { hue: 165, spread: 60, round: '1rem', font: rounded },
+        peach: { hue: 30, spread: 40, round: '1rem', font: rounded },
+        sky: { hue: 220, spread: 50, round: '1rem', font: rounded },
+        milk: { hue: 60, spread: 30, round: '.5rem', font: serif },
+        classic: { hue: 240, spread: 90, round: '.25rem', font: 'system-ui, sans-serif' },
+    };
+    function $bog_nka_theme_of(name) {
+        return $.$bog_nka_theme[name] ?? $.$bog_nka_theme.sakura;
+    }
+    $.$bog_nka_theme_of = $bog_nka_theme_of;
+    function $bog_nka_theme_style(name) {
+        const preset = $bog_nka_theme_of(name);
+        return {
+            '--mol_theme_hue': `${preset.hue}deg`,
+            '--mol_theme_hue_spread': `${preset.spread}deg`,
+            '--mol_gap_round': preset.round,
+            fontFamily: preset.font,
+        };
+    }
+    $.$bog_nka_theme_style = $bog_nka_theme_style;
 })($ || ($ = {}));
 
 ;
@@ -20434,6 +20523,35 @@ var $;
                 }
                 this.catalog()?.Categories()?.cut(category);
             }
+            catalog_title(next) {
+                const catalog = this.catalog();
+                if (!catalog)
+                    return '';
+                if (next === undefined)
+                    return catalog.Title()?.val() ?? '';
+                catalog.Title(null)?.val(next);
+                return next;
+            }
+            theme_options() {
+                return {
+                    sakura: this.Theme_sakura(),
+                    lavender: this.Theme_lavender(),
+                    mint: this.Theme_mint(),
+                    peach: this.Theme_peach(),
+                    sky: this.Theme_sky(),
+                    milk: this.Theme_milk(),
+                    classic: this.Theme_classic(),
+                };
+            }
+            theme(next) {
+                const catalog = this.catalog();
+                if (!catalog)
+                    return 'sakura';
+                if (next === undefined)
+                    return catalog.Theme()?.val() || 'sakura';
+                catalog.Theme(null)?.val(next);
+                return next;
+            }
             social_link(next) {
                 const catalog = this.catalog();
                 if (!catalog)
@@ -20513,6 +20631,9 @@ var $;
                     family: 'monospace',
                     size: '1.25rem',
                 },
+            },
+            Theme_switch: {
+                flex: { wrap: 'wrap' },
             },
             Category_form: {
                 flex: { wrap: 'nowrap' },
@@ -22226,7 +22347,6 @@ var $;
                 font: {
                     size: '1.25rem',
                     weight: 'bold',
-                    family: 'ui-rounded, system-ui, sans-serif',
                 },
             },
             Price_text: {
@@ -22554,6 +22674,15 @@ var $;
                 const land = this.$.$giper_baza_glob.land_grab();
                 this.catalog_link(land.link().str);
             }
+            title() {
+                return this.catalog()?.Title()?.val()?.trim() || super.title();
+            }
+            style() {
+                return {
+                    ...super.style(),
+                    ...$bog_nka_theme_style(this.catalog()?.Theme()?.val()),
+                };
+            }
             settings_button_sub() {
                 return [this.settings_open() ? this.Return_icon() : this.Settings_icon()];
             }
@@ -22733,6 +22862,9 @@ var $;
         ], $bog_nka_app.prototype, "catalog_create", null);
         __decorate([
             $mol_mem
+        ], $bog_nka_app.prototype, "style", null);
+        __decorate([
+            $mol_mem
         ], $bog_nka_app.prototype, "Settings_button", null);
         __decorate([
             $mol_action
@@ -22769,13 +22901,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/nka/app/app.view.css", "[bog_nka_app] {\n\t--mol_theme_hue: 340deg;\n\t--mol_theme_hue_spread: 60deg;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     var $$;
     (function ($$) {
         $mol_style_define($bog_nka_app, {
@@ -22789,7 +22914,6 @@ var $;
             },
             Title: {
                 font: {
-                    family: 'ui-rounded, system-ui, sans-serif',
                     weight: 'bold',
                 },
             },

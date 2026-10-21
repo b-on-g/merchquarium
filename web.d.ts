@@ -46319,6 +46319,8 @@ declare namespace $ {
             readonly Categories: (auto?: any) => $giper_baza_list_str | null;
             readonly Social: (auto?: any) => $giper_baza_atom_text | null;
             readonly SocialText: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Title: (auto?: any) => $giper_baza_atom_text | null;
+            readonly Theme: (auto?: any) => $giper_baza_atom_text | null;
         }>;
         path: string;
     } & {
@@ -47027,11 +47029,74 @@ declare namespace $ {
             readonly Categories: typeof $giper_baza_list_str;
             readonly Social: typeof $giper_baza_atom_text;
             readonly SocialText: typeof $giper_baza_atom_text;
+            readonly Title: typeof $giper_baza_atom_text;
+            readonly Theme: typeof $giper_baza_atom_text;
         };
     };
     export class $bog_nka_catalog extends $bog_nka_catalog_base {
     }
     export {};
+}
+
+declare namespace $ {
+    type $bog_nka_theme_preset = {
+        hue: number;
+        spread: number;
+        round: string;
+        font: string;
+    };
+    const $bog_nka_theme: {
+        sakura: {
+            hue: number;
+            spread: number;
+            round: string;
+            font: string;
+        };
+        lavender: {
+            hue: number;
+            spread: number;
+            round: string;
+            font: string;
+        };
+        mint: {
+            hue: number;
+            spread: number;
+            round: string;
+            font: string;
+        };
+        peach: {
+            hue: number;
+            spread: number;
+            round: string;
+            font: string;
+        };
+        sky: {
+            hue: number;
+            spread: number;
+            round: string;
+            font: string;
+        };
+        milk: {
+            hue: number;
+            spread: number;
+            round: string;
+            font: string;
+        };
+        classic: {
+            hue: number;
+            spread: number;
+            round: string;
+            font: string;
+        };
+    };
+    type $bog_nka_theme_name = keyof typeof $bog_nka_theme;
+    function $bog_nka_theme_of(name: string | null | undefined): $bog_nka_theme_preset;
+    function $bog_nka_theme_style(name: string | null | undefined): {
+        '--mol_theme_hue': string;
+        '--mol_theme_hue_spread': string;
+        '--mol_gap_round': string;
+        fontFamily: string;
+    };
 }
 
 declare namespace $ {
@@ -47067,19 +47132,19 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_7 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_link'] >
+		ReturnType< $bog_nka_settings['catalog_title'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_string__hint_bog_nka_settings_8 = $mol_type_enforce<
-		string
+	type $mol_switch__options_bog_nka_settings_8 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['theme_options'] >
 		,
-		ReturnType< $mol_string['hint'] >
+		ReturnType< $mol_switch['options'] >
 	>
-	type $mol_string__value_bog_nka_settings_9 = $mol_type_enforce<
-		ReturnType< $bog_nka_settings['social_text'] >
+	type $mol_switch__value_bog_nka_settings_9 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['theme'] >
 		,
-		ReturnType< $mol_string['value'] >
+		ReturnType< $mol_switch['value'] >
 	>
 	type $mol_section__title_bog_nka_settings_10 = $mol_type_enforce<
 		string
@@ -47097,131 +47162,161 @@ declare namespace $ {
 		ReturnType< $mol_string['hint'] >
 	>
 	type $mol_string__value_bog_nka_settings_13 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['social_link'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__hint_bog_nka_settings_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_nka_settings_15 = $mol_type_enforce<
+		ReturnType< $bog_nka_settings['social_text'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_section__title_bog_nka_settings_16 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_section['title'] >
+	>
+	type $mol_section__content_bog_nka_settings_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_section['content'] >
+	>
+	type $mol_string__hint_bog_nka_settings_18 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_nka_settings_19 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_draft'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_14 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_20 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_15 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_21 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_add'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_16 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_22 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_view__sub_bog_nka_settings_17 = $mol_type_enforce<
+	type $mol_view__sub_bog_nka_settings_23 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_rows'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_section__title_bog_nka_settings_18 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_24 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_19 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_25 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['categories_content'] >
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_20 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_26 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['debug_info'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $giper_baza_land_rights__land_bog_nka_settings_21 = $mol_type_enforce<
+	type $giper_baza_land_rights__land_bog_nka_settings_27 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['catalog_land'] >
 		,
 		ReturnType< $giper_baza_land_rights['land'] >
 	>
-	type $mol_section__title_bog_nka_settings_22 = $mol_type_enforce<
+	type $mol_section__title_bog_nka_settings_28 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_section['title'] >
 	>
-	type $mol_section__content_bog_nka_settings_23 = $mol_type_enforce<
+	type $mol_section__content_bog_nka_settings_29 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_section['content'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_24 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_30 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_title'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__hint_bog_nka_settings_25 = $mol_type_enforce<
+	type $mol_button_minor__hint_bog_nka_settings_31 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['hint'] >
 	>
-	type $mol_button_minor__sub_bog_nka_settings_26 = $mol_type_enforce<
+	type $mol_button_minor__sub_bog_nka_settings_32 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_button_minor['sub'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_27 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_33 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_28 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_34 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_29 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_35 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_paragraph__title_bog_nka_settings_30 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_nka_settings_36 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_product_count'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_button_minor__title_bog_nka_settings_31 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_nka_settings_37 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_nka_settings_32 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_nka_settings_38 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_cancel'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_major__title_bog_nka_settings_33 = $mol_type_enforce<
+	type $mol_button_major__title_bog_nka_settings_39 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_nka_settings_34 = $mol_type_enforce<
+	type $mol_button_major__click_bog_nka_settings_40 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['category_remove_confirm'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_row__sub_bog_nka_settings_35 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_41 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_pop__Anchor_bog_nka_settings_36 = $mol_type_enforce<
+	type $mol_pop__Anchor_bog_nka_settings_42 = $mol_type_enforce<
 		ReturnType< $bog_nka_settings['Category_remove_button'] >
 		,
 		ReturnType< $mol_pop['Anchor'] >
 	>
-	type $mol_pop__bubble_content_bog_nka_settings_37 = $mol_type_enforce<
+	type $mol_pop__bubble_content_bog_nka_settings_43 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_pop['bubble_content'] >
 	>
-	type $mol_row__sub_bog_nka_settings_38 = $mol_type_enforce<
+	type $mol_row__sub_bog_nka_settings_44 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
@@ -47234,6 +47329,12 @@ declare namespace $ {
 		account_id( ): string
 		Account_id( ): $mol_button_copy
 		Account_section( ): $mol_section
+		catalog_title( next?: string ): string
+		Catalog_title( ): $mol_string
+		theme_options( ): Record<string, any>
+		theme( next?: string ): string
+		Theme_switch( ): $mol_switch
+		Look_section( ): $mol_section
 		social_link( next?: string ): string
 		Social_link( ): $mol_string
 		social_text( next?: string ): string
@@ -47269,6 +47370,13 @@ declare namespace $ {
 		Category_confirm_actions( id: any): $mol_row
 		Category_remove( id: any): $mol_pop
 		title( ): string
+		Theme_sakura( ): string
+		Theme_lavender( ): string
+		Theme_mint( ): string
+		Theme_peach( ): string
+		Theme_sky( ): string
+		Theme_milk( ): string
+		Theme_classic( ): string
 		catalog_link( next?: string ): string
 		tools( ): readonly(any)[]
 		body( ): readonly(any)[]
@@ -47304,6 +47412,9 @@ declare namespace $.$$ {
         category_remove(category: string): void;
         category_remove_cancel(category: string): void;
         category_remove_confirm(category: string): void;
+        catalog_title(next?: string): string;
+        theme_options(): Record<string, string>;
+        theme(next?: string): string;
         social_link(next?: string): string;
         social_text(next?: string): string;
     }
@@ -47994,6 +48105,13 @@ declare namespace $.$$ {
         content(): $mol_view[] | $.$bog_nka_settings[];
         catalog_selected_text(): string;
         catalog_create(): void;
+        title(): string;
+        style(): {
+            '--mol_theme_hue': string;
+            '--mol_theme_hue_spread': string;
+            '--mol_gap_round': string;
+            fontFamily: string;
+        };
         settings_button_sub(): ($mol_icon_arrow_left | $mol_icon_cog)[];
         Settings_button(): $mol_button_minor;
         catalog_rows(): ($.$mol_paragraph | $.$mol_switch | $bog_nka_gallery)[];
@@ -48013,9 +48131,6 @@ declare namespace $.$$ {
         product_undo(link: string): void;
         undo_last(event: KeyboardEvent): void;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {

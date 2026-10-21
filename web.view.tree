@@ -2207,6 +2207,13 @@ $giper_baza_app $mol_book2_catalog
 
 $bog_nka_settings $mol_page
 	title @ \Settings
+	Theme_sakura @ \Sakura
+	Theme_lavender @ \Lavender
+	Theme_mint @ \Mint
+	Theme_peach @ \Peach
+	Theme_sky @ \Sky
+	Theme_milk @ \Milk
+	Theme_classic @ \Classic
 	catalog_link? \
 	tools /
 		<= Sync $giper_baza_status
@@ -2220,6 +2227,15 @@ $bog_nka_settings $mol_page
 					title <= account_lord \
 				<= Account_id $mol_button_copy
 					title <= account_id \
+		<= Look_section $mol_section
+			title @ \Appearance
+			content /
+				<= Catalog_title $mol_string
+					hint @ \Catalog title
+					value? <=> catalog_title? \
+				<= Theme_switch $mol_switch
+					options <= theme_options *
+					value? <=> theme? \sakura
 		<= Sales_section $mol_section
 			title @ \Sales
 			content /

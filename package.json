@@ -362,6 +362,7 @@
     "$giper_baza_link_chip",
     "$bog_nka_catalog",
     "$bog_nka_product",
+    "$bog_nka_theme",
     "$bog_nka_product_card",
     "$mol_card",
     "$bog_nka_carousel",
