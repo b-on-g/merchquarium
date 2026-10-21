@@ -210,6 +210,28 @@ namespace $.$$ {
 			return $bog_nka_social_url( this.catalog()?.Social()?.val() ?? '' )
 		}
 
+		cover() {
+			return [ this.photo_ids().length ? this.Photos() : this.Photo_empty() ]
+		}
+
+		info_rows() {
+			if( this.changed() ) return [ this.Title(), this.Price(), this.Description(), this.Category() ]
+			return [
+				this.Title(),
+				... this.price() ? [ this.Price_text() ] : [],
+				... this.description() ? [ this.Description_text() ] : [],
+				... this.category() ? [ this.Category_text() ] : [],
+			]
+		}
+
+		price_text() {
+			return `${ this.price().toLocaleString( 'ru-RU' ) } ₽`
+		}
+
+		category_text() {
+			return this.category() ?? ''
+		}
+
 		@ $mol_mem
 		Admin() {
 			return this.changed() ? super.Admin() : null!
