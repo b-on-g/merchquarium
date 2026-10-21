@@ -14086,11 +14086,12 @@ var $;
             for (const gift of this._gift.values()) {
                 collect(gift);
                 if (gift.mate().str) {
-                    if (skip_faces.has(gift.lord().peer().str))
+                    if (skip_faces.has(gift.mate().peer().str))
                         continue;
                     const mate_pass = this.lord_pass(gift.mate());
-                    if (mate_pass)
-                        passes.add(mate_pass);
+                    if (!mate_pass)
+                        return $mol_fail(new Error('No pass for mate'));
+                    passes.add(mate_pass);
                 }
             }
             for (const kids of this._sand.values()) {
@@ -18654,6 +18655,139 @@ var $;
 ;
 "use strict";
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_offline() { }
+    $.$mol_offline = $mol_offline;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const blacklist = new Set([
+        '//cse.google.com/adsense/search/async-ads.js'
+    ]);
+    /** Installs service worker proxy, which caches all requests and respond from cache on http errors. */
+    function $mol_offline_web() {
+        if (typeof window === 'undefined') {
+            self.addEventListener('install', (event) => {
+                ;
+                self.skipWaiting();
+            });
+            self.addEventListener('activate', (event) => {
+                // caches.delete( '$mol_offline' )
+                ;
+                self.clients.claim();
+                $$.$mol_log3_done({
+                    place: '$mol_offline',
+                    message: 'Activated',
+                });
+            });
+            self.addEventListener('fetch', (event) => {
+                const request = event.request;
+                // console.log( 'FETCH', request.mode, request.cache, request.url )
+                if (blacklist.has(request.url.replace(/^https?:/, ''))) {
+                    return event.respondWith(new Response(null, {
+                        status: 418,
+                        statusText: 'Blocked'
+                    }));
+                }
+                if (request.method !== 'GET')
+                    return;
+                if (!/^https?:/.test(request.url))
+                    return;
+                if (/\?/.test(request.url))
+                    return;
+                if (request.cache === 'no-store')
+                    return;
+                const fetch_data = () => fetch(new Request(request, { credentials: 'omit' })).then(response => {
+                    if (response.status !== 200)
+                        return response;
+                    event.waitUntil(caches.open('$mol_offline').then(cache => cache.put(request, response)));
+                    return response.clone();
+                });
+                const enrich = (response) => {
+                    // console.log( 'ENRICH', response.status, response.url )
+                    if (!response.status)
+                        return response;
+                    const headers = new Headers(response.headers);
+                    headers.set("$mol_offline", "");
+                    headers.set("Origin-Agent-Cluster", "?1"); // prevent thread sharing
+                    // headers.set( "Cross-Origin-Embedder-Policy", "credentialless" )
+                    // headers.set( "Cross-Origin-Resource-Policy", "cross-origin" )
+                    // headers.set( "Cross-Origin-Opener-Policy", "same-origin" )
+                    return new Response(response.body, {
+                        status: response.status,
+                        statusText: response.statusText,
+                        headers,
+                    });
+                };
+                const fresh = request.cache === 'force-cache' ? null : fetch_data();
+                if (fresh)
+                    event.waitUntil(fresh.then(enrich));
+                event.respondWith(caches.match(request).then(cached => request.cache === 'no-cache' || request.cache === 'reload'
+                    ? (cached
+                        ? fresh
+                            .then(actual => {
+                            if (actual.status === cached.status)
+                                return actual;
+                            throw new Error(`${actual.status}${actual.statusText ? ` ${actual.statusText}` : ''}`, { cause: actual });
+                        })
+                            .catch((err) => {
+                            const cloned = cached.clone();
+                            const message = `${err.cause instanceof Response ? '' : '500 '}${err.message} $mol_offline fallback to cache`;
+                            cloned.headers.set('$mol_offline_remote_status', message);
+                            return cloned;
+                        })
+                        : fresh)
+                    : (cached || fresh || fetch_data())).then(enrich));
+            });
+            self.addEventListener('beforeinstallprompt', (event) => event.prompt());
+        }
+        else if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+            console.warn('HTTPS or localhost is required for service workers.');
+        }
+        else if (!navigator.serviceWorker) {
+            console.warn('Service Worker is not supported.');
+        }
+        else {
+            $mol_dom.addEventListener('DOMContentLoaded', () => {
+                navigator.serviceWorker.register('web.js').then(reg => {
+                    reg.addEventListener('updatefound', () => {
+                        $$.$mol_log3_rise({
+                            place: '$mol_offline',
+                            message: 'Outdated',
+                        });
+                        const worker = reg.installing;
+                        worker.addEventListener('statechange', () => {
+                            if (worker.state !== 'activated')
+                                return;
+                            window.location.reload();
+                        });
+                    });
+                });
+            });
+        }
+    }
+    $.$mol_offline_web = $mol_offline_web;
+    $.$mol_offline = $mol_offline_web;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    try {
+        $mol_offline();
+    }
+    catch (error) {
+        console.error(error);
+    }
+})($ || ($ = {}));
 
 ;
 	($.$mol_book2) = class $mol_book2 extends ($.$mol_scroll) {
@@ -31141,139 +31275,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    function $mol_offline() { }
-    $.$mol_offline = $mol_offline;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    const blacklist = new Set([
-        '//cse.google.com/adsense/search/async-ads.js'
-    ]);
-    /** Installs service worker proxy, which caches all requests and respond from cache on http errors. */
-    function $mol_offline_web() {
-        if (typeof window === 'undefined') {
-            self.addEventListener('install', (event) => {
-                ;
-                self.skipWaiting();
-            });
-            self.addEventListener('activate', (event) => {
-                // caches.delete( '$mol_offline' )
-                ;
-                self.clients.claim();
-                $$.$mol_log3_done({
-                    place: '$mol_offline',
-                    message: 'Activated',
-                });
-            });
-            self.addEventListener('fetch', (event) => {
-                const request = event.request;
-                // console.log( 'FETCH', request.mode, request.cache, request.url )
-                if (blacklist.has(request.url.replace(/^https?:/, ''))) {
-                    return event.respondWith(new Response(null, {
-                        status: 418,
-                        statusText: 'Blocked'
-                    }));
-                }
-                if (request.method !== 'GET')
-                    return;
-                if (!/^https?:/.test(request.url))
-                    return;
-                if (/\?/.test(request.url))
-                    return;
-                if (request.cache === 'no-store')
-                    return;
-                const fetch_data = () => fetch(new Request(request, { credentials: 'omit' })).then(response => {
-                    if (response.status !== 200)
-                        return response;
-                    event.waitUntil(caches.open('$mol_offline').then(cache => cache.put(request, response)));
-                    return response.clone();
-                });
-                const enrich = (response) => {
-                    // console.log( 'ENRICH', response.status, response.url )
-                    if (!response.status)
-                        return response;
-                    const headers = new Headers(response.headers);
-                    headers.set("$mol_offline", "");
-                    headers.set("Origin-Agent-Cluster", "?1"); // prevent thread sharing
-                    // headers.set( "Cross-Origin-Embedder-Policy", "credentialless" )
-                    // headers.set( "Cross-Origin-Resource-Policy", "cross-origin" )
-                    // headers.set( "Cross-Origin-Opener-Policy", "same-origin" )
-                    return new Response(response.body, {
-                        status: response.status,
-                        statusText: response.statusText,
-                        headers,
-                    });
-                };
-                const fresh = request.cache === 'force-cache' ? null : fetch_data();
-                if (fresh)
-                    event.waitUntil(fresh.then(enrich));
-                event.respondWith(caches.match(request).then(cached => request.cache === 'no-cache' || request.cache === 'reload'
-                    ? (cached
-                        ? fresh
-                            .then(actual => {
-                            if (actual.status === cached.status)
-                                return actual;
-                            throw new Error(`${actual.status}${actual.statusText ? ` ${actual.statusText}` : ''}`, { cause: actual });
-                        })
-                            .catch((err) => {
-                            const cloned = cached.clone();
-                            const message = `${err.cause instanceof Response ? '' : '500 '}${err.message} $mol_offline fallback to cache`;
-                            cloned.headers.set('$mol_offline_remote_status', message);
-                            return cloned;
-                        })
-                        : fresh)
-                    : (cached || fresh || fetch_data())).then(enrich));
-            });
-            self.addEventListener('beforeinstallprompt', (event) => event.prompt());
-        }
-        else if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-            console.warn('HTTPS or localhost is required for service workers.');
-        }
-        else if (!navigator.serviceWorker) {
-            console.warn('Service Worker is not supported.');
-        }
-        else {
-            $mol_dom.addEventListener('DOMContentLoaded', () => {
-                navigator.serviceWorker.register('web.js').then(reg => {
-                    reg.addEventListener('updatefound', () => {
-                        $$.$mol_log3_rise({
-                            place: '$mol_offline',
-                            message: 'Outdated',
-                        });
-                        const worker = reg.installing;
-                        worker.addEventListener('statechange', () => {
-                            if (worker.state !== 'activated')
-                                return;
-                            window.location.reload();
-                        });
-                    });
-                });
-            });
-        }
-    }
-    $.$mol_offline_web = $mol_offline_web;
-    $.$mol_offline = $mol_offline_web;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    try {
-        $mol_offline();
-    }
-    catch (error) {
-        console.error(error);
-    }
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     if (typeof window === 'undefined') {
         self.addEventListener('fetch', (event) => {
             const url = new URL(event.request.url);
@@ -31331,7 +31332,6 @@ var $;
         Categories: $giper_baza_list_str,
         Social: $giper_baza_atom_text,
         SocialText: $giper_baza_atom_text,
-        SoldOutImage: $giper_baza_atom_link.to(() => $giper_baza_file),
     }) {
     }
     $.$bog_nka_catalog = $bog_nka_catalog;
@@ -31755,10 +31755,6 @@ var $;
 			if(next !== undefined) return next;
 			return 0;
 		}
-		mouse_x(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
 		auto_scroll(){
 			return true;
 		}
@@ -31785,7 +31781,6 @@ var $;
 	($mol_mem(($.$yuf_carousel.prototype), "event_scroll"));
 	($mol_mem(($.$yuf_carousel.prototype), "index"));
 	($mol_mem(($.$yuf_carousel.prototype), "scroll_x"));
-	($mol_mem(($.$yuf_carousel.prototype), "mouse_x"));
 
 
 ;
@@ -31804,18 +31799,22 @@ var $;
                     return null;
                 if (!this.auto_scroll())
                     return null;
-                this.mouse_x(e.pageX);
+                if (this.mouse_x !== -1)
+                    return null;
+                this.mouse_x = e.pageX;
+                new $mol_after_frame(() => this.mouse_index());
             }
-            part_size() { return 1 / (this.ids().length || 1); }
+            mouse_x = -1;
+            count() { return this.ids().length || 1; }
             mouse_index() {
+                const x = this.mouse_x;
                 const r = this.view_rect();
                 if (!r)
                     return null;
-                const x = this.mouse_x();
-                if (!x)
-                    return null;
-                const part = (x - r.left) / r.width;
-                return Math.floor(part / this.part_size());
+                const count = this.count();
+                const index = Math.max(0, Math.floor((x - r.left) / r.width * count));
+                this.scroll_x(index * r.width);
+                this.mouse_x = -1;
             }
             scroll_x(next, cache) {
                 const node = this.dom_node();
@@ -31824,29 +31823,13 @@ var $;
                 return next ?? node.scrollLeft;
             }
             event_scroll(next) { this.scroll_x(null, 'cache'); }
-            width() { return this.view_rect()?.width ?? 0; }
             index(next) {
                 if (next !== undefined)
                     next = Math.max(Math.min(this.ids().length - 1, next), 0);
-                const width = this.width();
+                const width = this.view_rect()?.width ?? 0;
                 const x = this.scroll_x(next === undefined ? next : width * next);
                 const index = width > 0 ? Math.round(x / width) : 0;
                 return index;
-            }
-            mouse_index_sync(next) {
-                const mouse_index = this.mouse_index();
-                if (mouse_index === null)
-                    return 0;
-                const index = next ?? mouse_index;
-                return this.index(index);
-            }
-            auto() {
-                try {
-                    this.mouse_index_sync();
-                }
-                catch (e) {
-                    $mol_fail_log(e);
-                }
             }
             images() {
                 const items = this.ids().map(id => this.url_safe(id) ? this.Image(id) : this.Empty(id));
@@ -31856,19 +31839,17 @@ var $;
                 return $mol_error_fence(() => this.url(id), e => e.message === $mol_rest_code[$mol_rest_code['Not Found']] ? '' : e);
             }
             url(path) { return path; }
+            auto() {
+                this.index();
+                return super.auto();
+            }
         }
-        __decorate([
-            $mol_mem
-        ], $yuf_carousel.prototype, "mouse_index", null);
         __decorate([
             $mol_mem
         ], $yuf_carousel.prototype, "scroll_x", null);
         __decorate([
             $mol_mem
         ], $yuf_carousel.prototype, "index", null);
-        __decorate([
-            $mol_mem
-        ], $yuf_carousel.prototype, "mouse_index_sync", null);
         __decorate([
             $mol_mem
         ], $yuf_carousel.prototype, "images", null);

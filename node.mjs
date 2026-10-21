@@ -14346,11 +14346,12 @@ var $;
             for (const gift of this._gift.values()) {
                 collect(gift);
                 if (gift.mate().str) {
-                    if (skip_faces.has(gift.lord().peer().str))
+                    if (skip_faces.has(gift.mate().peer().str))
                         continue;
                     const mate_pass = this.lord_pass(gift.mate());
-                    if (mate_pass)
-                        passes.add(mate_pass);
+                    if (!mate_pass)
+                        return $mol_fail(new Error('No pass for mate'));
+                    passes.add(mate_pass);
                 }
             }
             for (const kids of this._sand.values()) {
@@ -18479,6 +18480,9 @@ var $;
                     origin: msg.origin(),
                     remote: req.socket.remoteAddress + ':' + req.socket.remotePort
                 });
+            if (Number(req.headers['content-length']) > this.message_limit) {
+                return port.send_code($mol_rest_code["Request Entity Too Large"]);
+            }
             $mol_wire_sync(res).setHeader('Access-Control-Allow-Origin', '*');
             $mol_wire_sync(res).setHeader('Access-Control-Allow-Methods', '*');
             $mol_wire_sync(res).setHeader('Access-Control-Allow-Headers', '*');
@@ -18578,7 +18582,7 @@ var $;
         }
         _ws_income_chunks = new WeakMap;
         _ws_income_frames = new WeakMap;
-        ws_message_size_max = 64 * 1024 * 1024; // 64MiB
+        message_limit = 16 * 1024 * 1024; // 16MiB
         async ws_income(chunk, upgrade, sock) {
             sock.pause();
             try {
@@ -18604,10 +18608,10 @@ var $;
                 for (const frame of frames) {
                     total_size += typeof frame === 'string' ? frame.length : frame.byteLength;
                 }
-                if (total_size > this.ws_message_size_max)
+                if (total_size > this.message_limit)
                     throw new Error('WebSocket message too large', { cause: {
                             size: total_size,
-                            limit: this.ws_message_size_max,
+                            limit: this.message_limit,
                         } });
                 const msg_size = header_size + frame_size;
                 const partial_size = chunks.reduce((sum, buf) => sum + buf.byteLength, 0);
@@ -20234,7 +20238,6 @@ var $;
         Categories: $giper_baza_list_str,
         Social: $giper_baza_atom_text,
         SocialText: $giper_baza_atom_text,
-        SoldOutImage: $giper_baza_atom_link.to(() => $giper_baza_file),
     }) {
     }
     $.$bog_nka_catalog = $bog_nka_catalog;
@@ -20658,10 +20661,6 @@ var $;
 			if(next !== undefined) return next;
 			return 0;
 		}
-		mouse_x(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
 		auto_scroll(){
 			return true;
 		}
@@ -20688,7 +20687,6 @@ var $;
 	($mol_mem(($.$yuf_carousel.prototype), "event_scroll"));
 	($mol_mem(($.$yuf_carousel.prototype), "index"));
 	($mol_mem(($.$yuf_carousel.prototype), "scroll_x"));
-	($mol_mem(($.$yuf_carousel.prototype), "mouse_x"));
 
 
 ;
@@ -20735,18 +20733,22 @@ var $;
                     return null;
                 if (!this.auto_scroll())
                     return null;
-                this.mouse_x(e.pageX);
+                if (this.mouse_x !== -1)
+                    return null;
+                this.mouse_x = e.pageX;
+                new $mol_after_frame(() => this.mouse_index());
             }
-            part_size() { return 1 / (this.ids().length || 1); }
+            mouse_x = -1;
+            count() { return this.ids().length || 1; }
             mouse_index() {
+                const x = this.mouse_x;
                 const r = this.view_rect();
                 if (!r)
                     return null;
-                const x = this.mouse_x();
-                if (!x)
-                    return null;
-                const part = (x - r.left) / r.width;
-                return Math.floor(part / this.part_size());
+                const count = this.count();
+                const index = Math.max(0, Math.floor((x - r.left) / r.width * count));
+                this.scroll_x(index * r.width);
+                this.mouse_x = -1;
             }
             scroll_x(next, cache) {
                 const node = this.dom_node();
@@ -20755,29 +20757,13 @@ var $;
                 return next ?? node.scrollLeft;
             }
             event_scroll(next) { this.scroll_x(null, 'cache'); }
-            width() { return this.view_rect()?.width ?? 0; }
             index(next) {
                 if (next !== undefined)
                     next = Math.max(Math.min(this.ids().length - 1, next), 0);
-                const width = this.width();
+                const width = this.view_rect()?.width ?? 0;
                 const x = this.scroll_x(next === undefined ? next : width * next);
                 const index = width > 0 ? Math.round(x / width) : 0;
                 return index;
-            }
-            mouse_index_sync(next) {
-                const mouse_index = this.mouse_index();
-                if (mouse_index === null)
-                    return 0;
-                const index = next ?? mouse_index;
-                return this.index(index);
-            }
-            auto() {
-                try {
-                    this.mouse_index_sync();
-                }
-                catch (e) {
-                    $mol_fail_log(e);
-                }
             }
             images() {
                 const items = this.ids().map(id => this.url_safe(id) ? this.Image(id) : this.Empty(id));
@@ -20787,19 +20773,17 @@ var $;
                 return $mol_error_fence(() => this.url(id), e => e.message === $mol_rest_code[$mol_rest_code['Not Found']] ? '' : e);
             }
             url(path) { return path; }
+            auto() {
+                this.index();
+                return super.auto();
+            }
         }
-        __decorate([
-            $mol_mem
-        ], $yuf_carousel.prototype, "mouse_index", null);
         __decorate([
             $mol_mem
         ], $yuf_carousel.prototype, "scroll_x", null);
         __decorate([
             $mol_mem
         ], $yuf_carousel.prototype, "index", null);
-        __decorate([
-            $mol_mem
-        ], $yuf_carousel.prototype, "mouse_index_sync", null);
         __decorate([
             $mol_mem
         ], $yuf_carousel.prototype, "images", null);
