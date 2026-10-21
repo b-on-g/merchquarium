@@ -6,5 +6,6 @@ namespace $ {
 		SocialText: $giper_baza_atom_text,
 		Title: $giper_baza_atom_text,
 		Theme: $giper_baza_atom_text,
+		Hidden: $giper_baza_atom_bool,
 	}) {}
 }

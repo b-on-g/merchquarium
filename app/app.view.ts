@@ -42,6 +42,24 @@ namespace $.$$ {
 			this.catalog_link( land.link().str )
 		}
 
+		auto() {
+			return [ this.seo_register() ]
+		}
+
+		@ $mol_mem
+		seo_register() {
+			const server = this.seo_server()
+			const link = this.catalog_link()
+			if( !server || !link ) return false
+			try {
+				this.$.$mol_fetch.response( new URL( 'register', server ).toString(), { method: 'POST', body: link } )
+				return true
+			} catch( error ) {
+				if( $mol_promise_like( error ) ) $mol_fail_hidden( error )
+				return false
+			}
+		}
+
 		title() {
 			return this.catalog()?.Title()?.val()?.trim() || super.title()
 		}

@@ -30,6 +30,9 @@ $bog_nka_settings $mol_page
 					value? <=> catalog_title? \
 				<= Themes $mol_view
 					sub <= theme_options /
+				<= Listed $mol_check_box
+					title @ \Show in search engines
+					checked? <=> listed? true
 		<= Sales_section $mol_section
 			title @ \Sales
 			content /

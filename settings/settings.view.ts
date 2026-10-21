@@ -192,6 +192,14 @@ namespace $.$$ {
 			return next
 		}
 
+		listed(next?: boolean): boolean {
+			const catalog = this.catalog()
+			if (!catalog) return true
+			if (next === undefined) return !catalog.Hidden()?.val()
+			catalog.Hidden(null)?.val(!next)
+			return next
+		}
+
 		import_prompt() {
 			return $bog_nka_import_prompt
 		}
