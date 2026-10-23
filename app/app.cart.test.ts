@@ -43,6 +43,14 @@ namespace $ {
 			pinkie.Cart_counter().dec()
 			$mol_assert_equal( app.cart_size_text(), '2' )
 			$mol_assert_equal( pinkie.cart_controls(), [ pinkie.Cart_add() ] )
+
+			pinkie.cart_add()
+			pinkie.available( false )
+			$mol_assert_equal( cart.line_title( pinkie.product_link() ), `Брелок Пинки · ${ cart.Unavailable() }` )
+			$mol_assert_equal( cart.line_sum( pinkie.product_link() ), '' )
+			$mol_assert_equal( cart.total_text(), cart.Total_text().replace( '{total}', '800' ) )
+			const sold = /order=([^\s/&]+)/.exec( cart.message() )![ 1 ]
+			$mol_assert_equal( $bog_nka_order_decode( land.link().str, decodeURIComponent( sold ) ), { [ kit.product_link() ]: 2 } )
 		} ),
 
 		'non telegram social copies the order first and opens on the second press': $mol_wire_async( ( $: $ )=> {

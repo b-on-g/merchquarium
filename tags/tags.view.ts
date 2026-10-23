@@ -37,18 +37,18 @@ namespace $.$$ {
 
 		@ $mol_action
 		remove( name: string ) {
-			if( this.usage( name ) ) return this.Remove( name ).showed( true )
+			if( this.usage( name ) ) return this.confirming( name, true )
 			this.item_drop( name, null )
 		}
 
 		@ $mol_action
 		cancel( name: string ) {
-			this.Remove( name ).showed( false )
+			this.confirming( name, false )
 		}
 
 		@ $mol_action
 		confirm( name: string ) {
-			this.Remove( name ).showed( false )
+			this.confirming( name, false )
 			this.item_drop( name, null )
 		}
 

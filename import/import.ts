@@ -77,10 +77,9 @@ namespace $ {
 		if( data.title ) catalog.Title( 'auto' )!.val( data.title )
 
 		const categories = catalog.Categories( 'auto' )!
-		const known = new Set( categories.items() )
-		for( const category of data.categories ) {
-			if( !known.has( category ) ) categories.add( category )
-		}
+		const known = categories.items()
+		const fresh = data.categories.filter( category => !known.includes( category ) )
+		if( fresh.length ) categories.items([ ... known, ... fresh ])
 
 		const products = catalog.Products( 'auto' )!
 		for( const item of data.products ) {

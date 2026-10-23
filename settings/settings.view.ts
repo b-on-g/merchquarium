@@ -60,7 +60,8 @@ namespace $.$$ {
 
 		@ $mol_action
 		category_add(category: string) {
-			this.catalog()?.Categories(null)?.add(category)
+			const list = this.catalog()?.Categories(null)
+			if (list && !list.has(category)) list.items([ ... list.items(), category ])
 		}
 
 		@ $mol_action
@@ -85,7 +86,8 @@ namespace $.$$ {
 
 		@ $mol_action
 		fandom_add(fandom: string) {
-			this.catalog()?.Fandoms(null)?.add(fandom)
+			const list = this.catalog()?.Fandoms(null)
+			if (list && !list.has(fandom)) list.items([ ... list.items(), fandom ])
 		}
 
 		@ $mol_action
@@ -102,7 +104,8 @@ namespace $.$$ {
 
 		@ $mol_action
 		link_add(link: string) {
-			this.catalog()?.Links(null)?.add(link)
+			const list = this.catalog()?.Links(null)
+			if (list && !list.has(link)) list.items([ ... list.items(), link ])
 		}
 
 		@ $mol_action

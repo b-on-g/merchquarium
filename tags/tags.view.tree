@@ -26,6 +26,7 @@ $bog_nka_tags $mol_view
 			<= Name* $mol_paragraph
 				title <= name* \
 			<= Remove* $mol_pop
+				showed? <=> confirming*? false
 				Anchor <= Remove_button* $mol_button_minor
 					hint @ \Remove
 					sub /
