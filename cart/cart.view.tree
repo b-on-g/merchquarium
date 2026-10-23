@@ -1,0 +1,57 @@
+$bog_nka_cart $mol_list
+	catalog_link \
+	items? *
+	editable true
+	Cart_title @ \Cart
+	Order_title @ \Order
+	Unavailable @ \Sold out
+	Total_text @ \Total: {total} ₽
+	Order_message @ \Hello! I want to order {count} items for {total} ₽: {link}
+	Send_title @ \Send request
+	Copy_title @ \Copy order
+	Copied_title @ \✓ Copied — open {social}
+	Social_missing @ \Order link is not set
+	rows /
+		<= Back $mol_button_minor
+			click? <=> back? null
+			sub /
+				<= Back_icon $mol_icon_arrow_left
+				<= Back_title @ \Back to catalog
+		<= Title $mol_paragraph
+			title <= heading \
+		<= Empty $mol_paragraph
+			title @ \Cart is empty
+		<= Lines $mol_list
+			rows <= lines /
+		<= Summary $mol_view
+			sub /
+				<= Notice $mol_paragraph
+					title @ \The information on the site is not a public offer. Availability and price are confirmed by the artist when placing the order.
+				<= Total $mol_paragraph
+					title <= total_text \
+		<= Actions $mol_view
+			sub /
+				<= Send $mol_button_major
+					title <= send_title \
+					click? <=> send? null
+					enabled <= send_enabled true
+				<= Clear $mol_button_minor
+					title @ \Clear cart
+					click? <=> clear? null
+		<= Send_hint $mol_paragraph
+			title @ \Paste the message into the chat with the artist
+	Line* $mol_row
+		sub /
+			<= Thumb* $mol_view
+				style <= thumb_style* *
+			<= Line_info* $mol_view
+				sub /
+					<= Line_title* $mol_paragraph
+						title <= line_title* \
+					<= Line_price* $mol_paragraph
+						title <= line_price* \
+			<= Counter* $bog_nka_counter
+				value? <=> count*? 0
+				enabled <= editable
+			<= Line_sum* $mol_paragraph
+				title <= line_sum* \

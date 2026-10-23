@@ -2,8 +2,7 @@ $bog_nka_product_card $mol_card
 	product_link? \
 	catalog_link? \
 	search? \
-	Buy_title @ \Buy now!
-	Social_missing_title @ \Social link is not set
+	cart_count? 0
 	Tag* $mol_button_minor
 		title <= tag_title* \
 		click? <=> tag_select*? null
@@ -47,10 +46,14 @@ $bog_nka_product_card $mol_card
 					enabled <= changed true
 				<= Tags $mol_view
 					sub <= tags /
-		<= Buy $mol_button_major
-			title <= buy_title \
-			click? <=> buy? null
-			enabled <= buy_enabled true
+		<= Cart_controls $mol_view
+			sub <= cart_controls /
+				<= Cart_add $mol_button_major
+					title @ \Add to cart
+					click? <=> cart_add? null
+					enabled <= cart_enabled true
+				<= Cart_counter $bog_nka_counter
+					value? <=> cart_count?
 		- далее скрытые от клиента поля
 		<= Admin $mol_row
 			sub /

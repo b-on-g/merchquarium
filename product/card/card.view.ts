@@ -132,38 +132,17 @@ namespace $.$$ {
 		}
 
 		
-		buy_title() {
-			return this.social_url()
-				? this.Buy_title()
-				: this.Social_missing_title()
-		}
-		
-		buy_enabled() {
-			return this.available() && this.social_url() !== null
-		}
-		
-		@ $mol_action
-		buy() {
-			if (!this.buy_enabled()) return
-		
-			const catalog = this.catalog()
-			const url = this.social_url()
-			if (!catalog || !url) return
-		
-			const host = url.hostname.replace(/^www\./, '')
-		
-			if (host === 't.me' || host === 'telegram.me') {
-				const template = catalog.SocialText()?.val()
-					|| 'Добрый день, хотел бы приобрести {title}'
-				const message = template.replace(/\{title\}/g, this.title())
-				url.search = `?text=${ encodeURIComponent( message ) }`
-			}
-		
-			window.open(url.toString(), '_blank')
+		cart_controls() {
+			return [ this.cart_count() > 0 ? this.Cart_counter() : this.Cart_add() ]
 		}
 
-		social_url(): URL | null {
-			return $bog_nka_social_url( this.catalog()?.Social()?.val() ?? '' )
+		cart_enabled() {
+			return this.available() && Boolean( this.title() )
+		}
+
+		@ $mol_action
+		cart_add() {
+			if( this.cart_enabled() ) this.cart_count( 1 )
 		}
 
 		cover() {

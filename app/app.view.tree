@@ -9,6 +9,7 @@ $bog_nka_app $mol_page
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
 		search? <=> search? \
+		cart_count? <=> cart_count*? 0
 		product_delete? <=> product_delete*? null
 	Social* $mol_link
 		uri <= social_uri* \
@@ -38,6 +39,14 @@ $bog_nka_app $mol_page
 			hidden <= is_not_admin true
 		<= Tools
 	tools /
+		<= Cart_button $mol_button_minor
+			hint @ \Cart
+			click? <=> cart_toggle? null
+			sub /
+				<= Cart_icon $mol_icon_basket
+				<= Cart_size $mol_view
+					sub /
+						<= cart_size_text \
 		<= Lights $mol_lights_toggle
 		<= Settings_button $mol_button_minor
 			hint <= settings_button_title \
@@ -87,3 +96,12 @@ $bog_nka_app $mol_page
 					title @ \Products coming soon
 		<= Settings $bog_nka_settings
 			catalog_link <= catalog_link \
+		<= Cart $bog_nka_cart
+			catalog_link <= catalog_link \
+			items? <=> cart? *
+			back? <=> cart_close? null
+		<= Order $bog_nka_cart
+			catalog_link <= catalog_link \
+			items <= order_items *
+			editable false
+			back? <=> cart_close? null

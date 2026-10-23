@@ -102,7 +102,7 @@ namespace $.$$ {
 			color: $mol_theme.current,
 		},
 
-		Buy: {
+		Cart_controls: {
 			justifyContent: 'center',
 			margin: {
 				left: $mol_gap.block,

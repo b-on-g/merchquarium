@@ -26,7 +26,7 @@
 	"$bog_nka_settings_Look_section_title": "Оформление",
 	"$bog_nka_settings_Sales_section_title": "Продажи",
 	"$bog_nka_settings_Social_link_hint": "Ссылка для заказов: @ник или t.me/ник",
-	"$bog_nka_settings_Social_text_hint": "Текст заказа, например: «Здравствуйте! Хочу купить {title}!»",
+	"$bog_nka_settings_Social_text_hint": "Текст заявки: {count} — количество, {total} — сумма, {title} — названия, {link} — ссылка на заказ",
 	"$bog_nka_settings_Theme_classic": "Классика",
 	"$bog_nka_settings_Theme_lavender": "Лаванда",
 	"$bog_nka_settings_Theme_milk": "Молоко",

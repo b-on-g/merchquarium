@@ -45,7 +45,7 @@ $bog_nka_settings $mol_page
 					hint @ \Link for orders: @nick or t.me/nick
 					value? <=> social_link? \
 				<= Social_text $mol_string
-					hint @ \Order message, for example: "Hello! I want to buy {title}!"
+					hint @ \Request message: {count} items, {total} sum, {title} names, {link} order link
 					value? <=> social_text? \
 				<= Links_label $mol_paragraph
 					title @ \Other socials in the header

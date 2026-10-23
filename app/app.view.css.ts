@@ -110,9 +110,16 @@ namespace $.$$ {
 			flex: { wrap: 'wrap' },
 			alignItems: 'center',
 			gap: $mol_gap.block,
-			padding: {
+			padding: $mol_gap.space,
+			margin: {
 				left: $mol_gap.block,
 				right: $mol_gap.block,
+			},
+			background: {
+				color: $mol_theme.back,
+			},
+			border: {
+				radius: $mol_gap.round,
 			},
 		},
 
@@ -123,6 +130,12 @@ namespace $.$$ {
 			maxWidth: '24rem',
 			margin: {
 				left: 'auto',
+			},
+		},
+
+		Cart_size: {
+			font: {
+				weight: 'bold',
 			},
 		},
 

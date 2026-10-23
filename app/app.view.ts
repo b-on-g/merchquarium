@@ -16,11 +16,67 @@ namespace $.$$ {
 		
 		@ $mol_action
 		settings_toggle() {
+			this.cart_open( false )
 			this.settings_open( !this.settings_open() )
 		}
 		
+		@ $mol_mem
+		cart_open( next?: boolean ) {
+			const state = this.$.$mol_state_arg.value(
+				'cart',
+				next === undefined ? undefined : next ? '' : null,
+			)
+			return state !== null
+		}
+
+		@ $mol_action
+		cart_toggle() {
+			this.settings_open( false )
+			this.cart_open( !this.cart_open() )
+		}
+
+		@ $mol_action
+		cart_close() {
+			this.cart_open( false )
+			this.$.$mol_state_arg.value( 'order', null )
+		}
+
+		order_code() {
+			return this.$.$mol_state_arg.value( 'order' ) ?? ''
+		}
+
+		order_items() {
+			return $bog_nka_order_decode( this.catalog_link(), this.order_code() )
+		}
+
+		cart( next?: $bog_nka_order_items ) {
+			const key = `bog_nka_cart=${ this.catalog_link() }`
+			return this.$.$mol_state_local.value( key, next ) ?? {}
+		}
+
+		cart_count( link: string, next?: number ) {
+			if( next === undefined ) return this.cart()[ link ] ?? 0
+			const items = { ... this.cart() }
+			if( next > 0 ) items[ link ] = next
+			else delete items[ link ]
+			this.cart( items )
+			return next
+		}
+
+		cart_size_text() {
+			const size = Object.values( this.cart() ).reduce( ( sum, count )=> sum + count, 0 )
+			return size ? String( size ) : ''
+		}
+
+		@ $mol_mem
+		Cart_button() {
+			return this.catalog_link() ? super.Cart_button() : null!
+		}
+
 		content() {
 			if( this.settings_open() ) return [ this.Settings() ]
+			if( this.catalog_link() && this.order_code() ) return [ this.Order() ]
+			if( this.catalog_link() && this.cart_open() ) return [ this.Cart() ]
 		
 			return this.catalog_link()
 				? [ this.Catalog_selected() ]

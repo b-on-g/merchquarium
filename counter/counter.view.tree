@@ -1,0 +1,17 @@
+$bog_nka_counter $mol_view
+	value? 0
+	enabled true
+	sub <= content /
+		<= Minus $mol_button_minor
+			hint @ \Less
+			click? <=> dec? null
+			sub /
+				<= Minus_icon $mol_icon_minus
+		<= Value $mol_view
+			sub /
+				<= value_text \
+		<= Plus $mol_button_minor
+			hint @ \More
+			click? <=> inc? null
+			sub /
+				<= Plus_icon $mol_icon_plus
