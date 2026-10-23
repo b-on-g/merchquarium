@@ -6267,6 +6267,18 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_basket) = class $mol_icon_basket extends ($.$mol_icon) {
+		path(){
+			return "M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
 	($.$mol_check) = class $mol_check extends ($.$mol_button_minor) {
 		checked(next){
 			if(next !== undefined) return next;
@@ -6557,502 +6569,6 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
-		option_checked(id, next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		option_title(id){
-			return "";
-		}
-		option_label(id){
-			return [(this.option_title(id))];
-		}
-		enabled(){
-			return true;
-		}
-		option_enabled(id){
-			return (this.enabled());
-		}
-		option_hint(id){
-			return "";
-		}
-		items(){
-			return [];
-		}
-		dictionary(){
-			return {};
-		}
-		Option(id){
-			const obj = new this.$.$mol_check();
-			(obj.checked) = (next) => ((this.option_checked(id, next)));
-			(obj.label) = () => ((this.option_label(id)));
-			(obj.enabled) = () => ((this.option_enabled(id)));
-			(obj.hint) = () => ((this.option_hint(id)));
-			(obj.minimal_height) = () => (24);
-			return obj;
-		}
-		options(){
-			return {};
-		}
-		keys(){
-			return [];
-		}
-		sub(){
-			return (this.items());
-		}
-	};
-	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
-	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * List of checkboxes
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
-         */
-        class $mol_check_list extends $.$mol_check_list {
-            options() {
-                return {};
-            }
-            dictionary(next) {
-                return next ?? {};
-            }
-            option_checked(id, next) {
-                const prev = this.dictionary();
-                if (next === undefined)
-                    return prev[id] ?? null;
-                const next_rec = { ...prev, [id]: next };
-                if (next === null)
-                    delete next_rec[id];
-                return this.dictionary(next_rec)[id] ?? null;
-            }
-            keys() {
-                return Object.keys(this.options());
-            }
-            items() {
-                return this.keys().map(key => this.Option(key));
-            }
-            option_title(key) {
-                return this.options()[key] || key;
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "keys", null);
-        __decorate([
-            $mol_mem
-        ], $mol_check_list.prototype, "items", null);
-        $$.$mol_check_list = $mol_check_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
-		value(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-	};
-	($mol_mem(($.$mol_switch.prototype), "value"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $mol_state_session extends $mol_object {
-        static 'native()';
-        static native() {
-            if (this['native()'])
-                return this['native()'];
-            check: try {
-                const native = $mol_dom_context.sessionStorage;
-                if (!native)
-                    break check;
-                native.setItem('', '');
-                native.removeItem('');
-                return this['native()'] = native;
-            }
-            catch (error) {
-                console.warn(error);
-            }
-            return this['native()'] = {
-                getItem(key) {
-                    return this[':' + key];
-                },
-                setItem(key, value) {
-                    this[':' + key] = value;
-                },
-                removeItem(key) {
-                    this[':' + key] = void 0;
-                }
-            };
-        }
-        static value(key, next) {
-            if (next === void 0)
-                return JSON.parse(this.native().getItem(key) || 'null');
-            if (next === null)
-                this.native().removeItem(key);
-            else
-                this.native().setItem(key, JSON.stringify(next));
-            return next;
-        }
-        prefix() { return ''; }
-        value(key, next) {
-            return $mol_state_session.value(this.prefix() + '.' + key, next);
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_state_session, "value", null);
-    $.$mol_state_session = $mol_state_session;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * Buttons which switching the state
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
-         */
-        class $mol_switch extends $.$mol_switch {
-            value(next) {
-                return $mol_state_session.value(`${this}.value()`, next) ?? '';
-            }
-            option_checked(key, next) {
-                if (next === undefined)
-                    return this.value() == key;
-                this.value(next ? key : '');
-                return next;
-            }
-        }
-        $$.$mol_switch = $mol_switch;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$bog_nka_gallery) = class $bog_nka_gallery extends ($.$mol_view) {
-		items(){
-			return [];
-		}
-		sub(){
-			return (this.items());
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        $mol_style_define($bog_nka_gallery, {
-            display: 'grid',
-            gridTemplateColumns: 'repeat( auto-fill, minmax( min( 16rem, 100% ), 1fr ) )',
-            gap: $mol_gap.block,
-            padding: $mol_gap.block,
-            alignItems: 'start',
-        });
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_list) = class $mol_list extends ($.$mol_view) {
-		gap_before(){
-			return 0;
-		}
-		Gap_before(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_before())});
-			return obj;
-		}
-		Empty(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		gap_after(){
-			return 0;
-		}
-		Gap_after(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_after())});
-			return obj;
-		}
-		rows(){
-			return [
-				(this.Gap_before()), 
-				(this.Empty()), 
-				(this.Gap_after())
-			];
-		}
-		render_visible_only(){
-			return true;
-		}
-		render_over(){
-			return 0.1;
-		}
-		sub(){
-			return (this.rows());
-		}
-		item_height_min(id){
-			return 1;
-		}
-		item_width_min(id){
-			return 1;
-		}
-		view_window_shift(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		view_window(){
-			return [0, 0];
-		}
-	};
-	($mol_mem(($.$mol_list.prototype), "Gap_before"));
-	($mol_mem(($.$mol_list.prototype), "Empty"));
-	($mol_mem(($.$mol_list.prototype), "Gap_after"));
-	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    let cache = null;
-    function $mol_support_css_overflow_anchor() {
-        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
-    }
-    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
-         * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
-         */
-        class $mol_list extends $.$mol_list {
-            sub() {
-                const rows = this.rows();
-                const next = (rows.length === 0) ? [this.Empty()] : rows;
-                const prev = $mol_mem_cached(() => this.sub());
-                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
-                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
-                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
-                    if (index >= 0)
-                        this.view_window_shift(index - start);
-                }
-                return next;
-            }
-            render_visible_only() {
-                return this.$.$mol_support_css_overflow_anchor();
-            }
-            _view_window_last = [0, 0];
-            view_window(next) {
-                const kids = this.sub();
-                if (kids.length < 3)
-                    return [0, kids.length];
-                if (this.$.$mol_print.active())
-                    return [0, kids.length];
-                const rect = this.view_rect();
-                if (next)
-                    return next;
-                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? this._view_window_last;
-                const shift = this.view_window_shift();
-                this.view_window_shift(0);
-                min += shift;
-                max += shift;
-                let max2 = max = Math.min(max, kids.length);
-                let min2 = min = Math.max(0, Math.min(min, max - 1));
-                const anchoring = this.render_visible_only();
-                const window_height = this.$.$mol_window.size().height + 40;
-                const over = Math.ceil(window_height * this.render_over());
-                const limit_top = -over;
-                const limit_bottom = window_height + over;
-                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
-                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
-                let top = Math.ceil(rect?.top ?? 0) + gap_before;
-                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
-                // change nothing when already covers all limits
-                if (top <= limit_top && bottom >= limit_bottom) {
-                    return [min2, max2];
-                }
-                // jumps when fully over limits
-                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
-                    min = 0;
-                    top = Math.ceil(rect?.top ?? 0);
-                    while (min < (kids.length - 1)) {
-                        const height = this.item_height_min(min);
-                        if (top + height >= limit_top)
-                            break;
-                        top += height;
-                        ++min;
-                    }
-                    min2 = min;
-                    max2 = max = min;
-                    bottom = top;
-                }
-                let top2 = top;
-                let bottom2 = bottom;
-                // force recalc min when overlapse top limit
-                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
-                    min2 = max;
-                    top2 = bottom;
-                }
-                // force recalc max when overlapse bottom limit
-                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
-                    max2 = min;
-                    bottom2 = top;
-                }
-                // extend min to cover top limit
-                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
-                    --min2;
-                    top2 -= this.item_height_min(min2);
-                }
-                // extend max to cover bottom limit
-                while (bottom2 < limit_bottom && max2 < kids.length) {
-                    bottom2 += this.item_height_min(max2);
-                    ++max2;
-                }
-                return [min2, max2];
-            }
-            item_height_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_height() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            row_width_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_width() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            gap_before() {
-                let gap = 0;
-                const skipped = this.view_window()[0];
-                for (let i = 0; i < skipped; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            gap_after() {
-                let gap = 0;
-                const from = this.view_window()[1];
-                const to = this.sub().length;
-                for (let i = from; i < to; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            sub_visible() {
-                return [
-                    ...this.gap_before() ? [this.Gap_before()] : [],
-                    ...this.sub().slice(...this._view_window_last = this.view_window()),
-                    ...this.gap_after() ? [this.Gap_after()] : [],
-                ];
-            }
-            minimal_height() {
-                let height = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    height += this.item_height_min(i);
-                return height;
-            }
-            minimal_width() {
-                let width = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    width = Math.max(width, this.item_width_min(i));
-                return width;
-            }
-            force_render(path) {
-                const kids = this.rows();
-                const index = kids.findIndex(item => path.has(item));
-                if (index >= 0) {
-                    const win = this.view_window();
-                    if (index < win[0] || index >= win[1]) {
-                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
-                    }
-                    kids[index].force_render(path);
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "view_window", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_before", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_after", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub_visible", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_height", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_width", null);
-        $$.$mol_list = $mol_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\t/* will-change: contents; */\n}\n\n[mol_list]:where([mol_view_error]) {\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -8090,6 +7606,273 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_list) = class $mol_list extends ($.$mol_view) {
+		gap_before(){
+			return 0;
+		}
+		Gap_before(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_before())});
+			return obj;
+		}
+		Empty(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		gap_after(){
+			return 0;
+		}
+		Gap_after(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_after())});
+			return obj;
+		}
+		rows(){
+			return [
+				(this.Gap_before()), 
+				(this.Empty()), 
+				(this.Gap_after())
+			];
+		}
+		render_visible_only(){
+			return true;
+		}
+		render_over(){
+			return 0.1;
+		}
+		sub(){
+			return (this.rows());
+		}
+		item_height_min(id){
+			return 1;
+		}
+		item_width_min(id){
+			return 1;
+		}
+		view_window_shift(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		view_window(){
+			return [0, 0];
+		}
+	};
+	($mol_mem(($.$mol_list.prototype), "Gap_before"));
+	($mol_mem(($.$mol_list.prototype), "Empty"));
+	($mol_mem(($.$mol_list.prototype), "Gap_after"));
+	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    let cache = null;
+    function $mol_support_css_overflow_anchor() {
+        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
+    }
+    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
+         * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
+         */
+        class $mol_list extends $.$mol_list {
+            sub() {
+                const rows = this.rows();
+                const next = (rows.length === 0) ? [this.Empty()] : rows;
+                const prev = $mol_mem_cached(() => this.sub());
+                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
+                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
+                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
+                    if (index >= 0)
+                        this.view_window_shift(index - start);
+                }
+                return next;
+            }
+            render_visible_only() {
+                return this.$.$mol_support_css_overflow_anchor();
+            }
+            _view_window_last = [0, 0];
+            view_window(next) {
+                const kids = this.sub();
+                if (kids.length < 3)
+                    return [0, kids.length];
+                if (this.$.$mol_print.active())
+                    return [0, kids.length];
+                const rect = this.view_rect();
+                if (next)
+                    return next;
+                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? this._view_window_last;
+                const shift = this.view_window_shift();
+                this.view_window_shift(0);
+                min += shift;
+                max += shift;
+                let max2 = max = Math.min(max, kids.length);
+                let min2 = min = Math.max(0, Math.min(min, max - 1));
+                const anchoring = this.render_visible_only();
+                const window_height = this.$.$mol_window.size().height + 40;
+                const over = Math.ceil(window_height * this.render_over());
+                const limit_top = -over;
+                const limit_bottom = window_height + over;
+                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
+                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
+                let top = Math.ceil(rect?.top ?? 0) + gap_before;
+                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
+                // change nothing when already covers all limits
+                if (top <= limit_top && bottom >= limit_bottom) {
+                    return [min2, max2];
+                }
+                // jumps when fully over limits
+                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
+                    min = 0;
+                    top = Math.ceil(rect?.top ?? 0);
+                    while (min < (kids.length - 1)) {
+                        const height = this.item_height_min(min);
+                        if (top + height >= limit_top)
+                            break;
+                        top += height;
+                        ++min;
+                    }
+                    min2 = min;
+                    max2 = max = min;
+                    bottom = top;
+                }
+                let top2 = top;
+                let bottom2 = bottom;
+                // force recalc min when overlapse top limit
+                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
+                    min2 = max;
+                    top2 = bottom;
+                }
+                // force recalc max when overlapse bottom limit
+                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
+                    max2 = min;
+                    bottom2 = top;
+                }
+                // extend min to cover top limit
+                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
+                    --min2;
+                    top2 -= this.item_height_min(min2);
+                }
+                // extend max to cover bottom limit
+                while (bottom2 < limit_bottom && max2 < kids.length) {
+                    bottom2 += this.item_height_min(max2);
+                    ++max2;
+                }
+                return [min2, max2];
+            }
+            item_height_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_height() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            row_width_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_width() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            gap_before() {
+                let gap = 0;
+                const skipped = this.view_window()[0];
+                for (let i = 0; i < skipped; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            gap_after() {
+                let gap = 0;
+                const from = this.view_window()[1];
+                const to = this.sub().length;
+                for (let i = from; i < to; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            sub_visible() {
+                return [
+                    ...this.gap_before() ? [this.Gap_before()] : [],
+                    ...this.sub().slice(...this._view_window_last = this.view_window()),
+                    ...this.gap_after() ? [this.Gap_after()] : [],
+                ];
+            }
+            minimal_height() {
+                let height = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    height += this.item_height_min(i);
+                return height;
+            }
+            minimal_width() {
+                let width = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    width = Math.max(width, this.item_width_min(i));
+                return width;
+            }
+            force_render(path) {
+                const kids = this.rows();
+                const index = kids.findIndex(item => path.has(item));
+                if (index >= 0) {
+                    const win = this.view_window();
+                    if (index < win[0] || index >= win[1]) {
+                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
+                    }
+                    kids[index].force_render(path);
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "view_window", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_before", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_after", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub_visible", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_height", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_width", null);
+        $$.$mol_list = $mol_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\t/* will-change: contents; */\n}\n\n[mol_list]:where([mol_view_error]) {\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
+})($ || ($ = {}));
+
+;
 	($.$mol_hotkey) = class $mol_hotkey extends ($.$mol_hotkey2) {
 		key(){
 			return {};
@@ -8910,6 +8693,37 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/select/select.view.css", "[mol_select] {\n\tdisplay: flex;\n\tword-break: normal;\n\talign-self: flex-start;\n}\n\n[mol_select_option_row] {\n\tmin-width: 100%;\n\tpadding: 0;\n\tjustify-content: flex-start;\n}\n\n[mol_select_filter] {\n\tflex: 1 0 auto;\n\talign-self: stretch;\n}\n\n[mol_select_option_label] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: start;\n\tmin-height: 1.5em;\n\tdisplay: block;\n\twhite-space: nowrap;\n}\n\n[mol_select_clear_option_content] {\n\tpadding: .5em 1rem .5rem 0;\n\ttext-align: start;\n\tbox-shadow: var(--mol_theme_line);\n\tflex: 1 0 auto;\n}\n\n[mol_select_no_options] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: start;\n\tdisplay: block;\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_select_trigger] {\n\tpadding: 0;\n\tflex: 1 1 auto;\n\tdisplay: flex;\n}\n\n[mol_select_trigger] > * {\n\tmargin-inline-end: -1rem;\n}\n\n[mol_select_trigger] > *:last-child {\n\tmargin-inline-end: 0;\n}\n\n[mol_select_menu] {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n");
+})($ || ($ = {}));
+
+;
+	($.$bog_nka_gallery) = class $bog_nka_gallery extends ($.$mol_view) {
+		items(){
+			return [];
+		}
+		sub(){
+			return (this.items());
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_gallery, {
+            display: 'grid',
+            gridTemplateColumns: 'repeat( auto-fill, minmax( min( 16rem, 100% ), 1fr ) )',
+            gap: $mol_gap.block,
+            padding: $mol_gap.block,
+            alignItems: 'start',
+        });
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
@@ -18347,6 +18161,311 @@ var $;
 
 
 ;
+	($.$bog_nka_tags) = class $bog_nka_tags extends ($.$mol_view) {
+		draft(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		submit(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Input(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ((this.input_hint()));
+			(obj.value) = (next) => ((this.draft(next)));
+			(obj.submit) = (next) => ((this.submit(next)));
+			return obj;
+		}
+		Add(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.add_title()));
+			(obj.click) = (next) => ((this.submit(next)));
+			return obj;
+		}
+		Form(){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Input()), (this.Add())]);
+			return obj;
+		}
+		rows(){
+			return [];
+		}
+		List(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.rows()));
+			return obj;
+		}
+		content(){
+			return [(this.Form()), (this.List())];
+		}
+		name(id){
+			return "";
+		}
+		Name(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.name(id)));
+			return obj;
+		}
+		confirming(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		Remove_icon(id){
+			const obj = new this.$.$mol_icon_close();
+			return obj;
+		}
+		remove(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Remove_button(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_tags_Remove_button_hint")));
+			(obj.sub) = () => ([(this.Remove_icon(id))]);
+			(obj.click) = (next) => ((this.remove(id, next)));
+			return obj;
+		}
+		Confirm_title(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.confirm_title()));
+			return obj;
+		}
+		Confirm_info(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.confirm_info()));
+			return obj;
+		}
+		usage_text(id){
+			return "";
+		}
+		Confirm_count(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.usage_text(id)));
+			return obj;
+		}
+		cancel(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Cancel(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_tags_Cancel_title")));
+			(obj.click) = (next) => ((this.cancel(id, next)));
+			return obj;
+		}
+		confirm(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Confirm(id){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.confirm_action()));
+			(obj.click) = (next) => ((this.confirm(id, next)));
+			return obj;
+		}
+		Confirm_actions(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Cancel(id)), (this.Confirm(id))]);
+			return obj;
+		}
+		Remove(id){
+			const obj = new this.$.$mol_pop();
+			(obj.showed) = (next) => ((this.confirming(id, next)));
+			(obj.Anchor) = () => ((this.Remove_button(id)));
+			(obj.bubble_content) = () => ([
+				(this.Confirm_title(id)), 
+				(this.Confirm_info(id)), 
+				(this.Confirm_count(id)), 
+				(this.Confirm_actions(id))
+			]);
+			return obj;
+		}
+		items(){
+			return [];
+		}
+		editable(){
+			return false;
+		}
+		input_hint(){
+			return "";
+		}
+		add_title(){
+			return (this.$.$mol_locale.text("$bog_nka_tags_add_title"));
+		}
+		confirm_title(){
+			return (this.$.$mol_locale.text("$bog_nka_tags_confirm_title"));
+		}
+		confirm_info(){
+			return (this.$.$mol_locale.text("$bog_nka_tags_confirm_info"));
+		}
+		confirm_action(){
+			return (this.$.$mol_locale.text("$bog_nka_tags_confirm_action"));
+		}
+		usage(id){
+			return 0;
+		}
+		item_add(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		item_drop(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		sub(){
+			return (this.content());
+		}
+		Row(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([(this.Name(id)), (this.Remove(id))]);
+			return obj;
+		}
+	};
+	($mol_mem(($.$bog_nka_tags.prototype), "draft"));
+	($mol_mem(($.$bog_nka_tags.prototype), "submit"));
+	($mol_mem(($.$bog_nka_tags.prototype), "Input"));
+	($mol_mem(($.$bog_nka_tags.prototype), "Add"));
+	($mol_mem(($.$bog_nka_tags.prototype), "Form"));
+	($mol_mem(($.$bog_nka_tags.prototype), "List"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Name"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "confirming"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Remove_icon"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "remove"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Remove_button"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Confirm_title"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Confirm_info"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Confirm_count"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "cancel"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Cancel"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "confirm"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Confirm"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Confirm_actions"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Remove"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "item_add"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "item_drop"));
+	($mol_mem_key(($.$bog_nka_tags.prototype), "Row"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_nka_tags extends $.$bog_nka_tags {
+            content() {
+                return this.editable() ? [this.Form(), this.List()] : [this.List()];
+            }
+            rows() {
+                return this.items().map(name => this.Row(name));
+            }
+            name(name) {
+                return name;
+            }
+            usage_text(name) {
+                return String(this.usage(name));
+            }
+            Remove(name) {
+                return this.editable() ? super.Remove(name) : null;
+            }
+            draft(next) {
+                return next ?? '';
+            }
+            submit() {
+                const name = this.draft().trim();
+                if (!name)
+                    return;
+                if (!this.items().includes(name))
+                    this.item_add(name, null);
+                this.draft('');
+            }
+            remove(name) {
+                if (this.usage(name))
+                    return this.confirming(name, true);
+                this.item_drop(name, null);
+            }
+            cancel(name) {
+                this.confirming(name, false);
+            }
+            confirm(name) {
+                this.confirming(name, false);
+                this.item_drop(name, null);
+            }
+        }
+        __decorate([
+            $mol_mem_key
+        ], $bog_nka_tags.prototype, "Remove", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_tags.prototype, "draft", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_tags.prototype, "submit", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_tags.prototype, "remove", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_tags.prototype, "cancel", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_tags.prototype, "confirm", null);
+        $$.$bog_nka_tags = $bog_nka_tags;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_tags, {
+            flexDirection: 'column',
+            Form: {
+                flex: { wrap: 'nowrap' },
+                padding: 0,
+                gap: $mol_gap.block,
+            },
+            Input: {
+                flex: { grow: 1 },
+            },
+            List: {
+                flex: { wrap: 'wrap' },
+                gap: $mol_gap.block,
+                padding: {
+                    top: $mol_gap.block,
+                    bottom: $mol_gap.block,
+                },
+            },
+            Row: {
+                alignItems: 'center',
+                flex: { wrap: 'nowrap', grow: 0 },
+                padding: {
+                    top: 0,
+                    bottom: 0,
+                    left: '.75rem',
+                    right: 0,
+                },
+                gap: 0,
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                boxShadow: `inset 0 0 0 1px ${$mol_theme.line}`,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_stack) = class $mol_stack extends ($.$mol_view) {};
 
 
@@ -19629,6 +19748,135 @@ var $;
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_upload) = class $mol_icon_upload extends ($.$mol_icon) {
+		path(){
+			return "M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_button_open) = class $mol_button_open extends ($.$mol_button_minor) {
+		Icon(){
+			const obj = new this.$.$mol_icon_upload();
+			return obj;
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		files_handled(next){
+			return (this.files(next));
+		}
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		Native(){
+			const obj = new this.$.$mol_button_open_native();
+			(obj.files) = (next) => ((this.files_handled(next)));
+			(obj.accept) = () => ((this.accept()));
+			(obj.multiple) = () => ((this.multiple()));
+			return obj;
+		}
+		sub(){
+			return [(this.Icon()), (this.Native())];
+		}
+	};
+	($mol_mem(($.$mol_button_open.prototype), "Icon"));
+	($mol_mem(($.$mol_button_open.prototype), "files"));
+	($mol_mem(($.$mol_button_open.prototype), "Native"));
+	($.$mol_button_open_native) = class $mol_button_open_native extends ($.$mol_view) {
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		picked(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "input";
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		attr(){
+			return {
+				"type": "file", 
+				"accept": (this.accept()), 
+				"multiple": (this.multiple())
+			};
+		}
+		event(){
+			return {"change": (next) => (this.picked(next))};
+		}
+	};
+	($mol_mem(($.$mol_button_open_native.prototype), "picked"));
+	($mol_mem(($.$mol_button_open_native.prototype), "files"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_button_open extends $.$mol_button_open {
+            files_handled(next) {
+                try {
+                    const files = this.files(next);
+                    this.status([null]);
+                    return files;
+                }
+                catch (error) {
+                    // Calling actions from catch section, if throwing promise breaks idempotency
+                    Promise.resolve().then(() => this.status([error]));
+                    $mol_fail_hidden(error);
+                }
+            }
+        }
+        $$.$mol_button_open = $mol_button_open;
+        /**
+         * File open button
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+         */
+        class $mol_button_open_native extends $.$mol_button_open_native {
+            dom_node() {
+                return super.dom_node();
+            }
+            picked() {
+                const files = this.dom_node().files;
+                if (!files || !files.length)
+                    return;
+                this.files([...files]);
+            }
+        }
+        $$.$mol_button_open_native = $mol_button_open_native;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/open/open.view.css", "[mol_button_open_native] {\n\tposition: absolute;\n\tleft: 0;\n\ttop: -100%;\n\twidth: 100%;\n\theight: 200%;\n\tcursor: pointer;\n\topacity: 0;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -26852,135 +27100,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_upload) = class $mol_icon_upload extends ($.$mol_icon) {
-		path(){
-			return "M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_button_open) = class $mol_button_open extends ($.$mol_button_minor) {
-		Icon(){
-			const obj = new this.$.$mol_icon_upload();
-			return obj;
-		}
-		files(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		files_handled(next){
-			return (this.files(next));
-		}
-		accept(){
-			return "";
-		}
-		multiple(){
-			return true;
-		}
-		Native(){
-			const obj = new this.$.$mol_button_open_native();
-			(obj.files) = (next) => ((this.files_handled(next)));
-			(obj.accept) = () => ((this.accept()));
-			(obj.multiple) = () => ((this.multiple()));
-			return obj;
-		}
-		sub(){
-			return [(this.Icon()), (this.Native())];
-		}
-	};
-	($mol_mem(($.$mol_button_open.prototype), "Icon"));
-	($mol_mem(($.$mol_button_open.prototype), "files"));
-	($mol_mem(($.$mol_button_open.prototype), "Native"));
-	($.$mol_button_open_native) = class $mol_button_open_native extends ($.$mol_view) {
-		accept(){
-			return "";
-		}
-		multiple(){
-			return true;
-		}
-		picked(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		dom_name(){
-			return "input";
-		}
-		files(next){
-			if(next !== undefined) return next;
-			return [];
-		}
-		attr(){
-			return {
-				"type": "file", 
-				"accept": (this.accept()), 
-				"multiple": (this.multiple())
-			};
-		}
-		event(){
-			return {"change": (next) => (this.picked(next))};
-		}
-	};
-	($mol_mem(($.$mol_button_open_native.prototype), "picked"));
-	($mol_mem(($.$mol_button_open_native.prototype), "files"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_button_open extends $.$mol_button_open {
-            files_handled(next) {
-                try {
-                    const files = this.files(next);
-                    this.status([null]);
-                    return files;
-                }
-                catch (error) {
-                    // Calling actions from catch section, if throwing promise breaks idempotency
-                    Promise.resolve().then(() => this.status([error]));
-                    $mol_fail_hidden(error);
-                }
-            }
-        }
-        $$.$mol_button_open = $mol_button_open;
-        /**
-         * File open button
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
-         */
-        class $mol_button_open_native extends $.$mol_button_open_native {
-            dom_node() {
-                return super.dom_node();
-            }
-            picked() {
-                const files = this.dom_node().files;
-                if (!files || !files.length)
-                    return;
-                this.files([...files]);
-            }
-        }
-        $$.$mol_button_open_native = $mol_button_open_native;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/button/open/open.view.css", "[mol_button_open_native] {\n\tposition: absolute;\n\tleft: 0;\n\ttop: -100%;\n\twidth: 100%;\n\theight: 200%;\n\tcursor: pointer;\n\topacity: 0;\n}\n");
-})($ || ($ = {}));
-
-;
 	($.$giper_baza_glob_book) = class $giper_baza_glob_book extends ($.$mol_book2_catalog) {
 		home_link(){
 			return "";
@@ -30549,6 +30668,58 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    class $mol_state_session extends $mol_object {
+        static 'native()';
+        static native() {
+            if (this['native()'])
+                return this['native()'];
+            check: try {
+                const native = $mol_dom_context.sessionStorage;
+                if (!native)
+                    break check;
+                native.setItem('', '');
+                native.removeItem('');
+                return this['native()'] = native;
+            }
+            catch (error) {
+                console.warn(error);
+            }
+            return this['native()'] = {
+                getItem(key) {
+                    return this[':' + key];
+                },
+                setItem(key, value) {
+                    this[':' + key] = value;
+                },
+                removeItem(key) {
+                    this[':' + key] = void 0;
+                }
+            };
+        }
+        static value(key, next) {
+            if (next === void 0)
+                return JSON.parse(this.native().getItem(key) || 'null');
+            if (next === null)
+                this.native().removeItem(key);
+            else
+                this.native().setItem(key, JSON.stringify(next));
+            return next;
+        }
+        prefix() { return ''; }
+        value(key, next) {
+            return $mol_state_session.value(this.prefix() + '.' + key, next);
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_session, "value", null);
+    $.$mol_state_session = $mol_state_session;
+})($ || ($ = {}));
+
+;
+"use strict";
 
 
 ;
@@ -30799,6 +30970,15 @@ var $;
 			(obj.value) = (next) => ((this.catalog_title(next)));
 			return obj;
 		}
+		Images(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Image_field("Avatar")), 
+				(this.Image_field("Cover")), 
+				(this.Image_field("Back"))
+			]);
+			return obj;
+		}
 		theme_options(){
 			return [];
 		}
@@ -30822,6 +31002,7 @@ var $;
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Look_section_title")));
 			(obj.content) = () => ([
 				(this.Catalog_title()), 
+				(this.Images()), 
 				(this.Themes()), 
 				(this.Listed())
 			]);
@@ -30847,52 +31028,105 @@ var $;
 			(obj.value) = (next) => ((this.social_text(next)));
 			return obj;
 		}
-		Sales_section(){
-			const obj = new this.$.$mol_section();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Sales_section_title")));
-			(obj.content) = () => ([(this.Social_link()), (this.Social_text())]);
+		Links_label(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Links_label_title")));
 			return obj;
 		}
-		category_draft(next){
-			if(next !== undefined) return next;
-			return "";
+		link_items(){
+			return [];
 		}
-		Category_input(){
-			const obj = new this.$.$mol_string();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_input_hint")));
-			(obj.value) = (next) => ((this.category_draft(next)));
-			return obj;
+		is_admin(){
+			return false;
 		}
-		category_add(next){
+		link_add(id, next){
 			if(next !== undefined) return next;
 			return null;
 		}
-		Category_add(){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_add_title")));
-			(obj.click) = (next) => ((this.category_add(next)));
+		link_drop(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Links(){
+			const obj = new this.$.$bog_nka_tags();
+			(obj.items) = () => ((this.link_items()));
+			(obj.editable) = () => ((this.is_admin()));
+			(obj.input_hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Links_input_hint")));
+			(obj.item_add) = (id, next) => ((this.link_add(id, next)));
+			(obj.item_drop) = (id, next) => ((this.link_drop(id, next)));
 			return obj;
 		}
-		Category_form(){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Category_input()), (this.Category_add())]);
+		Sales_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Sales_section_title")));
+			(obj.content) = () => ([
+				(this.Social_link()), 
+				(this.Social_text()), 
+				(this.Links_label()), 
+				(this.Links())
+			]);
 			return obj;
 		}
-		category_rows(){
+		category_items(){
 			return [];
 		}
-		Categories_list(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.category_rows()));
-			return obj;
+		category_usage(id){
+			return 0;
 		}
-		categories_content(){
-			return [(this.Category_form()), (this.Categories_list())];
+		category_add(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		category_drop(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Categories(){
+			const obj = new this.$.$bog_nka_tags();
+			(obj.items) = () => ((this.category_items()));
+			(obj.editable) = () => ((this.is_admin()));
+			(obj.input_hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Categories_input_hint")));
+			(obj.confirm_title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Categories_confirm_title")));
+			(obj.usage) = (id) => ((this.category_usage(id)));
+			(obj.item_add) = (id, next) => ((this.category_add(id, next)));
+			(obj.item_drop) = (id, next) => ((this.category_drop(id, next)));
+			return obj;
 		}
 		Categories_section(){
 			const obj = new this.$.$mol_section();
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Categories_section_title")));
-			(obj.content) = () => ((this.categories_content()));
+			(obj.content) = () => ([(this.Categories())]);
+			return obj;
+		}
+		fandom_items(){
+			return [];
+		}
+		fandom_usage(id){
+			return 0;
+		}
+		fandom_add(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		fandom_drop(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Fandoms(){
+			const obj = new this.$.$bog_nka_tags();
+			(obj.items) = () => ((this.fandom_items()));
+			(obj.editable) = () => ((this.is_admin()));
+			(obj.input_hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Fandoms_input_hint")));
+			(obj.confirm_title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Fandoms_confirm_title")));
+			(obj.usage) = (id) => ((this.fandom_usage(id)));
+			(obj.item_add) = (id, next) => ((this.fandom_add(id, next)));
+			(obj.item_drop) = (id, next) => ((this.fandom_drop(id, next)));
+			return obj;
+		}
+		Fandoms_section(){
+			const obj = new this.$.$mol_section();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Fandoms_section_title")));
+			(obj.content) = () => ([(this.Fandoms())]);
 			return obj;
 		}
 		Import_hint(){
@@ -30975,81 +31209,51 @@ var $;
 			(obj.content) = () => ([(this.Debug_info()), (this.Rights())]);
 			return obj;
 		}
-		category_title(id){
-			return "";
+		image_style(id){
+			return {};
 		}
-		Category_title(id){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.category_title(id)));
+		Image_preview(id){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ((this.image_style(id)));
 			return obj;
 		}
-		Category_remove_icon(id){
+		image_add(id, next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		image_title(id){
+			return "";
+		}
+		Image_pick(id){
+			const obj = new this.$.$mol_button_open();
+			(obj.files) = (next) => ((this.image_add(id, next)));
+			(obj.multiple) = () => (false);
+			(obj.accept) = () => ("image/*");
+			(obj.sub) = () => ([...(this.$.$mol_button_open.prototype.sub.call(obj)), (this.image_title(id))]);
+			return obj;
+		}
+		image_filled(id){
+			return false;
+		}
+		image_drop(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Image_drop_icon(id){
 			const obj = new this.$.$mol_icon_close();
 			return obj;
 		}
-		category_remove(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Category_remove_button(id){
+		Image_drop(id){
 			const obj = new this.$.$mol_button_minor();
-			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_remove_button_hint")));
-			(obj.sub) = () => ([(this.Category_remove_icon(id))]);
-			(obj.click) = (next) => ((this.category_remove(id, next)));
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Image_drop_hint")));
+			(obj.enabled) = () => ((this.image_filled(id)));
+			(obj.click) = (next) => ((this.image_drop(id, next)));
+			(obj.sub) = () => ([(this.Image_drop_icon(id))]);
 			return obj;
 		}
-		Category_confirm_title(id){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_confirm_title_title")));
-			return obj;
-		}
-		Category_confirm_info(id){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_confirm_info_title")));
-			return obj;
-		}
-		category_product_count(id){
-			return "";
-		}
-		Category_confirm_count(id){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.category_product_count(id)));
-			return obj;
-		}
-		category_remove_cancel(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Category_cancel(id){
-			const obj = new this.$.$mol_button_minor();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_cancel_title")));
-			(obj.click) = (next) => ((this.category_remove_cancel(id, next)));
-			return obj;
-		}
-		category_remove_confirm(id, next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Category_confirm(id){
-			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_settings_Category_confirm_title")));
-			(obj.click) = (next) => ((this.category_remove_confirm(id, next)));
-			return obj;
-		}
-		Category_confirm_actions(id){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Category_cancel(id)), (this.Category_confirm(id))]);
-			return obj;
-		}
-		Category_remove(id){
-			const obj = new this.$.$mol_pop();
-			(obj.Anchor) = () => ((this.Category_remove_button(id)));
-			(obj.bubble_content) = () => ([
-				(this.Category_confirm_title(id)), 
-				(this.Category_confirm_info(id)), 
-				(this.Category_confirm_count(id)), 
-				(this.Category_confirm_actions(id))
-			]);
+		Image_actions(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Image_pick(id)), (this.Image_drop(id))]);
 			return obj;
 		}
 		theme_select(id, next){
@@ -31115,14 +31319,24 @@ var $;
 				(this.Look_section()), 
 				(this.Sales_section()), 
 				(this.Categories_section()), 
+				(this.Fandoms_section()), 
 				(this.Import_section()), 
 				(this.Access_section())
 			];
 		}
-		Category_row(id){
-			const obj = new this.$.$mol_row();
-			(obj.sub) = () => ([(this.Category_title(id)), (this.Category_remove(id))]);
+		Image_field(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Image_preview(id)), (this.Image_actions(id))]);
 			return obj;
+		}
+		Image_avatar(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Image_avatar"));
+		}
+		Image_cover(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Image_cover"));
+		}
+		Image_back(){
+			return (this.$.$mol_locale.text("$bog_nka_settings_Image_back"));
 		}
 		Theme_option(id){
 			const obj = new this.$.$mol_button_minor();
@@ -31138,6 +31352,7 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Account_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "catalog_title"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Catalog_title"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Images"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Themes"));
 	($mol_mem(($.$bog_nka_settings.prototype), "listed"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Listed"));
@@ -31146,14 +31361,19 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_link"));
 	($mol_mem(($.$bog_nka_settings.prototype), "social_text"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Social_text"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Links_label"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "link_add"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "link_drop"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Links"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Sales_section"));
-	($mol_mem(($.$bog_nka_settings.prototype), "category_draft"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Category_input"));
-	($mol_mem(($.$bog_nka_settings.prototype), "category_add"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Category_add"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Category_form"));
-	($mol_mem(($.$bog_nka_settings.prototype), "Categories_list"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "category_add"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "category_drop"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Categories"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Categories_section"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "fandom_add"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "fandom_drop"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Fandoms"));
+	($mol_mem(($.$bog_nka_settings.prototype), "Fandoms_section"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Import_hint"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Import_prompt"));
 	($mol_mem(($.$bog_nka_settings.prototype), "import_json"));
@@ -31165,24 +31385,18 @@ var $;
 	($mol_mem(($.$bog_nka_settings.prototype), "Debug_info"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Rights"));
 	($mol_mem(($.$bog_nka_settings.prototype), "Access_section"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_title"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_remove_icon"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "category_remove"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_remove_button"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm_title"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm_info"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm_count"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "category_remove_cancel"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_cancel"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "category_remove_confirm"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_confirm_actions"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_remove"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Image_preview"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "image_add"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Image_pick"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "image_drop"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Image_drop_icon"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Image_drop"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Image_actions"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "theme_select"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Theme_swatch"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Theme_name"));
 	($mol_mem(($.$bog_nka_settings.prototype), "catalog_link"));
-	($mol_mem_key(($.$bog_nka_settings.prototype), "Category_row"));
+	($mol_mem_key(($.$bog_nka_settings.prototype), "Image_field"));
 	($mol_mem_key(($.$bog_nka_settings.prototype), "Theme_option"));
 
 
@@ -31640,6 +31854,7 @@ var $;
         Description: $giper_baza_atom_text,
         Photos: $giper_baza_list_link.to(() => $giper_baza_file),
         Category: $giper_baza_atom_text,
+        Fandoms: $giper_baza_list_str,
         Available: $giper_baza_atom_bool,
     }) {
     }
@@ -31653,14 +31868,189 @@ var $;
     class $bog_nka_catalog extends $giper_baza_dict.with({
         Products: $giper_baza_list_link.to(() => $bog_nka_product),
         Categories: $giper_baza_list_str,
+        Fandoms: $giper_baza_list_str,
         Social: $giper_baza_atom_text,
         SocialText: $giper_baza_atom_text,
+        Links: $giper_baza_list_str,
         Title: $giper_baza_atom_text,
         Theme: $giper_baza_atom_text,
         Hidden: $giper_baza_atom_bool,
+        Avatar: $giper_baza_list_link.to(() => $giper_baza_file),
+        Cover: $giper_baza_list_link.to(() => $giper_baza_file),
+        Back: $giper_baza_list_link.to(() => $giper_baza_file),
     }) {
     }
     $.$bog_nka_catalog = $bog_nka_catalog;
+    function $bog_nka_catalog_image(catalog, key) {
+        return catalog[key]()?.items().at(-1)?.str ?? '';
+    }
+    $.$bog_nka_catalog_image = $bog_nka_catalog_image;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** Image processing. */
+    class $mol_picture extends $mol_object2 {
+        canvas;
+        constructor(canvas) {
+            super();
+            this.canvas = canvas;
+        }
+        get context() {
+            return this.canvas.getContext('2d');
+        }
+        get bitmap() {
+            return this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
+        }
+        static fit(image, width = Number.POSITIVE_INFINITY, height = width) {
+            if (image instanceof Blob)
+                image = $mol_wire_sync(URL).createObjectURL(image);
+            if (typeof image === 'string')
+                image = $mol_wire_sync(this).load(image);
+            let [w, h] = this.sizes(image);
+            if (w > width) {
+                h *= width / w;
+                w = width;
+            }
+            if (h > height) {
+                w *= height / h;
+                h = height;
+            }
+            return this.make(image, w, h);
+        }
+        static make(image, width, height = width) {
+            const canvas = $mol_dom_context.document.createElement('canvas');
+            Object.assign(canvas, { width, height });
+            const context = canvas.getContext('2d');
+            context.drawImage(image, 0, 0, width, height);
+            return new this(canvas);
+        }
+        static sizes(image) {
+            if (image instanceof HTMLVideoElement)
+                return [
+                    image.videoWidth,
+                    image.videoHeight,
+                ];
+            if (image instanceof SVGImageElement)
+                return [
+                    image.width.baseVal.value,
+                    image.height.baseVal.value,
+                ];
+            return [
+                image.width,
+                image.height,
+            ];
+        }
+        static async load(uri) {
+            const image = new Image;
+            image.src = uri;
+            await new Promise((onload, onerror) => Object.assign(image, { onload, onerror }));
+            return image;
+        }
+        format(type, quality = .9) {
+            return new Promise(done => this.canvas.toBlob(done, type, quality));
+        }
+        url(type = 'image/webp', quality = .9) {
+            return this.canvas.toDataURL(type, quality);
+        }
+    }
+    __decorate([
+        $mol_action
+    ], $mol_picture.prototype, "format", null);
+    __decorate([
+        $mol_action
+    ], $mol_picture.prototype, "url", null);
+    __decorate([
+        $mol_action
+    ], $mol_picture, "fit", null);
+    $.$mol_picture = $mol_picture;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $yuf_url_object extends $mol_object {
+        blob;
+        url;
+        constructor(blob, url = URL.createObjectURL(blob)) {
+            super();
+            this.blob = blob;
+            this.url = url;
+        }
+        static from_blob(blob) { return new this(blob); }
+        toString() { return this.url; }
+        destructor() { URL.revokeObjectURL(this.url); }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $yuf_url_object, "from_blob", null);
+    $.$yuf_url_object = $yuf_url_object;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $bog_nka_photo extends $mol_object {
+        source(file) {
+            const extension = file.name.split('.').pop()?.toLowerCase();
+            const detected_type = file.type.toLowerCase();
+            const type = detected_type.startsWith('image/')
+                ? detected_type
+                : extension === 'jpg' || extension === 'jpeg'
+                    ? 'image/jpeg'
+                    : extension === 'png'
+                        ? 'image/png'
+                        : extension === 'webp'
+                            ? 'image/webp'
+                            : detected_type;
+            return new Blob([file], { type });
+        }
+        picture(file) {
+            return $mol_picture.fit(this.source(file), 1600);
+        }
+        async save(files, list) {
+            const prepared = await Promise.all(files.map(async (file) => {
+                const blob = this.picture(file).format('image/webp', .82);
+                if (!blob)
+                    return null;
+                const buffer = new Uint8Array(await blob.arrayBuffer());
+                const extension = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/jpeg' ? 'jpg' : 'png';
+                return { file, blob, buffer, extension };
+            }));
+            return prepared.flatMap(item => {
+                if (!item)
+                    return [];
+                const photo = list.make(null);
+                photo.buffer(item.buffer);
+                photo.type(item.blob.type || 'image/png');
+                photo.name(`${item.file.name.replace(/\.[^/.]+$/, '')}.${item.extension}`);
+                return [photo];
+            });
+        }
+        url(link) {
+            const file = this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(link), $giper_baza_file);
+            if (!file.filled())
+                return '';
+            return $yuf_url_object.from_blob(file.blob()) + '';
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $bog_nka_photo.prototype, "source", null);
+    __decorate([
+        $mol_mem_key
+    ], $bog_nka_photo.prototype, "picture", null);
+    __decorate([
+        $mol_action
+    ], $bog_nka_photo.prototype, "save", null);
+    __decorate([
+        $mol_mem_key
+    ], $bog_nka_photo.prototype, "url", null);
+    $.$bog_nka_photo = $bog_nka_photo;
 })($ || ($ = {}));
 
 ;
@@ -31794,11 +32184,10 @@ var $;
         if (data.title)
             catalog.Title('auto').val(data.title);
         const categories = catalog.Categories('auto');
-        const known = new Set(categories.items());
-        for (const category of data.categories) {
-            if (!known.has(category))
-                categories.add(category);
-        }
+        const known = categories.items();
+        const fresh = data.categories.filter(category => !known.includes(category));
+        if (fresh.length)
+            categories.items([...known, ...fresh]);
         const products = catalog.Products('auto');
         for (const item of data.products) {
             const product = products.make(null);
@@ -31862,15 +32251,103 @@ var $;
             body() {
                 if (this.is_admin())
                     return super.body();
-                return [this.Account_section(), this.Categories_section()];
+                return [this.Account_section(), this.Categories_section(), this.Fandoms_section()];
             }
-            categories_content() {
-                if (this.is_admin())
-                    return super.categories_content();
-                return [this.Categories_list()];
+            products() {
+                return this.catalog()?.Products()?.remote_list() ?? [];
             }
-            Category_remove(category) {
-                return this.is_admin() ? super.Category_remove(category) : null;
+            category_items() {
+                return this.catalog()?.Categories()?.items() ?? [];
+            }
+            category_products(category) {
+                return this.products().filter(product => product.Category()?.val() === category);
+            }
+            category_usage(category) {
+                return this.category_products(category).length;
+            }
+            category_add(category) {
+                const list = this.catalog()?.Categories(null);
+                if (list && !list.has(category))
+                    list.items([...list.items(), category]);
+            }
+            category_drop(category) {
+                for (const product of this.category_products(category)) {
+                    product.Category(null)?.val('');
+                }
+                this.catalog()?.Categories()?.cut(category);
+            }
+            fandom_items() {
+                return this.catalog()?.Fandoms()?.items() ?? [];
+            }
+            fandom_products(fandom) {
+                return this.products().filter(product => product.Fandoms()?.items().includes(fandom));
+            }
+            fandom_usage(fandom) {
+                return this.fandom_products(fandom).length;
+            }
+            fandom_add(fandom) {
+                const list = this.catalog()?.Fandoms(null);
+                if (list && !list.has(fandom))
+                    list.items([...list.items(), fandom]);
+            }
+            fandom_drop(fandom) {
+                for (const product of this.fandom_products(fandom)) {
+                    product.Fandoms(null)?.cut(fandom);
+                }
+                this.catalog()?.Fandoms()?.cut(fandom);
+            }
+            link_items() {
+                return this.catalog()?.Links()?.items() ?? [];
+            }
+            link_add(link) {
+                const list = this.catalog()?.Links(null);
+                if (list && !list.has(link))
+                    list.items([...list.items(), link]);
+            }
+            link_drop(link) {
+                this.catalog()?.Links()?.cut(link);
+            }
+            Photo() {
+                return $bog_nka_photo.make({ $: this.$ });
+            }
+            image_title(key) {
+                return {
+                    Avatar: this.Image_avatar(),
+                    Cover: this.Image_cover(),
+                    Back: this.Image_back(),
+                }[key];
+            }
+            image_link(key) {
+                const catalog = this.catalog();
+                return catalog ? $bog_nka_catalog_image(catalog, key) : '';
+            }
+            image_filled(key) {
+                return Boolean(this.image_link(key));
+            }
+            image_style(key) {
+                const link = this.image_link(key);
+                const url = link ? this.Photo().url(link) : '';
+                return {
+                    backgroundImage: url ? `url("${url}")` : 'none',
+                    ...key === 'Avatar' ? { borderRadius: '50%' } : {},
+                };
+            }
+            image_add(key, next) {
+                if (next?.length && this.is_admin())
+                    $mol_wire_async(this).image_save(key, next[0]);
+                return [];
+            }
+            async image_save(key, file) {
+                const list = this.catalog()[key](null);
+                const old = list.items();
+                await this.Photo().save([file], list);
+                for (const link of old)
+                    list.cut(link);
+            }
+            image_drop(key) {
+                const list = this.catalog()?.[key]();
+                for (const link of list?.items() ?? [])
+                    list.cut(link);
             }
             debug_rank() {
                 const land = this.catalog_land();
@@ -31889,53 +32366,6 @@ var $;
             }
             debug_info() {
                 return `Rank: ${this.debug_rank()}; Products: ${this.products_total()} (${this.products_available()} available)`;
-            }
-            categories_text() {
-                return this.catalog()?.Categories()?.items().join(', ') ?? '';
-            }
-            category_draft(next) {
-                return next ?? '';
-            }
-            category_add() {
-                const name = this.category_draft().trim();
-                if (!name)
-                    return;
-                const categories = this.catalog()?.Categories(null);
-                if (!categories)
-                    return;
-                categories.add(name);
-                this.category_draft('');
-            }
-            category_rows() {
-                const categories = this.catalog()?.Categories()?.items() ?? [];
-                return categories.map(category => this.Category_row(category));
-            }
-            category_title(category) {
-                return category;
-            }
-            category_products(category) {
-                return (this.catalog()?.Products()?.remote_list() ?? [])
-                    .filter(product => product.Category()?.val() === category);
-            }
-            category_product_count(category) {
-                return String(this.category_products(category).length);
-            }
-            category_remove(category) {
-                if (this.category_products(category).length === 0) {
-                    this.catalog()?.Categories()?.cut(category);
-                    return;
-                }
-                this.Category_remove(category).showed(true);
-            }
-            category_remove_cancel(category) {
-                this.Category_remove(category).showed(false);
-            }
-            category_remove_confirm(category) {
-                this.Category_remove(category).showed(false);
-                for (const product of this.category_products(category)) {
-                    product.Category(null)?.val('');
-                }
-                this.catalog()?.Categories()?.cut(category);
             }
             catalog_title(next) {
                 const catalog = this.catalog();
@@ -32061,8 +32491,32 @@ var $;
             $mol_mem
         ], $bog_nka_settings.prototype, "is_admin", null);
         __decorate([
-            $mol_mem_key
-        ], $bog_nka_settings.prototype, "Category_remove", null);
+            $mol_action
+        ], $bog_nka_settings.prototype, "category_add", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "category_drop", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "fandom_add", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "fandom_drop", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "link_add", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "link_drop", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_settings.prototype, "Photo", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "image_save", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_settings.prototype, "image_drop", null);
         __decorate([
             $mol_mem
         ], $bog_nka_settings.prototype, "debug_rank", null);
@@ -32072,21 +32526,6 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_nka_settings.prototype, "products_available", null);
-        __decorate([
-            $mol_mem
-        ], $bog_nka_settings.prototype, "category_draft", null);
-        __decorate([
-            $mol_action
-        ], $bog_nka_settings.prototype, "category_add", null);
-        __decorate([
-            $mol_action
-        ], $bog_nka_settings.prototype, "category_remove", null);
-        __decorate([
-            $mol_action
-        ], $bog_nka_settings.prototype, "category_remove_cancel", null);
-        __decorate([
-            $mol_action
-        ], $bog_nka_settings.prototype, "category_remove_confirm", null);
         __decorate([
             $mol_action
         ], $bog_nka_settings.prototype, "theme_select", null);
@@ -32151,15 +32590,7 @@ var $;
                     size: '.875rem',
                 },
             },
-            Category_form: {
-                flex: { wrap: 'nowrap' },
-                padding: 0,
-                gap: $mol_gap.block,
-            },
-            Category_input: {
-                flex: { grow: 1 },
-            },
-            Categories_list: {
+            Images: {
                 flex: { wrap: 'wrap' },
                 gap: $mol_gap.block,
                 padding: {
@@ -32167,23 +32598,758 @@ var $;
                     bottom: $mol_gap.block,
                 },
             },
-            Category_row: {
+            Image_field: {
+                flexDirection: 'column',
                 alignItems: 'center',
-                flex: { wrap: 'nowrap', grow: 0 },
-                padding: {
-                    top: 0,
-                    bottom: 0,
-                    left: '.75rem',
-                    right: 0,
+                gap: $mol_gap.space,
+            },
+            Image_preview: {
+                width: '5rem',
+                height: '5rem',
+                border: {
+                    radius: $mol_gap.round,
                 },
-                gap: 0,
+                background: {
+                    color: $mol_theme.card,
+                    size: ['cover'],
+                    position: 'center',
+                },
+                boxShadow: `inset 0 0 0 1px ${$mol_theme.line}`,
+            },
+            Links_label: {
+                color: $mol_theme.shade,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_minus) = class $mol_icon_minus extends ($.$mol_icon) {
+		path(){
+			return "M19,13H5V11H19V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$bog_nka_counter) = class $bog_nka_counter extends ($.$mol_view) {
+		dec(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Minus_icon(){
+			const obj = new this.$.$mol_icon_minus();
+			return obj;
+		}
+		Minus(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_counter_Minus_hint")));
+			(obj.click) = (next) => ((this.dec(next)));
+			(obj.sub) = () => ([(this.Minus_icon())]);
+			return obj;
+		}
+		value_text(){
+			return "";
+		}
+		Value(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.value_text())]);
+			return obj;
+		}
+		inc(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Plus_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Plus(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_counter_Plus_hint")));
+			(obj.click) = (next) => ((this.inc(next)));
+			(obj.sub) = () => ([(this.Plus_icon())]);
+			return obj;
+		}
+		content(){
+			return [
+				(this.Minus()), 
+				(this.Value()), 
+				(this.Plus())
+			];
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		enabled(){
+			return true;
+		}
+		sub(){
+			return (this.content());
+		}
+	};
+	($mol_mem(($.$bog_nka_counter.prototype), "dec"));
+	($mol_mem(($.$bog_nka_counter.prototype), "Minus_icon"));
+	($mol_mem(($.$bog_nka_counter.prototype), "Minus"));
+	($mol_mem(($.$bog_nka_counter.prototype), "Value"));
+	($mol_mem(($.$bog_nka_counter.prototype), "inc"));
+	($mol_mem(($.$bog_nka_counter.prototype), "Plus_icon"));
+	($mol_mem(($.$bog_nka_counter.prototype), "Plus"));
+	($mol_mem(($.$bog_nka_counter.prototype), "value"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_nka_counter extends $.$bog_nka_counter {
+            content() {
+                return this.enabled() ? [this.Minus(), this.Value(), this.Plus()] : [this.Value()];
+            }
+            value_text() {
+                return this.enabled() ? String(this.value()) : `× ${this.value()}`;
+            }
+            dec() {
+                this.value(Math.max(0, this.value() - 1));
+            }
+            inc() {
+                this.value(this.value() + 1);
+            }
+        }
+        __decorate([
+            $mol_action
+        ], $bog_nka_counter.prototype, "dec", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_counter.prototype, "inc", null);
+        $$.$bog_nka_counter = $bog_nka_counter;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_counter, {
+            alignItems: 'center',
+            flex: { wrap: 'nowrap' },
+            border: {
+                radius: $mol_gap.round,
+            },
+            boxShadow: `inset 0 0 0 1px ${$mol_theme.line}`,
+            Value: {
+                minWidth: '2.5rem',
+                justifyContent: 'center',
+                font: {
+                    weight: 'bold',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$bog_nka_cart) = class $bog_nka_cart extends ($.$mol_list) {
+		back(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Back_icon(){
+			const obj = new this.$.$mol_icon_arrow_left();
+			return obj;
+		}
+		Back_title(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Back_title"));
+		}
+		Back(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.click) = (next) => ((this.back(next)));
+			(obj.sub) = () => ([(this.Back_icon()), (this.Back_title())]);
+			return obj;
+		}
+		heading(){
+			return "";
+		}
+		Title(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.heading()));
+			return obj;
+		}
+		Empty(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_cart_Empty_title")));
+			return obj;
+		}
+		lines(){
+			return [];
+		}
+		Lines(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ((this.lines()));
+			return obj;
+		}
+		Notice(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_cart_Notice_title")));
+			return obj;
+		}
+		total_text(){
+			return "";
+		}
+		Total(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.total_text()));
+			return obj;
+		}
+		Summary(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Notice()), (this.Total())]);
+			return obj;
+		}
+		send_title(){
+			return "";
+		}
+		send(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		send_enabled(){
+			return true;
+		}
+		Send(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.send_title()));
+			(obj.click) = (next) => ((this.send(next)));
+			(obj.enabled) = () => ((this.send_enabled()));
+			return obj;
+		}
+		clear(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Clear(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_cart_Clear_title")));
+			(obj.click) = (next) => ((this.clear(next)));
+			return obj;
+		}
+		Actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Send()), (this.Clear())]);
+			return obj;
+		}
+		Send_hint(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_cart_Send_hint_title")));
+			return obj;
+		}
+		thumb_style(id){
+			return {};
+		}
+		Thumb(id){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ((this.thumb_style(id)));
+			return obj;
+		}
+		line_title(id){
+			return "";
+		}
+		Line_title(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.line_title(id)));
+			return obj;
+		}
+		line_price(id){
+			return "";
+		}
+		Line_price(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.line_price(id)));
+			return obj;
+		}
+		Line_info(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Line_title(id)), (this.Line_price(id))]);
+			return obj;
+		}
+		count(id, next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Counter(id){
+			const obj = new this.$.$bog_nka_counter();
+			(obj.value) = (next) => ((this.count(id, next)));
+			(obj.enabled) = () => ((this.editable()));
+			return obj;
+		}
+		line_sum(id){
+			return "";
+		}
+		Line_sum(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.line_sum(id)));
+			return obj;
+		}
+		catalog_link(){
+			return "";
+		}
+		items(next){
+			if(next !== undefined) return next;
+			return {};
+		}
+		editable(){
+			return true;
+		}
+		Cart_title(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Cart_title"));
+		}
+		Order_title(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Order_title"));
+		}
+		Unavailable(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Unavailable"));
+		}
+		Total_text(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Total_text"));
+		}
+		Order_message(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Order_message"));
+		}
+		Send_title(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Send_title"));
+		}
+		Copy_title(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Copy_title"));
+		}
+		Copied_title(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Copied_title"));
+		}
+		Social_missing(){
+			return (this.$.$mol_locale.text("$bog_nka_cart_Social_missing"));
+		}
+		rows(){
+			return [
+				(this.Back()), 
+				(this.Title()), 
+				(this.Empty()), 
+				(this.Lines()), 
+				(this.Summary()), 
+				(this.Actions()), 
+				(this.Send_hint())
+			];
+		}
+		Line(id){
+			const obj = new this.$.$mol_row();
+			(obj.sub) = () => ([
+				(this.Thumb(id)), 
+				(this.Line_info(id)), 
+				(this.Counter(id)), 
+				(this.Line_sum(id))
+			]);
+			return obj;
+		}
+	};
+	($mol_mem(($.$bog_nka_cart.prototype), "back"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Back_icon"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Back"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Title"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Empty"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Lines"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Notice"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Total"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Summary"));
+	($mol_mem(($.$bog_nka_cart.prototype), "send"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Send"));
+	($mol_mem(($.$bog_nka_cart.prototype), "clear"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Clear"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Actions"));
+	($mol_mem(($.$bog_nka_cart.prototype), "Send_hint"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "Thumb"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "Line_title"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "Line_price"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "Line_info"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "count"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "Counter"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "Line_sum"));
+	($mol_mem(($.$bog_nka_cart.prototype), "items"));
+	($mol_mem_key(($.$bog_nka_cart.prototype), "Line"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $bog_nka_social_url(value) {
+        let text = value.trim();
+        if (!text)
+            return null;
+        if (/^@?[a-zA-Z][\w]{3,}$/.test(text))
+            text = `https://t.me/${text.replace(/^@/, '')}`;
+        else if (!/^[a-z][a-z\d+.-]*:/i.test(text))
+            text = `https://${text.replace(/^\/+/, '')}`;
+        try {
+            const url = new URL(text);
+            if (url.protocol !== 'https:' && url.protocol !== 'http:')
+                return null;
+            if (!url.hostname.includes('.'))
+                return null;
+            return url;
+        }
+        catch {
+            return null;
+        }
+    }
+    $.$bog_nka_social_url = $bog_nka_social_url;
+    function $bog_nka_social_kind(url) {
+        const host = url.hostname.replace(/^(www|m)\./, '');
+        if (host === 't.me' || host === 'telegram.me')
+            return 'telegram';
+        if (host === 'vk.com' || host === 'vk.ru' || host === 'vk.me')
+            return 'vk';
+        if (host === 'youtube.com' || host === 'youtu.be')
+            return 'youtube';
+        if (host === 'instagram.com')
+            return 'instagram';
+        return 'web';
+    }
+    $.$bog_nka_social_kind = $bog_nka_social_kind;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $bog_nka_order_encode(catalog, items) {
+        return Object.entries(items)
+            .filter(([link, count]) => link.startsWith(catalog) && count > 0)
+            .map(([link, count]) => `${link.slice(catalog.length)}.${Math.floor(count)}`)
+            .join('~');
+    }
+    $.$bog_nka_order_encode = $bog_nka_order_encode;
+    function $bog_nka_order_decode(catalog, code) {
+        const items = {};
+        for (const chunk of code.split('~')) {
+            const match = /^([\w-]+)\.(\d{1,4})$/.exec(chunk);
+            if (!match || !Number(match[2]))
+                continue;
+            items[catalog + match[1]] = Number(match[2]);
+        }
+        return items;
+    }
+    $.$bog_nka_order_decode = $bog_nka_order_decode;
+    function $bog_nka_order_message(template, order) {
+        const message = template
+            .replace(/\{count\}/g, String(order.count))
+            .replace(/\{total\}/g, order.total.toLocaleString('ru-RU'))
+            .replace(/\{title\}/g, order.titles.join(', '))
+            .replace(/\{link\}/g, order.link);
+        return template.includes('{link}') ? message : `${message} ${order.link}`;
+    }
+    $.$bog_nka_order_message = $bog_nka_order_message;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_nka_cart extends $.$bog_nka_cart {
+            catalog() {
+                const link = this.catalog_link();
+                if (!link)
+                    return null;
+                return this.$.$giper_baza_glob.Land(new this.$.$giper_baza_link(link)).Data($bog_nka_catalog);
+            }
+            product(link) {
+                return this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(link), $bog_nka_product);
+            }
+            Photo() {
+                return $bog_nka_photo.make({ $: this.$ });
+            }
+            links() {
+                return Object.keys(this.items()).filter(link => this.items()[link] > 0);
+            }
+            available(link) {
+                const product = this.product(link);
+                return Boolean(product.Title()?.val()) && Boolean(product.Available()?.val());
+            }
+            price(link) {
+                return this.product(link).Price()?.val() ?? 0;
+            }
+            count(link, next) {
+                if (next === undefined)
+                    return this.items()[link] ?? 0;
+                const items = { ...this.items() };
+                if (next > 0)
+                    items[link] = next;
+                else
+                    delete items[link];
+                this.items(items);
+                return next;
+            }
+            rows() {
+                if (!this.links().length)
+                    return [this.Back(), this.Title(), this.Empty()];
+                return [
+                    this.Back(),
+                    this.Title(),
+                    this.Lines(),
+                    this.Summary(),
+                    ...this.editable() ? [this.Actions()] : [],
+                    ...this.copied() && this.social_kind() !== 'telegram' ? [this.Send_hint()] : [],
+                ];
+            }
+            heading() {
+                return this.editable() ? this.Cart_title() : this.Order_title();
+            }
+            lines() {
+                return this.links().map(link => this.Line(link));
+            }
+            thumb_style(link) {
+                const photo = this.product(link).Photos()?.items()[0];
+                const url = photo ? this.Photo().url(photo.str) : '';
+                return { backgroundImage: url ? `url("${url}")` : 'none' };
+            }
+            line_title(link) {
+                const title = this.product(link).Title()?.val() ?? '';
+                return this.available(link) ? title : `${title} · ${this.Unavailable()}`;
+            }
+            line_price(link) {
+                return `${this.price(link).toLocaleString('ru-RU')} ₽`;
+            }
+            line_sum(link) {
+                if (!this.available(link))
+                    return '';
+                return `${(this.price(link) * this.count(link)).toLocaleString('ru-RU')} ₽`;
+            }
+            ordered() {
+                return this.links().filter(link => this.available(link));
+            }
+            total() {
+                return this.ordered().reduce((sum, link) => sum + this.price(link) * this.count(link), 0);
+            }
+            total_text() {
+                return this.Total_text().replace('{total}', this.total().toLocaleString('ru-RU'));
+            }
+            social_url() {
+                return $bog_nka_social_url(this.catalog()?.Social()?.val() ?? '');
+            }
+            social_kind() {
+                const url = this.social_url();
+                return url ? $bog_nka_social_kind(url) : null;
+            }
+            social_name() {
+                const url = this.social_url();
+                if (!url)
+                    return '';
+                return {
+                    telegram: 'Telegram',
+                    vk: 'VK',
+                    youtube: 'YouTube',
+                    instagram: 'Instagram',
+                    web: url.hostname.replace(/^www\./, ''),
+                }[$bog_nka_social_kind(url)];
+            }
+            order_link() {
+                const items = Object.fromEntries(this.ordered().map(link => [link, this.count(link)]));
+                return this.$.$mol_state_arg.make_link({
+                    catalog: this.catalog_link(),
+                    order: $bog_nka_order_encode(this.catalog_link(), items),
+                });
+            }
+            message() {
+                const ordered = this.ordered();
+                return $bog_nka_order_message(this.catalog()?.SocialText()?.val() || this.Order_message(), {
+                    titles: ordered.map(link => this.product(link).Title()?.val() ?? ''),
+                    count: ordered.reduce((sum, link) => sum + this.count(link), 0),
+                    total: this.total(),
+                    link: this.order_link(),
+                });
+            }
+            copied_message(next) {
+                return next ?? '';
+            }
+            copied() {
+                return this.copied_message() === this.message();
+            }
+            send_enabled() {
+                return Boolean(this.social_url()) && this.ordered().length > 0;
+            }
+            send_title() {
+                if (!this.social_url())
+                    return this.Social_missing();
+                if (this.social_kind() === 'telegram')
+                    return this.Send_title();
+                if (this.copied())
+                    return this.Copied_title().replace('{social}', this.social_name());
+                return this.Copy_title();
+            }
+            copy(text) {
+                this.$.$mol_dom_context.navigator.clipboard?.writeText(text).catch(() => { });
+                this.copied_message(text);
+            }
+            send() {
+                const url = this.social_url();
+                if (!url || !this.send_enabled())
+                    return;
+                const text = this.message();
+                const copied = this.copied();
+                this.copy(text);
+                if (this.social_kind() === 'telegram')
+                    url.search = `?text=${encodeURIComponent(text)}`;
+                else if (!copied)
+                    return;
+                this.$.$mol_dom_context.open(url.toString(), '_blank');
+            }
+            clear() {
+                this.items({});
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $bog_nka_cart.prototype, "Photo", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_cart.prototype, "copied_message", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_cart.prototype, "send", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_cart.prototype, "clear", null);
+        $$.$bog_nka_cart = $bog_nka_cart;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_nka_cart, {
+            gap: $mol_gap.block,
+            padding: $mol_gap.block,
+            maxWidth: '50rem',
+            background: {
+                color: $mol_theme.back,
+            },
+            border: {
+                radius: $mol_gap.round,
+            },
+            boxShadow: `0 0 0 1px ${$mol_theme.line}`,
+            margin: {
+                left: 'auto',
+                right: 'auto',
+            },
+            Back: {
+                alignSelf: 'flex-start',
+            },
+            Title: {
+                font: {
+                    size: '2rem',
+                    weight: 'bold',
+                },
+                justifyContent: 'center',
+            },
+            Lines: {
+                gap: $mol_gap.block,
+            },
+            Line: {
+                alignItems: 'center',
+                flex: { wrap: 'nowrap' },
+                gap: $mol_gap.block,
+                padding: $mol_gap.block,
                 background: {
                     color: $mol_theme.card,
                 },
                 border: {
                     radius: $mol_gap.round,
                 },
-                boxShadow: `inset 0 0 0 1px ${$mol_theme.line}`,
+            },
+            Thumb: {
+                width: '4.5rem',
+                height: '4.5rem',
+                flex: { shrink: 0 },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                background: {
+                    color: $mol_theme.line,
+                    size: ['cover'],
+                    position: 'center',
+                },
+            },
+            Line_info: {
+                flexDirection: 'column',
+                flex: { grow: 1, shrink: 1 },
+                minWidth: 0,
+            },
+            Line_title: {
+                font: {
+                    weight: 'bold',
+                },
+            },
+            Line_price: {
+                color: $mol_theme.shade,
+            },
+            Line_sum: {
+                minWidth: '5rem',
+                justifyContent: 'flex-end',
+                font: {
+                    weight: 'bold',
+                },
+            },
+            Summary: {
+                flexDirection: 'column',
+                gap: $mol_gap.block,
+                padding: $mol_gap.block,
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                boxShadow: `inset 0 0 0 2px ${$mol_theme.line}`,
+            },
+            Notice: {
+                color: $mol_theme.shade,
+            },
+            Total: {
+                font: {
+                    size: '1.5rem',
+                    weight: 'bold',
+                },
+                color: $mol_theme.current,
+                justifyContent: 'flex-end',
+            },
+            Actions: {
+                flex: { wrap: 'wrap' },
+                justifyContent: 'center',
+                gap: $mol_gap.block,
+            },
+            Send_hint: {
+                justifyContent: 'center',
+                textAlign: 'center',
+                color: $mol_theme.shade,
             },
         });
     })($$ = $.$$ || ($.$$ = {}));
@@ -32702,7 +33868,209 @@ var $;
 
 
 ;
+	($.$mol_select_list) = class $mol_select_list extends ($.$mol_view) {
+		Badges(){
+			return [];
+		}
+		badge_title(id){
+			return "badge";
+		}
+		remove(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		badge_hint(){
+			return (this.$.$mol_locale.text("$mol_select_list_badge_hint"));
+		}
+		enabled(){
+			return true;
+		}
+		drop_enabled(){
+			return (this.enabled());
+		}
+		event_select(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		align_hor(){
+			return "right";
+		}
+		options(){
+			return [];
+		}
+		options_pickable(){
+			return (this.options());
+		}
+		pick(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		option_title(id){
+			return "";
+		}
+		pick_enabled(){
+			return (this.enabled());
+		}
+		pick_hint(){
+			return (this.$.$mol_locale.text("$mol_select_list_pick_hint"));
+		}
+		filter_pattern(next){
+			return (this.Pick().filter_pattern(next));
+		}
+		Pick_icon(){
+			const obj = new this.$.$mol_icon_plus();
+			return obj;
+		}
+		Pick(){
+			const obj = new this.$.$mol_select();
+			(obj.event_select) = (id, next) => ((this.event_select(id, next)));
+			(obj.align_hor) = () => ((this.align_hor()));
+			(obj.options) = () => ((this.options_pickable()));
+			(obj.value) = (next) => ((this.pick(next)));
+			(obj.option_label) = (id) => ((this.option_title(id)));
+			(obj.trigger_enabled) = () => ((this.pick_enabled()));
+			(obj.hint) = () => ((this.pick_hint()));
+			(obj.Trigger_icon) = () => ((this.Pick_icon()));
+			return obj;
+		}
+		value(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		badges_list(){
+			return (this.Badges());
+		}
+		Badge(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.badge_title(id)));
+			(obj.click) = (next) => ((this.remove(id, next)));
+			(obj.hint) = () => ((this.badge_hint()));
+			(obj.enabled) = () => ((this.drop_enabled()));
+			return obj;
+		}
+		sub(){
+			return [(this.Pick()), ...(this.badges_list())];
+		}
+	};
+	($mol_mem_key(($.$mol_select_list.prototype), "remove"));
+	($mol_mem_key(($.$mol_select_list.prototype), "event_select"));
+	($mol_mem(($.$mol_select_list.prototype), "pick"));
+	($mol_mem(($.$mol_select_list.prototype), "Pick_icon"));
+	($mol_mem(($.$mol_select_list.prototype), "Pick"));
+	($mol_mem(($.$mol_select_list.prototype), "value"));
+	($mol_mem_key(($.$mol_select_list.prototype), "Badge"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Allow user to select value from various options and displays current value.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_select_demo_colors
+         */
+        class $mol_select_list extends $.$mol_select_list {
+            value(val) {
+                return super.value(val);
+            }
+            pick(key) {
+                if (!key)
+                    return '';
+                this.value([...this.value(), key]);
+                return '';
+            }
+            event_select(id, event) {
+                event?.preventDefault();
+                this.pick(id);
+            }
+            options() {
+                return Object.keys(this.dictionary());
+            }
+            options_pickable() {
+                if (!this.enabled())
+                    return [];
+                const exists = new Set(this.value());
+                return this.options().filter(key => !exists.has(key));
+            }
+            option_title(key) {
+                const value = this.dictionary()[key];
+                return value == null ? key : value;
+            }
+            badge_title(key) {
+                return this.option_title(key);
+            }
+            pick_enabled() {
+                return this.options_pickable().length > 0;
+            }
+            Badges() {
+                return this.value()
+                    .map(id => this.Badge(id))
+                    .reverse();
+            }
+            title() {
+                return this.value().map(key => this.option_title(key)).join(' + ');
+            }
+            remove(key) {
+                this.value(this.value().filter(id => id !== key));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "pick", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "options", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "options_pickable", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "pick_enabled", null);
+        __decorate([
+            $mol_mem
+        ], $mol_select_list.prototype, "title", null);
+        __decorate([
+            $mol_action
+        ], $mol_select_list.prototype, "remove", null);
+        $$.$mol_select_list = $mol_select_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        const { rem } = $mol_style_unit;
+        $mol_style_define($mol_select_list, {
+            flex: {
+                wrap: 'wrap',
+                shrink: 1,
+                grow: 1,
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
+		tag_title(id){
+			return "";
+		}
+		tag_select(id, next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		photo_ids(){
 			return [];
 		}
@@ -32796,12 +34164,27 @@ var $;
 			(obj.value) = (next) => ((this.category(next)));
 			return obj;
 		}
-		category_text(){
-			return "";
+		fandoms(next){
+			if(next !== undefined) return next;
+			return [];
 		}
-		Category_text(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.category_text()));
+		fandom_dictionary(){
+			return {};
+		}
+		Fandoms(){
+			const obj = new this.$.$mol_select_list();
+			(obj.value) = (next) => ((this.fandoms(next)));
+			(obj.dictionary) = () => ((this.fandom_dictionary()));
+			(obj.pick_hint) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Fandoms_pick_hint")));
+			(obj.enabled) = () => ((this.changed()));
+			return obj;
+		}
+		tags(){
+			return [];
+		}
+		Tags(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.tags()));
 			return obj;
 		}
 		info_rows(){
@@ -32812,7 +34195,8 @@ var $;
 				(this.Description()), 
 				(this.Description_text()), 
 				(this.Category()), 
-				(this.Category_text())
+				(this.Fandoms()), 
+				(this.Tags())
 			];
 		}
 		Info(){
@@ -32820,21 +34204,31 @@ var $;
 			(obj.rows) = () => ((this.info_rows()));
 			return obj;
 		}
-		buy_title(){
-			return "";
-		}
-		buy(next){
+		cart_add(next){
 			if(next !== undefined) return next;
 			return null;
 		}
-		buy_enabled(){
+		cart_enabled(){
 			return true;
 		}
-		Buy(){
+		Cart_add(){
 			const obj = new this.$.$mol_button_major();
-			(obj.title) = () => ((this.buy_title()));
-			(obj.click) = (next) => ((this.buy(next)));
-			(obj.enabled) = () => ((this.buy_enabled()));
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Cart_add_title")));
+			(obj.click) = (next) => ((this.cart_add(next)));
+			(obj.enabled) = () => ((this.cart_enabled()));
+			return obj;
+		}
+		Cart_counter(){
+			const obj = new this.$.$bog_nka_counter();
+			(obj.value) = (next) => ((this.cart_count(next)));
+			return obj;
+		}
+		cart_controls(){
+			return [(this.Cart_add()), (this.Cart_counter())];
+		}
+		Cart_controls(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.cart_controls()));
 			return obj;
 		}
 		photos_add(next){
@@ -32901,21 +34295,30 @@ var $;
 			if(next !== undefined) return next;
 			return "";
 		}
-		Buy_title(){
-			return (this.$.$mol_locale.text("$bog_nka_product_card_Buy_title"));
+		search(next){
+			if(next !== undefined) return next;
+			return "";
 		}
-		Social_missing_title(){
-			return (this.$.$mol_locale.text("$bog_nka_product_card_Social_missing_title"));
+		cart_count(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		Tag(id){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.tag_title(id)));
+			(obj.click) = (next) => ((this.tag_select(id, next)));
+			return obj;
 		}
 		sub(){
 			return [
 				(this.Cover()), 
 				(this.Info()), 
-				(this.Buy()), 
+				(this.Cart_controls()), 
 				(this.Admin())
 			];
 		}
 	};
+	($mol_mem_key(($.$bog_nka_product_card.prototype), "tag_select"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty_icon"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty"));
@@ -32929,10 +34332,14 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "Description_text"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "category"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Category"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Category_text"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "fandoms"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Fandoms"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Tags"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Info"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "buy"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Buy"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "cart_add"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_add"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_counter"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_controls"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photo_delete"));
@@ -32944,137 +34351,10 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "Admin"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_link"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "catalog_link"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "search"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "cart_count"));
+	($mol_mem_key(($.$bog_nka_product_card.prototype), "Tag"));
 
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** Image processing. */
-    class $mol_picture extends $mol_object2 {
-        canvas;
-        constructor(canvas) {
-            super();
-            this.canvas = canvas;
-        }
-        get context() {
-            return this.canvas.getContext('2d');
-        }
-        get bitmap() {
-            return this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
-        }
-        static fit(image, width = Number.POSITIVE_INFINITY, height = width) {
-            if (image instanceof Blob)
-                image = $mol_wire_sync(URL).createObjectURL(image);
-            if (typeof image === 'string')
-                image = $mol_wire_sync(this).load(image);
-            let [w, h] = this.sizes(image);
-            if (w > width) {
-                h *= width / w;
-                w = width;
-            }
-            if (h > height) {
-                w *= height / h;
-                h = height;
-            }
-            return this.make(image, w, h);
-        }
-        static make(image, width, height = width) {
-            const canvas = $mol_dom_context.document.createElement('canvas');
-            Object.assign(canvas, { width, height });
-            const context = canvas.getContext('2d');
-            context.drawImage(image, 0, 0, width, height);
-            return new this(canvas);
-        }
-        static sizes(image) {
-            if (image instanceof HTMLVideoElement)
-                return [
-                    image.videoWidth,
-                    image.videoHeight,
-                ];
-            if (image instanceof SVGImageElement)
-                return [
-                    image.width.baseVal.value,
-                    image.height.baseVal.value,
-                ];
-            return [
-                image.width,
-                image.height,
-            ];
-        }
-        static async load(uri) {
-            const image = new Image;
-            image.src = uri;
-            await new Promise((onload, onerror) => Object.assign(image, { onload, onerror }));
-            return image;
-        }
-        format(type, quality = .9) {
-            return new Promise(done => this.canvas.toBlob(done, type, quality));
-        }
-        url(type = 'image/webp', quality = .9) {
-            return this.canvas.toDataURL(type, quality);
-        }
-    }
-    __decorate([
-        $mol_action
-    ], $mol_picture.prototype, "format", null);
-    __decorate([
-        $mol_action
-    ], $mol_picture.prototype, "url", null);
-    __decorate([
-        $mol_action
-    ], $mol_picture, "fit", null);
-    $.$mol_picture = $mol_picture;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    class $yuf_url_object extends $mol_object {
-        blob;
-        url;
-        constructor(blob, url = URL.createObjectURL(blob)) {
-            super();
-            this.blob = blob;
-            this.url = url;
-        }
-        static from_blob(blob) { return new this(blob); }
-        toString() { return this.url; }
-        destructor() { URL.revokeObjectURL(this.url); }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $yuf_url_object, "from_blob", null);
-    $.$yuf_url_object = $yuf_url_object;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    function $bog_nka_social_url(value) {
-        let text = value.trim();
-        if (!text)
-            return null;
-        if (/^@?[a-zA-Z][\w]{3,}$/.test(text))
-            text = `https://t.me/${text.replace(/^@/, '')}`;
-        else if (!/^[a-z][a-z\d+.-]*:/i.test(text))
-            text = `https://${text.replace(/^\/+/, '')}`;
-        try {
-            const url = new URL(text);
-            if (url.protocol !== 'https:' && url.protocol !== 'http:')
-                return null;
-            if (!url.hostname.includes('.'))
-                return null;
-            return url;
-        }
-        catch {
-            return null;
-        }
-    }
-    $.$bog_nka_social_url = $bog_nka_social_url;
-})($ || ($ = {}));
 
 ;
 "use strict";
@@ -33093,6 +34373,9 @@ var $;
             changed() {
                 return this.product().can_change();
             }
+            Photo() {
+                return $bog_nka_photo.make({ $: this.$ });
+            }
             photos_add(next) {
                 if (!next?.length || !this.changed())
                     return [];
@@ -33100,57 +34383,13 @@ var $;
                 return [];
             }
             async photos_save(files) {
-                const prepared = await Promise.all(files.map(async (file) => {
-                    const picture = this.photo_picture(file);
-                    if (!picture)
-                        return null;
-                    const blob = picture.format('image/webp', .82);
-                    if (!blob)
-                        return null;
-                    const buffer = new Uint8Array(await blob.arrayBuffer());
-                    const output_extension = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/jpeg' ? 'jpg' : 'png';
-                    return { file, blob, buffer, output_extension };
-                }));
-                const photos = this.product().Photos('auto');
-                prepared.forEach(item => {
-                    if (!item)
-                        return;
-                    const { file, blob, buffer, output_extension } = item;
-                    const photo = photos.make(null);
-                    photo.buffer(buffer);
-                    photo.type(blob.type || 'image/png');
-                    photo.name(`${file.name.replace(/\.[^/.]+$/, '')}.${output_extension}`);
-                });
-            }
-            photo_source(file) {
-                if (!file)
-                    return new Blob();
-                const extension = file.name.split('.').pop()?.toLowerCase();
-                const detected_type = file.type.toLowerCase();
-                const type = detected_type.startsWith('image/')
-                    ? detected_type
-                    : extension === 'jpg' || extension === 'jpeg'
-                        ? 'image/jpeg'
-                        : extension === 'png'
-                            ? 'image/png'
-                            : extension === 'webp'
-                                ? 'image/webp'
-                                : detected_type;
-                return new Blob([file], { type });
-            }
-            photo_picture(file) {
-                if (!file)
-                    return null;
-                return $mol_picture.fit(this.photo_source(file), 1600);
+                await this.Photo().save(files, this.product().Photos('auto'));
             }
             photo_ids() {
                 return this.product().Photos()?.remote_list().map(photo => photo.link().str) ?? [];
             }
             photo_url(link) {
-                const file = this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(link), $giper_baza_file);
-                if (!file.filled())
-                    return '';
-                return $yuf_url_object.from_blob(file.blob()) + '';
+                return this.Photo().url(link);
             }
             photo_delete_enabled() {
                 return this.changed() && this.photo_ids().length > 0;
@@ -33228,74 +34467,74 @@ var $;
                 atom.val(next);
                 return next;
             }
-            buy_title() {
-                return this.social_url()
-                    ? this.Buy_title()
-                    : this.Social_missing_title();
+            cart_controls() {
+                return [this.cart_count() > 0 ? this.Cart_counter() : this.Cart_add()];
             }
-            buy_enabled() {
-                return this.available() && this.social_url() !== null;
+            cart_enabled() {
+                return this.available() && Boolean(this.title());
             }
-            buy() {
-                if (!this.buy_enabled())
-                    return;
-                const catalog = this.catalog();
-                const url = this.social_url();
-                if (!catalog || !url)
-                    return;
-                const host = url.hostname.replace(/^www\./, '');
-                if (host === 't.me' || host === 'telegram.me') {
-                    const template = catalog.SocialText()?.val()
-                        || 'Добрый день, хотел бы приобрести {title}';
-                    const message = template.replace(/\{title\}/g, this.title());
-                    url.search = `?text=${encodeURIComponent(message)}`;
-                }
-                window.open(url.toString(), '_blank');
-            }
-            social_url() {
-                return $bog_nka_social_url(this.catalog()?.Social()?.val() ?? '');
+            cart_add() {
+                if (this.cart_enabled())
+                    this.cart_count(1);
             }
             cover() {
                 return [this.photo_ids().length ? this.Photos() : this.Photo_empty()];
             }
             info_rows() {
                 if (this.changed())
-                    return [this.Title(), this.Price(), this.Description(), this.Category()];
+                    return [this.Title(), this.Price(), this.Description(), this.Category(), this.Fandoms()];
                 return [
                     this.Title(),
                     ...this.price() ? [this.Price_text()] : [],
                     ...this.description() ? [this.Description_text()] : [],
-                    ...this.category() ? [this.Category_text()] : [],
+                    ...this.tag_list().length ? [this.Tags()] : [],
                 ];
             }
             price_text() {
                 return `${this.price().toLocaleString('ru-RU')} ₽`;
             }
-            category_text() {
-                return this.category() ?? '';
+            fandom_dictionary() {
+                const fandoms = this.catalog()?.Fandoms()?.items() ?? [];
+                return Object.fromEntries(fandoms.map(fandom => [fandom, fandom]));
+            }
+            fandoms(next) {
+                const product = this.product();
+                if (next === undefined)
+                    return product.Fandoms()?.items() ?? [];
+                product.Fandoms(null)?.items(next);
+                return next;
+            }
+            tag_list() {
+                return [this.category() ?? '', ...this.fandoms()].filter(Boolean);
+            }
+            tags() {
+                return this.tag_list().map(tag => this.Tag(tag));
+            }
+            tag_title(tag) {
+                return `#${tag}`;
+            }
+            tag_select(tag) {
+                this.search(tag);
             }
             Admin() {
                 return this.changed() ? super.Admin() : null;
             }
         }
         __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "Photo", null);
+        __decorate([
             $mol_action
         ], $bog_nka_product_card.prototype, "photos_save", null);
-        __decorate([
-            $mol_mem
-        ], $bog_nka_product_card.prototype, "photo_source", null);
-        __decorate([
-            $mol_mem
-        ], $bog_nka_product_card.prototype, "photo_picture", null);
-        __decorate([
-            $mol_mem_key
-        ], $bog_nka_product_card.prototype, "photo_url", null);
         __decorate([
             $mol_action
         ], $bog_nka_product_card.prototype, "photo_delete", null);
         __decorate([
             $mol_action
-        ], $bog_nka_product_card.prototype, "buy", null);
+        ], $bog_nka_product_card.prototype, "cart_add", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_product_card.prototype, "tag_select", null);
         __decorate([
             $mol_mem
         ], $bog_nka_product_card.prototype, "Admin", null);
@@ -33379,17 +34618,28 @@ var $;
                 },
                 color: $mol_theme.shade,
             },
-            Category_text: {
+            Tags: {
+                flex: {
+                    wrap: 'wrap',
+                },
                 padding: {
-                    left: '.75rem',
-                    right: '.75rem',
+                    left: '.25rem',
+                    right: '.25rem',
+                },
+            },
+            Tag: {
+                padding: {
+                    top: '.25rem',
+                    bottom: '.25rem',
+                    left: '.5rem',
+                    right: '.5rem',
                 },
                 font: {
                     size: '.875rem',
                 },
-                color: $mol_theme.shade,
+                color: $mol_theme.current,
             },
-            Buy: {
+            Cart_controls: {
                 justifyContent: 'center',
                 margin: {
                     left: $mol_gap.block,
@@ -33423,6 +34673,66 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_telegram) = class $mol_icon_telegram extends ($.$mol_icon) {
+		path(){
+			return "M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_vk) = class $mol_icon_vk extends ($.$mol_icon) {
+		path(){
+			return "M20.8,7.74C20.93,7.32 20.8,7 20.18,7H18.16C17.64,7 17.41,7.27 17.28,7.57C17.28,7.57 16.25,10.08 14.79,11.72C14.31,12.19 14.1,12.34 13.84,12.34C13.71,12.34 13.5,12.19 13.5,11.76V7.74C13.5,7.23 13.38,7 12.95,7H9.76C9.44,7 9.25,7.24 9.25,7.47C9.25,7.95 10,8.07 10.05,9.44V12.42C10.05,13.08 9.93,13.2 9.68,13.2C9,13.2 7.32,10.67 6.33,7.79C6.13,7.23 5.94,7 5.42,7H3.39C2.82,7 2.7,7.27 2.7,7.57C2.7,8.11 3.39,10.77 5.9,14.29C7.57,16.7 9.93,18 12.08,18C13.37,18 13.53,17.71 13.53,17.21V15.39C13.53,14.82 13.65,14.7 14.06,14.7C14.36,14.7 14.87,14.85 16.07,16C17.45,17.38 17.67,18 18.45,18H20.47C21.05,18 21.34,17.71 21.18,17.14C21,16.57 20.34,15.74 19.47,14.76C19,14.21 18.29,13.61 18.07,13.3C17.77,12.92 17.86,12.75 18.07,12.4C18.07,12.4 20.54,8.93 20.8,7.74Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_youtube) = class $mol_icon_youtube extends ($.$mol_icon) {
+		path(){
+			return "M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_instagram) = class $mol_icon_instagram extends ($.$mol_icon) {
+		path(){
+			return "M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_web) = class $mol_icon_web extends ($.$mol_icon) {
+		path(){
+			return "M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
 	($.$bog_nka_app) = class $bog_nka_app extends ($.$mol_page) {
 		product_link(id){
 			return "";
@@ -33430,9 +34740,23 @@ var $;
 		catalog_link(){
 			return "";
 		}
+		search(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		cart_count(id, next){
+			if(next !== undefined) return next;
+			return 0;
+		}
 		product_delete(id, next){
 			if(next !== undefined) return next;
 			return null;
+		}
+		social_uri(id){
+			return "";
+		}
+		social_sub(id){
+			return [];
 		}
 		product_undo(id, next){
 			if(next !== undefined) return next;
@@ -33472,6 +34796,29 @@ var $;
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Product_add_title")));
 			(obj.click) = (next) => ((this.product_add(next)));
 			(obj.hidden) = () => ((this.is_not_admin()));
+			return obj;
+		}
+		cart_toggle(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Cart_icon(){
+			const obj = new this.$.$mol_icon_basket();
+			return obj;
+		}
+		cart_size_text(){
+			return "";
+		}
+		Cart_size(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.cart_size_text())]);
+			return obj;
+		}
+		Cart_button(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.$.$mol_locale.text("$bog_nka_app_Cart_button_hint")));
+			(obj.click) = (next) => ((this.cart_toggle(next)));
+			(obj.sub) = () => ([(this.Cart_icon()), (this.Cart_size())]);
 			return obj;
 		}
 		Lights(){
@@ -33523,17 +34870,95 @@ var $;
 			(obj.sub) = () => ([(this.Catalog_missing_text()), (this.Catalog_create())]);
 			return obj;
 		}
-		category_filter_options(){
+		avatar_style(){
+			return {};
+		}
+		avatar_empty(){
+			return true;
+		}
+		Avatar(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ((this.avatar_style()));
+			(obj.attr) = () => ({"bog_nka_app_avatar_empty": (this.avatar_empty())});
+			return obj;
+		}
+		Nick(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.title()));
+			return obj;
+		}
+		Profile(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Avatar()), (this.Nick())]);
+			return obj;
+		}
+		Socials_label(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Socials_label_title")));
+			return obj;
+		}
+		socials(){
+			return [];
+		}
+		Socials_list(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.socials()));
+			return obj;
+		}
+		Socials(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Socials_label()), (this.Socials_list())]);
+			return obj;
+		}
+		hero_sub(){
+			return [(this.Profile()), (this.Socials())];
+		}
+		Hero(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.hero_sub()));
+			return obj;
+		}
+		kind_options(){
 			return {};
 		}
 		category_filter(next){
 			if(next !== undefined) return next;
 			return "all";
 		}
-		Category_filter(){
-			const obj = new this.$.$mol_switch();
-			(obj.options) = () => ((this.category_filter_options()));
+		Kind_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.dictionary) = () => ((this.kind_options()));
 			(obj.value) = (next) => ((this.category_filter(next)));
+			return obj;
+		}
+		fandom_options(){
+			return {};
+		}
+		fandom_filter(next){
+			if(next !== undefined) return next;
+			return "all";
+		}
+		Fandom_filter(){
+			const obj = new this.$.$mol_select();
+			(obj.dictionary) = () => ((this.fandom_options()));
+			(obj.value) = (next) => ((this.fandom_filter(next)));
+			return obj;
+		}
+		Search(){
+			const obj = new this.$.$mol_search();
+			(obj.query) = (next) => ((this.search(next)));
+			return obj;
+		}
+		filters(){
+			return [
+				(this.Kind_filter()), 
+				(this.Fandom_filter()), 
+				(this.Search())
+			];
+		}
+		Filters(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.filters()));
 			return obj;
 		}
 		product_cards(){
@@ -33551,7 +34976,8 @@ var $;
 		}
 		catalog_rows(){
 			return [
-				(this.Category_filter()), 
+				(this.Hero()), 
+				(this.Filters()), 
 				(this.Product_cards()), 
 				(this.Catalog_empty())
 			];
@@ -33566,11 +34992,39 @@ var $;
 			(obj.catalog_link) = () => ((this.catalog_link()));
 			return obj;
 		}
+		cart(next){
+			if(next !== undefined) return next;
+			return {};
+		}
+		cart_close(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Cart(){
+			const obj = new this.$.$bog_nka_cart();
+			(obj.catalog_link) = () => ((this.catalog_link()));
+			(obj.items) = (next) => ((this.cart(next)));
+			(obj.back) = (next) => ((this.cart_close(next)));
+			return obj;
+		}
+		order_items(){
+			return {};
+		}
+		Order(){
+			const obj = new this.$.$bog_nka_cart();
+			(obj.catalog_link) = () => ((this.catalog_link()));
+			(obj.items) = () => ((this.order_items()));
+			(obj.editable) = () => (false);
+			(obj.back) = (next) => ((this.cart_close(next)));
+			return obj;
+		}
 		content(){
 			return [
 				(this.Catalog_missing()), 
 				(this.Catalog_selected()), 
-				(this.Settings())
+				(this.Settings()), 
+				(this.Cart()), 
+				(this.Order())
 			];
 		}
 		Settings_title(){
@@ -33579,8 +35033,11 @@ var $;
 		Return_title(){
 			return (this.$.$mol_locale.text("$bog_nka_app_Return_title"));
 		}
-		Filter_all(){
-			return (this.$.$mol_locale.text("$bog_nka_app_Filter_all"));
+		Kind_all(){
+			return (this.$.$mol_locale.text("$bog_nka_app_Kind_all"));
+		}
+		Fandom_all(){
+			return (this.$.$mol_locale.text("$bog_nka_app_Fandom_all"));
 		}
 		title(){
 			return (this.$.$mol_locale.text("$bog_nka_app_title"));
@@ -33592,7 +35049,37 @@ var $;
 			const obj = new this.$.$bog_nka_product_card();
 			(obj.product_link) = () => ((this.product_link(id)));
 			(obj.catalog_link) = () => ((this.catalog_link()));
+			(obj.search) = (next) => ((this.search(next)));
+			(obj.cart_count) = (next) => ((this.cart_count(id, next)));
 			(obj.product_delete) = (next) => ((this.product_delete(id, next)));
+			return obj;
+		}
+		Social(id){
+			const obj = new this.$.$mol_link();
+			(obj.uri) = () => ((this.social_uri(id)));
+			(obj.target) = () => ("_blank");
+			(obj.hint) = () => ((this.social_uri(id)));
+			(obj.sub) = () => ((this.social_sub(id)));
+			return obj;
+		}
+		Icon_telegram(id){
+			const obj = new this.$.$mol_icon_telegram();
+			return obj;
+		}
+		Icon_vk(id){
+			const obj = new this.$.$mol_icon_vk();
+			return obj;
+		}
+		Icon_youtube(id){
+			const obj = new this.$.$mol_icon_youtube();
+			return obj;
+		}
+		Icon_instagram(id){
+			const obj = new this.$.$mol_icon_instagram();
+			return obj;
+		}
+		Icon_web(id){
+			const obj = new this.$.$mol_icon_web();
 			return obj;
 		}
 		Product_undo(id){
@@ -33616,12 +35103,18 @@ var $;
 			];
 		}
 		tools(){
-			return [(this.Lights()), (this.Settings_button())];
+			return [
+				(this.Cart_button()), 
+				(this.Lights()), 
+				(this.Settings_button())
+			];
 		}
 		body(){
 			return (this.content());
 		}
 	};
+	($mol_mem(($.$bog_nka_app.prototype), "search"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "cart_count"));
 	($mol_mem_key(($.$bog_nka_app.prototype), "product_delete"));
 	($mol_mem_key(($.$bog_nka_app.prototype), "product_undo"));
 	($mol_mem(($.$bog_nka_app.prototype), "Theme_auto"));
@@ -33631,6 +35124,10 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Undo_hotkey"));
 	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
+	($mol_mem(($.$bog_nka_app.prototype), "cart_toggle"));
+	($mol_mem(($.$bog_nka_app.prototype), "Cart_icon"));
+	($mol_mem(($.$bog_nka_app.prototype), "Cart_size"));
+	($mol_mem(($.$bog_nka_app.prototype), "Cart_button"));
 	($mol_mem(($.$bog_nka_app.prototype), "Lights"));
 	($mol_mem(($.$bog_nka_app.prototype), "settings_toggle"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings_icon"));
@@ -33640,13 +35137,34 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_missing"));
+	($mol_mem(($.$bog_nka_app.prototype), "Avatar"));
+	($mol_mem(($.$bog_nka_app.prototype), "Nick"));
+	($mol_mem(($.$bog_nka_app.prototype), "Profile"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials_label"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials_list"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials"));
+	($mol_mem(($.$bog_nka_app.prototype), "Hero"));
 	($mol_mem(($.$bog_nka_app.prototype), "category_filter"));
-	($mol_mem(($.$bog_nka_app.prototype), "Category_filter"));
+	($mol_mem(($.$bog_nka_app.prototype), "Kind_filter"));
+	($mol_mem(($.$bog_nka_app.prototype), "fandom_filter"));
+	($mol_mem(($.$bog_nka_app.prototype), "Fandom_filter"));
+	($mol_mem(($.$bog_nka_app.prototype), "Search"));
+	($mol_mem(($.$bog_nka_app.prototype), "Filters"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_cards"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_empty"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_selected"));
 	($mol_mem(($.$bog_nka_app.prototype), "Settings"));
+	($mol_mem(($.$bog_nka_app.prototype), "cart"));
+	($mol_mem(($.$bog_nka_app.prototype), "cart_close"));
+	($mol_mem(($.$bog_nka_app.prototype), "Cart"));
+	($mol_mem(($.$bog_nka_app.prototype), "Order"));
 	($mol_mem_key(($.$bog_nka_app.prototype), "Product_card"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Social"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Icon_telegram"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Icon_vk"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Icon_youtube"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Icon_instagram"));
+	($mol_mem_key(($.$bog_nka_app.prototype), "Icon_web"));
 	($mol_mem_key(($.$bog_nka_app.prototype), "Product_undo"));
 
 
@@ -33669,11 +35187,56 @@ var $;
                 return state !== null;
             }
             settings_toggle() {
+                this.cart_open(false);
                 this.settings_open(!this.settings_open());
+            }
+            cart_open(next) {
+                const state = this.$.$mol_state_arg.value('cart', next === undefined ? undefined : next ? '' : null);
+                return state !== null;
+            }
+            cart_toggle() {
+                this.settings_open(false);
+                this.cart_open(!this.cart_open());
+            }
+            cart_close() {
+                this.cart_open(false);
+                this.$.$mol_state_arg.value('order', null);
+            }
+            order_code() {
+                return this.$.$mol_state_arg.value('order') ?? '';
+            }
+            order_items() {
+                return $bog_nka_order_decode(this.catalog_link(), this.order_code());
+            }
+            cart(next) {
+                const key = `bog_nka_cart=${this.catalog_link()}`;
+                return this.$.$mol_state_local.value(key, next) ?? {};
+            }
+            cart_count(link, next) {
+                if (next === undefined)
+                    return this.cart()[link] ?? 0;
+                const items = { ...this.cart() };
+                if (next > 0)
+                    items[link] = next;
+                else
+                    delete items[link];
+                this.cart(items);
+                return next;
+            }
+            cart_size_text() {
+                const size = Object.values(this.cart()).reduce((sum, count) => sum + count, 0);
+                return size ? String(size) : '';
+            }
+            Cart_button() {
+                return this.catalog_link() ? super.Cart_button() : null;
             }
             content() {
                 if (this.settings_open())
                     return [this.Settings()];
+                if (this.catalog_link() && this.order_code())
+                    return [this.Order()];
+                if (this.catalog_link() && this.cart_open())
+                    return [this.Cart()];
                 return this.catalog_link()
                     ? [this.Catalog_selected()]
                     : [this.Catalog_missing()];
@@ -33710,11 +35273,67 @@ var $;
             title() {
                 return this.catalog()?.Title()?.val()?.trim() || super.title();
             }
+            Photo() {
+                return $bog_nka_photo.make({ $: this.$ });
+            }
+            image_url(key) {
+                const catalog = this.catalog();
+                const link = catalog ? $bog_nka_catalog_image(catalog, key) : '';
+                return link ? this.Photo().url(link) : '';
+            }
             style() {
+                const back = this.image_url('Back');
+                const cover = this.image_url('Cover');
                 return {
                     ...super.style(),
                     ...$bog_nka_theme_style(this.catalog()?.Theme()?.val()),
+                    ...back ? { '--bog_nka_pattern': `url("${back}")`, '--bog_nka_pattern_size': 'cover' } : {},
+                    '--bog_nka_cover': cover ? `url("${cover}")` : 'none',
                 };
+            }
+            head() {
+                if (this.settings_open() || !this.catalog_link())
+                    return super.head();
+                return [this.Product_add(), this.Tools()];
+            }
+            avatar_empty() {
+                return !this.image_url('Avatar');
+            }
+            avatar_style() {
+                const url = this.image_url('Avatar');
+                return { backgroundImage: url ? `url("${url}")` : 'none' };
+            }
+            social_list() {
+                const catalog = this.catalog();
+                const values = [catalog?.Social()?.val() ?? '', ...catalog?.Links()?.items() ?? []];
+                const urls = values.map(value => $bog_nka_social_url(value)?.toString() ?? '').filter(Boolean);
+                return [...new Set(urls)];
+            }
+            socials() {
+                return this.social_list().map(uri => this.Social(uri));
+            }
+            social_uri(uri) {
+                return uri;
+            }
+            social_sub(uri) {
+                const kind = $bog_nka_social_kind(new URL(uri));
+                return [{
+                        telegram: this.Icon_telegram,
+                        vk: this.Icon_vk,
+                        youtube: this.Icon_youtube,
+                        instagram: this.Icon_instagram,
+                        web: this.Icon_web,
+                    }[kind].call(this, uri)];
+            }
+            hero_sub() {
+                return this.social_list().length ? [this.Profile(), this.Socials()] : [this.Profile()];
+            }
+            filters() {
+                return [
+                    ...Object.keys(this.kind_options()).length > 1 ? [this.Kind_filter()] : [],
+                    ...Object.keys(this.fandom_options()).length > 1 ? [this.Fandom_filter()] : [],
+                    this.Search(),
+                ];
             }
             settings_button_sub() {
                 return [this.settings_open() ? this.Return_icon() : this.Settings_icon()];
@@ -33724,7 +35343,8 @@ var $;
             }
             catalog_rows() {
                 return [
-                    ...this.filter_categories().length ? [this.Category_filter()] : [],
+                    this.Hero(),
+                    ...this.visible_products().length ? [this.Filters()] : [],
                     this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
                 ];
             }
@@ -33750,20 +35370,51 @@ var $;
                 return link;
             }
             category_filter(next) {
-                const categories = this.filter_categories() ?? [];
                 const value = next ?? 'all';
-                return value === 'all' || categories.includes(value)
-                    ? value
-                    : 'all';
+                return value === 'all' || this.filter_categories().includes(value) ? value : 'all';
             }
-            category_filter_options() {
-                const options = {
-                    all: this.Filter_all(),
-                };
-                for (const category of this.filter_categories() ?? []) {
-                    options[category] = category;
-                }
-                return options;
+            fandom_filter(next) {
+                const value = next ?? 'all';
+                return value === 'all' || this.filter_fandoms().includes(value) ? value : 'all';
+            }
+            search(next) {
+                return next ?? '';
+            }
+            kind_options() {
+                return Object.fromEntries([
+                    ['all', this.Kind_all()],
+                    ...this.filter_categories().map(kind => [kind, kind]),
+                ]);
+            }
+            fandom_options() {
+                return Object.fromEntries([
+                    ['all', this.Fandom_all()],
+                    ...this.filter_fandoms().map(fandom => [fandom, fandom]),
+                ]);
+            }
+            visible_products() {
+                return (this.catalog()?.Products()?.remote_list() ?? [])
+                    .filter(product => product.can_change() || product.Available()?.val());
+            }
+            filter_fandoms() {
+                const fandoms = this.is_admin()
+                    ? this.catalog()?.Fandoms()?.items() ?? []
+                    : this.visible_products().flatMap(product => product.Fandoms()?.items() ?? []);
+                return [...new Set(fandoms)];
+            }
+            product_match(product) {
+                const category = this.category_filter();
+                if (category !== 'all' && product.Category()?.val() !== category)
+                    return false;
+                const fandoms = product.Fandoms()?.items() ?? [];
+                const fandom = this.fandom_filter();
+                if (fandom !== 'all' && !fandoms.includes(fandom))
+                    return false;
+                const query = this.search().trim().replace(/^#/, '').toLowerCase();
+                if (!query)
+                    return true;
+                return [product.Title()?.val() ?? '', product.Category()?.val() ?? '', ...fandoms]
+                    .some(text => text.toLowerCase().includes(query));
             }
             is_admin() {
                 return this.catalog()?.can_change();
@@ -33772,14 +35423,11 @@ var $;
                 return !this.is_admin();
             }
             filter_categories() {
-                const catalog = this.catalog();
-                const products = catalog?.Products()?.remote_list() ?? [];
                 const categories = this.is_admin()
-                    ? catalog?.Categories()?.items() ?? []
-                    : products
-                        .filter(product => product.Available()?.val())
-                        .map(product => product.Category()?.val())
-                        .filter((category) => Boolean(category));
+                    ? this.catalog()?.Categories()?.items() ?? []
+                    : this.visible_products()
+                        .map(product => product.Category()?.val() ?? '')
+                        .filter(Boolean);
                 return [...new Set(categories)];
             }
             product_cards() {
@@ -33789,7 +35437,6 @@ var $;
                 const catalog_link = this.catalog_link();
                 const deleted = new Set(this.deleted_products(catalog_link));
                 const order = [...this.product_order(catalog_link)];
-                const category = this.category_filter();
                 for (const product of products) {
                     const link = product.link().str;
                     if (!order.includes(link))
@@ -33801,7 +35448,7 @@ var $;
                     if (product) {
                         if (!product.can_change() && !product.Available()?.val())
                             continue;
-                        if (category !== 'all' && product.Category()?.val() !== category)
+                        if (!this.product_match(product))
                             continue;
                         cards.push(this.Product_card(link));
                         continue;
@@ -33809,7 +35456,7 @@ var $;
                     if (!this.is_admin() || !deleted.has(link))
                         continue;
                     const removed = this.$.$giper_baza_glob.Pawn(new this.$.$giper_baza_link(link), $bog_nka_product);
-                    if (category !== 'all' && removed.Category()?.val() !== category)
+                    if (!this.product_match(removed))
                         continue;
                     cards.push(this.Product_undo(link));
                 }
@@ -33891,11 +35538,26 @@ var $;
             $mol_action
         ], $bog_nka_app.prototype, "settings_toggle", null);
         __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "cart_open", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_app.prototype, "cart_toggle", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_app.prototype, "cart_close", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "Cart_button", null);
+        __decorate([
             $mol_action
         ], $bog_nka_app.prototype, "catalog_create", null);
         __decorate([
             $mol_mem
         ], $bog_nka_app.prototype, "seo_register", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "Photo", null);
         __decorate([
             $mol_mem
         ], $bog_nka_app.prototype, "style", null);
@@ -33908,6 +35570,12 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_nka_app.prototype, "category_filter", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "fandom_filter", null);
+        __decorate([
+            $mol_mem
+        ], $bog_nka_app.prototype, "search", null);
         __decorate([
             $mol_mem
         ], $bog_nka_app.prototype, "is_admin", null);
@@ -33937,7 +35605,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/nka/app/app.view.css", "[bog_nka_app_title]::before {\n\tcontent: var(--bog_nka_decor);\n\tmargin-right: .5ch;\n}\n");
+    $mol_style_attach("bog/nka/app/app.view.css", "[bog_nka_app_avatar_empty=\"true\"]::before {\n\tcontent: var(--bog_nka_decor);\n\tfont-size: 3rem;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -33964,15 +35632,114 @@ var $;
                     weight: 'bold',
                 },
             },
-            Category_filter: {
-                flexWrap: 'nowrap',
-                overflow: {
-                    x: 'auto',
+            Hero: {
+                flex: { wrap: 'wrap' },
+                alignItems: 'center',
+                gap: $mol_gap.block,
+                padding: $mol_gap.block,
+                minHeight: '10rem',
+                background: {
+                    image: $mol_style_func.vary('--bog_nka_cover'),
+                    size: ['cover'],
+                    position: 'center',
                 },
-                scrollbarWidth: 'none',
+                border: {
+                    radius: $mol_gap.round,
+                },
+            },
+            Profile: {
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: $mol_gap.space,
+            },
+            Avatar: {
+                width: '7rem',
+                height: '7rem',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: {
+                    radius: '50%',
+                },
+                background: {
+                    color: $mol_theme.card,
+                    size: ['cover'],
+                    position: 'center',
+                },
+                boxShadow: `0 0 0 3px ${$mol_theme.back}, 0 0 0 5px ${$mol_theme.current}`,
+            },
+            Nick: {
+                font: {
+                    weight: 'bold',
+                    size: '1.25rem',
+                },
                 padding: {
+                    top: 0,
+                    bottom: 0,
+                    left: $mol_gap.text,
+                    right: $mol_gap.text,
+                },
+                background: {
+                    color: $mol_theme.back,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+            },
+            Socials: {
+                flexDirection: 'column',
+                padding: $mol_gap.block,
+                background: {
+                    color: $mol_theme.back,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                boxShadow: `inset 0 0 0 2px ${$mol_theme.line}`,
+            },
+            Socials_label: {
+                color: $mol_theme.shade,
+            },
+            Socials_list: {
+                flex: { wrap: 'wrap' },
+            },
+            Social: {
+                padding: $mol_gap.text,
+                border: {
+                    radius: '50%',
+                },
+                $mol_icon: {
+                    width: '1.75rem',
+                    height: '1.75rem',
+                },
+            },
+            Filters: {
+                flex: { wrap: 'wrap' },
+                alignItems: 'center',
+                gap: $mol_gap.block,
+                padding: $mol_gap.space,
+                margin: {
                     left: $mol_gap.block,
                     right: $mol_gap.block,
+                },
+                background: {
+                    color: $mol_theme.back,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+            },
+            Search: {
+                flex: {
+                    grow: 1,
+                },
+                maxWidth: '24rem',
+                margin: {
+                    left: 'auto',
+                },
+            },
+            Cart_size: {
+                font: {
+                    weight: 'bold',
                 },
             },
             Catalog_empty: {

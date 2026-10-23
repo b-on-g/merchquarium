@@ -116,6 +116,8 @@ $mol_button_major $mol_button_minor
 $bog_nka_button $mol_button_major
 	hidden false
 
+$mol_icon_basket $mol_icon path \M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z
+
 $mol_check $mol_button_minor
 	attr *
 		^
@@ -148,39 +150,6 @@ $mol_paragraph $mol_view
 	width_limit +Infinity
 	row_width 0
 	sub / <= title
-
-$mol_check_list $mol_view
-	dictionary *
-	Option* $mol_check
-		checked? <=> option_checked*? false
-		label <= option_label* /
-			<= option_title* \
-		enabled <= option_enabled* <= enabled true
-		hint <= option_hint* \
-		minimal_height 24
-	options *
-	keys /string
-	sub <= items /$mol_check
-
-$mol_switch $mol_check_list
-	value? \
-
-$bog_nka_gallery $mol_view
-	sub <= items /$mol_view
-
-$mol_list $mol_view
-	render_visible_only true
-	render_over 0.1
-	sub <= rows /$mol_view
-		<= Gap_before $mol_view style * paddingTop <= gap_before 0
-		<= Empty $mol_view
-		<= Gap_after $mol_view style * paddingTop <= gap_after 0
-	item_height_min* 1
-	item_width_min* 1
-	view_window_shift? 0
-	view_window /
-		0
-		0
 
 $mol_ghost $mol_view
 	Sub $mol_view
@@ -277,6 +246,20 @@ $mol_nav $mol_plugin
 	event *
 		^
 		keydown? <=> event_key? null
+
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0.1
+	sub <= rows /$mol_view
+		<= Gap_before $mol_view style * paddingTop <= gap_before 0
+		<= Empty $mol_view
+		<= Gap_after $mol_view style * paddingTop <= gap_after 0
+	item_height_min* 1
+	item_width_min* 1
+	view_window_shift? 0
+	view_window /
+		0
+		0
 
 $mol_hotkey $mol_hotkey2
 	key *
@@ -399,6 +382,9 @@ $mol_select $mol_pick
 	Trigger_icon $mol_icon_dots_vertical
 	trigger_enabled <= enabled
 
+$bog_nka_gallery $mol_view
+	sub <= items /$mol_view
+
 $mol_avatar $mol_icon
 	view_box \0 0 24 24
 	id \
@@ -481,6 +467,56 @@ $mol_check_box $mol_check
 	Icon $mol_icon_tick
 
 $mol_row $mol_view
+
+$bog_nka_tags $mol_view
+	items /string
+	editable false
+	input_hint \
+	add_title @ \Add
+	confirm_title @ \Delete this tag?
+	confirm_info @ \Deleting it will also clear it from these products:
+	confirm_action @ \Delete
+	usage* 0
+	item_add*? null
+	item_drop*? null
+	sub <= content /
+		<= Form $mol_row
+			sub /
+				<= Input $mol_string
+					hint <= input_hint
+					value? <=> draft? \
+					submit? <=> submit? null
+				<= Add $mol_button_major
+					title <= add_title
+					click? <=> submit? null
+		<= List $mol_view
+			sub <= rows /
+	Row* $mol_row
+		sub /
+			<= Name* $mol_paragraph
+				title <= name* \
+			<= Remove* $mol_pop
+				showed? <=> confirming*? false
+				Anchor <= Remove_button* $mol_button_minor
+					hint @ \Remove
+					sub /
+						<= Remove_icon* $mol_icon_close
+					click? <=> remove*? null
+				bubble_content /
+					<= Confirm_title* $mol_paragraph
+						title <= confirm_title
+					<= Confirm_info* $mol_paragraph
+						title <= confirm_info
+					<= Confirm_count* $mol_paragraph
+						title <= usage_text* \
+					<= Confirm_actions* $mol_row
+						sub /
+							<= Cancel* $mol_button_minor
+								title @ \Cancel
+								click? <=> cancel*? null
+							<= Confirm* $mol_button_major
+								title <= confirm_action
+								click? <=> confirm*? null
 
 $mol_stack $mol_view
 
@@ -682,6 +718,26 @@ $giper_baza_land_rights $mol_list
 						<= Gift_avatar* $mol_avatar
 							id <= peer_id* \
 
+$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
+
+$mol_button_open $mol_button_minor
+	sub /
+		<= Icon $mol_icon_upload
+		<= Native $mol_button_open_native
+			files? <=> files_handled? <=> files? /File
+			accept <= accept \
+			multiple <= multiple true
+
+$mol_button_open_native $mol_view
+	dom_name \input
+	files? /File
+	attr *
+		type \file
+		accept <= accept \
+		multiple <= multiple true
+	event *
+		change? <=> picked? null
+
 $bog_nka_settings $mol_page
 	title @ \Settings
 	Import_summary @ \Will add products: {products}, new categories: {categories}
@@ -712,6 +768,11 @@ $bog_nka_settings $mol_page
 				<= Catalog_title $mol_string
 					hint @ \Catalog title
 					value? <=> catalog_title? \
+				<= Images $mol_view
+					sub /
+						<= Image_field*Avatar
+						<= Image_field*Cover
+						<= Image_field*Back
 				<= Themes $mol_view
 					sub <= theme_options /
 				<= Listed $mol_check_box
@@ -721,24 +782,41 @@ $bog_nka_settings $mol_page
 			title @ \Sales
 			content /
 				<= Social_link $mol_string
-					hint @ \social link
+					hint @ \Link for orders: @nick or t.me/nick
 					value? <=> social_link? \
 				<= Social_text $mol_string
-					hint @ \Example (used by default message ): "Hello! I want to buy {title}!" 
+					hint @ \Request message: {count} items, {total} sum, {title} names, {link} order link
 					value? <=> social_text? \
+				<= Links_label $mol_paragraph
+					title @ \Other socials in the header
+				<= Links $bog_nka_tags
+					items <= link_items /string
+					editable <= is_admin false
+					input_hint @ \vk.com/nick, youtube.com/@nick
+					item_add*? <=> link_add*? null
+					item_drop*? <=> link_drop*? null
 		<= Categories_section $mol_section
-			title @ \Categories
-			content <= categories_content /
-				<= Category_form $mol_row
-					sub /
-						<= Category_input $mol_string
-							hint @ \New category
-							value? <=> category_draft? \
-						<= Category_add $mol_button_major
-							title @ \Add category
-							click? <=> category_add? null
-				<= Categories_list $mol_view
-					sub <= category_rows /
+			title @ \Merch kinds
+			content /
+				<= Categories $bog_nka_tags
+					items <= category_items /string
+					editable <= is_admin
+					input_hint @ \New merch kind
+					confirm_title @ \Delete this merch kind?
+					usage* <= category_usage* 0
+					item_add*? <=> category_add*? null
+					item_drop*? <=> category_drop*? null
+		<= Fandoms_section $mol_section
+			title @ \Fandoms
+			content /
+				<= Fandoms $bog_nka_tags
+					items <= fandom_items /string
+					editable <= is_admin
+					input_hint @ \New fandom
+					confirm_title @ \Delete this fandom?
+					usage* <= fandom_usage* 0
+					item_add*? <=> fandom_add*? null
+					item_drop*? <=> fandom_drop*? null
 		<= Import_section $mol_section
 			title @ \Bulk import
 			content /
@@ -763,31 +841,28 @@ $bog_nka_settings $mol_page
 					title <= debug_info \
 				<= Rights $giper_baza_land_rights
 					land <= catalog_land null
-	Category_row* $mol_row
+	Image_field* $mol_view
 		sub /
-			<= Category_title* $mol_paragraph
-				title <= category_title* \
-			<= Category_remove* $mol_pop
-				Anchor <= Category_remove_button* $mol_button_minor
-					hint @ \Remove
-					sub /
-						<= Category_remove_icon* $mol_icon_close
-					click? <=> category_remove*? null
-				bubble_content /
-					<= Category_confirm_title* $mol_paragraph
-						title @ \Delete this category?
-					<= Category_confirm_info* $mol_paragraph
-						title @ \Deleting it will also clear the category from these products:
-					<= Category_confirm_count* $mol_paragraph
-						title <= category_product_count* \
-					<= Category_confirm_actions* $mol_row
+			<= Image_preview* $mol_view
+				style <= image_style* *
+			<= Image_actions* $mol_view
+				sub /
+					<= Image_pick* $mol_button_open
+						files? <=> image_add*? /File
+						multiple false
+						accept \image/*
 						sub /
-							<= Category_cancel* $mol_button_minor
-								title @ \Cancel
-								click? <=> category_remove_cancel*? null
-							<= Category_confirm* $mol_button_major
-								title @ \Delete category
-								click? <=> category_remove_confirm*? null
+							^
+							<= image_title* \
+					<= Image_drop* $mol_button_minor
+						hint @ \Remove image
+						enabled <= image_filled* false
+						click? <=> image_drop*? null
+						sub /
+							<= Image_drop_icon* $mol_icon_close
+	Image_avatar @ \Avatar
+	Image_cover @ \Header background
+	Image_back @ \Page background
 	Theme_option* $mol_button_minor
 		click? <=> theme_select*? null
 		sub /
@@ -796,6 +871,84 @@ $bog_nka_settings $mol_page
 			<= Theme_name* $mol_view
 				sub /
 					<= theme_name* \
+
+$mol_icon_minus $mol_icon path \M19,13H5V11H19V13Z
+
+$bog_nka_counter $mol_view
+	value? 0
+	enabled true
+	sub <= content /
+		<= Minus $mol_button_minor
+			hint @ \Less
+			click? <=> dec? null
+			sub /
+				<= Minus_icon $mol_icon_minus
+		<= Value $mol_view
+			sub /
+				<= value_text \
+		<= Plus $mol_button_minor
+			hint @ \More
+			click? <=> inc? null
+			sub /
+				<= Plus_icon $mol_icon_plus
+
+$bog_nka_cart $mol_list
+	catalog_link \
+	items? *
+	editable true
+	Cart_title @ \Cart
+	Order_title @ \Order
+	Unavailable @ \Sold out
+	Total_text @ \Total: {total} ₽
+	Order_message @ \Hello! I want to order {count} items for {total} ₽: {link}
+	Send_title @ \Send request
+	Copy_title @ \Copy order
+	Copied_title @ \✓ Copied — open {social}
+	Social_missing @ \Order link is not set
+	rows /
+		<= Back $mol_button_minor
+			click? <=> back? null
+			sub /
+				<= Back_icon $mol_icon_arrow_left
+				<= Back_title @ \Back to catalog
+		<= Title $mol_paragraph
+			title <= heading \
+		<= Empty $mol_paragraph
+			title @ \Cart is empty
+		<= Lines $mol_list
+			rows <= lines /
+		<= Summary $mol_view
+			sub /
+				<= Notice $mol_paragraph
+					title @ \The information on the site is not a public offer. Availability and price are confirmed by the artist when placing the order.
+				<= Total $mol_paragraph
+					title <= total_text \
+		<= Actions $mol_view
+			sub /
+				<= Send $mol_button_major
+					title <= send_title \
+					click? <=> send? null
+					enabled <= send_enabled true
+				<= Clear $mol_button_minor
+					title @ \Clear cart
+					click? <=> clear? null
+		<= Send_hint $mol_paragraph
+			title @ \Paste the message into the chat with the artist
+	Line* $mol_row
+		sub /
+			<= Thumb* $mol_view
+				style <= thumb_style* *
+			<= Line_info* $mol_view
+				sub /
+					<= Line_title* $mol_paragraph
+						title <= line_title* \
+					<= Line_price* $mol_paragraph
+						title <= line_price* \
+			<= Counter* $bog_nka_counter
+				value? <=> count*? 0
+				enabled <= editable
+			<= Line_sum* $mol_paragraph
+				title <= line_sum* \
 
 $mol_card $mol_list
 	attr *
@@ -907,31 +1060,36 @@ $mol_number $mol_view
 
 $bog_nka_number $mol_number
 
-$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
-
-$mol_button_open $mol_button_minor
-	sub /
-		<= Icon $mol_icon_upload
-		<= Native $mol_button_open_native
-			files? <=> files_handled? <=> files? /File
-			accept <= accept \
-			multiple <= multiple true
-
-$mol_button_open_native $mol_view
-	dom_name \input
-	files? /File
-	attr *
-		type \file
-		accept <= accept \
-		multiple <= multiple true
-	event *
-		change? <=> picked? null
+$mol_select_list $mol_view
+	value? /string
+	dictionary *
+	badges_list <= Badges /$mol_view
+	Badge* $mol_button_minor
+		title <= badge_title* \badge
+		click? <=> remove*? null
+		hint <= badge_hint @ \Drop
+		enabled <= drop_enabled <= enabled true
+	sub /$mol_view
+		<= Pick $mol_select
+			event_select*? <=> event_select*? null
+			align_hor <= align_hor \right
+			options <= options_pickable <= options /string
+			value? <=> pick? \
+			option_label* <= option_title* \
+			trigger_enabled <= pick_enabled <= enabled true
+			hint <= pick_hint @ \Add..
+			filter_pattern? => filter_pattern?
+			Trigger_icon <= Pick_icon $mol_icon_plus
+		^ badges_list
 
 $bog_nka_product_card $mol_card
 	product_link? \
 	catalog_link? \
-	Buy_title @ \Buy now!
-	Social_missing_title @ \Social link is not set
+	search? \
+	cart_count? 0
+	Tag* $mol_button_minor
+		title <= tag_title* \
+		click? <=> tag_select*? null
 	sub /
 		<= Cover $mol_view
 			sub <= cover /
@@ -965,12 +1123,21 @@ $bog_nka_product_card $mol_card
 					option_label_default @ \Category
 					enabled <= changed true
 					value? <=> category? null
-				<= Category_text $mol_paragraph
-					title <= category_text \
-		<= Buy $mol_button_major
-			title <= buy_title \
-			click? <=> buy? null
-			enabled <= buy_enabled true
+				<= Fandoms $mol_select_list
+					value? <=> fandoms? /string
+					dictionary <= fandom_dictionary *
+					pick_hint @ \Fandoms
+					enabled <= changed true
+				<= Tags $mol_view
+					sub <= tags /
+		<= Cart_controls $mol_view
+			sub <= cart_controls /
+				<= Cart_add $mol_button_major
+					title @ \Add to cart
+					click? <=> cart_add? null
+					enabled <= cart_enabled true
+				<= Cart_counter $bog_nka_counter
+					value? <=> cart_count?
 		- далее скрытые от клиента поля
 		<= Admin $mol_row
 			sub /
@@ -990,16 +1157,39 @@ $bog_nka_product_card $mol_card
 					title @ \Delete
 					click? <=> product_delete? null
 
+$mol_icon_telegram $mol_icon path \M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z
+
+$mol_icon_vk $mol_icon path \M20.8,7.74C20.93,7.32 20.8,7 20.18,7H18.16C17.64,7 17.41,7.27 17.28,7.57C17.28,7.57 16.25,10.08 14.79,11.72C14.31,12.19 14.1,12.34 13.84,12.34C13.71,12.34 13.5,12.19 13.5,11.76V7.74C13.5,7.23 13.38,7 12.95,7H9.76C9.44,7 9.25,7.24 9.25,7.47C9.25,7.95 10,8.07 10.05,9.44V12.42C10.05,13.08 9.93,13.2 9.68,13.2C9,13.2 7.32,10.67 6.33,7.79C6.13,7.23 5.94,7 5.42,7H3.39C2.82,7 2.7,7.27 2.7,7.57C2.7,8.11 3.39,10.77 5.9,14.29C7.57,16.7 9.93,18 12.08,18C13.37,18 13.53,17.71 13.53,17.21V15.39C13.53,14.82 13.65,14.7 14.06,14.7C14.36,14.7 14.87,14.85 16.07,16C17.45,17.38 17.67,18 18.45,18H20.47C21.05,18 21.34,17.71 21.18,17.14C21,16.57 20.34,15.74 19.47,14.76C19,14.21 18.29,13.61 18.07,13.3C17.77,12.92 17.86,12.75 18.07,12.4C18.07,12.4 20.54,8.93 20.8,7.74Z
+
+$mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
+
+$mol_icon_instagram $mol_icon path \M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z
+
+$mol_icon_web $mol_icon path \M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
+
 $bog_nka_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
-	Filter_all @ \All
+	Kind_all @ \Merch kind
+	Fandom_all @ \Fandoms
 	title @ \Catalog 
 	seo_server \https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
+		search? <=> search? \
+		cart_count? <=> cart_count*? 0
 		product_delete? <=> product_delete*? null
+	Social* $mol_link
+		uri <= social_uri* \
+		target \_blank
+		hint <= social_uri* \
+		sub <= social_sub* /
+	Icon_telegram* $mol_icon_telegram
+	Icon_vk* $mol_icon_vk
+	Icon_youtube* $mol_icon_youtube
+	Icon_instagram* $mol_icon_instagram
+	Icon_web* $mol_icon_web
 	Product_undo* $mol_button_major
 		title @ \Undo
 		click? <=> product_undo*? null
@@ -1018,6 +1208,14 @@ $bog_nka_app $mol_page
 			hidden <= is_not_admin true
 		<= Tools
 	tools /
+		<= Cart_button $mol_button_minor
+			hint @ \Cart
+			click? <=> cart_toggle? null
+			sub /
+				<= Cart_icon $mol_icon_basket
+				<= Cart_size $mol_view
+					sub /
+						<= cart_size_text \
 		<= Lights $mol_lights_toggle
 		<= Settings_button $mol_button_minor
 			hint <= settings_button_title \
@@ -1035,12 +1233,44 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
-				<= Category_filter $mol_switch
-					options <= category_filter_options *
-					value? <=> category_filter? \all
+				<= Hero $mol_view
+					sub <= hero_sub /
+						<= Profile $mol_view
+							sub /
+								<= Avatar $mol_view
+									style <= avatar_style *
+									attr *
+										bog_nka_app_avatar_empty <= avatar_empty true
+								<= Nick $mol_paragraph
+									title <= title
+						<= Socials $mol_view
+							sub /
+								<= Socials_label $mol_paragraph
+									title @ \I have
+								<= Socials_list $mol_view
+									sub <= socials /
+				<= Filters $mol_view
+					sub <= filters /
+						<= Kind_filter $mol_select
+							dictionary <= kind_options *
+							value? <=> category_filter? \all
+						<= Fandom_filter $mol_select
+							dictionary <= fandom_options *
+							value? <=> fandom_filter? \all
+						<= Search $mol_search
+							query? <=> search? \
 				<= Product_cards $bog_nka_gallery
 					items <= product_cards /
 				<= Catalog_empty $mol_paragraph
 					title @ \Products coming soon
 		<= Settings $bog_nka_settings
 			catalog_link <= catalog_link \
+		<= Cart $bog_nka_cart
+			catalog_link <= catalog_link \
+			items? <=> cart? *
+			back? <=> cart_close? null
+		<= Order $bog_nka_cart
+			catalog_link <= catalog_link \
+			items <= order_items *
+			editable false
+			back? <=> cart_close? null

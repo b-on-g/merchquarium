@@ -2925,25 +2925,6 @@ var $;
 
 ;
 "use strict";
-var $;
-(function ($) {
-    $mol_test({
-        'null by default'() {
-            const key = String(Math.random());
-            $mol_assert_equal($mol_state_session.value(key), null);
-        },
-        'storing'() {
-            const key = String(Math.random());
-            $mol_state_session.value(key, '$mol_state_session_test');
-            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
-            $mol_state_session.value(key, null);
-            $mol_assert_equal($mol_state_session.value(key), null);
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 "use strict";
@@ -6958,6 +6939,25 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $mol_test({
+        'null by default'() {
+            const key = String(Math.random());
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+        'storing'() {
+            const key = String(Math.random());
+            $mol_state_session.value(key, '$mol_state_session_test');
+            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
+            $mol_state_session.value(key, null);
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     function check(str, query) {
         $mol_assert_like(str, $hyoo_harp_to_string(query));
         $mol_assert_like(query, $hyoo_harp_from_string(str));
@@ -7527,6 +7527,37 @@ var $;
             $mol_assert_equal($bog_nka_social_url('javascript:alert(1)'), null);
             $mol_assert_equal($bog_nka_social_url('not a link'), null);
         },
+        'Social kind is detected by host'() {
+            const kind = (value) => $bog_nka_social_kind($bog_nka_social_url(value));
+            $mol_assert_equal(kind('@kitten'), 'telegram');
+            $mol_assert_equal(kind('https://m.vk.com/kitten'), 'vk');
+            $mol_assert_equal(kind('youtu.be/abc'), 'youtube');
+            $mol_assert_equal(kind('www.instagram.com/kitten'), 'instagram');
+            $mol_assert_equal(kind('boosty.to/kitten'), 'web');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Order code keeps products and counts of this catalog only'() {
+            const catalog = 'AAAAAAAA_BBBBBBBB';
+            const items = { [catalog + '_one']: 2, [catalog + '__two']: 1, 'CCCCCCCC_DDDDDDDD_x': 5, [catalog + '_zero']: 0 };
+            const code = $bog_nka_order_encode(catalog, items);
+            $mol_assert_equal(code, '_one.2~__two.1');
+            $mol_assert_equal($bog_nka_order_decode(catalog, code), { [catalog + '_one']: 2, [catalog + '__two']: 1 });
+        },
+        'Order code ignores garbage'() {
+            $mol_assert_equal($bog_nka_order_decode('X', '_a.0~<b>.1~_c.99999~_d.3'), { X_d: 3 });
+        },
+        'Order message fills placeholders and always has the link'() {
+            const order = { titles: ['Кит', 'Пинки'], count: 3, total: 1000, link: 'https://x/#!order=1' };
+            $mol_assert_equal($bog_nka_order_message('Хочу {count} шт. на {total} ₽: {link}', order), 'Хочу 3 шт. на 1\u00a0000 ₽: https://x/#!order=1');
+            $mol_assert_equal($bog_nka_order_message('Хочу купить {title}!', order), 'Хочу купить Кит, Пинки! https://x/#!order=1');
+        },
     });
 })($ || ($ = {}));
 
@@ -7651,6 +7682,407 @@ var $;
                 .filter(card => card instanceof $bog_nka_product_card)
                 .map(card => card.title()), titles);
         }),
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
+    $mol_test({
+        'products go to cart from cards and come back from the order link': $mol_wire_async(($) => {
+            const land = $.$giper_baza_glob.land_grab();
+            const catalog = land.Data($bog_nka_catalog);
+            catalog.Social(null).val('@kitten_art');
+            for (const [title, price, available] of [
+                ['Открытка Кит', 400, true],
+                ['Брелок Пинки', 300, true],
+                ['Значок Паймон', 200, false],
+            ]) {
+                const product = catalog.Products(null).make(null);
+                product.Title(null).val(title);
+                product.Price(null).val(price);
+                product.Available(null).val(available);
+            }
+            const app = $bog_nka_app.make({ $ });
+            app.catalog_link = () => land.link().str;
+            const [kit, pinkie, paimon] = app.product_cards();
+            kit.cart_add();
+            kit.Cart_counter().inc();
+            pinkie.cart_add();
+            paimon.cart_add();
+            $mol_assert_equal(kit.cart_count(), 2);
+            $mol_assert_equal(paimon.cart_count(), 0);
+            $mol_assert_equal(app.cart_size_text(), '3');
+            const cart = app.Cart();
+            $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '1 100'));
+            const code = /order=([^\s/&]+)/.exec(cart.message())[1];
+            $mol_assert_equal($bog_nka_order_decode(land.link().str, decodeURIComponent(code)), {
+                [kit.product_link()]: 2,
+                [pinkie.product_link()]: 1,
+            });
+            pinkie.Cart_counter().dec();
+            $mol_assert_equal(app.cart_size_text(), '2');
+            $mol_assert_equal(pinkie.cart_controls(), [pinkie.Cart_add()]);
+            pinkie.cart_add();
+            pinkie.available(false);
+            $mol_assert_equal(cart.line_title(pinkie.product_link()), `Брелок Пинки · ${cart.Unavailable()}`);
+            $mol_assert_equal(cart.line_sum(pinkie.product_link()), '');
+            $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '800'));
+            const sold = /order=([^\s/&]+)/.exec(cart.message())[1];
+            $mol_assert_equal($bog_nka_order_decode(land.link().str, decodeURIComponent(sold)), { [kit.product_link()]: 2 });
+        }),
+        'non telegram social copies the order first and opens on the second press': $mol_wire_async(($) => {
+            const land = $.$giper_baza_glob.land_grab();
+            const catalog = land.Data($bog_nka_catalog);
+            catalog.Social(null).val('vk.com/kitten');
+            const product = catalog.Products(null).make(null);
+            product.Title(null).val('Открытка Кит');
+            product.Available(null).val(true);
+            const opened = [];
+            const copied = [];
+            const context = Object.create($.$mol_dom_context);
+            Object.defineProperties(context, {
+                open: { value: (url) => opened.push(url) },
+                navigator: { value: { clipboard: { writeText: async (text) => { copied.push(text); } } } },
+            });
+            const cart = $$.$bog_nka_cart.make({ $: $.$mol_ambient({ $mol_dom_context: context }) });
+            cart.catalog_link = () => land.link().str;
+            cart.items = () => ({ [product.link().str]: 1 });
+            $mol_assert_equal(cart.send_title(), cart.Copy_title());
+            cart.send();
+            $mol_assert_equal(copied, [cart.message()]);
+            $mol_assert_equal(opened, []);
+            $mol_assert_equal(cart.send_title(), cart.Copied_title().replace('{social}', 'VK'));
+            cart.send();
+            $mol_assert_equal(opened, ['https://vk.com/kitten']);
+        }),
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
+    function artist($) {
+        const land = $.$giper_baza_glob.land_grab();
+        new $mol_wire_atom('bog_nka_test_artist', () => $.$giper_baza_glob.Land(land.link())).fresh();
+        const app = $$.$bog_nka_app.make({ $ });
+        app.catalog_link = () => land.link().str;
+        return { land, app, settings: app.Settings() };
+    }
+    function titles(app) {
+        return app.product_cards().map(card => card.title());
+    }
+    $mol_test({
+        async 'empty page offers to create a catalog and opens it'($) {
+            const app = $$.$bog_nka_app.make({ $ });
+            let link = '';
+            app.catalog_link = (next) => next === undefined ? link : link = next;
+            $mol_assert_equal(app.content(), [app.Catalog_missing()]);
+            await $mol_wire_async(app).catalog_create();
+            $mol_assert_equal(link.length > 0, true);
+            $mol_assert_equal(app.content(), [app.Catalog_selected()]);
+        },
+        'artist adds a product and edits it on the card': $mol_wire_async(($) => {
+            const { app, settings } = artist($);
+            settings.category_add('Брелок');
+            settings.fandom_add('МЛП');
+            app.product_add();
+            const card = app.product_cards()[0];
+            $mol_assert_equal(card.changed(), true);
+            $mol_assert_equal(card.info_rows(), [card.Title(), card.Price(), card.Description(), card.Category(), card.Fandoms()]);
+            $mol_assert_unique(card.Admin(), null);
+            card.title('Брелок Пинки');
+            card.price(300);
+            card.category('Брелок');
+            card.fandoms(['МЛП']);
+            $mol_assert_equal(card.cart_enabled(), false);
+            card.available(true);
+            $mol_assert_equal(card.cart_enabled(), true);
+            const product = app.catalog().Products().remote_list()[0];
+            $mol_assert_equal(product.Title().val(), 'Брелок Пинки');
+            $mol_assert_equal(product.Price().val(), 300);
+            $mol_assert_equal(product.Category().val(), 'Брелок');
+            $mol_assert_equal(product.Fandoms().items(), ['МЛП']);
+            $mol_assert_equal(settings.debug_info().endsWith('Products: 1 (1 available)'), true);
+        }),
+        'used merch kind is removed only after confirmation': $mol_wire_async(($) => {
+            const { app, settings } = artist($);
+            const kinds = settings.Categories();
+            kinds.draft(' Брелок ');
+            kinds.submit();
+            kinds.draft('Брелок');
+            kinds.submit();
+            kinds.draft('Значок');
+            kinds.submit();
+            $mol_assert_equal(settings.category_items(), ['Брелок', 'Значок']);
+            $mol_assert_equal(kinds.draft(), '');
+            app.product_add();
+            const card = app.product_cards()[0];
+            card.category('Брелок');
+            kinds.remove('Значок');
+            $mol_assert_equal(settings.category_items(), ['Брелок']);
+            kinds.remove('Брелок');
+            $mol_assert_equal(kinds.confirming('Брелок'), true);
+            $mol_assert_equal(kinds.usage_text('Брелок'), '1');
+            $mol_assert_equal(settings.category_items(), ['Брелок']);
+            kinds.cancel('Брелок');
+            $mol_assert_equal(kinds.confirming('Брелок'), false);
+            $mol_assert_equal(settings.category_items(), ['Брелок']);
+            kinds.remove('Брелок');
+            kinds.confirm('Брелок');
+            $mol_assert_equal(settings.category_items(), []);
+            $mol_assert_equal(card.category(), '');
+        }),
+        'socials in the header follow settings': $mol_wire_async(($) => {
+            const { app, settings } = artist($);
+            $mol_assert_equal(app.hero_sub(), [app.Profile()]);
+            settings.social_link('NaftulKittenArt');
+            settings.link_add('https://www.youtube.com/@nyaftul');
+            settings.link_add('t.me/NaftulKittenArt');
+            $mol_assert_equal(app.social_list(), ['https://t.me/NaftulKittenArt', 'https://www.youtube.com/@nyaftul']);
+            $mol_assert_equal(app.hero_sub(), [app.Profile(), app.Socials()]);
+            $mol_assert_equal(app.social_sub('https://www.youtube.com/@nyaftul'), [app.Icon_youtube('https://www.youtube.com/@nyaftul')]);
+            settings.link_drop('https://www.youtube.com/@nyaftul');
+            $mol_assert_equal(app.social_list(), ['https://t.me/NaftulKittenArt']);
+        }),
+        'bulk import from settings creates products and kinds': $mol_wire_async(($) => {
+            const { app, settings } = artist($);
+            settings.category_add('Брелок');
+            settings.import_json(JSON.stringify({
+                products: [
+                    { title: 'Брелок Пинки', price: 300, category: 'Брелок' },
+                    { title: 'Значок Паймон', price: 200, category: 'Значок', available: false },
+                    { price: 5 },
+                ],
+            }));
+            $mol_assert_equal(settings.import_ready(), true);
+            $mol_assert_equal(settings.import_new_categories(), ['Значок']);
+            $mol_assert_equal(settings.import_data().errors, ['Product 3 has no title']);
+            settings.import_run();
+            $mol_assert_equal(settings.import_json(), '');
+            $mol_assert_equal(titles(app), ['Брелок Пинки', 'Значок Паймон']);
+            $mol_assert_equal(settings.category_items(), ['Брелок', 'Значок']);
+        }),
+        'chosen theme is marked and applied to the catalog': $mol_wire_async(($) => {
+            const { app, settings } = artist($);
+            $mol_assert_equal(settings.theme(), 'sakura');
+            $mol_assert_equal(app.style()['--mol_theme_hue'], '340deg');
+            settings.theme_select('sky');
+            $mol_assert_equal(settings.theme_swatch('sky').boxShadow, '0 0 0 3px var(--mol_theme_current)');
+            $mol_assert_equal(settings.theme_swatch('sakura').boxShadow, '0 0 0 1px var(--mol_theme_line)');
+            $mol_assert_equal(app.style()['--mol_theme_hue'], '220deg');
+        }),
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
+    function fill($) {
+        const land = $.$giper_baza_glob.land_grab();
+        const catalog = land.Data($bog_nka_catalog);
+        catalog.Categories(null).items(['Открытка', 'Брелок', 'Значок']);
+        catalog.Fandoms(null).items(['МЛП', 'Genshin']);
+        for (const [title, kind, fandoms] of [
+            ['Открытка Кит', 'Открытка', ['МЛП']],
+            ['Брелок Пинки', 'Брелок', ['МЛП']],
+            ['Значок Паймон', 'Значок', ['Genshin']],
+        ]) {
+            const product = catalog.Products(null).make(null);
+            product.Title(null).val(title);
+            product.Category(null).val(kind);
+            product.Fandoms(null).items(fandoms);
+        }
+        const app = $bog_nka_app.make({ $ });
+        app.catalog_link = () => land.link().str;
+        return { app, catalog };
+    }
+    function titles(app) {
+        return app.product_cards().map(card => card.title());
+    }
+    $mol_test({
+        'catalog filters by merch kind, fandom and search': $mol_wire_async(($) => {
+            const { app } = fill($);
+            app.category_filter('Значок');
+            $mol_assert_equal(titles(app), ['Значок Паймон']);
+            app.category_filter('all');
+            app.fandom_filter('МЛП');
+            $mol_assert_equal(titles(app), ['Открытка Кит', 'Брелок Пинки']);
+            app.fandom_filter('all');
+            app.search('пинк');
+            $mol_assert_equal(titles(app), ['Брелок Пинки']);
+            app.search('#genshin');
+            $mol_assert_equal(titles(app), ['Значок Паймон']);
+        }),
+        'tag click on card searches by the tag': $mol_wire_async(($) => {
+            const { app } = fill($);
+            const card = app.product_cards()[0];
+            $mol_assert_equal(card.tags().map((tag) => tag.title()), ['#Открытка', '#МЛП']);
+            card.tag_select('МЛП');
+            $mol_assert_equal(app.search(), 'МЛП');
+            $mol_assert_equal(titles(app), ['Открытка Кит', 'Брелок Пинки']);
+        }),
+        'dropping a fandom clears it from products': $mol_wire_async(($) => {
+            const { app, catalog } = fill($);
+            const settings = app.Settings();
+            $mol_assert_equal(settings.fandom_usage('МЛП'), 2);
+            settings.fandom_drop('МЛП');
+            $mol_assert_equal(catalog.Fandoms().items(), ['Genshin']);
+            $mol_assert_equal(settings.fandom_usage('МЛП'), 0);
+            $mol_assert_equal(app.fandom_options(), { all: app.Fandom_all(), Genshin: 'Genshin' });
+        }),
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
+    function step(task) {
+        return $mol_wire_async(task)();
+    }
+    function artist($) {
+        const land = $.$giper_baza_glob.land_grab();
+        new $mol_wire_atom('bog_nka_test_artist', () => $.$giper_baza_glob.Land(land.link())).fresh();
+        const app = $$.$bog_nka_app.make({ $ });
+        app.catalog_link = () => land.link().str;
+        return { land, app, settings: app.Settings() };
+    }
+    function product(app, config) {
+        app.product_add();
+        const card = app.product_cards().at(-1);
+        card.title(config.title);
+        card.price(config.price ?? 0);
+        card.description(config.description ?? '');
+        if (config.kind)
+            card.category(config.kind);
+        card.fandoms(config.fandoms ?? []);
+        card.available(config.available ?? true);
+        return card;
+    }
+    async function visitor($, land) {
+        const auth = $.$giper_baza_auth.grab();
+        const context = $.$mol_ambient({});
+        class Auth extends $.$giper_baza_auth {
+            static current() { return auth; }
+        }
+        class Glob extends $.$giper_baza_glob {
+            static $ = context;
+        }
+        Object.assign(context, { $giper_baza_auth: Auth, $giper_baza_glob: Glob });
+        new $mol_wire_atom('bog_nka_test_visitor', () => Glob.Land(land.link())).fresh();
+        await $mol_wire_async(Glob.Land(land.link())).units_steal(land);
+        const app = $$.$bog_nka_app.make({ $: context });
+        app.catalog_link = () => land.link().str;
+        return app;
+    }
+    function titles(app) {
+        return app.product_cards().map(card => card.title());
+    }
+    $mol_test({
+        async 'visitor sees only available products and their kinds and fandoms'($) {
+            const { land, app } = await step(() => {
+                const artwork = artist($);
+                for (const kind of ['Открытка', 'Брелок', 'Значок'])
+                    artwork.settings.category_add(kind);
+                for (const fandom of ['МЛП', 'Genshin'])
+                    artwork.settings.fandom_add(fandom);
+                product(artwork.app, { title: 'Открытка Кит', kind: 'Открытка', fandoms: ['МЛП'] });
+                product(artwork.app, { title: 'Брелок Пинки', kind: 'Брелок', fandoms: ['МЛП'] });
+                product(artwork.app, { title: 'Значок Паймон', kind: 'Значок', fandoms: ['Genshin'], available: false });
+                return artwork;
+            });
+            const guest = await visitor($, land);
+            await step(() => {
+                $mol_assert_equal(titles(app), ['Открытка Кит', 'Брелок Пинки', 'Значок Паймон']);
+                $mol_assert_equal(guest.is_admin(), false);
+                $mol_assert_equal(titles(guest), ['Открытка Кит', 'Брелок Пинки']);
+                $mol_assert_equal(Object.keys(guest.kind_options()), ['all', 'Открытка', 'Брелок']);
+                $mol_assert_equal(Object.keys(guest.fandom_options()), ['all', 'МЛП']);
+            });
+        },
+        async 'visitor gets no admin controls'($) {
+            const { land } = await step(() => {
+                const artwork = artist($);
+                product(artwork.app, { title: 'Открытка Кит', price: 400 });
+                return artwork;
+            });
+            const guest = await visitor($, land);
+            await step(() => {
+                const card = guest.product_cards()[0];
+                $mol_assert_equal(guest.is_not_admin(), true);
+                $mol_assert_equal(guest.Product_add().hidden(), true);
+                $mol_assert_equal(guest.Settings_button(), null);
+                $mol_assert_equal(card.changed(), false);
+                $mol_assert_equal(card.Admin(), null);
+                const settings = guest.Settings();
+                $mol_assert_equal(settings.body(), [settings.Account_section(), settings.Categories_section(), settings.Fandoms_section()]);
+                $mol_assert_equal(settings.Categories().content(), [settings.Categories().List()]);
+            });
+        },
+        async 'visitor card shows price and tags but hides empty description'($) {
+            const { land } = await step(() => {
+                const artwork = artist($);
+                artwork.settings.category_add('Брелок');
+                product(artwork.app, { title: 'Брелок Пинки', price: 1000, kind: 'Брелок' });
+                product(artwork.app, { title: 'Открытка Кит', description: 'С блёстками' });
+                return artwork;
+            });
+            const guest = await visitor($, land);
+            await step(() => {
+                const [pinkie, kit] = guest.product_cards();
+                $mol_assert_equal(pinkie.info_rows(), [pinkie.Title(), pinkie.Price_text(), pinkie.Tags()]);
+                $mol_assert_equal(pinkie.price_text(), '1 000 ₽');
+                $mol_assert_equal(kit.info_rows(), [kit.Title(), kit.Description_text()]);
+            });
+        },
+        async 'catalog look and socials set in settings reach the visitor'($) {
+            const { land } = await step(() => {
+                const artwork = artist($);
+                artwork.settings.catalog_title('Nyaftul Kitten Art');
+                artwork.settings.theme_select('mint');
+                artwork.settings.social_link('@NaftulKittenArt');
+                artwork.settings.link_add('vk.com/nyaftul');
+                artwork.settings.listed(false);
+                return artwork;
+            });
+            const guest = await visitor($, land);
+            await step(() => {
+                $mol_assert_equal(guest.title(), 'Nyaftul Kitten Art');
+                $mol_assert_equal(guest.style()['--mol_theme_hue'], '165deg');
+                $mol_assert_equal(guest.social_list(), ['https://t.me/NaftulKittenArt', 'https://vk.com/nyaftul']);
+                $mol_assert_equal(guest.catalog().Hidden().val(), true);
+            });
+        },
+        async 'visitor orders from cards and the artist opens the same order'($) {
+            const { land, app } = await step(() => {
+                const artwork = artist($);
+                artwork.settings.social_link('@kitten_art');
+                product(artwork.app, { title: 'Открытка Кит', price: 400 });
+                product(artwork.app, { title: 'Значок Паймон', price: 200, available: false });
+                return artwork;
+            });
+            const guest = await visitor($, land);
+            await step(() => {
+                const cards = guest.product_cards();
+                $mol_assert_equal(cards.length, 1);
+                const kit = cards[0];
+                kit.cart_add();
+                kit.Cart_counter().inc();
+                kit.Cart_counter().inc();
+                const cart = guest.Cart();
+                $mol_assert_equal(cart.send_title(), cart.Send_title());
+                const code = /order=([^\s/&]+)/.exec(cart.message())[1];
+                const order = app.Order();
+                order.items = () => $bog_nka_order_decode(land.link().str, decodeURIComponent(code));
+                $mol_assert_equal(order.lines().length, 1);
+                $mol_assert_equal(order.line_sum(kit.product_link()), '1 200 ₽');
+                $mol_assert_equal(order.rows().includes(order.Actions()), false);
+            });
+        },
     });
 })($ || ($ = {}));
 
