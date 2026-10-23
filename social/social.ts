@@ -19,4 +19,15 @@ namespace $ {
 
 	}
 
+	export type $bog_nka_social_kind = 'telegram' | 'vk' | 'youtube' | 'instagram' | 'web'
+
+	export function $bog_nka_social_kind( url: URL ): $bog_nka_social_kind {
+		const host = url.hostname.replace( /^(www|m)\./, '' )
+		if( host === 't.me' || host === 'telegram.me' ) return 'telegram'
+		if( host === 'vk.com' || host === 'vk.ru' || host === 'vk.me' ) return 'vk'
+		if( host === 'youtube.com' || host === 'youtu.be' ) return 'youtube'
+		if( host === 'instagram.com' ) return 'instagram'
+		return 'web'
+	}
+
 }

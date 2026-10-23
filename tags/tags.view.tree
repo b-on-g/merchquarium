@@ -1,0 +1,48 @@
+$bog_nka_tags $mol_view
+	items /string
+	editable false
+	input_hint \
+	add_title @ \Add
+	confirm_title @ \Delete this tag?
+	confirm_info @ \Deleting it will also clear it from these products:
+	confirm_action @ \Delete
+	usage* 0
+	item_add*? null
+	item_drop*? null
+	sub <= content /
+		<= Form $mol_row
+			sub /
+				<= Input $mol_string
+					hint <= input_hint
+					value? <=> draft? \
+					submit? <=> submit? null
+				<= Add $mol_button_major
+					title <= add_title
+					click? <=> submit? null
+		<= List $mol_view
+			sub <= rows /
+	Row* $mol_row
+		sub /
+			<= Name* $mol_paragraph
+				title <= name* \
+			<= Remove* $mol_pop
+				Anchor <= Remove_button* $mol_button_minor
+					hint @ \Remove
+					sub /
+						<= Remove_icon* $mol_icon_close
+					click? <=> remove*? null
+				bubble_content /
+					<= Confirm_title* $mol_paragraph
+						title <= confirm_title
+					<= Confirm_info* $mol_paragraph
+						title <= confirm_info
+					<= Confirm_count* $mol_paragraph
+						title <= usage_text* \
+					<= Confirm_actions* $mol_row
+						sub /
+							<= Cancel* $mol_button_minor
+								title @ \Cancel
+								click? <=> cancel*? null
+							<= Confirm* $mol_button_major
+								title <= confirm_action
+								click? <=> confirm*? null

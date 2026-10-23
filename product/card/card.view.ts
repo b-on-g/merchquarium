@@ -12,6 +12,11 @@ namespace $.$$ {
 			return this.product().can_change()
 		}
 
+		@ $mol_mem
+		Photo() {
+			return $bog_nka_photo.make({ $: this.$ })
+		}
+
 		photos_add(next?: readonly File[]) {
 			if (!next?.length || !this.changed()) return [] as readonly File[]
 			$mol_wire_async(this).photos_save(next)
@@ -20,64 +25,15 @@ namespace $.$$ {
 
 		@ $mol_action
 		async photos_save(files: readonly File[]) {
-			const prepared = await Promise.all(files.map(async file => {
-				const picture = this.photo_picture(file)
-				if (!picture) return null
-				const blob = picture.format('image/webp', .82) as unknown as Blob | null
-				if (!blob) return null
-
-				const buffer = new Uint8Array(await blob.arrayBuffer())
-				const output_extension = blob.type === 'image/webp' ? 'webp' : blob.type === 'image/jpeg' ? 'jpg' : 'png'
-				return { file, blob, buffer, output_extension }
-			}))
-
-			const photos = this.product().Photos('auto')!
-			prepared.forEach(item => {
-				if (!item) return
-
-				const { file, blob, buffer, output_extension } = item
-				const photo = photos.make(null)
-				photo.buffer(buffer)
-				photo.type(blob.type || 'image/png')
-				photo.name(`${file.name.replace(/\.[^/.]+$/, '')}.${output_extension}`)
-			})
-		}
-
-		@ $mol_mem
-		photo_source(file?: File): Blob {
-			if (!file) return new Blob()
-			const extension = file.name.split('.').pop()?.toLowerCase()
-			const detected_type = file.type.toLowerCase()
-			const type = detected_type.startsWith('image/')
-				? detected_type
-				: extension === 'jpg' || extension === 'jpeg'
-					? 'image/jpeg'
-					: extension === 'png'
-						? 'image/png'
-						: extension === 'webp'
-							? 'image/webp'
-							: detected_type
-			return new Blob([file], { type })
-		}
-
-		@ $mol_mem
-		photo_picture(file?: File) {
-			if (!file) return null
-			return $mol_picture.fit(this.photo_source(file), 1600)
+			await this.Photo().save(files, this.product().Photos('auto')!)
 		}
 
 		photo_ids() {
 			return this.product().Photos()?.remote_list().map(photo => photo.link().str) ?? []
 		}
 
-		@ $mol_mem_key
-		photo_url(link: string): string {
-			const file = this.$.$giper_baza_glob.Pawn(
-				new this.$.$giper_baza_link(link),
-				$giper_baza_file,
-			)
-			if (!file.filled()) return ''
-			return $yuf_url_object.from_blob(file.blob()) + ''
+		photo_url(link: string) {
+			return this.Photo().url(link)
 		}
 
 		photo_delete_enabled() {
@@ -215,12 +171,12 @@ namespace $.$$ {
 		}
 
 		info_rows() {
-			if( this.changed() ) return [ this.Title(), this.Price(), this.Description(), this.Category() ]
+			if( this.changed() ) return [ this.Title(), this.Price(), this.Description(), this.Category(), this.Fandoms() ]
 			return [
 				this.Title(),
 				... this.price() ? [ this.Price_text() ] : [],
 				... this.description() ? [ this.Description_text() ] : [],
-				... this.category() ? [ this.Category_text() ] : [],
+				... this.tag_list().length ? [ this.Tags() ] : [],
 			]
 		}
 
@@ -228,18 +184,39 @@ namespace $.$$ {
 			return `${ this.price().toLocaleString( 'ru-RU' ) } ₽`
 		}
 
-		category_text() {
-			return this.category() ?? ''
+		fandom_dictionary() {
+			const fandoms = this.catalog()?.Fandoms()?.items() ?? []
+			return Object.fromEntries(fandoms.map(fandom => [ fandom, fandom ]))
+		}
+
+		fandoms(next?: readonly string[]): readonly string[] {
+			const product = this.product()
+			if (next === undefined) return product.Fandoms()?.items() ?? []
+			product.Fandoms(null)?.items(next)
+			return next
+		}
+
+		tag_list() {
+			return [ this.category() ?? '', ... this.fandoms() ].filter(Boolean)
+		}
+
+		tags() {
+			return this.tag_list().map(tag => this.Tag(tag))
+		}
+
+		tag_title(tag: string) {
+			return `#${ tag }`
+		}
+
+		@ $mol_action
+		tag_select(tag: string) {
+			this.search(tag)
 		}
 
 		@ $mol_mem
 		Admin() {
 			return this.changed() ? super.Admin() : null!
 		}
-
-
-
-
 
 	}
 }

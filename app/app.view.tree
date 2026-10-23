@@ -1,13 +1,25 @@
 $bog_nka_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
-	Filter_all @ \All
+	Kind_all @ \Merch kind
+	Fandom_all @ \Fandoms
 	title @ \Catalog 
 	seo_server \https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/
 	Product_card* $bog_nka_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
+		search? <=> search? \
 		product_delete? <=> product_delete*? null
+	Social* $mol_link
+		uri <= social_uri* \
+		target \_blank
+		hint <= social_uri* \
+		sub <= social_sub* /
+	Icon_telegram* $mol_icon_telegram
+	Icon_vk* $mol_icon_vk
+	Icon_youtube* $mol_icon_youtube
+	Icon_instagram* $mol_icon_instagram
+	Icon_web* $mol_icon_web
 	Product_undo* $mol_button_major
 		title @ \Undo
 		click? <=> product_undo*? null
@@ -43,9 +55,32 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
-				<= Category_filter $mol_switch
-					options <= category_filter_options *
-					value? <=> category_filter? \all
+				<= Hero $mol_view
+					sub <= hero_sub /
+						<= Profile $mol_view
+							sub /
+								<= Avatar $mol_view
+									style <= avatar_style *
+									attr *
+										bog_nka_app_avatar_empty <= avatar_empty true
+								<= Nick $mol_paragraph
+									title <= title
+						<= Socials $mol_view
+							sub /
+								<= Socials_label $mol_paragraph
+									title @ \I have
+								<= Socials_list $mol_view
+									sub <= socials /
+				<= Filters $mol_view
+					sub <= filters /
+						<= Kind_filter $mol_select
+							dictionary <= kind_options *
+							value? <=> category_filter? \all
+						<= Fandom_filter $mol_select
+							dictionary <= fandom_options *
+							value? <=> fandom_filter? \all
+						<= Search $mol_search
+							query? <=> search? \
 				<= Product_cards $bog_nka_gallery
 					items <= product_cards /
 				<= Catalog_empty $mol_paragraph

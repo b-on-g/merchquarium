@@ -65,11 +65,78 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
+		Photo() {
+			return $bog_nka_photo.make({ $: this.$ })
+		}
+
+		image_url( key: $bog_nka_catalog_image ) {
+			const catalog = this.catalog()
+			const link = catalog ? $bog_nka_catalog_image( catalog, key ) : ''
+			return link ? this.Photo().url( link ) : ''
+		}
+
+		@ $mol_mem
 		style() {
+			const back = this.image_url( 'Back' )
+			const cover = this.image_url( 'Cover' )
 			return {
 				... super.style(),
 				... $bog_nka_theme_style( this.catalog()?.Theme()?.val() ),
+				... back ? { '--bog_nka_pattern': `url("${ back }")`, '--bog_nka_pattern_size': 'cover' } : {},
+				'--bog_nka_cover': cover ? `url("${ cover }")` : 'none',
 			}
+		}
+
+		head() {
+			if( this.settings_open() || !this.catalog_link() ) return super.head()
+			return [ this.Product_add(), this.Tools() ]
+		}
+
+		avatar_empty() {
+			return !this.image_url( 'Avatar' )
+		}
+
+		avatar_style() {
+			const url = this.image_url( 'Avatar' )
+			return { backgroundImage: url ? `url("${ url }")` : 'none' }
+		}
+
+		social_list() {
+			const catalog = this.catalog()
+			const values = [ catalog?.Social()?.val() ?? '', ... catalog?.Links()?.items() ?? [] ]
+			const urls = values.map( value => $bog_nka_social_url( value )?.toString() ?? '' ).filter( Boolean )
+			return [ ... new Set( urls ) ]
+		}
+
+		socials() {
+			return this.social_list().map( uri => this.Social( uri ) )
+		}
+
+		social_uri( uri: string ) {
+			return uri
+		}
+
+		social_sub( uri: string ) {
+			const kind = $bog_nka_social_kind( new URL( uri ) )
+			return [ {
+				telegram: this.Icon_telegram,
+				vk: this.Icon_vk,
+				youtube: this.Icon_youtube,
+				instagram: this.Icon_instagram,
+				web: this.Icon_web,
+			}[ kind ].call( this, uri ) ]
+		}
+
+		hero_sub() {
+			return this.social_list().length ? [ this.Profile(), this.Socials() ] : [ this.Profile() ]
+		}
+
+		filters() {
+			return [
+				... Object.keys( this.kind_options() ).length > 1 ? [ this.Kind_filter() ] : [],
+				... Object.keys( this.fandom_options() ).length > 1 ? [ this.Fandom_filter() ] : [],
+				this.Search(),
+			]
 		}
 
 		settings_button_sub() {
@@ -83,7 +150,8 @@ namespace $.$$ {
 
 		catalog_rows() {
 			return [
-				... this.filter_categories().length ? [ this.Category_filter() ] : [],
+				this.Hero(),
+				... this.visible_products().length ? [ this.Filters() ] : [],
 				this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
 			]
 		}
@@ -118,27 +186,63 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
-		category_filter(next?: string) {
-			const categories = this.filter_categories() ?? []
+		category_filter( next?: string ) {
 			const value = next ?? 'all'
-		
-			return value === 'all' || categories.includes(value)
-				? value
-				: 'all'
+			return value === 'all' || this.filter_categories().includes( value ) ? value : 'all'
 		}
-		
-		category_filter_options(): Record<string, string> {
-			const options: Record<string, string> = {
-				all: this.Filter_all(),
-			}
-		
-			for (const category of this.filter_categories() ?? []) {
-				options[category] = category
-			}
-		
-			return options
+
+		@ $mol_mem
+		fandom_filter( next?: string ) {
+			const value = next ?? 'all'
+			return value === 'all' || this.filter_fandoms().includes( value ) ? value : 'all'
 		}
-		
+
+		@ $mol_mem
+		search( next?: string ) {
+			return next ?? ''
+		}
+
+		kind_options() {
+			return Object.fromEntries( [
+				[ 'all', this.Kind_all() ],
+				... this.filter_categories().map( kind => [ kind, kind ] ),
+			] )
+		}
+
+		fandom_options() {
+			return Object.fromEntries( [
+				[ 'all', this.Fandom_all() ],
+				... this.filter_fandoms().map( fandom => [ fandom, fandom ] ),
+			] )
+		}
+
+		visible_products() {
+			return ( this.catalog()?.Products()?.remote_list() ?? [] )
+				.filter( product => product.can_change() || product.Available()?.val() )
+		}
+
+		filter_fandoms() {
+			const fandoms = this.is_admin()
+				? this.catalog()?.Fandoms()?.items() ?? []
+				: this.visible_products().flatMap( product => product.Fandoms()?.items() ?? [] )
+			return [ ... new Set( fandoms ) ]
+		}
+
+		product_match( product: $bog_nka_product ) {
+			const category = this.category_filter()
+			if( category !== 'all' && product.Category()?.val() !== category ) return false
+
+			const fandoms = product.Fandoms()?.items() ?? []
+			const fandom = this.fandom_filter()
+			if( fandom !== 'all' && !fandoms.includes( fandom ) ) return false
+
+			const query = this.search().trim().replace( /^#/, '' ).toLowerCase()
+			if( !query ) return true
+
+			return [ product.Title()?.val() ?? '', product.Category()?.val() ?? '', ... fandoms ]
+				.some( text => text.toLowerCase().includes( query ) )
+		}
+
 		@ $mol_mem
 		is_admin() {
 			return this.catalog()?.can_change()
@@ -150,19 +254,13 @@ namespace $.$$ {
 		}
 
 		filter_categories() {
-			const catalog = this.catalog()
-			const products = catalog?.Products()?.remote_list() ?? []
-		
 			const categories = this.is_admin()
-				? catalog?.Categories()?.items() ?? []
-				: products
-					.filter(product => product.Available()?.val())
-					.map(product => product.Category()?.val())
-					.filter((category): category is string => Boolean(category))
-		
-			return [...new Set(categories)]
+				? this.catalog()?.Categories()?.items() ?? []
+				: this.visible_products()
+					.map( product => product.Category()?.val() ?? '' )
+					.filter( Boolean )
+			return [ ... new Set( categories ) ]
 		}
-
 
 		product_cards() {
 			const catalog = this.catalog()
@@ -173,8 +271,6 @@ namespace $.$$ {
 			const catalog_link = this.catalog_link()
 			const deleted = new Set(this.deleted_products(catalog_link))
 			const order = [...this.product_order(catalog_link)]
-			const category = this.category_filter()
-		
 			for (const product of products) {
 				const link = product.link().str
 				if (!order.includes(link)) order.push(link)
@@ -187,7 +283,7 @@ namespace $.$$ {
 		
 				if (product) {
 					if (!product.can_change() && !product.Available()?.val()) continue
-					if (category !== 'all' && product.Category()?.val() !== category) continue
+					if (!this.product_match(product)) continue
 		
 					cards.push(this.Product_card(link))
 					continue
@@ -200,7 +296,7 @@ namespace $.$$ {
 					$bog_nka_product,
 				)
 		
-				if (category !== 'all' && removed.Category()?.val() !== category) continue
+				if (!this.product_match(removed)) continue
 		
 				cards.push(this.Product_undo(link))
 			}

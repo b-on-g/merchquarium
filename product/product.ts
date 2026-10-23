@@ -5,6 +5,7 @@ namespace $ {
 		Description: $giper_baza_atom_text,
 		Photos: $giper_baza_list_link.to( ()=> $giper_baza_file ),
 		Category: $giper_baza_atom_text,
+		Fandoms: $giper_baza_list_str,
 		Available: $giper_baza_atom_bool,
 	}) {}
 }

@@ -1,4 +1,4 @@
-[bog_nka_app_title]::before {
+[bog_nka_app_avatar_empty="true"]::before {
 	content: var(--bog_nka_decor);
-	margin-right: .5ch;
+	font-size: 3rem;
 }

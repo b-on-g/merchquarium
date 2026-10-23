@@ -28,6 +28,8 @@ echo NKA_DOMAIN=cmyser-ru-nka.91.188.212.151.ip.giper.dev | sudo tee -a /etc/env
 docker compose up -d --build
 ```
 
+Коды подтверждения Search Console и Яндекс Вебмастера (способ «мета-тег») кладутся в `.env` рядом с compose: `NKA_GOOGLE=…`, `NKA_YANDEX=…`. Узел вставит их в `<head>` главной и страниц каталогов.
+
 После запуска прописать адрес в `bog/nka/app/app.view.tree`: `seo_server \https://<NKA_DOMAIN>/`.
 
 ## Локально

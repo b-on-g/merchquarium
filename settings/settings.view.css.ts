@@ -49,17 +49,7 @@ namespace $.$$ {
 			},
 		},
 
-		Category_form: {
-			flex: { wrap: 'nowrap' },
-			padding: 0,
-			gap: $mol_gap.block,
-		},
-
-		Category_input: {
-			flex: { grow: 1 },
-		},
-
-		Categories_list: {
+		Images: {
 			flex: { wrap: 'wrap' },
 			gap: $mol_gap.block,
 			padding: {
@@ -68,23 +58,28 @@ namespace $.$$ {
 			},
 		},
 
-		Category_row: {
+		Image_field: {
+			flexDirection: 'column',
 			alignItems: 'center',
-			flex: { wrap: 'nowrap', grow: 0 },
-			padding: {
-				top: 0,
-				bottom: 0,
-				left: '.75rem',
-				right: 0,
-			},
-			gap: 0,
-			background: {
-				color: $mol_theme.card,
-			},
+			gap: $mol_gap.space,
+		},
+
+		Image_preview: {
+			width: '5rem',
+			height: '5rem',
 			border: {
 				radius: $mol_gap.round,
 			},
+			background: {
+				color: $mol_theme.card,
+				size: [ 'cover' ],
+				position: 'center',
+			},
 			boxShadow: `inset 0 0 0 1px ${ $mol_theme.line }`,
+		},
+
+		Links_label: {
+			color: $mol_theme.shade,
 		},
 
 	})

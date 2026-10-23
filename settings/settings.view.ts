@@ -39,17 +39,125 @@ namespace $.$$ {
 
 		body() {
 			if (this.is_admin()) return super.body()
-			return [ this.Account_section(), this.Categories_section() ]
+			return [ this.Account_section(), this.Categories_section(), this.Fandoms_section() ]
 		}
 
-		categories_content() {
-			if (this.is_admin()) return super.categories_content()
-			return [ this.Categories_list() ]
+		products() {
+			return this.catalog()?.Products()?.remote_list() ?? []
 		}
 
-		@ $mol_mem_key
-		Category_remove(category: string) {
-			return this.is_admin() ? super.Category_remove(category) : null!
+		category_items() {
+			return this.catalog()?.Categories()?.items() ?? []
+		}
+
+		category_products(category: string) {
+			return this.products().filter(product => product.Category()?.val() === category)
+		}
+
+		category_usage(category: string) {
+			return this.category_products(category).length
+		}
+
+		@ $mol_action
+		category_add(category: string) {
+			this.catalog()?.Categories(null)?.add(category)
+		}
+
+		@ $mol_action
+		category_drop(category: string) {
+			for (const product of this.category_products(category)) {
+				product.Category(null)?.val('')
+			}
+			this.catalog()?.Categories()?.cut(category)
+		}
+
+		fandom_items() {
+			return this.catalog()?.Fandoms()?.items() ?? []
+		}
+
+		fandom_products(fandom: string) {
+			return this.products().filter(product => product.Fandoms()?.items().includes(fandom))
+		}
+
+		fandom_usage(fandom: string) {
+			return this.fandom_products(fandom).length
+		}
+
+		@ $mol_action
+		fandom_add(fandom: string) {
+			this.catalog()?.Fandoms(null)?.add(fandom)
+		}
+
+		@ $mol_action
+		fandom_drop(fandom: string) {
+			for (const product of this.fandom_products(fandom)) {
+				product.Fandoms(null)?.cut(fandom)
+			}
+			this.catalog()?.Fandoms()?.cut(fandom)
+		}
+
+		link_items() {
+			return this.catalog()?.Links()?.items() ?? []
+		}
+
+		@ $mol_action
+		link_add(link: string) {
+			this.catalog()?.Links(null)?.add(link)
+		}
+
+		@ $mol_action
+		link_drop(link: string) {
+			this.catalog()?.Links()?.cut(link)
+		}
+
+		@ $mol_mem
+		Photo() {
+			return $bog_nka_photo.make({ $: this.$ })
+		}
+
+		image_title(key: $bog_nka_catalog_image) {
+			return {
+				Avatar: this.Image_avatar(),
+				Cover: this.Image_cover(),
+				Back: this.Image_back(),
+			}[key]
+		}
+
+		image_link(key: $bog_nka_catalog_image) {
+			const catalog = this.catalog()
+			return catalog ? $bog_nka_catalog_image(catalog, key) : ''
+		}
+
+		image_filled(key: $bog_nka_catalog_image) {
+			return Boolean(this.image_link(key))
+		}
+
+		image_style(key: $bog_nka_catalog_image) {
+			const link = this.image_link(key)
+			const url = link ? this.Photo().url(link) : ''
+			return {
+				backgroundImage: url ? `url("${ url }")` : 'none',
+				... key === 'Avatar' ? { borderRadius: '50%' } : {},
+			}
+		}
+
+		image_add(key: $bog_nka_catalog_image, next?: readonly File[]) {
+			if (next?.length && this.is_admin()) $mol_wire_async(this).image_save(key, next[0])
+			return [] as readonly File[]
+		}
+
+		@ $mol_action
+		async image_save(key: $bog_nka_catalog_image, file: File) {
+			const list = this.catalog()![key](null)!
+			const old = list.items()
+			await this.Photo().save([ file ], list)
+			for (const link of old) list.cut(link)
+		}
+
+		@ $mol_action
+		image_drop(key: $bog_nka_catalog_image) {
+			const list = this.catalog()?.[key]()
+			for (const link of list?.items() ?? []) list!.cut(link)
 		}
 
 		@ $mol_mem
@@ -76,74 +184,6 @@ namespace $.$$ {
 			return `Rank: ${ this.debug_rank() }; Products: ${ this.products_total() } (${ this.products_available() } available)`
 		}
 		
-		categories_text() {
-			return this.catalog()?.Categories()?.items().join(', ') ?? ''
-		}
-
-
-		@ $mol_mem
-		category_draft(next?: string) {
-			return next ?? ''
-		}
-		
-		@ $mol_action
-		category_add() {
-			const name = this.category_draft().trim()
-			if (!name) return
-		
-			const categories = this.catalog()?.Categories(null)
-			if (!categories) return
-		
-			categories.add(name)
-			this.category_draft('')
-		}
-
-		category_rows() {
-			const categories = this.catalog()?.Categories()?.items() ?? []
-			return categories.map(category => this.Category_row(category))
-		}
-		
-		category_title(category: string) {
-			return category
-		}
-		
-		category_products(category: string) {
-			return (this.catalog()?.Products()?.remote_list() ?? [])
-				.filter(product => product.Category()?.val() === category)
-		}
-		
-		
-		category_product_count(category: string) {
-			return String(this.category_products(category).length)
-		}
-		
-		@ $mol_action
-		category_remove(category: string) {
-			if (this.category_products(category).length === 0) {
-				this.catalog()?.Categories()?.cut(category)
-				return
-			}
-		
-			this.Category_remove(category).showed(true)
-		}
-		
-		@ $mol_action
-		category_remove_cancel(category: string) {
-			this.Category_remove(category).showed(false)
-		}
-		
-		@ $mol_action
-		category_remove_confirm(category: string) {
-			this.Category_remove(category).showed(false)
-		
-			for (const product of this.category_products(category)) {
-				product.Category(null)?.val('')
-			}
-		
-			this.catalog()?.Categories()?.cut(category)
-		}
-
-
 		catalog_title(next?: string): string {
 			const catalog = this.catalog()
 			if (!catalog) return ''

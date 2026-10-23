@@ -79,15 +79,27 @@ namespace $.$$ {
 			color: $mol_theme.shade,
 		},
 
-		Category_text: {
+		Tags: {
+			flex: {
+				wrap: 'wrap',
+			},
 			padding: {
-				left: '.75rem',
-				right: '.75rem',
+				left: '.25rem',
+				right: '.25rem',
+			},
+		},
+
+		Tag: {
+			padding: {
+				top: '.25rem',
+				bottom: '.25rem',
+				left: '.5rem',
+				right: '.5rem',
 			},
 			font: {
 				size: '.875rem',
 			},
-			color: $mol_theme.shade,
+			color: $mol_theme.current,
 		},
 
 		Buy: {
