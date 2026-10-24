@@ -1,8 +1,8 @@
 {
-	"name": "bog_nka_app",
-	"short_name": "bog_nka_app",
+	"name": "bog_prilavok_app",
+	"short_name": "bog_prilavok_app",
 	"description": "",
-	"id": "bog_nka_app",
+	"id": "bog_prilavok_app",
 	"start_url": ".",
 	"display": "standalone",
 	"background_color": "#000000",

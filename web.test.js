@@ -7447,11 +7447,11 @@ var $;
 (function ($) {
     $mol_test({
         'Unknown theme falls back to sakura'() {
-            $mol_assert_equal($bog_nka_theme_of('nope'), $bog_nka_theme.sakura);
-            $mol_assert_equal($bog_nka_theme_of(null), $bog_nka_theme.sakura);
+            $mol_assert_equal($bog_prilavok_theme_of('nope'), $bog_prilavok_theme.sakura);
+            $mol_assert_equal($bog_prilavok_theme_of(null), $bog_prilavok_theme.sakura);
         },
         'Theme style sets hue and round'() {
-            const style = $bog_nka_theme_style('mint');
+            const style = $bog_prilavok_theme_style('mint');
             $mol_assert_equal(style['--mol_theme_hue'], '165deg');
             $mol_assert_equal(style['--mol_gap_round'], '1rem');
         },
@@ -7464,7 +7464,7 @@ var $;
 (function ($) {
     $mol_test({
         'Import parses products and collects categories'() {
-            const data = $bog_nka_import_parse(JSON.stringify({
+            const data = $bog_prilavok_import_parse(JSON.stringify({
                 title: ' Kitten ',
                 categories: ['Mats'],
                 products: [
@@ -7481,13 +7481,13 @@ var $;
             $mol_assert_equal(data.errors, []);
         },
         'Import accepts json wrapped in code fence'() {
-            const data = $bog_nka_import_parse('```json\n{ "products": [ { "title": "Mat" } ] }\n```');
+            const data = $bog_prilavok_import_parse('```json\n{ "products": [ { "title": "Mat" } ] }\n```');
             $mol_assert_equal(data.products.length, 1);
             $mol_assert_equal(data.errors, []);
         },
         'Import reports broken json and untitled products'() {
-            $mol_assert_equal($bog_nka_import_parse('{ nope').errors.length, 1);
-            const data = $bog_nka_import_parse('{ "products": [ { "price": 5 } ] }');
+            $mol_assert_equal($bog_prilavok_import_parse('{ nope').errors.length, 1);
+            const data = $bog_prilavok_import_parse('{ "products": [ { "price": 5 } ] }');
             $mol_assert_equal(data.products.length, 0);
             $mol_assert_equal(data.errors, ['Product 1 has no title']);
         },
@@ -7501,19 +7501,19 @@ var $;
     $mol_test({
         'Social url accepts telegram nick in any form'() {
             for (const value of ['@NaftulKittenArt', 'NaftulKittenArt', 't.me/NaftulKittenArt', ' https://t.me/NaftulKittenArt ']) {
-                $mol_assert_equal($bog_nka_social_url(value)?.toString(), 'https://t.me/NaftulKittenArt');
+                $mol_assert_equal($bog_prilavok_social_url(value)?.toString(), 'https://t.me/NaftulKittenArt');
             }
         },
         'Social url keeps other sites'() {
-            $mol_assert_equal($bog_nka_social_url('vk.com/kitten')?.toString(), 'https://vk.com/kitten');
+            $mol_assert_equal($bog_prilavok_social_url('vk.com/kitten')?.toString(), 'https://vk.com/kitten');
         },
         'Social url rejects empty and unsafe values'() {
-            $mol_assert_equal($bog_nka_social_url(''), null);
-            $mol_assert_equal($bog_nka_social_url('javascript:alert(1)'), null);
-            $mol_assert_equal($bog_nka_social_url('not a link'), null);
+            $mol_assert_equal($bog_prilavok_social_url(''), null);
+            $mol_assert_equal($bog_prilavok_social_url('javascript:alert(1)'), null);
+            $mol_assert_equal($bog_prilavok_social_url('not a link'), null);
         },
         'Social kind is detected by host'() {
-            const kind = (value) => $bog_nka_social_kind($bog_nka_social_url(value));
+            const kind = (value) => $bog_prilavok_social_kind($bog_prilavok_social_url(value));
             $mol_assert_equal(kind('@kitten'), 'telegram');
             $mol_assert_equal(kind('https://m.vk.com/kitten'), 'vk');
             $mol_assert_equal(kind('youtu.be/abc'), 'youtube');
@@ -7531,17 +7531,17 @@ var $;
         'Order code keeps products and counts of this catalog only'() {
             const catalog = 'AAAAAAAA_BBBBBBBB';
             const items = { [catalog + '_one']: 2, [catalog + '__two']: 1, 'CCCCCCCC_DDDDDDDD_x': 5, [catalog + '_zero']: 0 };
-            const code = $bog_nka_order_encode(catalog, items);
+            const code = $bog_prilavok_order_encode(catalog, items);
             $mol_assert_equal(code, '_one.2~__two.1');
-            $mol_assert_equal($bog_nka_order_decode(catalog, code), { [catalog + '_one']: 2, [catalog + '__two']: 1 });
+            $mol_assert_equal($bog_prilavok_order_decode(catalog, code), { [catalog + '_one']: 2, [catalog + '__two']: 1 });
         },
         'Order code ignores garbage'() {
-            $mol_assert_equal($bog_nka_order_decode('X', '_a.0~<b>.1~_c.99999~_d.3'), { X_d: 3 });
+            $mol_assert_equal($bog_prilavok_order_decode('X', '_a.0~<b>.1~_c.99999~_d.3'), { X_d: 3 });
         },
         'Order message fills placeholders and always has the link'() {
             const order = { titles: ['Кит', 'Пинки'], count: 3, total: 1000, link: 'https://x/#!order=1' };
-            $mol_assert_equal($bog_nka_order_message('Хочу {count} шт. на {total} ₽: {link}', order), 'Хочу 3 шт. на 1\u00a0000 ₽: https://x/#!order=1');
-            $mol_assert_equal($bog_nka_order_message('Хочу купить {title}!', order), 'Хочу купить Кит, Пинки! https://x/#!order=1');
+            $mol_assert_equal($bog_prilavok_order_message('Хочу {count} шт. на {total} ₽: {link}', order), 'Хочу 3 шт. на 1\u00a0000 ₽: https://x/#!order=1');
+            $mol_assert_equal($bog_prilavok_order_message('Хочу купить {title}!', order), 'Хочу купить Кит, Пинки! https://x/#!order=1');
         },
     });
 })($ || ($ = {}));
@@ -7550,20 +7550,20 @@ var $;
 "use strict";
 var $;
 (function ($_1) {
-    function $bog_nka_test_allowed() {
+    function $bog_prilavok_test_allowed() {
         return /[?&#!/]test=1(?![^&/#])/.test($mol_dom_context.location.href);
     }
-    $_1.$bog_nka_test_allowed = $bog_nka_test_allowed;
-    function $bog_nka_test_context($) {
+    $_1.$bog_prilavok_test_allowed = $bog_prilavok_test_allowed;
+    function $bog_prilavok_test_context($) {
         return $$;
     }
-    $_1.$bog_nka_test_context = $bog_nka_test_context;
-    async function $bog_nka_test_image(name) {
-        const url = new URL(`/bog/nka/assets-test/${name}`, $mol_dom_context.location.href);
+    $_1.$bog_prilavok_test_context = $bog_prilavok_test_context;
+    async function $bog_prilavok_test_image(name) {
+        const url = new URL(`/bog/prilavok/assets-test/${name}`, $mol_dom_context.location.href);
         const blob = await (await fetch(url)).blob();
         return new File([blob], name, { type: blob.type });
     }
-    $_1.$bog_nka_test_image = $bog_nka_test_image;
+    $_1.$bog_prilavok_test_image = $bog_prilavok_test_image;
 })($ || ($ = {}));
 
 ;
@@ -7589,7 +7589,7 @@ var $;
 // // 
 // // 				// Owner creates a real catalog with products
 // // 				const land = $.$giper_baza_glob.land_grab()
-// // 				const catalog = land.Data( $bog_nka_catalog )
+// // 				const catalog = land.Data( $bog_prilavok_catalog )
 // // 				catalog.Products( null )!.make( null )
 // // 				catalog.Products( null )!.make( null )
 // // 				console.log('[test] catalog', { link: land.link().str, products: catalog.Products()?.remote_list().length })
@@ -7599,7 +7599,7 @@ var $;
 // // 				$mol_assert_equal( rank_before, $giper_baza_rank_read )
 // // 
 // // 				// Owner grants rights to the second account
-// // 				const settings = $bog_nka_settings.make({ $ })
+// // 				const settings = $bog_prilavok_settings.make({ $ })
 // // 				settings.catalog_link = ()=> land.link().str
 // // 				const id = auth1.pass().toString()
 // // 				console.log('[test] granting id', { id, len: id.length })
@@ -7616,7 +7616,7 @@ var $;
 // // 				// Now the second account is admin over the catalog
 // // 				$giper_baza_auth.current( auth1 )
 // // 				console.log('[test] after current(auth1), cur_lord', { cur_lord: $giper_baza_auth.current().pass().lord().str })
-// // 				const app = $bog_nka_app.make({ $ })
+// // 				const app = $bog_prilavok_app.make({ $ })
 // // 				app.catalog_link = ()=> land.link().str
 // // 				const auth_lord = land.auth().pass().lord().str
 // // 				const cur = land.auth().pass().lord().str
@@ -7667,9 +7667,15 @@ var $;
     const decal = mark('Наклейка');
     const mlp = mark('МЛП');
     const genshin = mark('Genshin');
+    const order_url = 'https://t.me/NaftulKittenArt';
+    const links = ['https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art'];
+    function socials(app) {
+        const list = app.social_list();
+        return [list[0], ...links.filter(link => list.includes(link))];
+    }
     function titles(app) {
         return ours(app.product_cards()
-            .filter(card => card instanceof $bog_nka_product_card)
+            .filter(card => card instanceof $bog_prilavok_product_card)
             .map(card => card.title()));
     }
     function card(app, title) {
@@ -7699,7 +7705,7 @@ var $;
         return { context: guest_context.$mol_ambient({ $mol_dom_context: dom }), opened, copied };
     }
     function want_card(context, title) {
-        const item = $$.$bog_nka_product_card.make({ $: context });
+        const item = $$.$bog_prilavok_product_card.make({ $: context });
         item.product_link = () => card(guest, title).product_link();
         item.catalog_link = () => link;
         return item;
@@ -7709,9 +7715,9 @@ var $;
     }
     const scenario = {
         async 'e2e 01: catalog is taken from the url or created'($) {
-            const context = $bog_nka_test_context($);
+            const context = $bog_prilavok_test_context($);
             link = context.$mol_state_arg.value('catalog') ?? '';
-            artist = $$.$bog_nka_app.make({ $: context });
+            artist = $$.$bog_prilavok_app.make({ $: context });
             artist.catalog_link = (next) => {
                 if (next === undefined)
                     return link;
@@ -7724,11 +7730,11 @@ var $;
                 await step(() => $mol_assert_equal(artist.content(), [artist.Catalog_missing()]));
                 await step(() => {
                     artist.catalog_create();
-                    keep('bog_nka_e2e_artist', land);
+                    keep('bog_prilavok_e2e_artist', land);
                 });
             }
             else {
-                keep('bog_nka_e2e_artist', land);
+                keep('bog_prilavok_e2e_artist', land);
             }
             await step(() => {
                 $mol_assert_equal(link.length > 0, true);
@@ -7754,7 +7760,7 @@ var $;
                 $mol_assert_equal(artist.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(artist.style()['--mol_theme_hue'], '165deg');
                 $mol_assert_equal(settings.theme_swatch('mint').boxShadow, '0 0 0 3px var(--mol_theme_current)');
-                $mol_assert_equal(artist.social_list().slice(0, 3), ['https://t.me/NaftulKittenArt', 'https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art']);
+                $mol_assert_equal(socials(artist), [order_url, ...links]);
                 $mol_assert_equal(artist.hero_sub(), [artist.Profile(), artist.Socials()]);
                 $mol_assert_equal(artist.social_sub('https://vk.com/nyaftulkittenart'), [artist.Icon_vk('https://vk.com/nyaftulkittenart')]);
                 $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge]);
@@ -7767,10 +7773,10 @@ var $;
                 $mol_assert_equal(artist.catalog_rows().includes(artist.Hero()), false);
             });
             const keys = ['Avatar', 'Cover', 'Back'];
-            const files = await Promise.all(keys.map(key => $bog_nka_test_image(`${key.toLowerCase()}.png`)));
+            const files = await Promise.all(keys.map(key => $bog_prilavok_test_image(`${key.toLowerCase()}.png`)));
             if (!files[0]) {
                 $$.$mol_log3_warn({
-                    place: '$bog_nka_e2e',
+                    place: '$bog_prilavok_e2e',
                     message: 'images skipped without canvas',
                     hint: 'run e2e in browser with test=1',
                 });
@@ -7785,8 +7791,8 @@ var $;
                     $mol_assert_equal(artist.image_url(key).startsWith('blob:'), true);
                 $mol_assert_equal(settings.image_filled('Cover'), true);
                 $mol_assert_equal(artist.avatar_empty(), false);
-                $mol_assert_equal(artist.style()['--bog_nka_cover'], `url("${artist.image_url('Cover')}")`);
-                $mol_assert_equal(artist.style()['--bog_nka_pattern'], `url("${artist.image_url('Back')}")`);
+                $mol_assert_equal(artist.style()['--bog_prilavok_cover'], `url("${artist.image_url('Cover')}")`);
+                $mol_assert_equal(artist.style()['--bog_prilavok_pattern'], `url("${artist.image_url('Back')}")`);
             });
             const doc = $mol_dom_context.document;
             const host = doc.createElement('div');
@@ -7831,7 +7837,7 @@ var $;
                     $mol_assert_equal(item.status(), status);
                     $mol_assert_equal(item.product().Available().val(), status === 'available');
                     $mol_assert_equal(item.cart_enabled(), status === 'available');
-                    $mol_assert_equal(item.attr().bog_nka_product_card_state, status);
+                    $mol_assert_equal(item.attr().bog_prilavok_product_card_state, status);
                 }
                 const draft = card(artist, paimon);
                 draft.Status().option_checked('hidden', false);
@@ -7906,7 +7912,7 @@ var $;
             });
         },
         async 'e2e 09: visitor receives the catalog'($) {
-            const base = $bog_nka_test_context($);
+            const base = $bog_prilavok_test_context($);
             const embryo = base.$giper_baza_auth.embryos[0];
             const auth = embryo ? base.$giper_baza_auth.from(embryo) : await base.$giper_baza_auth._generate();
             guest_context = base.$mol_ambient({});
@@ -7918,19 +7924,19 @@ var $;
             }
             Object.assign(guest_context, { $giper_baza_auth: Auth, $giper_baza_glob: Glob });
             guest_land = Glob.Land(new $giper_baza_link(link));
-            keep('bog_nka_e2e_guest', () => Glob.Land(new $giper_baza_link(link)));
+            keep('bog_prilavok_e2e_guest', () => Glob.Land(new $giper_baza_link(link)));
             await sync_guest();
-            guest = $$.$bog_nka_app.make({ $: guest_context });
+            guest = $$.$bog_prilavok_app.make({ $: guest_context });
             guest.catalog_link = () => link;
             await step(() => {
                 $mol_assert_unique(auth.pass().lord().str, new $giper_baza_link(link).lord().str, base.$giper_baza_auth.current().pass().lord().str);
                 $mol_assert_equal(guest.is_admin(), false);
                 $mol_assert_equal(guest.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(guest.style()['--mol_theme_hue'], '165deg');
-                $mol_assert_equal(guest.social_list().slice(0, 3), ['https://t.me/NaftulKittenArt', 'https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art']);
+                $mol_assert_equal(socials(guest), [order_url, ...links]);
                 $mol_assert_equal(guest.head(), [guest.Hero(), guest.Product_add(), guest.Tools()]);
                 $mol_assert_equal(guest.avatar_empty(), !images);
-                $mol_assert_equal(guest.style()['--bog_nka_cover'] !== 'none', images);
+                $mol_assert_equal(guest.style()['--bog_prilavok_cover'] !== 'none', images);
             });
         },
         async 'e2e 10: visitor does not see hidden products and admin controls'() {
@@ -7977,7 +7983,7 @@ var $;
                 $mol_assert_equal(cart.lines().length, 2);
                 $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '1 100'));
                 $mol_assert_equal(cart.send_title(), cart.Send_title());
-                $mol_assert_equal($bog_nka_order_decode(link, order_code(cart)), {
+                $mol_assert_equal($bog_prilavok_order_decode(link, order_code(cart)), {
                     [first.product_link()]: 2,
                     [second.product_link()]: 1,
                 });
@@ -7989,7 +7995,7 @@ var $;
             await step(() => {
                 const item = card(guest, pinkie);
                 $mol_assert_equal(titles(guest), [kit, sticker, pinkie]);
-                $mol_assert_equal(item.attr().bog_nka_product_card_state, 'sold');
+                $mol_assert_equal(item.attr().bog_prilavok_product_card_state, 'sold');
                 $mol_assert_equal(item.cover().includes(item.Sold_badge()), true);
                 $mol_assert_equal(item.cart_controls(), [item.Want()]);
                 $mol_assert_equal(item.want_title(), item.Want_title());
@@ -8014,7 +8020,7 @@ var $;
                 $mol_assert_equal(cart.line_title(second.product_link()), `${pinkie} · ${cart.Unavailable()}`);
                 $mol_assert_equal(cart.line_sum(second.product_link()), '');
                 $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '800'));
-                $mol_assert_equal($bog_nka_order_decode(link, order_code(cart)), { [first.product_link()]: 2 });
+                $mol_assert_equal($bog_prilavok_order_decode(link, order_code(cart)), { [first.product_link()]: 2 });
             });
         },
         async 'e2e 14: artist opens the order link'() {
@@ -8022,7 +8028,7 @@ var $;
                 const code = order_code(guest.Cart());
                 const first = card(artist, kit);
                 const order = artist.Order();
-                order.items = () => $bog_nka_order_decode(link, code);
+                order.items = () => $bog_prilavok_order_decode(link, code);
                 $mol_assert_equal(order.heading(), order.Order_title());
                 $mol_assert_equal(order.lines().length, 1);
                 $mol_assert_equal(order.line_sum(first.product_link()), '800 ₽');
@@ -8033,7 +8039,7 @@ var $;
             await step(() => settings.social_link('https://vk.com/nyaftulkittenart'));
             await sync_guest();
             const { context, opened, copied } = mock_dom();
-            const cart = $$.$bog_nka_cart.make({ $: context });
+            const cart = $$.$bog_prilavok_cart.make({ $: context });
             cart.catalog_link = () => link;
             cart.items = () => guest.cart();
             const want = want_card(context, pinkie);
@@ -8083,7 +8089,7 @@ var $;
             await sync_guest();
             await step(() => $mol_assert_equal(guest.catalog().Hidden().val(), false));
             $$.$mol_log3_done({
-                place: '$bog_nka_e2e',
+                place: '$bog_prilavok_e2e',
                 message: 'e2e catalog',
                 url: artist.$.$mol_state_arg.make_link({ catalog: link }),
             });
@@ -8091,9 +8097,9 @@ var $;
     };
     $mol_test({
         async 'e2e runs with test=1 in browser and only when Giper Baza responds'($) {
-            if (!$bog_nka_test_allowed()) {
+            if (!$bog_prilavok_test_allowed()) {
                 $$.$mol_log3_warn({
-                    place: '$bog_nka_e2e',
+                    place: '$bog_prilavok_e2e',
                     message: 'e2e skipped in browser without test=1',
                     hint: 'add test=1 to the url',
                 });
@@ -8103,7 +8109,7 @@ var $;
             const alive = await fetch(master, { signal: AbortSignal.timeout(700) }).then(res => res.ok, () => false);
             if (!alive) {
                 $$.$mol_log3_warn({
-                    place: '$bog_nka_e2e',
+                    place: '$bog_prilavok_e2e',
                     message: 'Giper Baza is not responding, e2e skipped',
                     hint: master,
                 });
