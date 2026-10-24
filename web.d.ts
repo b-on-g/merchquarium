@@ -49515,17 +49515,19 @@ declare namespace $ {
         price: number;
         description: string;
         category: string;
+        fandoms: string[];
         available: boolean;
     };
     type $bog_prilavok_import_data = {
         title: string;
         categories: string[];
+        fandoms: string[];
         products: $bog_prilavok_import_product[];
         errors: string[];
     };
     function $bog_prilavok_import_parse(json: string): $bog_prilavok_import_data;
     function $bog_prilavok_import_apply(catalog: $bog_prilavok_catalog, data: $bog_prilavok_import_data): void;
-    const $bog_prilavok_import_prompt = "You help an artist fill an online merch catalog.\nAsk me short questions in my language, one at a time: what products I sell, their names, prices in rubles, short descriptions, categories and whether each one is in stock.\nWhen you have enough, reply with JSON only, no comments, in this format:\n{\n\t\"title\": \"Catalog name\",\n\t\"categories\": [ \"Category\" ],\n\t\"products\": [\n\t\t{ \"title\": \"Name\", \"price\": 1000, \"description\": \"Short description\", \"category\": \"Category\", \"available\": true }\n\t]\n}\nEvery product must have a title. Price is a number without currency. I will upload photos myself later.";
+    const $bog_prilavok_import_prompt = "You help an author fill an online merch catalog.\nAsk me short questions in my language, one at a time: what products I sell, their names, prices in rubles, short descriptions, categories, fandoms (what the art is about) and whether each one is in stock.\nWhen you have enough, reply with JSON only, no comments, in this format:\n{\n\t\"title\": \"Catalog name\",\n\t\"categories\": [ \"Category\" ],\n\t\"fandoms\": [ \"Fandom\" ],\n\t\"products\": [\n\t\t{ \"title\": \"Name\", \"price\": 1000, \"description\": \"Short description\", \"category\": \"Category\", \"fandoms\": [ \"Fandom\" ], \"available\": true }\n\t]\n}\nEvery product must have a title. Price is a number without currency. I will upload photos myself later.";
 }
 
 declare namespace $ {
@@ -50042,6 +50044,7 @@ declare namespace $.$$ {
         import_json(next?: string): string;
         import_data(): $bog_prilavok_import_data;
         import_new_categories(): string[];
+        import_new_fandoms(): string[];
         import_preview(): string;
         import_ready(): boolean;
         import_run(): void;

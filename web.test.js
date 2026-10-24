@@ -7480,6 +7480,24 @@ var $;
             $mol_assert_equal(data.products[1].available, false);
             $mol_assert_equal(data.errors, []);
         },
+        'Import collects fandoms from list or comma separated text'() {
+            const data = $bog_prilavok_import_parse(JSON.stringify({
+                fandoms: ['MLP'],
+                products: [
+                    { title: 'Pin', fandoms: [' Genshin ', 'MLP', 'Genshin', ''] },
+                    { title: 'Mat', fandoms: 'Hollow Knight, MLP' },
+                    { title: 'Case', tags: ['Undertale'] },
+                    { title: 'Cup' },
+                ],
+            }));
+            $mol_assert_equal(data.fandoms, ['MLP', 'Genshin', 'Hollow Knight', 'Undertale']);
+            $mol_assert_equal(data.products.map(product => product.fandoms), [
+                ['Genshin', 'MLP'],
+                ['Hollow Knight', 'MLP'],
+                ['Undertale'],
+                [],
+            ]);
+        },
         'Import accepts json wrapped in code fence'() {
             const data = $bog_prilavok_import_parse('```json\n{ "products": [ { "title": "Mat" } ] }\n```');
             $mol_assert_equal(data.products.length, 1);
@@ -7667,6 +7685,7 @@ var $;
     const decal = mark('Наклейка');
     const mlp = mark('МЛП');
     const genshin = mark('Genshin');
+    const knight = mark('Hollow Knight');
     const order_url = 'https://t.me/NaftulKittenArt';
     const links = ['https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art'];
     function socials(app) {
@@ -7850,18 +7869,21 @@ var $;
             await step(() => {
                 settings.import_json('```json\n' + JSON.stringify({
                     products: [
-                        { title: sticker, price: 100, category: decal },
+                        { title: sticker, price: 100, category: decal, fandoms: [genshin, knight] },
                         { price: 5 },
                     ],
                 }) + '\n```');
                 $mol_assert_equal(settings.import_ready(), true);
                 $mol_assert_equal(settings.import_new_categories(), [decal]);
+                $mol_assert_equal(settings.import_new_fandoms(), [knight]);
                 $mol_assert_equal(settings.import_data().errors, ['Product 2 has no title']);
                 settings.import_run();
                 $mol_assert_equal(settings.import_json(), '');
                 $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge, decal]);
                 $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
                 $mol_assert_equal(card(artist, sticker).status(), 'available');
+                $mol_assert_equal(card(artist, sticker).fandoms(), [genshin, knight]);
+                $mol_assert_equal(ours(settings.fandom_items()), [mlp, genshin, knight]);
             });
         },
         async 'e2e 06: artist filters by kind, fandom, search and tag'() {
@@ -7875,7 +7897,7 @@ var $;
                 artist.search(`пинки ${run}`);
                 $mol_assert_equal(titles(artist), [pinkie]);
                 artist.search(`#${genshin.toLowerCase()}`);
-                $mol_assert_equal(titles(artist), [paimon]);
+                $mol_assert_equal(titles(artist), [paimon, sticker]);
                 artist.search('');
                 const item = card(artist, kit);
                 $mol_assert_equal(item.tags().map((tag) => tag.title()), [`#${postcard}`, `#${mlp}`]);
@@ -7943,7 +7965,7 @@ var $;
             await step(() => {
                 $mol_assert_equal(titles(guest), [kit, pinkie, sticker]);
                 $mol_assert_equal(ours(Object.keys(guest.kind_options())), [postcard, keychain]);
-                $mol_assert_equal(ours(Object.keys(guest.fandom_options())), [mlp]);
+                $mol_assert_equal(ours(Object.keys(guest.fandom_options())), [mlp, genshin, knight]);
                 $mol_assert_equal(guest.Product_add().hidden(), true);
                 $mol_assert_equal(guest.Settings_button(), null);
                 const item = card(guest, kit);
@@ -8074,12 +8096,12 @@ var $;
             await step(() => {
                 $mol_assert_equal(settings.fandom_usage(mlp), 2);
                 settings.fandom_drop(mlp);
-                $mol_assert_equal(ours(settings.fandom_items()), [genshin]);
+                $mol_assert_equal(ours(settings.fandom_items()), [genshin, knight]);
                 $mol_assert_equal(settings.fandom_usage(mlp), 0);
                 $mol_assert_equal(card(artist, kit).fandoms(), []);
             });
             await sync_guest();
-            await step(() => $mol_assert_equal(ours(Object.keys(guest.fandom_options())), []));
+            await step(() => $mol_assert_equal(ours(Object.keys(guest.fandom_options())), [genshin, knight]));
         },
         async 'e2e 17: hiding from search engines reaches the visitor and is undone'() {
             await step(() => settings.listed(false));

@@ -63,7 +63,7 @@
 	"$bog_prilavok_settings_Import_prompt_title": "Copy prompt for AI",
 	"$bog_prilavok_settings_Import_run_title": "Create products",
 	"$bog_prilavok_settings_Import_section_title": "Bulk import",
-	"$bog_prilavok_settings_Import_summary": "Will add products: {products}, new categories: {categories}",
+	"$bog_prilavok_settings_Import_summary": "Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}",
 	"$bog_prilavok_settings_Links_input_hint": "vk.com/nick, youtube.com/@nick",
 	"$bog_prilavok_settings_Links_label_title": "Other socials in the header",
 	"$bog_prilavok_settings_Listed_title": "Show in search engines",
