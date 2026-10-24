@@ -344,7 +344,7 @@ namespace $.$$ {
 					if (this.in_stock_only() && status !== 'available') continue
 					if (!this.product_match(product)) continue
 
-					if (status === 'sold') sold.push(this.Product_card(link))
+					if (status === 'sold' && !this.is_admin()) sold.push(this.Product_card(link))
 					else cards.push(this.Product_card(link))
 					continue
 				}
