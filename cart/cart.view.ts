@@ -22,7 +22,7 @@ namespace $.$$ {
 
 		available( link: string ) {
 			const product = this.product( link )
-			return Boolean( product.Title()?.val() ) && Boolean( product.Available()?.val() )
+			return Boolean( product.Title()?.val() ) && $bog_nka_product_status( product ) === 'available'
 		}
 
 		price( link: string ) {
@@ -101,14 +101,7 @@ namespace $.$$ {
 
 		social_name() {
 			const url = this.social_url()
-			if( !url ) return ''
-			return {
-				telegram: 'Telegram',
-				vk: 'VK',
-				youtube: 'YouTube',
-				instagram: 'Instagram',
-				web: url.hostname.replace( /^www\./, '' ),
-			}[ $bog_nka_social_kind( url ) ]
+			return url ? $bog_nka_social_name( url ) : ''
 		}
 
 		order_link() {

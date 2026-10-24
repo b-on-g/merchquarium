@@ -12,9 +12,57 @@ namespace $.$$ {
 			bottom: $mol_gap.block,
 		},
 
+		'@': {
+			bog_nka_product_card_state: {
+				sold: {
+					Photos: {
+						filter: 'grayscale(1)',
+						opacity: .6,
+					},
+					Photo_empty: {
+						opacity: .6,
+					},
+					Info: {
+						opacity: .6,
+					},
+				},
+				hidden: {
+					opacity: .5,
+					border: {
+						style: 'dashed',
+					},
+				},
+			},
+		},
+
 		Cover: {
 			display: 'block',
+			position: 'relative',
 			padding: $mol_style_func.vary( '--bog_nka_photo_inset' ),
+		},
+
+		Sold_badge: {
+			position: 'absolute',
+			left: 0,
+			right: 0,
+			bottom: '1rem',
+			justifyContent: 'center',
+			margin: {
+				left: 'auto',
+				right: 'auto',
+			},
+			width: 'fit-content',
+			padding: $mol_gap.text,
+			color: $mol_theme.back,
+			background: {
+				color: $mol_theme.text,
+			},
+			border: {
+				radius: $mol_gap.round,
+			},
+			font: {
+				weight: 'bold',
+			},
 		},
 
 		Photos: {

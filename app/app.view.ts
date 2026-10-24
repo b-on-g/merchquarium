@@ -144,8 +144,8 @@ namespace $.$$ {
 		}
 
 		head() {
-			if( this.settings_open() || !this.catalog_link() ) return super.head()
-			return [ this.Product_add(), this.Tools() ]
+			if( this.settings_open() || !this.catalog_link() ) return [ this.Title(), this.Product_add(), this.Tools() ]
+			return [ this.Hero(), this.Product_add(), this.Tools() ]
 		}
 
 		avatar_empty() {
@@ -191,6 +191,7 @@ namespace $.$$ {
 			return [
 				... Object.keys( this.kind_options() ).length > 1 ? [ this.Kind_filter() ] : [],
 				... Object.keys( this.fandom_options() ).length > 1 ? [ this.Fandom_filter() ] : [],
+				... this.visible_products().some( product => $bog_nka_product_status( product ) === 'sold' ) ? [ this.In_stock() ] : [],
 				this.Search(),
 			]
 		}
@@ -206,7 +207,6 @@ namespace $.$$ {
 
 		catalog_rows() {
 			return [
-				this.Hero(),
 				... this.visible_products().length ? [ this.Filters() ] : [],
 				this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
 			]
@@ -274,7 +274,7 @@ namespace $.$$ {
 
 		visible_products() {
 			return ( this.catalog()?.Products()?.remote_list() ?? [] )
-				.filter( product => product.can_change() || product.Available()?.val() )
+				.filter( product => product.can_change() || $bog_nka_product_status( product ) !== 'hidden' )
 		}
 
 		filter_fandoms() {
@@ -333,15 +333,19 @@ namespace $.$$ {
 			}
 		
 			const cards: $mol_view[] = []
-		
+			const sold: $mol_view[] = []
+
 			for (const link of order) {
 				const product = by_link.get(link)
-		
+
 				if (product) {
-					if (!product.can_change() && !product.Available()?.val()) continue
+					const status = $bog_nka_product_status(product)
+					if (!product.can_change() && status === 'hidden') continue
+					if (this.in_stock_only() && status !== 'available') continue
 					if (!this.product_match(product)) continue
-		
-					cards.push(this.Product_card(link))
+
+					if (status === 'sold') sold.push(this.Product_card(link))
+					else cards.push(this.Product_card(link))
 					continue
 				}
 		
@@ -356,8 +360,8 @@ namespace $.$$ {
 		
 				cards.push(this.Product_undo(link))
 			}
-		
-			return cards
+
+			return [ ... cards, ... sold ]
 		}
 		
 		@ $mol_mem_key

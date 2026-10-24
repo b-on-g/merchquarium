@@ -78,6 +78,7 @@ namespace $ {
 			product.price ? `<p>${ product.price } ₽</p>` : '',
 			product.description ? `<p>${ esc( product.description ) }</p>` : '',
 			product.category ? `<p>${ esc( product.category ) }</p>` : '',
+			product.available ? '' : '<p>Товар закончился</p>',
 			'</article>',
 		].filter( Boolean ).join( '' ) ).join( '\n' )
 

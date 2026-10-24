@@ -90,16 +90,14 @@ namespace $.$$ {
 			return next
 		}
 
-		available(next?: boolean): boolean {
+		status(next?: string): $bog_nka_product_status {
 			const product = this.product()
-		
-			if (next === undefined) return product.Available()?.val() ?? false
-		
-			const atom = product.Available(null)
-			if (!atom) return false
-		
-			atom.val(next)
-			return next
+			if (next === 'available' || next === 'sold' || next === 'hidden') return $bog_nka_product_status(product, next)
+			return $bog_nka_product_status(product)
+		}
+
+		sold() {
+			return this.status() === 'sold'
 		}
 
 		catalog() {
@@ -133,11 +131,54 @@ namespace $.$$ {
 
 		
 		cart_controls() {
+			if( this.sold() ) return [ this.Want() ]
 			return [ this.cart_count() > 0 ? this.Cart_counter() : this.Cart_add() ]
 		}
 
 		cart_enabled() {
-			return this.available() && Boolean( this.title() )
+			return this.status() === 'available' && Boolean( this.title() )
+		}
+
+		social_url() {
+			return $bog_nka_social_url( this.catalog()?.Social()?.val() ?? '' )
+		}
+
+		want_enabled() {
+			return Boolean( this.social_url() )
+		}
+
+		want_message() {
+			return this.Want_message()
+				.replace( '{title}', this.title() )
+				.replace( '{link}', this.$.$mol_state_arg.make_link({ catalog: this.catalog_link() }) )
+		}
+
+		@ $mol_mem
+		want_copied( next?: boolean ) {
+			return next ?? false
+		}
+
+		want_title() {
+			const url = this.social_url()
+			if( !url || !this.want_copied() ) return this.Want_title()
+			return this.Want_copied_title().replace( '{social}', $bog_nka_social_name( url ) )
+		}
+
+		@ $mol_action
+		want() {
+			const url = this.social_url()
+			if( !url ) return
+
+			const text = this.want_message()
+			if( $bog_nka_social_kind( url ) === 'telegram' ) {
+				url.search = `?text=${ encodeURIComponent( text ) }`
+			} else if( !this.want_copied() ) {
+				this.$.$mol_dom_context.navigator.clipboard?.writeText( text ).catch( ()=> {} )
+				this.want_copied( true )
+				return
+			}
+
+			this.$.$mol_dom_context.open( url.toString(), '_blank' )
 		}
 
 		@ $mol_action
@@ -146,7 +187,10 @@ namespace $.$$ {
 		}
 
 		cover() {
-			return [ this.photo_ids().length ? this.Photos() : this.Photo_empty() ]
+			return [
+				this.photo_ids().length ? this.Photos() : this.Photo_empty(),
+				... this.sold() ? [ this.Sold_badge() ] : [],
+			]
 		}
 
 		info_rows() {

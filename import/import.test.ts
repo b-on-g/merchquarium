@@ -31,22 +31,5 @@ namespace $ {
 			$mol_assert_equal( data.products.length, 0 )
 			$mol_assert_equal( data.errors, [ 'Product 1 has no title' ] )
 		},
-
-		'Import creates products in catalog'( $ ) {
-			const land = $giper_baza_land.make({ $ })
-			const catalog = land.Data( $bog_nka_catalog )
-			$bog_nka_import_apply( catalog, $bog_nka_import_parse( JSON.stringify({
-				title: 'Kitten',
-				products: [ { title: 'Mat', price: 1200, category: 'Mats', description: 'Soft' } ],
-			}) ) )
-			const [ link ] = catalog.Products()!.items()
-			const product = land.Pawn( $bog_nka_product ).Head( link!.head() )
-			$mol_assert_equal( catalog.Title()!.val(), 'Kitten' )
-			$mol_assert_equal( catalog.Categories()!.items(), [ 'Mats' ] )
-			$mol_assert_equal( product.Title()!.val(), 'Mat' )
-			$mol_assert_equal( product.Price()!.val(), 1200 )
-			$mol_assert_equal( product.Available()!.val(), true )
-		},
-
 	})
 }

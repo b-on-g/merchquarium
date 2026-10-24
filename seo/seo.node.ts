@@ -40,17 +40,20 @@ namespace $ {
 			const catalog = land.Data( $bog_nka_catalog )
 			if( catalog.Hidden()?.val() ) return null
 
-			const products = ( catalog.Products()?.remote_list() ?? [] ).map( product => {
-				const photo = product.Photos()?.items()[0]
-				return {
-					title: product.Title()?.val()?.trim() ?? '',
-					price: product.Price()?.val() ?? 0,
-					description: product.Description()?.val()?.trim() ?? '',
-					category: product.Category()?.val() ?? '',
-					available: product.Available()?.val() ?? false,
-					cover: photo ? `${ origin }/cover?BAZA:file=${ photo }` : '',
-				}
-			} ).filter( product => product.title )
+			const products = ( catalog.Products()?.remote_list() ?? [] )
+				.filter( product => $bog_nka_product_status( product ) !== 'hidden' )
+				.map( product => {
+					const photo = product.Photos()?.items()[0]
+					return {
+						title: product.Title()?.val()?.trim() ?? '',
+						price: product.Price()?.val() ?? 0,
+						description: product.Description()?.val()?.trim() ?? '',
+						category: product.Category()?.val() ?? '',
+						available: $bog_nka_product_status( product ) === 'available',
+						cover: photo ? `${ origin }/cover?BAZA:file=${ photo }` : '',
+					}
+				} )
+				.filter( product => product.title )
 
 			return {
 				link: link.str,

@@ -43,7 +43,7 @@ namespace $ {
 			const html = $bog_nka_seo_page( template, catalog )
 			$mol_assert_equal( html.includes( '<div mol_view_root="$bog_nka_app"><main><h1>Kitten &#60;Art&#62;</h1>' ), true )
 			$mol_assert_equal( html.includes( '<h2>Mat</h2><p>1200 ₽</p><p>Soft</p><p>Mats</p>' ), true )
-			$mol_assert_equal( html.includes( '<article><h2>Case</h2></article>' ), true )
+			$mol_assert_equal( html.includes( '<article><h2>Case</h2><p>Товар закончился</p></article>' ), true )
 		},
 
 		'SEO page boots app with catalog hash before bundle'() {

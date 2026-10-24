@@ -3,9 +3,15 @@ $bog_nka_product_card $mol_card
 	catalog_link? \
 	search? \
 	cart_count? 0
+	Want_message @ \I want {title} if there is a reprint: {link}
+	Want_title @ \I want it if there is a reprint
+	Want_copied_title @ \✓ Copied — open {social}
 	Tag* $mol_button_minor
 		title <= tag_title* \
 		click? <=> tag_select*? null
+	attr *
+		^
+		bog_nka_product_card_state <= status? \available
 	sub /
 		<= Cover $mol_view
 			sub <= cover /
@@ -15,6 +21,8 @@ $bog_nka_product_card $mol_card
 				<= Photo_empty $mol_view
 					sub /
 						<= Photo_empty_icon $mol_icon_image_off
+				<= Sold_badge $mol_paragraph
+					title @ \Sold out
 		<= Info $mol_list
 			rows <= info_rows /
 				<= Title $mol_string_button
@@ -54,6 +62,10 @@ $bog_nka_product_card $mol_card
 					enabled <= cart_enabled true
 				<= Cart_counter $bog_nka_counter
 					value? <=> cart_count?
+				<= Want $mol_button_minor
+					title <= want_title \
+					click? <=> want? null
+					enabled <= want_enabled true
 		- далее скрытые от клиента поля
 		<= Admin $mol_row
 			sub /
@@ -65,9 +77,12 @@ $bog_nka_product_card $mol_card
 					title @ \Delete photo
 					click? <=> photo_delete? null
 					enabled <= photo_delete_enabled true
-				<= Available $mol_check_box
-					checked? <=> available? false
-					title @ \Available
+				<= Status $mol_switch
+					value? <=> status? \available
+					options *
+						available @ \In stock
+						sold @ \Sold out
+						hidden @ \Hidden
 					enabled <= changed true
 				<= Delete $mol_button_minor
 					title @ \Delete

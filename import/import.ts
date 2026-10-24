@@ -88,7 +88,7 @@ namespace $ {
 			product.Price( 'auto' )!.val( item.price )
 			product.Description( 'auto' )!.val( item.description )
 			product.Category( 'auto' )!.val( item.category )
-			product.Available( 'auto' )!.val( item.available )
+			$bog_nka_product_status( product, item.available ? 'available' : 'sold' )
 		}
 
 	}

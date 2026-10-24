@@ -30,4 +30,14 @@ namespace $ {
 		return 'web'
 	}
 
+	export function $bog_nka_social_name( url: URL ) {
+		return {
+			telegram: 'Telegram',
+			vk: 'VK',
+			youtube: 'YouTube',
+			instagram: 'Instagram',
+			web: url.hostname.replace( /^www\./, '' ),
+		}[ $bog_nka_social_kind( url ) ]
+	}
+
 }

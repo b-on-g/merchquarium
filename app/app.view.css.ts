@@ -18,26 +18,26 @@ namespace $.$$ {
 				weight: 'bold',
 			},
 		},
-		Hero: {
-			flex: { wrap: 'wrap' },
-			alignItems: 'center',
-			gap: $mol_gap.block,
-			padding: $mol_gap.block,
-			minHeight: '10rem',
+		Head: {
+			alignItems: 'flex-start',
 			background: {
 				image: $mol_style_func.vary( '--bog_nka_cover' ),
 				size: [ 'cover' ],
 				position: 'center',
 			},
-			border: {
-				radius: $mol_gap.round,
-			},
+		},
+		Hero: {
+			flex: { wrap: 'wrap', grow: 1 },
+			alignItems: 'center',
+			gap: $mol_gap.block,
+			padding: $mol_gap.block,
+			minHeight: '10rem',
 		},
 
 		Profile: {
 			flexDirection: 'column',
 			alignItems: 'center',
-			gap: $mol_gap.space,
+			gap: $mol_gap.block,
 		},
 
 		Avatar: {
@@ -66,12 +66,6 @@ namespace $.$$ {
 				bottom: 0,
 				left: $mol_gap.text,
 				right: $mol_gap.text,
-			},
-			background: {
-				color: $mol_theme.back,
-			},
-			border: {
-				radius: $mol_gap.round,
 			},
 		},
 

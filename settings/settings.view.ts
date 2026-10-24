@@ -179,7 +179,7 @@ namespace $.$$ {
 		@ $mol_mem
 		products_available() {
 			return (this.catalog()?.Products()?.remote_list() ?? [])
-				.filter(product => product.Available()?.val())
+				.filter(product => $bog_nka_product_status(product) === 'available')
 				.length
 		}
 

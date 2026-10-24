@@ -32,6 +32,22 @@ $bog_nka_app $mol_page
 			action *
 				ctrl_Z? <=> undo_last? null
 	head /
+		<= Hero $mol_view
+			sub <= hero_sub /
+				<= Profile $mol_view
+					sub /
+						<= Avatar $mol_view
+							style <= avatar_style *
+							attr *
+								bog_nka_app_avatar_empty <= avatar_empty true
+						<= Nick $mol_paragraph
+							title <= title
+				<= Socials $mol_view
+					sub /
+						<= Socials_label $mol_paragraph
+							title @ \I have
+						<= Socials_list $mol_view
+							sub <= socials /
 		<= Title
 		<= Product_add $bog_nka_button
 			title @ \Add product
@@ -64,22 +80,6 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
-				<= Hero $mol_view
-					sub <= hero_sub /
-						<= Profile $mol_view
-							sub /
-								<= Avatar $mol_view
-									style <= avatar_style *
-									attr *
-										bog_nka_app_avatar_empty <= avatar_empty true
-								<= Nick $mol_paragraph
-									title <= title
-						<= Socials $mol_view
-							sub /
-								<= Socials_label $mol_paragraph
-									title @ \I have
-								<= Socials_list $mol_view
-									sub <= socials /
 				<= Filters $mol_view
 					sub <= filters /
 						<= Kind_filter $mol_select
@@ -88,6 +88,9 @@ $bog_nka_app $mol_page
 						<= Fandom_filter $mol_select
 							dictionary <= fandom_options *
 							value? <=> fandom_filter? \all
+						<= In_stock $mol_check_box
+							title @ \Only in stock
+							checked? <=> in_stock_only? false
 						<= Search $mol_search
 							query? <=> search? \
 				<= Product_cards $bog_nka_gallery

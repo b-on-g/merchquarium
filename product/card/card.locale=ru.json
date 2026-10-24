@@ -1,5 +1,4 @@
 {
-	"$bog_nka_product_card_Available_title": "В наличии",
 	"$bog_nka_product_card_Cart_add_title": "В корзину",
 	"$bog_nka_product_card_Category_option_label_default": "Категория",
 	"$bog_nka_product_card_Delete_title": "Удалить",
@@ -7,5 +6,12 @@
 	"$bog_nka_product_card_Fandoms_pick_hint": "Фандомы",
 	"$bog_nka_product_card_Photos_delete_title": "Удалить фото",
 	"$bog_nka_product_card_Price_hint": "Цена",
-	"$bog_nka_product_card_Title_hint": "Название"
+	"$bog_nka_product_card_Sold_badge_title": "Товар закончился",
+	"$bog_nka_product_card_Status_options_available": "В наличии",
+	"$bog_nka_product_card_Status_options_hidden": "Скрыт",
+	"$bog_nka_product_card_Status_options_sold": "Закончился",
+	"$bog_nka_product_card_Title_hint": "Название",
+	"$bog_nka_product_card_Want_copied_title": "✓ Скопировано — открыть {social}",
+	"$bog_nka_product_card_Want_message": "Здравствуйте! Хочу «{title}», если будет повторный тираж: {link}",
+	"$bog_nka_product_card_Want_title": "Хочу, если будет повтор"
 }
