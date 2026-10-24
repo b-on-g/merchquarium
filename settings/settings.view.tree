@@ -1,6 +1,6 @@
 $bog_prilavok_settings $mol_page
 	title @ \Settings
-	Import_summary @ \Will add products: {products}, new categories: {categories}
+	Import_summary @ \Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}
 	Import_errors @ \Problems: {errors}
 	Theme_sakura @ \Sakura
 	Theme_lavender @ \Lavender

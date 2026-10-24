@@ -262,12 +262,18 @@ namespace $.$$ {
 			return this.import_data().categories.filter(category => !known.has(category))
 		}
 
+		import_new_fandoms() {
+			const known = new Set(this.catalog()?.Fandoms()?.items() ?? [])
+			return this.import_data().fandoms.filter(fandom => !known.has(fandom))
+		}
+
 		import_preview() {
 			const data = this.import_data()
 			if (!this.import_json().trim()) return ''
 			const summary = this.Import_summary()
 				.replace('{products}', String(data.products.length))
 				.replace('{categories}', String(this.import_new_categories().length))
+				.replace('{fandoms}', String(this.import_new_fandoms().length))
 			if (!data.errors.length) return summary
 			return summary + '. ' + this.Import_errors().replace('{errors}', data.errors.join('; '))
 		}

@@ -19,6 +19,25 @@ namespace $ {
 			$mol_assert_equal( data.errors, [] )
 		},
 
+		'Import collects fandoms from list or comma separated text'() {
+			const data = $bog_prilavok_import_parse( JSON.stringify({
+				fandoms: [ 'MLP' ],
+				products: [
+					{ title: 'Pin', fandoms: [ ' Genshin ', 'MLP', 'Genshin', '' ] },
+					{ title: 'Mat', fandoms: 'Hollow Knight, MLP' },
+					{ title: 'Case', tags: [ 'Undertale' ] },
+					{ title: 'Cup' },
+				],
+			}) )
+			$mol_assert_equal( data.fandoms, [ 'MLP', 'Genshin', 'Hollow Knight', 'Undertale' ] )
+			$mol_assert_equal( data.products.map( product => product.fandoms ), [
+				[ 'Genshin', 'MLP' ],
+				[ 'Hollow Knight', 'MLP' ],
+				[ 'Undertale' ],
+				[],
+			] )
+		},
+
 		'Import accepts json wrapped in code fence'() {
 			const data = $bog_prilavok_import_parse( '```json\n{ "products": [ { "title": "Mat" } ] }\n```' )
 			$mol_assert_equal( data.products.length, 1 )
