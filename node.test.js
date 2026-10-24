@@ -26149,7 +26149,7 @@ var $;
                             continue;
                         if (!this.product_match(product))
                             continue;
-                        if (status === 'sold')
+                        if (status === 'sold' && !this.is_admin())
                             sold.push(this.Product_card(link));
                         else
                             cards.push(this.Product_card(link));
@@ -34044,8 +34044,11 @@ var $;
                 });
             });
         },
-        async 'e2e 13: sold out product stays muted at the end and drops out of the order'() {
-            await step(() => card(artist, pinkie).Status().option_checked('sold', true));
+        async 'e2e 13: sold out product stays in place for the author, muted at the end for the visitor and drops out of the order'() {
+            await step(() => {
+                card(artist, pinkie).Status().option_checked('sold', true);
+                $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
+            });
             await sync_guest();
             await step(() => {
                 const item = card(guest, pinkie);

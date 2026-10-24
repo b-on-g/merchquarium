@@ -35786,7 +35786,7 @@ var $;
                             continue;
                         if (!this.product_match(product))
                             continue;
-                        if (status === 'sold')
+                        if (status === 'sold' && !this.is_admin())
                             sold.push(this.Product_card(link));
                         else
                             cards.push(this.Product_card(link));
