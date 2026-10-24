@@ -1,4 +1,4 @@
-$bog_nka_cart $mol_list
+$bog_prilavok_cart $mol_list
 	catalog_link \
 	items? *
 	editable true
@@ -26,7 +26,7 @@ $bog_nka_cart $mol_list
 		<= Summary $mol_view
 			sub /
 				<= Notice $mol_paragraph
-					title @ \The information on the site is not a public offer. Availability and price are confirmed by the artist when placing the order.
+					title @ \The information on the site is not a public offer. Availability and price are confirmed by the author when placing the order.
 				<= Total $mol_paragraph
 					title <= total_text \
 		<= Actions $mol_view
@@ -39,7 +39,7 @@ $bog_nka_cart $mol_list
 					title @ \Clear cart
 					click? <=> clear? null
 		<= Send_hint $mol_paragraph
-			title @ \Paste the message into the chat with the artist
+			title @ \Paste the message into the chat with the author
 	Line* $mol_row
 		sub /
 			<= Thumb* $mol_view
@@ -50,7 +50,7 @@ $bog_nka_cart $mol_list
 						title <= line_title* \
 					<= Line_price* $mol_paragraph
 						title <= line_price* \
-			<= Counter* $bog_nka_counter
+			<= Counter* $bog_prilavok_counter
 				value? <=> count*? 0
 				enabled <= editable
 			<= Line_sum* $mol_paragraph

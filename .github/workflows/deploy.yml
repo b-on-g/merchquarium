@@ -1,4 +1,4 @@
-name: $bog_nka
+name: $bog_prilavok
 
 permissions: write-all
 
@@ -17,20 +17,20 @@ jobs:
 
     - uses: hyoo-ru/mam_build@master2
       with:
-        package: 'bog/nka'
+        package: 'bog/prilavok'
         modules: 'app'
 
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/main'
       with:
-        folder: 'bog/nka/app/-'
+        folder: 'bog/prilavok/app/-'
 
     - name: Prerender landing
       if: github.ref == 'refs/heads/main'
       continue-on-error: true
       uses: b-on-g/mol-prerender-action@main
       with:
-        folder: 'bog/nka/app/-'
-        base-url: 'https://b-on-g.github.io/nyaftul_kitten_art/'
+        folder: 'bog/prilavok/app/-'
+        base-url: 'https://b-on-g.github.io/prilavok/'
 
 

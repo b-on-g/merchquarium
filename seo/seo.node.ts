@@ -1,6 +1,6 @@
 namespace $ {
 
-	export class $bog_nka_seo_node extends $giper_baza_app_node {
+	export class $bog_prilavok_seo_node extends $giper_baza_app_node {
 
 		@ $mol_memo.method
 		_root() {
@@ -8,11 +8,11 @@ namespace $ {
 		}
 
 		origin( msg: $mol_rest_message ) {
-			return process.env.BOG_NKA_SEO_ORIGIN?.replace( /\/$/, '' ) || msg.uri().origin
+			return process.env.BOG_PRILAVOK_SEO_ORIGIN?.replace( /\/$/, '' ) || msg.uri().origin
 		}
 
 		known( next?: string[] ) {
-			return this.$.$mol_state_local.value( 'bog_nka_seo_catalogs', next ) ?? []
+			return this.$.$mol_state_local.value( 'bog_prilavok_seo_catalogs', next ) ?? []
 		}
 
 		land_link( text: string | null ) {
@@ -32,16 +32,16 @@ namespace $ {
 			}
 		}
 
-		catalog( origin: string, link: $giper_baza_link ): $bog_nka_seo_catalog | null {
+		catalog( origin: string, link: $giper_baza_link ): $bog_prilavok_seo_catalog | null {
 
 			const land = this.$.$giper_baza_glob.Land( link ).sync()
 			if( land.encrypted() ) return null
 
-			const catalog = land.Data( $bog_nka_catalog )
+			const catalog = land.Data( $bog_prilavok_catalog )
 			if( catalog.Hidden()?.val() ) return null
 
 			const products = ( catalog.Products()?.remote_list() ?? [] )
-				.filter( product => $bog_nka_product_status( product ) !== 'hidden' )
+				.filter( product => $bog_prilavok_product_status( product ) !== 'hidden' )
 				.map( product => {
 					const photo = product.Photos()?.items()[0]
 					return {
@@ -49,7 +49,7 @@ namespace $ {
 						price: product.Price()?.val() ?? 0,
 						description: product.Description()?.val()?.trim() ?? '',
 						category: product.Category()?.val() ?? '',
-						available: $bog_nka_product_status( product ) === 'available',
+						available: $bog_prilavok_product_status( product ) === 'available',
 						cover: photo ? `${ origin }/cover?BAZA:file=${ photo }` : '',
 					}
 				} )
@@ -66,11 +66,11 @@ namespace $ {
 
 		verification() {
 			return Object.entries({
-				'google-site-verification': process.env.BOG_NKA_SEO_GOOGLE,
-				'yandex-verification': process.env.BOG_NKA_SEO_YANDEX,
+				'google-site-verification': process.env.BOG_PRILAVOK_SEO_GOOGLE,
+				'yandex-verification': process.env.BOG_PRILAVOK_SEO_YANDEX,
 			})
 				.filter( ([ , token ])=> token )
-				.map( ([ name, token ])=> `<meta name="${ name }" content="${ $bog_nka_seo_escape( token! ) }" />` )
+				.map( ([ name, token ])=> `<meta name="${ name }" content="${ $bog_prilavok_seo_escape( token! ) }" />` )
 				.join( '' )
 		}
 
@@ -92,7 +92,7 @@ namespace $ {
 					.map( link => this.catalog( origin, new $giper_baza_link( link ) ) )
 					.filter( catalog => catalog?.products.length )
 					.map( catalog => catalog!.url )
-				return msg.reply( $bog_nka_seo_sitemap( urls ), { type: 'application/xml' } )
+				return msg.reply( $bog_prilavok_seo_sitemap( urls ), { type: 'application/xml' } )
 			}
 
 			if( uri.pathname !== '/' ) return super.GET( msg )
@@ -105,7 +105,7 @@ namespace $ {
 			this.remember( link )
 
 			const catalog = this.catalog( origin, link )
-			this.html( msg, catalog ? $bog_nka_seo_page( template, catalog ) : template )
+			this.html( msg, catalog ? $bog_prilavok_seo_page( template, catalog ) : template )
 
 		}
 

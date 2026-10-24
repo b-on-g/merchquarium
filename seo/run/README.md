@@ -14,9 +14,9 @@
 Из корня MAM собрать приложение и сервер, затем сложить их в `dist` рядом с `Dockerfile`: сначала бандл приложения, поверх него бандл сервера (его `node.js` и `package.json` главнее).
 
 ```
-npx mam bog/nka/app bog/nka/seo/run
-rsync -a --delete --exclude '.baza' --exclude '*.map' --exclude '*test*' bog/nka/app/- bog/nka/seo/run/dist
-rsync -a --exclude '.baza' --exclude '*.map' bog/nka/seo/run/-/ bog/nka/seo/run/dist
+npx mam bog/prilavok/app bog/prilavok/seo/run
+rsync -a --delete --exclude '.baza' --exclude '*.map' --exclude '*test*' bog/prilavok/app/- bog/prilavok/seo/run/dist
+rsync -a --exclude '.baza' --exclude '*.map' bog/prilavok/seo/run/-/ bog/prilavok/seo/run/dist
 ```
 
 ## Запуск рядом с Базой (caddy-docker-proxy)
@@ -30,12 +30,12 @@ docker compose up -d --build
 
 Коды подтверждения Search Console и Яндекс Вебмастера (способ «мета-тег») кладутся в `.env` рядом с compose: `NKA_GOOGLE=…`, `NKA_YANDEX=…`. Узел вставит их в `<head>` главной и страниц каталогов.
 
-После запуска прописать адрес в `bog/nka/app/app.view.tree`: `seo_server \https://<NKA_DOMAIN>/`.
+После запуска прописать адрес в `bog/prilavok/app/app.view.tree`: `seo_server \https://<NKA_DOMAIN>/`.
 
 ## Локально
 
 ```
-cd bog/nka/app/-
+cd bog/prilavok/app/-
 node ../../seo/run/-/node.js port=9095
 ```
 

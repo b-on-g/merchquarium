@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	$mol_style_define( $bog_nka_counter, {
+	$mol_style_define( $bog_prilavok_counter, {
 		alignItems: 'center',
 		flex: { wrap: 'nowrap' },
 		border: {

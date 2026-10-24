@@ -1,4 +1,4 @@
-$bog_nka_settings $mol_page
+$bog_prilavok_settings $mol_page
 	title @ \Settings
 	Import_summary @ \Will add products: {products}, new categories: {categories}
 	Import_errors @ \Problems: {errors}
@@ -49,7 +49,7 @@ $bog_nka_settings $mol_page
 					value? <=> social_text? \
 				<= Links_label $mol_paragraph
 					title @ \Other socials in the header
-				<= Links $bog_nka_tags
+				<= Links $bog_prilavok_tags
 					items <= link_items /string
 					editable <= is_admin false
 					input_hint @ \vk.com/nick, youtube.com/@nick
@@ -58,7 +58,7 @@ $bog_nka_settings $mol_page
 		<= Categories_section $mol_section
 			title @ \Merch kinds
 			content /
-				<= Categories $bog_nka_tags
+				<= Categories $bog_prilavok_tags
 					items <= category_items /string
 					editable <= is_admin
 					input_hint @ \New merch kind
@@ -69,7 +69,7 @@ $bog_nka_settings $mol_page
 		<= Fandoms_section $mol_section
 			title @ \Fandoms
 			content /
-				<= Fandoms $bog_nka_tags
+				<= Fandoms $bog_prilavok_tags
 					items <= fandom_items /string
 					editable <= is_admin
 					input_hint @ \New fandom

@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $bog_nka_counter extends $.$bog_nka_counter {
+	export class $bog_prilavok_counter extends $.$bog_prilavok_counter {
 
 		content() {
 			return this.enabled() ? [ this.Minus(), this.Value(), this.Plus() ] : [ this.Value() ]

@@ -1,4 +1,10 @@
-[bog_nka_app_avatar_empty="true"]::before {
-	content: var(--bog_nka_decor);
+[bog_prilavok_app_avatar_empty="true"]::before {
+	content: var(--bog_prilavok_decor);
 	font-size: 3rem;
+}
+
+@media (max-width: 40rem) {
+	[bog_prilavok_app_avatar_empty="true"]::before {
+		font-size: 1.5rem;
+	}
 }

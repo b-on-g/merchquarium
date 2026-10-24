@@ -1,6 +1,6 @@
 namespace $ {
 
-	export type $bog_nka_import_product = {
+	export type $bog_prilavok_import_product = {
 		title: string
 		price: number
 		description: string
@@ -8,18 +8,18 @@ namespace $ {
 		available: boolean
 	}
 
-	export type $bog_nka_import_data = {
+	export type $bog_prilavok_import_data = {
 		title: string
 		categories: string[]
-		products: $bog_nka_import_product[]
+		products: $bog_prilavok_import_product[]
 		errors: string[]
 	}
 
 	const text = ( value: unknown )=> typeof value === 'string' ? value.trim() : ''
 
-	export function $bog_nka_import_parse( json: string ): $bog_nka_import_data {
+	export function $bog_prilavok_import_parse( json: string ): $bog_prilavok_import_data {
 
-		const data: $bog_nka_import_data = { title: '', categories: [], products: [], errors: [] }
+		const data: $bog_prilavok_import_data = { title: '', categories: [], products: [], errors: [] }
 		if( !json.trim() ) return data
 
 		let raw: any
@@ -72,7 +72,7 @@ namespace $ {
 		return data
 	}
 
-	export function $bog_nka_import_apply( catalog: $bog_nka_catalog, data: $bog_nka_import_data ) {
+	export function $bog_prilavok_import_apply( catalog: $bog_prilavok_catalog, data: $bog_prilavok_import_data ) {
 
 		if( data.title ) catalog.Title( 'auto' )!.val( data.title )
 
@@ -88,12 +88,12 @@ namespace $ {
 			product.Price( 'auto' )!.val( item.price )
 			product.Description( 'auto' )!.val( item.description )
 			product.Category( 'auto' )!.val( item.category )
-			$bog_nka_product_status( product, item.available ? 'available' : 'sold' )
+			$bog_prilavok_product_status( product, item.available ? 'available' : 'sold' )
 		}
 
 	}
 
-	export const $bog_nka_import_prompt = `You help an artist fill an online merch catalog.
+	export const $bog_prilavok_import_prompt = `You help an artist fill an online merch catalog.
 Ask me short questions in my language, one at a time: what products I sell, their names, prices in rubles, short descriptions, categories and whether each one is in stock.
 When you have enough, reply with JSON only, no comments, in this format:
 {

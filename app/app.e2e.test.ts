@@ -23,27 +23,35 @@ namespace $ {
 	const mlp = mark( 'МЛП' )
 	const genshin = mark( 'Genshin' )
 
-	function titles( app: $$.$bog_nka_app ) {
+	const order_url = 'https://t.me/NaftulKittenArt'
+	const links = [ 'https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art' ]
+
+	function socials( app: $$.$bog_prilavok_app ) {
+		const list = app.social_list()
+		return [ list[ 0 ], ... links.filter( link => list.includes( link ) ) ]
+	}
+
+	function titles( app: $$.$bog_prilavok_app ) {
 		return ours( app.product_cards()
-			.filter( card => card instanceof $bog_nka_product_card )
-			.map( card => ( card as $bog_nka_product_card ).title() ) )
+			.filter( card => card instanceof $bog_prilavok_product_card )
+			.map( card => ( card as $bog_prilavok_product_card ).title() ) )
 	}
 
-	function card( app: $$.$bog_nka_app, title: string ) {
-		return ( app.product_cards() as $$.$bog_nka_product_card[] ).find( card => card.title() === title )!
+	function card( app: $$.$bog_prilavok_app, title: string ) {
+		return ( app.product_cards() as $$.$bog_prilavok_product_card[] ).find( card => card.title() === title )!
 	}
 
-	function order_code( cart: $$.$bog_nka_cart ) {
+	function order_code( cart: $$.$bog_prilavok_cart ) {
 		return decodeURIComponent( /order=([^\s/&]+)/.exec( cart.message() )![ 1 ] )
 	}
 
 	let link = ''
 	let images = false
-	let artist: $$.$bog_nka_app
-	let settings: $$.$bog_nka_settings
+	let artist: $$.$bog_prilavok_app
+	let settings: $$.$bog_prilavok_settings
 	let guest_context: $
 	let guest_land: $giper_baza_land
-	let guest: $$.$bog_nka_app
+	let guest: $$.$bog_prilavok_app
 
 	function land() {
 		return artist.$.$giper_baza_glob.Land( new $giper_baza_link( link ) )
@@ -61,7 +69,7 @@ namespace $ {
 	}
 
 	function want_card( context: $, title: string ) {
-		const item = $$.$bog_nka_product_card.make({ $: context })
+		const item = $$.$bog_prilavok_product_card.make({ $: context })
 		item.product_link = ()=> card( guest, title ).product_link()
 		item.catalog_link = ()=> link
 		return item
@@ -74,26 +82,26 @@ namespace $ {
 	const scenario: Record< string, ( $: $ )=> unknown > = {
 
 		async 'e2e 01: catalog is taken from the url or created'( $ ) {
-			const context = $bog_nka_test_context( $ )
+			const context = $bog_prilavok_test_context( $ )
 			link = context.$mol_state_arg.value( 'catalog' ) ?? ''
 
-			artist = $$.$bog_nka_app.make({ $: context })
+			artist = $$.$bog_prilavok_app.make({ $: context })
 			artist.catalog_link = ( next?: string )=> {
 				if( next === undefined ) return link
 				context.$mol_state_arg.value( 'catalog', next )
 				return link = next
 			}
 			artist.focused = ( next?: boolean )=> next ?? false
-			settings = artist.Settings() as $$.$bog_nka_settings
+			settings = artist.Settings() as $$.$bog_prilavok_settings
 
 			if( !link ) {
 				await step( ()=> $mol_assert_equal( artist.content(), [ artist.Catalog_missing() ] ) )
 				await step( ()=> {
 					artist.catalog_create()
-					keep( 'bog_nka_e2e_artist', land )
+					keep( 'bog_prilavok_e2e_artist', land )
 				} )
 			} else {
-				keep( 'bog_nka_e2e_artist', land )
+				keep( 'bog_prilavok_e2e_artist', land )
 			}
 
 			await step( ()=> {
@@ -111,7 +119,7 @@ namespace $ {
 				settings.link_add( 'https://vk.com/nyaftulkittenart' )
 				settings.link_add( '@nyaftul_kitten_art' )
 
-				const kinds = settings.Categories() as $$.$bog_nka_tags
+				const kinds = settings.Categories() as $$.$bog_prilavok_tags
 				for( const kind of [ ` ${ postcard } `, keychain, keychain, badge ] ) {
 					kinds.draft( kind )
 					kinds.submit()
@@ -124,7 +132,7 @@ namespace $ {
 				$mol_assert_equal( artist.title(), 'Nyaftul Kitten Art' )
 				$mol_assert_equal( artist.style()[ '--mol_theme_hue' ], '165deg' )
 				$mol_assert_equal( settings.theme_swatch( 'mint' ).boxShadow, '0 0 0 3px var(--mol_theme_current)' )
-				$mol_assert_equal( artist.social_list().slice( 0, 3 ), [ 'https://t.me/NaftulKittenArt', 'https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art' ] )
+				$mol_assert_equal( socials( artist ), [ order_url, ... links ] )
 				$mol_assert_equal( artist.hero_sub(), [ artist.Profile(), artist.Socials() ] )
 				$mol_assert_equal( artist.social_sub( 'https://vk.com/nyaftulkittenart' ), [ artist.Icon_vk( 'https://vk.com/nyaftulkittenart' ) ] )
 				$mol_assert_equal( ours( settings.category_items() ), [ postcard, keychain, badge ] )
@@ -139,10 +147,10 @@ namespace $ {
 			} )
 
 			const keys = [ 'Avatar', 'Cover', 'Back' ] as const
-			const files = await Promise.all( keys.map( key => $bog_nka_test_image( `${ key.toLowerCase() }.png` ) ) )
+			const files = await Promise.all( keys.map( key => $bog_prilavok_test_image( `${ key.toLowerCase() }.png` ) ) )
 			if( !files[ 0 ] ) {
 				$$.$mol_log3_warn({
-					place: '$bog_nka_e2e',
+					place: '$bog_prilavok_e2e',
 					message: 'images skipped without canvas',
 					hint: 'run e2e in browser with test=1',
 				})
@@ -158,8 +166,8 @@ namespace $ {
 				for( const key of keys ) $mol_assert_equal( artist.image_url( key ).startsWith( 'blob:' ), true )
 				$mol_assert_equal( settings.image_filled( 'Cover' ), true )
 				$mol_assert_equal( artist.avatar_empty(), false )
-				$mol_assert_equal( artist.style()[ '--bog_nka_cover' ], `url("${ artist.image_url( 'Cover' ) }")` )
-				$mol_assert_equal( artist.style()[ '--bog_nka_pattern' ], `url("${ artist.image_url( 'Back' ) }")` )
+				$mol_assert_equal( artist.style()[ '--bog_prilavok_cover' ], `url("${ artist.image_url( 'Cover' ) }")` )
+				$mol_assert_equal( artist.style()[ '--bog_prilavok_pattern' ], `url("${ artist.image_url( 'Back' ) }")` )
 			} )
 
 			const doc = $mol_dom_context.document
@@ -188,7 +196,7 @@ namespace $ {
 				] as const ) {
 					const before = artist.product_cards()
 					artist.product_add()
-					const item = artist.product_cards().find( card => !before.includes( card ) ) as $$.$bog_nka_product_card
+					const item = artist.product_cards().find( card => !before.includes( card ) ) as $$.$bog_prilavok_product_card
 					$mol_assert_equal( item.changed(), true )
 					$mol_assert_equal( item.info_rows(), [ item.Title(), item.Price(), item.Description(), item.Category(), item.Fandoms() ] )
 					$mol_assert_unique( item.Admin(), null )
@@ -208,7 +216,7 @@ namespace $ {
 					$mol_assert_equal( item.status(), status )
 					$mol_assert_equal( item.product().Available()!.val(), status === 'available' )
 					$mol_assert_equal( item.cart_enabled(), status === 'available' )
-					$mol_assert_equal( item.attr().bog_nka_product_card_state, status )
+					$mol_assert_equal( item.attr().bog_prilavok_product_card_state, status )
 				}
 
 				const draft = card( artist, paimon )
@@ -281,7 +289,7 @@ namespace $ {
 
 		async 'e2e 08: used kind is removed only after confirmation'() {
 			await step( ()=> {
-				const kinds = settings.Categories() as $$.$bog_nka_tags
+				const kinds = settings.Categories() as $$.$bog_prilavok_tags
 
 				kinds.remove( decal )
 				$mol_assert_equal( kinds.confirming( decal ), true )
@@ -299,7 +307,7 @@ namespace $ {
 		},
 
 		async 'e2e 09: visitor receives the catalog'( $ ) {
-			const base = $bog_nka_test_context( $ )
+			const base = $bog_prilavok_test_context( $ )
 			const embryo = base.$giper_baza_auth.embryos[ 0 ]
 			const auth = embryo ? base.$giper_baza_auth.from( embryo ) : await base.$giper_baza_auth._generate()
 			guest_context = base.$mol_ambient({})
@@ -313,10 +321,10 @@ namespace $ {
 			Object.assign( guest_context, { $giper_baza_auth: Auth, $giper_baza_glob: Glob } )
 
 			guest_land = Glob.Land( new $giper_baza_link( link ) )
-			keep( 'bog_nka_e2e_guest', ()=> Glob.Land( new $giper_baza_link( link ) ) )
+			keep( 'bog_prilavok_e2e_guest', ()=> Glob.Land( new $giper_baza_link( link ) ) )
 			await sync_guest()
 
-			guest = $$.$bog_nka_app.make({ $: guest_context })
+			guest = $$.$bog_prilavok_app.make({ $: guest_context })
 			guest.catalog_link = ()=> link
 
 			await step( ()=> {
@@ -324,10 +332,10 @@ namespace $ {
 				$mol_assert_equal( guest.is_admin(), false )
 				$mol_assert_equal( guest.title(), 'Nyaftul Kitten Art' )
 				$mol_assert_equal( guest.style()[ '--mol_theme_hue' ], '165deg' )
-				$mol_assert_equal( guest.social_list().slice( 0, 3 ), [ 'https://t.me/NaftulKittenArt', 'https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art' ] )
+				$mol_assert_equal( socials( guest ), [ order_url, ... links ] )
 				$mol_assert_equal( guest.head(), [ guest.Hero(), guest.Product_add(), guest.Tools() ] )
 				$mol_assert_equal( guest.avatar_empty(), !images )
-				$mol_assert_equal( guest.style()[ '--bog_nka_cover' ] !== 'none', images )
+				$mol_assert_equal( guest.style()[ '--bog_prilavok_cover' ] !== 'none', images )
 			} )
 		},
 
@@ -343,7 +351,7 @@ namespace $ {
 				$mol_assert_equal( item.changed(), false )
 				$mol_assert_equal( item.Admin(), null )
 
-				const guest_settings = guest.Settings() as $$.$bog_nka_settings
+				const guest_settings = guest.Settings() as $$.$bog_prilavok_settings
 				$mol_assert_equal( guest_settings.body(), [ guest_settings.Account_section(), guest_settings.Categories_section(), guest_settings.Fandoms_section() ] )
 				$mol_assert_equal( guest_settings.Categories().content(), [ guest_settings.Categories().List() ] )
 			} )
@@ -361,7 +369,7 @@ namespace $ {
 
 		async 'e2e 12: visitor fills the cart from cards'() {
 			await step( ()=> {
-				const cart = guest.Cart() as $$.$bog_nka_cart
+				const cart = guest.Cart() as $$.$bog_prilavok_cart
 				cart.clear()
 
 				const first = card( guest, kit )
@@ -382,7 +390,7 @@ namespace $ {
 				$mol_assert_equal( cart.lines().length, 2 )
 				$mol_assert_equal( cart.total_text(), cart.Total_text().replace( '{total}', '1 100' ) )
 				$mol_assert_equal( cart.send_title(), cart.Send_title() )
-				$mol_assert_equal( $bog_nka_order_decode( link, order_code( cart ) ), {
+				$mol_assert_equal( $bog_prilavok_order_decode( link, order_code( cart ) ), {
 					[ first.product_link() ]: 2,
 					[ second.product_link() ]: 1,
 				} )
@@ -396,7 +404,7 @@ namespace $ {
 			await step( ()=> {
 				const item = card( guest, pinkie )
 				$mol_assert_equal( titles( guest ), [ kit, sticker, pinkie ] )
-				$mol_assert_equal( item.attr().bog_nka_product_card_state, 'sold' )
+				$mol_assert_equal( item.attr().bog_prilavok_product_card_state, 'sold' )
 				$mol_assert_equal( item.cover().includes( item.Sold_badge() ), true )
 				$mol_assert_equal( item.cart_controls(), [ item.Want() ] )
 				$mol_assert_equal( item.want_title(), item.Want_title() )
@@ -418,22 +426,22 @@ namespace $ {
 			} )
 
 			await step( ()=> {
-				const cart = guest.Cart() as $$.$bog_nka_cart
+				const cart = guest.Cart() as $$.$bog_prilavok_cart
 				const first = card( artist, kit )
 				const second = card( artist, pinkie )
 				$mol_assert_equal( cart.line_title( second.product_link() ), `${ pinkie } · ${ cart.Unavailable() }` )
 				$mol_assert_equal( cart.line_sum( second.product_link() ), '' )
 				$mol_assert_equal( cart.total_text(), cart.Total_text().replace( '{total}', '800' ) )
-				$mol_assert_equal( $bog_nka_order_decode( link, order_code( cart ) ), { [ first.product_link() ]: 2 } )
+				$mol_assert_equal( $bog_prilavok_order_decode( link, order_code( cart ) ), { [ first.product_link() ]: 2 } )
 			} )
 		},
 
 		async 'e2e 14: artist opens the order link'() {
 			await step( ()=> {
-				const code = order_code( guest.Cart() as $$.$bog_nka_cart )
+				const code = order_code( guest.Cart() as $$.$bog_prilavok_cart )
 				const first = card( artist, kit )
-				const order = artist.Order() as $$.$bog_nka_cart
-				order.items = ()=> $bog_nka_order_decode( link, code )
+				const order = artist.Order() as $$.$bog_prilavok_cart
+				order.items = ()=> $bog_prilavok_order_decode( link, code )
 				$mol_assert_equal( order.heading(), order.Order_title() )
 				$mol_assert_equal( order.lines().length, 1 )
 				$mol_assert_equal( order.line_sum( first.product_link() ), '800 ₽' )
@@ -446,7 +454,7 @@ namespace $ {
 			await sync_guest()
 
 			const { context, opened, copied } = mock_dom()
-			const cart = $$.$bog_nka_cart.make({ $: context })
+			const cart = $$.$bog_prilavok_cart.make({ $: context })
 			cart.catalog_link = ()=> link
 			cart.items = ()=> guest.cart()
 			const want = want_card( context, pinkie )
@@ -505,7 +513,7 @@ namespace $ {
 			await step( ()=> $mol_assert_equal( guest.catalog()!.Hidden()!.val(), false ) )
 
 			$$.$mol_log3_done({
-				place: '$bog_nka_e2e',
+				place: '$bog_prilavok_e2e',
 				message: 'e2e catalog',
 				url: artist.$.$mol_state_arg.make_link({ catalog: link }),
 			})
@@ -516,9 +524,9 @@ namespace $ {
 	$mol_test({
 
 		async 'e2e runs with test=1 in browser and only when Giper Baza responds'( $ ) {
-			if( !$bog_nka_test_allowed() ) {
+			if( !$bog_prilavok_test_allowed() ) {
 				$$.$mol_log3_warn({
-					place: '$bog_nka_e2e',
+					place: '$bog_prilavok_e2e',
 					message: 'e2e skipped in browser without test=1',
 					hint: 'add test=1 to the url',
 				})
@@ -530,7 +538,7 @@ namespace $ {
 
 			if( !alive ) {
 				$$.$mol_log3_warn({
-					place: '$bog_nka_e2e',
+					place: '$bog_prilavok_e2e',
 					message: 'Giper Baza is not responding, e2e skipped',
 					hint: master,
 				})

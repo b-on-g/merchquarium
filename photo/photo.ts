@@ -1,10 +1,10 @@
 namespace $ {
 
-	export type $bog_nka_photo_list = {
+	export type $bog_prilavok_photo_list = {
 		make( config: null ): $giper_baza_file
 	}
 
-	export class $bog_nka_photo extends $mol_object {
+	export class $bog_prilavok_photo extends $mol_object {
 
 		@ $mol_mem_key
 		source( file: File ): Blob {
@@ -28,7 +28,7 @@ namespace $ {
 		}
 
 		@ $mol_action
-		async save( files: readonly File[], list: $bog_nka_photo_list ) {
+		async save( files: readonly File[], list: $bog_prilavok_photo_list ) {
 			const prepared = await Promise.all( files.map( async file => {
 				const blob = this.picture( file ).format( 'image/webp', .82 ) as unknown as Blob | null
 				if( !blob ) return null

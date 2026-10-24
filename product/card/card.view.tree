@@ -1,4 +1,4 @@
-$bog_nka_product_card $mol_card
+$bog_prilavok_product_card $mol_card
 	product_link? \
 	catalog_link? \
 	search? \
@@ -11,11 +11,11 @@ $bog_nka_product_card $mol_card
 		click? <=> tag_select*? null
 	attr *
 		^
-		bog_nka_product_card_state <= status? \available
+		bog_prilavok_product_card_state <= status? \available
 	sub /
 		<= Cover $mol_view
 			sub <= cover /
-				<= Photos $bog_nka_carousel
+				<= Photos $bog_prilavok_carousel
 					ids <= photo_ids /string
 					url* <= photo_url* \
 				<= Photo_empty $mol_view
@@ -29,7 +29,7 @@ $bog_nka_product_card $mol_card
 					value? <=> title? \
 					hint @ \Title
 					enabled <= changed true
-				<= Price $bog_nka_number
+				<= Price $bog_prilavok_number
 					value_min 0
 					hint @ \Price
 					value? <=> price? null
@@ -60,7 +60,7 @@ $bog_nka_product_card $mol_card
 					title @ \Add to cart
 					click? <=> cart_add? null
 					enabled <= cart_enabled true
-				<= Cart_counter $bog_nka_counter
+				<= Cart_counter $bog_prilavok_counter
 					value? <=> cart_count?
 				<= Want $mol_button_minor
 					title <= want_title \

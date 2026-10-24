@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $bog_nka_button extends $.$bog_nka_button {
+	export class $bog_prilavok_button extends $.$bog_prilavok_button {
 		
 		hidden(next?: boolean) {
 			return next ?? false

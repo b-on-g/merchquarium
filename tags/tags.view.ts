@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $bog_nka_tags extends $.$bog_nka_tags {
+	export class $bog_prilavok_tags extends $.$bog_prilavok_tags {
 
 		content() {
 			return this.editable() ? [ this.Form(), this.List() ] : [ this.List() ]

@@ -1,6 +1,6 @@
 namespace $ {
 
-	export type $bog_nka_theme_preset = {
+	export type $bog_prilavok_theme_preset = {
 		hue: number
 		spread: number
 		round: string
@@ -14,7 +14,7 @@ namespace $ {
 	const rounded = 'ui-rounded, system-ui, sans-serif'
 	const serif = 'ui-serif, Georgia, serif'
 
-	export const $bog_nka_theme = {
+	export const $bog_prilavok_theme = {
 		sakura: { hue: 340, spread: 60, round: '1rem', font: rounded, pattern: 'decor', card: 'soft', photo: 'polaroid', decor: '🌸' },
 		lavender: { hue: 290, spread: 50, round: '1rem', font: rounded, pattern: 'dots', card: 'dashed', photo: 'round', decor: '🦄' },
 		mint: { hue: 165, spread: 60, round: '1rem', font: rounded, pattern: 'grid', card: 'soft', photo: 'full', decor: '🌿' },
@@ -22,17 +22,17 @@ namespace $ {
 		sky: { hue: 220, spread: 50, round: '1rem', font: rounded, pattern: 'dots', card: 'soft', photo: 'round', decor: '☁️' },
 		milk: { hue: 60, spread: 30, round: '.5rem', font: serif, pattern: 'none', card: 'outline', photo: 'polaroid', decor: '🐾' },
 		classic: { hue: 240, spread: 90, round: '.25rem', font: 'system-ui, sans-serif', pattern: 'none', card: 'soft', photo: 'full', decor: '' },
-	} satisfies Record< string, $bog_nka_theme_preset >
+	} satisfies Record< string, $bog_prilavok_theme_preset >
 
-	export type $bog_nka_theme_name = keyof typeof $bog_nka_theme
+	export type $bog_prilavok_theme_name = keyof typeof $bog_prilavok_theme
 
-	export function $bog_nka_theme_of( name: string | null | undefined ): $bog_nka_theme_preset {
-		return $bog_nka_theme[ name as $bog_nka_theme_name ] ?? $bog_nka_theme.sakura
+	export function $bog_prilavok_theme_of( name: string | null | undefined ): $bog_prilavok_theme_preset {
+		return $bog_prilavok_theme[ name as $bog_prilavok_theme_name ] ?? $bog_prilavok_theme.sakura
 	}
 
 	const tint = ( alpha: number )=> `oklch( 70% .12 var(--mol_theme_hue) / ${ alpha } )`
 
-	function pattern( preset: $bog_nka_theme_preset ) {
+	function pattern( preset: $bog_prilavok_theme_preset ) {
 		switch( preset.pattern ) {
 			case 'decor': {
 				const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><text x="8" y="28" font-size="18" opacity=".18">${ preset.decor }</text><text x="40" y="60" font-size="14" opacity=".12">${ preset.decor }</text></svg>`
@@ -60,8 +60,8 @@ namespace $ {
 		round: { inset: '.75rem', round: '50%' },
 	}
 
-	export function $bog_nka_theme_style( name: string | null | undefined ) {
-		const preset = $bog_nka_theme_of( name )
+	export function $bog_prilavok_theme_style( name: string | null | undefined ) {
+		const preset = $bog_prilavok_theme_of( name )
 		const back = pattern( preset )
 		const photo = photo_frame[ preset.photo ]
 		const border = card_border[ preset.card ]
@@ -69,19 +69,19 @@ namespace $ {
 			'--mol_theme_hue': `${ preset.hue }deg`,
 			'--mol_theme_hue_spread': `${ preset.spread }deg`,
 			'--mol_gap_round': preset.round,
-			'--bog_nka_pattern': back.image,
-			'--bog_nka_pattern_size': back.size,
-			'--bog_nka_card_border_style': border.style,
-			'--bog_nka_card_border_width': border.width,
-			'--bog_nka_photo_inset': photo.inset,
-			'--bog_nka_photo_round': photo.round,
-			'--bog_nka_decor': JSON.stringify( preset.decor ),
+			'--bog_prilavok_pattern': back.image,
+			'--bog_prilavok_pattern_size': back.size,
+			'--bog_prilavok_card_border_style': border.style,
+			'--bog_prilavok_card_border_width': border.width,
+			'--bog_prilavok_photo_inset': photo.inset,
+			'--bog_prilavok_photo_round': photo.round,
+			'--bog_prilavok_decor': JSON.stringify( preset.decor ),
 			fontFamily: preset.font,
 		}
 	}
 
-	export function $bog_nka_theme_swatch( name: string ) {
-		const { hue } = $bog_nka_theme_of( name )
+	export function $bog_prilavok_theme_swatch( name: string ) {
+		const { hue } = $bog_prilavok_theme_of( name )
 		return {
 			background: `linear-gradient( 135deg, oklch( 93% .04 ${ hue } ) 50%, oklch( 72% .15 ${ hue } ) 50% )`,
 		}

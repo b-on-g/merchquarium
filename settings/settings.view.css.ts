@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	$mol_style_define($bog_nka_settings, {
+	$mol_style_define($bog_prilavok_settings, {
 		Sales_section: {
 			Content: {
 				gap: $mol_gap.block,

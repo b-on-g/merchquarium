@@ -1,4 +1,4 @@
-$bog_nka_counter $mol_view
+$bog_prilavok_counter $mol_view
 	value? 0
 	enabled true
 	sub <= content /
