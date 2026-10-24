@@ -6224,6 +6224,172 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
+		line_height(){
+			return 24;
+		}
+		letter_width(){
+			return 7;
+		}
+		width_limit(){
+			return +Infinity;
+		}
+		row_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_paragraph extends $.$mol_paragraph {
+            maximal_width() {
+                let width = 0;
+                const letter = this.letter_width();
+                for (const kid of this.sub()) {
+                    if (!kid)
+                        continue;
+                    if (kid instanceof $mol_view) {
+                        width += kid.maximal_width();
+                    }
+                    else if (typeof kid !== 'object') {
+                        width += String(kid).length * letter;
+                    }
+                }
+                return width;
+            }
+            width_limit() {
+                return this.$.$mol_window.size().width;
+            }
+            minimal_width() {
+                return this.letter_width();
+            }
+            row_width() {
+                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
+            }
+            minimal_height() {
+                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "maximal_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "row_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "minimal_height", null);
+        $$.$mol_paragraph = $mol_paragraph;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /**
+     * Localisation in $mol framework
+     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
+     */
+    class $mol_locale extends $mol_object {
+        static lang_default() {
+            return 'en';
+        }
+        static lang(next) {
+            return this.$.$mol_state_local.value('locale', next) || $mol_dom_context.navigator.language.replace(/-.*/, '') || this.lang_default();
+        }
+        static langs_rtl() {
+            return ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'ug', 'sd'];
+        }
+        static direction() {
+            const lang = this.lang();
+            let direction;
+            try {
+                direction = new Intl.Locale(lang).getTextInfo().direction;
+            }
+            catch (e) {
+                $mol_fail_log(e);
+            }
+            return direction ?? (this.langs_rtl().includes(lang) ? 'rtl' : 'ltr');
+        }
+        static source(lang) {
+            return JSON.parse(this.$.$mol_file.relative(`web.locale=${lang}.json`).text().toString());
+        }
+        static texts(lang, next) {
+            if (next)
+                return next;
+            try {
+                return this.source(lang).valueOf();
+            }
+            catch (error) {
+                if ($mol_fail_catch(error)) {
+                    const def = this.lang_default();
+                    if (lang === def)
+                        throw error;
+                }
+            }
+            return {};
+        }
+        static text(key) {
+            const lang = this.lang();
+            const target = this.texts(lang)[key];
+            if (target)
+                return target;
+            this.warn(key);
+            const en = this.texts('en')[key];
+            if (!en)
+                return key;
+            return en;
+        }
+        static warn(key) {
+            console.warn(`Not translated to "${this.lang()}": ${key}`);
+            return null;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "lang_default", null);
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "lang", null);
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "direction", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "source", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "texts", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "text", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "warn", null);
+    $.$mol_locale = $mol_locale;
+})($ || ($ = {}));
+
+;
 	($.$mol_speck) = class $mol_speck extends ($.$mol_view) {
 		value(){
 			return null;
@@ -6528,93 +6694,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-"use strict";
-var $;
-(function ($) {
-    /**
-     * Localisation in $mol framework
-     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
-     */
-    class $mol_locale extends $mol_object {
-        static lang_default() {
-            return 'en';
-        }
-        static lang(next) {
-            return this.$.$mol_state_local.value('locale', next) || $mol_dom_context.navigator.language.replace(/-.*/, '') || this.lang_default();
-        }
-        static langs_rtl() {
-            return ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'ug', 'sd'];
-        }
-        static direction() {
-            const lang = this.lang();
-            let direction;
-            try {
-                direction = new Intl.Locale(lang).getTextInfo().direction;
-            }
-            catch (e) {
-                $mol_fail_log(e);
-            }
-            return direction ?? (this.langs_rtl().includes(lang) ? 'rtl' : 'ltr');
-        }
-        static source(lang) {
-            return JSON.parse(this.$.$mol_file.relative(`web.locale=${lang}.json`).text().toString());
-        }
-        static texts(lang, next) {
-            if (next)
-                return next;
-            try {
-                return this.source(lang).valueOf();
-            }
-            catch (error) {
-                if ($mol_fail_catch(error)) {
-                    const def = this.lang_default();
-                    if (lang === def)
-                        throw error;
-                }
-            }
-            return {};
-        }
-        static text(key) {
-            const lang = this.lang();
-            const target = this.texts(lang)[key];
-            if (target)
-                return target;
-            this.warn(key);
-            const en = this.texts('en')[key];
-            if (!en)
-                return key;
-            return en;
-        }
-        static warn(key) {
-            console.warn(`Not translated to "${this.lang()}": ${key}`);
-            return null;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang_default", null);
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang", null);
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "direction", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "source", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "texts", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "text", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "warn", null);
-    $.$mol_locale = $mol_locale;
-})($ || ($ = {}));
-
-;
 	($.$mol_icon_basket) = class $mol_icon_basket extends ($.$mol_icon) {
 		path(){
 			return "M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z";
@@ -6839,85 +6918,6 @@ var $;
 ;
 "use strict";
 
-
-;
-	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
-		line_height(){
-			return 24;
-		}
-		letter_width(){
-			return 7;
-		}
-		width_limit(){
-			return +Infinity;
-		}
-		row_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.title())];
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_paragraph extends $.$mol_paragraph {
-            maximal_width() {
-                let width = 0;
-                const letter = this.letter_width();
-                for (const kid of this.sub()) {
-                    if (!kid)
-                        continue;
-                    if (kid instanceof $mol_view) {
-                        width += kid.maximal_width();
-                    }
-                    else if (typeof kid !== 'object') {
-                        width += String(kid).length * letter;
-                    }
-                }
-                return width;
-            }
-            width_limit() {
-                return this.$.$mol_window.size().width;
-            }
-            minimal_width() {
-                return this.letter_width();
-            }
-            row_width() {
-                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
-            }
-            minimal_height() {
-                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "maximal_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "row_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "minimal_height", null);
-        $$.$mol_paragraph = $mol_paragraph;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
 
 ;
 	($.$mol_ghost) = class $mol_ghost extends ($.$mol_view) {
@@ -9042,6 +9042,39 @@ var $;
 (function ($) {
     $mol_style_attach("mol/select/select.view.css", "[mol_select] {\n\tdisplay: flex;\n\tword-break: normal;\n\talign-self: flex-start;\n}\n\n[mol_select_option_row] {\n\tmin-width: 100%;\n\tpadding: 0;\n\tjustify-content: flex-start;\n}\n\n[mol_select_filter] {\n\tflex: 1 0 auto;\n\talign-self: stretch;\n}\n\n[mol_select_option_label] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: start;\n\tmin-height: 1.5em;\n\tdisplay: block;\n\twhite-space: nowrap;\n}\n\n[mol_select_clear_option_content] {\n\tpadding: .5em 1rem .5rem 0;\n\ttext-align: start;\n\tbox-shadow: var(--mol_theme_line);\n\tflex: 1 0 auto;\n}\n\n[mol_select_no_options] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: start;\n\tdisplay: block;\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_select_trigger] {\n\tpadding: 0;\n\tflex: 1 1 auto;\n\tdisplay: flex;\n}\n\n[mol_select_trigger] > * {\n\tmargin-inline-end: -1rem;\n}\n\n[mol_select_trigger] > *:last-child {\n\tmargin-inline-end: 0;\n}\n\n[mol_select_menu] {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n");
 })($ || ($ = {}));
+
+;
+	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
+		path(){
+			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
+		Icon(){
+			const obj = new this.$.$mol_icon_tick();
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_check_box.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
 
 ;
 	($.$bog_nka_gallery) = class $bog_nka_gallery extends ($.$mol_view) {
@@ -19437,39 +19470,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
-		path(){
-			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
-		Icon(){
-			const obj = new this.$.$mol_icon_tick();
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_check_box.prototype), "Icon"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
 	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
 
 
@@ -21638,9 +21638,22 @@ var $;
         Category: $giper_baza_atom_text,
         Fandoms: $giper_baza_list_str,
         Available: $giper_baza_atom_bool,
+        Status: $giper_baza_atom_text,
     }) {
     }
     $.$bog_nka_product = $bog_nka_product;
+    function $bog_nka_product_status(product, next) {
+        if (next === undefined) {
+            const status = product.Status()?.val();
+            if (status === 'available' || status === 'sold' || status === 'hidden')
+                return status;
+            return product.Available()?.val() ? 'available' : 'hidden';
+        }
+        product.Status('auto').val(next);
+        product.Available('auto').val(next === 'available');
+        return next;
+    }
+    $.$bog_nka_product_status = $bog_nka_product_status;
 })($ || ($ = {}));
 
 ;
@@ -21977,7 +21990,7 @@ var $;
             product.Price('auto').val(item.price);
             product.Description('auto').val(item.description);
             product.Category('auto').val(item.category);
-            product.Available('auto').val(item.available);
+            $bog_nka_product_status(product, item.available ? 'available' : 'sold');
         }
     }
     $.$bog_nka_import_apply = $bog_nka_import_apply;
@@ -22143,7 +22156,7 @@ var $;
             }
             products_available() {
                 return (this.catalog()?.Products()?.remote_list() ?? [])
-                    .filter(product => product.Available()?.val())
+                    .filter(product => $bog_nka_product_status(product) === 'available')
                     .length;
             }
             debug_info() {
@@ -22808,6 +22821,16 @@ var $;
         return 'web';
     }
     $.$bog_nka_social_kind = $bog_nka_social_kind;
+    function $bog_nka_social_name(url) {
+        return {
+            telegram: 'Telegram',
+            vk: 'VK',
+            youtube: 'YouTube',
+            instagram: 'Instagram',
+            web: url.hostname.replace(/^www\./, ''),
+        }[$bog_nka_social_kind(url)];
+    }
+    $.$bog_nka_social_name = $bog_nka_social_name;
 })($ || ($ = {}));
 
 ;
@@ -22871,7 +22894,7 @@ var $;
             }
             available(link) {
                 const product = this.product(link);
-                return Boolean(product.Title()?.val()) && Boolean(product.Available()?.val());
+                return Boolean(product.Title()?.val()) && $bog_nka_product_status(product) === 'available';
             }
             price(link) {
                 return this.product(link).Price()?.val() ?? 0;
@@ -22940,15 +22963,7 @@ var $;
             }
             social_name() {
                 const url = this.social_url();
-                if (!url)
-                    return '';
-                return {
-                    telegram: 'Telegram',
-                    vk: 'VK',
-                    youtube: 'YouTube',
-                    instagram: 'Instagram',
-                    web: url.hostname.replace(/^www\./, ''),
-                }[$bog_nka_social_kind(url)];
+                return url ? $bog_nka_social_name(url) : '';
             }
             order_link() {
                 const items = Object.fromEntries(this.ordered().map(link => [link, this.count(link)]));
@@ -24215,6 +24230,204 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
+		option_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		option_title(id){
+			return "";
+		}
+		option_label(id){
+			return [(this.option_title(id))];
+		}
+		enabled(){
+			return true;
+		}
+		option_enabled(id){
+			return (this.enabled());
+		}
+		option_hint(id){
+			return "";
+		}
+		items(){
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		Option(id){
+			const obj = new this.$.$mol_check();
+			(obj.checked) = (next) => ((this.option_checked(id, next)));
+			(obj.label) = () => ((this.option_label(id)));
+			(obj.enabled) = () => ((this.option_enabled(id)));
+			(obj.hint) = () => ((this.option_hint(id)));
+			(obj.minimal_height) = () => (24);
+			return obj;
+		}
+		options(){
+			return {};
+		}
+		keys(){
+			return [];
+		}
+		sub(){
+			return (this.items());
+		}
+	};
+	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
+	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * List of checkboxes
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
+         */
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key] || key;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_switch.prototype), "value"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_state_session extends $mol_object {
+        static 'native()';
+        static native() {
+            if (this['native()'])
+                return this['native()'];
+            check: try {
+                const native = $mol_dom_context.sessionStorage;
+                if (!native)
+                    break check;
+                native.setItem('', '');
+                native.removeItem('');
+                return this['native()'] = native;
+            }
+            catch (error) {
+                console.warn(error);
+            }
+            return this['native()'] = {
+                getItem(key) {
+                    return this[':' + key];
+                },
+                setItem(key, value) {
+                    this[':' + key] = value;
+                },
+                removeItem(key) {
+                    this[':' + key] = void 0;
+                }
+            };
+        }
+        static value(key, next) {
+            if (next === void 0)
+                return JSON.parse(this.native().getItem(key) || 'null');
+            if (next === null)
+                this.native().removeItem(key);
+            else
+                this.native().setItem(key, JSON.stringify(next));
+            return next;
+        }
+        prefix() { return ''; }
+        value(key, next) {
+            return $mol_state_session.value(this.prefix() + '.' + key, next);
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_session, "value", null);
+    $.$mol_state_session = $mol_state_session;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Buttons which switching the state
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
+         */
+        class $mol_switch extends $.$mol_switch {
+            value(next) {
+                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+            }
+            option_checked(key, next) {
+                if (next === undefined)
+                    return this.value() == key;
+                this.value(next ? key : '');
+                return next;
+            }
+        }
+        $$.$mol_switch = $mol_switch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
 		tag_title(id){
 			return "";
@@ -24222,6 +24435,10 @@ var $;
 		tag_select(id, next){
 			if(next !== undefined) return next;
 			return null;
+		}
+		status(next){
+			if(next !== undefined) return next;
+			return "available";
 		}
 		photo_ids(){
 			return [];
@@ -24244,8 +24461,17 @@ var $;
 			(obj.sub) = () => ([(this.Photo_empty_icon())]);
 			return obj;
 		}
+		Sold_badge(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Sold_badge_title")));
+			return obj;
+		}
 		cover(){
-			return [(this.Photos()), (this.Photo_empty())];
+			return [
+				(this.Photos()), 
+				(this.Photo_empty()), 
+				(this.Sold_badge())
+			];
 		}
 		Cover(){
 			const obj = new this.$.$mol_view();
@@ -24375,8 +24601,29 @@ var $;
 			(obj.value) = (next) => ((this.cart_count(next)));
 			return obj;
 		}
+		want_title(){
+			return "";
+		}
+		want(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		want_enabled(){
+			return true;
+		}
+		Want(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.want_title()));
+			(obj.click) = (next) => ((this.want(next)));
+			(obj.enabled) = () => ((this.want_enabled()));
+			return obj;
+		}
 		cart_controls(){
-			return [(this.Cart_add()), (this.Cart_counter())];
+			return [
+				(this.Cart_add()), 
+				(this.Cart_counter()), 
+				(this.Want())
+			];
 		}
 		Cart_controls(){
 			const obj = new this.$.$mol_view();
@@ -24408,14 +24655,14 @@ var $;
 			(obj.enabled) = () => ((this.photo_delete_enabled()));
 			return obj;
 		}
-		available(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		Available(){
-			const obj = new this.$.$mol_check_box();
-			(obj.checked) = (next) => ((this.available(next)));
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Available_title")));
+		Status(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.status(next)));
+			(obj.options) = () => ({
+				"available": (this.$.$mol_locale.text("$bog_nka_product_card_Status_options_available")), 
+				"sold": (this.$.$mol_locale.text("$bog_nka_product_card_Status_options_sold")), 
+				"hidden": (this.$.$mol_locale.text("$bog_nka_product_card_Status_options_hidden"))
+			});
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
@@ -24434,7 +24681,7 @@ var $;
 			(obj.sub) = () => ([
 				(this.Photos_add()), 
 				(this.Photos_delete()), 
-				(this.Available()), 
+				(this.Status()), 
 				(this.Delete())
 			]);
 			return obj;
@@ -24455,11 +24702,23 @@ var $;
 			if(next !== undefined) return next;
 			return 0;
 		}
+		Want_message(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Want_message"));
+		}
+		Want_title(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Want_title"));
+		}
+		Want_copied_title(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Want_copied_title"));
+		}
 		Tag(id){
 			const obj = new this.$.$mol_button_minor();
 			(obj.title) = () => ((this.tag_title(id)));
 			(obj.click) = (next) => ((this.tag_select(id, next)));
 			return obj;
+		}
+		attr(){
+			return {...(super.attr()), "bog_nka_product_card_state": (this.status())};
 		}
 		sub(){
 			return [
@@ -24471,9 +24730,11 @@ var $;
 		}
 	};
 	($mol_mem_key(($.$bog_nka_product_card.prototype), "tag_select"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "status"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty_icon"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Sold_badge"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cover"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "title"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Title"));
@@ -24491,13 +24752,14 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "cart_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_counter"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "want"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Want"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_controls"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photo_delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_delete"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Status"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Admin"));
@@ -24588,15 +24850,14 @@ var $;
                 descr.val(next);
                 return next;
             }
-            available(next) {
+            status(next) {
                 const product = this.product();
-                if (next === undefined)
-                    return product.Available()?.val() ?? false;
-                const atom = product.Available(null);
-                if (!atom)
-                    return false;
-                atom.val(next);
-                return next;
+                if (next === 'available' || next === 'sold' || next === 'hidden')
+                    return $bog_nka_product_status(product, next);
+                return $bog_nka_product_status(product);
+            }
+            sold() {
+                return this.status() === 'sold';
             }
             catalog() {
                 const link = this.catalog_link();
@@ -24620,17 +24881,57 @@ var $;
                 return next;
             }
             cart_controls() {
+                if (this.sold())
+                    return [this.Want()];
                 return [this.cart_count() > 0 ? this.Cart_counter() : this.Cart_add()];
             }
             cart_enabled() {
-                return this.available() && Boolean(this.title());
+                return this.status() === 'available' && Boolean(this.title());
+            }
+            social_url() {
+                return $bog_nka_social_url(this.catalog()?.Social()?.val() ?? '');
+            }
+            want_enabled() {
+                return Boolean(this.social_url());
+            }
+            want_message() {
+                return this.Want_message()
+                    .replace('{title}', this.title())
+                    .replace('{link}', this.$.$mol_state_arg.make_link({ catalog: this.catalog_link() }));
+            }
+            want_copied(next) {
+                return next ?? false;
+            }
+            want_title() {
+                const url = this.social_url();
+                if (!url || !this.want_copied())
+                    return this.Want_title();
+                return this.Want_copied_title().replace('{social}', $bog_nka_social_name(url));
+            }
+            want() {
+                const url = this.social_url();
+                if (!url)
+                    return;
+                const text = this.want_message();
+                if ($bog_nka_social_kind(url) === 'telegram') {
+                    url.search = `?text=${encodeURIComponent(text)}`;
+                }
+                else if (!this.want_copied()) {
+                    this.$.$mol_dom_context.navigator.clipboard?.writeText(text).catch(() => { });
+                    this.want_copied(true);
+                    return;
+                }
+                this.$.$mol_dom_context.open(url.toString(), '_blank');
             }
             cart_add() {
                 if (this.cart_enabled())
                     this.cart_count(1);
             }
             cover() {
-                return [this.photo_ids().length ? this.Photos() : this.Photo_empty()];
+                return [
+                    this.photo_ids().length ? this.Photos() : this.Photo_empty(),
+                    ...this.sold() ? [this.Sold_badge()] : [],
+                ];
             }
             info_rows() {
                 if (this.changed())
@@ -24682,6 +24983,12 @@ var $;
             $mol_action
         ], $bog_nka_product_card.prototype, "photo_delete", null);
         __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "want_copied", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_product_card.prototype, "want", null);
+        __decorate([
             $mol_action
         ], $bog_nka_product_card.prototype, "cart_add", null);
         __decorate([
@@ -24711,9 +25018,55 @@ var $;
             padding: {
                 bottom: $mol_gap.block,
             },
+            '@': {
+                bog_nka_product_card_state: {
+                    sold: {
+                        Photos: {
+                            filter: 'grayscale(1)',
+                            opacity: .6,
+                        },
+                        Photo_empty: {
+                            opacity: .6,
+                        },
+                        Info: {
+                            opacity: .6,
+                        },
+                    },
+                    hidden: {
+                        opacity: .5,
+                        border: {
+                            style: 'dashed',
+                        },
+                    },
+                },
+            },
             Cover: {
                 display: 'block',
+                position: 'relative',
                 padding: $mol_style_func.vary('--bog_nka_photo_inset'),
+            },
+            Sold_badge: {
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: '1rem',
+                justifyContent: 'center',
+                margin: {
+                    left: 'auto',
+                    right: 'auto',
+                },
+                width: 'fit-content',
+                padding: $mol_gap.text,
+                color: $mol_theme.back,
+                background: {
+                    color: $mol_theme.text,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                font: {
+                    weight: 'bold',
+                },
             },
             Photos: {
                 Image: {
@@ -24936,6 +25289,54 @@ var $;
 			(obj.action) = () => ({"ctrl_Z": (next) => (this.undo_last(next))});
 			return obj;
 		}
+		avatar_style(){
+			return {};
+		}
+		avatar_empty(){
+			return true;
+		}
+		Avatar(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ((this.avatar_style()));
+			(obj.attr) = () => ({"bog_nka_app_avatar_empty": (this.avatar_empty())});
+			return obj;
+		}
+		Nick(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.title()));
+			return obj;
+		}
+		Profile(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Avatar()), (this.Nick())]);
+			return obj;
+		}
+		Socials_label(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Socials_label_title")));
+			return obj;
+		}
+		socials(){
+			return [];
+		}
+		Socials_list(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.socials()));
+			return obj;
+		}
+		Socials(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Socials_label()), (this.Socials_list())]);
+			return obj;
+		}
+		hero_sub(){
+			return [(this.Profile()), (this.Socials())];
+		}
+		Hero(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.hero_sub()));
+			return obj;
+		}
 		product_add(next){
 			if(next !== undefined) return next;
 			return null;
@@ -25022,54 +25423,6 @@ var $;
 			(obj.sub) = () => ([(this.Catalog_missing_text()), (this.Catalog_create())]);
 			return obj;
 		}
-		avatar_style(){
-			return {};
-		}
-		avatar_empty(){
-			return true;
-		}
-		Avatar(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ((this.avatar_style()));
-			(obj.attr) = () => ({"bog_nka_app_avatar_empty": (this.avatar_empty())});
-			return obj;
-		}
-		Nick(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.title()));
-			return obj;
-		}
-		Profile(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Avatar()), (this.Nick())]);
-			return obj;
-		}
-		Socials_label(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Socials_label_title")));
-			return obj;
-		}
-		socials(){
-			return [];
-		}
-		Socials_list(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.socials()));
-			return obj;
-		}
-		Socials(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Socials_label()), (this.Socials_list())]);
-			return obj;
-		}
-		hero_sub(){
-			return [(this.Profile()), (this.Socials())];
-		}
-		Hero(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.hero_sub()));
-			return obj;
-		}
 		kind_options(){
 			return {};
 		}
@@ -25096,6 +25449,16 @@ var $;
 			(obj.value) = (next) => ((this.fandom_filter(next)));
 			return obj;
 		}
+		in_stock_only(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		In_stock(){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_In_stock_title")));
+			(obj.checked) = (next) => ((this.in_stock_only(next)));
+			return obj;
+		}
 		Search(){
 			const obj = new this.$.$mol_search();
 			(obj.query) = (next) => ((this.search(next)));
@@ -25105,6 +25468,7 @@ var $;
 			return [
 				(this.Kind_filter()), 
 				(this.Fandom_filter()), 
+				(this.In_stock()), 
 				(this.Search())
 			];
 		}
@@ -25128,7 +25492,6 @@ var $;
 		}
 		catalog_rows(){
 			return [
-				(this.Hero()), 
 				(this.Filters()), 
 				(this.Product_cards()), 
 				(this.Catalog_empty())
@@ -25249,6 +25612,7 @@ var $;
 		}
 		head(){
 			return [
+				(this.Hero()), 
 				(this.Title()), 
 				(this.Product_add()), 
 				(this.Tools())
@@ -25274,6 +25638,13 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Ico"));
 	($mol_mem(($.$bog_nka_app.prototype), "undo_last"));
 	($mol_mem(($.$bog_nka_app.prototype), "Undo_hotkey"));
+	($mol_mem(($.$bog_nka_app.prototype), "Avatar"));
+	($mol_mem(($.$bog_nka_app.prototype), "Nick"));
+	($mol_mem(($.$bog_nka_app.prototype), "Profile"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials_label"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials_list"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials"));
+	($mol_mem(($.$bog_nka_app.prototype), "Hero"));
 	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "cart_toggle"));
@@ -25289,17 +25660,12 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_missing"));
-	($mol_mem(($.$bog_nka_app.prototype), "Avatar"));
-	($mol_mem(($.$bog_nka_app.prototype), "Nick"));
-	($mol_mem(($.$bog_nka_app.prototype), "Profile"));
-	($mol_mem(($.$bog_nka_app.prototype), "Socials_label"));
-	($mol_mem(($.$bog_nka_app.prototype), "Socials_list"));
-	($mol_mem(($.$bog_nka_app.prototype), "Socials"));
-	($mol_mem(($.$bog_nka_app.prototype), "Hero"));
 	($mol_mem(($.$bog_nka_app.prototype), "category_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Kind_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "fandom_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Fandom_filter"));
+	($mol_mem(($.$bog_nka_app.prototype), "in_stock_only"));
+	($mol_mem(($.$bog_nka_app.prototype), "In_stock"));
 	($mol_mem(($.$bog_nka_app.prototype), "Search"));
 	($mol_mem(($.$bog_nka_app.prototype), "Filters"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_cards"));
@@ -25604,8 +25970,8 @@ var $;
             }
             head() {
                 if (this.settings_open() || !this.catalog_link())
-                    return super.head();
-                return [this.Product_add(), this.Tools()];
+                    return [this.Title(), this.Product_add(), this.Tools()];
+                return [this.Hero(), this.Product_add(), this.Tools()];
             }
             avatar_empty() {
                 return !this.image_url('Avatar');
@@ -25643,6 +26009,7 @@ var $;
                 return [
                     ...Object.keys(this.kind_options()).length > 1 ? [this.Kind_filter()] : [],
                     ...Object.keys(this.fandom_options()).length > 1 ? [this.Fandom_filter()] : [],
+                    ...this.visible_products().some(product => $bog_nka_product_status(product) === 'sold') ? [this.In_stock()] : [],
                     this.Search(),
                 ];
             }
@@ -25654,7 +26021,6 @@ var $;
             }
             catalog_rows() {
                 return [
-                    this.Hero(),
                     ...this.visible_products().length ? [this.Filters()] : [],
                     this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
                 ];
@@ -25705,7 +26071,7 @@ var $;
             }
             visible_products() {
                 return (this.catalog()?.Products()?.remote_list() ?? [])
-                    .filter(product => product.can_change() || product.Available()?.val());
+                    .filter(product => product.can_change() || $bog_nka_product_status(product) !== 'hidden');
             }
             filter_fandoms() {
                 const fandoms = this.is_admin()
@@ -25754,14 +26120,21 @@ var $;
                         order.push(link);
                 }
                 const cards = [];
+                const sold = [];
                 for (const link of order) {
                     const product = by_link.get(link);
                     if (product) {
-                        if (!product.can_change() && !product.Available()?.val())
+                        const status = $bog_nka_product_status(product);
+                        if (!product.can_change() && status === 'hidden')
+                            continue;
+                        if (this.in_stock_only() && status !== 'available')
                             continue;
                         if (!this.product_match(product))
                             continue;
-                        cards.push(this.Product_card(link));
+                        if (status === 'sold')
+                            sold.push(this.Product_card(link));
+                        else
+                            cards.push(this.Product_card(link));
                         continue;
                     }
                     if (!this.is_admin() || !deleted.has(link))
@@ -25771,7 +26144,7 @@ var $;
                         continue;
                     cards.push(this.Product_undo(link));
                 }
-                return cards;
+                return [...cards, ...sold];
             }
             deleted_products(catalog_link, next) {
                 if (!catalog_link)
@@ -25943,25 +26316,25 @@ var $;
                     weight: 'bold',
                 },
             },
-            Hero: {
-                flex: { wrap: 'wrap' },
-                alignItems: 'center',
-                gap: $mol_gap.block,
-                padding: $mol_gap.block,
-                minHeight: '10rem',
+            Head: {
+                alignItems: 'flex-start',
                 background: {
                     image: $mol_style_func.vary('--bog_nka_cover'),
                     size: ['cover'],
                     position: 'center',
                 },
-                border: {
-                    radius: $mol_gap.round,
-                },
+            },
+            Hero: {
+                flex: { wrap: 'wrap', grow: 1 },
+                alignItems: 'center',
+                gap: $mol_gap.block,
+                padding: $mol_gap.block,
+                minHeight: '10rem',
             },
             Profile: {
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: $mol_gap.space,
+                gap: $mol_gap.block,
             },
             Avatar: {
                 width: '7rem',
@@ -25988,12 +26361,6 @@ var $;
                     bottom: 0,
                     left: $mol_gap.text,
                     right: $mol_gap.text,
-                },
-                background: {
-                    color: $mol_theme.back,
-                },
-                border: {
-                    radius: $mol_gap.round,
                 },
             },
             Socials: {
@@ -29249,6 +29616,27 @@ var $;
 "use strict";
 var $;
 (function ($_1) {
+    $mol_test_mocks.push($ => {
+        class $mol_locale_mock extends $mol_locale {
+            lang(next = 'en') { return next; }
+            static source(lang) {
+                return {};
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_locale_mock.prototype, "lang", null);
+        __decorate([
+            $mol_mem_key
+        ], $mol_locale_mock, "source", null);
+        $.$mol_locale = $mol_locale_mock;
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
     var $$;
     (function ($$) {
         $mol_test({
@@ -29289,27 +29677,6 @@ var $;
             },
         });
     })($$ = $_1.$$ || ($_1.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($_1) {
-    $mol_test_mocks.push($ => {
-        class $mol_locale_mock extends $mol_locale {
-            lang(next = 'en') { return next; }
-            static source(lang) {
-                return {};
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_locale_mock.prototype, "lang", null);
-        __decorate([
-            $mol_mem_key
-        ], $mol_locale_mock, "source", null);
-        $.$mol_locale = $mol_locale_mock;
-    });
 })($ || ($ = {}));
 
 ;
@@ -33037,7 +33404,7 @@ var $;
 ;
 "use strict";
 var $;
-(function ($_1) {
+(function ($) {
     $mol_test({
         'Import parses products and collects categories'() {
             const data = $bog_nka_import_parse(JSON.stringify({
@@ -33066,21 +33433,6 @@ var $;
             const data = $bog_nka_import_parse('{ "products": [ { "price": 5 } ] }');
             $mol_assert_equal(data.products.length, 0);
             $mol_assert_equal(data.errors, ['Product 1 has no title']);
-        },
-        'Import creates products in catalog'($) {
-            const land = $giper_baza_land.make({ $ });
-            const catalog = land.Data($bog_nka_catalog);
-            $bog_nka_import_apply(catalog, $bog_nka_import_parse(JSON.stringify({
-                title: 'Kitten',
-                products: [{ title: 'Mat', price: 1200, category: 'Mats', description: 'Soft' }],
-            })));
-            const [link] = catalog.Products().items();
-            const product = land.Pawn($bog_nka_product).Head(link.head());
-            $mol_assert_equal(catalog.Title().val(), 'Kitten');
-            $mol_assert_equal(catalog.Categories().items(), ['Mats']);
-            $mol_assert_equal(product.Title().val(), 'Mat');
-            $mol_assert_equal(product.Price().val(), 1200);
-            $mol_assert_equal(product.Available().val(), true);
         },
     });
 })($ || ($ = {}));
@@ -33140,6 +33492,25 @@ var $;
 ;
 "use strict";
 var $;
+(function ($) {
+    $mol_test({
+        'null by default'() {
+            const key = String(Math.random());
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+        'storing'() {
+            const key = String(Math.random());
+            $mol_state_session.value(key, '$mol_state_session_test');
+            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
+            $mol_state_session.value(key, null);
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
 (function ($_1) {
     var $$;
     (function ($$) {
@@ -33149,6 +33520,24 @@ var $;
             },
         });
     })($$ = $_1.$$ || ($_1.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
+    function $bog_nka_test_allowed() {
+        return true;
+    }
+    $_1.$bog_nka_test_allowed = $bog_nka_test_allowed;
+    function $bog_nka_test_context($) {
+        return $;
+    }
+    $_1.$bog_nka_test_context = $bog_nka_test_context;
+    async function $bog_nka_test_image(name) {
+        return null;
+    }
+    $_1.$bog_nka_test_image = $bog_nka_test_image;
 })($ || ($ = {}));
 
 ;
@@ -33233,399 +33622,468 @@ var $;
 "use strict";
 var $;
 (function ($_1) {
-    $mol_test({
-        'products go to cart from cards and come back from the order link': $mol_wire_async(($) => {
-            const land = $.$giper_baza_glob.land_grab();
-            const catalog = land.Data($bog_nka_catalog);
-            catalog.Social(null).val('@kitten_art');
-            for (const [title, price, available] of [
-                ['Открытка Кит', 400, true],
-                ['Брелок Пинки', 300, true],
-                ['Значок Паймон', 200, false],
-            ]) {
-                const product = catalog.Products(null).make(null);
-                product.Title(null).val(title);
-                product.Price(null).val(price);
-                product.Available(null).val(available);
-            }
-            const app = $bog_nka_app.make({ $ });
-            app.catalog_link = () => land.link().str;
-            const [kit, pinkie, paimon] = app.product_cards();
-            kit.cart_add();
-            kit.Cart_counter().inc();
-            pinkie.cart_add();
-            paimon.cart_add();
-            $mol_assert_equal(kit.cart_count(), 2);
-            $mol_assert_equal(paimon.cart_count(), 0);
-            $mol_assert_equal(app.cart_size_text(), '3');
-            const cart = app.Cart();
-            $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '1 100'));
-            const code = /order=([^\s/&]+)/.exec(cart.message())[1];
-            $mol_assert_equal($bog_nka_order_decode(land.link().str, decodeURIComponent(code)), {
-                [kit.product_link()]: 2,
-                [pinkie.product_link()]: 1,
-            });
-            pinkie.Cart_counter().dec();
-            $mol_assert_equal(app.cart_size_text(), '2');
-            $mol_assert_equal(pinkie.cart_controls(), [pinkie.Cart_add()]);
-            pinkie.cart_add();
-            pinkie.available(false);
-            $mol_assert_equal(cart.line_title(pinkie.product_link()), `Брелок Пинки · ${cart.Unavailable()}`);
-            $mol_assert_equal(cart.line_sum(pinkie.product_link()), '');
-            $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '800'));
-            const sold = /order=([^\s/&]+)/.exec(cart.message())[1];
-            $mol_assert_equal($bog_nka_order_decode(land.link().str, decodeURIComponent(sold)), { [kit.product_link()]: 2 });
-        }),
-        'non telegram social copies the order first and opens on the second press': $mol_wire_async(($) => {
-            const land = $.$giper_baza_glob.land_grab();
-            const catalog = land.Data($bog_nka_catalog);
-            catalog.Social(null).val('vk.com/kitten');
-            const product = catalog.Products(null).make(null);
-            product.Title(null).val('Открытка Кит');
-            product.Available(null).val(true);
-            const opened = [];
-            const copied = [];
-            const context = Object.create($.$mol_dom_context);
-            Object.defineProperties(context, {
-                open: { value: (url) => opened.push(url) },
-                navigator: { value: { clipboard: { writeText: async (text) => { copied.push(text); } } } },
-            });
-            const cart = $$.$bog_nka_cart.make({ $: $.$mol_ambient({ $mol_dom_context: context }) });
-            cart.catalog_link = () => land.link().str;
-            cart.items = () => ({ [product.link().str]: 1 });
-            $mol_assert_equal(cart.send_title(), cart.Copy_title());
-            cart.send();
-            $mol_assert_equal(copied, [cart.message()]);
-            $mol_assert_equal(opened, []);
-            $mol_assert_equal(cart.send_title(), cart.Copied_title().replace('{social}', 'VK'));
-            cart.send();
-            $mol_assert_equal(opened, ['https://vk.com/kitten']);
-        }),
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($_1) {
-    function artist($) {
-        const land = $.$giper_baza_glob.land_grab();
-        new $mol_wire_atom('bog_nka_test_artist', () => $.$giper_baza_glob.Land(land.link())).fresh();
-        const app = $$.$bog_nka_app.make({ $ });
-        app.catalog_link = () => land.link().str;
-        return { land, app, settings: app.Settings() };
-    }
-    function titles(app) {
-        return app.product_cards().map(card => card.title());
-    }
-    $mol_test({
-        async 'empty page offers to create a catalog and opens it'($) {
-            const app = $$.$bog_nka_app.make({ $ });
-            let link = '';
-            app.catalog_link = (next) => next === undefined ? link : link = next;
-            $mol_assert_equal(app.content(), [app.Catalog_missing()]);
-            await $mol_wire_async(app).catalog_create();
-            $mol_assert_equal(link.length > 0, true);
-            $mol_assert_equal(app.content(), [app.Catalog_selected()]);
-        },
-        'artist adds a product and edits it on the card': $mol_wire_async(($) => {
-            const { app, settings } = artist($);
-            settings.category_add('Брелок');
-            settings.fandom_add('МЛП');
-            app.product_add();
-            const card = app.product_cards()[0];
-            $mol_assert_equal(card.changed(), true);
-            $mol_assert_equal(card.info_rows(), [card.Title(), card.Price(), card.Description(), card.Category(), card.Fandoms()]);
-            $mol_assert_unique(card.Admin(), null);
-            card.title('Брелок Пинки');
-            card.price(300);
-            card.category('Брелок');
-            card.fandoms(['МЛП']);
-            $mol_assert_equal(card.cart_enabled(), false);
-            card.available(true);
-            $mol_assert_equal(card.cart_enabled(), true);
-            const product = app.catalog().Products().remote_list()[0];
-            $mol_assert_equal(product.Title().val(), 'Брелок Пинки');
-            $mol_assert_equal(product.Price().val(), 300);
-            $mol_assert_equal(product.Category().val(), 'Брелок');
-            $mol_assert_equal(product.Fandoms().items(), ['МЛП']);
-            $mol_assert_equal(settings.debug_info().endsWith('Products: 1 (1 available)'), true);
-        }),
-        'used merch kind is removed only after confirmation': $mol_wire_async(($) => {
-            const { app, settings } = artist($);
-            const kinds = settings.Categories();
-            kinds.draft(' Брелок ');
-            kinds.submit();
-            kinds.draft('Брелок');
-            kinds.submit();
-            kinds.draft('Значок');
-            kinds.submit();
-            $mol_assert_equal(settings.category_items(), ['Брелок', 'Значок']);
-            $mol_assert_equal(kinds.draft(), '');
-            app.product_add();
-            const card = app.product_cards()[0];
-            card.category('Брелок');
-            kinds.remove('Значок');
-            $mol_assert_equal(settings.category_items(), ['Брелок']);
-            kinds.remove('Брелок');
-            $mol_assert_equal(kinds.confirming('Брелок'), true);
-            $mol_assert_equal(kinds.usage_text('Брелок'), '1');
-            $mol_assert_equal(settings.category_items(), ['Брелок']);
-            kinds.cancel('Брелок');
-            $mol_assert_equal(kinds.confirming('Брелок'), false);
-            $mol_assert_equal(settings.category_items(), ['Брелок']);
-            kinds.remove('Брелок');
-            kinds.confirm('Брелок');
-            $mol_assert_equal(settings.category_items(), []);
-            $mol_assert_equal(card.category(), '');
-        }),
-        'socials in the header follow settings': $mol_wire_async(($) => {
-            const { app, settings } = artist($);
-            $mol_assert_equal(app.hero_sub(), [app.Profile()]);
-            settings.social_link('NaftulKittenArt');
-            settings.link_add('https://www.youtube.com/@nyaftul');
-            settings.link_add('t.me/NaftulKittenArt');
-            $mol_assert_equal(app.social_list(), ['https://t.me/NaftulKittenArt', 'https://www.youtube.com/@nyaftul']);
-            $mol_assert_equal(app.hero_sub(), [app.Profile(), app.Socials()]);
-            $mol_assert_equal(app.social_sub('https://www.youtube.com/@nyaftul'), [app.Icon_youtube('https://www.youtube.com/@nyaftul')]);
-            settings.link_drop('https://www.youtube.com/@nyaftul');
-            $mol_assert_equal(app.social_list(), ['https://t.me/NaftulKittenArt']);
-        }),
-        'bulk import from settings creates products and kinds': $mol_wire_async(($) => {
-            const { app, settings } = artist($);
-            settings.category_add('Брелок');
-            settings.import_json(JSON.stringify({
-                products: [
-                    { title: 'Брелок Пинки', price: 300, category: 'Брелок' },
-                    { title: 'Значок Паймон', price: 200, category: 'Значок', available: false },
-                    { price: 5 },
-                ],
-            }));
-            $mol_assert_equal(settings.import_ready(), true);
-            $mol_assert_equal(settings.import_new_categories(), ['Значок']);
-            $mol_assert_equal(settings.import_data().errors, ['Product 3 has no title']);
-            settings.import_run();
-            $mol_assert_equal(settings.import_json(), '');
-            $mol_assert_equal(titles(app), ['Брелок Пинки', 'Значок Паймон']);
-            $mol_assert_equal(settings.category_items(), ['Брелок', 'Значок']);
-        }),
-        'chosen theme is marked and applied to the catalog': $mol_wire_async(($) => {
-            const { app, settings } = artist($);
-            $mol_assert_equal(settings.theme(), 'sakura');
-            $mol_assert_equal(app.style()['--mol_theme_hue'], '340deg');
-            settings.theme_select('sky');
-            $mol_assert_equal(settings.theme_swatch('sky').boxShadow, '0 0 0 3px var(--mol_theme_current)');
-            $mol_assert_equal(settings.theme_swatch('sakura').boxShadow, '0 0 0 1px var(--mol_theme_line)');
-            $mol_assert_equal(app.style()['--mol_theme_hue'], '220deg');
-        }),
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($_1) {
-    function fill($) {
-        const land = $.$giper_baza_glob.land_grab();
-        const catalog = land.Data($bog_nka_catalog);
-        catalog.Categories(null).items(['Открытка', 'Брелок', 'Значок']);
-        catalog.Fandoms(null).items(['МЛП', 'Genshin']);
-        for (const [title, kind, fandoms] of [
-            ['Открытка Кит', 'Открытка', ['МЛП']],
-            ['Брелок Пинки', 'Брелок', ['МЛП']],
-            ['Значок Паймон', 'Значок', ['Genshin']],
-        ]) {
-            const product = catalog.Products(null).make(null);
-            product.Title(null).val(title);
-            product.Category(null).val(kind);
-            product.Fandoms(null).items(fandoms);
-        }
-        const app = $bog_nka_app.make({ $ });
-        app.catalog_link = () => land.link().str;
-        return { app, catalog };
-    }
-    function titles(app) {
-        return app.product_cards().map(card => card.title());
-    }
-    $mol_test({
-        'catalog filters by merch kind, fandom and search': $mol_wire_async(($) => {
-            const { app } = fill($);
-            app.category_filter('Значок');
-            $mol_assert_equal(titles(app), ['Значок Паймон']);
-            app.category_filter('all');
-            app.fandom_filter('МЛП');
-            $mol_assert_equal(titles(app), ['Открытка Кит', 'Брелок Пинки']);
-            app.fandom_filter('all');
-            app.search('пинк');
-            $mol_assert_equal(titles(app), ['Брелок Пинки']);
-            app.search('#genshin');
-            $mol_assert_equal(titles(app), ['Значок Паймон']);
-        }),
-        'tag click on card searches by the tag': $mol_wire_async(($) => {
-            const { app } = fill($);
-            const card = app.product_cards()[0];
-            $mol_assert_equal(card.tags().map((tag) => tag.title()), ['#Открытка', '#МЛП']);
-            card.tag_select('МЛП');
-            $mol_assert_equal(app.search(), 'МЛП');
-            $mol_assert_equal(titles(app), ['Открытка Кит', 'Брелок Пинки']);
-        }),
-        'dropping a fandom clears it from products': $mol_wire_async(($) => {
-            const { app, catalog } = fill($);
-            const settings = app.Settings();
-            $mol_assert_equal(settings.fandom_usage('МЛП'), 2);
-            settings.fandom_drop('МЛП');
-            $mol_assert_equal(catalog.Fandoms().items(), ['Genshin']);
-            $mol_assert_equal(settings.fandom_usage('МЛП'), 0);
-            $mol_assert_equal(app.fandom_options(), { all: app.Fandom_all(), Genshin: 'Genshin' });
-        }),
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($_1) {
     function step(task) {
         return $mol_wire_async(task)();
     }
-    function artist($) {
-        const land = $.$giper_baza_glob.land_grab();
-        new $mol_wire_atom('bog_nka_test_artist', () => $.$giper_baza_glob.Land(land.link())).fresh();
-        const app = $$.$bog_nka_app.make({ $ });
-        app.catalog_link = () => land.link().str;
-        return { land, app, settings: app.Settings() };
+    function keep(name, land) {
+        new $mol_wire_atom(name, land).fresh();
     }
-    function product(app, config) {
-        app.product_add();
-        const card = app.product_cards().at(-1);
-        card.title(config.title);
-        card.price(config.price ?? 0);
-        card.description(config.description ?? '');
-        if (config.kind)
-            card.category(config.kind);
-        card.fandoms(config.fandoms ?? []);
-        card.available(config.available ?? true);
-        return card;
-    }
-    async function visitor($, land) {
-        const auth = $.$giper_baza_auth.grab();
-        const context = $.$mol_ambient({});
-        class Auth extends $.$giper_baza_auth {
-            static current() { return auth; }
-        }
-        class Glob extends $.$giper_baza_glob {
-            static $ = context;
-        }
-        Object.assign(context, { $giper_baza_auth: Auth, $giper_baza_glob: Glob });
-        new $mol_wire_atom('bog_nka_test_visitor', () => Glob.Land(land.link())).fresh();
-        await $mol_wire_async(Glob.Land(land.link())).units_steal(land);
-        const app = $$.$bog_nka_app.make({ $: context });
-        app.catalog_link = () => land.link().str;
-        return app;
-    }
+    const run = Date.now().toString(36).slice(-4);
+    const mark = (name) => `${name} ${run}`;
+    const ours = (names) => names.filter(name => name.endsWith(` ${run}`));
+    const kit = mark('Открытка Кит');
+    const pinkie = mark('Брелок Пинки');
+    const paimon = mark('Значок Паймон');
+    const sticker = mark('Наклейка Кит');
+    const postcard = mark('Открытка');
+    const keychain = mark('Брелок');
+    const badge = mark('Значок');
+    const decal = mark('Наклейка');
+    const mlp = mark('МЛП');
+    const genshin = mark('Genshin');
     function titles(app) {
-        return app.product_cards().map(card => card.title());
+        return ours(app.product_cards()
+            .filter(card => card instanceof $bog_nka_product_card)
+            .map(card => card.title()));
     }
-    $mol_test({
-        async 'visitor sees only available products and their kinds and fandoms'($) {
-            const { land, app } = await step(() => {
-                const artwork = artist($);
-                for (const kind of ['Открытка', 'Брелок', 'Значок'])
-                    artwork.settings.category_add(kind);
-                for (const fandom of ['МЛП', 'Genshin'])
-                    artwork.settings.fandom_add(fandom);
-                product(artwork.app, { title: 'Открытка Кит', kind: 'Открытка', fandoms: ['МЛП'] });
-                product(artwork.app, { title: 'Брелок Пинки', kind: 'Брелок', fandoms: ['МЛП'] });
-                product(artwork.app, { title: 'Значок Паймон', kind: 'Значок', fandoms: ['Genshin'], available: false });
-                return artwork;
-            });
-            const guest = await visitor($, land);
+    function card(app, title) {
+        return app.product_cards().find(card => card.title() === title);
+    }
+    function order_code(cart) {
+        return decodeURIComponent(/order=([^\s/&]+)/.exec(cart.message())[1]);
+    }
+    let link = '';
+    let images = false;
+    let artist;
+    let settings;
+    let guest_context;
+    let guest_land;
+    let guest;
+    function land() {
+        return artist.$.$giper_baza_glob.Land(new $giper_baza_link(link));
+    }
+    function mock_dom() {
+        const opened = [];
+        const copied = [];
+        const dom = Object.create(guest_context.$mol_dom_context);
+        Object.defineProperties(dom, {
+            open: { value: (url) => opened.push(url) },
+            navigator: { value: { clipboard: { writeText: async (text) => { copied.push(text); } } } },
+        });
+        return { context: guest_context.$mol_ambient({ $mol_dom_context: dom }), opened, copied };
+    }
+    function want_card(context, title) {
+        const item = $$.$bog_nka_product_card.make({ $: context });
+        item.product_link = () => card(guest, title).product_link();
+        item.catalog_link = () => link;
+        return item;
+    }
+    async function sync_guest() {
+        await $mol_wire_async(guest_land).units_steal(land());
+    }
+    const scenario = {
+        async 'e2e 01: catalog is taken from the url or created'($) {
+            const context = $bog_nka_test_context($);
+            link = context.$mol_state_arg.value('catalog') ?? '';
+            artist = $$.$bog_nka_app.make({ $: context });
+            artist.catalog_link = (next) => {
+                if (next === undefined)
+                    return link;
+                context.$mol_state_arg.value('catalog', next);
+                return link = next;
+            };
+            artist.focused = (next) => next ?? false;
+            settings = artist.Settings();
+            if (!link) {
+                await step(() => $mol_assert_equal(artist.content(), [artist.Catalog_missing()]));
+                await step(() => {
+                    artist.catalog_create();
+                    keep('bog_nka_e2e_artist', land);
+                });
+            }
+            else {
+                keep('bog_nka_e2e_artist', land);
+            }
             await step(() => {
-                $mol_assert_equal(titles(app), ['Открытка Кит', 'Брелок Пинки', 'Значок Паймон']);
+                $mol_assert_equal(link.length > 0, true);
+                $mol_assert_equal(artist.content(), [artist.Catalog_selected()]);
+                $mol_assert_equal(artist.is_admin(), true);
+            });
+        },
+        async 'e2e 02: artist sets up look, socials, kinds and fandoms'() {
+            await step(() => {
+                settings.catalog_title('Nyaftul Kitten Art');
+                settings.theme_select('mint');
+                settings.social_link('@NaftulKittenArt');
+                settings.link_add('https://vk.com/nyaftulkittenart');
+                settings.link_add('@nyaftul_kitten_art');
+                const kinds = settings.Categories();
+                for (const kind of [` ${postcard} `, keychain, keychain, badge]) {
+                    kinds.draft(kind);
+                    kinds.submit();
+                }
+                $mol_assert_equal(kinds.draft(), '');
+                settings.fandom_add(mlp);
+                settings.fandom_add(genshin);
+                $mol_assert_equal(artist.title(), 'Nyaftul Kitten Art');
+                $mol_assert_equal(artist.style()['--mol_theme_hue'], '165deg');
+                $mol_assert_equal(settings.theme_swatch('mint').boxShadow, '0 0 0 3px var(--mol_theme_current)');
+                $mol_assert_equal(artist.social_list().slice(0, 3), ['https://t.me/NaftulKittenArt', 'https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art']);
+                $mol_assert_equal(artist.hero_sub(), [artist.Profile(), artist.Socials()]);
+                $mol_assert_equal(artist.social_sub('https://vk.com/nyaftulkittenart'), [artist.Icon_vk('https://vk.com/nyaftulkittenart')]);
+                $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge]);
+                $mol_assert_equal(ours(settings.fandom_items()), [mlp, genshin]);
+            });
+        },
+        async 'e2e 03: hero sits in the page head and images repaint the whole head'() {
+            await step(() => {
+                $mol_assert_equal(artist.head(), [artist.Hero(), artist.Product_add(), artist.Tools()]);
+                $mol_assert_equal(artist.catalog_rows().includes(artist.Hero()), false);
+            });
+            const keys = ['Avatar', 'Cover', 'Back'];
+            const files = await Promise.all(keys.map(key => $bog_nka_test_image(`${key.toLowerCase()}.png`)));
+            if (!files[0]) {
+                $$.$mol_log3_warn({
+                    place: '$bog_nka_e2e',
+                    message: 'images skipped without canvas',
+                    hint: 'run e2e in browser with test=1',
+                });
+                return;
+            }
+            for (const [index, key] of keys.entries()) {
+                await $mol_wire_async(settings).image_save(key, files[index]);
+            }
+            images = true;
+            await step(() => {
+                for (const key of keys)
+                    $mol_assert_equal(artist.image_url(key).startsWith('blob:'), true);
+                $mol_assert_equal(settings.image_filled('Cover'), true);
+                $mol_assert_equal(artist.avatar_empty(), false);
+                $mol_assert_equal(artist.style()['--bog_nka_cover'], `url("${artist.image_url('Cover')}")`);
+                $mol_assert_equal(artist.style()['--bog_nka_pattern'], `url("${artist.image_url('Back')}")`);
+            });
+            const doc = $mol_dom_context.document;
+            const host = doc.createElement('div');
+            host.style.cssText = 'position: fixed; left: -10000px; width: 800px; height: 600px';
+            doc.body.append(host);
+            try {
+                await step(() => {
+                    host.replaceChildren(artist.dom_tree());
+                    const css = (view) => getComputedStyle(view.dom_node()).backgroundImage;
+                    $mol_assert_equal(css(artist.Head()), `url("${artist.image_url('Cover')}")`);
+                    $mol_assert_equal(css(artist.Avatar()), `url("${artist.image_url('Avatar')}")`);
+                    $mol_assert_equal(css(artist), `url("${artist.image_url('Back')}")`);
+                });
+            }
+            finally {
+                host.remove();
+            }
+        },
+        async 'e2e 04: artist adds products and edits them on cards'() {
+            await step(() => {
+                for (const [title, price, kind, fandoms, status, description] of [
+                    [kit, 400, postcard, [mlp], 'available', ''],
+                    [pinkie, 300, keychain, [mlp], 'available', 'С блёстками'],
+                    [paimon, 200, badge, [genshin], 'hidden', ''],
+                ]) {
+                    const before = artist.product_cards();
+                    artist.product_add();
+                    const item = artist.product_cards().find(card => !before.includes(card));
+                    $mol_assert_equal(item.changed(), true);
+                    $mol_assert_equal(item.info_rows(), [item.Title(), item.Price(), item.Description(), item.Category(), item.Fandoms()]);
+                    $mol_assert_unique(item.Admin(), null);
+                    item.title(title);
+                    item.price(price);
+                    item.description(description);
+                    item.category(kind);
+                    item.fandoms(fandoms);
+                    $mol_assert_equal(item.status(), 'hidden');
+                    $mol_assert_equal(item.cart_enabled(), false);
+                    item.product().Available('auto').val(true);
+                    $mol_assert_equal(item.status(), 'available');
+                    item.Status().option_checked(status, true);
+                    $mol_assert_equal(item.status(), status);
+                    $mol_assert_equal(item.product().Available().val(), status === 'available');
+                    $mol_assert_equal(item.cart_enabled(), status === 'available');
+                    $mol_assert_equal(item.attr().bog_nka_product_card_state, status);
+                }
+                const draft = card(artist, paimon);
+                draft.Status().option_checked('hidden', false);
+                $mol_assert_equal(draft.status(), 'hidden');
+                $mol_assert_equal(titles(artist), [kit, pinkie, paimon]);
+                $mol_assert_equal(artist.catalog_rows(), [artist.Filters(), artist.Product_cards()]);
+            });
+        },
+        async 'e2e 05: bulk import adds products and new kinds'() {
+            await step(() => {
+                settings.import_json('```json\n' + JSON.stringify({
+                    products: [
+                        { title: sticker, price: 100, category: decal },
+                        { price: 5 },
+                    ],
+                }) + '\n```');
+                $mol_assert_equal(settings.import_ready(), true);
+                $mol_assert_equal(settings.import_new_categories(), [decal]);
+                $mol_assert_equal(settings.import_data().errors, ['Product 2 has no title']);
+                settings.import_run();
+                $mol_assert_equal(settings.import_json(), '');
+                $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge, decal]);
+                $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
+                $mol_assert_equal(card(artist, sticker).status(), 'available');
+            });
+        },
+        async 'e2e 06: artist filters by kind, fandom, search and tag'() {
+            await step(() => {
+                artist.category_filter(badge);
+                $mol_assert_equal(titles(artist), [paimon]);
+                artist.category_filter('all');
+                artist.fandom_filter(mlp);
+                $mol_assert_equal(titles(artist), [kit, pinkie]);
+                artist.fandom_filter('all');
+                artist.search(`пинки ${run}`);
+                $mol_assert_equal(titles(artist), [pinkie]);
+                artist.search(`#${genshin.toLowerCase()}`);
+                $mol_assert_equal(titles(artist), [paimon]);
+                artist.search('');
+                const item = card(artist, kit);
+                $mol_assert_equal(item.tags().map((tag) => tag.title()), [`#${postcard}`, `#${mlp}`]);
+                item.tag_select(mlp);
+                $mol_assert_equal(artist.search(), mlp);
+                $mol_assert_equal(titles(artist), [kit, pinkie]);
+                artist.search('');
+            });
+        },
+        async 'e2e 07: deleted products come back in place after undo'() {
+            await step(() => {
+                const links = [pinkie, sticker].map(title => card(artist, title).product_link());
+                artist.product_delete(links[0]);
+                artist.product_delete(links[1]);
+                $mol_assert_equal(titles(artist), [kit, paimon]);
+                artist.product_undo(links[0]);
+                artist.product_undo(links[1]);
+                $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
+            });
+        },
+        async 'e2e 08: used kind is removed only after confirmation'() {
+            await step(() => {
+                const kinds = settings.Categories();
+                kinds.remove(decal);
+                $mol_assert_equal(kinds.confirming(decal), true);
+                $mol_assert_equal(kinds.usage_text(decal), '1');
+                kinds.cancel(decal);
+                $mol_assert_equal(kinds.confirming(decal), false);
+                $mol_assert_equal(settings.category_items().includes(decal), true);
+                kinds.remove(decal);
+                kinds.confirm(decal);
+                $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge]);
+                $mol_assert_equal(card(artist, sticker).category(), '');
+            });
+        },
+        async 'e2e 09: visitor receives the catalog'($) {
+            const base = $bog_nka_test_context($);
+            const embryo = base.$giper_baza_auth.embryos[0];
+            const auth = embryo ? base.$giper_baza_auth.from(embryo) : await base.$giper_baza_auth._generate();
+            guest_context = base.$mol_ambient({});
+            class Auth extends base.$giper_baza_auth {
+                static current() { return auth; }
+            }
+            class Glob extends base.$giper_baza_glob {
+                static $ = guest_context;
+            }
+            Object.assign(guest_context, { $giper_baza_auth: Auth, $giper_baza_glob: Glob });
+            guest_land = Glob.Land(new $giper_baza_link(link));
+            keep('bog_nka_e2e_guest', () => Glob.Land(new $giper_baza_link(link)));
+            await sync_guest();
+            guest = $$.$bog_nka_app.make({ $: guest_context });
+            guest.catalog_link = () => link;
+            await step(() => {
+                $mol_assert_unique(auth.pass().lord().str, new $giper_baza_link(link).lord().str, base.$giper_baza_auth.current().pass().lord().str);
                 $mol_assert_equal(guest.is_admin(), false);
-                $mol_assert_equal(titles(guest), ['Открытка Кит', 'Брелок Пинки']);
-                $mol_assert_equal(Object.keys(guest.kind_options()), ['all', 'Открытка', 'Брелок']);
-                $mol_assert_equal(Object.keys(guest.fandom_options()), ['all', 'МЛП']);
-            });
-        },
-        async 'visitor gets no admin controls'($) {
-            const { land } = await step(() => {
-                const artwork = artist($);
-                product(artwork.app, { title: 'Открытка Кит', price: 400 });
-                return artwork;
-            });
-            const guest = await visitor($, land);
-            await step(() => {
-                const card = guest.product_cards()[0];
-                $mol_assert_equal(guest.is_not_admin(), true);
-                $mol_assert_equal(guest.Product_add().hidden(), true);
-                $mol_assert_equal(guest.Settings_button(), null);
-                $mol_assert_equal(card.changed(), false);
-                $mol_assert_equal(card.Admin(), null);
-                const settings = guest.Settings();
-                $mol_assert_equal(settings.body(), [settings.Account_section(), settings.Categories_section(), settings.Fandoms_section()]);
-                $mol_assert_equal(settings.Categories().content(), [settings.Categories().List()]);
-            });
-        },
-        async 'visitor card shows price and tags but hides empty description'($) {
-            const { land } = await step(() => {
-                const artwork = artist($);
-                artwork.settings.category_add('Брелок');
-                product(artwork.app, { title: 'Брелок Пинки', price: 1000, kind: 'Брелок' });
-                product(artwork.app, { title: 'Открытка Кит', description: 'С блёстками' });
-                return artwork;
-            });
-            const guest = await visitor($, land);
-            await step(() => {
-                const [pinkie, kit] = guest.product_cards();
-                $mol_assert_equal(pinkie.info_rows(), [pinkie.Title(), pinkie.Price_text(), pinkie.Tags()]);
-                $mol_assert_equal(pinkie.price_text(), '1 000 ₽');
-                $mol_assert_equal(kit.info_rows(), [kit.Title(), kit.Description_text()]);
-            });
-        },
-        async 'catalog look and socials set in settings reach the visitor'($) {
-            const { land } = await step(() => {
-                const artwork = artist($);
-                artwork.settings.catalog_title('Nyaftul Kitten Art');
-                artwork.settings.theme_select('mint');
-                artwork.settings.social_link('@NaftulKittenArt');
-                artwork.settings.link_add('vk.com/nyaftul');
-                artwork.settings.listed(false);
-                return artwork;
-            });
-            const guest = await visitor($, land);
-            await step(() => {
                 $mol_assert_equal(guest.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(guest.style()['--mol_theme_hue'], '165deg');
-                $mol_assert_equal(guest.social_list(), ['https://t.me/NaftulKittenArt', 'https://vk.com/nyaftul']);
-                $mol_assert_equal(guest.catalog().Hidden().val(), true);
+                $mol_assert_equal(guest.social_list().slice(0, 3), ['https://t.me/NaftulKittenArt', 'https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art']);
+                $mol_assert_equal(guest.head(), [guest.Hero(), guest.Product_add(), guest.Tools()]);
+                $mol_assert_equal(guest.avatar_empty(), !images);
+                $mol_assert_equal(guest.style()['--bog_nka_cover'] !== 'none', images);
             });
         },
-        async 'visitor orders from cards and the artist opens the same order'($) {
-            const { land, app } = await step(() => {
-                const artwork = artist($);
-                artwork.settings.social_link('@kitten_art');
-                product(artwork.app, { title: 'Открытка Кит', price: 400 });
-                product(artwork.app, { title: 'Значок Паймон', price: 200, available: false });
-                return artwork;
-            });
-            const guest = await visitor($, land);
+        async 'e2e 10: visitor does not see hidden products and admin controls'() {
             await step(() => {
-                const cards = guest.product_cards();
-                $mol_assert_equal(cards.length, 1);
-                const kit = cards[0];
-                kit.cart_add();
-                kit.Cart_counter().inc();
-                kit.Cart_counter().inc();
+                $mol_assert_equal(titles(guest), [kit, pinkie, sticker]);
+                $mol_assert_equal(ours(Object.keys(guest.kind_options())), [postcard, keychain]);
+                $mol_assert_equal(ours(Object.keys(guest.fandom_options())), [mlp]);
+                $mol_assert_equal(guest.Product_add().hidden(), true);
+                $mol_assert_equal(guest.Settings_button(), null);
+                const item = card(guest, kit);
+                $mol_assert_equal(item.changed(), false);
+                $mol_assert_equal(item.Admin(), null);
+                const guest_settings = guest.Settings();
+                $mol_assert_equal(guest_settings.body(), [guest_settings.Account_section(), guest_settings.Categories_section(), guest_settings.Fandoms_section()]);
+                $mol_assert_equal(guest_settings.Categories().content(), [guest_settings.Categories().List()]);
+            });
+        },
+        async 'e2e 11: visitor card shows price and tags but hides empty description'() {
+            await step(() => {
+                const first = card(guest, kit);
+                const second = card(guest, pinkie);
+                $mol_assert_equal(first.info_rows(), [first.Title(), first.Price_text(), first.Tags()]);
+                $mol_assert_equal(first.price_text(), '400 ₽');
+                $mol_assert_equal(second.info_rows(), [second.Title(), second.Price_text(), second.Description_text(), second.Tags()]);
+            });
+        },
+        async 'e2e 12: visitor fills the cart from cards'() {
+            await step(() => {
                 const cart = guest.Cart();
+                cart.clear();
+                const first = card(guest, kit);
+                const second = card(guest, pinkie);
+                first.cart_add();
+                first.Cart_counter().inc();
+                second.cart_add();
+                second.Cart_counter().inc();
+                second.Cart_counter().dec();
+                $mol_assert_equal(first.cart_controls(), [first.Cart_counter()]);
+                $mol_assert_equal(guest.cart_size_text(), '3');
+                const third = card(guest, sticker);
+                third.cart_add();
+                third.Cart_counter().dec();
+                $mol_assert_equal(third.cart_controls(), [third.Cart_add()]);
+                $mol_assert_equal(cart.lines().length, 2);
+                $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '1 100'));
                 $mol_assert_equal(cart.send_title(), cart.Send_title());
-                const code = /order=([^\s/&]+)/.exec(cart.message())[1];
-                const order = app.Order();
-                order.items = () => $bog_nka_order_decode(land.link().str, decodeURIComponent(code));
+                $mol_assert_equal($bog_nka_order_decode(link, order_code(cart)), {
+                    [first.product_link()]: 2,
+                    [second.product_link()]: 1,
+                });
+            });
+        },
+        async 'e2e 13: sold out product stays muted at the end and drops out of the order'() {
+            await step(() => card(artist, pinkie).Status().option_checked('sold', true));
+            await sync_guest();
+            await step(() => {
+                const item = card(guest, pinkie);
+                $mol_assert_equal(titles(guest), [kit, sticker, pinkie]);
+                $mol_assert_equal(item.attr().bog_nka_product_card_state, 'sold');
+                $mol_assert_equal(item.cover().includes(item.Sold_badge()), true);
+                $mol_assert_equal(item.cart_controls(), [item.Want()]);
+                $mol_assert_equal(item.want_title(), item.Want_title());
+                $mol_assert_equal(card(guest, kit).cover().includes(card(guest, kit).Sold_badge()), false);
+                $mol_assert_equal(guest.filters().includes(guest.In_stock()), true);
+                guest.in_stock_only(true);
+                $mol_assert_equal(titles(guest), [kit, sticker]);
+                guest.in_stock_only(false);
+                $mol_assert_equal(titles(guest), [kit, sticker, pinkie]);
+            });
+            const telegram = mock_dom();
+            const want = want_card(telegram.context, pinkie);
+            await step(() => {
+                want.want();
+                $mol_assert_equal(telegram.opened, [`https://t.me/NaftulKittenArt?text=${encodeURIComponent(want.want_message())}`]);
+                $mol_assert_equal(want.title(), pinkie);
+            });
+            await step(() => {
+                const cart = guest.Cart();
+                const first = card(artist, kit);
+                const second = card(artist, pinkie);
+                $mol_assert_equal(cart.line_title(second.product_link()), `${pinkie} · ${cart.Unavailable()}`);
+                $mol_assert_equal(cart.line_sum(second.product_link()), '');
+                $mol_assert_equal(cart.total_text(), cart.Total_text().replace('{total}', '800'));
+                $mol_assert_equal($bog_nka_order_decode(link, order_code(cart)), { [first.product_link()]: 2 });
+            });
+        },
+        async 'e2e 14: artist opens the order link'() {
+            await step(() => {
+                const code = order_code(guest.Cart());
+                const first = card(artist, kit);
+                const order = artist.Order();
+                order.items = () => $bog_nka_order_decode(link, code);
+                $mol_assert_equal(order.heading(), order.Order_title());
                 $mol_assert_equal(order.lines().length, 1);
-                $mol_assert_equal(order.line_sum(kit.product_link()), '1 200 ₽');
+                $mol_assert_equal(order.line_sum(first.product_link()), '800 ₽');
                 $mol_assert_equal(order.rows().includes(order.Actions()), false);
             });
+        },
+        async 'e2e 15: request to VK is copied first and opened on the second press'() {
+            await step(() => settings.social_link('https://vk.com/nyaftulkittenart'));
+            await sync_guest();
+            const { context, opened, copied } = mock_dom();
+            const cart = $$.$bog_nka_cart.make({ $: context });
+            cart.catalog_link = () => link;
+            cart.items = () => guest.cart();
+            const want = want_card(context, pinkie);
+            await step(() => {
+                want.want();
+                $mol_assert_equal(copied, [want.want_message()]);
+                $mol_assert_equal(opened, []);
+                $mol_assert_equal(want.want_title(), want.Want_copied_title().replace('{social}', 'VK'));
+                want.want();
+                $mol_assert_equal(opened, ['https://vk.com/nyaftulkittenart']);
+                opened.length = copied.length = 0;
+            });
+            await step(() => {
+                $mol_assert_equal(cart.send_title(), cart.Copy_title());
+                cart.send();
+                $mol_assert_equal(copied, [cart.message()]);
+                $mol_assert_equal(opened, []);
+                $mol_assert_equal(cart.send_title(), cart.Copied_title().replace('{social}', 'VK'));
+                $mol_assert_equal(cart.rows().includes(cart.Send_hint()), true);
+                cart.send();
+                $mol_assert_equal(opened, ['https://vk.com/nyaftulkittenart']);
+            });
+            await step(() => settings.social_link('@NaftulKittenArt'));
+            await sync_guest();
+            await step(() => {
+                $mol_assert_equal(cart.send_title(), cart.Send_title());
+                cart.send();
+                $mol_assert_equal(opened.at(-1), `https://t.me/NaftulKittenArt?text=${encodeURIComponent(cart.message())}`);
+            });
+        },
+        async 'e2e 16: dropping a fandom clears it everywhere'() {
+            await step(() => {
+                $mol_assert_equal(settings.fandom_usage(mlp), 2);
+                settings.fandom_drop(mlp);
+                $mol_assert_equal(ours(settings.fandom_items()), [genshin]);
+                $mol_assert_equal(settings.fandom_usage(mlp), 0);
+                $mol_assert_equal(card(artist, kit).fandoms(), []);
+            });
+            await sync_guest();
+            await step(() => $mol_assert_equal(ours(Object.keys(guest.fandom_options())), []));
+        },
+        async 'e2e 17: hiding from search engines reaches the visitor and is undone'() {
+            await step(() => settings.listed(false));
+            await sync_guest();
+            await step(() => $mol_assert_equal(guest.catalog().Hidden().val(), true));
+            await step(() => settings.listed(true));
+            await sync_guest();
+            await step(() => $mol_assert_equal(guest.catalog().Hidden().val(), false));
+            $$.$mol_log3_done({
+                place: '$bog_nka_e2e',
+                message: 'e2e catalog',
+                url: artist.$.$mol_state_arg.make_link({ catalog: link }),
+            });
+        },
+    };
+    $mol_test({
+        async 'e2e runs with test=1 in browser and only when Giper Baza responds'($) {
+            if (!$bog_nka_test_allowed()) {
+                $$.$mol_log3_warn({
+                    place: '$bog_nka_e2e',
+                    message: 'e2e skipped in browser without test=1',
+                    hint: 'add test=1 to the url',
+                });
+                return;
+            }
+            const master = $.$giper_baza_yard.masters()[0];
+            const alive = await fetch(master, { signal: AbortSignal.timeout(700) }).then(res => res.ok, () => false);
+            if (!alive) {
+                $$.$mol_log3_warn({
+                    place: '$bog_nka_e2e',
+                    message: 'Giper Baza is not responding, e2e skipped',
+                    hint: master,
+                });
+                return;
+            }
+            $mol_test_all.push(...Object.values(scenario));
         },
     });
 })($ || ($ = {}));

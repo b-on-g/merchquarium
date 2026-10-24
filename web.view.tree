@@ -78,6 +78,13 @@ $mol_hotkey2 $mol_plugin
 		keydown? <=> keydown? null
 	action *
 
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
 $mol_speck $mol_view
 	theme \$mol_theme_accent
 	sub /
@@ -143,13 +150,6 @@ $mol_lights_toggle $mol_check_icon
 $mol_icon_cog $mol_icon path \M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z
 
 $mol_icon_arrow_left $mol_icon path \M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z
-
-$mol_paragraph $mol_view
-	line_height 24
-	letter_width 7
-	width_limit +Infinity
-	row_width 0
-	sub / <= title
 
 $mol_ghost $mol_view
 	Sub $mol_view
@@ -382,6 +382,11 @@ $mol_select $mol_pick
 	Trigger_icon $mol_icon_dots_vertical
 	trigger_enabled <= enabled
 
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
 $bog_nka_gallery $mol_view
 	sub <= items /$mol_view
 
@@ -460,11 +465,6 @@ $mol_section $mol_list
 				<= Tools $mol_view sub <= tools /
 		<= Content $mol_list
 			rows <= content /
-
-$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
-
-$mol_check_box $mol_check
-	Icon $mol_icon_tick
 
 $mol_row $mol_view
 
@@ -2540,14 +2540,36 @@ $mol_select_list $mol_view
 			Trigger_icon <= Pick_icon $mol_icon_plus
 		^ badges_list
 
+$mol_check_list $mol_view
+	dictionary *
+	Option* $mol_check
+		checked? <=> option_checked*? false
+		label <= option_label* /
+			<= option_title* \
+		enabled <= option_enabled* <= enabled true
+		hint <= option_hint* \
+		minimal_height 24
+	options *
+	keys /string
+	sub <= items /$mol_check
+
+$mol_switch $mol_check_list
+	value? \
+
 $bog_nka_product_card $mol_card
 	product_link? \
 	catalog_link? \
 	search? \
 	cart_count? 0
+	Want_message @ \I want {title} if there is a reprint: {link}
+	Want_title @ \I want it if there is a reprint
+	Want_copied_title @ \✓ Copied — open {social}
 	Tag* $mol_button_minor
 		title <= tag_title* \
 		click? <=> tag_select*? null
+	attr *
+		^
+		bog_nka_product_card_state <= status? \available
 	sub /
 		<= Cover $mol_view
 			sub <= cover /
@@ -2557,6 +2579,8 @@ $bog_nka_product_card $mol_card
 				<= Photo_empty $mol_view
 					sub /
 						<= Photo_empty_icon $mol_icon_image_off
+				<= Sold_badge $mol_paragraph
+					title @ \Sold out
 		<= Info $mol_list
 			rows <= info_rows /
 				<= Title $mol_string_button
@@ -2596,6 +2620,10 @@ $bog_nka_product_card $mol_card
 					enabled <= cart_enabled true
 				<= Cart_counter $bog_nka_counter
 					value? <=> cart_count?
+				<= Want $mol_button_minor
+					title <= want_title \
+					click? <=> want? null
+					enabled <= want_enabled true
 		- далее скрытые от клиента поля
 		<= Admin $mol_row
 			sub /
@@ -2607,9 +2635,12 @@ $bog_nka_product_card $mol_card
 					title @ \Delete photo
 					click? <=> photo_delete? null
 					enabled <= photo_delete_enabled true
-				<= Available $mol_check_box
-					checked? <=> available? false
-					title @ \Available
+				<= Status $mol_switch
+					value? <=> status? \available
+					options *
+						available @ \In stock
+						sold @ \Sold out
+						hidden @ \Hidden
 					enabled <= changed true
 				<= Delete $mol_button_minor
 					title @ \Delete
@@ -2659,6 +2690,22 @@ $bog_nka_app $mol_page
 			action *
 				ctrl_Z? <=> undo_last? null
 	head /
+		<= Hero $mol_view
+			sub <= hero_sub /
+				<= Profile $mol_view
+					sub /
+						<= Avatar $mol_view
+							style <= avatar_style *
+							attr *
+								bog_nka_app_avatar_empty <= avatar_empty true
+						<= Nick $mol_paragraph
+							title <= title
+				<= Socials $mol_view
+					sub /
+						<= Socials_label $mol_paragraph
+							title @ \I have
+						<= Socials_list $mol_view
+							sub <= socials /
 		<= Title
 		<= Product_add $bog_nka_button
 			title @ \Add product
@@ -2691,22 +2738,6 @@ $bog_nka_app $mol_page
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
-				<= Hero $mol_view
-					sub <= hero_sub /
-						<= Profile $mol_view
-							sub /
-								<= Avatar $mol_view
-									style <= avatar_style *
-									attr *
-										bog_nka_app_avatar_empty <= avatar_empty true
-								<= Nick $mol_paragraph
-									title <= title
-						<= Socials $mol_view
-							sub /
-								<= Socials_label $mol_paragraph
-									title @ \I have
-								<= Socials_list $mol_view
-									sub <= socials /
 				<= Filters $mol_view
 					sub <= filters /
 						<= Kind_filter $mol_select
@@ -2715,6 +2746,9 @@ $bog_nka_app $mol_page
 						<= Fandom_filter $mol_select
 							dictionary <= fandom_options *
 							value? <=> fandom_filter? \all
+						<= In_stock $mol_check_box
+							title @ \Only in stock
+							checked? <=> in_stock_only? false
 						<= Search $mol_search
 							query? <=> search? \
 				<= Product_cards $bog_nka_gallery

@@ -6233,6 +6233,172 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
+		line_height(){
+			return 24;
+		}
+		letter_width(){
+			return 7;
+		}
+		width_limit(){
+			return +Infinity;
+		}
+		row_width(){
+			return 0;
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_paragraph extends $.$mol_paragraph {
+            maximal_width() {
+                let width = 0;
+                const letter = this.letter_width();
+                for (const kid of this.sub()) {
+                    if (!kid)
+                        continue;
+                    if (kid instanceof $mol_view) {
+                        width += kid.maximal_width();
+                    }
+                    else if (typeof kid !== 'object') {
+                        width += String(kid).length * letter;
+                    }
+                }
+                return width;
+            }
+            width_limit() {
+                return this.$.$mol_window.size().width;
+            }
+            minimal_width() {
+                return this.letter_width();
+            }
+            row_width() {
+                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
+            }
+            minimal_height() {
+                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "maximal_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "row_width", null);
+        __decorate([
+            $mol_mem
+        ], $mol_paragraph.prototype, "minimal_height", null);
+        $$.$mol_paragraph = $mol_paragraph;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    /**
+     * Localisation in $mol framework
+     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
+     */
+    class $mol_locale extends $mol_object {
+        static lang_default() {
+            return 'en';
+        }
+        static lang(next) {
+            return this.$.$mol_state_local.value('locale', next) || $mol_dom_context.navigator.language.replace(/-.*/, '') || this.lang_default();
+        }
+        static langs_rtl() {
+            return ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'ug', 'sd'];
+        }
+        static direction() {
+            const lang = this.lang();
+            let direction;
+            try {
+                direction = new Intl.Locale(lang).getTextInfo().direction;
+            }
+            catch (e) {
+                $mol_fail_log(e);
+            }
+            return direction ?? (this.langs_rtl().includes(lang) ? 'rtl' : 'ltr');
+        }
+        static source(lang) {
+            return JSON.parse(this.$.$mol_file.relative(`web.locale=${lang}.json`).text().toString());
+        }
+        static texts(lang, next) {
+            if (next)
+                return next;
+            try {
+                return this.source(lang).valueOf();
+            }
+            catch (error) {
+                if ($mol_fail_catch(error)) {
+                    const def = this.lang_default();
+                    if (lang === def)
+                        throw error;
+                }
+            }
+            return {};
+        }
+        static text(key) {
+            const lang = this.lang();
+            const target = this.texts(lang)[key];
+            if (target)
+                return target;
+            this.warn(key);
+            const en = this.texts('en')[key];
+            if (!en)
+                return key;
+            return en;
+        }
+        static warn(key) {
+            console.warn(`Not translated to "${this.lang()}": ${key}`);
+            return null;
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "lang_default", null);
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "lang", null);
+    __decorate([
+        $mol_mem
+    ], $mol_locale, "direction", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "source", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "texts", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "text", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_locale, "warn", null);
+    $.$mol_locale = $mol_locale;
+})($ || ($ = {}));
+
+;
 	($.$mol_speck) = class $mol_speck extends ($.$mol_view) {
 		value(){
 			return null;
@@ -6537,93 +6703,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-"use strict";
-var $;
-(function ($) {
-    /**
-     * Localisation in $mol framework
-     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
-     */
-    class $mol_locale extends $mol_object {
-        static lang_default() {
-            return 'en';
-        }
-        static lang(next) {
-            return this.$.$mol_state_local.value('locale', next) || $mol_dom_context.navigator.language.replace(/-.*/, '') || this.lang_default();
-        }
-        static langs_rtl() {
-            return ['ar', 'he', 'fa', 'ur', 'yi', 'ps', 'ug', 'sd'];
-        }
-        static direction() {
-            const lang = this.lang();
-            let direction;
-            try {
-                direction = new Intl.Locale(lang).getTextInfo().direction;
-            }
-            catch (e) {
-                $mol_fail_log(e);
-            }
-            return direction ?? (this.langs_rtl().includes(lang) ? 'rtl' : 'ltr');
-        }
-        static source(lang) {
-            return JSON.parse(this.$.$mol_file.relative(`web.locale=${lang}.json`).text().toString());
-        }
-        static texts(lang, next) {
-            if (next)
-                return next;
-            try {
-                return this.source(lang).valueOf();
-            }
-            catch (error) {
-                if ($mol_fail_catch(error)) {
-                    const def = this.lang_default();
-                    if (lang === def)
-                        throw error;
-                }
-            }
-            return {};
-        }
-        static text(key) {
-            const lang = this.lang();
-            const target = this.texts(lang)[key];
-            if (target)
-                return target;
-            this.warn(key);
-            const en = this.texts('en')[key];
-            if (!en)
-                return key;
-            return en;
-        }
-        static warn(key) {
-            console.warn(`Not translated to "${this.lang()}": ${key}`);
-            return null;
-        }
-    }
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang_default", null);
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "lang", null);
-    __decorate([
-        $mol_mem
-    ], $mol_locale, "direction", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "source", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "texts", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "text", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_locale, "warn", null);
-    $.$mol_locale = $mol_locale;
-})($ || ($ = {}));
-
-;
 	($.$mol_icon_basket) = class $mol_icon_basket extends ($.$mol_icon) {
 		path(){
 			return "M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z";
@@ -6848,85 +6927,6 @@ var $;
 ;
 "use strict";
 
-
-;
-	($.$mol_paragraph) = class $mol_paragraph extends ($.$mol_view) {
-		line_height(){
-			return 24;
-		}
-		letter_width(){
-			return 7;
-		}
-		width_limit(){
-			return +Infinity;
-		}
-		row_width(){
-			return 0;
-		}
-		sub(){
-			return [(this.title())];
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $mol_paragraph extends $.$mol_paragraph {
-            maximal_width() {
-                let width = 0;
-                const letter = this.letter_width();
-                for (const kid of this.sub()) {
-                    if (!kid)
-                        continue;
-                    if (kid instanceof $mol_view) {
-                        width += kid.maximal_width();
-                    }
-                    else if (typeof kid !== 'object') {
-                        width += String(kid).length * letter;
-                    }
-                }
-                return width;
-            }
-            width_limit() {
-                return this.$.$mol_window.size().width;
-            }
-            minimal_width() {
-                return this.letter_width();
-            }
-            row_width() {
-                return Math.max(Math.min(this.width_limit(), this.maximal_width()), this.letter_width());
-            }
-            minimal_height() {
-                return Math.max(1, Math.ceil(this.maximal_width() / this.row_width())) * this.line_height();
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "maximal_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "row_width", null);
-        __decorate([
-            $mol_mem
-        ], $mol_paragraph.prototype, "minimal_height", null);
-        $$.$mol_paragraph = $mol_paragraph;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/paragraph/paragraph.view.css", ":where([mol_paragraph]) {\n\tmargin: 0;\n\tmax-width: 100%;\n}\n");
-})($ || ($ = {}));
 
 ;
 	($.$mol_ghost) = class $mol_ghost extends ($.$mol_view) {
@@ -9051,6 +9051,39 @@ var $;
 (function ($) {
     $mol_style_attach("mol/select/select.view.css", "[mol_select] {\n\tdisplay: flex;\n\tword-break: normal;\n\talign-self: flex-start;\n}\n\n[mol_select_option_row] {\n\tmin-width: 100%;\n\tpadding: 0;\n\tjustify-content: flex-start;\n}\n\n[mol_select_filter] {\n\tflex: 1 0 auto;\n\talign-self: stretch;\n}\n\n[mol_select_option_label] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: start;\n\tmin-height: 1.5em;\n\tdisplay: block;\n\twhite-space: nowrap;\n}\n\n[mol_select_clear_option_content] {\n\tpadding: .5em 1rem .5rem 0;\n\ttext-align: start;\n\tbox-shadow: var(--mol_theme_line);\n\tflex: 1 0 auto;\n}\n\n[mol_select_no_options] {\n\tpadding: var(--mol_gap_text);\n\ttext-align: start;\n\tdisplay: block;\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_select_trigger] {\n\tpadding: 0;\n\tflex: 1 1 auto;\n\tdisplay: flex;\n}\n\n[mol_select_trigger] > * {\n\tmargin-inline-end: -1rem;\n}\n\n[mol_select_trigger] > *:last-child {\n\tmargin-inline-end: 0;\n}\n\n[mol_select_menu] {\n\tdisplay: flex;\n\tflex-direction: column;\n}\n\n");
 })($ || ($ = {}));
+
+;
+	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
+		path(){
+			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
+		Icon(){
+			const obj = new this.$.$mol_icon_tick();
+			return obj;
+		}
+	};
+	($mol_mem(($.$mol_check_box.prototype), "Icon"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
 
 ;
 	($.$bog_nka_gallery) = class $bog_nka_gallery extends ($.$mol_view) {
@@ -19446,39 +19479,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_tick) = class $mol_icon_tick extends ($.$mol_icon) {
-		path(){
-			return "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_check_box) = class $mol_check_box extends ($.$mol_check) {
-		Icon(){
-			const obj = new this.$.$mol_icon_tick();
-			return obj;
-		}
-	};
-	($mol_mem(($.$mol_check_box.prototype), "Icon"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/check/box/box.view.css", "[mol_check_box_icon] {\n\tborder-radius: var(--mol_gap_round);\n\tbox-shadow: inset 0 0 0 1px var(--mol_theme_line);\n\tcolor: var(--mol_theme_shade);\n\theight: 1rem;\n\talign-self: center;\n}\n\n[mol_check]:not([mol_check_checked]) > [mol_check_box_icon] {\n\tfill: transparent;\n}\n\n[mol_check]:not([disabled]) > [mol_check_box_icon] {\n\tbackground: var(--mol_theme_field);\n\tcolor: var(--mol_theme_text);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
 	($.$mol_row) = class $mol_row extends ($.$mol_view) {};
 
 
@@ -21647,9 +21647,22 @@ var $;
         Category: $giper_baza_atom_text,
         Fandoms: $giper_baza_list_str,
         Available: $giper_baza_atom_bool,
+        Status: $giper_baza_atom_text,
     }) {
     }
     $.$bog_nka_product = $bog_nka_product;
+    function $bog_nka_product_status(product, next) {
+        if (next === undefined) {
+            const status = product.Status()?.val();
+            if (status === 'available' || status === 'sold' || status === 'hidden')
+                return status;
+            return product.Available()?.val() ? 'available' : 'hidden';
+        }
+        product.Status('auto').val(next);
+        product.Available('auto').val(next === 'available');
+        return next;
+    }
+    $.$bog_nka_product_status = $bog_nka_product_status;
 })($ || ($ = {}));
 
 ;
@@ -21986,7 +21999,7 @@ var $;
             product.Price('auto').val(item.price);
             product.Description('auto').val(item.description);
             product.Category('auto').val(item.category);
-            product.Available('auto').val(item.available);
+            $bog_nka_product_status(product, item.available ? 'available' : 'sold');
         }
     }
     $.$bog_nka_import_apply = $bog_nka_import_apply;
@@ -22152,7 +22165,7 @@ var $;
             }
             products_available() {
                 return (this.catalog()?.Products()?.remote_list() ?? [])
-                    .filter(product => product.Available()?.val())
+                    .filter(product => $bog_nka_product_status(product) === 'available')
                     .length;
             }
             debug_info() {
@@ -22817,6 +22830,16 @@ var $;
         return 'web';
     }
     $.$bog_nka_social_kind = $bog_nka_social_kind;
+    function $bog_nka_social_name(url) {
+        return {
+            telegram: 'Telegram',
+            vk: 'VK',
+            youtube: 'YouTube',
+            instagram: 'Instagram',
+            web: url.hostname.replace(/^www\./, ''),
+        }[$bog_nka_social_kind(url)];
+    }
+    $.$bog_nka_social_name = $bog_nka_social_name;
 })($ || ($ = {}));
 
 ;
@@ -22880,7 +22903,7 @@ var $;
             }
             available(link) {
                 const product = this.product(link);
-                return Boolean(product.Title()?.val()) && Boolean(product.Available()?.val());
+                return Boolean(product.Title()?.val()) && $bog_nka_product_status(product) === 'available';
             }
             price(link) {
                 return this.product(link).Price()?.val() ?? 0;
@@ -22949,15 +22972,7 @@ var $;
             }
             social_name() {
                 const url = this.social_url();
-                if (!url)
-                    return '';
-                return {
-                    telegram: 'Telegram',
-                    vk: 'VK',
-                    youtube: 'YouTube',
-                    instagram: 'Instagram',
-                    web: url.hostname.replace(/^www\./, ''),
-                }[$bog_nka_social_kind(url)];
+                return url ? $bog_nka_social_name(url) : '';
             }
             order_link() {
                 const items = Object.fromEntries(this.ordered().map(link => [link, this.count(link)]));
@@ -24224,6 +24239,204 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_check_list) = class $mol_check_list extends ($.$mol_view) {
+		option_checked(id, next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		option_title(id){
+			return "";
+		}
+		option_label(id){
+			return [(this.option_title(id))];
+		}
+		enabled(){
+			return true;
+		}
+		option_enabled(id){
+			return (this.enabled());
+		}
+		option_hint(id){
+			return "";
+		}
+		items(){
+			return [];
+		}
+		dictionary(){
+			return {};
+		}
+		Option(id){
+			const obj = new this.$.$mol_check();
+			(obj.checked) = (next) => ((this.option_checked(id, next)));
+			(obj.label) = () => ((this.option_label(id)));
+			(obj.enabled) = () => ((this.option_enabled(id)));
+			(obj.hint) = () => ((this.option_hint(id)));
+			(obj.minimal_height) = () => (24);
+			return obj;
+		}
+		options(){
+			return {};
+		}
+		keys(){
+			return [];
+		}
+		sub(){
+			return (this.items());
+		}
+	};
+	($mol_mem_key(($.$mol_check_list.prototype), "option_checked"));
+	($mol_mem_key(($.$mol_check_list.prototype), "Option"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * List of checkboxes
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_check_list_demo
+         */
+        class $mol_check_list extends $.$mol_check_list {
+            options() {
+                return {};
+            }
+            dictionary(next) {
+                return next ?? {};
+            }
+            option_checked(id, next) {
+                const prev = this.dictionary();
+                if (next === undefined)
+                    return prev[id] ?? null;
+                const next_rec = { ...prev, [id]: next };
+                if (next === null)
+                    delete next_rec[id];
+                return this.dictionary(next_rec)[id] ?? null;
+            }
+            keys() {
+                return Object.keys(this.options());
+            }
+            items() {
+                return this.keys().map(key => this.Option(key));
+            }
+            option_title(key) {
+                return this.options()[key] || key;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "keys", null);
+        __decorate([
+            $mol_mem
+        ], $mol_check_list.prototype, "items", null);
+        $$.$mol_check_list = $mol_check_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/check/list/list.view.css", "[mol_check_list] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex: 1 1 auto;\n\tborder-radius: var(--mol_gap_round);\n\tgap: 1px;\n}\n\n[mol_check_list_option] {\n\tflex: 0 1 auto;\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"]) {\n\ttext-shadow: 0 0;\n\tcolor: var(--mol_theme_current);\n}\n\n[mol_check_list_option]:where([mol_check_checked=\"true\"][disabled]) {\n\tcolor: var(--mol_theme_text);\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_switch) = class $mol_switch extends ($.$mol_check_list) {
+		value(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+	};
+	($mol_mem(($.$mol_switch.prototype), "value"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_state_session extends $mol_object {
+        static 'native()';
+        static native() {
+            if (this['native()'])
+                return this['native()'];
+            check: try {
+                const native = $mol_dom_context.sessionStorage;
+                if (!native)
+                    break check;
+                native.setItem('', '');
+                native.removeItem('');
+                return this['native()'] = native;
+            }
+            catch (error) {
+                console.warn(error);
+            }
+            return this['native()'] = {
+                getItem(key) {
+                    return this[':' + key];
+                },
+                setItem(key, value) {
+                    this[':' + key] = value;
+                },
+                removeItem(key) {
+                    this[':' + key] = void 0;
+                }
+            };
+        }
+        static value(key, next) {
+            if (next === void 0)
+                return JSON.parse(this.native().getItem(key) || 'null');
+            if (next === null)
+                this.native().removeItem(key);
+            else
+                this.native().setItem(key, JSON.stringify(next));
+            return next;
+        }
+        prefix() { return ''; }
+        value(key, next) {
+            return $mol_state_session.value(this.prefix() + '.' + key, next);
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_session, "value", null);
+    $.$mol_state_session = $mol_state_session;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Buttons which switching the state
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_switch_demo
+         */
+        class $mol_switch extends $.$mol_switch {
+            value(next) {
+                return $mol_state_session.value(`${this}.value()`, next) ?? '';
+            }
+            option_checked(key, next) {
+                if (next === undefined)
+                    return this.value() == key;
+                this.value(next ? key : '');
+                return next;
+            }
+        }
+        $$.$mol_switch = $mol_switch;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$bog_nka_product_card) = class $bog_nka_product_card extends ($.$mol_card) {
 		tag_title(id){
 			return "";
@@ -24231,6 +24444,10 @@ var $;
 		tag_select(id, next){
 			if(next !== undefined) return next;
 			return null;
+		}
+		status(next){
+			if(next !== undefined) return next;
+			return "available";
 		}
 		photo_ids(){
 			return [];
@@ -24253,8 +24470,17 @@ var $;
 			(obj.sub) = () => ([(this.Photo_empty_icon())]);
 			return obj;
 		}
+		Sold_badge(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Sold_badge_title")));
+			return obj;
+		}
 		cover(){
-			return [(this.Photos()), (this.Photo_empty())];
+			return [
+				(this.Photos()), 
+				(this.Photo_empty()), 
+				(this.Sold_badge())
+			];
 		}
 		Cover(){
 			const obj = new this.$.$mol_view();
@@ -24384,8 +24610,29 @@ var $;
 			(obj.value) = (next) => ((this.cart_count(next)));
 			return obj;
 		}
+		want_title(){
+			return "";
+		}
+		want(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		want_enabled(){
+			return true;
+		}
+		Want(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.want_title()));
+			(obj.click) = (next) => ((this.want(next)));
+			(obj.enabled) = () => ((this.want_enabled()));
+			return obj;
+		}
 		cart_controls(){
-			return [(this.Cart_add()), (this.Cart_counter())];
+			return [
+				(this.Cart_add()), 
+				(this.Cart_counter()), 
+				(this.Want())
+			];
 		}
 		Cart_controls(){
 			const obj = new this.$.$mol_view();
@@ -24417,14 +24664,14 @@ var $;
 			(obj.enabled) = () => ((this.photo_delete_enabled()));
 			return obj;
 		}
-		available(next){
-			if(next !== undefined) return next;
-			return false;
-		}
-		Available(){
-			const obj = new this.$.$mol_check_box();
-			(obj.checked) = (next) => ((this.available(next)));
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_product_card_Available_title")));
+		Status(){
+			const obj = new this.$.$mol_switch();
+			(obj.value) = (next) => ((this.status(next)));
+			(obj.options) = () => ({
+				"available": (this.$.$mol_locale.text("$bog_nka_product_card_Status_options_available")), 
+				"sold": (this.$.$mol_locale.text("$bog_nka_product_card_Status_options_sold")), 
+				"hidden": (this.$.$mol_locale.text("$bog_nka_product_card_Status_options_hidden"))
+			});
 			(obj.enabled) = () => ((this.changed()));
 			return obj;
 		}
@@ -24443,7 +24690,7 @@ var $;
 			(obj.sub) = () => ([
 				(this.Photos_add()), 
 				(this.Photos_delete()), 
-				(this.Available()), 
+				(this.Status()), 
 				(this.Delete())
 			]);
 			return obj;
@@ -24464,11 +24711,23 @@ var $;
 			if(next !== undefined) return next;
 			return 0;
 		}
+		Want_message(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Want_message"));
+		}
+		Want_title(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Want_title"));
+		}
+		Want_copied_title(){
+			return (this.$.$mol_locale.text("$bog_nka_product_card_Want_copied_title"));
+		}
 		Tag(id){
 			const obj = new this.$.$mol_button_minor();
 			(obj.title) = () => ((this.tag_title(id)));
 			(obj.click) = (next) => ((this.tag_select(id, next)));
 			return obj;
+		}
+		attr(){
+			return {...(super.attr()), "bog_nka_product_card_state": (this.status())};
 		}
 		sub(){
 			return [
@@ -24480,9 +24739,11 @@ var $;
 		}
 	};
 	($mol_mem_key(($.$bog_nka_product_card.prototype), "tag_select"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "status"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty_icon"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photo_empty"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Sold_badge"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cover"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "title"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Title"));
@@ -24500,13 +24761,14 @@ var $;
 	($mol_mem(($.$bog_nka_product_card.prototype), "cart_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_counter"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "want"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Want"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Cart_controls"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_add"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "photo_delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Photos_delete"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "available"));
-	($mol_mem(($.$bog_nka_product_card.prototype), "Available"));
+	($mol_mem(($.$bog_nka_product_card.prototype), "Status"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "product_delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Delete"));
 	($mol_mem(($.$bog_nka_product_card.prototype), "Admin"));
@@ -24597,15 +24859,14 @@ var $;
                 descr.val(next);
                 return next;
             }
-            available(next) {
+            status(next) {
                 const product = this.product();
-                if (next === undefined)
-                    return product.Available()?.val() ?? false;
-                const atom = product.Available(null);
-                if (!atom)
-                    return false;
-                atom.val(next);
-                return next;
+                if (next === 'available' || next === 'sold' || next === 'hidden')
+                    return $bog_nka_product_status(product, next);
+                return $bog_nka_product_status(product);
+            }
+            sold() {
+                return this.status() === 'sold';
             }
             catalog() {
                 const link = this.catalog_link();
@@ -24629,17 +24890,57 @@ var $;
                 return next;
             }
             cart_controls() {
+                if (this.sold())
+                    return [this.Want()];
                 return [this.cart_count() > 0 ? this.Cart_counter() : this.Cart_add()];
             }
             cart_enabled() {
-                return this.available() && Boolean(this.title());
+                return this.status() === 'available' && Boolean(this.title());
+            }
+            social_url() {
+                return $bog_nka_social_url(this.catalog()?.Social()?.val() ?? '');
+            }
+            want_enabled() {
+                return Boolean(this.social_url());
+            }
+            want_message() {
+                return this.Want_message()
+                    .replace('{title}', this.title())
+                    .replace('{link}', this.$.$mol_state_arg.make_link({ catalog: this.catalog_link() }));
+            }
+            want_copied(next) {
+                return next ?? false;
+            }
+            want_title() {
+                const url = this.social_url();
+                if (!url || !this.want_copied())
+                    return this.Want_title();
+                return this.Want_copied_title().replace('{social}', $bog_nka_social_name(url));
+            }
+            want() {
+                const url = this.social_url();
+                if (!url)
+                    return;
+                const text = this.want_message();
+                if ($bog_nka_social_kind(url) === 'telegram') {
+                    url.search = `?text=${encodeURIComponent(text)}`;
+                }
+                else if (!this.want_copied()) {
+                    this.$.$mol_dom_context.navigator.clipboard?.writeText(text).catch(() => { });
+                    this.want_copied(true);
+                    return;
+                }
+                this.$.$mol_dom_context.open(url.toString(), '_blank');
             }
             cart_add() {
                 if (this.cart_enabled())
                     this.cart_count(1);
             }
             cover() {
-                return [this.photo_ids().length ? this.Photos() : this.Photo_empty()];
+                return [
+                    this.photo_ids().length ? this.Photos() : this.Photo_empty(),
+                    ...this.sold() ? [this.Sold_badge()] : [],
+                ];
             }
             info_rows() {
                 if (this.changed())
@@ -24691,6 +24992,12 @@ var $;
             $mol_action
         ], $bog_nka_product_card.prototype, "photo_delete", null);
         __decorate([
+            $mol_mem
+        ], $bog_nka_product_card.prototype, "want_copied", null);
+        __decorate([
+            $mol_action
+        ], $bog_nka_product_card.prototype, "want", null);
+        __decorate([
             $mol_action
         ], $bog_nka_product_card.prototype, "cart_add", null);
         __decorate([
@@ -24720,9 +25027,55 @@ var $;
             padding: {
                 bottom: $mol_gap.block,
             },
+            '@': {
+                bog_nka_product_card_state: {
+                    sold: {
+                        Photos: {
+                            filter: 'grayscale(1)',
+                            opacity: .6,
+                        },
+                        Photo_empty: {
+                            opacity: .6,
+                        },
+                        Info: {
+                            opacity: .6,
+                        },
+                    },
+                    hidden: {
+                        opacity: .5,
+                        border: {
+                            style: 'dashed',
+                        },
+                    },
+                },
+            },
             Cover: {
                 display: 'block',
+                position: 'relative',
                 padding: $mol_style_func.vary('--bog_nka_photo_inset'),
+            },
+            Sold_badge: {
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: '1rem',
+                justifyContent: 'center',
+                margin: {
+                    left: 'auto',
+                    right: 'auto',
+                },
+                width: 'fit-content',
+                padding: $mol_gap.text,
+                color: $mol_theme.back,
+                background: {
+                    color: $mol_theme.text,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                font: {
+                    weight: 'bold',
+                },
             },
             Photos: {
                 Image: {
@@ -24945,6 +25298,54 @@ var $;
 			(obj.action) = () => ({"ctrl_Z": (next) => (this.undo_last(next))});
 			return obj;
 		}
+		avatar_style(){
+			return {};
+		}
+		avatar_empty(){
+			return true;
+		}
+		Avatar(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ((this.avatar_style()));
+			(obj.attr) = () => ({"bog_nka_app_avatar_empty": (this.avatar_empty())});
+			return obj;
+		}
+		Nick(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.title()));
+			return obj;
+		}
+		Profile(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Avatar()), (this.Nick())]);
+			return obj;
+		}
+		Socials_label(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Socials_label_title")));
+			return obj;
+		}
+		socials(){
+			return [];
+		}
+		Socials_list(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.socials()));
+			return obj;
+		}
+		Socials(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Socials_label()), (this.Socials_list())]);
+			return obj;
+		}
+		hero_sub(){
+			return [(this.Profile()), (this.Socials())];
+		}
+		Hero(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.hero_sub()));
+			return obj;
+		}
 		product_add(next){
 			if(next !== undefined) return next;
 			return null;
@@ -25031,54 +25432,6 @@ var $;
 			(obj.sub) = () => ([(this.Catalog_missing_text()), (this.Catalog_create())]);
 			return obj;
 		}
-		avatar_style(){
-			return {};
-		}
-		avatar_empty(){
-			return true;
-		}
-		Avatar(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ((this.avatar_style()));
-			(obj.attr) = () => ({"bog_nka_app_avatar_empty": (this.avatar_empty())});
-			return obj;
-		}
-		Nick(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.title()));
-			return obj;
-		}
-		Profile(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Avatar()), (this.Nick())]);
-			return obj;
-		}
-		Socials_label(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_Socials_label_title")));
-			return obj;
-		}
-		socials(){
-			return [];
-		}
-		Socials_list(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.socials()));
-			return obj;
-		}
-		Socials(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Socials_label()), (this.Socials_list())]);
-			return obj;
-		}
-		hero_sub(){
-			return [(this.Profile()), (this.Socials())];
-		}
-		Hero(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ((this.hero_sub()));
-			return obj;
-		}
 		kind_options(){
 			return {};
 		}
@@ -25105,6 +25458,16 @@ var $;
 			(obj.value) = (next) => ((this.fandom_filter(next)));
 			return obj;
 		}
+		in_stock_only(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		In_stock(){
+			const obj = new this.$.$mol_check_box();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_nka_app_In_stock_title")));
+			(obj.checked) = (next) => ((this.in_stock_only(next)));
+			return obj;
+		}
 		Search(){
 			const obj = new this.$.$mol_search();
 			(obj.query) = (next) => ((this.search(next)));
@@ -25114,6 +25477,7 @@ var $;
 			return [
 				(this.Kind_filter()), 
 				(this.Fandom_filter()), 
+				(this.In_stock()), 
 				(this.Search())
 			];
 		}
@@ -25137,7 +25501,6 @@ var $;
 		}
 		catalog_rows(){
 			return [
-				(this.Hero()), 
 				(this.Filters()), 
 				(this.Product_cards()), 
 				(this.Catalog_empty())
@@ -25258,6 +25621,7 @@ var $;
 		}
 		head(){
 			return [
+				(this.Hero()), 
 				(this.Title()), 
 				(this.Product_add()), 
 				(this.Tools())
@@ -25283,6 +25647,13 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "Ico"));
 	($mol_mem(($.$bog_nka_app.prototype), "undo_last"));
 	($mol_mem(($.$bog_nka_app.prototype), "Undo_hotkey"));
+	($mol_mem(($.$bog_nka_app.prototype), "Avatar"));
+	($mol_mem(($.$bog_nka_app.prototype), "Nick"));
+	($mol_mem(($.$bog_nka_app.prototype), "Profile"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials_label"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials_list"));
+	($mol_mem(($.$bog_nka_app.prototype), "Socials"));
+	($mol_mem(($.$bog_nka_app.prototype), "Hero"));
 	($mol_mem(($.$bog_nka_app.prototype), "product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_add"));
 	($mol_mem(($.$bog_nka_app.prototype), "cart_toggle"));
@@ -25298,17 +25669,12 @@ var $;
 	($mol_mem(($.$bog_nka_app.prototype), "catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_create"));
 	($mol_mem(($.$bog_nka_app.prototype), "Catalog_missing"));
-	($mol_mem(($.$bog_nka_app.prototype), "Avatar"));
-	($mol_mem(($.$bog_nka_app.prototype), "Nick"));
-	($mol_mem(($.$bog_nka_app.prototype), "Profile"));
-	($mol_mem(($.$bog_nka_app.prototype), "Socials_label"));
-	($mol_mem(($.$bog_nka_app.prototype), "Socials_list"));
-	($mol_mem(($.$bog_nka_app.prototype), "Socials"));
-	($mol_mem(($.$bog_nka_app.prototype), "Hero"));
 	($mol_mem(($.$bog_nka_app.prototype), "category_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Kind_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "fandom_filter"));
 	($mol_mem(($.$bog_nka_app.prototype), "Fandom_filter"));
+	($mol_mem(($.$bog_nka_app.prototype), "in_stock_only"));
+	($mol_mem(($.$bog_nka_app.prototype), "In_stock"));
 	($mol_mem(($.$bog_nka_app.prototype), "Search"));
 	($mol_mem(($.$bog_nka_app.prototype), "Filters"));
 	($mol_mem(($.$bog_nka_app.prototype), "Product_cards"));
@@ -25613,8 +25979,8 @@ var $;
             }
             head() {
                 if (this.settings_open() || !this.catalog_link())
-                    return super.head();
-                return [this.Product_add(), this.Tools()];
+                    return [this.Title(), this.Product_add(), this.Tools()];
+                return [this.Hero(), this.Product_add(), this.Tools()];
             }
             avatar_empty() {
                 return !this.image_url('Avatar');
@@ -25652,6 +26018,7 @@ var $;
                 return [
                     ...Object.keys(this.kind_options()).length > 1 ? [this.Kind_filter()] : [],
                     ...Object.keys(this.fandom_options()).length > 1 ? [this.Fandom_filter()] : [],
+                    ...this.visible_products().some(product => $bog_nka_product_status(product) === 'sold') ? [this.In_stock()] : [],
                     this.Search(),
                 ];
             }
@@ -25663,7 +26030,6 @@ var $;
             }
             catalog_rows() {
                 return [
-                    this.Hero(),
                     ...this.visible_products().length ? [this.Filters()] : [],
                     this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
                 ];
@@ -25714,7 +26080,7 @@ var $;
             }
             visible_products() {
                 return (this.catalog()?.Products()?.remote_list() ?? [])
-                    .filter(product => product.can_change() || product.Available()?.val());
+                    .filter(product => product.can_change() || $bog_nka_product_status(product) !== 'hidden');
             }
             filter_fandoms() {
                 const fandoms = this.is_admin()
@@ -25763,14 +26129,21 @@ var $;
                         order.push(link);
                 }
                 const cards = [];
+                const sold = [];
                 for (const link of order) {
                     const product = by_link.get(link);
                     if (product) {
-                        if (!product.can_change() && !product.Available()?.val())
+                        const status = $bog_nka_product_status(product);
+                        if (!product.can_change() && status === 'hidden')
+                            continue;
+                        if (this.in_stock_only() && status !== 'available')
                             continue;
                         if (!this.product_match(product))
                             continue;
-                        cards.push(this.Product_card(link));
+                        if (status === 'sold')
+                            sold.push(this.Product_card(link));
+                        else
+                            cards.push(this.Product_card(link));
                         continue;
                     }
                     if (!this.is_admin() || !deleted.has(link))
@@ -25780,7 +26153,7 @@ var $;
                         continue;
                     cards.push(this.Product_undo(link));
                 }
-                return cards;
+                return [...cards, ...sold];
             }
             deleted_products(catalog_link, next) {
                 if (!catalog_link)
@@ -25952,25 +26325,25 @@ var $;
                     weight: 'bold',
                 },
             },
-            Hero: {
-                flex: { wrap: 'wrap' },
-                alignItems: 'center',
-                gap: $mol_gap.block,
-                padding: $mol_gap.block,
-                minHeight: '10rem',
+            Head: {
+                alignItems: 'flex-start',
                 background: {
                     image: $mol_style_func.vary('--bog_nka_cover'),
                     size: ['cover'],
                     position: 'center',
                 },
-                border: {
-                    radius: $mol_gap.round,
-                },
+            },
+            Hero: {
+                flex: { wrap: 'wrap', grow: 1 },
+                alignItems: 'center',
+                gap: $mol_gap.block,
+                padding: $mol_gap.block,
+                minHeight: '10rem',
             },
             Profile: {
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: $mol_gap.space,
+                gap: $mol_gap.block,
             },
             Avatar: {
                 width: '7rem',
@@ -25997,12 +26370,6 @@ var $;
                     bottom: 0,
                     left: $mol_gap.text,
                     right: $mol_gap.text,
-                },
-                background: {
-                    color: $mol_theme.back,
-                },
-                border: {
-                    radius: $mol_gap.round,
                 },
             },
             Socials: {
