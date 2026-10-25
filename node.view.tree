@@ -120,7 +120,7 @@ $mol_button_minor $mol_button_typed
 $mol_button_major $mol_button_minor
 	theme \$mol_theme_base
 
-$bog_prilavok_button $mol_button_major
+$bog_merchquarium_button $mol_button_major
 	hidden false
 
 $mol_icon_basket $mol_icon path \M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z
@@ -387,7 +387,7 @@ $mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
 $mol_check_box $mol_check
 	Icon $mol_icon_tick
 
-$bog_prilavok_gallery $mol_view
+$bog_merchquarium_gallery $mol_view
 	sub <= items /$mol_view
 
 $mol_avatar $mol_icon
@@ -468,7 +468,7 @@ $mol_section $mol_list
 
 $mol_row $mol_view
 
-$bog_prilavok_tags $mol_view
+$bog_merchquarium_tags $mol_view
 	items /string
 	editable false
 	input_hint \
@@ -738,7 +738,7 @@ $mol_button_open_native $mol_view
 	event *
 		change? <=> picked? null
 
-$bog_prilavok_settings $mol_page
+$bog_merchquarium_settings $mol_page
 	title @ \Settings
 	Import_summary @ \Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}
 	Import_errors @ \Problems: {errors}
@@ -789,7 +789,7 @@ $bog_prilavok_settings $mol_page
 					value? <=> social_text? \
 				<= Links_label $mol_paragraph
 					title @ \Other socials in the header
-				<= Links $bog_prilavok_tags
+				<= Links $bog_merchquarium_tags
 					items <= link_items /string
 					editable <= is_admin false
 					input_hint @ \vk.com/nick, youtube.com/@nick
@@ -798,7 +798,7 @@ $bog_prilavok_settings $mol_page
 		<= Categories_section $mol_section
 			title @ \Merch kinds
 			content /
-				<= Categories $bog_prilavok_tags
+				<= Categories $bog_merchquarium_tags
 					items <= category_items /string
 					editable <= is_admin
 					input_hint @ \New merch kind
@@ -809,7 +809,7 @@ $bog_prilavok_settings $mol_page
 		<= Fandoms_section $mol_section
 			title @ \Fandoms
 			content /
-				<= Fandoms $bog_prilavok_tags
+				<= Fandoms $bog_merchquarium_tags
 					items <= fandom_items /string
 					editable <= is_admin
 					input_hint @ \New fandom
@@ -874,7 +874,7 @@ $bog_prilavok_settings $mol_page
 
 $mol_icon_minus $mol_icon path \M19,13H5V11H19V13Z
 
-$bog_prilavok_counter $mol_view
+$bog_merchquarium_counter $mol_view
 	value? 0
 	enabled true
 	sub <= content /
@@ -892,7 +892,7 @@ $bog_prilavok_counter $mol_view
 			sub /
 				<= Plus_icon $mol_icon_plus
 
-$bog_prilavok_cart $mol_list
+$bog_merchquarium_cart $mol_list
 	catalog_link \
 	items? *
 	editable true
@@ -944,7 +944,7 @@ $bog_prilavok_cart $mol_list
 						title <= line_title* \
 					<= Line_price* $mol_paragraph
 						title <= line_price* \
-			<= Counter* $bog_prilavok_counter
+			<= Counter* $bog_merchquarium_counter
 				value? <=> count*? 0
 				enabled <= editable
 			<= Line_sum* $mol_paragraph
@@ -1005,7 +1005,7 @@ $yuf_carousel_image $mol_image
 		^
 		error? <=> error? null
 
-$bog_prilavok_carousel $yuf_carousel
+$bog_merchquarium_carousel $yuf_carousel
 
 $mol_icon_image $mol_icon path \M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z
 
@@ -1058,7 +1058,7 @@ $mol_number $mol_view
 			enabled <= inc_enabled <= enabled
 			sub / <= inc_icon $mol_icon_menu_up_outline
 
-$bog_prilavok_number $mol_number
+$bog_merchquarium_number $mol_number
 
 $mol_select_list $mol_view
 	value? /string
@@ -1098,7 +1098,7 @@ $mol_check_list $mol_view
 $mol_switch $mol_check_list
 	value? \
 
-$bog_prilavok_product_card $mol_card
+$bog_merchquarium_product_card $mol_card
 	product_link? \
 	catalog_link? \
 	search? \
@@ -1111,11 +1111,11 @@ $bog_prilavok_product_card $mol_card
 		click? <=> tag_select*? null
 	attr *
 		^
-		bog_prilavok_product_card_state <= status? \available
+		bog_merchquarium_product_card_state <= status? \available
 	sub /
 		<= Cover $mol_view
 			sub <= cover /
-				<= Photos $bog_prilavok_carousel
+				<= Photos $bog_merchquarium_carousel
 					ids <= photo_ids /string
 					url* <= photo_url* \
 				<= Photo_empty $mol_view
@@ -1129,7 +1129,7 @@ $bog_prilavok_product_card $mol_card
 					value? <=> title? \
 					hint @ \Title
 					enabled <= changed true
-				<= Price $bog_prilavok_number
+				<= Price $bog_merchquarium_number
 					value_min 0
 					hint @ \Price
 					value? <=> price? null
@@ -1160,7 +1160,7 @@ $bog_prilavok_product_card $mol_card
 					title @ \Add to cart
 					click? <=> cart_add? null
 					enabled <= cart_enabled true
-				<= Cart_counter $bog_prilavok_counter
+				<= Cart_counter $bog_merchquarium_counter
 					value? <=> cart_count?
 				<= Want $mol_button_minor
 					title <= want_title \
@@ -1198,14 +1198,14 @@ $mol_icon_instagram $mol_icon path \M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.
 
 $mol_icon_web $mol_icon path \M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
 
-$bog_prilavok_app $mol_page
+$bog_merchquarium_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
 	Kind_all @ \Merch kind
 	Fandom_all @ \Fandoms
 	title @ \Catalog 
 	seo_server \https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/
-	Product_card* $bog_prilavok_product_card
+	Product_card* $bog_merchquarium_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
 		search? <=> search? \
@@ -1239,7 +1239,7 @@ $bog_prilavok_app $mol_page
 						<= Avatar $mol_view
 							style <= avatar_style *
 							attr *
-								bog_prilavok_app_avatar_empty <= avatar_empty true
+								bog_merchquarium_app_avatar_empty <= avatar_empty true
 						<= Nick $mol_paragraph
 							title <= title
 				<= Socials $mol_view
@@ -1249,7 +1249,7 @@ $bog_prilavok_app $mol_page
 						<= Socials_list $mol_view
 							sub <= socials /
 		<= Title
-		<= Product_add $bog_prilavok_button
+		<= Product_add $bog_merchquarium_button
 			title @ \Add product
 			click? <=> product_add? null
 			hidden <= is_not_admin true
@@ -1275,7 +1275,7 @@ $bog_prilavok_app $mol_page
 			sub /
 				<= Catalog_missing_text $mol_paragraph
 					title @ \No catalog selected:
-				<= Catalog_create $bog_prilavok_button
+				<= Catalog_create $bog_merchquarium_button
 					title @ \Create catalog
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_list
@@ -1293,17 +1293,17 @@ $bog_prilavok_app $mol_page
 							checked? <=> in_stock_only? false
 						<= Search $mol_search
 							query? <=> search? \
-				<= Product_cards $bog_prilavok_gallery
+				<= Product_cards $bog_merchquarium_gallery
 					items <= product_cards /
 				<= Catalog_empty $mol_paragraph
 					title @ \Products coming soon
-		<= Settings $bog_prilavok_settings
+		<= Settings $bog_merchquarium_settings
 			catalog_link <= catalog_link \
-		<= Cart $bog_prilavok_cart
+		<= Cart $bog_merchquarium_cart
 			catalog_link <= catalog_link \
 			items? <=> cart? *
 			back? <=> cart_close? null
-		<= Order $bog_prilavok_cart
+		<= Order $bog_merchquarium_cart
 			catalog_link <= catalog_link \
 			items <= order_items *
 			editable false

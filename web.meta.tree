@@ -228,6 +228,6 @@
 	pack intern git \https://github.com/hyoo-ru/intern.hyoo.ru.git
 \/giper/baza/file
 	include \/mol/offline/install
-\/bog/prilavok/app
+\/bog/merchquarium/app
 	include \/mol/offline/install
 	deploy \/bog/assets
