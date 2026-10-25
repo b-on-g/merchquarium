@@ -3,6 +3,7 @@ $bog_merchquarium_product_card $mol_card
 	catalog_link? \
 	search? \
 	cart_count? 0
+	editable true
 	Want_message @ \I want {title} if there is a reprint: {link}
 	Want_title @ \I want it if there is a reprint
 	Want_copied_title @ \✓ Copied — open {social}

@@ -129,6 +129,12 @@ namespace $ {
 
 				settings.fandom_add( mlp )
 				settings.fandom_add( genshin )
+				const fandoms = settings.Fandoms() as $$.$bog_merchquarium_tags
+				fandoms.draft( `#${ genshin }` )
+				fandoms.submit()
+				$mol_assert_equal( fandoms.name( mlp ), `#${ mlp }` )
+				$mol_assert_equal( kinds.name( badge ), badge )
+				$mol_assert_equal( artist.fandom_options()[ mlp ], `#${ mlp }` )
 
 				$mol_assert_equal( artist.title(), 'Nyaftul Kitten Art' )
 				$mol_assert_equal( artist.style()[ '--mol_theme_hue' ], '165deg' )
@@ -231,19 +237,28 @@ namespace $ {
 
 		async 'e2e 05: bulk import adds products and new kinds'() {
 			await step( ()=> {
+				const youtube = `https://youtube.com/@merch${ run }`
 				settings.import_json( '```json\n' + JSON.stringify({
+					social: order_url,
+					links: [ 'vk.com/nyaftulkittenart', youtube ],
 					products: [
-						{ title: sticker, price: 100, category: decal, fandoms: [ genshin, knight ] },
+						{ title: sticker, price: 100, category: decal, fandoms: [ `#${ genshin }`, knight ] },
 						{ price: 5 },
 					],
 				}) + '\n```' )
 				$mol_assert_equal( settings.import_ready(), true )
 				$mol_assert_equal( settings.import_new_categories(), [ decal ] )
 				$mol_assert_equal( settings.import_new_fandoms(), [ knight ] )
+				$mol_assert_equal( settings.import_new_links(), [ youtube ] )
 				$mol_assert_equal( settings.import_data().errors, [ 'Product 2 has no title' ] )
 
 				settings.import_run()
 				$mol_assert_equal( settings.import_json(), '' )
+				$mol_assert_equal( settings.social_link(), '@NaftulKittenArt' )
+				$mol_assert_equal( settings.link_items().filter( link => link.endsWith( run ) ), [ youtube ] )
+				$mol_assert_equal( artist.social_list().includes( youtube ), true )
+				settings.link_drop( youtube )
+				$mol_assert_equal( socials( artist ), [ order_url, ... links ] )
 				$mol_assert_equal( ours( settings.category_items() ), [ postcard, keychain, badge, decal ] )
 				$mol_assert_equal( titles( artist ), [ kit, pinkie, paimon, sticker ] )
 				$mol_assert_equal( card( artist, sticker ).status(), 'available' )
@@ -443,7 +458,40 @@ namespace $ {
 			} )
 		},
 
-		async 'e2e 14: artist opens the order link'() {
+		async 'e2e 14: author previews the catalog as a visitor and opens help'() {
+			await step( ()=> {
+				$mol_assert_equal( guest.Preview(), null )
+				$mol_assert_equal( guest.Help_button(), null )
+				$mol_assert_unique( artist.Preview(), null )
+
+				artist.preview( true )
+				const item = card( artist, kit )
+				$mol_assert_equal( titles( artist ), [ kit, sticker, pinkie ] )
+				$mol_assert_equal( artist.Product_add().hidden(), true )
+				$mol_assert_equal( item.changed(), false )
+				$mol_assert_equal( item.Admin(), null )
+				$mol_assert_equal( item.info_rows(), [ item.Title(), item.Price_text(), item.Tags() ] )
+				$mol_assert_equal( ours( Object.keys( artist.kind_options() ) ), [ postcard, keychain ] )
+
+				artist.preview( false )
+				$mol_assert_equal( titles( artist ), [ kit, pinkie, paimon, sticker ] )
+				$mol_assert_equal( artist.Product_add().hidden(), false )
+				$mol_assert_equal( card( artist, kit ).changed(), true )
+
+				artist.settings_toggle()
+				artist.Help_button().checked( true )
+				$mol_assert_equal( artist.settings_open(), false )
+				$mol_assert_equal( artist.content(), [ artist.Help() ] )
+				$mol_assert_equal( artist.head(), [ artist.Title(), artist.Product_add(), artist.Tools() ] )
+				$mol_assert_equal( artist.Help().text().length > 0, true )
+				$mol_assert_equal( artist.Preview(), null )
+
+				artist.Help_button().checked( false )
+				$mol_assert_equal( artist.content(), [ artist.Catalog_selected() ] )
+			} )
+		},
+
+		async 'e2e 15: artist opens the order link'() {
 			await step( ()=> {
 				const code = order_code( guest.Cart() as $$.$bog_merchquarium_cart )
 				const first = card( artist, kit )
@@ -456,7 +504,7 @@ namespace $ {
 			} )
 		},
 
-		async 'e2e 15: request to VK is copied first and opened on the second press'() {
+		async 'e2e 16: request to VK is copied first and opened on the second press'() {
 			await step( ()=> settings.social_link( 'https://vk.com/nyaftulkittenart' ) )
 			await sync_guest()
 
@@ -498,7 +546,7 @@ namespace $ {
 			} )
 		},
 
-		async 'e2e 16: dropping a fandom clears it everywhere'() {
+		async 'e2e 17: dropping a fandom clears it everywhere'() {
 			await step( ()=> {
 				$mol_assert_equal( settings.fandom_usage( mlp ), 2 )
 				settings.fandom_drop( mlp )
@@ -510,7 +558,7 @@ namespace $ {
 			await step( ()=> $mol_assert_equal( ours( Object.keys( guest.fandom_options() ) ), [ genshin, knight ] ) )
 		},
 
-		async 'e2e 17: hiding from search engines reaches the visitor and is undone'() {
+		async 'e2e 18: hiding from search engines reaches the visitor and is undone'() {
 			await step( ()=> settings.listed( false ) )
 			await sync_guest()
 			await step( ()=> $mol_assert_equal( guest.catalog()!.Hidden()!.val(), true ) )

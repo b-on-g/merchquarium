@@ -9,7 +9,7 @@ namespace $.$$ {
 		}
 		
 		changed(): boolean {
-			return this.product().can_change()
+			return this.editable() && this.product().can_change()
 		}
 
 		@ $mol_mem
@@ -209,7 +209,7 @@ namespace $.$$ {
 
 		fandom_dictionary() {
 			const fandoms = this.catalog()?.Fandoms()?.items() ?? []
-			return Object.fromEntries(fandoms.map(fandom => [ fandom, fandom ]))
+			return Object.fromEntries(fandoms.map(fandom => [ fandom, `#${ fandom }` ]))
 		}
 
 		fandoms(next?: readonly string[]): readonly string[] {

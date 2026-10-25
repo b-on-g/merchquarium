@@ -85,7 +85,9 @@ namespace $.$$ {
 		}
 
 		@ $mol_action
-		fandom_add(fandom: string) {
+		fandom_add(name: string) {
+			const fandom = $bog_merchquarium_catalog_fandom(name)
+			if (!fandom) return
 			const list = this.catalog()?.Fandoms(null)
 			if (list && !list.has(fandom)) list.items([ ... list.items(), fandom ])
 		}
@@ -267,6 +269,10 @@ namespace $.$$ {
 			return this.import_data().fandoms.filter(fandom => !known.has(fandom))
 		}
 
+		import_new_links() {
+			return $bog_merchquarium_import_new_links(this.catalog(), this.import_data())
+		}
+
 		import_preview() {
 			const data = this.import_data()
 			if (!this.import_json().trim()) return ''
@@ -274,12 +280,13 @@ namespace $.$$ {
 				.replace('{products}', String(data.products.length))
 				.replace('{categories}', String(this.import_new_categories().length))
 				.replace('{fandoms}', String(this.import_new_fandoms().length))
+				.replace('{links}', String(this.import_new_links().length))
 			if (!data.errors.length) return summary
 			return summary + '. ' + this.Import_errors().replace('{errors}', data.errors.join('; '))
 		}
 
 		import_ready() {
-			return this.import_data().products.length > 0
+			return this.import_data().products.length > 0 || this.import_new_links().length > 0
 		}
 
 		@ $mol_action

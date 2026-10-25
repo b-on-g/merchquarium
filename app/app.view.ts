@@ -17,7 +17,43 @@ namespace $.$$ {
 		@ $mol_action
 		settings_toggle() {
 			this.cart_open( false )
+			this.help_open( false )
 			this.settings_open( !this.settings_open() )
+		}
+
+		@ $mol_mem
+		help_open( next?: boolean ) {
+			const state = this.$.$mol_state_arg.value(
+				'help',
+				next === undefined ? undefined : next ? '' : null,
+			)
+			return state !== null
+		}
+
+		help_checked( next?: boolean ) {
+			if( next === undefined ) return this.help_open()
+			this.settings_open( false )
+			this.cart_open( false )
+			return this.help_open( next )
+		}
+
+		@ $mol_mem
+		Help_button() {
+			return this.is_admin() || this.help_open() ? super.Help_button() : null!
+		}
+
+		@ $mol_mem
+		Preview() {
+			return this.is_admin() && this.content()[ 0 ] === this.Catalog_selected() ? super.Preview() : null!
+		}
+
+		@ $mol_mem
+		editing() {
+			return Boolean( this.is_admin() ) && !this.preview()
+		}
+
+		not_editing() {
+			return !this.editing()
 		}
 		
 		@ $mol_mem
@@ -32,6 +68,7 @@ namespace $.$$ {
 		@ $mol_action
 		cart_toggle() {
 			this.settings_open( false )
+			this.help_open( false )
 			this.cart_open( !this.cart_open() )
 		}
 
@@ -74,6 +111,7 @@ namespace $.$$ {
 		}
 
 		content() {
+			if( this.help_open() ) return [ this.Help() ]
 			if( this.settings_open() ) return [ this.Settings() ]
 			if( this.catalog_link() && this.order_code() ) return [ this.Order() ]
 			if( this.catalog_link() && this.cart_open() ) return [ this.Cart() ]
@@ -144,7 +182,7 @@ namespace $.$$ {
 		}
 
 		head() {
-			if( this.settings_open() || !this.catalog_link() ) return [ this.Title(), this.Product_add(), this.Tools() ]
+			if( this.settings_open() || this.help_open() || !this.catalog_link() ) return [ this.Title(), this.Product_add(), this.Tools() ]
 			return [ this.Hero(), this.Product_add(), this.Tools() ]
 		}
 
@@ -268,17 +306,17 @@ namespace $.$$ {
 		fandom_options() {
 			return Object.fromEntries( [
 				[ 'all', this.Fandom_all() ],
-				... this.filter_fandoms().map( fandom => [ fandom, fandom ] ),
+				... this.filter_fandoms().map( fandom => [ fandom, `#${ fandom }` ] ),
 			] )
 		}
 
 		visible_products() {
 			return ( this.catalog()?.Products()?.remote_list() ?? [] )
-				.filter( product => product.can_change() || $bog_merchquarium_product_status( product ) !== 'hidden' )
+				.filter( product => this.editing() || $bog_merchquarium_product_status( product ) !== 'hidden' )
 		}
 
 		filter_fandoms() {
-			const fandoms = this.is_admin()
+			const fandoms = this.editing()
 				? this.catalog()?.Fandoms()?.items() ?? []
 				: this.visible_products().flatMap( product => product.Fandoms()?.items() ?? [] )
 			return [ ... new Set( fandoms ) ]
@@ -303,14 +341,9 @@ namespace $.$$ {
 		is_admin() {
 			return this.catalog()?.can_change()
 		}
-		
-		@ $mol_mem
-		is_not_admin() {
-			return !this.is_admin()
-		}
 
 		filter_categories() {
-			const categories = this.is_admin()
+			const categories = this.editing()
 				? this.catalog()?.Categories()?.items() ?? []
 				: this.visible_products()
 					.map( product => product.Category()?.val() ?? '' )
@@ -340,16 +373,16 @@ namespace $.$$ {
 
 				if (product) {
 					const status = $bog_merchquarium_product_status(product)
-					if (!product.can_change() && status === 'hidden') continue
+					if (!this.editing() && status === 'hidden') continue
 					if (this.in_stock_only() && status !== 'available') continue
 					if (!this.product_match(product)) continue
 
-					if (status === 'sold' && !this.is_admin()) sold.push(this.Product_card(link))
+					if (status === 'sold' && !this.editing()) sold.push(this.Product_card(link))
 					else cards.push(this.Product_card(link))
 					continue
 				}
 		
-				if (!this.is_admin() || !deleted.has(link)) continue
+				if (!this.editing() || !deleted.has(link)) continue
 		
 				const removed = this.$.$giper_baza_glob.Pawn(
 					new this.$.$giper_baza_link(link),

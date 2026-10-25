@@ -2,6 +2,7 @@ $bog_merchquarium_tags $mol_view
 	items /string
 	editable false
 	input_hint \
+	marker \
 	add_title @ \Add
 	confirm_title @ \Delete this tag?
 	confirm_info @ \Deleting it will also clear it from these products:

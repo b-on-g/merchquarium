@@ -1,6 +1,6 @@
 $bog_merchquarium_settings $mol_page
 	title @ \Settings
-	Import_summary @ \Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}
+	Import_summary @ \Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}, new links: {links}
 	Import_errors @ \Problems: {errors}
 	Theme_sakura @ \Sakura
 	Theme_lavender @ \Lavender
@@ -73,6 +73,7 @@ $bog_merchquarium_settings $mol_page
 					items <= fandom_items /string
 					editable <= is_admin
 					input_hint @ \New fandom
+					marker \#
 					confirm_title @ \Delete this fandom?
 					usage* <= fandom_usage* 0
 					item_add*? <=> fandom_add*? null

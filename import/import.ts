@@ -11,6 +11,8 @@ namespace $ {
 
 	export type $bog_merchquarium_import_data = {
 		title: string
+		social: string
+		links: string[]
 		categories: string[]
 		fandoms: string[]
 		products: $bog_merchquarium_import_product[]
@@ -24,9 +26,15 @@ namespace $ {
 		return [ ... new Set( list.map( text ).filter( Boolean ) ) ]
 	}
 
+	const fandoms_of = ( value: unknown )=> [ ... new Set( names( value ).map( $bog_merchquarium_catalog_fandom ).filter( Boolean ) ) ]
+
+	export function $bog_merchquarium_import_social_key( value: string ) {
+		return $bog_merchquarium_social_url( value )?.toString() ?? value.trim()
+	}
+
 	export function $bog_merchquarium_import_parse( json: string ): $bog_merchquarium_import_data {
 
-		const data: $bog_merchquarium_import_data = { title: '', categories: [], fandoms: [], products: [], errors: [] }
+		const data: $bog_merchquarium_import_data = { title: '', social: '', links: [], categories: [], fandoms: [], products: [], errors: [] }
 		if( !json.trim() ) return data
 
 		let raw: any
@@ -43,9 +51,25 @@ namespace $ {
 		}
 
 		data.title = text( raw.title )
+		data.social = text( raw.social )
+		if( data.social && !$bog_merchquarium_social_url( data.social ) ) {
+			data.errors.push( `Link "${ data.social }" is not recognized` )
+			data.social = ''
+		}
+
+		const links = new Map< string, string >()
+		for( const link of names( raw.links ?? raw.socials ) ) {
+			if( !$bog_merchquarium_social_url( link ) ) {
+				data.errors.push( `Link "${ link }" is not recognized` )
+				continue
+			}
+			const key = $bog_merchquarium_import_social_key( link )
+			if( !links.has( key ) ) links.set( key, link )
+		}
+		data.links = [ ... links.values() ]
 
 		const categories = new Set( names( raw.categories ) )
-		const fandoms = new Set( names( raw.fandoms ) )
+		const fandoms = new Set( fandoms_of( raw.fandoms ) )
 
 		const products = Array.isArray( raw.products ) ? raw.products : []
 		products.forEach( ( item: any, index: number )=> {
@@ -62,7 +86,7 @@ namespace $ {
 			const category = text( item.category )
 			if( category ) categories.add( category )
 
-			const tags = names( item.fandoms ?? item.tags )
+			const tags = fandoms_of( item.fandoms ?? item.tags )
 			for( const fandom of tags ) fandoms.add( fandom )
 
 			data.products.push({
@@ -81,9 +105,30 @@ namespace $ {
 		return data
 	}
 
+	export function $bog_merchquarium_import_new_links( catalog: $bog_merchquarium_catalog | null, data: $bog_merchquarium_import_data ) {
+		const social = catalog?.Social()?.val() ?? ''
+		const known = new Set( [ social, ... catalog?.Links()?.items() ?? [] ].filter( Boolean ).map( $bog_merchquarium_import_social_key ) )
+		return [ data.social, ... data.links ].filter( link => {
+			const key = $bog_merchquarium_import_social_key( link )
+			if( !link || known.has( key ) ) return false
+			known.add( key )
+			return true
+		} )
+	}
+
 	export function $bog_merchquarium_import_apply( catalog: $bog_merchquarium_catalog, data: $bog_merchquarium_import_data ) {
 
 		if( data.title ) catalog.Title( 'auto' )!.val( data.title )
+
+		const fresh_links = $bog_merchquarium_import_new_links( catalog, data )
+		if( data.social && fresh_links.includes( data.social ) && !catalog.Social()?.val() ) catalog.Social( 'auto' )!.val( data.social )
+
+		const social = $bog_merchquarium_import_social_key( catalog.Social()?.val() ?? '' )
+		const extra = fresh_links.filter( link => $bog_merchquarium_import_social_key( link ) !== social )
+		if( extra.length ) {
+			const links = catalog.Links( 'auto' )!
+			links.items([ ... links.items(), ... extra ])
+		}
 
 		const categories = catalog.Categories( 'auto' )!
 		const known = categories.items()
@@ -109,16 +154,18 @@ namespace $ {
 	}
 
 	export const $bog_merchquarium_import_prompt = `You help an author fill an online merch catalog.
-Ask me short questions in my language, one at a time: what products I sell, their names, prices in rubles, short descriptions, categories, fandoms (what the art is about) and whether each one is in stock.
+Ask me short questions in my language, one at a time: where buyers should send orders (Telegram or VK link), my other social links, what products I sell, their names, prices in rubles, short descriptions, categories, fandoms (what the art is about) and whether each one is in stock.
 When you have enough, reply with JSON only, no comments, in this format:
 {
 	"title": "Catalog name",
+	"social": "https://t.me/nick",
+	"links": [ "https://vk.com/nick" ],
 	"categories": [ "Category" ],
 	"fandoms": [ "Fandom" ],
 	"products": [
 		{ "title": "Name", "price": 1000, "description": "Short description", "category": "Category", "fandoms": [ "Fandom" ], "available": true }
 	]
 }
-Every product must have a title. Price is a number without currency. I will upload photos myself later.`
+Every product must have a title. Price is a number without currency. Fandoms are plain names without #. I will upload photos myself later.`
 
 }

@@ -19,7 +19,7 @@
 	"$bog_merchquarium_settings_Import_prompt_title": "Скопировать промпт для ИИ",
 	"$bog_merchquarium_settings_Import_run_title": "Создать товары",
 	"$bog_merchquarium_settings_Import_section_title": "Массовое добавление",
-	"$bog_merchquarium_settings_Import_summary": "Добавится товаров: {products}, новых категорий: {categories}, новых фандомов: {fandoms}",
+	"$bog_merchquarium_settings_Import_summary": "Добавится товаров: {products}, новых категорий: {categories}, новых фандомов: {fandoms}, новых ссылок: {links}",
 	"$bog_merchquarium_settings_Links_input_hint": "vk.com/ник, youtube.com/@ник",
 	"$bog_merchquarium_settings_Links_label_title": "Другие соцсети в шапке",
 	"$bog_merchquarium_settings_Listed_title": "Показывать в поисковиках",

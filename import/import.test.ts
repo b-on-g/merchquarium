@@ -38,6 +38,26 @@ namespace $ {
 			] )
 		},
 
+		'Import strips hash from fandoms'() {
+			const data = $bog_merchquarium_import_parse( JSON.stringify({
+				fandoms: [ '#MLP' ],
+				products: [ { title: 'Pin', fandoms: '## Genshin, MLP' } ],
+			}) )
+			$mol_assert_equal( data.fandoms, [ 'MLP', 'Genshin' ] )
+			$mol_assert_equal( data.products[0].fandoms, [ 'Genshin', 'MLP' ] )
+		},
+
+		'Import reads order social and other links without duplicates'() {
+			const data = $bog_merchquarium_import_parse( JSON.stringify({
+				social: '@NaftulKittenArt',
+				links: [ 'vk.com/nyaftulkittenart', 'https://vk.com/nyaftulkittenart', '@nyaftul_kitten_art', 'not a link' ],
+				products: [],
+			}) )
+			$mol_assert_equal( data.social, '@NaftulKittenArt' )
+			$mol_assert_equal( data.links, [ 'vk.com/nyaftulkittenart', '@nyaftul_kitten_art' ] )
+			$mol_assert_equal( data.errors, [ 'Link "not a link" is not recognized' ] )
+		},
+
 		'Import accepts json wrapped in code fence'() {
 			const data = $bog_merchquarium_import_parse( '```json\n{ "products": [ { "title": "Mat" } ] }\n```' )
 			$mol_assert_equal( data.products.length, 1 )

@@ -14,6 +14,10 @@ namespace $ {
 		Back: $giper_baza_list_link.to( ()=> $giper_baza_file ),
 	}) {}
 
+	export function $bog_merchquarium_catalog_fandom( text: string ) {
+		return text.trim().replace( /^#+\s*/, '' )
+	}
+
 	export type $bog_merchquarium_catalog_image = 'Avatar' | 'Cover' | 'Back'
 
 	export function $bog_merchquarium_catalog_image( catalog: $bog_merchquarium_catalog, key: $bog_merchquarium_catalog_image ) {

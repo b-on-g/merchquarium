@@ -10,7 +10,7 @@ namespace $.$$ {
 		}
 
 		name( name: string ) {
-			return name
+			return this.marker() + name
 		}
 
 		usage_text( name: string ) {

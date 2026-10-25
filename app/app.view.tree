@@ -11,6 +11,7 @@ $bog_merchquarium_app $mol_page
 		search? <=> search? \
 		cart_count? <=> cart_count*? 0
 		product_delete? <=> product_delete*? null
+		editable <= editing true
 	Social* $mol_link
 		uri <= social_uri* \
 		target \_blank
@@ -52,9 +53,17 @@ $bog_merchquarium_app $mol_page
 		<= Product_add $bog_merchquarium_button
 			title @ \Add product
 			click? <=> product_add? null
-			hidden <= is_not_admin true
+			hidden <= not_editing true
 		<= Tools
 	tools /
+		<= Help_button $mol_check_icon
+			hint @ \How it works
+			Icon <= Help_icon $mol_icon_help_circle_outline
+			checked? <=> help_checked? false
+		<= Preview $mol_check_icon
+			hint @ \How visitors see it
+			Icon <= Preview_icon $mol_icon_eye_outline
+			checked? <=> preview? false
 		<= Cart_button $mol_button_minor
 			hint @ \Cart
 			click? <=> cart_toggle? null
@@ -97,6 +106,41 @@ $bog_merchquarium_app $mol_page
 					items <= product_cards /
 				<= Catalog_empty $mol_paragraph
 					title @ \Products coming soon
+		<= Help $mol_text
+			text @ \
+				\## What is it
+				\
+				\Merchquarium is a showcase of your merch. Visitors browse products, fill the cart and send you the order to your DM in one message with a link. There is no checkout and no payment inside: you confirm availability and price yourself.
+				\
+				\## First steps
+				\
+				\1. Open **Settings** (the gear in the header).
+				\2. Set the catalog title, avatar, header and page backgrounds, pick a theme.
+				\3. In **Sales** put the link for orders: @nick or t.me/nick for Telegram, vk.com/nick for VK. Other socials go to the header icons.
+				\4. Add merch kinds and fandoms: they become filters and #tags on cards.
+				\
+				\## Products
+				\
+				\- **Add product** creates an empty card. Fill title, price, description, kind and fandoms right on it, then upload photos.
+				\- Status: **In stock** sells, **Sold out** stays visible with a badge and an "I want it if there is a reprint" button, **Hidden** is visible only to you.
+				\- **Delete** can be undone with the button in place of the card or Ctrl+Z.
+				\
+				\## Bulk import
+				\
+				\In Settings → **Bulk import** copy the prompt, talk to any AI chat about your merch and paste its JSON back. Products, kinds, fandoms and socials are added at once, photos are uploaded to cards afterwards.
+				\
+				\## How visitors see it
+				\
+				\The eye button in the header switches you to the visitor view: hidden products disappear, sold out ones go to the end, editing turns off. Press it again to return.
+				\
+				\## Orders
+				\
+				\Share the page link from the address bar. A visitor's order comes to your DM with a link: open it to see the order list with sums.
+				\
+				\## Access and search
+				\
+				\- In Settings → **Access** you can give editing rights to a co-author by their account id.
+				\- **Show in search engines** puts the catalog into Yandex and Google; turn it off to keep the catalog by link only.
 		<= Settings $bog_merchquarium_settings
 			catalog_link <= catalog_link \
 		<= Cart $bog_merchquarium_cart
