@@ -17,6 +17,8 @@ services:
       caddy: ${NKA_DOMAIN}
       caddy.encode: zstd gzip
       caddy.reverse_proxy: ":9095"
+      caddy_1: cmyser-ru-nka.91.188.212.151.ip.giper.dev
+      caddy_1.redir: https://${NKA_DOMAIN}{uri} permanent
 
 volumes:
   nka_public:

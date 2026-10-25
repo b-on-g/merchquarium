@@ -12,7 +12,7 @@ namespace $ {
 		}
 
 		known( next?: string[] ) {
-			return this.$.$mol_state_local.value( 'bog_merchquarium_seo_catalogs', next ) ?? []
+			return this.$.$mol_state_local.value( 'seo_catalogs', next ) ?? []
 		}
 
 		land_link( text: string | null ) {

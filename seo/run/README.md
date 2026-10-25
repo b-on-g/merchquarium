@@ -24,9 +24,11 @@ rsync -a --exclude '.baza' --exclude '*.map' bog/merchquarium/seo/run/-/ bog/mer
 На сервере в папке с `Dockerfile`, `docker-compose.yml` и `dist`:
 
 ```
-echo NKA_DOMAIN=cmyser-ru-nka.91.188.212.151.ip.giper.dev | sudo tee -a /etc/environment
+echo NKA_DOMAIN=cmyser-ru-merchquarium.91.188.212.151.ip.giper.dev >> .env
 docker compose up -d --build
 ```
+
+Старый адрес `cmyser-ru-nka…` caddy постоянно перенаправляет на новый.
 
 Коды подтверждения Search Console и Яндекс Вебмастера (способ «мета-тег») кладутся в `.env` рядом с compose: `NKA_GOOGLE=…`, `NKA_YANDEX=…`. Узел вставит их в `<head>` главной и страниц каталогов.
 
