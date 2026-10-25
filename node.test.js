@@ -25576,7 +25576,7 @@ var $;
 			return (this.$.$mol_locale.text("$bog_merchquarium_app_title"));
 		}
 		seo_server(){
-			return "https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/";
+			return "https://cmyser-ru-merchquarium.91.188.212.151.ip.giper.dev/";
 		}
 		Product_card(id){
 			const obj = new this.$.$bog_merchquarium_product_card();

@@ -1204,7 +1204,7 @@ $bog_merchquarium_app $mol_page
 	Kind_all @ \Merch kind
 	Fandom_all @ \Fandoms
 	title @ \Catalog 
-	seo_server \https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/
+	seo_server \https://cmyser-ru-merchquarium.91.188.212.151.ip.giper.dev/
 	Product_card* $bog_merchquarium_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
