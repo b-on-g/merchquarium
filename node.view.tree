@@ -123,7 +123,11 @@ $mol_button_major $mol_button_minor
 $bog_merchquarium_button $mol_button_major
 	hidden false
 
-$mol_icon_basket $mol_icon path \M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z
+$mol_icon_help $mol_icon path \M10,19H13V22H10V19M12,2C17.35,2.22 19.68,7.62 16.5,11.67C15.67,12.67 14.33,13.33 13.67,14.17C13,15 13,16 13,17H10C10,15.33 10,13.92 10.67,12.92C11.33,11.92 12.67,11.33 13.5,10.67C15.92,8.43 15.32,5.26 12,5A3,3 0 0,0 9,8H6A6,6 0 0,1 12,2Z
+
+$mol_icon_help_circle $mol_icon path \M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z
+
+$mol_icon_help_circle_outline $mol_icon path \M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z
 
 $mol_check $mol_button_minor
 	attr *
@@ -139,6 +143,12 @@ $mol_check $mol_button_minor
 					<= title \
 
 $mol_check_icon $mol_check
+
+$mol_icon_eye $mol_icon path \M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z
+
+$mol_icon_eye_outline $mol_icon path \M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5M3.18,12C4.83,15.36 8.24,17.5 12,17.5C15.76,17.5 19.17,15.36 20.82,12C19.17,8.64 15.76,6.5 12,6.5C8.24,6.5 4.83,8.64 3.18,12Z
+
+$mol_icon_basket $mol_icon path \M5.5,21C4.72,21 4.04,20.55 3.71,19.9V19.9L1.1,10.44L1,10A1,1 0 0,1 2,9H6.58L11.18,2.43C11.36,2.17 11.66,2 12,2C12.34,2 12.65,2.17 12.83,2.44L17.42,9H22A1,1 0 0,1 23,10L22.96,10.29L20.29,19.9C19.96,20.55 19.28,21 18.5,21H5.5M12,4.74L9,9H15L12,4.74M12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17A2,2 0 0,0 14,15A2,2 0 0,0 12,13Z
 
 $mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
 
@@ -390,14 +400,150 @@ $mol_check_box $mol_check
 $bog_merchquarium_gallery $mol_view
 	sub <= items /$mol_view
 
-$mol_avatar $mol_icon
-	view_box \0 0 24 24
-	id \
-	path \M 12 12 l 0 0 M 0 0 l 0 0 M 24 24 l 0 0 M 0 24 l 0 0 M 24 0 l 0 0
+$mol_stack $mol_view
 
-$mol_icon_sync $mol_icon path \M12,18A6,6 0 0,1 6,12C6,11 6.25,10.03 6.7,9.2L5.24,7.74C4.46,8.97 4,10.43 4,12A8,8 0 0,0 12,20V23L16,19L12,15M12,4V1L8,5L12,9V6A6,6 0 0,1 18,12C18,13 17.75,13.97 17.3,14.8L18.76,16.26C19.54,15.03 20,13.57 20,12A8,8 0 0,0 12,4Z
+$mol_text_code_token $mol_dimmer
+	attr *
+		^
+		mol_text_code_token_type <= type \
 
-$mol_icon_sync_off $mol_icon path \M20,4H14V10L16.24,7.76C17.32,8.85 18,10.34 18,12C18,13 17.75,13.94 17.32,14.77L18.78,16.23C19.55,15 20,13.56 20,12C20,9.79 19.09,7.8 17.64,6.36L20,4M2.86,5.41L5.22,7.77C4.45,9 4,10.44 4,12C4,14.21 4.91,16.2 6.36,17.64L4,20H10V14L7.76,16.24C6.68,15.15 6,13.66 6,12C6,11 6.25,10.06 6.68,9.23L14.76,17.31C14.5,17.44 14.26,17.56 14,17.65V19.74C14.79,19.53 15.54,19.2 16.22,18.78L18.58,21.14L19.85,19.87L4.14,4.14L2.86,5.41M10,6.35V4.26C9.2,4.47 8.45,4.8 7.77,5.22L9.23,6.68C9.5,6.56 9.73,6.44 10,6.35Z
+$mol_text_code_token_link $mol_text_code_token
+	dom_name \a
+	type \code-link
+	attr *
+		^
+		href <= uri \
+		target \_blank
+
+$mol_text_code_line $mol_paragraph
+	text \
+	minimal_height 24
+	numb_showed true
+	syntax null
+	uri_resolve* \
+	Numb $mol_view
+		sub /
+			<= numb 0
+	Token* $mol_text_code_token
+		type <= token_type* \
+		haystack <= token_text* \
+		needle <= highlight \
+	Token_link* $mol_text_code_token_link
+		haystack <= token_text* \
+		needle <= highlight \
+		uri <= token_uri* \
+	find_pos* null
+
+$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
+
+$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
+
+$mol_button_copy $mol_button_minor
+	blobs /$mol_blob
+		<= text_blob? $mol_blob /
+			/BlobPart <= text <= title
+			* type \text/plain
+		<= html_blob? $mol_blob /
+			/BlobPart <= html \
+			* type \text/html
+	data *
+	sub /
+		<= Icon $mol_icon_clipboard_outline
+		<= title \
+
+$mol_text_code $mol_stack
+	attr *
+		^
+		mol_text_code_sidebar_showed <= sidebar_showed false
+	text \
+	text_lines /string
+	find_pos* null
+	uri_base \
+	row_themes /string
+	sub /
+		<= Rows $mol_list
+			render_visible_only <= render_visible_only false
+			rows <= rows /
+				<= Row*0 $mol_text_code_line
+					numb_showed <= sidebar_showed
+					numb <= row_numb* 0
+					theme <= row_theme* \
+					text <= row_text* \
+					syntax <= syntax null
+					uri_resolve* <= uri_resolve* \
+					highlight <= highlight \
+		<= Copy $mol_button_copy
+			hint @ \Copy whole code
+			text <= text_export \
+
+$mol_float $mol_view
+	style *
+		^
+		minHeight \auto
+
+$mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
+
+$mol_check_expand $mol_check
+	Icon $mol_icon_chevron
+	level 0
+	style *
+		^
+		paddingLeft <= level_style \0px
+	checked? <=> expanded? false
+	enabled <= expandable false
+
+$mol_grid $mol_view
+	row_height 32
+	row_ids /string[]
+	row_id* null
+	col_ids /
+	records *
+	record* null
+	hierarchy null
+	hierarchy_col \
+	minimal_width 0
+	-
+	sub /
+		<= Head
+		<= Table $mol_grid_table
+			sub <= rows /$mol_view
+	Head $mol_grid_row
+		cells <= head_cells /$mol_view
+	Row* $mol_grid_row
+		minimal_height <= row_height
+		minimal_width <= minimal_width
+		cells <= cells* /$mol_view
+	-
+	Cell* $mol_view
+	cell* null
+	Cell_text* $mol_grid_cell
+		sub <= cell_content_text* <= cell_content* /$mol_view_content
+	Cell_number* $mol_grid_number
+		sub <= cell_content_number* <= cell_content* /$mol_view_content
+	Col_head* $mol_float
+		dom_name \th
+		sub <= col_head_content* /$mol_view_content
+	Cell_branch* $mol_check_expand
+		level <= cell_level* 0
+		label <= cell_content* /$mol_view_content
+		expanded? <=> cell_expanded*? false
+	Cell_content* /
+		<= Cell_dimmer* $mol_dimmer
+			needle <= needle \
+			haystack <= cell_value* \
+
+$mol_grid_table $mol_list
+	- dom_name \table
+
+$mol_grid_row $mol_view
+	- dom_name \tr
+	sub <= cells /$mol_view
+
+$mol_grid_cell $mol_view
+	- dom_name \td
+	minimal_height 40
+
+$mol_grid_number $mol_grid_cell
 
 $mol_link $mol_view
 	uri \
@@ -420,6 +566,235 @@ $mol_link $mol_view
 		^
 		click? <=> click? <=> event_click? null
 
+$mol_image $mol_view
+	dom_name \img
+	attr *any
+		^
+		src <= uri \
+		title <= hint
+		alt <= title \
+		loading <= loading \lazy
+		decoding <= decoding \async
+		crossOrigin <= cors null
+		width <= natural_width 0
+		height <= natural_height 0
+	event *any
+		load? <=> load? null
+	minimal_width 16
+	minimal_height 16
+
+$mol_link_iconed $mol_link
+	sub /
+		<= Icon $mol_image
+			uri <= icon \
+			title \
+	content /
+		<= title <= uri
+	host \
+
+$mol_embed_native $mol_scroll
+	dom_name \iframe
+	window null
+	attr *
+		^
+		src <= uri? \about:config
+	sub /
+		<= Fallback $mol_link
+			uri <= uri
+			sub /
+				<= title \
+	message *
+		hashchange? <=> uri_change? null
+
+$mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
+
+$mol_frame $mol_embed_native
+	attr *
+		tabindex <= tabindex
+		allow <= allow \
+		src <= uri
+		srcdoc <= html null
+	fullscreen true
+	accelerometer true
+	autoplay true
+	encription true
+	gyroscope true
+	pip true
+	clipboard_read true
+	clipboard_write true
+
+$mol_embed_service $mol_check
+	uri \
+	video_preview \
+	video_id \
+	checked? <=> active? false
+	sub /
+		<= Image $mol_image
+			title <= title \
+			uri <= video_preview \
+		<= Hint $mol_icon_youtube
+		<= Frame $mol_frame
+			title <= title \
+			uri <= video_embed \
+
+
+$mol_embed_youtube $mol_embed_service
+
+$mol_embed_rutube $mol_embed_service
+
+$mol_embed_vklive $mol_embed_service
+
+$mol_embed_any $mol_view
+	Image $mol_image
+		title <= title \
+		uri <= uri \
+	Object $mol_embed_native
+		title <= title \
+		uri <= uri \
+	Youtube $mol_embed_youtube
+		title <= title \
+		uri <= uri \
+	Rutube $mol_embed_rutube
+		title <= title \
+		uri <= uri \
+	Vklive $mol_embed_vklive
+		title <= title \
+		uri <= uri \
+
+$mol_expander $mol_list
+	rows /
+		<= Label $mol_view
+			sub /
+				<= Trigger $mol_check_expand
+					checked? <=> expanded? false
+					expandable <= expandable true
+					label <= label /
+						<= title
+				<= Tools null
+		<= Content $mol_list
+			rows <= content /
+
+$mol_text $mol_list
+	uri_base \
+	text \
+	param \
+	flow_tokens /
+	block_text* \
+	auto /
+		<= auto_scroll null
+	- \Blocks
+	Paragraph* $mol_paragraph
+		sub <= block_content* /
+	Quote* $mol_text
+		text <= quote_text* \
+		auto_scroll null
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	List* $mol_text_list
+		type <= list_type* \-
+		text <= list_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	item_index* 0
+	Header* $mol_text_header
+		minimal_height 40
+		level <= header_level* 1
+		content <= block_content* /
+		arg <= header_arg* *
+	Pre* $mol_text_code
+		text <= pre_text* \
+		row_themes <= pre_themes* /string
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		sidebar_showed <= code_sidebar_showed true
+	Cut* $mol_view dom_name \hr
+	- \Table
+	Table* $mol_grid
+		head_cells <= table_head_cells* /
+		rows <= table_rows* /
+	Table_row* $mol_grid_row
+		cells <= table_cells* /
+	Table_cell* $mol_text
+		auto_scroll null
+		text <= table_cell_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	- \Grid
+	Grid* $mol_grid
+		rows <= grid_rows* /
+	Grid_row* $mol_grid_row
+		cells <= grid_cells* /
+	Grid_cell* $mol_text
+		auto_scroll null
+		text <= grid_cell_text* \
+		highlight <= highlight \
+		uri_resolve* <= uri_resolve* \
+		code_sidebar_showed <= code_sidebar_showed true
+	- \Lines
+	String* $mol_dimmer
+		dom_name \span
+		needle <= highlight \
+		haystack <= line_text* \
+	Span* $mol_text_span
+		dom_name \span
+		type <= line_type* \
+		sub <= line_content* /
+	Code_line* $mol_text_code_line
+		numb_showed false
+		highlight <= highlight \
+		text <= line_text* \
+		uri_resolve* <= uri_resolve* \
+		syntax <= code_syntax null
+	Link* $mol_link_iconed
+		uri <= link_uri* \
+		content <= line_content* /
+	Link_http* $mol_link_iconed
+		uri <= link_uri* \
+		content / <= link_host* \
+	Embed* $mol_embed_any
+		uri <= link_uri* \
+		title <= line_text* \
+	- \Spoilers
+	Spoiler* $mol_expander
+		label /
+			<= Spoiler_label* $mol_text
+				text <= spoiler_label* \
+				highlight <= highlight \
+				uri_resolve* <= uri_resolve* \
+				code_sidebar_showed <= code_sidebar_showed true
+		content /
+			<= Spoiler_content* $mol_text
+				text <= spoiler_content* \
+				highlight <= highlight \
+				uri_resolve* <= uri_resolve* \
+				code_sidebar_showed <= code_sidebar_showed true
+
+$mol_text_header $mol_paragraph
+	level 1
+	sub /
+		<= Link $mol_link
+			arg <= arg *
+			hint @ \Permalink to this section
+			sub <= content /
+
+$mol_text_span $mol_paragraph
+	dom_name \span
+	attr *
+		^
+		mol_text_type <= type \
+
+$mol_avatar $mol_icon
+	view_box \0 0 24 24
+	id \
+	path \M 12 12 l 0 0 M 0 0 l 0 0 M 24 24 l 0 0 M 0 24 l 0 0 M 24 0 l 0 0
+
+$mol_icon_sync $mol_icon path \M12,18A6,6 0 0,1 6,12C6,11 6.25,10.03 6.7,9.2L5.24,7.74C4.46,8.97 4,10.43 4,12A8,8 0 0,0 12,20V23L16,19L12,15M12,4V1L8,5L12,9V6A6,6 0 0,1 18,12C18,13 17.75,13.97 17.3,14.8L18.76,16.26C19.54,15.03 20,13.57 20,12A8,8 0 0,0 12,4Z
+
+$mol_icon_sync_off $mol_icon path \M20,4H14V10L16.24,7.76C17.32,8.85 18,10.34 18,12C18,13 17.75,13.94 17.32,14.77L18.78,16.23C19.55,15 20,13.56 20,12C20,9.79 19.09,7.8 17.64,6.36L20,4M2.86,5.41L5.22,7.77C4.45,9 4,10.44 4,12C4,14.21 4.91,16.2 6.36,17.64L4,20H10V14L7.76,16.24C6.68,15.15 6,13.66 6,12C6,11 6.25,10.06 6.68,9.23L14.76,17.31C14.5,17.44 14.26,17.56 14,17.65V19.74C14.79,19.53 15.54,19.2 16.22,18.78L18.58,21.14L19.85,19.87L4.14,4.14L2.86,5.41M10,6.35V4.26C9.2,4.47 8.45,4.8 7.77,5.22L9.23,6.68C9.5,6.56 9.73,6.44 10,6.35Z
+
 $giper_baza_status $mol_select
 	minimal_width 40
 	minimal_height 40
@@ -436,23 +811,6 @@ $giper_baza_status $mol_select
 					id <= master_link \
 				<= Fail $mol_icon_sync_off
 			hint <= message <= hint \Sync status
-
-$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
-
-$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
-
-$mol_button_copy $mol_button_minor
-	blobs /$mol_blob
-		<= text_blob? $mol_blob /
-			/BlobPart <= text <= title
-			* type \text/plain
-		<= html_blob? $mol_blob /
-			/BlobPart <= html \
-			* type \text/html
-	data *
-	sub /
-		<= Icon $mol_icon_clipboard_outline
-		<= title \
 
 $mol_section $mol_list
 	level 1
@@ -472,6 +830,7 @@ $bog_merchquarium_tags $mol_view
 	items /string
 	editable false
 	input_hint \
+	marker \
 	add_title @ \Add
 	confirm_title @ \Delete this tag?
 	confirm_info @ \Deleting it will also clear it from these products:
@@ -517,65 +876,6 @@ $bog_merchquarium_tags $mol_view
 							<= Confirm* $mol_button_major
 								title <= confirm_action
 								click? <=> confirm*? null
-
-$mol_stack $mol_view
-
-$mol_text_code_token $mol_dimmer
-	attr *
-		^
-		mol_text_code_token_type <= type \
-
-$mol_text_code_token_link $mol_text_code_token
-	dom_name \a
-	type \code-link
-	attr *
-		^
-		href <= uri \
-		target \_blank
-
-$mol_text_code_line $mol_paragraph
-	text \
-	minimal_height 24
-	numb_showed true
-	syntax null
-	uri_resolve* \
-	Numb $mol_view
-		sub /
-			<= numb 0
-	Token* $mol_text_code_token
-		type <= token_type* \
-		haystack <= token_text* \
-		needle <= highlight \
-	Token_link* $mol_text_code_token_link
-		haystack <= token_text* \
-		needle <= highlight \
-		uri <= token_uri* \
-	find_pos* null
-
-$mol_text_code $mol_stack
-	attr *
-		^
-		mol_text_code_sidebar_showed <= sidebar_showed false
-	text \
-	text_lines /string
-	find_pos* null
-	uri_base \
-	row_themes /string
-	sub /
-		<= Rows $mol_list
-			render_visible_only <= render_visible_only false
-			rows <= rows /
-				<= Row*0 $mol_text_code_line
-					numb_showed <= sidebar_showed
-					numb <= row_numb* 0
-					theme <= row_theme* \
-					text <= row_text* \
-					syntax <= syntax null
-					uri_resolve* <= uri_resolve* \
-					highlight <= highlight \
-		<= Copy $mol_button_copy
-			hint @ \Copy whole code
-			text <= text_export \
 
 $mol_textarea $mol_stack
 	attr *
@@ -740,7 +1040,7 @@ $mol_button_open_native $mol_view
 
 $bog_merchquarium_settings $mol_page
 	title @ \Settings
-	Import_summary @ \Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}
+	Import_summary @ \Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}, new links: {links}
 	Import_errors @ \Problems: {errors}
 	Theme_sakura @ \Sakura
 	Theme_lavender @ \Lavender
@@ -813,6 +1113,7 @@ $bog_merchquarium_settings $mol_page
 					items <= fandom_items /string
 					editable <= is_admin
 					input_hint @ \New fandom
+					marker \#
 					confirm_title @ \Delete this fandom?
 					usage* <= fandom_usage* 0
 					item_add*? <=> fandom_add*? null
@@ -967,23 +1268,6 @@ $mol_icon_camera $mol_icon path \M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0
 
 $mol_icon_camera_off $mol_icon path \M1.2,4.47L2.5,3.2L20,20.72L18.73,22L16.73,20H4A2,2 0 0,1 2,18V6C2,5.78 2.04,5.57 2.1,5.37L1.2,4.47M7,4L9,2H15L17,4H20A2,2 0 0,1 22,6V18C22,18.6 21.74,19.13 21.32,19.5L16.33,14.5C16.76,13.77 17,12.91 17,12A5,5 0 0,0 12,7C11.09,7 10.23,7.24 9.5,7.67L5.82,4H7M7,12A5,5 0 0,0 12,17C12.5,17 13.03,16.92 13.5,16.77L11.72,15C10.29,14.85 9.15,13.71 9,12.28L7.23,10.5C7.08,10.97 7,11.5 7,12M12,9A3,3 0 0,1 15,12C15,12.35 14.94,12.69 14.83,13L11,9.17C11.31,9.06 11.65,9 12,9Z
 
-$mol_image $mol_view
-	dom_name \img
-	attr *any
-		^
-		src <= uri \
-		title <= hint
-		alt <= title \
-		loading <= loading \lazy
-		decoding <= decoding \async
-		crossOrigin <= cors null
-		width <= natural_width 0
-		height <= natural_height 0
-	event *any
-		load? <=> load? null
-	minimal_width 16
-	minimal_height 16
-
 $yuf_carousel $mol_view
 	index? 0
 	scroll_x? 0
@@ -1103,6 +1387,7 @@ $bog_merchquarium_product_card $mol_card
 	catalog_link? \
 	search? \
 	cart_count? 0
+	editable true
 	Want_message @ \I want {title} if there is a reprint: {link}
 	Want_title @ \I want it if there is a reprint
 	Want_copied_title @ \✓ Copied — open {social}
@@ -1192,11 +1477,23 @@ $mol_icon_telegram $mol_icon path \M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 
 
 $mol_icon_vk $mol_icon path \M20.8,7.74C20.93,7.32 20.8,7 20.18,7H18.16C17.64,7 17.41,7.27 17.28,7.57C17.28,7.57 16.25,10.08 14.79,11.72C14.31,12.19 14.1,12.34 13.84,12.34C13.71,12.34 13.5,12.19 13.5,11.76V7.74C13.5,7.23 13.38,7 12.95,7H9.76C9.44,7 9.25,7.24 9.25,7.47C9.25,7.95 10,8.07 10.05,9.44V12.42C10.05,13.08 9.93,13.2 9.68,13.2C9,13.2 7.32,10.67 6.33,7.79C6.13,7.23 5.94,7 5.42,7H3.39C2.82,7 2.7,7.27 2.7,7.57C2.7,8.11 3.39,10.77 5.9,14.29C7.57,16.7 9.93,18 12.08,18C13.37,18 13.53,17.71 13.53,17.21V15.39C13.53,14.82 13.65,14.7 14.06,14.7C14.36,14.7 14.87,14.85 16.07,16C17.45,17.38 17.67,18 18.45,18H20.47C21.05,18 21.34,17.71 21.18,17.14C21,16.57 20.34,15.74 19.47,14.76C19,14.21 18.29,13.61 18.07,13.3C17.77,12.92 17.86,12.75 18.07,12.4C18.07,12.4 20.54,8.93 20.8,7.74Z
 
-$mol_icon_youtube $mol_icon path \M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z
-
 $mol_icon_instagram $mol_icon path \M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z
 
 $mol_icon_web $mol_icon path \M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
+
+$mol_text_list $mol_text
+	auto_scroll null
+	attr *
+		^
+		mol_text_list_type <= type \
+	Paragraph* $mol_text_list_item
+		index <= item_index*
+		sub <= block_content*
+
+$mol_text_list_item $mol_paragraph
+	attr *
+		^
+		mol_text_list_item_index <= index 0
 
 $bog_merchquarium_app $mol_page
 	Settings_title @ \Settings
@@ -1211,6 +1508,7 @@ $bog_merchquarium_app $mol_page
 		search? <=> search? \
 		cart_count? <=> cart_count*? 0
 		product_delete? <=> product_delete*? null
+		editable <= editing true
 	Social* $mol_link
 		uri <= social_uri* \
 		target \_blank
@@ -1252,9 +1550,17 @@ $bog_merchquarium_app $mol_page
 		<= Product_add $bog_merchquarium_button
 			title @ \Add product
 			click? <=> product_add? null
-			hidden <= is_not_admin true
+			hidden <= not_editing true
 		<= Tools
 	tools /
+		<= Help_button $mol_check_icon
+			hint @ \How it works
+			Icon <= Help_icon $mol_icon_help_circle_outline
+			checked? <=> help_checked? false
+		<= Preview $mol_check_icon
+			hint @ \How visitors see it
+			Icon <= Preview_icon $mol_icon_eye_outline
+			checked? <=> preview? false
 		<= Cart_button $mol_button_minor
 			hint @ \Cart
 			click? <=> cart_toggle? null
@@ -1297,6 +1603,41 @@ $bog_merchquarium_app $mol_page
 					items <= product_cards /
 				<= Catalog_empty $mol_paragraph
 					title @ \Products coming soon
+		<= Help $mol_text
+			text @ \
+				\## What is it
+				\
+				\Merchquarium is a showcase of your merch. Visitors browse products, fill the cart and send you the order to your DM in one message with a link. There is no checkout and no payment inside: you confirm availability and price yourself.
+				\
+				\## First steps
+				\
+				\1. Open **Settings** (the gear in the header).
+				\2. Set the catalog title, avatar, header and page backgrounds, pick a theme.
+				\3. In **Sales** put the link for orders: @nick or t.me/nick for Telegram, vk.com/nick for VK. Other socials go to the header icons.
+				\4. Add merch kinds and fandoms: they become filters and #tags on cards.
+				\
+				\## Products
+				\
+				\- **Add product** creates an empty card. Fill title, price, description, kind and fandoms right on it, then upload photos.
+				\- Status: **In stock** sells, **Sold out** stays visible with a badge and an "I want it if there is a reprint" button, **Hidden** is visible only to you.
+				\- **Delete** can be undone with the button in place of the card or Ctrl+Z.
+				\
+				\## Bulk import
+				\
+				\In Settings → **Bulk import** copy the prompt, talk to any AI chat about your merch and paste its JSON back. Products, kinds, fandoms and socials are added at once, photos are uploaded to cards afterwards.
+				\
+				\## How visitors see it
+				\
+				\The eye button in the header switches you to the visitor view: hidden products disappear, sold out ones go to the end, editing turns off. Press it again to return.
+				\
+				\## Orders
+				\
+				\Share the page link from the address bar. A visitor's order comes to your DM with a link: open it to see the order list with sums.
+				\
+				\## Access and search
+				\
+				\- In Settings → **Access** you can give editing rights to a co-author by their account id.
+				\- **Show in search engines** puts the catalog into Yandex and Google; turn it off to keep the catalog by link only.
 		<= Settings $bog_merchquarium_settings
 			catalog_link <= catalog_link \
 		<= Cart $bog_merchquarium_cart

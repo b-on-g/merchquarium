@@ -4,8 +4,11 @@
 	"$bog_merchquarium_app_Catalog_empty_title": "Products coming soon",
 	"$bog_merchquarium_app_Catalog_missing_text_title": "No catalog selected:",
 	"$bog_merchquarium_app_Fandom_all": "Fandoms",
+	"$bog_merchquarium_app_Help_button_hint": "How it works",
+	"$bog_merchquarium_app_Help_text": "## What is it\n\nMerchquarium is a showcase of your merch. Visitors browse products, fill the cart and send you the order to your DM in one message with a link. There is no checkout and no payment inside: you confirm availability and price yourself.\n\n## First steps\n\n1. Open **Settings** (the gear in the header).\n2. Set the catalog title, avatar, header and page backgrounds, pick a theme.\n3. In **Sales** put the link for orders: @nick or t.me/nick for Telegram, vk.com/nick for VK. Other socials go to the header icons.\n4. Add merch kinds and fandoms: they become filters and #tags on cards.\n\n## Products\n\n- **Add product** creates an empty card. Fill title, price, description, kind and fandoms right on it, then upload photos.\n- Status: **In stock** sells, **Sold out** stays visible with a badge and an \"I want it if there is a reprint\" button, **Hidden** is visible only to you.\n- **Delete** can be undone with the button in place of the card or Ctrl+Z.\n\n## Bulk import\n\nIn Settings → **Bulk import** copy the prompt, talk to any AI chat about your merch and paste its JSON back. Products, kinds, fandoms and socials are added at once, photos are uploaded to cards afterwards.\n\n## How visitors see it\n\nThe eye button in the header switches you to the visitor view: hidden products disappear, sold out ones go to the end, editing turns off. Press it again to return.\n\n## Orders\n\nShare the page link from the address bar. A visitor's order comes to your DM with a link: open it to see the order list with sums.\n\n## Access and search\n\n- In Settings → **Access** you can give editing rights to a co-author by their account id.\n- **Show in search engines** puts the catalog into Yandex and Google; turn it off to keep the catalog by link only.",
 	"$bog_merchquarium_app_In_stock_title": "Only in stock",
 	"$bog_merchquarium_app_Kind_all": "Merch kind",
+	"$bog_merchquarium_app_Preview_hint": "How visitors see it",
 	"$bog_merchquarium_app_Product_add_title": "Add product",
 	"$bog_merchquarium_app_Product_undo_title": "Undo",
 	"$bog_merchquarium_app_Return_title": "Return",
@@ -63,7 +66,7 @@
 	"$bog_merchquarium_settings_Import_prompt_title": "Copy prompt for AI",
 	"$bog_merchquarium_settings_Import_run_title": "Create products",
 	"$bog_merchquarium_settings_Import_section_title": "Bulk import",
-	"$bog_merchquarium_settings_Import_summary": "Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}",
+	"$bog_merchquarium_settings_Import_summary": "Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}, new links: {links}",
 	"$bog_merchquarium_settings_Links_input_hint": "vk.com/nick, youtube.com/@nick",
 	"$bog_merchquarium_settings_Links_label_title": "Other socials in the header",
 	"$bog_merchquarium_settings_Listed_title": "Show in search engines",
@@ -135,5 +138,6 @@
 	"$mol_select_list_badge_hint": "Drop",
 	"$mol_select_list_pick_hint": "Add..",
 	"$mol_select_no_options_message": "No options",
-	"$mol_text_code_Copy_hint": "Copy whole code"
+	"$mol_text_code_Copy_hint": "Copy whole code",
+	"$mol_text_header_Link_hint": "Permalink to this section"
 }

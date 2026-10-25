@@ -3263,6 +3263,60 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    $mol_test({
+        '$mol_syntax2_md_flow'() {
+            const check = (input, right) => {
+                const tokens = [];
+                $mol_syntax2_md_flow.tokenize(input, (...token) => tokens.push(token));
+                $mol_assert_equal(tokens, right);
+            };
+            check('Hello,\nWorld..\r\n\r\n\nof Love!', [
+                ['block', 'Hello,\n', ['Hello,', '\n'], 0],
+                ['block', 'World..\r\n\r\n\n', ['World..', '\r\n\r\n\n'], 7],
+                ['block', 'of Love!', ['of Love!', ''], 19],
+            ]);
+            check('# Header1\n\nHello!\n\n## Header2', [
+                ['header', '# Header1\n\n', ['#', ' ', 'Header1', '\n\n'], 0],
+                ['block', 'Hello!\n\n', ['Hello!', '\n\n'], 11],
+                ['header', '## Header2', ['##', ' ', 'Header2', ''], 19],
+            ]);
+            check('```\nstart()\n```\n\n```jam.js\nrestart()\n```\n\nHello!\n\n```\nstop()\n```', [
+                ['code', '```\nstart()\n```\n\n', ['```', '', 'start()\n', '```', '\n\n'], 0],
+                ['code', '```jam.js\nrestart()\n```\n\n', ['```', 'jam.js', 'restart()\n', '```', '\n\n'], 17],
+                ['block', 'Hello!\n\n', ['Hello!', '\n\n'], 42],
+                ['code', '```\nstop()\n```', ['```', '', 'stop()\n', '```', ''], 50],
+            ]);
+            check('| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n\n| Cell11 | Cell12\n| Cell21 | Cell22\n', [
+                ['table', '| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n\n', ['| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n', '\n'], 0],
+                ['table', '| Cell11 | Cell12\n| Cell21 | Cell22\n', ['| Cell11 | Cell12\n| Cell21 | Cell22\n', ''], 68],
+            ]);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'null by default'() {
+            const key = String(Math.random());
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+        'storing'() {
+            const key = String(Math.random());
+            $mol_state_session.value(key, '$mol_state_session_test');
+            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
+            $mol_state_session.value(key, null);
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
 /** @jsx $mol_jsx */
 /** @jsxFrag $mol_jsx_frag */
 var $;
@@ -6383,41 +6437,6 @@ var $;
 var $;
 (function ($) {
     $mol_test({
-        '$mol_syntax2_md_flow'() {
-            const check = (input, right) => {
-                const tokens = [];
-                $mol_syntax2_md_flow.tokenize(input, (...token) => tokens.push(token));
-                $mol_assert_equal(tokens, right);
-            };
-            check('Hello,\nWorld..\r\n\r\n\nof Love!', [
-                ['block', 'Hello,\n', ['Hello,', '\n'], 0],
-                ['block', 'World..\r\n\r\n\n', ['World..', '\r\n\r\n\n'], 7],
-                ['block', 'of Love!', ['of Love!', ''], 19],
-            ]);
-            check('# Header1\n\nHello!\n\n## Header2', [
-                ['header', '# Header1\n\n', ['#', ' ', 'Header1', '\n\n'], 0],
-                ['block', 'Hello!\n\n', ['Hello!', '\n\n'], 11],
-                ['header', '## Header2', ['##', ' ', 'Header2', ''], 19],
-            ]);
-            check('```\nstart()\n```\n\n```jam.js\nrestart()\n```\n\nHello!\n\n```\nstop()\n```', [
-                ['code', '```\nstart()\n```\n\n', ['```', '', 'start()\n', '```', '\n\n'], 0],
-                ['code', '```jam.js\nrestart()\n```\n\n', ['```', 'jam.js', 'restart()\n', '```', '\n\n'], 17],
-                ['block', 'Hello!\n\n', ['Hello!', '\n\n'], 42],
-                ['code', '```\nstop()\n```', ['```', '', 'stop()\n', '```', ''], 50],
-            ]);
-            check('| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n\n| Cell11 | Cell12\n| Cell21 | Cell22\n', [
-                ['table', '| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n\n', ['| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n', '\n'], 0],
-                ['table', '| Cell11 | Cell12\n| Cell21 | Cell22\n', ['| Cell11 | Cell12\n| Cell21 | Cell22\n', ''], 68],
-            ]);
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
         'empty string'() {
             $mol_assert_equal(''.match($giper_baza_text_tokens), null);
         },
@@ -6939,25 +6958,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_test({
-        'null by default'() {
-            const key = String(Math.random());
-            $mol_assert_equal($mol_state_session.value(key), null);
-        },
-        'storing'() {
-            const key = String(Math.random());
-            $mol_state_session.value(key, '$mol_state_session_test');
-            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
-            $mol_state_session.value(key, null);
-            $mol_assert_equal($mol_state_session.value(key), null);
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     function check(str, query) {
         $mol_assert_like(str, $hyoo_harp_to_string(query));
         $mol_assert_like(query, $hyoo_harp_from_string(str));
@@ -7463,6 +7463,35 @@ var $;
 var $;
 (function ($) {
     $mol_test({
+        'Social url accepts telegram nick in any form'() {
+            for (const value of ['@NaftulKittenArt', 'NaftulKittenArt', 't.me/NaftulKittenArt', ' https://t.me/NaftulKittenArt ']) {
+                $mol_assert_equal($bog_merchquarium_social_url(value)?.toString(), 'https://t.me/NaftulKittenArt');
+            }
+        },
+        'Social url keeps other sites'() {
+            $mol_assert_equal($bog_merchquarium_social_url('vk.com/kitten')?.toString(), 'https://vk.com/kitten');
+        },
+        'Social url rejects empty and unsafe values'() {
+            $mol_assert_equal($bog_merchquarium_social_url(''), null);
+            $mol_assert_equal($bog_merchquarium_social_url('javascript:alert(1)'), null);
+            $mol_assert_equal($bog_merchquarium_social_url('not a link'), null);
+        },
+        'Social kind is detected by host'() {
+            const kind = (value) => $bog_merchquarium_social_kind($bog_merchquarium_social_url(value));
+            $mol_assert_equal(kind('@kitten'), 'telegram');
+            $mol_assert_equal(kind('https://m.vk.com/kitten'), 'vk');
+            $mol_assert_equal(kind('youtu.be/abc'), 'youtube');
+            $mol_assert_equal(kind('www.instagram.com/kitten'), 'instagram');
+            $mol_assert_equal(kind('boosty.to/kitten'), 'web');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
         'Import parses products and collects categories'() {
             const data = $bog_merchquarium_import_parse(JSON.stringify({
                 title: ' Kitten ',
@@ -7498,6 +7527,24 @@ var $;
                 [],
             ]);
         },
+        'Import strips hash from fandoms'() {
+            const data = $bog_merchquarium_import_parse(JSON.stringify({
+                fandoms: ['#MLP'],
+                products: [{ title: 'Pin', fandoms: '## Genshin, MLP' }],
+            }));
+            $mol_assert_equal(data.fandoms, ['MLP', 'Genshin']);
+            $mol_assert_equal(data.products[0].fandoms, ['Genshin', 'MLP']);
+        },
+        'Import reads order social and other links without duplicates'() {
+            const data = $bog_merchquarium_import_parse(JSON.stringify({
+                social: '@NaftulKittenArt',
+                links: ['vk.com/nyaftulkittenart', 'https://vk.com/nyaftulkittenart', '@nyaftul_kitten_art', 'not a link'],
+                products: [],
+            }));
+            $mol_assert_equal(data.social, '@NaftulKittenArt');
+            $mol_assert_equal(data.links, ['vk.com/nyaftulkittenart', '@nyaftul_kitten_art']);
+            $mol_assert_equal(data.errors, ['Link "not a link" is not recognized']);
+        },
         'Import accepts json wrapped in code fence'() {
             const data = $bog_merchquarium_import_parse('```json\n{ "products": [ { "title": "Mat" } ] }\n```');
             $mol_assert_equal(data.products.length, 1);
@@ -7508,35 +7555,6 @@ var $;
             const data = $bog_merchquarium_import_parse('{ "products": [ { "price": 5 } ] }');
             $mol_assert_equal(data.products.length, 0);
             $mol_assert_equal(data.errors, ['Product 1 has no title']);
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
-        'Social url accepts telegram nick in any form'() {
-            for (const value of ['@NaftulKittenArt', 'NaftulKittenArt', 't.me/NaftulKittenArt', ' https://t.me/NaftulKittenArt ']) {
-                $mol_assert_equal($bog_merchquarium_social_url(value)?.toString(), 'https://t.me/NaftulKittenArt');
-            }
-        },
-        'Social url keeps other sites'() {
-            $mol_assert_equal($bog_merchquarium_social_url('vk.com/kitten')?.toString(), 'https://vk.com/kitten');
-        },
-        'Social url rejects empty and unsafe values'() {
-            $mol_assert_equal($bog_merchquarium_social_url(''), null);
-            $mol_assert_equal($bog_merchquarium_social_url('javascript:alert(1)'), null);
-            $mol_assert_equal($bog_merchquarium_social_url('not a link'), null);
-        },
-        'Social kind is detected by host'() {
-            const kind = (value) => $bog_merchquarium_social_kind($bog_merchquarium_social_url(value));
-            $mol_assert_equal(kind('@kitten'), 'telegram');
-            $mol_assert_equal(kind('https://m.vk.com/kitten'), 'vk');
-            $mol_assert_equal(kind('youtu.be/abc'), 'youtube');
-            $mol_assert_equal(kind('www.instagram.com/kitten'), 'instagram');
-            $mol_assert_equal(kind('boosty.to/kitten'), 'web');
         },
     });
 })($ || ($ = {}));
@@ -7776,6 +7794,12 @@ var $;
                 $mol_assert_equal(kinds.draft(), '');
                 settings.fandom_add(mlp);
                 settings.fandom_add(genshin);
+                const fandoms = settings.Fandoms();
+                fandoms.draft(`#${genshin}`);
+                fandoms.submit();
+                $mol_assert_equal(fandoms.name(mlp), `#${mlp}`);
+                $mol_assert_equal(kinds.name(badge), badge);
+                $mol_assert_equal(artist.fandom_options()[mlp], `#${mlp}`);
                 $mol_assert_equal(artist.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(artist.style()['--mol_theme_hue'], '165deg');
                 $mol_assert_equal(settings.theme_swatch('mint').boxShadow, '0 0 0 3px var(--mol_theme_current)');
@@ -7867,18 +7891,27 @@ var $;
         },
         async 'e2e 05: bulk import adds products and new kinds'() {
             await step(() => {
+                const youtube = `https://youtube.com/@merch${run}`;
                 settings.import_json('```json\n' + JSON.stringify({
+                    social: order_url,
+                    links: ['vk.com/nyaftulkittenart', youtube],
                     products: [
-                        { title: sticker, price: 100, category: decal, fandoms: [genshin, knight] },
+                        { title: sticker, price: 100, category: decal, fandoms: [`#${genshin}`, knight] },
                         { price: 5 },
                     ],
                 }) + '\n```');
                 $mol_assert_equal(settings.import_ready(), true);
                 $mol_assert_equal(settings.import_new_categories(), [decal]);
                 $mol_assert_equal(settings.import_new_fandoms(), [knight]);
+                $mol_assert_equal(settings.import_new_links(), [youtube]);
                 $mol_assert_equal(settings.import_data().errors, ['Product 2 has no title']);
                 settings.import_run();
                 $mol_assert_equal(settings.import_json(), '');
+                $mol_assert_equal(settings.social_link(), '@NaftulKittenArt');
+                $mol_assert_equal(settings.link_items().filter(link => link.endsWith(run)), [youtube]);
+                $mol_assert_equal(artist.social_list().includes(youtube), true);
+                settings.link_drop(youtube);
+                $mol_assert_equal(socials(artist), [order_url, ...links]);
                 $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge, decal]);
                 $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
                 $mol_assert_equal(card(artist, sticker).status(), 'available');
@@ -8048,7 +8081,35 @@ var $;
                 $mol_assert_equal($bog_merchquarium_order_decode(link, order_code(cart)), { [first.product_link()]: 2 });
             });
         },
-        async 'e2e 14: artist opens the order link'() {
+        async 'e2e 14: author previews the catalog as a visitor and opens help'() {
+            await step(() => {
+                $mol_assert_equal(guest.Preview(), null);
+                $mol_assert_equal(guest.Help_button(), null);
+                $mol_assert_unique(artist.Preview(), null);
+                artist.preview(true);
+                const item = card(artist, kit);
+                $mol_assert_equal(titles(artist), [kit, sticker, pinkie]);
+                $mol_assert_equal(artist.Product_add().hidden(), true);
+                $mol_assert_equal(item.changed(), false);
+                $mol_assert_equal(item.Admin(), null);
+                $mol_assert_equal(item.info_rows(), [item.Title(), item.Price_text(), item.Tags()]);
+                $mol_assert_equal(ours(Object.keys(artist.kind_options())), [postcard, keychain]);
+                artist.preview(false);
+                $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
+                $mol_assert_equal(artist.Product_add().hidden(), false);
+                $mol_assert_equal(card(artist, kit).changed(), true);
+                artist.settings_toggle();
+                artist.Help_button().checked(true);
+                $mol_assert_equal(artist.settings_open(), false);
+                $mol_assert_equal(artist.content(), [artist.Help()]);
+                $mol_assert_equal(artist.head(), [artist.Title(), artist.Product_add(), artist.Tools()]);
+                $mol_assert_equal(artist.Help().text().length > 0, true);
+                $mol_assert_equal(artist.Preview(), null);
+                artist.Help_button().checked(false);
+                $mol_assert_equal(artist.content(), [artist.Catalog_selected()]);
+            });
+        },
+        async 'e2e 15: artist opens the order link'() {
             await step(() => {
                 const code = order_code(guest.Cart());
                 const first = card(artist, kit);
@@ -8060,7 +8121,7 @@ var $;
                 $mol_assert_equal(order.rows().includes(order.Actions()), false);
             });
         },
-        async 'e2e 15: request to VK is copied first and opened on the second press'() {
+        async 'e2e 16: request to VK is copied first and opened on the second press'() {
             await step(() => settings.social_link('https://vk.com/nyaftulkittenart'));
             await sync_guest();
             const { context, opened, copied } = mock_dom();
@@ -8095,7 +8156,7 @@ var $;
                 $mol_assert_equal(opened.at(-1), `https://t.me/NaftulKittenArt?text=${encodeURIComponent(cart.message())}`);
             });
         },
-        async 'e2e 16: dropping a fandom clears it everywhere'() {
+        async 'e2e 17: dropping a fandom clears it everywhere'() {
             await step(() => {
                 $mol_assert_equal(settings.fandom_usage(mlp), 2);
                 settings.fandom_drop(mlp);
@@ -8106,7 +8167,7 @@ var $;
             await sync_guest();
             await step(() => $mol_assert_equal(ours(Object.keys(guest.fandom_options())), [genshin, knight]));
         },
-        async 'e2e 17: hiding from search engines reaches the visitor and is undone'() {
+        async 'e2e 18: hiding from search engines reaches the visitor and is undone'() {
             await step(() => settings.listed(false));
             await sync_guest();
             await step(() => $mol_assert_equal(guest.catalog().Hidden().val(), true));
