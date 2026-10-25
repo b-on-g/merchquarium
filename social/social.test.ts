@@ -26,5 +26,27 @@ namespace $ {
 			$mol_assert_equal( kind( 'boosty.to/kitten' ), 'web' )
 		},
 
+		'Social header hides order link when its network is already listed'() {
+			$mol_assert_equal(
+				$bog_merchquarium_social_header( '@NaftulKittenArt', [ 'vk.com/kitten', '@nyaftul_kitten_art' ] ),
+				[ 'https://vk.com/kitten', 'https://t.me/nyaftul_kitten_art' ],
+			)
+			$mol_assert_equal(
+				$bog_merchquarium_social_header( 'vk.com/kitten_orders', [ 'https://m.vk.com/kitten', 'boosty.to/kitten' ] ),
+				[ 'https://m.vk.com/kitten', 'https://boosty.to/kitten' ],
+			)
+		},
+
+		'Social header keeps order link of a new network first'() {
+			$mol_assert_equal(
+				$bog_merchquarium_social_header( '@NaftulKittenArt', [ 'vk.com/kitten', 'vk.com/kitten', 'boosty.to/kitten' ] ),
+				[ 'https://t.me/NaftulKittenArt', 'https://vk.com/kitten', 'https://boosty.to/kitten' ],
+			)
+			$mol_assert_equal(
+				$bog_merchquarium_social_header( 'kitten.art/shop', [ 'boosty.to/kitten' ] ),
+				[ 'https://kitten.art/shop', 'https://boosty.to/kitten' ],
+			)
+		},
+
 	})
 }

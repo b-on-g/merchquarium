@@ -286,7 +286,10 @@ namespace $.$$ {
 		}
 
 		import_ready() {
-			return this.import_data().products.length > 0 || this.import_new_links().length > 0
+			return this.import_data().products.length > 0
+				|| this.import_new_categories().length > 0
+				|| this.import_new_fandoms().length > 0
+				|| this.import_new_links().length > 0
 		}
 
 		@ $mol_action

@@ -29,7 +29,7 @@ namespace $ {
 
 	function socials( app: $$.$bog_merchquarium_app ) {
 		const list = app.social_list()
-		return [ list[ 0 ], ... links.filter( link => list.includes( link ) ) ]
+		return [ ... list.includes( order_url ) ? [ order_url ] : [], ... links.filter( link => list.includes( link ) ) ]
 	}
 
 	function titles( app: $$.$bog_merchquarium_app ) {
@@ -139,7 +139,7 @@ namespace $ {
 				$mol_assert_equal( artist.title(), 'Nyaftul Kitten Art' )
 				$mol_assert_equal( artist.style()[ '--mol_theme_hue' ], '165deg' )
 				$mol_assert_equal( settings.theme_swatch( 'mint' ).boxShadow, '0 0 0 3px var(--mol_theme_current)' )
-				$mol_assert_equal( socials( artist ), [ order_url, ... links ] )
+				$mol_assert_equal( socials( artist ), links )
 				$mol_assert_equal( artist.hero_sub(), [ artist.Profile(), artist.Socials() ] )
 				$mol_assert_equal( artist.social_sub( 'https://vk.com/nyaftulkittenart' ), [ artist.Icon_vk( 'https://vk.com/nyaftulkittenart' ) ] )
 				$mol_assert_equal( ours( settings.category_items() ), [ postcard, keychain, badge ] )
@@ -237,6 +237,24 @@ namespace $ {
 
 		async 'e2e 05: bulk import adds products and new kinds'() {
 			await step( ()=> {
+				const magnet = mark( 'Магнит' )
+				const undertale = mark( 'Undertale' )
+				for( const [ json, kinds, fandoms ] of [
+					[ { categories: [ magnet ] }, [ magnet ], [] ],
+					[ { fandoms: [ `#${ undertale }` ] }, [], [ undertale ] ],
+				] as [ object, string[], string[] ][] ) {
+					settings.import_json( JSON.stringify( json ) )
+					$mol_assert_equal( settings.import_ready(), true )
+					$mol_assert_equal( settings.import_new_categories(), kinds )
+					$mol_assert_equal( settings.import_new_fandoms(), fandoms )
+					settings.import_run()
+					$mol_assert_equal( settings.import_ready(), false )
+				}
+				$mol_assert_equal( settings.category_items().includes( magnet ), true )
+				$mol_assert_equal( settings.fandom_items().includes( undertale ), true )
+				settings.category_drop( magnet )
+				settings.fandom_drop( undertale )
+
 				const youtube = `https://youtube.com/@merch${ run }`
 				settings.import_json( '```json\n' + JSON.stringify({
 					social: order_url,
@@ -258,7 +276,7 @@ namespace $ {
 				$mol_assert_equal( settings.link_items().filter( link => link.endsWith( run ) ), [ youtube ] )
 				$mol_assert_equal( artist.social_list().includes( youtube ), true )
 				settings.link_drop( youtube )
-				$mol_assert_equal( socials( artist ), [ order_url, ... links ] )
+				$mol_assert_equal( socials( artist ), links )
 				$mol_assert_equal( ours( settings.category_items() ), [ postcard, keychain, badge, decal ] )
 				$mol_assert_equal( titles( artist ), [ kit, pinkie, paimon, sticker ] )
 				$mol_assert_equal( card( artist, sticker ).status(), 'available' )
@@ -351,7 +369,7 @@ namespace $ {
 				$mol_assert_equal( guest.is_admin(), false )
 				$mol_assert_equal( guest.title(), 'Nyaftul Kitten Art' )
 				$mol_assert_equal( guest.style()[ '--mol_theme_hue' ], '165deg' )
-				$mol_assert_equal( socials( guest ), [ order_url, ... links ] )
+				$mol_assert_equal( socials( guest ), links )
 				$mol_assert_equal( guest.head(), [ guest.Hero(), guest.Product_add(), guest.Tools() ] )
 				$mol_assert_equal( guest.avatar_empty(), !images )
 				$mol_assert_equal( guest.style()[ '--bog_merchquarium_cover' ] !== 'none', images )

@@ -197,9 +197,7 @@ namespace $.$$ {
 
 		social_list() {
 			const catalog = this.catalog()
-			const values = [ catalog?.Social()?.val() ?? '', ... catalog?.Links()?.items() ?? [] ]
-			const urls = values.map( value => $bog_merchquarium_social_url( value )?.toString() ?? '' ).filter( Boolean )
-			return [ ... new Set( urls ) ]
+			return $bog_merchquarium_social_header( catalog?.Social()?.val() ?? '', catalog?.Links()?.items() ?? [] )
 		}
 
 		socials() {

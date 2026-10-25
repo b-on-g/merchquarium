@@ -30,6 +30,19 @@ namespace $ {
 		return 'web'
 	}
 
+	export function $bog_merchquarium_social_same( left: URL, right: URL ) {
+		const kind = $bog_merchquarium_social_kind( left )
+		if( kind !== $bog_merchquarium_social_kind( right ) ) return false
+		return kind !== 'web' || left.hostname.replace( /^www\./, '' ) === right.hostname.replace( /^www\./, '' )
+	}
+
+	export function $bog_merchquarium_social_header( order: string, links: readonly string[] ) {
+		const urls = links.map( $bog_merchquarium_social_url ).filter( url => url ) as URL[]
+		const main = $bog_merchquarium_social_url( order )
+		const list = main && !urls.some( url => $bog_merchquarium_social_same( url, main ) ) ? [ main, ... urls ] : urls
+		return [ ... new Set( list.map( url => url.toString() ) ) ]
+	}
+
 	export function $bog_merchquarium_social_name( url: URL ) {
 		return {
 			telegram: 'Telegram',
