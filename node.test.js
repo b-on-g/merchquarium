@@ -23950,6 +23950,20 @@ var $;
         return 'web';
     }
     $.$bog_merchquarium_social_kind = $bog_merchquarium_social_kind;
+    function $bog_merchquarium_social_same(left, right) {
+        const kind = $bog_merchquarium_social_kind(left);
+        if (kind !== $bog_merchquarium_social_kind(right))
+            return false;
+        return kind !== 'web' || left.hostname.replace(/^www\./, '') === right.hostname.replace(/^www\./, '');
+    }
+    $.$bog_merchquarium_social_same = $bog_merchquarium_social_same;
+    function $bog_merchquarium_social_header(order, links) {
+        const urls = links.map($bog_merchquarium_social_url).filter(url => url);
+        const main = $bog_merchquarium_social_url(order);
+        const list = main && !urls.some(url => $bog_merchquarium_social_same(url, main)) ? [main, ...urls] : urls;
+        return [...new Set(list.map(url => url.toString()))];
+    }
+    $.$bog_merchquarium_social_header = $bog_merchquarium_social_header;
     function $bog_merchquarium_social_name(url) {
         return {
             telegram: 'Telegram',
@@ -24349,7 +24363,10 @@ var $;
                 return summary + '. ' + this.Import_errors().replace('{errors}', data.errors.join('; '));
             }
             import_ready() {
-                return this.import_data().products.length > 0 || this.import_new_links().length > 0;
+                return this.import_data().products.length > 0
+                    || this.import_new_categories().length > 0
+                    || this.import_new_fandoms().length > 0
+                    || this.import_new_links().length > 0;
             }
             import_run() {
                 const catalog = this.catalog();
@@ -27993,9 +28010,7 @@ var $;
             }
             social_list() {
                 const catalog = this.catalog();
-                const values = [catalog?.Social()?.val() ?? '', ...catalog?.Links()?.items() ?? []];
-                const urls = values.map(value => $bog_merchquarium_social_url(value)?.toString() ?? '').filter(Boolean);
-                return [...new Set(urls)];
+                return $bog_merchquarium_social_header(catalog?.Social()?.val() ?? '', catalog?.Links()?.items() ?? []);
             }
             socials() {
                 return this.social_list().map(uri => this.Social(uri));
@@ -35486,6 +35501,14 @@ var $;
             $mol_assert_equal(kind('www.instagram.com/kitten'), 'instagram');
             $mol_assert_equal(kind('boosty.to/kitten'), 'web');
         },
+        'Social header hides order link when its network is already listed'() {
+            $mol_assert_equal($bog_merchquarium_social_header('@NaftulKittenArt', ['vk.com/kitten', '@nyaftul_kitten_art']), ['https://vk.com/kitten', 'https://t.me/nyaftul_kitten_art']);
+            $mol_assert_equal($bog_merchquarium_social_header('vk.com/kitten_orders', ['https://m.vk.com/kitten', 'boosty.to/kitten']), ['https://m.vk.com/kitten', 'https://boosty.to/kitten']);
+        },
+        'Social header keeps order link of a new network first'() {
+            $mol_assert_equal($bog_merchquarium_social_header('@NaftulKittenArt', ['vk.com/kitten', 'vk.com/kitten', 'boosty.to/kitten']), ['https://t.me/NaftulKittenArt', 'https://vk.com/kitten', 'https://boosty.to/kitten']);
+            $mol_assert_equal($bog_merchquarium_social_header('kitten.art/shop', ['boosty.to/kitten']), ['https://kitten.art/shop', 'https://boosty.to/kitten']);
+        },
     });
 })($ || ($ = {}));
 
@@ -35722,7 +35745,7 @@ var $;
     const links = ['https://vk.com/nyaftulkittenart', 'https://t.me/nyaftul_kitten_art'];
     function socials(app) {
         const list = app.social_list();
-        return [list[0], ...links.filter(link => list.includes(link))];
+        return [...list.includes(order_url) ? [order_url] : [], ...links.filter(link => list.includes(link))];
     }
     function titles(app) {
         return ours(app.product_cards()
@@ -35817,7 +35840,7 @@ var $;
                 $mol_assert_equal(artist.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(artist.style()['--mol_theme_hue'], '165deg');
                 $mol_assert_equal(settings.theme_swatch('mint').boxShadow, '0 0 0 3px var(--mol_theme_current)');
-                $mol_assert_equal(socials(artist), [order_url, ...links]);
+                $mol_assert_equal(socials(artist), links);
                 $mol_assert_equal(artist.hero_sub(), [artist.Profile(), artist.Socials()]);
                 $mol_assert_equal(artist.social_sub('https://vk.com/nyaftulkittenart'), [artist.Icon_vk('https://vk.com/nyaftulkittenart')]);
                 $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge]);
@@ -35905,6 +35928,23 @@ var $;
         },
         async 'e2e 05: bulk import adds products and new kinds'() {
             await step(() => {
+                const magnet = mark('Магнит');
+                const undertale = mark('Undertale');
+                for (const [json, kinds, fandoms] of [
+                    [{ categories: [magnet] }, [magnet], []],
+                    [{ fandoms: [`#${undertale}`] }, [], [undertale]],
+                ]) {
+                    settings.import_json(JSON.stringify(json));
+                    $mol_assert_equal(settings.import_ready(), true);
+                    $mol_assert_equal(settings.import_new_categories(), kinds);
+                    $mol_assert_equal(settings.import_new_fandoms(), fandoms);
+                    settings.import_run();
+                    $mol_assert_equal(settings.import_ready(), false);
+                }
+                $mol_assert_equal(settings.category_items().includes(magnet), true);
+                $mol_assert_equal(settings.fandom_items().includes(undertale), true);
+                settings.category_drop(magnet);
+                settings.fandom_drop(undertale);
                 const youtube = `https://youtube.com/@merch${run}`;
                 settings.import_json('```json\n' + JSON.stringify({
                     social: order_url,
@@ -35925,7 +35965,7 @@ var $;
                 $mol_assert_equal(settings.link_items().filter(link => link.endsWith(run)), [youtube]);
                 $mol_assert_equal(artist.social_list().includes(youtube), true);
                 settings.link_drop(youtube);
-                $mol_assert_equal(socials(artist), [order_url, ...links]);
+                $mol_assert_equal(socials(artist), links);
                 $mol_assert_equal(ours(settings.category_items()), [postcard, keychain, badge, decal]);
                 $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
                 $mol_assert_equal(card(artist, sticker).status(), 'available');
@@ -36002,7 +36042,7 @@ var $;
                 $mol_assert_equal(guest.is_admin(), false);
                 $mol_assert_equal(guest.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(guest.style()['--mol_theme_hue'], '165deg');
-                $mol_assert_equal(socials(guest), [order_url, ...links]);
+                $mol_assert_equal(socials(guest), links);
                 $mol_assert_equal(guest.head(), [guest.Hero(), guest.Product_add(), guest.Tools()]);
                 $mol_assert_equal(guest.avatar_empty(), !images);
                 $mol_assert_equal(guest.style()['--bog_merchquarium_cover'] !== 'none', images);

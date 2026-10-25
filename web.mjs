@@ -33698,6 +33698,20 @@ var $;
         return 'web';
     }
     $.$bog_merchquarium_social_kind = $bog_merchquarium_social_kind;
+    function $bog_merchquarium_social_same(left, right) {
+        const kind = $bog_merchquarium_social_kind(left);
+        if (kind !== $bog_merchquarium_social_kind(right))
+            return false;
+        return kind !== 'web' || left.hostname.replace(/^www\./, '') === right.hostname.replace(/^www\./, '');
+    }
+    $.$bog_merchquarium_social_same = $bog_merchquarium_social_same;
+    function $bog_merchquarium_social_header(order, links) {
+        const urls = links.map($bog_merchquarium_social_url).filter(url => url);
+        const main = $bog_merchquarium_social_url(order);
+        const list = main && !urls.some(url => $bog_merchquarium_social_same(url, main)) ? [main, ...urls] : urls;
+        return [...new Set(list.map(url => url.toString()))];
+    }
+    $.$bog_merchquarium_social_header = $bog_merchquarium_social_header;
     function $bog_merchquarium_social_name(url) {
         return {
             telegram: 'Telegram',
@@ -34097,7 +34111,10 @@ var $;
                 return summary + '. ' + this.Import_errors().replace('{errors}', data.errors.join('; '));
             }
             import_ready() {
-                return this.import_data().products.length > 0 || this.import_new_links().length > 0;
+                return this.import_data().products.length > 0
+                    || this.import_new_categories().length > 0
+                    || this.import_new_fandoms().length > 0
+                    || this.import_new_links().length > 0;
             }
             import_run() {
                 const catalog = this.catalog();
@@ -37212,9 +37229,7 @@ var $;
             }
             social_list() {
                 const catalog = this.catalog();
-                const values = [catalog?.Social()?.val() ?? '', ...catalog?.Links()?.items() ?? []];
-                const urls = values.map(value => $bog_merchquarium_social_url(value)?.toString() ?? '').filter(Boolean);
-                return [...new Set(urls)];
+                return $bog_merchquarium_social_header(catalog?.Social()?.val() ?? '', catalog?.Links()?.items() ?? []);
             }
             socials() {
                 return this.social_list().map(uri => this.Social(uri));

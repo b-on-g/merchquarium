@@ -45088,6 +45088,8 @@ declare namespace $ {
     function $bog_merchquarium_social_url(value: string): URL | null;
     type $bog_merchquarium_social_kind = 'telegram' | 'vk' | 'youtube' | 'instagram' | 'web';
     function $bog_merchquarium_social_kind(url: URL): $bog_merchquarium_social_kind;
+    function $bog_merchquarium_social_same(left: URL, right: URL): boolean;
+    function $bog_merchquarium_social_header(order: string, links: readonly string[]): string[];
     function $bog_merchquarium_social_name(url: URL): string;
 }
 
