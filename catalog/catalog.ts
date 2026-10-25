@@ -1,6 +1,6 @@
 namespace $ {
-	export class $bog_prilavok_catalog extends $giper_baza_dict.with({
-		Products: $giper_baza_list_link.to( ()=> $bog_prilavok_product ),
+	export class $bog_merchquarium_catalog extends $giper_baza_dict.with({
+		Products: $giper_baza_list_link.to( ()=> $bog_merchquarium_product ),
 		Categories: $giper_baza_list_str,
 		Fandoms: $giper_baza_list_str,
 		Social: $giper_baza_atom_text,
@@ -14,9 +14,9 @@ namespace $ {
 		Back: $giper_baza_list_link.to( ()=> $giper_baza_file ),
 	}) {}
 
-	export type $bog_prilavok_catalog_image = 'Avatar' | 'Cover' | 'Back'
+	export type $bog_merchquarium_catalog_image = 'Avatar' | 'Cover' | 'Back'
 
-	export function $bog_prilavok_catalog_image( catalog: $bog_prilavok_catalog, key: $bog_prilavok_catalog_image ) {
+	export function $bog_merchquarium_catalog_image( catalog: $bog_merchquarium_catalog, key: $bog_merchquarium_catalog_image ) {
 		return catalog[ key ]()?.items().at( -1 )?.str ?? ''
 	}
 

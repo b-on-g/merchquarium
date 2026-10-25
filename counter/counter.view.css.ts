@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	$mol_style_define( $bog_prilavok_counter, {
+	$mol_style_define( $bog_merchquarium_counter, {
 		alignItems: 'center',
 		flex: { wrap: 'nowrap' },
 		border: {

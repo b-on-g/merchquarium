@@ -1,16 +1,16 @@
 namespace $ {
 
-	export type $bog_prilavok_order_items = Record< string, number >
+	export type $bog_merchquarium_order_items = Record< string, number >
 
-	export function $bog_prilavok_order_encode( catalog: string, items: $bog_prilavok_order_items ) {
+	export function $bog_merchquarium_order_encode( catalog: string, items: $bog_merchquarium_order_items ) {
 		return Object.entries( items )
 			.filter( ([ link, count ])=> link.startsWith( catalog ) && count > 0 )
 			.map( ([ link, count ])=> `${ link.slice( catalog.length ) }.${ Math.floor( count ) }` )
 			.join( '~' )
 	}
 
-	export function $bog_prilavok_order_decode( catalog: string, code: string ): $bog_prilavok_order_items {
-		const items: $bog_prilavok_order_items = {}
+	export function $bog_merchquarium_order_decode( catalog: string, code: string ): $bog_merchquarium_order_items {
+		const items: $bog_merchquarium_order_items = {}
 		for( const chunk of code.split( '~' ) ) {
 			const match = /^([\w-]+)\.(\d{1,4})$/.exec( chunk )
 			if( !match || !Number( match[2] ) ) continue
@@ -19,7 +19,7 @@ namespace $ {
 		return items
 	}
 
-	export function $bog_prilavok_order_message( template: string, order: { titles: string[], count: number, total: number, link: string } ) {
+	export function $bog_merchquarium_order_message( template: string, order: { titles: string[], count: number, total: number, link: string } ) {
 		const message = template
 			.replace( /\{count\}/g, String( order.count ) )
 			.replace( /\{total\}/g, order.total.toLocaleString( 'ru-RU' ) )

@@ -1,19 +1,19 @@
 namespace $.$$ {
-	export class $bog_prilavok_cart extends $.$bog_prilavok_cart {
+	export class $bog_merchquarium_cart extends $.$bog_merchquarium_cart {
 
 		catalog() {
 			const link = this.catalog_link()
 			if( !link ) return null
-			return this.$.$giper_baza_glob.Land( new this.$.$giper_baza_link( link ) ).Data( $bog_prilavok_catalog )
+			return this.$.$giper_baza_glob.Land( new this.$.$giper_baza_link( link ) ).Data( $bog_merchquarium_catalog )
 		}
 
 		product( link: string ) {
-			return this.$.$giper_baza_glob.Pawn( new this.$.$giper_baza_link( link ), $bog_prilavok_product )
+			return this.$.$giper_baza_glob.Pawn( new this.$.$giper_baza_link( link ), $bog_merchquarium_product )
 		}
 
 		@ $mol_mem
 		Photo() {
-			return $bog_prilavok_photo.make({ $: this.$ })
+			return $bog_merchquarium_photo.make({ $: this.$ })
 		}
 
 		links() {
@@ -22,7 +22,7 @@ namespace $.$$ {
 
 		available( link: string ) {
 			const product = this.product( link )
-			return Boolean( product.Title()?.val() ) && $bog_prilavok_product_status( product ) === 'available'
+			return Boolean( product.Title()?.val() ) && $bog_merchquarium_product_status( product ) === 'available'
 		}
 
 		price( link: string ) {
@@ -91,30 +91,30 @@ namespace $.$$ {
 		}
 
 		social_url() {
-			return $bog_prilavok_social_url( this.catalog()?.Social()?.val() ?? '' )
+			return $bog_merchquarium_social_url( this.catalog()?.Social()?.val() ?? '' )
 		}
 
 		social_kind() {
 			const url = this.social_url()
-			return url ? $bog_prilavok_social_kind( url ) : null
+			return url ? $bog_merchquarium_social_kind( url ) : null
 		}
 
 		social_name() {
 			const url = this.social_url()
-			return url ? $bog_prilavok_social_name( url ) : ''
+			return url ? $bog_merchquarium_social_name( url ) : ''
 		}
 
 		order_link() {
 			const items = Object.fromEntries( this.ordered().map( link => [ link, this.count( link ) ] ) )
 			return this.$.$mol_state_arg.make_link({
 				catalog: this.catalog_link(),
-				order: $bog_prilavok_order_encode( this.catalog_link(), items ),
+				order: $bog_merchquarium_order_encode( this.catalog_link(), items ),
 			})
 		}
 
 		message() {
 			const ordered = this.ordered()
-			return $bog_prilavok_order_message( this.catalog()?.SocialText()?.val() || this.Order_message(), {
+			return $bog_merchquarium_order_message( this.catalog()?.SocialText()?.val() || this.Order_message(), {
 				titles: ordered.map( link => this.product( link ).Title()?.val() ?? '' ),
 				count: ordered.reduce( ( sum, link )=> sum + this.count( link ), 0 ),
 				total: this.total(),

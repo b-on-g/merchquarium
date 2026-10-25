@@ -1,10 +1,10 @@
 namespace $.$$ {
-	export class $bog_prilavok_product_card extends $.$bog_prilavok_product_card {
+	export class $bog_merchquarium_product_card extends $.$bog_merchquarium_product_card {
 
 		product() {
 			return this.$.$giper_baza_glob.Pawn(
 				new this.$.$giper_baza_link( this.product_link() ),
-				$bog_prilavok_product,
+				$bog_merchquarium_product,
 			)
 		}
 		
@@ -14,7 +14,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		Photo() {
-			return $bog_prilavok_photo.make({ $: this.$ })
+			return $bog_merchquarium_photo.make({ $: this.$ })
 		}
 
 		photos_add(next?: readonly File[]) {
@@ -90,10 +90,10 @@ namespace $.$$ {
 			return next
 		}
 
-		status(next?: string): $bog_prilavok_product_status {
+		status(next?: string): $bog_merchquarium_product_status {
 			const product = this.product()
-			if (next === 'available' || next === 'sold' || next === 'hidden') return $bog_prilavok_product_status(product, next)
-			return $bog_prilavok_product_status(product)
+			if (next === 'available' || next === 'sold' || next === 'hidden') return $bog_merchquarium_product_status(product, next)
+			return $bog_merchquarium_product_status(product)
 		}
 
 		sold() {
@@ -108,7 +108,7 @@ namespace $.$$ {
 				new this.$.$giper_baza_link(link),
 			)
 		
-			return land.Data($bog_prilavok_catalog)
+			return land.Data($bog_merchquarium_catalog)
 		}
 		
 		category_list() {
@@ -140,7 +140,7 @@ namespace $.$$ {
 		}
 
 		social_url() {
-			return $bog_prilavok_social_url( this.catalog()?.Social()?.val() ?? '' )
+			return $bog_merchquarium_social_url( this.catalog()?.Social()?.val() ?? '' )
 		}
 
 		want_enabled() {
@@ -161,7 +161,7 @@ namespace $.$$ {
 		want_title() {
 			const url = this.social_url()
 			if( !url || !this.want_copied() ) return this.Want_title()
-			return this.Want_copied_title().replace( '{social}', $bog_prilavok_social_name( url ) )
+			return this.Want_copied_title().replace( '{social}', $bog_merchquarium_social_name( url ) )
 		}
 
 		@ $mol_action
@@ -170,7 +170,7 @@ namespace $.$$ {
 			if( !url ) return
 
 			const text = this.want_message()
-			if( $bog_prilavok_social_kind( url ) === 'telegram' ) {
+			if( $bog_merchquarium_social_kind( url ) === 'telegram' ) {
 				url.search = `?text=${ encodeURIComponent( text ) }`
 			} else if( !this.want_copied() ) {
 				this.$.$mol_dom_context.navigator.clipboard?.writeText( text ).catch( ()=> {} )

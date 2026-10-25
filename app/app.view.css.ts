@@ -1,9 +1,9 @@
 namespace $.$$ {
 	
-	$mol_style_define($bog_prilavok_app, {
+	$mol_style_define($bog_merchquarium_app, {
 		background: {
-			image: $mol_style_func.vary( '--bog_prilavok_pattern' ),
-			size: [ $mol_style_func.vary( '--bog_prilavok_pattern_size' ) ],
+			image: $mol_style_func.vary( '--bog_merchquarium_pattern' ),
+			size: [ $mol_style_func.vary( '--bog_merchquarium_pattern_size' ) ],
 		},
 		Catalog_missing: {
 			flexDirection: 'column',
@@ -21,7 +21,7 @@ namespace $.$$ {
 		Head: {
 			alignItems: 'flex-start',
 			background: {
-				image: $mol_style_func.vary( '--bog_prilavok_cover' ),
+				image: $mol_style_func.vary( '--bog_merchquarium_cover' ),
 				size: [ 'cover' ],
 				position: 'center',
 			},

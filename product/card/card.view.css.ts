@@ -1,10 +1,10 @@
 namespace $.$$ {
 
-	$mol_style_define( $bog_prilavok_product_card, {
+	$mol_style_define( $bog_merchquarium_product_card, {
 		overflow: 'hidden',
 		border: {
-			style: $mol_style_func.vary( '--bog_prilavok_card_border_style' ),
-			width: $mol_style_func.vary( '--bog_prilavok_card_border_width' ),
+			style: $mol_style_func.vary( '--bog_merchquarium_card_border_style' ),
+			width: $mol_style_func.vary( '--bog_merchquarium_card_border_width' ),
 			color: $mol_theme.control,
 		},
 		gap: $mol_gap.block,
@@ -13,7 +13,7 @@ namespace $.$$ {
 		},
 
 		'@': {
-			bog_prilavok_product_card_state: {
+			bog_merchquarium_product_card_state: {
 				sold: {
 					Photos: {
 						filter: 'grayscale(1)',
@@ -38,7 +38,7 @@ namespace $.$$ {
 		Cover: {
 			display: 'block',
 			position: 'relative',
-			padding: $mol_style_func.vary( '--bog_prilavok_photo_inset' ),
+			padding: $mol_style_func.vary( '--bog_merchquarium_photo_inset' ),
 		},
 
 		Sold_badge: {
@@ -70,7 +70,7 @@ namespace $.$$ {
 				width: '100%',
 				aspectRatio: 1,
 				border: {
-					radius: $mol_style_func.vary( '--bog_prilavok_photo_round' ),
+					radius: $mol_style_func.vary( '--bog_merchquarium_photo_round' ),
 				},
 			},
 		},
@@ -78,7 +78,7 @@ namespace $.$$ {
 		Photo_empty: {
 			aspectRatio: 1,
 			border: {
-				radius: $mol_style_func.vary( '--bog_prilavok_photo_round' ),
+				radius: $mol_style_func.vary( '--bog_merchquarium_photo_round' ),
 			},
 			alignItems: 'center',
 			justifyContent: 'center',

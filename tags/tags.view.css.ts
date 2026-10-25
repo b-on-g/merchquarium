@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	$mol_style_define( $bog_prilavok_tags, {
+	$mol_style_define( $bog_merchquarium_tags, {
 		flexDirection: 'column',
 
 		Form: {

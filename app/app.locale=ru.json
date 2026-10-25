@@ -1,15 +1,15 @@
 {
-	"$bog_prilavok_app_Cart_button_hint": "Корзина",
-	"$bog_prilavok_app_Catalog_create_title": "Создать каталог",
-	"$bog_prilavok_app_Catalog_empty_title": "Товары скоро появятся",
-	"$bog_prilavok_app_Catalog_missing_text_title": "Каталог не выбран:",
-	"$bog_prilavok_app_Fandom_all": "Фандомы",
-	"$bog_prilavok_app_In_stock_title": "Только в наличии",
-	"$bog_prilavok_app_Kind_all": "Вид мерча",
-	"$bog_prilavok_app_Product_add_title": "Добавить товар",
-	"$bog_prilavok_app_Product_undo_title": "Вернуть",
-	"$bog_prilavok_app_Return_title": "Назад",
-	"$bog_prilavok_app_Settings_title": "Настройки",
-	"$bog_prilavok_app_Socials_label_title": "У меня есть",
-	"$bog_prilavok_app_title": "Каталог"
+	"$bog_merchquarium_app_Cart_button_hint": "Корзина",
+	"$bog_merchquarium_app_Catalog_create_title": "Создать каталог",
+	"$bog_merchquarium_app_Catalog_empty_title": "Товары скоро появятся",
+	"$bog_merchquarium_app_Catalog_missing_text_title": "Каталог не выбран:",
+	"$bog_merchquarium_app_Fandom_all": "Фандомы",
+	"$bog_merchquarium_app_In_stock_title": "Только в наличии",
+	"$bog_merchquarium_app_Kind_all": "Вид мерча",
+	"$bog_merchquarium_app_Product_add_title": "Добавить товар",
+	"$bog_merchquarium_app_Product_undo_title": "Вернуть",
+	"$bog_merchquarium_app_Return_title": "Назад",
+	"$bog_merchquarium_app_Settings_title": "Настройки",
+	"$bog_merchquarium_app_Socials_label_title": "У меня есть",
+	"$bog_merchquarium_app_title": "Каталог"
 }

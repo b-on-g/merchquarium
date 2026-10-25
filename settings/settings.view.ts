@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $bog_prilavok_settings extends $.$bog_prilavok_settings {
+	export class $bog_merchquarium_settings extends $.$bog_merchquarium_settings {
 
 		@ $mol_mem
 		settings_open( next?: boolean ) {
@@ -21,7 +21,7 @@ namespace $.$$ {
 
 		catalog() {
 			const land = this.catalog_land()
-			return land?.Data($bog_prilavok_catalog) ?? null
+			return land?.Data($bog_merchquarium_catalog) ?? null
 		}
 
 		catalog_land() {
@@ -34,7 +34,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		is_admin() {
-			return this.catalog_land()?.Data($bog_prilavok_catalog).can_change() ?? false
+			return this.catalog_land()?.Data($bog_merchquarium_catalog).can_change() ?? false
 		}
 
 		body() {
@@ -115,10 +115,10 @@ namespace $.$$ {
 
 		@ $mol_mem
 		Photo() {
-			return $bog_prilavok_photo.make({ $: this.$ })
+			return $bog_merchquarium_photo.make({ $: this.$ })
 		}
 
-		image_title(key: $bog_prilavok_catalog_image) {
+		image_title(key: $bog_merchquarium_catalog_image) {
 			return {
 				Avatar: this.Image_avatar(),
 				Cover: this.Image_cover(),
@@ -126,16 +126,16 @@ namespace $.$$ {
 			}[key]
 		}
 
-		image_link(key: $bog_prilavok_catalog_image) {
+		image_link(key: $bog_merchquarium_catalog_image) {
 			const catalog = this.catalog()
-			return catalog ? $bog_prilavok_catalog_image(catalog, key) : ''
+			return catalog ? $bog_merchquarium_catalog_image(catalog, key) : ''
 		}
 
-		image_filled(key: $bog_prilavok_catalog_image) {
+		image_filled(key: $bog_merchquarium_catalog_image) {
 			return Boolean(this.image_link(key))
 		}
 
-		image_style(key: $bog_prilavok_catalog_image) {
+		image_style(key: $bog_merchquarium_catalog_image) {
 			const link = this.image_link(key)
 			const url = link ? this.Photo().url(link) : ''
 			return {
@@ -144,13 +144,13 @@ namespace $.$$ {
 			}
 		}
 
-		image_add(key: $bog_prilavok_catalog_image, next?: readonly File[]) {
+		image_add(key: $bog_merchquarium_catalog_image, next?: readonly File[]) {
 			if (next?.length && this.is_admin()) $mol_wire_async(this).image_save(key, next[0])
 			return [] as readonly File[]
 		}
 
 		@ $mol_action
-		async image_save(key: $bog_prilavok_catalog_image, file: File) {
+		async image_save(key: $bog_merchquarium_catalog_image, file: File) {
 			const list = this.catalog()![key](null)!
 			const old = list.items()
 			await this.Photo().save([ file ], list)
@@ -158,7 +158,7 @@ namespace $.$$ {
 		}
 
 		@ $mol_action
-		image_drop(key: $bog_prilavok_catalog_image) {
+		image_drop(key: $bog_merchquarium_catalog_image) {
 			const list = this.catalog()?.[key]()
 			for (const link of list?.items() ?? []) list!.cut(link)
 		}
@@ -179,7 +179,7 @@ namespace $.$$ {
 		@ $mol_mem
 		products_available() {
 			return (this.catalog()?.Products()?.remote_list() ?? [])
-				.filter(product => $bog_prilavok_product_status(product) === 'available')
+				.filter(product => $bog_merchquarium_product_status(product) === 'available')
 				.length
 		}
 
@@ -195,7 +195,7 @@ namespace $.$$ {
 			return next
 		}
 
-		theme_names(): Record<$bog_prilavok_theme_name, string> {
+		theme_names(): Record<$bog_merchquarium_theme_name, string> {
 			return {
 				sakura: this.Theme_sakura(),
 				lavender: this.Theme_lavender(),
@@ -211,7 +211,7 @@ namespace $.$$ {
 			return Object.keys(this.theme_names()).map(name => this.Theme_option(name))
 		}
 
-		theme_name(name: $bog_prilavok_theme_name) {
+		theme_name(name: $bog_merchquarium_theme_name) {
 			return this.theme_names()[name]
 		}
 
@@ -219,7 +219,7 @@ namespace $.$$ {
 			const ring = this.theme() === name
 				? '0 0 0 3px var(--mol_theme_current)'
 				: '0 0 0 1px var(--mol_theme_line)'
-			return { ... $bog_prilavok_theme_swatch(name), boxShadow: ring }
+			return { ... $bog_merchquarium_theme_swatch(name), boxShadow: ring }
 		}
 
 		@ $mol_action
@@ -244,7 +244,7 @@ namespace $.$$ {
 		}
 
 		import_prompt() {
-			return $bog_prilavok_import_prompt
+			return $bog_merchquarium_import_prompt
 		}
 
 		@ $mol_mem
@@ -254,7 +254,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		import_data() {
-			return $bog_prilavok_import_parse(this.import_json())
+			return $bog_merchquarium_import_parse(this.import_json())
 		}
 
 		import_new_categories() {
@@ -286,7 +286,7 @@ namespace $.$$ {
 		import_run() {
 			const catalog = this.catalog()
 			if (!catalog || !this.import_ready()) return
-			$bog_prilavok_import_apply(catalog, this.import_data())
+			$bog_merchquarium_import_apply(catalog, this.import_data())
 			this.import_json('')
 		}
 

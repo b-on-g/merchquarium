@@ -1,5 +1,5 @@
 namespace $ {
-	export class $bog_prilavok_product extends $giper_baza_dict.with({
+	export class $bog_merchquarium_product extends $giper_baza_dict.with({
 		Title: $giper_baza_atom_text,
 		Price: $giper_baza_atom_real,
 		Description: $giper_baza_atom_text,
@@ -10,9 +10,9 @@ namespace $ {
 		Status: $giper_baza_atom_text,
 	}) {}
 
-	export type $bog_prilavok_product_status = 'available' | 'sold' | 'hidden'
+	export type $bog_merchquarium_product_status = 'available' | 'sold' | 'hidden'
 
-	export function $bog_prilavok_product_status( product: $bog_prilavok_product, next?: $bog_prilavok_product_status ): $bog_prilavok_product_status {
+	export function $bog_merchquarium_product_status( product: $bog_merchquarium_product, next?: $bog_merchquarium_product_status ): $bog_merchquarium_product_status {
 		if( next === undefined ) {
 			const status = product.Status()?.val()
 			if( status === 'available' || status === 'sold' || status === 'hidden' ) return status

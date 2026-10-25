@@ -1,10 +1,10 @@
-[bog_prilavok_app_avatar_empty="true"]::before {
-	content: var(--bog_prilavok_decor);
+[bog_merchquarium_app_avatar_empty="true"]::before {
+	content: var(--bog_merchquarium_decor);
 	font-size: 3rem;
 }
 
 @media (max-width: 40rem) {
-	[bog_prilavok_app_avatar_empty="true"]::before {
+	[bog_merchquarium_app_avatar_empty="true"]::before {
 		font-size: 1.5rem;
 	}
 }

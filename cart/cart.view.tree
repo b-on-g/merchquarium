@@ -1,4 +1,4 @@
-$bog_prilavok_cart $mol_list
+$bog_merchquarium_cart $mol_list
 	catalog_link \
 	items? *
 	editable true
@@ -50,7 +50,7 @@ $bog_prilavok_cart $mol_list
 						title <= line_title* \
 					<= Line_price* $mol_paragraph
 						title <= line_price* \
-			<= Counter* $bog_prilavok_counter
+			<= Counter* $bog_merchquarium_counter
 				value? <=> count*? 0
 				enabled <= editable
 			<= Line_sum* $mol_paragraph

@@ -1,12 +1,12 @@
-[bog_prilavok_number] [mol_string]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {
+[bog_merchquarium_number] [mol_string]:not(:placeholder-shown):not(:focus):not(:hover):not(:disabled) {
 	color: var(--mol_theme_control);
 	background: transparent;
 	box-shadow: none;
 }
-[bog_prilavok_number] [mol_button_minor] {
+[bog_merchquarium_number] [mol_button_minor] {
 	display: none;
 }
 
-[bog_prilavok_number]:focus-within [mol_button_minor] {
+[bog_merchquarium_number]:focus-within [mol_button_minor] {
 	display: inline-flex;
 }

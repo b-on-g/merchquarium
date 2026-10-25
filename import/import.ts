@@ -1,6 +1,6 @@
 namespace $ {
 
-	export type $bog_prilavok_import_product = {
+	export type $bog_merchquarium_import_product = {
 		title: string
 		price: number
 		description: string
@@ -9,11 +9,11 @@ namespace $ {
 		available: boolean
 	}
 
-	export type $bog_prilavok_import_data = {
+	export type $bog_merchquarium_import_data = {
 		title: string
 		categories: string[]
 		fandoms: string[]
-		products: $bog_prilavok_import_product[]
+		products: $bog_merchquarium_import_product[]
 		errors: string[]
 	}
 
@@ -24,9 +24,9 @@ namespace $ {
 		return [ ... new Set( list.map( text ).filter( Boolean ) ) ]
 	}
 
-	export function $bog_prilavok_import_parse( json: string ): $bog_prilavok_import_data {
+	export function $bog_merchquarium_import_parse( json: string ): $bog_merchquarium_import_data {
 
-		const data: $bog_prilavok_import_data = { title: '', categories: [], fandoms: [], products: [], errors: [] }
+		const data: $bog_merchquarium_import_data = { title: '', categories: [], fandoms: [], products: [], errors: [] }
 		if( !json.trim() ) return data
 
 		let raw: any
@@ -81,7 +81,7 @@ namespace $ {
 		return data
 	}
 
-	export function $bog_prilavok_import_apply( catalog: $bog_prilavok_catalog, data: $bog_prilavok_import_data ) {
+	export function $bog_merchquarium_import_apply( catalog: $bog_merchquarium_catalog, data: $bog_merchquarium_import_data ) {
 
 		if( data.title ) catalog.Title( 'auto' )!.val( data.title )
 
@@ -103,12 +103,12 @@ namespace $ {
 			product.Description( 'auto' )!.val( item.description )
 			product.Category( 'auto' )!.val( item.category )
 			if( item.fandoms.length ) product.Fandoms( 'auto' )!.items( item.fandoms )
-			$bog_prilavok_product_status( product, item.available ? 'available' : 'sold' )
+			$bog_merchquarium_product_status( product, item.available ? 'available' : 'sold' )
 		}
 
 	}
 
-	export const $bog_prilavok_import_prompt = `You help an author fill an online merch catalog.
+	export const $bog_merchquarium_import_prompt = `You help an author fill an online merch catalog.
 Ask me short questions in my language, one at a time: what products I sell, their names, prices in rubles, short descriptions, categories, fandoms (what the art is about) and whether each one is in stock.
 When you have enough, reply with JSON only, no comments, in this format:
 {

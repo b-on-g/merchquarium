@@ -2,7 +2,7 @@ namespace $ {
 	$mol_test({
 
 		'Import parses products and collects categories'() {
-			const data = $bog_prilavok_import_parse( JSON.stringify({
+			const data = $bog_merchquarium_import_parse( JSON.stringify({
 				title: ' Kitten ',
 				categories: [ 'Mats' ],
 				products: [
@@ -20,7 +20,7 @@ namespace $ {
 		},
 
 		'Import collects fandoms from list or comma separated text'() {
-			const data = $bog_prilavok_import_parse( JSON.stringify({
+			const data = $bog_merchquarium_import_parse( JSON.stringify({
 				fandoms: [ 'MLP' ],
 				products: [
 					{ title: 'Pin', fandoms: [ ' Genshin ', 'MLP', 'Genshin', '' ] },
@@ -39,14 +39,14 @@ namespace $ {
 		},
 
 		'Import accepts json wrapped in code fence'() {
-			const data = $bog_prilavok_import_parse( '```json\n{ "products": [ { "title": "Mat" } ] }\n```' )
+			const data = $bog_merchquarium_import_parse( '```json\n{ "products": [ { "title": "Mat" } ] }\n```' )
 			$mol_assert_equal( data.products.length, 1 )
 			$mol_assert_equal( data.errors, [] )
 		},
 
 		'Import reports broken json and untitled products'() {
-			$mol_assert_equal( $bog_prilavok_import_parse( '{ nope' ).errors.length, 1 )
-			const data = $bog_prilavok_import_parse( '{ "products": [ { "price": 5 } ] }' )
+			$mol_assert_equal( $bog_merchquarium_import_parse( '{ nope' ).errors.length, 1 )
+			const data = $bog_merchquarium_import_parse( '{ "products": [ { "price": 5 } ] }' )
 			$mol_assert_equal( data.products.length, 0 )
 			$mol_assert_equal( data.errors, [ 'Product 1 has no title' ] )
 		},

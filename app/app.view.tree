@@ -1,11 +1,11 @@
-$bog_prilavok_app $mol_page
+$bog_merchquarium_app $mol_page
 	Settings_title @ \Settings
 	Return_title @ \Return
 	Kind_all @ \Merch kind
 	Fandom_all @ \Fandoms
 	title @ \Catalog 
 	seo_server \https://cmyser-ru-nka.91.188.212.151.ip.giper.dev/
-	Product_card* $bog_prilavok_product_card
+	Product_card* $bog_merchquarium_product_card
 		product_link <= product_link* \
 		catalog_link <= catalog_link \
 		search? <=> search? \
@@ -39,7 +39,7 @@ $bog_prilavok_app $mol_page
 						<= Avatar $mol_view
 							style <= avatar_style *
 							attr *
-								bog_prilavok_app_avatar_empty <= avatar_empty true
+								bog_merchquarium_app_avatar_empty <= avatar_empty true
 						<= Nick $mol_paragraph
 							title <= title
 				<= Socials $mol_view
@@ -49,7 +49,7 @@ $bog_prilavok_app $mol_page
 						<= Socials_list $mol_view
 							sub <= socials /
 		<= Title
-		<= Product_add $bog_prilavok_button
+		<= Product_add $bog_merchquarium_button
 			title @ \Add product
 			click? <=> product_add? null
 			hidden <= is_not_admin true
@@ -75,7 +75,7 @@ $bog_prilavok_app $mol_page
 			sub /
 				<= Catalog_missing_text $mol_paragraph
 					title @ \No catalog selected:
-				<= Catalog_create $bog_prilavok_button
+				<= Catalog_create $bog_merchquarium_button
 					title @ \Create catalog
 					click? <=> catalog_create? null
 		<= Catalog_selected $mol_list
@@ -93,17 +93,17 @@ $bog_prilavok_app $mol_page
 							checked? <=> in_stock_only? false
 						<= Search $mol_search
 							query? <=> search? \
-				<= Product_cards $bog_prilavok_gallery
+				<= Product_cards $bog_merchquarium_gallery
 					items <= product_cards /
 				<= Catalog_empty $mol_paragraph
 					title @ \Products coming soon
-		<= Settings $bog_prilavok_settings
+		<= Settings $bog_merchquarium_settings
 			catalog_link <= catalog_link \
-		<= Cart $bog_prilavok_cart
+		<= Cart $bog_merchquarium_cart
 			catalog_link <= catalog_link \
 			items? <=> cart? *
 			back? <=> cart_close? null
-		<= Order $bog_prilavok_cart
+		<= Order $bog_merchquarium_cart
 			catalog_link <= catalog_link \
 			items <= order_items *
 			editable false

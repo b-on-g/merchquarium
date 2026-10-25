@@ -19,7 +19,7 @@
 // // 
 // // 				// Owner creates a real catalog with products
 // // 				const land = $.$giper_baza_glob.land_grab()
-// // 				const catalog = land.Data( $bog_prilavok_catalog )
+// // 				const catalog = land.Data( $bog_merchquarium_catalog )
 // // 				catalog.Products( null )!.make( null )
 // // 				catalog.Products( null )!.make( null )
 // // 				console.log('[test] catalog', { link: land.link().str, products: catalog.Products()?.remote_list().length })
@@ -29,7 +29,7 @@
 // // 				$mol_assert_equal( rank_before, $giper_baza_rank_read )
 // // 
 // // 				// Owner grants rights to the second account
-// // 				const settings = $bog_prilavok_settings.make({ $ })
+// // 				const settings = $bog_merchquarium_settings.make({ $ })
 // // 				settings.catalog_link = ()=> land.link().str
 // // 				const id = auth1.pass().toString()
 // // 				console.log('[test] granting id', { id, len: id.length })
@@ -46,7 +46,7 @@
 // // 				// Now the second account is admin over the catalog
 // // 				$giper_baza_auth.current( auth1 )
 // // 				console.log('[test] after current(auth1), cur_lord', { cur_lord: $giper_baza_auth.current().pass().lord().str })
-// // 				const app = $bog_prilavok_app.make({ $ })
+// // 				const app = $bog_merchquarium_app.make({ $ })
 // // 				app.catalog_link = ()=> land.link().str
 // // 				const auth_lord = land.auth().pass().lord().str
 // // 				const cur = land.auth().pass().lord().str

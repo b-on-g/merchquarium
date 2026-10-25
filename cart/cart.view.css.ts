@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	$mol_style_define( $bog_prilavok_cart, {
+	$mol_style_define( $bog_merchquarium_cart, {
 		gap: $mol_gap.block,
 		padding: $mol_gap.block,
 		maxWidth: '50rem',

@@ -1,5 +1,5 @@
 namespace $.$$ {
-	export class $bog_prilavok_app extends $.$bog_prilavok_app {
+	export class $bog_merchquarium_app extends $.$bog_merchquarium_app {
 
 		catalog_link( next?: string ) {
 			return this.$.$mol_state_arg.value( 'catalog', next ) ?? ''
@@ -46,11 +46,11 @@ namespace $.$$ {
 		}
 
 		order_items() {
-			return $bog_prilavok_order_decode( this.catalog_link(), this.order_code() )
+			return $bog_merchquarium_order_decode( this.catalog_link(), this.order_code() )
 		}
 
-		cart( next?: $bog_prilavok_order_items ) {
-			const key = `bog_prilavok_cart=${ this.catalog_link() }`
+		cart( next?: $bog_merchquarium_order_items ) {
+			const key = `bog_merchquarium_cart=${ this.catalog_link() }`
 			return this.$.$mol_state_local.value( key, next ) ?? {}
 		}
 
@@ -122,12 +122,12 @@ namespace $.$$ {
 
 		@ $mol_mem
 		Photo() {
-			return $bog_prilavok_photo.make({ $: this.$ })
+			return $bog_merchquarium_photo.make({ $: this.$ })
 		}
 
-		image_url( key: $bog_prilavok_catalog_image ) {
+		image_url( key: $bog_merchquarium_catalog_image ) {
 			const catalog = this.catalog()
-			const link = catalog ? $bog_prilavok_catalog_image( catalog, key ) : ''
+			const link = catalog ? $bog_merchquarium_catalog_image( catalog, key ) : ''
 			return link ? this.Photo().url( link ) : ''
 		}
 
@@ -137,9 +137,9 @@ namespace $.$$ {
 			const cover = this.image_url( 'Cover' )
 			return {
 				... super.style(),
-				... $bog_prilavok_theme_style( this.catalog()?.Theme()?.val() ),
-				... back ? { '--bog_prilavok_pattern': `url("${ back }")`, '--bog_prilavok_pattern_size': 'cover' } : {},
-				'--bog_prilavok_cover': cover ? `url("${ cover }")` : 'none',
+				... $bog_merchquarium_theme_style( this.catalog()?.Theme()?.val() ),
+				... back ? { '--bog_merchquarium_pattern': `url("${ back }")`, '--bog_merchquarium_pattern_size': 'cover' } : {},
+				'--bog_merchquarium_cover': cover ? `url("${ cover }")` : 'none',
 			}
 		}
 
@@ -160,7 +160,7 @@ namespace $.$$ {
 		social_list() {
 			const catalog = this.catalog()
 			const values = [ catalog?.Social()?.val() ?? '', ... catalog?.Links()?.items() ?? [] ]
-			const urls = values.map( value => $bog_prilavok_social_url( value )?.toString() ?? '' ).filter( Boolean )
+			const urls = values.map( value => $bog_merchquarium_social_url( value )?.toString() ?? '' ).filter( Boolean )
 			return [ ... new Set( urls ) ]
 		}
 
@@ -173,7 +173,7 @@ namespace $.$$ {
 		}
 
 		social_sub( uri: string ) {
-			const kind = $bog_prilavok_social_kind( new URL( uri ) )
+			const kind = $bog_merchquarium_social_kind( new URL( uri ) )
 			return [ {
 				telegram: this.Icon_telegram,
 				vk: this.Icon_vk,
@@ -191,7 +191,7 @@ namespace $.$$ {
 			return [
 				... Object.keys( this.kind_options() ).length > 1 ? [ this.Kind_filter() ] : [],
 				... Object.keys( this.fandom_options() ).length > 1 ? [ this.Fandom_filter() ] : [],
-				... this.visible_products().some( product => $bog_prilavok_product_status( product ) === 'sold' ) ? [ this.In_stock() ] : [],
+				... this.visible_products().some( product => $bog_merchquarium_product_status( product ) === 'sold' ) ? [ this.In_stock() ] : [],
 				this.Search(),
 			]
 		}
@@ -226,7 +226,7 @@ namespace $.$$ {
 				new this.$.$giper_baza_link( link ),
 			)
 		
-			return land.Data( $bog_prilavok_catalog )
+			return land.Data( $bog_merchquarium_catalog )
 		}
 
 		@ $mol_action
@@ -274,7 +274,7 @@ namespace $.$$ {
 
 		visible_products() {
 			return ( this.catalog()?.Products()?.remote_list() ?? [] )
-				.filter( product => product.can_change() || $bog_prilavok_product_status( product ) !== 'hidden' )
+				.filter( product => product.can_change() || $bog_merchquarium_product_status( product ) !== 'hidden' )
 		}
 
 		filter_fandoms() {
@@ -284,7 +284,7 @@ namespace $.$$ {
 			return [ ... new Set( fandoms ) ]
 		}
 
-		product_match( product: $bog_prilavok_product ) {
+		product_match( product: $bog_merchquarium_product ) {
 			const category = this.category_filter()
 			if( category !== 'all' && product.Category()?.val() !== category ) return false
 
@@ -339,7 +339,7 @@ namespace $.$$ {
 				const product = by_link.get(link)
 
 				if (product) {
-					const status = $bog_prilavok_product_status(product)
+					const status = $bog_merchquarium_product_status(product)
 					if (!product.can_change() && status === 'hidden') continue
 					if (this.in_stock_only() && status !== 'available') continue
 					if (!this.product_match(product)) continue
@@ -353,7 +353,7 @@ namespace $.$$ {
 		
 				const removed = this.$.$giper_baza_glob.Pawn(
 					new this.$.$giper_baza_link(link),
-					$bog_prilavok_product,
+					$bog_merchquarium_product,
 				)
 		
 				if (!this.product_match(removed)) continue

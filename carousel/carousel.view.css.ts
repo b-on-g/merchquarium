@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	$mol_style_define( $bog_prilavok_carousel, {
+	$mol_style_define( $bog_merchquarium_carousel, {
 		Image: {
 			objectFit: 'cover',
 		},
