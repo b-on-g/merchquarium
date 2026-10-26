@@ -6788,176 +6788,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_test({
-        'Special'() {
-            $mol_assert_equal($mol_si_short(0), '0');
-            $mol_assert_equal($mol_si_short(1 / 0), '∞');
-            $mol_assert_equal($mol_si_short(-1 / 0), '-∞');
-            $mol_assert_equal($mol_si_short(0 / 0), '∅');
-        },
-        'M'() {
-            $mol_assert_equal($mol_si_short(0), '0');
-            $mol_assert_equal($mol_si_short(0.999500), '1.00');
-            $mol_assert_equal($mol_si_short(-0.999600), '-1.00');
-            $mol_assert_equal($mol_si_short(999.4), '999');
-            $mol_assert_equal($mol_si_short(-999.4), '-999');
-        },
-        'L'() {
-            $mol_assert_equal($mol_si_short(999.5), '1.00k');
-            $mol_assert_equal($mol_si_short(-999.5), '-1.00k');
-            $mol_assert_equal($mol_si_short(999_400), '999k');
-            $mol_assert_equal($mol_si_short(-999_400), '-999k');
-        },
-        'XL'() {
-            $mol_assert_equal($mol_si_short(999_500), '1.00M');
-            $mol_assert_equal($mol_si_short(-999_600), '-1.00M');
-            $mol_assert_equal($mol_si_short(999_400_000), '999M');
-            $mol_assert_equal($mol_si_short(-999_400_000), '-999M');
-        },
-        'S'() {
-            $mol_assert_equal($mol_si_short(0.999400), '999m');
-            $mol_assert_equal($mol_si_short(-0.999400), '-999m');
-            $mol_assert_equal($mol_si_short(0.000_999_500), '1.00m');
-            $mol_assert_equal($mol_si_short(-0.000_999_500), '-1.00m');
-        },
-        'XS'() {
-            $mol_assert_equal($mol_si_short(0.000_999_400), '999µ');
-            $mol_assert_equal($mol_si_short(-0.000_999_400), '-999µ');
-            $mol_assert_equal($mol_si_short(0.000_000_999_600), '1.00µ');
-            $mol_assert_equal($mol_si_short(-0.000_000_999_600), '-1.00µ');
-        },
-        'With unit'() {
-            $mol_assert_equal($mol_si_short(0, 's'), '0 s');
-            $mol_assert_equal($mol_si_short(1 / 0, 's'), '∞ s');
-            $mol_assert_equal($mol_si_short(0 / 0, 's'), '∅ s');
-            $mol_assert_equal($mol_si_short(123, 'Hz'), '123 Hz');
-            $mol_assert_equal($mol_si_short(1234, 'g'), '1.23 kg');
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
-        'simple sort'() {
-            const list = ['abc', 'ac', 'ab'];
-            list.sort($mol_compare_text());
-            $mol_assert_equal(`${list}`, 'ab,abc,ac');
-        },
-        'sort ignoring spaces around'() {
-            const list = [' a', '\tb', ' b'];
-            list.sort($mol_compare_text());
-            $mol_assert_equal(`${list}`, ' a,\tb, b');
-        },
-        'sort ignoring letter case'() {
-            const list = ['A', 'B', 'a'];
-            list.sort($mol_compare_text());
-            $mol_assert_equal(`${list}`, 'A,a,B');
-        },
-        'sort with custom serializer'() {
-            const list = ['abc', 'ab', 'ac'];
-            list.sort($mol_compare_text(str => str.split('').reverse().join('')));
-            $mol_assert_equal(`${list}`, 'ab,ac,abc');
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
-        'Vector limiting'() {
-            let point = new $mol_vector_3d(7, 10, 13);
-            const res = point.limited([[1, 5], [15, 20], [5, 10]]);
-            $mol_assert_equal(res.x, 5);
-            $mol_assert_equal(res.y, 15);
-            $mol_assert_equal(res.z, 10);
-        },
-        'Vector adding scalar'() {
-            let point = new $mol_vector_3d(1, 2, 3);
-            let res = point.added0(5);
-            $mol_assert_equal(res.x, 6);
-            $mol_assert_equal(res.y, 7);
-            $mol_assert_equal(res.z, 8);
-        },
-        'Vector adding vector'() {
-            let point = new $mol_vector_3d(1, 2, 3);
-            let res = point.added1([5, 10, 15]);
-            $mol_assert_equal(res.x, 6);
-            $mol_assert_equal(res.y, 12);
-            $mol_assert_equal(res.z, 18);
-        },
-        'Vector multiplying scalar'() {
-            let point = new $mol_vector_3d(2, 3, 4);
-            let res = point.multed0(-1);
-            $mol_assert_equal(res.x, -2);
-            $mol_assert_equal(res.y, -3);
-            $mol_assert_equal(res.z, -4);
-        },
-        'Vector multiplying vector'() {
-            let point = new $mol_vector_3d(2, 3, 4);
-            let res = point.multed1([5, 2, -2]);
-            $mol_assert_equal(res.x, 10);
-            $mol_assert_equal(res.y, 6);
-            $mol_assert_equal(res.z, -8);
-        },
-        'Matrix adding matrix'() {
-            let matrix = new $mol_vector_matrix(...[[1, 2], [3, 4], [5, 6]]);
-            let res = matrix.added2([[10, 20], [30, 40], [50, 60]]);
-            $mol_assert_equal(res[0][0], 11);
-            $mol_assert_equal(res[0][1], 22);
-            $mol_assert_equal(res[1][0], 33);
-            $mol_assert_equal(res[1][1], 44);
-            $mol_assert_equal(res[2][0], 55);
-            $mol_assert_equal(res[2][1], 66);
-        },
-        'Matrix multiplying matrix'() {
-            let matrix = new $mol_vector_matrix(...[[2, 3], [4, 5], [6, 7]]);
-            let res = matrix.multed2([[2, 3], [4, 5], [6, 7]]);
-            $mol_assert_equal(res[0][0], 4);
-            $mol_assert_equal(res[0][1], 9);
-            $mol_assert_equal(res[1][0], 16);
-            $mol_assert_equal(res[1][1], 25);
-            $mol_assert_equal(res[2][0], 36);
-            $mol_assert_equal(res[2][1], 49);
-        },
-        'Range expanding'() {
-            let range = $mol_vector_range_full.inversed;
-            const expanded = range.expanded0(10).expanded0(5);
-            $mol_assert_like([...expanded], [5, 10]);
-        },
-        'Vector of range expanding by vector'() {
-            let dimensions = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
-            const expanded = dimensions.expanded1([1, 7]).expanded1([3, 5]);
-            $mol_assert_like([...expanded.x], [1, 3]);
-            $mol_assert_like([...expanded.y], [5, 7]);
-        },
-        'Vector of range expanding by vector of range'() {
-            let dimensions = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
-            const expanded = dimensions
-                .expanded2([[1, 3], [7, 9]])
-                .expanded2([[2, 4], [6, 8]]);
-            $mol_assert_like([...expanded.x], [1, 4]);
-            $mol_assert_like([...expanded.y], [6, 9]);
-        },
-        'Vector of infinity range expanding by vector of range'() {
-            let dimensions = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
-            const next = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
-            const expanded = next
-                .expanded2(dimensions);
-            $mol_assert_like([...expanded.x], [Infinity, -Infinity]);
-            $mol_assert_like([...expanded.y], [Infinity, -Infinity]);
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     function check(str, query) {
         $mol_assert_like(str, $hyoo_harp_to_string(query));
         $mol_assert_like(query, $hyoo_harp_from_string(str));
@@ -7437,6 +7267,176 @@ var $;
             await $mol_wire_async(file).blob(new $mol_blob([source], { type: 'test/test' }));
             $mol_assert_equal('test/test', file.blob().type);
             $mol_assert_equal(source, new Uint8Array(await file.blob().arrayBuffer()));
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Special'() {
+            $mol_assert_equal($mol_si_short(0), '0');
+            $mol_assert_equal($mol_si_short(1 / 0), '∞');
+            $mol_assert_equal($mol_si_short(-1 / 0), '-∞');
+            $mol_assert_equal($mol_si_short(0 / 0), '∅');
+        },
+        'M'() {
+            $mol_assert_equal($mol_si_short(0), '0');
+            $mol_assert_equal($mol_si_short(0.999500), '1.00');
+            $mol_assert_equal($mol_si_short(-0.999600), '-1.00');
+            $mol_assert_equal($mol_si_short(999.4), '999');
+            $mol_assert_equal($mol_si_short(-999.4), '-999');
+        },
+        'L'() {
+            $mol_assert_equal($mol_si_short(999.5), '1.00k');
+            $mol_assert_equal($mol_si_short(-999.5), '-1.00k');
+            $mol_assert_equal($mol_si_short(999_400), '999k');
+            $mol_assert_equal($mol_si_short(-999_400), '-999k');
+        },
+        'XL'() {
+            $mol_assert_equal($mol_si_short(999_500), '1.00M');
+            $mol_assert_equal($mol_si_short(-999_600), '-1.00M');
+            $mol_assert_equal($mol_si_short(999_400_000), '999M');
+            $mol_assert_equal($mol_si_short(-999_400_000), '-999M');
+        },
+        'S'() {
+            $mol_assert_equal($mol_si_short(0.999400), '999m');
+            $mol_assert_equal($mol_si_short(-0.999400), '-999m');
+            $mol_assert_equal($mol_si_short(0.000_999_500), '1.00m');
+            $mol_assert_equal($mol_si_short(-0.000_999_500), '-1.00m');
+        },
+        'XS'() {
+            $mol_assert_equal($mol_si_short(0.000_999_400), '999µ');
+            $mol_assert_equal($mol_si_short(-0.000_999_400), '-999µ');
+            $mol_assert_equal($mol_si_short(0.000_000_999_600), '1.00µ');
+            $mol_assert_equal($mol_si_short(-0.000_000_999_600), '-1.00µ');
+        },
+        'With unit'() {
+            $mol_assert_equal($mol_si_short(0, 's'), '0 s');
+            $mol_assert_equal($mol_si_short(1 / 0, 's'), '∞ s');
+            $mol_assert_equal($mol_si_short(0 / 0, 's'), '∅ s');
+            $mol_assert_equal($mol_si_short(123, 'Hz'), '123 Hz');
+            $mol_assert_equal($mol_si_short(1234, 'g'), '1.23 kg');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'simple sort'() {
+            const list = ['abc', 'ac', 'ab'];
+            list.sort($mol_compare_text());
+            $mol_assert_equal(`${list}`, 'ab,abc,ac');
+        },
+        'sort ignoring spaces around'() {
+            const list = [' a', '\tb', ' b'];
+            list.sort($mol_compare_text());
+            $mol_assert_equal(`${list}`, ' a,\tb, b');
+        },
+        'sort ignoring letter case'() {
+            const list = ['A', 'B', 'a'];
+            list.sort($mol_compare_text());
+            $mol_assert_equal(`${list}`, 'A,a,B');
+        },
+        'sort with custom serializer'() {
+            const list = ['abc', 'ab', 'ac'];
+            list.sort($mol_compare_text(str => str.split('').reverse().join('')));
+            $mol_assert_equal(`${list}`, 'ab,ac,abc');
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'Vector limiting'() {
+            let point = new $mol_vector_3d(7, 10, 13);
+            const res = point.limited([[1, 5], [15, 20], [5, 10]]);
+            $mol_assert_equal(res.x, 5);
+            $mol_assert_equal(res.y, 15);
+            $mol_assert_equal(res.z, 10);
+        },
+        'Vector adding scalar'() {
+            let point = new $mol_vector_3d(1, 2, 3);
+            let res = point.added0(5);
+            $mol_assert_equal(res.x, 6);
+            $mol_assert_equal(res.y, 7);
+            $mol_assert_equal(res.z, 8);
+        },
+        'Vector adding vector'() {
+            let point = new $mol_vector_3d(1, 2, 3);
+            let res = point.added1([5, 10, 15]);
+            $mol_assert_equal(res.x, 6);
+            $mol_assert_equal(res.y, 12);
+            $mol_assert_equal(res.z, 18);
+        },
+        'Vector multiplying scalar'() {
+            let point = new $mol_vector_3d(2, 3, 4);
+            let res = point.multed0(-1);
+            $mol_assert_equal(res.x, -2);
+            $mol_assert_equal(res.y, -3);
+            $mol_assert_equal(res.z, -4);
+        },
+        'Vector multiplying vector'() {
+            let point = new $mol_vector_3d(2, 3, 4);
+            let res = point.multed1([5, 2, -2]);
+            $mol_assert_equal(res.x, 10);
+            $mol_assert_equal(res.y, 6);
+            $mol_assert_equal(res.z, -8);
+        },
+        'Matrix adding matrix'() {
+            let matrix = new $mol_vector_matrix(...[[1, 2], [3, 4], [5, 6]]);
+            let res = matrix.added2([[10, 20], [30, 40], [50, 60]]);
+            $mol_assert_equal(res[0][0], 11);
+            $mol_assert_equal(res[0][1], 22);
+            $mol_assert_equal(res[1][0], 33);
+            $mol_assert_equal(res[1][1], 44);
+            $mol_assert_equal(res[2][0], 55);
+            $mol_assert_equal(res[2][1], 66);
+        },
+        'Matrix multiplying matrix'() {
+            let matrix = new $mol_vector_matrix(...[[2, 3], [4, 5], [6, 7]]);
+            let res = matrix.multed2([[2, 3], [4, 5], [6, 7]]);
+            $mol_assert_equal(res[0][0], 4);
+            $mol_assert_equal(res[0][1], 9);
+            $mol_assert_equal(res[1][0], 16);
+            $mol_assert_equal(res[1][1], 25);
+            $mol_assert_equal(res[2][0], 36);
+            $mol_assert_equal(res[2][1], 49);
+        },
+        'Range expanding'() {
+            let range = $mol_vector_range_full.inversed;
+            const expanded = range.expanded0(10).expanded0(5);
+            $mol_assert_like([...expanded], [5, 10]);
+        },
+        'Vector of range expanding by vector'() {
+            let dimensions = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
+            const expanded = dimensions.expanded1([1, 7]).expanded1([3, 5]);
+            $mol_assert_like([...expanded.x], [1, 3]);
+            $mol_assert_like([...expanded.y], [5, 7]);
+        },
+        'Vector of range expanding by vector of range'() {
+            let dimensions = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
+            const expanded = dimensions
+                .expanded2([[1, 3], [7, 9]])
+                .expanded2([[2, 4], [6, 8]]);
+            $mol_assert_like([...expanded.x], [1, 4]);
+            $mol_assert_like([...expanded.y], [6, 9]);
+        },
+        'Vector of infinity range expanding by vector of range'() {
+            let dimensions = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
+            const next = new $mol_vector_2d($mol_vector_range_full.inversed, $mol_vector_range_full.inversed);
+            const expanded = next
+                .expanded2(dimensions);
+            $mol_assert_like([...expanded.x], [Infinity, -Infinity]);
+            $mol_assert_like([...expanded.y], [Infinity, -Infinity]);
         },
     });
 })($ || ($ = {}));
