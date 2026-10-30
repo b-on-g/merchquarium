@@ -1,6 +1,13 @@
 namespace $.$$ {
 
 	$mol_style_define($bog_merchquarium_settings, {
+		width: '100%',
+		maxWidth: '44rem',
+		margin: {
+			left: 'auto',
+			right: 'auto',
+		},
+
 		Title: {
 			flex: {
 				grow: 0,
@@ -31,6 +38,10 @@ namespace $.$$ {
 				family: 'monospace',
 				size: '1.25rem',
 			},
+		},
+
+		Account_id: {
+			wordBreak: 'break-all',
 		},
 
 		Themes: {

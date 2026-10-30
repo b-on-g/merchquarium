@@ -218,7 +218,7 @@ namespace $.$$ {
 		}
 
 		theme_swatch(name: string) {
-			const ring = this.theme() === name
+			const ring = this.catalog_theme() === name
 				? '0 0 0 3px var(--mol_theme_current)'
 				: '0 0 0 1px var(--mol_theme_line)'
 			return { ... $bog_merchquarium_theme_swatch(name), boxShadow: ring }
@@ -226,10 +226,10 @@ namespace $.$$ {
 
 		@ $mol_action
 		theme_select(name: string) {
-			this.theme(name)
+			this.catalog_theme(name)
 		}
 
-		theme(next?: string): string {
+		catalog_theme(next?: string): string {
 			const catalog = this.catalog()
 			if (!catalog) return 'sakura'
 			if (next === undefined) return catalog.Theme()?.val() || 'sakura'

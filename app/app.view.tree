@@ -26,7 +26,10 @@ $bog_merchquarium_app $mol_page
 		title @ \Undo
 		click? <=> product_undo*? null
 	plugins /
-		<= Theme_auto $mol_theme_auto
+		<= Theme_auto $bog_theme_auto
+			themes /
+				\$mol_theme_light
+				\$mol_theme_dark
 		<= Ico $bog_favicon
 			Icon <= ico $mol_icon_all_inclusive
 		<= Undo_hotkey $mol_hotkey2
@@ -72,7 +75,8 @@ $bog_merchquarium_app $mol_page
 				<= Cart_size $mol_view
 					sub /
 						<= cart_size_text \
-		<= Lights $mol_lights_toggle
+		<= Lights $bog_theme_toggle
+			theme_auto <= Theme_auto
 		<= Settings_button $mol_button_minor
 			hint <= settings_button_title \
 			click? <=> settings_toggle? null

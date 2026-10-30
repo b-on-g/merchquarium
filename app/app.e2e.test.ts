@@ -143,6 +143,10 @@ namespace $ {
 				$mol_assert_equal( artist.fandom_options()[ mlp ], `#${ mlp }` )
 
 				$mol_assert_equal( settings.head(), [ settings.Title(), settings.Lang(), settings.Tools() ] )
+				$mol_assert_unique( ( settings.attr() as Record< string, unknown > ).mol_theme, settings.catalog_theme() )
+				$mol_assert_equal( settings.catalog_theme(), 'mint' )
+				$mol_assert_equal( artist.Lights().theme_auto(), artist.Theme_auto() )
+				$mol_assert_equal( artist.Theme_auto().themes(), [ '$mol_theme_light', '$mol_theme_dark' ] )
 				$mol_assert_equal( Object.keys( settings.Lang().dictionary() ), [ 'ru', 'en' ] )
 				$mol_assert_equal( artist.title(), 'Nyaftul Kitten Art' )
 				$mol_assert_equal( artist.style()[ '--mol_theme_hue' ], '165deg' )

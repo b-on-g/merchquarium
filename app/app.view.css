@@ -8,3 +8,8 @@
 		font-size: 1.5rem;
 	}
 }
+
+[bog_merchquarium_app][mol_theme='$mol_theme_light'] {
+	--mol_theme_back: oklch( 92% .01 var(--mol_theme_hue) );
+	--mol_theme_hover: oklch( 50% 0 var(--mol_theme_hue) / .1 );
+}
