@@ -233,3 +233,4 @@
 \/bog/merchquarium/app
 	include \/mol/offline/install
 	deploy \/bog/assets
+	include \/bog/merchquarium/storage

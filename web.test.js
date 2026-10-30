@@ -7593,6 +7593,17 @@ var $;
 ;
 "use strict";
 var $;
+(function ($) {
+    $mol_test({
+        'Storage estimate override replaces the self rescheduling one'() {
+            $mol_assert_equal($mol_storage, $bog_merchquarium_storage);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
 (function ($_1) {
     function $bog_merchquarium_test_allowed() {
         return /[?&#!/]test=1(?![^&/#])/.test($mol_dom_context.location.href);
@@ -7777,6 +7788,12 @@ var $;
                     artist.catalog_create();
                     keep('bog_merchquarium_e2e_artist', land);
                 });
+                await step(() => {
+                    $mol_assert_equal(artist.content(), [artist.Help()]);
+                    artist.Help().Quick_settings().click(null);
+                    $mol_assert_equal(artist.content(), [artist.Settings()]);
+                    artist.settings_toggle();
+                });
             }
             else {
                 keep('bog_merchquarium_e2e_artist', land);
@@ -7808,6 +7825,8 @@ var $;
                 $mol_assert_equal(fandoms.name(mlp), `#${mlp}`);
                 $mol_assert_equal(kinds.name(badge), badge);
                 $mol_assert_equal(artist.fandom_options()[mlp], `#${mlp}`);
+                $mol_assert_equal(settings.head(), [settings.Title(), settings.Lang(), settings.Tools()]);
+                $mol_assert_equal(Object.keys(settings.Lang().dictionary()), ['ru', 'en']);
                 $mol_assert_equal(artist.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(artist.style()['--mol_theme_hue'], '165deg');
                 $mol_assert_equal(settings.theme_swatch('mint').boxShadow, '0 0 0 3px var(--mol_theme_current)');
@@ -7954,6 +7973,8 @@ var $;
                 artist.fandom_filter('all');
                 artist.search(`пинки ${run}`);
                 $mol_assert_equal(titles(artist), [pinkie]);
+                $mol_assert_equal(artist.$.$mol_state_arg.value('search'), `пинки ${run}`);
+                $mol_assert_equal(artist.$.$mol_state_arg.link({}).includes('search='), true);
                 artist.search(`#${genshin.toLowerCase()}`);
                 $mol_assert_equal(titles(artist), [paimon, sticker]);
                 artist.search('');
@@ -7963,6 +7984,7 @@ var $;
                 $mol_assert_equal(artist.search(), mlp);
                 $mol_assert_equal(titles(artist), [kit, pinkie]);
                 artist.search('');
+                $mol_assert_equal(artist.$.$mol_state_arg.value('search'), null);
             });
         },
         async 'e2e 07: deleted products come back in place after undo'() {
@@ -8128,7 +8150,7 @@ var $;
                 $mol_assert_equal(artist.settings_open(), false);
                 $mol_assert_equal(artist.content(), [artist.Help()]);
                 $mol_assert_equal(artist.head(), [artist.Title(), artist.Product_add(), artist.Tools()]);
-                $mol_assert_equal(artist.Help().text().length > 0, true);
+                $mol_assert_equal(artist.Help().rows()[0], artist.Help().Quick());
                 $mol_assert_equal(artist.Preview(), null);
                 artist.Help_button().checked(false);
                 $mol_assert_equal(artist.content(), [artist.Catalog_selected()]);

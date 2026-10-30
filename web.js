@@ -6661,6 +6661,623 @@ var $;
 
 
 ;
+	($.$mol_icon_fish) = class $mol_icon_fish extends ($.$mol_icon) {
+		path(){
+			return "M12,20L12.76,17C9.5,16.79 6.59,15.4 5.75,13.58C5.66,14.06 5.53,14.5 5.33,14.83C4.67,16 3.33,16 2,16C3.1,16 3.5,14.43 3.5,12.5C3.5,10.57 3.1,9 2,9C3.33,9 4.67,9 5.33,10.17C5.53,10.5 5.66,10.94 5.75,11.42C6.4,10 8.32,8.85 10.66,8.32L9,5C11,5 13,5 14.33,5.67C15.46,6.23 16.11,7.27 16.69,8.38C19.61,9.08 22,10.66 22,12.5C22,14.38 19.5,16 16.5,16.66C15.67,17.76 14.86,18.78 14.17,19.33C13.33,20 12.67,20 12,20M17,11A1,1 0 0,0 16,12A1,1 0 0,0 17,13A1,1 0 0,0 18,12A1,1 0 0,0 17,11Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_list) = class $mol_list extends ($.$mol_view) {
+		gap_before(){
+			return 0;
+		}
+		Gap_before(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_before())});
+			return obj;
+		}
+		Empty(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		gap_after(){
+			return 0;
+		}
+		Gap_after(){
+			const obj = new this.$.$mol_view();
+			(obj.style) = () => ({"paddingTop": (this.gap_after())});
+			return obj;
+		}
+		rows(){
+			return [
+				(this.Gap_before()), 
+				(this.Empty()), 
+				(this.Gap_after())
+			];
+		}
+		render_visible_only(){
+			return true;
+		}
+		render_over(){
+			return 0.1;
+		}
+		sub(){
+			return (this.rows());
+		}
+		item_height_min(id){
+			return 1;
+		}
+		item_width_min(id){
+			return 1;
+		}
+		view_window_shift(next){
+			if(next !== undefined) return next;
+			return 0;
+		}
+		view_window(){
+			return [0, 0];
+		}
+	};
+	($mol_mem(($.$mol_list.prototype), "Gap_before"));
+	($mol_mem(($.$mol_list.prototype), "Empty"));
+	($mol_mem(($.$mol_list.prototype), "Gap_after"));
+	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    let cache = null;
+    function $mol_support_css_overflow_anchor() {
+        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
+    }
+    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
+         * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
+         */
+        class $mol_list extends $.$mol_list {
+            sub() {
+                const rows = this.rows();
+                const next = (rows.length === 0) ? [this.Empty()] : rows;
+                const prev = $mol_mem_cached(() => this.sub());
+                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
+                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
+                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
+                    if (index >= 0)
+                        this.view_window_shift(index - start);
+                }
+                return next;
+            }
+            render_visible_only() {
+                return this.$.$mol_support_css_overflow_anchor();
+            }
+            _view_window_last = [0, 0];
+            view_window(next) {
+                const kids = this.sub();
+                if (kids.length < 3)
+                    return [0, kids.length];
+                if (this.$.$mol_print.active())
+                    return [0, kids.length];
+                const rect = this.view_rect();
+                if (next)
+                    return next;
+                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? this._view_window_last;
+                const shift = this.view_window_shift();
+                this.view_window_shift(0);
+                min += shift;
+                max += shift;
+                let max2 = max = Math.min(max, kids.length);
+                let min2 = min = Math.max(0, Math.min(min, max - 1));
+                const anchoring = this.render_visible_only();
+                const window_height = this.$.$mol_window.size().height + 40;
+                const over = Math.ceil(window_height * this.render_over());
+                const limit_top = -over;
+                const limit_bottom = window_height + over;
+                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
+                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
+                let top = Math.ceil(rect?.top ?? 0) + gap_before;
+                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
+                // change nothing when already covers all limits
+                if (top <= limit_top && bottom >= limit_bottom) {
+                    return [min2, max2];
+                }
+                // jumps when fully over limits
+                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
+                    min = 0;
+                    top = Math.ceil(rect?.top ?? 0);
+                    while (min < (kids.length - 1)) {
+                        const height = this.item_height_min(min);
+                        if (top + height >= limit_top)
+                            break;
+                        top += height;
+                        ++min;
+                    }
+                    min2 = min;
+                    max2 = max = min;
+                    bottom = top;
+                }
+                let top2 = top;
+                let bottom2 = bottom;
+                // force recalc min when overlapse top limit
+                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
+                    min2 = max;
+                    top2 = bottom;
+                }
+                // force recalc max when overlapse bottom limit
+                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
+                    max2 = min;
+                    bottom2 = top;
+                }
+                // extend min to cover top limit
+                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
+                    --min2;
+                    top2 -= this.item_height_min(min2);
+                }
+                // extend max to cover bottom limit
+                while (bottom2 < limit_bottom && max2 < kids.length) {
+                    bottom2 += this.item_height_min(max2);
+                    ++max2;
+                }
+                return [min2, max2];
+            }
+            item_height_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_height() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            row_width_min(index) {
+                try {
+                    return this.sub()[index]?.minimal_width() ?? 0;
+                }
+                catch (error) {
+                    $mol_fail_log(error);
+                    return 0;
+                }
+            }
+            gap_before() {
+                let gap = 0;
+                const skipped = this.view_window()[0];
+                for (let i = 0; i < skipped; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            gap_after() {
+                let gap = 0;
+                const from = this.view_window()[1];
+                const to = this.sub().length;
+                for (let i = from; i < to; ++i)
+                    gap += this.item_height_min(i);
+                return gap;
+            }
+            sub_visible() {
+                return [
+                    ...this.gap_before() ? [this.Gap_before()] : [],
+                    ...this.sub().slice(...this._view_window_last = this.view_window()),
+                    ...this.gap_after() ? [this.Gap_after()] : [],
+                ];
+            }
+            minimal_height() {
+                let height = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    height += this.item_height_min(i);
+                return height;
+            }
+            minimal_width() {
+                let width = 0;
+                const len = this.sub().length;
+                for (let i = 0; i < len; ++i)
+                    width = Math.max(width, this.item_width_min(i));
+                return width;
+            }
+            force_render(path) {
+                const kids = this.rows();
+                const index = kids.findIndex(item => path.has(item));
+                if (index >= 0) {
+                    const win = this.view_window();
+                    if (index < win[0] || index >= win[1]) {
+                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
+                    }
+                    kids[index].force_render(path);
+                }
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "view_window", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_before", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "gap_after", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "sub_visible", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_height", null);
+        __decorate([
+            $mol_mem
+        ], $mol_list.prototype, "minimal_width", null);
+        $$.$mol_list = $mol_list;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\t/* will-change: contents; */\n}\n\n[mol_list]:where([mol_view_error]) {\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_image) = class $mol_icon_image extends ($.$mol_icon) {
+		path(){
+			return "M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_image_multiple) = class $mol_icon_image_multiple extends ($.$mol_icon) {
+		path(){
+			return "M22,16V4A2,2 0 0,0 20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16M11,12L13.03,14.71L16,11L20,16H8M2,6V20A2,2 0 0,0 4,22H18V20H4V6";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_send) = class $mol_icon_send extends ($.$mol_icon) {
+		path(){
+			return "M2,21L23,12L2,3V10L17,12L2,14V21Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_send_outline) = class $mol_icon_send_outline extends ($.$mol_icon) {
+		path(){
+			return "M4 6.03L11.5 9.25L4 8.25L4 6.03M11.5 14.75L4 17.97V15.75L11.5 14.75M2 3L2 10L17 12L2 14L2 21L23 12L2 3Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_magnify) = class $mol_icon_magnify extends ($.$mol_icon) {
+		path(){
+			return "M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$bog_merchquarium_start) = class $bog_merchquarium_start extends ($.$mol_view) {
+		Logo_icon(){
+			const obj = new this.$.$mol_icon_fish();
+			return obj;
+		}
+		Logo(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Logo_icon())]);
+			return obj;
+		}
+		Brand(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ("Merchquarium");
+			return obj;
+		}
+		Tagline(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_start_Tagline_title")));
+			return obj;
+		}
+		Lead(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_start_Lead_title")));
+			return obj;
+		}
+		Points(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Point("cards")), 
+				(this.Point("orders")), 
+				(this.Point("search"))
+			]);
+			return obj;
+		}
+		create(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Create(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_start_Create_title")));
+			(obj.click) = (next) => ((this.create(next)));
+			return obj;
+		}
+		Note(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_start_Note_title")));
+			return obj;
+		}
+		Card(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Logo()), 
+				(this.Brand()), 
+				(this.Tagline()), 
+				(this.Lead()), 
+				(this.Points()), 
+				(this.Create()), 
+				(this.Note())
+			]);
+			return obj;
+		}
+		point_icon(id){
+			const obj = new this.$.$mol_icon();
+			return obj;
+		}
+		Point_icon(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.point_icon(id))]);
+			return obj;
+		}
+		point_text(id){
+			return "";
+		}
+		Point_text(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.point_text(id)));
+			return obj;
+		}
+		sub(){
+			return [(this.Card())];
+		}
+		Point(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Point_icon(id)), (this.Point_text(id))]);
+			return obj;
+		}
+		Icon_cards(){
+			const obj = new this.$.$mol_icon_image_multiple();
+			return obj;
+		}
+		Icon_orders(){
+			const obj = new this.$.$mol_icon_send_outline();
+			return obj;
+		}
+		Icon_search(){
+			const obj = new this.$.$mol_icon_magnify();
+			return obj;
+		}
+		cards_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_start_cards_text"));
+		}
+		orders_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_start_orders_text"));
+		}
+		search_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_start_search_text"));
+		}
+	};
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Logo_icon"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Logo"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Brand"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Tagline"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Lead"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Points"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "create"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Create"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Note"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Card"));
+	($mol_mem_key(($.$bog_merchquarium_start.prototype), "point_icon"));
+	($mol_mem_key(($.$bog_merchquarium_start.prototype), "Point_icon"));
+	($mol_mem_key(($.$bog_merchquarium_start.prototype), "Point_text"));
+	($mol_mem_key(($.$bog_merchquarium_start.prototype), "Point"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Icon_cards"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Icon_orders"));
+	($mol_mem(($.$bog_merchquarium_start.prototype), "Icon_search"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_merchquarium_start extends $.$bog_merchquarium_start {
+            points() {
+                return {
+                    cards: [this.cards_text(), this.Icon_cards()],
+                    orders: [this.orders_text(), this.Icon_orders()],
+                    search: [this.search_text(), this.Icon_search()],
+                };
+            }
+            point_text(key) {
+                return this.points()[key][0];
+            }
+            point_icon(key) {
+                return this.points()[key][1];
+            }
+        }
+        $$.$bog_merchquarium_start = $bog_merchquarium_start;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_merchquarium_start, {
+            flex: {
+                grow: 1,
+            },
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: $mol_gap.block,
+            Card: {
+                width: '100%',
+                maxWidth: '30rem',
+                alignItems: 'center',
+                gap: $mol_gap.block,
+                padding: {
+                    top: '2rem',
+                    bottom: '2rem',
+                    left: $mol_gap.block,
+                    right: $mol_gap.block,
+                },
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                boxShadow: `0 0 0 1px ${$mol_theme.line}`,
+            },
+            Logo: {
+                width: '5rem',
+                height: '5rem',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: $mol_theme.current,
+                background: {
+                    color: $mol_theme.back,
+                },
+                border: {
+                    radius: '50%',
+                },
+                boxShadow: `0 0 0 3px ${$mol_theme.current}`,
+            },
+            Logo_icon: {
+                width: '3rem',
+                height: '3rem',
+            },
+            Brand: {
+                font: {
+                    size: '2rem',
+                    weight: 'bold',
+                },
+                textAlign: 'center',
+            },
+            Tagline: {
+                color: $mol_theme.current,
+                textAlign: 'center',
+                padding: {
+                    top: 0,
+                },
+            },
+            Lead: {
+                textAlign: 'center',
+            },
+            Points: {
+                alignSelf: 'stretch',
+                gap: $mol_gap.space,
+            },
+            Point: {
+                alignItems: 'center',
+                gap: $mol_gap.block,
+            },
+            Point_icon: {
+                flex: {
+                    shrink: 0,
+                },
+                width: '2.25rem',
+                height: '2.25rem',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: $mol_theme.current,
+                background: {
+                    color: $mol_theme.back,
+                },
+                border: {
+                    radius: '50%',
+                },
+            },
+            Point_text: {
+                flex: {
+                    shrink: 1,
+                },
+                minWidth: 0,
+            },
+            Create: {
+                font: {
+                    size: '1.125rem',
+                },
+                padding: {
+                    top: '.5rem',
+                    bottom: '.5rem',
+                    left: '2rem',
+                    right: '2rem',
+                },
+            },
+            Note: {
+                color: $mol_theme.shade,
+                textAlign: 'center',
+                font: {
+                    size: '.875rem',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$mol_ghost) = class $mol_ghost extends ($.$mol_view) {
 		Sub(){
 			const obj = new this.$.$mol_view();
@@ -7692,273 +8309,6 @@ var $;
         }
         $$.$mol_nav = $mol_nav;
     })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-	($.$mol_list) = class $mol_list extends ($.$mol_view) {
-		gap_before(){
-			return 0;
-		}
-		Gap_before(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_before())});
-			return obj;
-		}
-		Empty(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		gap_after(){
-			return 0;
-		}
-		Gap_after(){
-			const obj = new this.$.$mol_view();
-			(obj.style) = () => ({"paddingTop": (this.gap_after())});
-			return obj;
-		}
-		rows(){
-			return [
-				(this.Gap_before()), 
-				(this.Empty()), 
-				(this.Gap_after())
-			];
-		}
-		render_visible_only(){
-			return true;
-		}
-		render_over(){
-			return 0.1;
-		}
-		sub(){
-			return (this.rows());
-		}
-		item_height_min(id){
-			return 1;
-		}
-		item_width_min(id){
-			return 1;
-		}
-		view_window_shift(next){
-			if(next !== undefined) return next;
-			return 0;
-		}
-		view_window(){
-			return [0, 0];
-		}
-	};
-	($mol_mem(($.$mol_list.prototype), "Gap_before"));
-	($mol_mem(($.$mol_list.prototype), "Empty"));
-	($mol_mem(($.$mol_list.prototype), "Gap_after"));
-	($mol_mem(($.$mol_list.prototype), "view_window_shift"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    let cache = null;
-    function $mol_support_css_overflow_anchor() {
-        return cache ?? (cache = this.$mol_dom_context.CSS?.supports('overflow-anchor:auto') ?? false);
-    }
-    $.$mol_support_css_overflow_anchor = $mol_support_css_overflow_anchor;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /**
-         * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
-         * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
-         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
-         */
-        class $mol_list extends $.$mol_list {
-            sub() {
-                const rows = this.rows();
-                const next = (rows.length === 0) ? [this.Empty()] : rows;
-                const prev = $mol_mem_cached(() => this.sub());
-                const [start, end] = $mol_mem_cached(() => this.view_window()) ?? [0, 0];
-                if (prev && $mol_mem_cached(() => prev[start] !== next[start])) {
-                    const index = $mol_mem_cached(() => next.indexOf(prev[start])) ?? -1;
-                    if (index >= 0)
-                        this.view_window_shift(index - start);
-                }
-                return next;
-            }
-            render_visible_only() {
-                return this.$.$mol_support_css_overflow_anchor();
-            }
-            _view_window_last = [0, 0];
-            view_window(next) {
-                const kids = this.sub();
-                if (kids.length < 3)
-                    return [0, kids.length];
-                if (this.$.$mol_print.active())
-                    return [0, kids.length];
-                const rect = this.view_rect();
-                if (next)
-                    return next;
-                let [min, max] = $mol_mem_cached(() => this.view_window()) ?? this._view_window_last;
-                const shift = this.view_window_shift();
-                this.view_window_shift(0);
-                min += shift;
-                max += shift;
-                let max2 = max = Math.min(max, kids.length);
-                let min2 = min = Math.max(0, Math.min(min, max - 1));
-                const anchoring = this.render_visible_only();
-                const window_height = this.$.$mol_window.size().height + 40;
-                const over = Math.ceil(window_height * this.render_over());
-                const limit_top = -over;
-                const limit_bottom = window_height + over;
-                const gap_before = $mol_mem_cached(() => this.gap_before()) ?? 0;
-                const gap_after = $mol_mem_cached(() => this.gap_after()) ?? 0;
-                let top = Math.ceil(rect?.top ?? 0) + gap_before;
-                let bottom = Math.ceil(rect?.bottom ?? 0) - gap_after;
-                // change nothing when already covers all limits
-                if (top <= limit_top && bottom >= limit_bottom) {
-                    return [min2, max2];
-                }
-                // jumps when fully over limits
-                if (anchoring && ((bottom < limit_top) || (top > limit_bottom))) {
-                    min = 0;
-                    top = Math.ceil(rect?.top ?? 0);
-                    while (min < (kids.length - 1)) {
-                        const height = this.item_height_min(min);
-                        if (top + height >= limit_top)
-                            break;
-                        top += height;
-                        ++min;
-                    }
-                    min2 = min;
-                    max2 = max = min;
-                    bottom = top;
-                }
-                let top2 = top;
-                let bottom2 = bottom;
-                // force recalc min when overlapse top limit
-                if (anchoring && (top < limit_top) && (bottom < limit_bottom) && (max < kids.length)) {
-                    min2 = max;
-                    top2 = bottom;
-                }
-                // force recalc max when overlapse bottom limit
-                if ((bottom > limit_bottom) && (top > limit_top) && (min > 0)) {
-                    max2 = min;
-                    bottom2 = top;
-                }
-                // extend min to cover top limit
-                while (anchoring && ((top2 > limit_top) && (min2 > 0))) {
-                    --min2;
-                    top2 -= this.item_height_min(min2);
-                }
-                // extend max to cover bottom limit
-                while (bottom2 < limit_bottom && max2 < kids.length) {
-                    bottom2 += this.item_height_min(max2);
-                    ++max2;
-                }
-                return [min2, max2];
-            }
-            item_height_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_height() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            row_width_min(index) {
-                try {
-                    return this.sub()[index]?.minimal_width() ?? 0;
-                }
-                catch (error) {
-                    $mol_fail_log(error);
-                    return 0;
-                }
-            }
-            gap_before() {
-                let gap = 0;
-                const skipped = this.view_window()[0];
-                for (let i = 0; i < skipped; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            gap_after() {
-                let gap = 0;
-                const from = this.view_window()[1];
-                const to = this.sub().length;
-                for (let i = from; i < to; ++i)
-                    gap += this.item_height_min(i);
-                return gap;
-            }
-            sub_visible() {
-                return [
-                    ...this.gap_before() ? [this.Gap_before()] : [],
-                    ...this.sub().slice(...this._view_window_last = this.view_window()),
-                    ...this.gap_after() ? [this.Gap_after()] : [],
-                ];
-            }
-            minimal_height() {
-                let height = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    height += this.item_height_min(i);
-                return height;
-            }
-            minimal_width() {
-                let width = 0;
-                const len = this.sub().length;
-                for (let i = 0; i < len; ++i)
-                    width = Math.max(width, this.item_width_min(i));
-                return width;
-            }
-            force_render(path) {
-                const kids = this.rows();
-                const index = kids.findIndex(item => path.has(item));
-                if (index >= 0) {
-                    const win = this.view_window();
-                    if (index < win[0] || index >= win[1]) {
-                        this.view_window([this.render_visible_only() ? index : 0, index + 1]);
-                    }
-                    kids[index].force_render(path);
-                }
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "view_window", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_before", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "gap_after", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "sub_visible", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_height", null);
-        __decorate([
-            $mol_mem
-        ], $mol_list.prototype, "minimal_width", null);
-        $$.$mol_list = $mol_list;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/list/list.view.css", "[mol_list] {\n\twill-change: contents;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex-shrink: 0;\n\tmax-width: 100%;\n\t/* display: flex;\n\talign-items: stretch;\n\talign-content: stretch; */\n\ttransition: none;\n\t/* will-change: contents; */\n}\n\n[mol_list]:where([mol_view_error]) {\n\tmin-height: 1.5rem;\n}\n\n[mol_list_gap_before] ,\n[mol_list_gap_after] {\n\tdisplay: block !important;\n\tflex: none;\n\ttransition: none;\n\toverflow-anchor: none;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -11835,6 +12185,547 @@ var $;
 var $;
 (function ($) {
     $mol_style_attach("mol/text/text/text.view.css", "[mol_text] {\n\tline-height: 1.5em;\n\tbox-sizing: border-box;\n\tborder-radius: var(--mol_gap_round);\n\twhite-space: pre-line;\n\tdisplay: flex;\n\tflex-direction: column;\n\tflex: 0 0 auto;\n\ttab-size: 4;\n}\n\n[mol_text_paragraph] {\n\tpadding: var(--mol_gap_text);\n\toverflow: auto;\n\toverflow-x: overlay;\n\tmax-width: 100%;\n\tdisplay: block;\n\tmax-width: 60rem;\n\tbreak-inside: avoid;\n}\n\n[mol_text_spoiler_label_paragraph] {\n\tpadding: 0;\n}\n\n[mol_text_span] {\n\tdisplay: inline;\n}\n\n[mol_text_string] {\n\tdisplay: inline;\n\tflex: 0 1 auto;\n\twhite-space: normal;\n}\n\n[mol_text_quote] {\n\tmargin: var(--mol_gap_block);\n\tpadding: var(--mol_gap_block);\n\tbackground: var(--mol_theme_card);\n\tbox-shadow: 0 0 0 1px var(--mol_theme_back);\n\tbreak-inside: avoid;\n}\n\n[mol_text_header] {\n\tdisplay: block;\n\ttext-shadow: 0 0;\n\tfont-weight: normal;\n\tbreak-after: avoid;\n\tletter-spacing: 2px;\n}\n\n* + [mol_text_header] {\n\tmargin-top: 0.75rem;\n}\n\nh1[mol_text_header] {\n\tfont-size: 1.5rem;\n}\n\nh2[mol_text_header] {\n\tfont-size: 1.5rem;\n\tfont-style: italic;\n}\n\nh3[mol_text_header] {\n\tfont-size: 1.25rem;\n}\n\nh4[mol_text_header] {\n\tfont-size: 1.25em;\n\tfont-style: italic;\n}\n\nh5[mol_text_header] {\n\tfont-size: 1rem;\n}\n\nh6[mol_text_header] {\n\tfont-size: 1rem;\n\tfont-style: italic;\n}\n\n[mol_text_header_link] {\n\tcolor: inherit;\n}\n\n[mol_text_table] {\n\tbreak-inside: avoid;\n}\n\n[mol_text_table_cell] {\n\twidth: auto;\n\tdisplay: table-cell;\n\tvertical-align: baseline;\n\tpadding: 0;\n\tborder-radius: 0;\n}\n\n[mol_text_grid] {\n\tbreak-inside: avoid;\n}\n\n[mol_text_grid_cell] {\n\twidth: auto;\n\tdisplay: table-cell;\n\tvertical-align: top;\n\tpadding: 0;\n\tborder-radius: 0;\n}\n\n[mol_text_cut] {\n\tborder: none;\n\twidth: 100%;\n\tbox-shadow: 0 0 0 1px var(--mol_theme_line);\n}\n\n[mol_text_link_http],\n[mol_text_link] {\n\tpadding: 0;\n\tdisplay: inline;\n\twhite-space: nowrap;\n}\n\n[mol_text_link_icon] + [mol_text_embed] {\n\tmargin-inline-start: -1.5rem;\n}\n\n[mol_text_embed_youtube] {\n\tdisplay: inline;\n}\n\n[mol_text_embed_youtube_image],\n[mol_text_embed_youtube_frame],\n[mol_text_embed_object] {\n\tobject-fit: contain;\n\tobject-position: center;\n\twidth: 100vw;\n\tmax-height: calc( 100vh - 6rem );\n}\n[mol_text_embed_object_fallback] {\n\tpadding: 0;\n}\n[mol_text_embed_image] {\n\tobject-fit: contain;\n\tobject-position: center;\n\tdisplay: inline;\n\t/* max-height: calc( 100vh - 6rem ); */\n\tvertical-align: top;\n}\n\n[mol_text_pre] {\n\twhite-space: pre;\n\toverflow-x: auto;\n\toverflow-x: overlay;\n\ttab-size: 2;\n\tbreak-inside: avoid;\n}\n\n[mol_text_code_line] {\n\tdisplay: inline-block;\n}\n\n[mol_text_type=\"strong\"] {\n\ttext-shadow: 0 0;\n\tfilter: contrast(1.5);\n}\n\n[mol_text_type=\"emphasis\"] {\n\tfont-style: italic;\n}\n\n[mol_text_type=\"insert\"] {\n\tcolor: var(--mol_theme_special);\n}\n\n[mol_text_type=\"delete\"] {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_text_type=\"remark\"] {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_text_type=\"quote\"] {\n\tfont-style: italic;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_palette) = class $mol_icon_palette extends ($.$mol_icon) {
+		path(){
+			return "M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A1.5,1.5 0 0,0 13.5,19.5C13.5,19.11 13.35,18.76 13.11,18.5C12.88,18.23 12.73,17.88 12.73,17.5A1.5,1.5 0 0,1 14.23,16H16A5,5 0 0,0 21,11C21,6.58 16.97,3 12,3Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_palette_outline) = class $mol_icon_palette_outline extends ($.$mol_icon) {
+		path(){
+			return "M12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2C17.5,2 22,6 22,11A6,6 0 0,1 16,17H14.2C13.9,17 13.7,17.2 13.7,17.5C13.7,17.6 13.8,17.7 13.8,17.8C14.2,18.3 14.4,18.9 14.4,19.5C14.5,20.9 13.4,22 12,22M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C12.3,20 12.5,19.8 12.5,19.5C12.5,19.3 12.4,19.2 12.4,19.1C12,18.6 11.8,18.1 11.8,17.5C11.8,16.1 12.9,15 14.3,15H16A4,4 0 0,0 20,11C20,7.1 16.4,4 12,4M6.5,10C7.3,10 8,10.7 8,11.5C8,12.3 7.3,13 6.5,13C5.7,13 5,12.3 5,11.5C5,10.7 5.7,10 6.5,10M9.5,6C10.3,6 11,6.7 11,7.5C11,8.3 10.3,9 9.5,9C8.7,9 8,8.3 8,7.5C8,6.7 8.7,6 9.5,6M14.5,6C15.3,6 16,6.7 16,7.5C16,8.3 15.3,9 14.5,9C13.7,9 13,8.3 13,7.5C13,6.7 13.7,6 14.5,6M17.5,10C18.3,10 19,10.7 19,11.5C19,12.3 18.3,13 17.5,13C16.7,13 16,12.3 16,11.5C16,10.7 16.7,10 17.5,10Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_storefront) = class $mol_icon_storefront extends ($.$mol_icon) {
+		path(){
+			return "M5.06 3C4.63 3 4.22 3.14 3.84 3.42C3.46 3.7 3.24 4.06 3.14 4.5L2.11 8.91C1.86 10 2.06 10.92 2.69 11.73C2.81 11.85 2.93 11.97 3.04 12.07C3.63 12.64 4.28 13 5.22 13C6.16 13 6.91 12.59 7.47 12.05C8.1 12.67 8.86 13 9.8 13C10.64 13 11.44 12.63 12 12.07C12.68 12.7 13.45 13 14.3 13C15.17 13 15.91 12.67 16.54 12.05C17.11 12.62 17.86 13 18.81 13C19.76 13 20.43 12.65 21 12.06C21.09 11.97 21.18 11.87 21.28 11.77C21.94 10.95 22.14 10 21.89 8.91L20.86 4.5C20.73 4.06 20.5 3.7 20.13 3.42C19.77 3.14 19.38 3 18.94 3M18.89 4.97L19.97 9.38C20.06 9.81 19.97 10.2 19.69 10.55C19.44 10.86 19.13 11 18.75 11C18.44 11 18.17 10.9 17.95 10.66C17.73 10.43 17.61 10.16 17.58 9.84L16.97 5M5.06 5H7.03L6.42 9.84C6.3 10.63 5.91 11 5.25 11C4.84 11 4.53 10.86 4.31 10.55C4.03 10.2 3.94 9.81 4.03 9.38M9.05 5H11V9.7C11 10.05 10.89 10.35 10.64 10.62C10.39 10.88 10.08 11 9.7 11C9.36 11 9.07 10.88 8.84 10.59C8.61 10.3 8.5 10 8.5 9.66V9.5M13 5H14.95L15.5 9.5C15.58 9.92 15.5 10.27 15.21 10.57C14.95 10.87 14.61 11 14.2 11C13.89 11 13.61 10.88 13.36 10.62C13.11 10.35 13 10.05 13 9.7M3 14.03V19C3 20.11 3.89 21 5 21C9.67 21 14.33 21 19 21C20.1 21 21 20.11 21 19V14.05C20.45 14.63 19.75 14.96 19 15C18 15.03 17.25 14.74 16.54 14.05C15.94 14.65 15.14 15 14.3 15C13.4 15 12.6 14.64 12 14.07C11.43 14.64 10.65 15 9.78 15C8.87 15 8.07 14.65 7.47 14.05C6.89 14.64 6.1 15 5.23 15C4.33 15 3.66 14.65 3 14.03Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_storefront_outline) = class $mol_icon_storefront_outline extends ($.$mol_icon) {
+		path(){
+			return "M5.06 3C4.63 3 4.22 3.14 3.84 3.42S3.24 4.06 3.14 4.5L2.11 8.91C1.86 10 2.06 10.95 2.72 11.77L3 12.05V19C3 19.5 3.2 20 3.61 20.39S4.5 21 5 21H19C19.5 21 20 20.8 20.39 20.39S21 19.5 21 19V12.05L21.28 11.77C21.94 10.95 22.14 10 21.89 8.91L20.86 4.5C20.73 4.06 20.5 3.7 20.13 3.42C19.77 3.14 19.38 3 18.94 3H5.06M18.89 4.97L19.97 9.38C20.06 9.81 19.97 10.2 19.69 10.55C19.44 10.86 19.13 11 18.75 11C18.44 11 18.17 10.9 17.95 10.66C17.73 10.43 17.61 10.16 17.58 9.84L16.97 5L18.89 4.97M5.06 5H7.03L6.42 9.84C6.3 10.63 5.91 11 5.25 11C4.84 11 4.53 10.86 4.31 10.55C4.03 10.2 3.94 9.81 4.03 9.38L5.06 5M9.05 5H11V9.7C11 10.05 10.89 10.35 10.64 10.62C10.39 10.88 10.08 11 9.7 11C9.36 11 9.07 10.88 8.84 10.59S8.5 10 8.5 9.66V9.5L9.05 5M13 5H14.95L15.5 9.5C15.58 9.92 15.5 10.27 15.21 10.57C14.95 10.87 14.61 11 14.2 11C13.89 11 13.61 10.88 13.36 10.62C13.11 10.35 13 10.05 13 9.7V5M7.45 12.05C8.08 12.67 8.86 13 9.8 13C10.64 13 11.38 12.67 12 12.05C12.69 12.67 13.45 13 14.3 13C15.17 13 15.92 12.67 16.55 12.05C17.11 12.67 17.86 13 18.8 13H19.03V19H5V13H5.25C6.16 13 6.89 12.67 7.45 12.05Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_tag) = class $mol_icon_tag extends ($.$mol_icon) {
+		path(){
+			return "M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_tag_multiple) = class $mol_icon_tag_multiple extends ($.$mol_icon) {
+		path(){
+			return "M5.5,9A1.5,1.5 0 0,0 7,7.5A1.5,1.5 0 0,0 5.5,6A1.5,1.5 0 0,0 4,7.5A1.5,1.5 0 0,0 5.5,9M17.41,11.58C17.77,11.94 18,12.44 18,13C18,13.55 17.78,14.05 17.41,14.41L12.41,19.41C12.05,19.77 11.55,20 11,20C10.45,20 9.95,19.78 9.58,19.41L2.59,12.42C2.22,12.05 2,11.55 2,11V6C2,4.89 2.89,4 4,4H9C9.55,4 10.05,4.22 10.41,4.58L17.41,11.58M13.54,5.71L14.54,4.71L21.41,11.58C21.78,11.94 22,12.45 22,13C22,13.55 21.78,14.05 21.42,14.41L16.04,19.79L15.04,18.79L20.75,13L13.54,5.71Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_robot) = class $mol_icon_robot extends ($.$mol_icon) {
+		path(){
+			return "M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_robot_outline) = class $mol_icon_robot_outline extends ($.$mol_icon) {
+		path(){
+			return "M17.5 15.5C17.5 16.61 16.61 17.5 15.5 17.5S13.5 16.61 13.5 15.5 14.4 13.5 15.5 13.5 17.5 14.4 17.5 15.5M8.5 13.5C7.4 13.5 6.5 14.4 6.5 15.5S7.4 17.5 8.5 17.5 10.5 16.61 10.5 15.5 9.61 13.5 8.5 13.5M23 15V18C23 18.55 22.55 19 22 19H21V20C21 21.11 20.11 22 19 22H5C3.9 22 3 21.11 3 20V19H2C1.45 19 1 18.55 1 18V15C1 14.45 1.45 14 2 14H3C3 10.13 6.13 7 10 7H11V5.73C10.4 5.39 10 4.74 10 4C10 2.9 10.9 2 12 2S14 2.9 14 4C14 4.74 13.6 5.39 13 5.73V7H14C17.87 7 21 10.13 21 14H22C22.55 14 23 14.45 23 15M21 16H19V14C19 11.24 16.76 9 14 9H10C7.24 9 5 11.24 5 14V16H3V17H5V20H19V17H21V16Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_share) = class $mol_icon_share extends ($.$mol_icon) {
+		path(){
+			return "M21,12L14,5V9C7,10 4,15 3,20C5.5,16.5 9,14.9 14,14.9V19L21,12Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_share_variant) = class $mol_icon_share_variant extends ($.$mol_icon) {
+		path(){
+			return "M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_account) = class $mol_icon_account extends ($.$mol_icon) {
+		path(){
+			return "M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_account_multiple) = class $mol_icon_account_multiple extends ($.$mol_icon) {
+		path(){
+			return "M16 17V19H2V17S2 13 9 13 16 17 16 17M12.5 7.5A3.5 3.5 0 1 0 9 11A3.5 3.5 0 0 0 12.5 7.5M15.94 13A5.32 5.32 0 0 1 18 17V19H22V17S22 13.37 15.94 13M15 4A3.39 3.39 0 0 0 13.07 4.59A5 5 0 0 1 13.07 10.41A3.39 3.39 0 0 0 15 11A3.5 3.5 0 0 0 15 4Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
+		type(){
+			return "";
+		}
+		auto_scroll(){
+			return null;
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_list_type": (this.type())};
+		}
+		Paragraph(id){
+			const obj = new this.$.$mol_text_list_item();
+			(obj.index) = () => ((this.item_index(id)));
+			(obj.sub) = () => ((this.block_content(id)));
+			return obj;
+		}
+	};
+	($mol_mem_key(($.$mol_text_list.prototype), "Paragraph"));
+	($.$mol_text_list_item) = class $mol_text_list_item extends ($.$mol_paragraph) {
+		index(){
+			return 0;
+		}
+		attr(){
+			return {...(super.attr()), "mol_text_list_item_index": (this.index())};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\n\tpadding-inline-start: 1.75rem;\n}\n\n[mol_text_list_item] {\n\tcontain: none;\n\tdisplay: list-item;\n}\n\n[mol_text_list_item]::before {\n\tcontent: attr( mol_text_list_item_index ) \".\";\n\twidth: 1.25rem;\n\tdisplay: inline-block;\n\tposition: absolute;\n\tmargin-inline-start: -1.75rem;\n\ttext-align: end;\n}\n\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\n\tcontent: \"•\";\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$bog_merchquarium_help) = class $bog_merchquarium_help extends ($.$mol_list) {
+		Quick_title(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_help_Quick_title_title")));
+			return obj;
+		}
+		Quick_text(){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.$.$mol_locale.text("$bog_merchquarium_help_Quick_text_text")));
+			return obj;
+		}
+		settings(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Quick_settings(){
+			const obj = new this.$.$mol_button_major();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_help_Quick_settings_title")));
+			(obj.click) = (next) => ((this.settings(next)));
+			return obj;
+		}
+		Quick(){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([
+				(this.Quick_title()), 
+				(this.Quick_text()), 
+				(this.Quick_settings())
+			]);
+			return obj;
+		}
+		Lead(){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_help_Lead_title")));
+			return obj;
+		}
+		icon(id){
+			const obj = new this.$.$mol_icon();
+			return obj;
+		}
+		Section_icon(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.icon(id))]);
+			return obj;
+		}
+		section_title(id){
+			return "";
+		}
+		Section_title(id){
+			const obj = new this.$.$mol_paragraph();
+			(obj.title) = () => ((this.section_title(id)));
+			return obj;
+		}
+		section_text(id){
+			return "";
+		}
+		Section_text(id){
+			const obj = new this.$.$mol_text();
+			(obj.text) = () => ((this.section_text(id)));
+			return obj;
+		}
+		Section_body(id){
+			const obj = new this.$.$mol_list();
+			(obj.rows) = () => ([(this.Section_title(id)), (this.Section_text(id))]);
+			return obj;
+		}
+		rows(){
+			return [
+				(this.Quick()), 
+				(this.Lead()), 
+				(this.Section("about")), 
+				(this.Section("look")), 
+				(this.Section("products")), 
+				(this.Section("tags")), 
+				(this.Section("import")), 
+				(this.Section("preview")), 
+				(this.Section("share")), 
+				(this.Section("access"))
+			];
+		}
+		Section(id){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Section_icon(id)), (this.Section_body(id))]);
+			return obj;
+		}
+		Icon_about(){
+			const obj = new this.$.$mol_icon_send_outline();
+			return obj;
+		}
+		Icon_look(){
+			const obj = new this.$.$mol_icon_palette_outline();
+			return obj;
+		}
+		Icon_products(){
+			const obj = new this.$.$mol_icon_storefront_outline();
+			return obj;
+		}
+		Icon_tags(){
+			const obj = new this.$.$mol_icon_tag_multiple();
+			return obj;
+		}
+		Icon_import(){
+			const obj = new this.$.$mol_icon_robot_outline();
+			return obj;
+		}
+		Icon_preview(){
+			const obj = new this.$.$mol_icon_eye_outline();
+			return obj;
+		}
+		Icon_share(){
+			const obj = new this.$.$mol_icon_share_variant();
+			return obj;
+		}
+		Icon_access(){
+			const obj = new this.$.$mol_icon_account_multiple();
+			return obj;
+		}
+		about_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_about_title"));
+		}
+		about_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_about_text"));
+		}
+		look_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_look_title"));
+		}
+		look_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_look_text"));
+		}
+		products_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_products_title"));
+		}
+		products_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_products_text"));
+		}
+		tags_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_tags_title"));
+		}
+		tags_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_tags_text"));
+		}
+		import_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_import_title"));
+		}
+		import_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_import_text"));
+		}
+		preview_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_preview_title"));
+		}
+		preview_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_preview_text"));
+		}
+		share_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_share_title"));
+		}
+		share_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_share_text"));
+		}
+		access_title(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_access_title"));
+		}
+		access_text(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_help_access_text"));
+		}
+	};
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Quick_title"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Quick_text"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "settings"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Quick_settings"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Quick"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Lead"));
+	($mol_mem_key(($.$bog_merchquarium_help.prototype), "icon"));
+	($mol_mem_key(($.$bog_merchquarium_help.prototype), "Section_icon"));
+	($mol_mem_key(($.$bog_merchquarium_help.prototype), "Section_title"));
+	($mol_mem_key(($.$bog_merchquarium_help.prototype), "Section_text"));
+	($mol_mem_key(($.$bog_merchquarium_help.prototype), "Section_body"));
+	($mol_mem_key(($.$bog_merchquarium_help.prototype), "Section"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_about"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_look"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_products"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_tags"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_import"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_preview"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_share"));
+	($mol_mem(($.$bog_merchquarium_help.prototype), "Icon_access"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_merchquarium_help extends $.$bog_merchquarium_help {
+            sections() {
+                return {
+                    about: [this.about_title(), this.about_text(), this.Icon_about()],
+                    look: [this.look_title(), this.look_text(), this.Icon_look()],
+                    products: [this.products_title(), this.products_text(), this.Icon_products()],
+                    tags: [this.tags_title(), this.tags_text(), this.Icon_tags()],
+                    import: [this.import_title(), this.import_text(), this.Icon_import()],
+                    preview: [this.preview_title(), this.preview_text(), this.Icon_preview()],
+                    share: [this.share_title(), this.share_text(), this.Icon_share()],
+                    access: [this.access_title(), this.access_text(), this.Icon_access()],
+                };
+            }
+            section_title(key) {
+                return this.sections()[key][0];
+            }
+            section_text(key) {
+                return this.sections()[key][1];
+            }
+            icon(key) {
+                return this.sections()[key][2];
+            }
+        }
+        $$.$bog_merchquarium_help = $bog_merchquarium_help;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        $mol_style_define($bog_merchquarium_help, {
+            maxWidth: '44rem',
+            margin: {
+                left: 'auto',
+                right: 'auto',
+            },
+            gap: $mol_gap.block,
+            padding: $mol_gap.block,
+            Quick: {
+                gap: $mol_gap.block,
+                padding: $mol_gap.block,
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                boxShadow: `0 0 0 2px ${$mol_theme.current}`,
+            },
+            Quick_title: {
+                font: {
+                    weight: 'bold',
+                    size: '1.375rem',
+                },
+                padding: {
+                    left: '.75rem',
+                    right: '.75rem',
+                },
+            },
+            Quick_settings: {
+                alignSelf: 'flex-start',
+                margin: {
+                    left: '.75rem',
+                },
+            },
+            Lead: {
+                color: $mol_theme.shade,
+                padding: {
+                    left: '.75rem',
+                    right: '.75rem',
+                },
+            },
+            Section: {
+                gap: $mol_gap.block,
+                padding: $mol_gap.block,
+                background: {
+                    color: $mol_theme.card,
+                },
+                border: {
+                    radius: $mol_gap.round,
+                },
+                boxShadow: `0 0 0 1px ${$mol_theme.line}`,
+            },
+            Section_icon: {
+                flex: {
+                    shrink: 0,
+                },
+                width: '2.5rem',
+                height: '2.5rem',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: $mol_theme.current,
+                background: {
+                    color: $mol_theme.back,
+                },
+                border: {
+                    radius: '50%',
+                },
+            },
+            Section_body: {
+                flex: {
+                    grow: 1,
+                    shrink: 1,
+                },
+                minWidth: 0,
+            },
+            Section_text: {
+                padding: 0,
+            },
+            Section_title: {
+                font: {
+                    weight: 'bold',
+                    size: '1.125rem',
+                },
+                padding: {
+                    left: '.75rem',
+                    right: '.75rem',
+                },
+            },
+        });
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_locale_select) = class $mol_locale_select extends ($.$mol_select) {
+		langs(){
+			return ["en"];
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_locale_select extends $.$mol_locale_select {
+            value(next) {
+                return this.$.$mol_locale.lang(next);
+            }
+            dictionary(next) {
+                return next ?? Object.fromEntries(this.langs().map(code => [code, code]));
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_locale_select.prototype, "dictionary", null);
+        $$.$mol_locale_select = $mol_locale_select;
+    })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
 ;
@@ -22492,18 +23383,6 @@ var $;
 
 
 ;
-	($.$mol_icon_account) = class $mol_icon_account extends ($.$mol_icon) {
-		path(){
-			return "M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
 	($.$mol_icon_security) = class $mol_icon_security extends ($.$mol_icon) {
 		path(){
 			return "M12,12H19C18.47,16.11 15.72,19.78 12,20.92V12H5V6.3L12,3.19M12,1L3,5V11C3,16.55 6.84,21.73 12,23C17.16,21.73 21,16.55 21,11V5L12,1Z";
@@ -33033,6 +33912,11 @@ var $;
 
 ;
 	($.$bog_merchquarium_settings) = class $bog_merchquarium_settings extends ($.$mol_page) {
+		Lang(){
+			const obj = new this.$.$mol_locale_select();
+			(obj.dictionary) = () => ({"ru": "Русский", "en": "English"});
+			return obj;
+		}
 		Sync(){
 			const obj = new this.$.$giper_baza_status();
 			return obj;
@@ -33419,6 +34303,13 @@ var $;
 			if(next !== undefined) return next;
 			return "";
 		}
+		head(){
+			return [
+				(this.Title()), 
+				(this.Lang()), 
+				(this.Tools())
+			];
+		}
 		tools(){
 			return [(this.Sync())];
 		}
@@ -33454,6 +34345,7 @@ var $;
 			return obj;
 		}
 	};
+	($mol_mem(($.$bog_merchquarium_settings.prototype), "Lang"));
 	($mol_mem(($.$bog_merchquarium_settings.prototype), "Sync"));
 	($mol_mem(($.$bog_merchquarium_settings.prototype), "Account_label"));
 	($mol_mem(($.$bog_merchquarium_settings.prototype), "Account_lord"));
@@ -34286,6 +35178,16 @@ var $;
     var $$;
     (function ($$) {
         $mol_style_define($bog_merchquarium_settings, {
+            Title: {
+                flex: {
+                    grow: 0,
+                },
+            },
+            Lang: {
+                margin: {
+                    right: 'auto',
+                },
+            },
             Sales_section: {
                 Content: {
                     gap: $mol_gap.block,
@@ -35398,18 +36300,6 @@ var $;
         });
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
-
-;
-	($.$mol_icon_image) = class $mol_icon_image extends ($.$mol_icon) {
-		path(){
-			return "M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z";
-		}
-	};
-
-
-;
-"use strict";
-
 
 ;
 	($.$mol_icon_image_off) = class $mol_icon_image_off extends ($.$mol_icon) {
@@ -36596,46 +37486,6 @@ var $;
 
 
 ;
-	($.$mol_text_list) = class $mol_text_list extends ($.$mol_text) {
-		type(){
-			return "";
-		}
-		auto_scroll(){
-			return null;
-		}
-		attr(){
-			return {...(super.attr()), "mol_text_list_type": (this.type())};
-		}
-		Paragraph(id){
-			const obj = new this.$.$mol_text_list_item();
-			(obj.index) = () => ((this.item_index(id)));
-			(obj.sub) = () => ((this.block_content(id)));
-			return obj;
-		}
-	};
-	($mol_mem_key(($.$mol_text_list.prototype), "Paragraph"));
-	($.$mol_text_list_item) = class $mol_text_list_item extends ($.$mol_paragraph) {
-		index(){
-			return 0;
-		}
-		attr(){
-			return {...(super.attr()), "mol_text_list_item_index": (this.index())};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/text/list/list.view.css", "[mol_text_list] {\n\tpadding-inline-start: 1.75rem;\n}\n\n[mol_text_list_item] {\n\tcontain: none;\n\tdisplay: list-item;\n}\n\n[mol_text_list_item]::before {\n\tcontent: attr( mol_text_list_item_index ) \".\";\n\twidth: 1.25rem;\n\tdisplay: inline-block;\n\tposition: absolute;\n\tmargin-inline-start: -1.75rem;\n\ttext-align: end;\n}\n\n[mol_text_list_type=\"-\"] > [mol_text_list_item]::before,\n[mol_text_list_type=\"*\"] > [mol_text_list_item]::before {\n\tcontent: \"•\";\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
 	($.$bog_merchquarium_app) = class $bog_merchquarium_app extends ($.$mol_page) {
 		product_link(id){
 			return "";
@@ -36834,24 +37684,13 @@ var $;
 			(obj.sub) = () => ((this.settings_button_sub()));
 			return obj;
 		}
-		Catalog_missing_text(){
-			const obj = new this.$.$mol_paragraph();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_app_Catalog_missing_text_title")));
-			return obj;
-		}
 		catalog_create(next){
 			if(next !== undefined) return next;
 			return null;
 		}
-		Catalog_create(){
-			const obj = new this.$.$bog_merchquarium_button();
-			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_app_Catalog_create_title")));
-			(obj.click) = (next) => ((this.catalog_create(next)));
-			return obj;
-		}
 		Catalog_missing(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Catalog_missing_text()), (this.Catalog_create())]);
+			const obj = new this.$.$bog_merchquarium_start();
+			(obj.create) = (next) => ((this.catalog_create(next)));
 			return obj;
 		}
 		kind_options(){
@@ -36933,9 +37772,13 @@ var $;
 			(obj.rows) = () => ((this.catalog_rows()));
 			return obj;
 		}
+		help_settings(next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		Help(){
-			const obj = new this.$.$mol_text();
-			(obj.text) = () => ((this.$.$mol_locale.text("$bog_merchquarium_app_Help_text")));
+			const obj = new this.$.$bog_merchquarium_help();
+			(obj.settings) = (next) => ((this.help_settings(next)));
 			return obj;
 		}
 		Settings(){
@@ -37102,9 +37945,7 @@ var $;
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Settings_icon"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Return_icon"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Settings_button"));
-	($mol_mem(($.$bog_merchquarium_app.prototype), "Catalog_missing_text"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "catalog_create"));
-	($mol_mem(($.$bog_merchquarium_app.prototype), "Catalog_create"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Catalog_missing"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "category_filter"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Kind_filter"));
@@ -37117,6 +37958,7 @@ var $;
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Product_cards"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Catalog_empty"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Catalog_selected"));
+	($mol_mem(($.$bog_merchquarium_app.prototype), "help_settings"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Help"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Settings"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "cart"));
@@ -37132,6 +37974,31 @@ var $;
 	($mol_mem_key(($.$bog_merchquarium_app.prototype), "Icon_web"));
 	($mol_mem_key(($.$bog_merchquarium_app.prototype), "Product_undo"));
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $bog_merchquarium_storage extends $mol_storage_web {
+        static estimate(next) {
+            try {
+                const estimate = $mol_wire_sync(this.native() ?? {}).estimate();
+                new this.$.$mol_after_timeout(1000, $mol_wire_async(() => this.estimate(null)));
+                return estimate;
+            }
+            catch (error) {
+                if (!$mol_promise_like(error))
+                    new this.$.$mol_after_timeout(1000, $mol_wire_async(() => this.estimate(null)));
+                $mol_fail_hidden(error);
+            }
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $bog_merchquarium_storage, "estimate", null);
+    $.$bog_merchquarium_storage = $bog_merchquarium_storage;
+    $.$mol_storage = $bog_merchquarium_storage;
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -37243,6 +38110,11 @@ var $;
             catalog_create() {
                 const land = this.$.$giper_baza_glob.land_grab();
                 this.catalog_link(land.link().str);
+                this.help_open(true);
+            }
+            help_settings() {
+                this.help_open(false);
+                this.settings_open(true);
             }
             auto() {
                 return [this.seo_register()];
@@ -37263,6 +38135,8 @@ var $;
                 }
             }
             title() {
+                if (!this.catalog_link())
+                    return 'Merchquarium';
                 return this.catalog()?.Title()?.val()?.trim() || super.title();
             }
             Photo() {
@@ -37368,7 +38242,7 @@ var $;
                 return value === 'all' || this.filter_fandoms().includes(value) ? value : 'all';
             }
             search(next) {
-                return next ?? '';
+                return this.$.$mol_state_arg.value('search', next === undefined ? undefined : next || null) ?? '';
             }
             kind_options() {
                 return Object.fromEntries([
@@ -37559,6 +38433,9 @@ var $;
             $mol_action
         ], $bog_merchquarium_app.prototype, "catalog_create", null);
         __decorate([
+            $mol_action
+        ], $bog_merchquarium_app.prototype, "help_settings", null);
+        __decorate([
             $mol_mem
         ], $bog_merchquarium_app.prototype, "seo_register", null);
         __decorate([
@@ -37579,9 +38456,6 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_merchquarium_app.prototype, "fandom_filter", null);
-        __decorate([
-            $mol_mem
-        ], $bog_merchquarium_app.prototype, "search", null);
         __decorate([
             $mol_mem
         ], $bog_merchquarium_app.prototype, "is_admin", null);
@@ -37621,14 +38495,6 @@ var $;
             background: {
                 image: $mol_style_func.vary('--bog_merchquarium_pattern'),
                 size: [$mol_style_func.vary('--bog_merchquarium_pattern_size')],
-            },
-            Catalog_missing: {
-                flexDirection: 'column',
-                display: 'block'
-            },
-            Catalog_create: {
-                gap: $mol_gap.block,
-                marginTop: '1rem'
             },
             Title: {
                 font: {
