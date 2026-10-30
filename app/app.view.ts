@@ -155,6 +155,7 @@ namespace $.$$ {
 		}
 
 		title() {
+			if( !this.catalog_link() ) return 'Merchquarium'
 			return this.catalog()?.Title()?.val()?.trim() || super.title()
 		}
 

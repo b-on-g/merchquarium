@@ -501,7 +501,7 @@ namespace $ {
 				$mol_assert_equal( artist.settings_open(), false )
 				$mol_assert_equal( artist.content(), [ artist.Help() ] )
 				$mol_assert_equal( artist.head(), [ artist.Title(), artist.Product_add(), artist.Tools() ] )
-				$mol_assert_equal( artist.Help().text().length > 0, true )
+				$mol_assert_equal( artist.Help().rows().length, 9 )
 				$mol_assert_equal( artist.Preview(), null )
 
 				artist.Help_button().checked( false )

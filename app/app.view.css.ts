@@ -5,14 +5,6 @@ namespace $.$$ {
 			image: $mol_style_func.vary( '--bog_merchquarium_pattern' ),
 			size: [ $mol_style_func.vary( '--bog_merchquarium_pattern_size' ) ],
 		},
-		Catalog_missing: {
-			flexDirection: 'column',
-			display: 'block'
-		},
-		Catalog_create: {
-			gap: $mol_gap.block,
-			marginTop: '1rem'
-		},
 		Title: {
 			font: {
 				weight: 'bold',

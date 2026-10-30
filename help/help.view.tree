@@ -1,0 +1,67 @@
+$bog_merchquarium_help $mol_list
+	rows /
+		<= Lead $mol_paragraph
+			title @ \A quick tour for the catalog author. Buyers never see this page.
+		<= Section*about
+		<= Section*look
+		<= Section*products
+		<= Section*tags
+		<= Section*import
+		<= Section*preview
+		<= Section*share
+		<= Section*access
+	Section* $mol_view
+		sub /
+			<= Section_icon* $mol_view
+				sub /
+					<= icon* $mol_icon
+			<= Section_body* $mol_list
+				rows /
+					<= Section_title* $mol_paragraph
+						title <= section_title* \
+					<= Section_text* $mol_text
+						text <= section_text* \
+	Icon_about $mol_icon_send_outline
+	Icon_look $mol_icon_palette_outline
+	Icon_products $mol_icon_storefront_outline
+	Icon_tags $mol_icon_tag_multiple
+	Icon_import $mol_icon_robot_outline
+	Icon_preview $mol_icon_eye_outline
+	Icon_share $mol_icon_share_variant
+	Icon_access $mol_icon_account_multiple
+	about_title @ \How it works
+	about_text @ \
+		\A buyer browses the catalog, puts items into the cart and sends you a request in direct messages. The request has the list, the total and a link to the order. Payment and delivery are discussed in the chat as usual.
+	look_title @ \Look and contacts
+	look_text @ \
+		\The gear in the header opens the settings: title, avatar, header and page backgrounds, color theme.
+		\
+		\In **Sales** set where requests go: a Telegram @nick or a VK link. Other socials become icons in the header.
+	products_title @ \Products
+	products_text @ \
+		\**Add product** creates an empty card, fill it in place. Photos are uploaded with the button under the card, several per product.
+		\
+		\**In stock** can be ordered. **Sold out** stays in the catalog with a badge, and a buyer can tell you they wait for a reprint. **Hidden** is visible only to you.
+		\
+		\A deleted product comes back with the button in its place or with Ctrl+Z.
+	tags_title @ \Merch kinds and fandoms
+	tags_text @ \
+		\They become filters and #tags on cards. A buyer taps a tag and sees everything from that fandom.
+	import_title @ \Many products at once
+	import_text @ \
+		\Settings → **Bulk import**. Copy the prompt and send it to any AI chat: it asks about your merch and replies with JSON. Paste the JSON back and the products appear at once, with kinds, fandoms and socials. Add photos afterwards.
+		\
+		\JSON with only kinds or only fandoms works too.
+	preview_title @ \How buyers see it
+	preview_text @ \
+		\The eye button shows the catalog the way a buyer sees it: no hidden products, sold out ones at the end, no editing. Press it again to get back.
+	share_title @ \Link and orders
+	share_text @ \
+		\Take the catalog link from the address bar and put it where your buyers are: profile, pinned post, channel description.
+		\
+		\The link in a request opens the order with prices and the total, handy for checking.
+	access_title @ \Co-author and search
+	access_text @ \
+		\In **Access** you can let another person edit the catalog by their account id.
+		\
+		\**Show in search engines** decides whether the catalog gets into Yandex and Google.

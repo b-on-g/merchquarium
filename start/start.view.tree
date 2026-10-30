@@ -1,0 +1,37 @@
+$bog_merchquarium_start $mol_view
+	create? null
+	sub /
+		<= Card $mol_list
+			rows /
+				<= Logo $mol_view
+					sub /
+						<= Logo_icon $mol_icon_fish
+				<= Brand $mol_paragraph
+					title \Merchquarium
+				<= Tagline $mol_paragraph
+					title @ \The merch makers aquarium
+				<= Lead $mol_paragraph
+					title @ \A showcase for your merch. Buyers fill a cart and send the order straight to your direct messages.
+				<= Points $mol_list
+					rows /
+						<= Point*cards
+						<= Point*orders
+						<= Point*search
+				<= Create $mol_button_major
+					title @ \Create my catalog
+					click? <=> create? null
+				<= Note $mol_paragraph
+					title @ \Got a link to someone's catalog? Just open it, nothing to create.
+	Point* $mol_view
+		sub /
+			<= Point_icon* $mol_view
+				sub /
+					<= point_icon* $mol_icon
+			<= Point_text* $mol_paragraph
+				title <= point_text* \
+	Icon_cards $mol_icon_image_multiple
+	Icon_orders $mol_icon_send_outline
+	Icon_search $mol_icon_magnify
+	cards_text @ \Cards with photos, prices and #fandoms
+	orders_text @ \The order comes to Telegram or VK in one message
+	search_text @ \Yandex and Google find the catalog
