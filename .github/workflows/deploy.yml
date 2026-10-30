@@ -18,12 +18,38 @@ jobs:
     - uses: hyoo-ru/mam_build@master2
       with:
         package: 'bog/merchquarium'
-        modules: 'app'
+        modules: 'app seo/run'
 
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/main'
       with:
         folder: 'bog/merchquarium/app/-'
+
+    - name: Deploy SEO server
+      if: github.ref == 'refs/heads/main'
+      env:
+        SSH_KEY: ${{ secrets.SEO_SSH_KEY }}
+      working-directory: bog/merchquarium/seo/run
+      run: |
+        if [ -z "$SSH_KEY" ]; then echo "SEO_SSH_KEY is not set, skip"; exit 0; fi
+        mkdir -p ~/.ssh dist
+        echo "$SSH_KEY" > ~/.ssh/seo && chmod 600 ~/.ssh/seo
+        echo '91.188.212.151 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHRSZ3C56udXUnWFkq4hq//S2IW5bQNRQcR3NAHKLErTc9+mpbny/ibCfsAlDzJwenWxVpFn7pNE53w1jGucGNA=' > ~/.ssh/known_hosts
+        rsync -a --exclude '.baza' --exclude '*.map' --exclude '*test*' ../../app/-/ dist/
+        rsync -a --exclude '.baza' --exclude '*.map' --exclude '*test*' ./-/ dist/
+        tar czf ../seo.tgz Dockerfile docker-compose.yml dist
+        for i in 1 2 3 4 5; do
+          ssh -i ~/.ssh/seo -o BatchMode=yes -o ConnectTimeout=30 user@91.188.212.151 < ../seo.tgz && break
+          [ $i = 5 ] && exit 1
+          sleep 20
+        done
+        want=$(sha256sum dist/web.js | cut -d' ' -f1)
+        for i in $(seq 60); do
+          got=$(curl -sf https://cmyser-ru-merchquarium.91.188.212.151.ip.giper.dev/web.js | sha256sum | cut -d' ' -f1)
+          [ "$got" = "$want" ] && exit 0
+          sleep 5
+        done
+        exit 1
 
     - name: Prerender landing
       if: github.ref == 'refs/heads/main'
@@ -32,5 +58,3 @@ jobs:
       with:
         folder: 'bog/merchquarium/app/-'
         base-url: 'https://b-on-g.github.io/merchquarium/'
-
-

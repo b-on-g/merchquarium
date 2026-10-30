@@ -34,6 +34,12 @@ docker compose up -d --build
 
 После запуска прописать адрес в `bog/merchquarium/app/app.view.tree`: `seo_server \https://<NKA_DOMAIN>/`.
 
+## Автовыкладка
+
+Каждый пуш в `main` после сборки отправляет `dist` на сервер шагом «Deploy SEO server» в `.github/workflows/deploy.yml`. На сервере его принимает `~/nka/deploy.sh`: распаковывает архив во временную папку, проверяет, что все файлы на месте, подменяет `dist` и перезапускает контейнер.
+
+CI заходит отдельным ключом из секрета `SEO_SSH_KEY`. В `~/.ssh/authorized_keys` он записан с `restrict,command="/home/user/nka/deploy.sh"`, поэтому умеет только выкладывать. Без секрета шаг пропускается.
+
 ## Локально
 
 ```
