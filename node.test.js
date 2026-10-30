@@ -28051,6 +28051,18 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_icon_check) = class $mol_icon_check extends ($.$mol_icon) {
+		path(){
+			return "M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
 	($.$bog_merchquarium_product_card) = class $bog_merchquarium_product_card extends ($.$mol_card) {
 		tag_title(id){
 			return "";
@@ -28089,11 +28101,30 @@ var $;
 			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_product_card_Sold_badge_title")));
 			return obj;
 		}
+		share_hint(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_product_card_share_hint"));
+		}
+		share(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		share_icon(){
+			const obj = new this.$.$mol_icon_share_variant();
+			return obj;
+		}
+		Share(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ((this.share_hint()));
+			(obj.click) = (next) => ((this.share(next)));
+			(obj.sub) = () => ([(this.share_icon())]);
+			return obj;
+		}
 		cover(){
 			return [
 				(this.Photos()), 
 				(this.Photo_empty()), 
-				(this.Sold_badge())
+				(this.Sold_badge()), 
+				(this.Share())
 			];
 		}
 		Cover(){
@@ -28337,6 +28368,13 @@ var $;
 		Want_copied_title(){
 			return (this.$.$mol_locale.text("$bog_merchquarium_product_card_Want_copied_title"));
 		}
+		Share_copied_hint(){
+			return (this.$.$mol_locale.text("$bog_merchquarium_product_card_Share_copied_hint"));
+		}
+		Share_done_icon(){
+			const obj = new this.$.$mol_icon_check();
+			return obj;
+		}
 		Tag(id){
 			const obj = new this.$.$mol_button_minor();
 			(obj.title) = () => ((this.tag_title(id)));
@@ -28361,6 +28399,9 @@ var $;
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "Photo_empty_icon"));
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "Photo_empty"));
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "Sold_badge"));
+	($mol_mem(($.$bog_merchquarium_product_card.prototype), "share"));
+	($mol_mem(($.$bog_merchquarium_product_card.prototype), "share_icon"));
+	($mol_mem(($.$bog_merchquarium_product_card.prototype), "Share"));
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "Cover"));
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "title"));
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "Title"));
@@ -28393,6 +28434,7 @@ var $;
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "catalog_link"));
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "search"));
 	($mol_mem(($.$bog_merchquarium_product_card.prototype), "cart_count"));
+	($mol_mem(($.$bog_merchquarium_product_card.prototype), "Share_done_icon"));
 	($mol_mem_key(($.$bog_merchquarium_product_card.prototype), "Tag"));
 
 
@@ -28549,6 +28591,28 @@ var $;
                 }
                 this.$.$mol_dom_context.open(url.toString(), '_blank');
             }
+            share_link() {
+                return this.$.$mol_state_arg.make_link({ catalog: this.catalog_link(), product: this.product_link() });
+            }
+            share_copied(next) {
+                return next ?? false;
+            }
+            share_hint() {
+                return this.share_copied() ? this.Share_copied_hint() : super.share_hint();
+            }
+            share_icon() {
+                return this.share_copied() ? this.Share_done_icon() : super.share_icon();
+            }
+            share() {
+                const url = this.share_link();
+                const navigator = this.$.$mol_dom_context.navigator;
+                if (navigator.share) {
+                    navigator.share({ title: this.title(), url }).catch(() => { });
+                    return;
+                }
+                navigator.clipboard?.writeText(url).catch(() => { });
+                this.share_copied(true);
+            }
             cart_add() {
                 if (this.cart_enabled())
                     this.cart_count(1);
@@ -28557,6 +28621,7 @@ var $;
                 return [
                     this.photo_ids().length ? this.Photos() : this.Photo_empty(),
                     ...this.sold() ? [this.Sold_badge()] : [],
+                    this.Share(),
                 ];
             }
             info_rows() {
@@ -28615,6 +28680,12 @@ var $;
             $mol_action
         ], $bog_merchquarium_product_card.prototype, "want", null);
         __decorate([
+            $mol_mem
+        ], $bog_merchquarium_product_card.prototype, "share_copied", null);
+        __decorate([
+            $mol_action
+        ], $bog_merchquarium_product_card.prototype, "share", null);
+        __decorate([
             $mol_action
         ], $bog_merchquarium_product_card.prototype, "cart_add", null);
         __decorate([
@@ -28670,6 +28741,26 @@ var $;
                 display: 'block',
                 position: 'relative',
                 padding: $mol_style_func.vary('--bog_merchquarium_photo_inset'),
+            },
+            Share: {
+                position: 'absolute',
+                top: $mol_style_func.calc(`var(--bog_merchquarium_photo_inset) + .5rem`),
+                right: $mol_style_func.calc(`var(--bog_merchquarium_photo_inset) + .5rem`),
+                zIndex: 1,
+                width: '2rem',
+                height: '2rem',
+                minHeight: 0,
+                minWidth: 0,
+                padding: 0,
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: $mol_theme.text,
+                background: {
+                    color: $mol_theme.spirit,
+                },
+                border: {
+                    radius: '50%',
+                },
             },
             Sold_badge: {
                 position: 'absolute',
@@ -29061,6 +29152,16 @@ var $;
 			(obj.create) = (next) => ((this.catalog_create(next)));
 			return obj;
 		}
+		product_all(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Product_all(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.title) = () => ((this.$.$mol_locale.text("$bog_merchquarium_app_Product_all_title")));
+			(obj.click) = (next) => ((this.product_all(next)));
+			return obj;
+		}
 		kind_options(){
 			return {};
 		}
@@ -29130,6 +29231,7 @@ var $;
 		}
 		catalog_rows(){
 			return [
+				(this.Product_all()), 
 				(this.Filters()), 
 				(this.Product_cards()), 
 				(this.Catalog_empty())
@@ -29315,6 +29417,8 @@ var $;
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Settings_button"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "catalog_create"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Catalog_missing"));
+	($mol_mem(($.$bog_merchquarium_app.prototype), "product_all"));
+	($mol_mem(($.$bog_merchquarium_app.prototype), "Product_all"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "category_filter"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "Kind_filter"));
 	($mol_mem(($.$bog_merchquarium_app.prototype), "fandom_filter"));
@@ -29708,7 +29812,21 @@ var $;
             Settings_button() {
                 return this.editing() || this.settings_open() ? super.Settings_button() : null;
             }
+            product_focus(next) {
+                return this.$.$mol_state_arg.value('product', next) ?? '';
+            }
+            product_focused() {
+                const link = this.product_focus();
+                if (!link)
+                    return '';
+                return this.visible_products().some(product => product.link().str === link) ? link : '';
+            }
+            product_all() {
+                this.product_focus(null);
+            }
             catalog_rows() {
+                if (this.product_focused())
+                    return [this.Product_all(), this.Product_cards()];
                 return [
                     ...this.visible_products().length ? [this.Filters()] : [],
                     this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
@@ -29794,6 +29912,9 @@ var $;
                 return [...new Set(categories)];
             }
             product_cards() {
+                const focused = this.product_focused();
+                if (focused)
+                    return [this.Product_card(focused)];
                 const catalog = this.catalog();
                 const products = catalog?.Products()?.remote_list() ?? [];
                 const by_link = new Map(products.map(product => [product.link().str, product]));
@@ -29949,6 +30070,9 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_merchquarium_app.prototype, "Settings_button", null);
+        __decorate([
+            $mol_action
+        ], $bog_merchquarium_app.prototype, "product_all", null);
         __decorate([
             $mol_action
         ], $bog_merchquarium_app.prototype, "product_add", null);
@@ -37484,15 +37608,19 @@ var $;
     function land() {
         return artist.$.$giper_baza_glob.Land(new $giper_baza_link(link));
     }
-    function mock_dom() {
+    function mock_dom(native_share = false) {
         const opened = [];
         const copied = [];
+        const shared = [];
         const dom = Object.create(guest_context.$mol_dom_context);
         Object.defineProperties(dom, {
             open: { value: (url) => opened.push(url) },
-            navigator: { value: { clipboard: { writeText: async (text) => { copied.push(text); } } } },
+            navigator: { value: {
+                    clipboard: { writeText: async (text) => { copied.push(text); } },
+                    ...native_share ? { share: async (data) => { shared.push(data); } } : {},
+                } },
         });
-        return { context: guest_context.$mol_ambient({ $mol_dom_context: dom }), opened, copied };
+        return { context: guest_context.$mol_ambient({ $mol_dom_context: dom }), opened, copied, shared };
     }
     function want_card(context, title) {
         const item = $$.$bog_merchquarium_product_card.make({ $: context });
@@ -37866,7 +37994,38 @@ var $;
                 $mol_assert_equal($bog_merchquarium_order_decode(link, order_code(cart)), { [first.product_link()]: 2 });
             });
         },
-        async 'e2e 14: author previews the catalog as a visitor and opens help'() {
+        async 'e2e 14: visitor shares a product and the link opens only it'() {
+            const copy = mock_dom();
+            const native = mock_dom(true);
+            const copying = want_card(copy.context, kit);
+            const sharing = want_card(native.context, kit);
+            await step(() => {
+                $mol_assert_equal(copying.cover().includes(copying.Share()), true);
+                copying.share();
+                $mol_assert_equal(copy.copied, [copying.share_link()]);
+                $mol_assert_equal(copying.share_icon(), copying.Share_done_icon());
+                $mol_assert_equal(copying.share_hint(), copying.Share_copied_hint());
+                sharing.share();
+                $mol_assert_equal(native.shared, [{ title: kit, url: sharing.share_link() }]);
+                $mol_assert_equal(native.copied, []);
+            });
+            await step(() => {
+                const focus = card(guest, kit).product_link();
+                const hidden = card(artist, paimon).product_link();
+                guest.product_focus(focus);
+                $mol_assert_equal(guest.$.$mol_state_arg.value('product'), focus);
+                $mol_assert_equal(guest.catalog_rows(), [guest.Product_all(), guest.Product_cards()]);
+                $mol_assert_equal(titles(guest), [kit]);
+                guest.Product_all().click(null);
+                $mol_assert_equal(guest.product_focus(), '');
+                $mol_assert_equal(titles(guest), [kit, sticker, pinkie]);
+                guest.product_focus(hidden);
+                $mol_assert_equal(guest.product_focused(), '');
+                $mol_assert_equal(titles(guest), [kit, sticker, pinkie]);
+                guest.product_all();
+            });
+        },
+        async 'e2e 15: author previews the catalog as a visitor and opens help'() {
             await step(() => {
                 $mol_assert_equal(guest.Preview(), null);
                 $mol_assert_equal(guest.Help_button(), null);
@@ -37899,7 +38058,7 @@ var $;
                 $mol_assert_equal(artist.content(), [artist.Catalog_selected()]);
             });
         },
-        async 'e2e 15: artist opens the order link'() {
+        async 'e2e 16: artist opens the order link'() {
             await step(() => {
                 const code = order_code(guest.Cart());
                 const first = card(artist, kit);
@@ -37911,7 +38070,7 @@ var $;
                 $mol_assert_equal(order.rows().includes(order.Actions()), false);
             });
         },
-        async 'e2e 16: request to VK is copied first and opened on the second press'() {
+        async 'e2e 17: request to VK is copied first and opened on the second press'() {
             await step(() => settings.social_link('https://vk.com/nyaftulkittenart'));
             await sync_guest();
             const { context, opened, copied } = mock_dom();
@@ -37946,7 +38105,7 @@ var $;
                 $mol_assert_equal(opened.at(-1), `https://t.me/NaftulKittenArt?text=${encodeURIComponent(cart.message())}`);
             });
         },
-        async 'e2e 17: dropping a fandom clears it everywhere'() {
+        async 'e2e 18: dropping a fandom clears it everywhere'() {
             await step(() => {
                 $mol_assert_equal(settings.fandom_usage(mlp), 2);
                 settings.fandom_drop(mlp);
@@ -37957,7 +38116,7 @@ var $;
             await sync_guest();
             await step(() => $mol_assert_equal(ours(Object.keys(guest.fandom_options())), [genshin, knight]));
         },
-        async 'e2e 18: hiding from search engines reaches the visitor and is undone'() {
+        async 'e2e 19: hiding from search engines reaches the visitor and is undone'() {
             await step(() => settings.listed(false));
             await sync_guest();
             await step(() => $mol_assert_equal(guest.catalog().Hidden().val(), true));

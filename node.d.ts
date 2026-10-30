@@ -47210,6 +47210,15 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	export class $mol_icon_check extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=check.view.tree.d.ts.map
+declare namespace $ {
+
 	type $bog_merchquarium_carousel__ids_bog_merchquarium_product_card_1 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['photo_ids'] >
 		,
@@ -47230,197 +47239,212 @@ declare namespace $ {
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_view__sub_bog_merchquarium_product_card_5 = $mol_type_enforce<
+	type $mol_button_minor__hint_bog_merchquarium_product_card_5 = $mol_type_enforce<
+		ReturnType< $bog_merchquarium_product_card['share_hint'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__click_bog_merchquarium_product_card_6 = $mol_type_enforce<
+		ReturnType< $bog_merchquarium_product_card['share'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_bog_merchquarium_product_card_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_view__sub_bog_merchquarium_product_card_8 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['cover'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_string_button__value_bog_merchquarium_product_card_6 = $mol_type_enforce<
+	type $mol_string_button__value_bog_merchquarium_product_card_9 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['title'] >
 		,
 		ReturnType< $mol_string_button['value'] >
 	>
-	type $mol_string_button__hint_bog_merchquarium_product_card_7 = $mol_type_enforce<
+	type $mol_string_button__hint_bog_merchquarium_product_card_10 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string_button['hint'] >
 	>
-	type $mol_string_button__enabled_bog_merchquarium_product_card_8 = $mol_type_enforce<
+	type $mol_string_button__enabled_bog_merchquarium_product_card_11 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['changed'] >
 		,
 		ReturnType< $mol_string_button['enabled'] >
 	>
-	type $bog_merchquarium_number__value_min_bog_merchquarium_product_card_9 = $mol_type_enforce<
+	type $bog_merchquarium_number__value_min_bog_merchquarium_product_card_12 = $mol_type_enforce<
 		number
 		,
 		ReturnType< $bog_merchquarium_number['value_min'] >
 	>
-	type $bog_merchquarium_number__hint_bog_merchquarium_product_card_10 = $mol_type_enforce<
+	type $bog_merchquarium_number__hint_bog_merchquarium_product_card_13 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $bog_merchquarium_number['hint'] >
 	>
-	type $bog_merchquarium_number__value_bog_merchquarium_product_card_11 = $mol_type_enforce<
+	type $bog_merchquarium_number__value_bog_merchquarium_product_card_14 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['price'] >
 		,
 		ReturnType< $bog_merchquarium_number['value'] >
 	>
-	type $bog_merchquarium_number__enabled_bog_merchquarium_product_card_12 = $mol_type_enforce<
+	type $bog_merchquarium_number__enabled_bog_merchquarium_product_card_15 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['changed'] >
 		,
 		ReturnType< $bog_merchquarium_number['enabled'] >
 	>
-	type $mol_paragraph__title_bog_merchquarium_product_card_13 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_merchquarium_product_card_16 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['price_text'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_string_button__value_bog_merchquarium_product_card_14 = $mol_type_enforce<
+	type $mol_string_button__value_bog_merchquarium_product_card_17 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['description'] >
 		,
 		ReturnType< $mol_string_button['value'] >
 	>
-	type $mol_string_button__hint_bog_merchquarium_product_card_15 = $mol_type_enforce<
+	type $mol_string_button__hint_bog_merchquarium_product_card_18 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string_button['hint'] >
 	>
-	type $mol_string_button__enabled_bog_merchquarium_product_card_16 = $mol_type_enforce<
+	type $mol_string_button__enabled_bog_merchquarium_product_card_19 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['changed'] >
 		,
 		ReturnType< $mol_string_button['enabled'] >
 	>
-	type $mol_paragraph__title_bog_merchquarium_product_card_17 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_merchquarium_product_card_20 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['description'] >
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_select__options_bog_merchquarium_product_card_18 = $mol_type_enforce<
+	type $mol_select__options_bog_merchquarium_product_card_21 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['category_list'] >
 		,
 		ReturnType< $mol_select['options'] >
 	>
-	type $mol_select__option_label_default_bog_merchquarium_product_card_19 = $mol_type_enforce<
+	type $mol_select__option_label_default_bog_merchquarium_product_card_22 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_select['option_label_default'] >
 	>
-	type $mol_select__enabled_bog_merchquarium_product_card_20 = $mol_type_enforce<
+	type $mol_select__enabled_bog_merchquarium_product_card_23 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['changed'] >
 		,
 		ReturnType< $mol_select['enabled'] >
 	>
-	type $mol_select__value_bog_merchquarium_product_card_21 = $mol_type_enforce<
+	type $mol_select__value_bog_merchquarium_product_card_24 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['category'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_select_list__value_bog_merchquarium_product_card_22 = $mol_type_enforce<
+	type $mol_select_list__value_bog_merchquarium_product_card_25 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['fandoms'] >
 		,
 		ReturnType< $mol_select_list['value'] >
 	>
-	type $mol_select_list__dictionary_bog_merchquarium_product_card_23 = $mol_type_enforce<
+	type $mol_select_list__dictionary_bog_merchquarium_product_card_26 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['fandom_dictionary'] >
 		,
 		ReturnType< $mol_select_list['dictionary'] >
 	>
-	type $mol_select_list__pick_hint_bog_merchquarium_product_card_24 = $mol_type_enforce<
+	type $mol_select_list__pick_hint_bog_merchquarium_product_card_27 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_select_list['pick_hint'] >
 	>
-	type $mol_select_list__enabled_bog_merchquarium_product_card_25 = $mol_type_enforce<
+	type $mol_select_list__enabled_bog_merchquarium_product_card_28 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['changed'] >
 		,
 		ReturnType< $mol_select_list['enabled'] >
 	>
-	type $mol_view__sub_bog_merchquarium_product_card_26 = $mol_type_enforce<
+	type $mol_view__sub_bog_merchquarium_product_card_29 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['tags'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_list__rows_bog_merchquarium_product_card_27 = $mol_type_enforce<
+	type $mol_list__rows_bog_merchquarium_product_card_30 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['info_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $mol_button_major__title_bog_merchquarium_product_card_28 = $mol_type_enforce<
+	type $mol_button_major__title_bog_merchquarium_product_card_31 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_merchquarium_product_card_29 = $mol_type_enforce<
+	type $mol_button_major__click_bog_merchquarium_product_card_32 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['cart_add'] >
 		,
 		ReturnType< $mol_button_major['click'] >
 	>
-	type $mol_button_major__enabled_bog_merchquarium_product_card_30 = $mol_type_enforce<
+	type $mol_button_major__enabled_bog_merchquarium_product_card_33 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['cart_enabled'] >
 		,
 		ReturnType< $mol_button_major['enabled'] >
 	>
-	type $bog_merchquarium_counter__value_bog_merchquarium_product_card_31 = $mol_type_enforce<
+	type $bog_merchquarium_counter__value_bog_merchquarium_product_card_34 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['cart_count'] >
 		,
 		ReturnType< $bog_merchquarium_counter['value'] >
 	>
-	type $mol_button_minor__title_bog_merchquarium_product_card_32 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_merchquarium_product_card_35 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['want_title'] >
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_merchquarium_product_card_33 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_merchquarium_product_card_36 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['want'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_minor__enabled_bog_merchquarium_product_card_34 = $mol_type_enforce<
+	type $mol_button_minor__enabled_bog_merchquarium_product_card_37 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['want_enabled'] >
 		,
 		ReturnType< $mol_button_minor['enabled'] >
 	>
-	type $mol_view__sub_bog_merchquarium_product_card_35 = $mol_type_enforce<
+	type $mol_view__sub_bog_merchquarium_product_card_38 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['cart_controls'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_button_open__files_bog_merchquarium_product_card_36 = $mol_type_enforce<
+	type $mol_button_open__files_bog_merchquarium_product_card_39 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['photos_add'] >
 		,
 		ReturnType< $mol_button_open['files'] >
 	>
-	type $mol_button_open__enabled_bog_merchquarium_product_card_37 = $mol_type_enforce<
+	type $mol_button_open__enabled_bog_merchquarium_product_card_40 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['changed'] >
 		,
 		ReturnType< $mol_button_open['enabled'] >
 	>
-	type $mol_button_open__accept_bog_merchquarium_product_card_38 = $mol_type_enforce<
+	type $mol_button_open__accept_bog_merchquarium_product_card_41 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_open['accept'] >
 	>
-	type $mol_button_minor__title_bog_merchquarium_product_card_39 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_merchquarium_product_card_42 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_merchquarium_product_card_40 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_merchquarium_product_card_43 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['photo_delete'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_minor__enabled_bog_merchquarium_product_card_41 = $mol_type_enforce<
+	type $mol_button_minor__enabled_bog_merchquarium_product_card_44 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['photo_delete_enabled'] >
 		,
 		ReturnType< $mol_button_minor['enabled'] >
 	>
-	type $mol_switch__value_bog_merchquarium_product_card_42 = $mol_type_enforce<
+	type $mol_switch__value_bog_merchquarium_product_card_45 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['status'] >
 		,
 		ReturnType< $mol_switch['value'] >
 	>
-	type $mol_switch__options_bog_merchquarium_product_card_43 = $mol_type_enforce<
+	type $mol_switch__options_bog_merchquarium_product_card_46 = $mol_type_enforce<
 		({ 
 			'available': string,
 			'sold': string,
@@ -47429,32 +47453,32 @@ declare namespace $ {
 		,
 		ReturnType< $mol_switch['options'] >
 	>
-	type $mol_switch__enabled_bog_merchquarium_product_card_44 = $mol_type_enforce<
+	type $mol_switch__enabled_bog_merchquarium_product_card_47 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['changed'] >
 		,
 		ReturnType< $mol_switch['enabled'] >
 	>
-	type $mol_button_minor__title_bog_merchquarium_product_card_45 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_merchquarium_product_card_48 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_merchquarium_product_card_46 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_merchquarium_product_card_49 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['product_delete'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_row__sub_bog_merchquarium_product_card_47 = $mol_type_enforce<
+	type $mol_row__sub_bog_merchquarium_product_card_50 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_row['sub'] >
 	>
-	type $mol_button_minor__title_bog_merchquarium_product_card_48 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_merchquarium_product_card_51 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['tag_title'] >
 		,
 		ReturnType< $mol_button_minor['title'] >
 	>
-	type $mol_button_minor__click_bog_merchquarium_product_card_49 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_merchquarium_product_card_52 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_product_card['tag_select'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
@@ -47469,6 +47493,10 @@ declare namespace $ {
 		Photo_empty_icon( ): $mol_icon_image_off
 		Photo_empty( ): $mol_view
 		Sold_badge( ): $mol_paragraph
+		share_hint( ): string
+		share( next?: any ): any
+		share_icon( ): $mol_icon_share_variant
+		Share( ): $mol_button_minor
 		cover( ): readonly(any)[]
 		Cover( ): $mol_view
 		title( next?: string ): string
@@ -47518,6 +47546,8 @@ declare namespace $ {
 		Want_message( ): string
 		Want_title( ): string
 		Want_copied_title( ): string
+		Share_copied_hint( ): string
+		Share_done_icon( ): $mol_icon_check
 		Tag( id: any): $mol_button_minor
 		attr( ): ({ 
 			'bog_merchquarium_product_card_state': ReturnType< $bog_merchquarium_product_card['status'] >,
@@ -47555,6 +47585,11 @@ declare namespace $.$$ {
         want_copied(next?: boolean): boolean;
         want_title(): string;
         want(): void;
+        share_link(): string;
+        share_copied(next?: boolean): boolean;
+        share_hint(): string;
+        share_icon(): $mol_icon_share_variant | $mol_icon_check;
+        share(): void;
         cart_add(): void;
         cover(): ($mol_view | $.$mol_paragraph)[];
         info_rows(): ($.$mol_select | $.$mol_select_list | $mol_string_button | $bog_merchquarium_number)[] | ($mol_view | $.$mol_paragraph | $mol_string_button)[];
@@ -47807,162 +47842,172 @@ declare namespace $ {
 		,
 		ReturnType< $bog_merchquarium_start['create'] >
 	>
-	type $mol_select__dictionary_bog_merchquarium_app_30 = $mol_type_enforce<
+	type $mol_button_minor__title_bog_merchquarium_app_30 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['title'] >
+	>
+	type $mol_button_minor__click_bog_merchquarium_app_31 = $mol_type_enforce<
+		ReturnType< $bog_merchquarium_app['product_all'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_select__dictionary_bog_merchquarium_app_32 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['kind_options'] >
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_select__value_bog_merchquarium_app_31 = $mol_type_enforce<
+	type $mol_select__value_bog_merchquarium_app_33 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['category_filter'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_select__dictionary_bog_merchquarium_app_32 = $mol_type_enforce<
+	type $mol_select__dictionary_bog_merchquarium_app_34 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['fandom_options'] >
 		,
 		ReturnType< $mol_select['dictionary'] >
 	>
-	type $mol_select__value_bog_merchquarium_app_33 = $mol_type_enforce<
+	type $mol_select__value_bog_merchquarium_app_35 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['fandom_filter'] >
 		,
 		ReturnType< $mol_select['value'] >
 	>
-	type $mol_check_box__title_bog_merchquarium_app_34 = $mol_type_enforce<
+	type $mol_check_box__title_bog_merchquarium_app_36 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_check_box['title'] >
 	>
-	type $mol_check_box__checked_bog_merchquarium_app_35 = $mol_type_enforce<
+	type $mol_check_box__checked_bog_merchquarium_app_37 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['in_stock_only'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_search__query_bog_merchquarium_app_36 = $mol_type_enforce<
+	type $mol_search__query_bog_merchquarium_app_38 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['search'] >
 		,
 		ReturnType< $mol_search['query'] >
 	>
-	type $mol_view__sub_bog_merchquarium_app_37 = $mol_type_enforce<
+	type $mol_view__sub_bog_merchquarium_app_39 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['filters'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_merchquarium_gallery__items_bog_merchquarium_app_38 = $mol_type_enforce<
+	type $bog_merchquarium_gallery__items_bog_merchquarium_app_40 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['product_cards'] >
 		,
 		ReturnType< $bog_merchquarium_gallery['items'] >
 	>
-	type $mol_paragraph__title_bog_merchquarium_app_39 = $mol_type_enforce<
+	type $mol_paragraph__title_bog_merchquarium_app_41 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_paragraph['title'] >
 	>
-	type $mol_list__rows_bog_merchquarium_app_40 = $mol_type_enforce<
+	type $mol_list__rows_bog_merchquarium_app_42 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['catalog_rows'] >
 		,
 		ReturnType< $mol_list['rows'] >
 	>
-	type $bog_merchquarium_help__settings_bog_merchquarium_app_41 = $mol_type_enforce<
+	type $bog_merchquarium_help__settings_bog_merchquarium_app_43 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['help_settings'] >
 		,
 		ReturnType< $bog_merchquarium_help['settings'] >
 	>
-	type $bog_merchquarium_settings__catalog_link_bog_merchquarium_app_42 = $mol_type_enforce<
+	type $bog_merchquarium_settings__catalog_link_bog_merchquarium_app_44 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['catalog_link'] >
 		,
 		ReturnType< $bog_merchquarium_settings['catalog_link'] >
 	>
-	type $bog_merchquarium_cart__catalog_link_bog_merchquarium_app_43 = $mol_type_enforce<
+	type $bog_merchquarium_cart__catalog_link_bog_merchquarium_app_45 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['catalog_link'] >
 		,
 		ReturnType< $bog_merchquarium_cart['catalog_link'] >
 	>
-	type $bog_merchquarium_cart__items_bog_merchquarium_app_44 = $mol_type_enforce<
+	type $bog_merchquarium_cart__items_bog_merchquarium_app_46 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['cart'] >
 		,
 		ReturnType< $bog_merchquarium_cart['items'] >
 	>
-	type $bog_merchquarium_cart__back_bog_merchquarium_app_45 = $mol_type_enforce<
+	type $bog_merchquarium_cart__back_bog_merchquarium_app_47 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['cart_close'] >
 		,
 		ReturnType< $bog_merchquarium_cart['back'] >
 	>
-	type $bog_merchquarium_cart__catalog_link_bog_merchquarium_app_46 = $mol_type_enforce<
+	type $bog_merchquarium_cart__catalog_link_bog_merchquarium_app_48 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['catalog_link'] >
 		,
 		ReturnType< $bog_merchquarium_cart['catalog_link'] >
 	>
-	type $bog_merchquarium_cart__items_bog_merchquarium_app_47 = $mol_type_enforce<
+	type $bog_merchquarium_cart__items_bog_merchquarium_app_49 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['order_items'] >
 		,
 		ReturnType< $bog_merchquarium_cart['items'] >
 	>
-	type $bog_merchquarium_cart__editable_bog_merchquarium_app_48 = $mol_type_enforce<
+	type $bog_merchquarium_cart__editable_bog_merchquarium_app_50 = $mol_type_enforce<
 		boolean
 		,
 		ReturnType< $bog_merchquarium_cart['editable'] >
 	>
-	type $bog_merchquarium_cart__back_bog_merchquarium_app_49 = $mol_type_enforce<
+	type $bog_merchquarium_cart__back_bog_merchquarium_app_51 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['cart_close'] >
 		,
 		ReturnType< $bog_merchquarium_cart['back'] >
 	>
-	type $bog_merchquarium_product_card__product_link_bog_merchquarium_app_50 = $mol_type_enforce<
+	type $bog_merchquarium_product_card__product_link_bog_merchquarium_app_52 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['product_link'] >
 		,
 		ReturnType< $bog_merchquarium_product_card['product_link'] >
 	>
-	type $bog_merchquarium_product_card__catalog_link_bog_merchquarium_app_51 = $mol_type_enforce<
+	type $bog_merchquarium_product_card__catalog_link_bog_merchquarium_app_53 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['catalog_link'] >
 		,
 		ReturnType< $bog_merchquarium_product_card['catalog_link'] >
 	>
-	type $bog_merchquarium_product_card__search_bog_merchquarium_app_52 = $mol_type_enforce<
+	type $bog_merchquarium_product_card__search_bog_merchquarium_app_54 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['search'] >
 		,
 		ReturnType< $bog_merchquarium_product_card['search'] >
 	>
-	type $bog_merchquarium_product_card__cart_count_bog_merchquarium_app_53 = $mol_type_enforce<
+	type $bog_merchquarium_product_card__cart_count_bog_merchquarium_app_55 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['cart_count'] >
 		,
 		ReturnType< $bog_merchquarium_product_card['cart_count'] >
 	>
-	type $bog_merchquarium_product_card__product_delete_bog_merchquarium_app_54 = $mol_type_enforce<
+	type $bog_merchquarium_product_card__product_delete_bog_merchquarium_app_56 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['product_delete'] >
 		,
 		ReturnType< $bog_merchquarium_product_card['product_delete'] >
 	>
-	type $bog_merchquarium_product_card__editable_bog_merchquarium_app_55 = $mol_type_enforce<
+	type $bog_merchquarium_product_card__editable_bog_merchquarium_app_57 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['editing'] >
 		,
 		ReturnType< $bog_merchquarium_product_card['editable'] >
 	>
-	type $mol_link__uri_bog_merchquarium_app_56 = $mol_type_enforce<
+	type $mol_link__uri_bog_merchquarium_app_58 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['social_uri'] >
 		,
 		ReturnType< $mol_link['uri'] >
 	>
-	type $mol_link__target_bog_merchquarium_app_57 = $mol_type_enforce<
+	type $mol_link__target_bog_merchquarium_app_59 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_link['target'] >
 	>
-	type $mol_link__hint_bog_merchquarium_app_58 = $mol_type_enforce<
+	type $mol_link__hint_bog_merchquarium_app_60 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['social_uri'] >
 		,
 		ReturnType< $mol_link['hint'] >
 	>
-	type $mol_link__sub_bog_merchquarium_app_59 = $mol_type_enforce<
+	type $mol_link__sub_bog_merchquarium_app_61 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['social_sub'] >
 		,
 		ReturnType< $mol_link['sub'] >
 	>
-	type $mol_button_major__title_bog_merchquarium_app_60 = $mol_type_enforce<
+	type $mol_button_major__title_bog_merchquarium_app_62 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_button_major['title'] >
 	>
-	type $mol_button_major__click_bog_merchquarium_app_61 = $mol_type_enforce<
+	type $mol_button_major__click_bog_merchquarium_app_63 = $mol_type_enforce<
 		ReturnType< $bog_merchquarium_app['product_undo'] >
 		,
 		ReturnType< $mol_button_major['click'] >
@@ -48016,6 +48061,8 @@ declare namespace $ {
 		Settings_button( ): $mol_button_minor
 		catalog_create( next?: any ): any
 		Catalog_missing( ): $bog_merchquarium_start
+		product_all( next?: any ): any
+		Product_all( ): $mol_button_minor
 		kind_options( ): Record<string, any>
 		category_filter( next?: string ): string
 		Kind_filter( ): $mol_select
@@ -48120,6 +48167,9 @@ declare namespace $.$$ {
         filters(): ($.$mol_search | $.$mol_select | $mol_check_box)[];
         settings_button_sub(): ($mol_icon_arrow_left | $mol_icon_cog)[];
         Settings_button(): $mol_button_minor;
+        product_focus(next?: string | null): string;
+        product_focused(): string;
+        product_all(): void;
         catalog_rows(): ($mol_view | $.$mol_paragraph)[];
         settings_button_title(): string;
         catalog(): $bog_merchquarium_catalog | null;

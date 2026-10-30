@@ -457,6 +457,7 @@
     "$mol_select_list",
     "$mol_switch",
     "$mol_check_list",
+    "$mol_icon_check",
     "$mol_icon_telegram",
     "$mol_icon_vk",
     "$mol_icon_instagram",

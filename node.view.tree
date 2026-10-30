@@ -1629,6 +1629,8 @@ $mol_check_list $mol_view
 $mol_switch $mol_check_list
 	value? \
 
+$mol_icon_check $mol_icon path \M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z
+
 $bog_merchquarium_product_card $mol_card
 	product_link? \
 	catalog_link? \
@@ -1638,6 +1640,8 @@ $bog_merchquarium_product_card $mol_card
 	Want_message @ \I want {title} if there is a reprint: {link}
 	Want_title @ \I want it if there is a reprint
 	Want_copied_title @ \✓ Copied — open {social}
+	Share_copied_hint @ \Link copied
+	Share_done_icon $mol_icon_check
 	Tag* $mol_button_minor
 		title <= tag_title* \
 		click? <=> tag_select*? null
@@ -1655,6 +1659,11 @@ $bog_merchquarium_product_card $mol_card
 						<= Photo_empty_icon $mol_icon_image_off
 				<= Sold_badge $mol_paragraph
 					title @ \Sold out
+				<= Share $mol_button_minor
+					hint <= share_hint @ \Share
+					click? <=> share? null
+					sub /
+						<= share_icon $mol_icon_share_variant
 		<= Info $mol_list
 			rows <= info_rows /
 				<= Title $mol_string_button
@@ -1818,6 +1827,9 @@ $bog_merchquarium_app $mol_page
 			create? <=> catalog_create? null
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
+				<= Product_all $mol_button_minor
+					title @ \← Whole catalog
+					click? <=> product_all? null
 				<= Filters $mol_view
 					sub <= filters /
 						<= Kind_filter $mol_select
