@@ -28764,9 +28764,6 @@ var $;
                 justifyContent: 'center',
                 alignItems: 'center',
                 color: $mol_theme.text,
-                background: {
-                    color: $mol_theme.spirit,
-                },
                 border: {
                     radius: '50%',
                 },
