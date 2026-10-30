@@ -41,6 +41,27 @@ namespace $.$$ {
 			padding: $mol_style_func.vary( '--bog_merchquarium_photo_inset' ),
 		},
 
+		Share: {
+			position: 'absolute',
+			top: $mol_style_func.calc( `var(--bog_merchquarium_photo_inset) + .5rem` ),
+			right: $mol_style_func.calc( `var(--bog_merchquarium_photo_inset) + .5rem` ),
+			zIndex: 1,
+			width: '2rem',
+			height: '2rem',
+			minHeight: 0,
+			minWidth: 0,
+			padding: 0,
+			justifyContent: 'center',
+			alignItems: 'center',
+			color: $mol_theme.text,
+			background: {
+				color: $mol_theme.spirit,
+			},
+			border: {
+				radius: '50%',
+			},
+		},
+
 		Sold_badge: {
 			position: 'absolute',
 			left: 0,

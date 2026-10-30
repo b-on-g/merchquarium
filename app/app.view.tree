@@ -88,6 +88,9 @@ $bog_merchquarium_app $mol_page
 			create? <=> catalog_create? null
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
+				<= Product_all $mol_button_minor
+					title @ \← Whole catalog
+					click? <=> product_all? null
 				<= Filters $mol_view
 					sub <= filters /
 						<= Kind_filter $mol_select

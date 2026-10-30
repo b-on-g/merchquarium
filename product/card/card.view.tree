@@ -7,6 +7,8 @@ $bog_merchquarium_product_card $mol_card
 	Want_message @ \I want {title} if there is a reprint: {link}
 	Want_title @ \I want it if there is a reprint
 	Want_copied_title @ \✓ Copied — open {social}
+	Share_copied_hint @ \Link copied
+	Share_done_icon $mol_icon_check
 	Tag* $mol_button_minor
 		title <= tag_title* \
 		click? <=> tag_select*? null
@@ -24,6 +26,11 @@ $bog_merchquarium_product_card $mol_card
 						<= Photo_empty_icon $mol_icon_image_off
 				<= Sold_badge $mol_paragraph
 					title @ \Sold out
+				<= Share $mol_button_minor
+					hint <= share_hint @ \Share
+					click? <=> share? null
+					sub /
+						<= share_icon $mol_icon_share_variant
 		<= Info $mol_list
 			rows <= info_rows /
 				<= Title $mol_string_button

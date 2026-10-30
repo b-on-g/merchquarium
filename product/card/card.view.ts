@@ -181,6 +181,35 @@ namespace $.$$ {
 			this.$.$mol_dom_context.open( url.toString(), '_blank' )
 		}
 
+		share_link() {
+			return this.$.$mol_state_arg.make_link({ catalog: this.catalog_link(), product: this.product_link() })
+		}
+
+		@ $mol_mem
+		share_copied( next?: boolean ) {
+			return next ?? false
+		}
+
+		share_hint() {
+			return this.share_copied() ? this.Share_copied_hint() : super.share_hint()
+		}
+
+		share_icon() {
+			return this.share_copied() ? this.Share_done_icon() : super.share_icon()
+		}
+
+		@ $mol_action
+		share() {
+			const url = this.share_link()
+			const navigator = this.$.$mol_dom_context.navigator
+			if( navigator.share ) {
+				navigator.share({ title: this.title(), url }).catch( ()=> {} )
+				return
+			}
+			navigator.clipboard?.writeText( url ).catch( ()=> {} )
+			this.share_copied( true )
+		}
+
 		@ $mol_action
 		cart_add() {
 			if( this.cart_enabled() ) this.cart_count( 1 )
@@ -190,6 +219,7 @@ namespace $.$$ {
 			return [
 				this.photo_ids().length ? this.Photos() : this.Photo_empty(),
 				... this.sold() ? [ this.Sold_badge() ] : [],
+				this.Share(),
 			]
 		}
 

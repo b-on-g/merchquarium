@@ -249,7 +249,23 @@ namespace $.$$ {
 			return this.editing() || this.settings_open() ? super.Settings_button() : null!
 		}
 
+		product_focus( next?: string | null ) {
+			return this.$.$mol_state_arg.value( 'product', next ) ?? ''
+		}
+
+		product_focused() {
+			const link = this.product_focus()
+			if( !link ) return ''
+			return this.visible_products().some( product => product.link().str === link ) ? link : ''
+		}
+
+		@ $mol_action
+		product_all() {
+			this.product_focus( null )
+		}
+
 		catalog_rows() {
+			if( this.product_focused() ) return [ this.Product_all(), this.Product_cards() ]
 			return [
 				... this.visible_products().length ? [ this.Filters() ] : [],
 				this.product_cards().length ? this.Product_cards() : this.Catalog_empty(),
@@ -356,7 +372,10 @@ namespace $.$$ {
 			return [ ... new Set( categories ) ]
 		}
 
-		product_cards() {
+		product_cards(): $mol_view[] {
+			const focused = this.product_focused()
+			if (focused) return [ this.Product_card(focused) ]
+
 			const catalog = this.catalog()
 			const products = catalog?.Products()?.remote_list() ?? []
 			const by_link = new Map(

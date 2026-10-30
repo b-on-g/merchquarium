@@ -58,15 +58,19 @@ namespace $ {
 		return artist.$.$giper_baza_glob.Land( new $giper_baza_link( link ) )
 	}
 
-	function mock_dom() {
+	function mock_dom( native_share = false ) {
 		const opened: string[] = []
 		const copied: string[] = []
+		const shared: ShareData[] = []
 		const dom = Object.create( guest_context.$mol_dom_context )
 		Object.defineProperties( dom, {
 			open: { value: ( url: string )=> opened.push( url ) },
-			navigator: { value: { clipboard: { writeText: async ( text: string )=> { copied.push( text ) } } } },
+			navigator: { value: {
+				clipboard: { writeText: async ( text: string )=> { copied.push( text ) } },
+				... native_share ? { share: async ( data: ShareData )=> { shared.push( data ) } } : {},
+			} },
 		} )
-		return { context: guest_context.$mol_ambient({ $mol_dom_context: dom }), opened, copied }
+		return { context: guest_context.$mol_ambient({ $mol_dom_context: dom }), opened, copied, shared }
 	}
 
 	function want_card( context: $, title: string ) {
@@ -491,7 +495,45 @@ namespace $ {
 			} )
 		},
 
-		async 'e2e 14: author previews the catalog as a visitor and opens help'() {
+		async 'e2e 14: visitor shares a product and the link opens only it'() {
+			const copy = mock_dom()
+			const native = mock_dom( true )
+			const copying = want_card( copy.context, kit )
+			const sharing = want_card( native.context, kit )
+
+			await step( ()=> {
+				$mol_assert_equal( copying.cover().includes( copying.Share() ), true )
+				copying.share()
+				$mol_assert_equal( copy.copied, [ copying.share_link() ] )
+				$mol_assert_equal( copying.share_icon(), copying.Share_done_icon() )
+				$mol_assert_equal( copying.share_hint(), copying.Share_copied_hint() )
+
+				sharing.share()
+				$mol_assert_equal( native.shared, [ { title: kit, url: sharing.share_link() } ] )
+				$mol_assert_equal( native.copied, [] )
+			} )
+
+			await step( ()=> {
+				const focus = card( guest, kit ).product_link()
+				const hidden = card( artist, paimon ).product_link()
+
+				guest.product_focus( focus )
+				$mol_assert_equal( guest.$.$mol_state_arg.value( 'product' ), focus )
+				$mol_assert_equal( guest.catalog_rows(), [ guest.Product_all(), guest.Product_cards() ] )
+				$mol_assert_equal( titles( guest ), [ kit ] )
+
+				guest.Product_all().click( null as any )
+				$mol_assert_equal( guest.product_focus(), '' )
+				$mol_assert_equal( titles( guest ), [ kit, sticker, pinkie ] )
+
+				guest.product_focus( hidden )
+				$mol_assert_equal( guest.product_focused(), '' )
+				$mol_assert_equal( titles( guest ), [ kit, sticker, pinkie ] )
+				guest.product_all()
+			} )
+		},
+
+		async 'e2e 15: author previews the catalog as a visitor and opens help'() {
 			await step( ()=> {
 				$mol_assert_equal( guest.Preview(), null )
 				$mol_assert_equal( guest.Help_button(), null )
@@ -529,7 +571,7 @@ namespace $ {
 			} )
 		},
 
-		async 'e2e 15: artist opens the order link'() {
+		async 'e2e 16: artist opens the order link'() {
 			await step( ()=> {
 				const code = order_code( guest.Cart() as $$.$bog_merchquarium_cart )
 				const first = card( artist, kit )
@@ -542,7 +584,7 @@ namespace $ {
 			} )
 		},
 
-		async 'e2e 16: request to VK is copied first and opened on the second press'() {
+		async 'e2e 17: request to VK is copied first and opened on the second press'() {
 			await step( ()=> settings.social_link( 'https://vk.com/nyaftulkittenart' ) )
 			await sync_guest()
 
@@ -584,7 +626,7 @@ namespace $ {
 			} )
 		},
 
-		async 'e2e 17: dropping a fandom clears it everywhere'() {
+		async 'e2e 18: dropping a fandom clears it everywhere'() {
 			await step( ()=> {
 				$mol_assert_equal( settings.fandom_usage( mlp ), 2 )
 				settings.fandom_drop( mlp )
@@ -596,7 +638,7 @@ namespace $ {
 			await step( ()=> $mol_assert_equal( ours( Object.keys( guest.fandom_options() ) ), [ genshin, knight ] ) )
 		},
 
-		async 'e2e 18: hiding from search engines reaches the visitor and is undone'() {
+		async 'e2e 19: hiding from search engines reaches the visitor and is undone'() {
 			await step( ()=> settings.listed( false ) )
 			await sync_guest()
 			await step( ()=> $mol_assert_equal( guest.catalog()!.Hidden()!.val(), true ) )
