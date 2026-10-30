@@ -9,6 +9,36 @@ namespace $.$$ {
 		gap: $mol_gap.block,
 		padding: $mol_gap.block,
 
+		Quick: {
+			gap: $mol_gap.block,
+			padding: $mol_gap.block,
+			background: {
+				color: $mol_theme.card,
+			},
+			border: {
+				radius: $mol_gap.round,
+			},
+			boxShadow: `0 0 0 2px ${ $mol_theme.current }`,
+		},
+
+		Quick_title: {
+			font: {
+				weight: 'bold',
+				size: '1.375rem',
+			},
+			padding: {
+				left: '.75rem',
+				right: '.75rem',
+			},
+		},
+
+		Quick_settings: {
+			alignSelf: 'flex-start',
+			margin: {
+				left: '.75rem',
+			},
+		},
+
 		Lead: {
 			color: $mol_theme.shade,
 			padding: {

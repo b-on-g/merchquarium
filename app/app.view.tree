@@ -102,6 +102,7 @@ $bog_merchquarium_app $mol_page
 				<= Catalog_empty $mol_paragraph
 					title @ \Products coming soon
 		<= Help $bog_merchquarium_help
+			settings? <=> help_settings? null
 		<= Settings $bog_merchquarium_settings
 			catalog_link <= catalog_link \
 		<= Cart $bog_merchquarium_cart

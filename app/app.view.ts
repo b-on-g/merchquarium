@@ -134,6 +134,13 @@ namespace $.$$ {
 		catalog_create() {
 			const land = this.$.$giper_baza_glob.land_grab()
 			this.catalog_link( land.link().str )
+			this.help_open( true )
+		}
+
+		@ $mol_action
+		help_settings() {
+			this.help_open( false )
+			this.settings_open( true )
 		}
 
 		auto() {
@@ -290,9 +297,8 @@ namespace $.$$ {
 			return value === 'all' || this.filter_fandoms().includes( value ) ? value : 'all'
 		}
 
-		@ $mol_mem
 		search( next?: string ) {
-			return next ?? ''
+			return this.$.$mol_state_arg.value( 'search', next === undefined ? undefined : next || null ) ?? ''
 		}
 
 		kind_options() {

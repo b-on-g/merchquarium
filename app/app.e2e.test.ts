@@ -101,6 +101,12 @@ namespace $ {
 					artist.catalog_create()
 					keep( 'bog_merchquarium_e2e_artist', land )
 				} )
+				await step( ()=> {
+					$mol_assert_equal( artist.content(), [ artist.Help() ] )
+					artist.Help().Quick_settings().click( null as any )
+					$mol_assert_equal( artist.content(), [ artist.Settings() ] )
+					artist.settings_toggle()
+				} )
 			} else {
 				keep( 'bog_merchquarium_e2e_artist', land )
 			}
@@ -299,6 +305,8 @@ namespace $ {
 				artist.fandom_filter( 'all' )
 				artist.search( `пинки ${ run }` )
 				$mol_assert_equal( titles( artist ), [ pinkie ] )
+				$mol_assert_equal( artist.$.$mol_state_arg.value( 'search' ), `пинки ${ run }` )
+				$mol_assert_equal( artist.$.$mol_state_arg.link({}).includes( 'search=' ), true )
 
 				artist.search( `#${ genshin.toLowerCase() }` )
 				$mol_assert_equal( titles( artist ), [ paimon, sticker ] )
@@ -310,6 +318,7 @@ namespace $ {
 				$mol_assert_equal( artist.search(), mlp )
 				$mol_assert_equal( titles( artist ), [ kit, pinkie ] )
 				artist.search( '' )
+				$mol_assert_equal( artist.$.$mol_state_arg.value( 'search' ), null )
 			} )
 		},
 
@@ -503,7 +512,7 @@ namespace $ {
 				$mol_assert_equal( artist.settings_open(), false )
 				$mol_assert_equal( artist.content(), [ artist.Help() ] )
 				$mol_assert_equal( artist.head(), [ artist.Title(), artist.Product_add(), artist.Tools() ] )
-				$mol_assert_equal( artist.Help().rows().length, 9 )
+				$mol_assert_equal( artist.Help().rows()[ 0 ], artist.Help().Quick() )
 				$mol_assert_equal( artist.Preview(), null )
 
 				artist.Help_button().checked( false )

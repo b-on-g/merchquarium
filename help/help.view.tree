@@ -1,7 +1,24 @@
 $bog_merchquarium_help $mol_list
+	settings? null
 	rows /
+		<= Quick $mol_list
+			rows /
+				<= Quick_title $mol_paragraph
+					title @ \Fill the catalog in five minutes
+				<= Quick_text $mol_text
+					text @ \
+						\1. Open **Settings**, the gear at the top.
+						\2. In **Bulk import** press **Copy prompt for AI**.
+						\3. Paste it into ChatGPT or any other AI chat.
+						\4. Answer its questions about your merch.
+						\5. Copy the reply, paste it into the field under the prompt and press **Create products**.
+						\
+						\Products, merch kinds, fandoms and socials appear at once. Then just upload photos to the cards.
+				<= Quick_settings $mol_button_major
+					title @ \Open settings
+					click? <=> settings? null
 		<= Lead $mol_paragraph
-			title @ \A quick tour for the catalog author. Buyers never see this page.
+			title @ \More details. Buyers never see this page.
 		<= Section*about
 		<= Section*look
 		<= Section*products
