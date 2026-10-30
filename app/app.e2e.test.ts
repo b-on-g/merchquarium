@@ -136,6 +136,8 @@ namespace $ {
 				$mol_assert_equal( kinds.name( badge ), badge )
 				$mol_assert_equal( artist.fandom_options()[ mlp ], `#${ mlp }` )
 
+				$mol_assert_equal( settings.head(), [ settings.Title(), settings.Lang(), settings.Tools() ] )
+				$mol_assert_equal( Object.keys( settings.Lang().dictionary() ), [ 'ru', 'en' ] )
 				$mol_assert_equal( artist.title(), 'Nyaftul Kitten Art' )
 				$mol_assert_equal( artist.style()[ '--mol_theme_hue' ], '165deg' )
 				$mol_assert_equal( settings.theme_swatch( 'mint' ).boxShadow, '0 0 0 3px var(--mol_theme_current)' )

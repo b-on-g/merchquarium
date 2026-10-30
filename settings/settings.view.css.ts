@@ -1,6 +1,19 @@
 namespace $.$$ {
 
 	$mol_style_define($bog_merchquarium_settings, {
+		Title: {
+			flex: {
+				grow: 0,
+			},
+		},
+
+		Lang: {
+			margin: {
+				right: 'auto',
+			},
+		},
+
+
 		Sales_section: {
 			Content: {
 				gap: $mol_gap.block,

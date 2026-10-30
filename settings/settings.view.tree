@@ -10,6 +10,13 @@ $bog_merchquarium_settings $mol_page
 	Theme_milk @ \Milk
 	Theme_classic @ \Classic
 	catalog_link? \
+	head /
+		<= Title
+		<= Lang $mol_locale_select
+			dictionary *
+				ru \Русский
+				en \English
+		<= Tools
 	tools /
 		<= Sync $giper_baza_status
 	body /
