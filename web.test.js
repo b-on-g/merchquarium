@@ -2751,6 +2751,86 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    function parse(theme) {
+        if (theme === 'true')
+            return true;
+        if (theme === 'false')
+            return false;
+        return null;
+    }
+    /**
+     * Switcher between light/dark themes (usually for `mol_theme_auto` plugin).
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_lights_demo
+     */
+    function $mol_lights(next) {
+        const arg = parse(this.$mol_state_arg.value('mol_lights'));
+        const base = this.$mol_media.match('(prefers-color-scheme: light)');
+        if (next === undefined) {
+            return arg ?? this.$mol_state_local.value('$mol_lights') ?? base;
+        }
+        else {
+            if (arg === null) {
+                this.$mol_state_local.value('$mol_lights', next === base ? null : next);
+            }
+            else {
+                this.$mol_state_arg.value('mol_lights', String(next));
+            }
+            return next;
+        }
+    }
+    $.$mol_lights = $mol_lights;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_test({
+        'null by default'() {
+            const key = String(Math.random());
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+        'storing'() {
+            const key = String(Math.random());
+            $mol_state_session.value(key, '$mol_state_session_test');
+            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
+            $mol_state_session.value(key, null);
+            $mol_assert_equal($mol_state_session.value(key), null);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($_1) {
+    $mol_test({
+        'system mode follows the device, not a light choice stored by another app'($) {
+            const device = (light) => {
+                const context = Object.create($);
+                context.$mol_lights = () => !light;
+                context.$mol_media = class extends $.$mol_media {
+                    static match() {
+                        return light;
+                    }
+                };
+                return $bog_theme_auto.make({ $: context });
+            };
+            const night = device(false);
+            $mol_assert_equal(night.mode(), 'system');
+            $mol_assert_equal(night.theme(), night.theme_dark());
+            $mol_assert_equal(night.is_light_now(), false);
+            const day = device(true);
+            $mol_assert_equal(day.theme(), day.theme_light());
+            $mol_assert_equal(day.is_light_now(), true);
+        },
+    });
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     class TestClass extends Uint8Array {
     }
     $mol_test({
@@ -3292,25 +3372,6 @@ var $;
                 ['table', '| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n\n', ['| header1 | header2\n|----|----\n| Cell11 | Cell12\n| Cell21 | Cell22\n', '\n'], 0],
                 ['table', '| Cell11 | Cell12\n| Cell21 | Cell22\n', ['| Cell11 | Cell12\n| Cell21 | Cell22\n', ''], 68],
             ]);
-        },
-    });
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_test({
-        'null by default'() {
-            const key = String(Math.random());
-            $mol_assert_equal($mol_state_session.value(key), null);
-        },
-        'storing'() {
-            const key = String(Math.random());
-            $mol_state_session.value(key, '$mol_state_session_test');
-            $mol_assert_equal($mol_state_session.value(key), '$mol_state_session_test');
-            $mol_state_session.value(key, null);
-            $mol_assert_equal($mol_state_session.value(key), null);
         },
     });
 })($ || ($ = {}));
@@ -7826,6 +7887,10 @@ var $;
                 $mol_assert_equal(kinds.name(badge), badge);
                 $mol_assert_equal(artist.fandom_options()[mlp], `#${mlp}`);
                 $mol_assert_equal(settings.head(), [settings.Title(), settings.Lang(), settings.Tools()]);
+                $mol_assert_unique(settings.attr().mol_theme, settings.catalog_theme());
+                $mol_assert_equal(settings.catalog_theme(), 'mint');
+                $mol_assert_equal(artist.Lights().theme_auto(), artist.Theme_auto());
+                $mol_assert_equal(artist.Theme_auto().themes(), ['$mol_theme_light', '$mol_theme_dark']);
                 $mol_assert_equal(Object.keys(settings.Lang().dictionary()), ['ru', 'en']);
                 $mol_assert_equal(artist.title(), 'Nyaftul Kitten Art');
                 $mol_assert_equal(artist.style()['--mol_theme_hue'], '165deg');
@@ -8137,6 +8202,9 @@ var $;
                 const item = card(artist, kit);
                 $mol_assert_equal(titles(artist), [kit, sticker, pinkie]);
                 $mol_assert_equal(artist.Product_add().hidden(), true);
+                $mol_assert_equal(artist.Settings_button(), null);
+                $mol_assert_equal(artist.Help_button(), null);
+                $mol_assert_unique(artist.Preview(), null);
                 $mol_assert_equal(item.changed(), false);
                 $mol_assert_equal(item.Admin(), null);
                 $mol_assert_equal(item.info_rows(), [item.Title(), item.Price_text(), item.Tags()]);
@@ -8144,6 +8212,8 @@ var $;
                 artist.preview(false);
                 $mol_assert_equal(titles(artist), [kit, pinkie, paimon, sticker]);
                 $mol_assert_equal(artist.Product_add().hidden(), false);
+                $mol_assert_unique(artist.Settings_button(), null);
+                $mol_assert_unique(artist.Help_button(), null);
                 $mol_assert_equal(card(artist, kit).changed(), true);
                 artist.settings_toggle();
                 artist.Help_button().checked(true);
