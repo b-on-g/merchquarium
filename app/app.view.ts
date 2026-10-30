@@ -39,7 +39,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		Help_button() {
-			return this.is_admin() || this.help_open() ? super.Help_button() : null!
+			return this.editing() || this.help_open() ? super.Help_button() : null!
 		}
 
 		@ $mol_mem
@@ -246,7 +246,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		Settings_button() {
-			return this.is_admin() || this.settings_open() ? super.Settings_button() : null!
+			return this.editing() || this.settings_open() ? super.Settings_button() : null!
 		}
 
 		catalog_rows() {

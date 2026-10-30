@@ -497,6 +497,9 @@ namespace $ {
 				const item = card( artist, kit )
 				$mol_assert_equal( titles( artist ), [ kit, sticker, pinkie ] )
 				$mol_assert_equal( artist.Product_add().hidden(), true )
+				$mol_assert_equal( artist.Settings_button(), null )
+				$mol_assert_equal( artist.Help_button(), null )
+				$mol_assert_unique( artist.Preview(), null )
 				$mol_assert_equal( item.changed(), false )
 				$mol_assert_equal( item.Admin(), null )
 				$mol_assert_equal( item.info_rows(), [ item.Title(), item.Price_text(), item.Tags() ] )
@@ -505,6 +508,8 @@ namespace $ {
 				artist.preview( false )
 				$mol_assert_equal( titles( artist ), [ kit, pinkie, paimon, sticker ] )
 				$mol_assert_equal( artist.Product_add().hidden(), false )
+				$mol_assert_unique( artist.Settings_button(), null )
+				$mol_assert_unique( artist.Help_button(), null )
 				$mol_assert_equal( card( artist, kit ).changed(), true )
 
 				artist.settings_toggle()
