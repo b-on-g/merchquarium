@@ -1,15 +1,22 @@
-[bog_merchquarium_app_avatar_empty="true"]::before {
+[bog_merchquarium_app_avatar_empty='true']::before {
 	content: var(--bog_merchquarium_decor);
 	font-size: 3rem;
 }
 
 @media (max-width: 40rem) {
-	[bog_merchquarium_app_avatar_empty="true"]::before {
+	[bog_merchquarium_app_avatar_empty='true']::before {
 		font-size: 1.5rem;
 	}
 }
 
 [bog_merchquarium_app][mol_theme='$mol_theme_light'] {
-	--mol_theme_back: oklch( 92% .01 var(--mol_theme_hue) );
-	--mol_theme_hover: oklch( 50% 0 var(--mol_theme_hue) / .1 );
+	--mol_theme_back: oklch(92% 0.01 var(--mol_theme_hue));
+	--mol_theme_hover: oklch(50% 0 var(--mol_theme_hue) / 0.1);
+}
+
+[bog_merchquarium_app_nick] {
+	color: #000;
+	text-shadow:
+	1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff,
+	1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
 }
