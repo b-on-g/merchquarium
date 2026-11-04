@@ -56,12 +56,12 @@ namespace $.$$ {
 				size: [ 'cover' ],
 				position: 'center',
 			},
-			boxShadow: `0 0 0 3px ${ $mol_theme.back }, 0 0 0 5px ${ $mol_theme.current }`,
+			boxShadow: `0 0 0 3px white, 0 0 0 5px white`,
 			'@media': {
 				'(max-width: 40rem)': {
 					width: '3.5rem',
 					height: '3.5rem',
-					boxShadow: `0 0 0 2px ${ $mol_theme.back }, 0 0 0 3px ${ $mol_theme.current }`,
+					boxShadow: `0 0 0 2px white, 0 0 0 3px white `,
 				},
 			},
 		},
