@@ -39371,7 +39371,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/merchquarium/app/app.view.css", "[bog_merchquarium_app_avatar_empty=\"true\"]::before {\n\tcontent: var(--bog_merchquarium_decor);\n\tfont-size: 3rem;\n}\n\n@media (max-width: 40rem) {\n\t[bog_merchquarium_app_avatar_empty=\"true\"]::before {\n\t\tfont-size: 1.5rem;\n\t}\n}\n\n[bog_merchquarium_app][mol_theme='$mol_theme_light'] {\n\t--mol_theme_back: oklch( 92% .01 var(--mol_theme_hue) );\n\t--mol_theme_hover: oklch( 50% 0 var(--mol_theme_hue) / .1 );\n}\n");
+    $mol_style_attach("bog/merchquarium/app/app.view.css", "[bog_merchquarium_app_avatar_empty='true']::before {\n\tcontent: var(--bog_merchquarium_decor);\n\tfont-size: 3rem;\n}\n\n@media (max-width: 40rem) {\n\t[bog_merchquarium_app_avatar_empty='true']::before {\n\t\tfont-size: 1.5rem;\n\t}\n}\n\n[bog_merchquarium_app][mol_theme='$mol_theme_light'] {\n\t--mol_theme_back: oklch(92% 0.01 var(--mol_theme_hue));\n\t--mol_theme_hover: oklch(50% 0 var(--mol_theme_hue) / 0.1);\n}\n\n[bog_merchquarium_app_nick] {\n\tcolor: #000;\n\ttext-shadow:\n\t1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff,\n\t1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;\n}\n");
 })($ || ($ = {}));
 
 ;
