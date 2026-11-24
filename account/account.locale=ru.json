@@ -1,0 +1,18 @@
+{
+	"$bog_merchquarium_account_Id_enter_title": "Войти через Гипер ID",
+	"$bog_merchquarium_account_Id_replace_title": "Заменить аккаунт на этом устройстве",
+	"$bog_merchquarium_account_Show_title": "Сохранить ключ аккаунта",
+	"$bog_merchquarium_account_Warning_title": "Ключ даёт полный доступ к вашим каталогам. Храните его в надёжном месте и никому не показывайте.",
+	"$bog_merchquarium_account_Copy_title": "Скопировать ключ",
+	"$bog_merchquarium_account_Save_title": "Скачать файл",
+	"$bog_merchquarium_account_Enter_title": "Войти по ключу",
+	"$bog_merchquarium_account_Field_hint": "Ключ аккаунта",
+	"$bog_merchquarium_account_import_title": "Войти",
+	"$bog_merchquarium_account_import_sure": "Текущий аккаунт будет заменён. Войти?",
+	"$bog_merchquarium_account_Open_hint": "Выбрать файл с ключом",
+	"$bog_merchquarium_account_error_bad": "Это не похоже на ключ аккаунта",
+	"$bog_merchquarium_account_id_wait": "Получаем ключ из Гипер Базы…",
+	"$bog_merchquarium_account_id_conflict": "На этом устройстве уже есть аккаунт с каталогами. Сохраните его ключ перед заменой.",
+	"$bog_merchquarium_account_id_done": "Вход через Гипер ID: {name}",
+	"$bog_merchquarium_account_scan_Toggle_title": "Сканировать QR"
+}

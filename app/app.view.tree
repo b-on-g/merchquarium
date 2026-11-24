@@ -86,6 +86,7 @@ $bog_merchquarium_app $mol_page
 	body <= content /
 		<= Catalog_missing $bog_merchquarium_start
 			create? <=> catalog_create? null
+			catalogs <= own_links /string
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
 				<= Product_all $mol_button_minor

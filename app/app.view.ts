@@ -144,7 +144,49 @@ namespace $.$$ {
 		}
 
 		auto() {
-			return [ this.seo_register() ]
+			return [ this.seo_register(), this.handover(), this.own_remember() ]
+		}
+
+		own_links() {
+			return this.$.$bog_merchquarium_home_links()
+		}
+
+		@ $mol_mem
+		own_remember() {
+			if( !this.catalog_link() || !this.is_admin() ) return null
+			if( this.own_links().includes( this.catalog_link() ) ) return null
+			return new this.$.$mol_after_tick( ()=> $mol_wire_async( this ).own_add( this.catalog_link() ) )
+		}
+
+		@ $mol_action
+		own_add( link: string ) {
+			this.$.$bog_merchquarium_home_of( 'auto' )!.Catalogs( 'auto' )!.add( link )
+		}
+
+		domain_auth() {
+			const str = String( this.$.$mol_state_local.value( '$giper_baza_auth' ) ?? '' )
+			if( !str ) return null
+			const auth = this.$.$giper_baza_auth.from( str )
+			return auth.byteLength === 128 ? auth : null
+		}
+
+		@ $mol_mem
+		handover() {
+
+			const land = this.catalog()?.land()
+			const old = this.domain_auth()
+			if( !land || !old ) return null
+
+			const self = this.$.$giper_baza_auth.current().pass()
+			if( land.lord_rank( self.lord() ) >= $giper_baza_rank_rule ) return null
+			if( land.lord_rank( old.pass().lord() ) < $giper_baza_rank_rule ) return null
+
+			return new this.$.$mol_after_tick( ()=> $mol_wire_async( this ).handover_run( this.catalog_link() ) )
+		}
+
+		handover_run( link: string ) {
+			const land = this.$.$giper_baza_glob.Land( new this.$.$giper_baza_link( link ) )
+			return this.$.$bog_merchquarium_handover( land, this.domain_auth()!, this.$.$giper_baza_auth.current().pass() ).catch( $mol_fail_log )
 		}
 
 		@ $mol_mem

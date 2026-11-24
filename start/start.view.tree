@@ -1,8 +1,9 @@
 $bog_merchquarium_start $mol_view
 	create? null
+	catalogs /string
 	sub /
 		<= Card $mol_list
-			rows /
+			rows <= card_rows /
 				<= Logo $mol_view
 					sub /
 						<= Logo_icon $mol_icon_fish
@@ -17,11 +18,19 @@ $bog_merchquarium_start $mol_view
 						<= Point*cards
 						<= Point*orders
 						<= Point*search
+				<= Own $mol_list
+					rows <= own_rows /
 				<= Create $mol_button_major
 					title @ \Create my catalog
 					click? <=> create? null
 				<= Note $mol_paragraph
 					title @ \Got a link to someone's catalog? Just open it, nothing to create.
+				<= Account_title $mol_paragraph
+					title @ \Already have an account?
+				<= Account $bog_merchquarium_account
+	Own_link* $mol_link
+		arg <= own_arg* *
+		title <= own_title* \
 	Point* $mol_view
 		sub /
 			<= Point_icon* $mol_view

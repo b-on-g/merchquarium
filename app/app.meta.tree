@@ -1,3 +1,4 @@
 include \/mol/offline/install
 deploy \/bog/assets
 include \/bog/merchquarium/storage
+include \/bog/id/path

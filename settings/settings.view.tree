@@ -29,6 +29,7 @@ $bog_merchquarium_settings $mol_page
 					title <= account_lord \
 				<= Account_id $mol_button_copy
 					title <= account_id \
+				<= Account $bog_merchquarium_account
 		<= Look_section $mol_section
 			title @ \Appearance
 			content /

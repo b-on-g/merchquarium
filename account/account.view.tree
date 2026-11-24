@@ -1,0 +1,61 @@
+$bog_merchquarium_account $mol_list
+	provider \https://b-on-g.github.io/id/
+	scope \merchquarium
+	rows <= parts /
+	Id_enter $mol_button_major
+		title @ \Sign in with Giper ID
+		click? <=> id_enter? null
+	Id_status $mol_paragraph
+		title <= id_status \
+	Id_replace $mol_button_major
+		title @ \Replace the account on this device
+		click? <=> id_replace? null
+	Show $mol_check
+		title @ \Save the account key
+		checked? <=> shown? false
+	Warning $mol_paragraph
+		title @ \The key is full access to your catalogs. Keep it in a safe place and do not show it to anyone.
+	Key_text $mol_paragraph
+		title <= key \
+	Qr $bog_qr
+		uri <= key
+		error_correction \L
+	Keep $mol_view
+		sub /
+			<= Copy $mol_button_copy
+				title @ \Copy key
+				text <= key
+			<= Save $mol_button_download
+				title @ \Download file
+				file_name \merchquarium-account.key
+				blob <= blob null Blob
+	Enter $mol_check
+		title @ \Sign in with a key
+		checked? <=> entering? false
+	Scan $bog_merchquarium_account_scan
+		found? <=> scanned? \
+	Field $mol_string
+		hint @ \Account key
+		value? <=> input? \
+	Load $mol_view
+		sub /
+			<= Import $mol_button_major
+				title <= import_title @ \Sign in
+				click? <=> import? null
+			<= Open $mol_button_open
+				hint @ \Choose a file with the key
+				accept \.key,text/plain
+				multiple false
+				files? <=> file? /File
+	Error $mol_paragraph
+		title <= error? \
+	import_sure @ \The current account will be replaced. Sign in?
+	error_bad @ \This does not look like an account key
+	id_wait @ \Getting the key from Giper Base…
+	id_conflict @ \This device already has an account with catalogs. Save its key before replacing it.
+	id_done @ \Signed in with Giper ID: {name}
+
+$bog_merchquarium_account_scan $bog_keyqr_scan
+	Toggle $mol_check
+		title @ \Scan QR
+		checked? <=> scanning?
