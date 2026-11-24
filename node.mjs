@@ -31526,7 +31526,7 @@ var $;
                 this.settings_open(true);
             }
             auto() {
-                return [this.seo_register(), this.handover(), this.own_remember()];
+                return [this.handover(), this.own_remember(), this.seo_register()];
             }
             own_links() {
                 return this.$.$bog_merchquarium_home_links();
