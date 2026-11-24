@@ -334,6 +334,273 @@ $mol_icon_arrow_left $mol_icon path \M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L1
 
 $mol_icon_fish $mol_icon path \M12,20L12.76,17C9.5,16.79 6.59,15.4 5.75,13.58C5.66,14.06 5.53,14.5 5.33,14.83C4.67,16 3.33,16 2,16C3.1,16 3.5,14.43 3.5,12.5C3.5,10.57 3.1,9 2,9C3.33,9 4.67,9 5.33,10.17C5.53,10.5 5.66,10.94 5.75,11.42C6.4,10 8.32,8.85 10.66,8.32L9,5C11,5 13,5 14.33,5.67C15.46,6.23 16.11,7.27 16.69,8.38C19.61,9.08 22,10.66 22,12.5C22,14.38 19.5,16 16.5,16.66C15.67,17.76 14.86,18.78 14.17,19.33C13.33,20 12.67,20 12,20M17,11A1,1 0 0,0 16,12A1,1 0 0,0 17,13A1,1 0 0,0 18,12A1,1 0 0,0 17,11Z
 
+$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
+
+$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
+
+$mol_button_copy $mol_button_minor
+	blobs /$mol_blob
+		<= text_blob? $mol_blob /
+			/BlobPart <= text <= title
+			* type \text/plain
+		<= html_blob? $mol_blob /
+			/BlobPart <= html \
+			* type \text/html
+	data *
+	sub /
+		<= Icon $mol_icon_clipboard_outline
+		<= title \
+
+$mol_icon_download $mol_icon path \M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z
+
+$mol_button_download $mol_button_minor
+	blob null
+	uri \
+	file_name \blob.bin
+	sub /
+		<= Icon $mol_icon_download
+		<= title \
+
+$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
+
+$mol_button_open $mol_button_minor
+	sub /
+		<= Icon $mol_icon_upload
+		<= Native $mol_button_open_native
+			files? <=> files_handled? <=> files? /File
+			accept <= accept \
+			multiple <= multiple true
+
+$mol_button_open_native $mol_view
+	dom_name \input
+	files? /File
+	attr *
+		type \file
+		accept <= accept \
+		multiple <= multiple true
+	event *
+		change? <=> picked? null
+
+$bog_qr $mol_svg_root
+	uri \
+	module_radius 0.35
+	finder_radius 1.2
+	gradient_angle 45
+	error_correction \M
+	quiet_zone 2
+	center /
+	gradient_id \qr-grad
+	gradient_fill \url(#qr-grad)
+	gradient_stops /
+		\var(--mol_theme_special)
+		\var(--mol_theme_focus)
+	Stop* $mol_svg
+		dom_name \stop
+		attr *
+			^
+			offset <= stop_offset* \0%
+			stop-color <= stop_color* \
+	view_box <= qr_view_box \0 0 1 1
+	sub /
+		<= Defs $mol_svg
+			dom_name \defs
+			sub /
+				<= Gradient $mol_svg
+					dom_name \linearGradient
+					attr *
+						^
+						id <= gradient_id
+						x1 <= grad_x1 \0
+						y1 <= grad_y1 \0
+						x2 <= grad_x2 \1
+						y2 <= grad_y2 \1
+					sub <= gradient_stop_list /
+		<= Modules $mol_svg_path
+			geometry <= modules_d \
+			attr *
+				^
+				fill <= gradient_fill
+		<= Rings $mol_svg_path
+			geometry <= rings_d \
+			attr *
+				^
+				fill <= gradient_fill
+				fill-rule \evenodd
+		<= Centers $mol_svg_path
+			geometry <= centers_d \
+			attr *
+				^
+				fill <= gradient_fill
+		<= Center_wrap $mol_svg
+			dom_name \foreignObject
+			attr *
+				^
+				x <= center_x \0
+				y <= center_y \0
+				width <= center_size \0
+				height <= center_size
+			sub /
+				<= Center_body $mol_view
+					sub <= center
+
+$mol_video_player $mol_view
+	dom_name \video
+	playing? false
+	play null
+	pause null
+	volume? 0
+	time? 0
+	duration 0
+	attr *
+		src <= uri \
+		controls <= controls true
+		autoplay <= autoplay true
+		playsinline <= inline true
+		loop <= loop false
+		muted <= muted false
+		poster <= poster \
+	field *
+		srcObject <= stream null
+	event *
+		volumechange? <=> revolume? null
+		timeupdate? <=> retime? null
+		durationchange? <=> redurate? null
+		playing? <=> playing_event? null
+		play? <=> play_event? null
+		pause? <=> pause_event? null
+
+$mol_video_camera $mol_video_player
+	controls false
+	style *
+		transform <= transform \
+	video_constraints *
+		facingMode <= facing \user
+		aspectRatio <= aspect 1
+		width * ideal <= width <= size 720
+		height * ideal <= height <= size
+	video_settings *
+		brightness <= brightness 128
+		sharpness <= sharpness 2
+		contrast <= contrast 32
+		saturation <= saturation 64
+		advanced /
+			* colorTemperature <= temperature 4000
+			* torch <= torch false
+
+
+$bog_keyqr_scan $mol_view
+	scanning? false
+	found? \
+	sub /
+		<= Toggle $mol_check
+			title @ \Сканировать QR
+			checked? <=> scanning?
+		<= Camera $mol_video_camera
+			facing \environment
+			muted true
+
+$bog_keyqr $mol_list
+	key \
+	found? \
+	shown? false
+	rows /
+		<= Show $mol_check
+			title @ \Показать ключ
+			checked? <=> shown?
+		<= Warning $mol_paragraph
+			title @ \Ключ даёт полный доступ к аккаунту. Показывайте его только своему устройству.
+		<= Qr $bog_qr
+			uri <= key
+			error_correction \L
+		<= Copy $mol_button_copy
+			title @ \Скопировать ключ
+			text <= key
+		<= Scan $bog_keyqr_scan
+			found? <=> found?
+
+$bog_merchquarium_account $mol_list
+	provider \https://b-on-g.github.io/id/
+	scope \merchquarium
+	rows <= parts /
+	Id_enter $mol_button_major
+		title @ \Sign in with Giper ID
+		click? <=> id_enter? null
+	Id_status $mol_paragraph
+		title <= id_status \
+	Id_replace $mol_button_major
+		title @ \Replace the account on this device
+		click? <=> id_replace? null
+	Show $mol_check
+		title @ \Save the account key
+		checked? <=> shown? false
+	Warning $mol_paragraph
+		title @ \The key is full access to your catalogs. Keep it in a safe place and do not show it to anyone.
+	Key_text $mol_paragraph
+		title <= key \
+	Qr $bog_qr
+		uri <= key
+		error_correction \L
+	Keep $mol_view
+		sub /
+			<= Copy $mol_button_copy
+				title @ \Copy key
+				text <= key
+			<= Save $mol_button_download
+				title @ \Download file
+				file_name \merchquarium-account.key
+				blob <= blob null Blob
+	Enter $mol_check
+		title @ \Sign in with a key
+		checked? <=> entering? false
+	Scan $bog_merchquarium_account_scan
+		found? <=> scanned? \
+	Field $mol_string
+		hint @ \Account key
+		value? <=> input? \
+	Load $mol_view
+		sub /
+			<= Import $mol_button_major
+				title <= import_title @ \Sign in
+				click? <=> import? null
+			<= Open $mol_button_open
+				hint @ \Choose a file with the key
+				accept \.key,text/plain
+				multiple false
+				files? <=> file? /File
+	Error $mol_paragraph
+		title <= error? \
+	import_sure @ \The current account will be replaced. Sign in?
+	error_bad @ \This does not look like an account key
+	id_wait @ \Getting the key from Giper Base…
+	id_conflict @ \This device already has an account with catalogs. Save its key before replacing it.
+	id_done @ \Signed in with Giper ID: {name}
+
+$bog_merchquarium_account_scan $bog_keyqr_scan
+	Toggle $mol_check
+		title @ \Scan QR
+		checked? <=> scanning?
+
+$mol_link $mol_view
+	uri \
+	dom_name \a
+	uri_off \
+	uri_native null
+	external false
+	attr *
+		^
+		href <= uri_unsafe <= uri_toggle \
+		title <= hint_safe <= hint \
+		target <= target \_self
+		download <= file_name \
+		mol_link_current <= current false
+		rel <= relation \
+	sub /$mol_view_content
+		<= title
+	arg *
+	event *
+		^
+		click? <=> click? <=> event_click? null
+
 $mol_icon_image $mol_icon path \M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z
 
 $mol_icon_image_multiple $mol_icon path \M22,16V4A2,2 0 0,0 20,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H20A2,2 0 0,0 22,16M11,12L13.03,14.71L16,11L20,16H8M2,6V20A2,2 0 0,0 4,22H18V20H4V6
@@ -346,9 +613,10 @@ $mol_icon_magnify $mol_icon path \M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.
 
 $bog_merchquarium_start $mol_view
 	create? null
+	catalogs /string
 	sub /
 		<= Card $mol_list
-			rows /
+			rows <= card_rows /
 				<= Logo $mol_view
 					sub /
 						<= Logo_icon $mol_icon_fish
@@ -363,11 +631,19 @@ $bog_merchquarium_start $mol_view
 						<= Point*cards
 						<= Point*orders
 						<= Point*search
+				<= Own $mol_list
+					rows <= own_rows /
 				<= Create $mol_button_major
 					title @ \Create my catalog
 					click? <=> create? null
 				<= Note $mol_paragraph
 					title @ \Got a link to someone's catalog? Just open it, nothing to create.
+				<= Account_title $mol_paragraph
+					title @ \Already have an account?
+				<= Account $bog_merchquarium_account
+	Own_link* $mol_link
+		arg <= own_arg* *
+		title <= own_title* \
 	Point* $mol_view
 		sub /
 			<= Point_icon* $mol_view
@@ -551,23 +827,6 @@ $mol_text_code_line $mol_paragraph
 		uri <= token_uri* \
 	find_pos* null
 
-$mol_icon_clipboard $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3
-
-$mol_icon_clipboard_outline $mol_icon path \M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z
-
-$mol_button_copy $mol_button_minor
-	blobs /$mol_blob
-		<= text_blob? $mol_blob /
-			/BlobPart <= text <= title
-			* type \text/plain
-		<= html_blob? $mol_blob /
-			/BlobPart <= html \
-			* type \text/html
-	data *
-	sub /
-		<= Icon $mol_icon_clipboard_outline
-		<= title \
-
 $mol_text_code $mol_stack
 	attr *
 		^
@@ -661,27 +920,6 @@ $mol_grid_cell $mol_view
 	minimal_height 40
 
 $mol_grid_number $mol_grid_cell
-
-$mol_link $mol_view
-	uri \
-	dom_name \a
-	uri_off \
-	uri_native null
-	external false
-	attr *
-		^
-		href <= uri_unsafe <= uri_toggle \
-		title <= hint_safe <= hint \
-		target <= target \_self
-		download <= file_name \
-		mol_link_current <= current false
-		rel <= relation \
-	sub /$mol_view_content
-		<= title
-	arg *
-	event *
-		^
-		click? <=> click? <=> event_click? null
 
 $mol_image $mol_view
 	dom_name \img
@@ -1262,26 +1500,6 @@ $giper_baza_land_rights $mol_list
 						<= Gift_avatar* $mol_avatar
 							id <= peer_id* \
 
-$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
-
-$mol_button_open $mol_button_minor
-	sub /
-		<= Icon $mol_icon_upload
-		<= Native $mol_button_open_native
-			files? <=> files_handled? <=> files? /File
-			accept <= accept \
-			multiple <= multiple true
-
-$mol_button_open_native $mol_view
-	dom_name \input
-	files? /File
-	attr *
-		type \file
-		accept <= accept \
-		multiple <= multiple true
-	event *
-		change? <=> picked? null
-
 $bog_merchquarium_settings $mol_page
 	title @ \Settings
 	Import_summary @ \Will add products: {products}, new categories: {categories}, new fandoms: {fandoms}, new links: {links}
@@ -1313,6 +1531,7 @@ $bog_merchquarium_settings $mol_page
 					title <= account_lord \
 				<= Account_id $mol_button_copy
 					title <= account_id \
+				<= Account $bog_merchquarium_account
 		<= Look_section $mol_section
 			title @ \Appearance
 			content /
@@ -1827,6 +2046,7 @@ $bog_merchquarium_app $mol_page
 	body <= content /
 		<= Catalog_missing $bog_merchquarium_start
 			create? <=> catalog_create? null
+			catalogs <= own_links /string
 		<= Catalog_selected $mol_list
 			rows <= catalog_rows /
 				<= Product_all $mol_button_minor
