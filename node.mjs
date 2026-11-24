@@ -10112,7 +10112,7 @@ var $;
 			return "";
 		}
 		provider(){
-			return "https://b-on-g.github.io/id/";
+			return "https://dev-cmyser.github.io/id/";
 		}
 		scope(){
 			return "merchquarium";
