@@ -1,5 +1,5 @@
 $bog_merchquarium_account $mol_list
-	provider \https://b-on-g.github.io/id/
+	provider \https://dev-cmyser.github.io/id/
 	scope \merchquarium
 	rows <= parts /
 	Id_enter $mol_button_major
