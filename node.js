@@ -31558,6 +31558,7 @@ var $;
                     return null;
                 if (land.lord_rank(old.pass().lord()) < $giper_baza_rank_rule)
                     return null;
+                this.$.$mol_state_time.now(3000);
                 return new this.$.$mol_after_tick(() => $mol_wire_async(this).handover_run(this.catalog_link()));
             }
             handover_run(link) {
