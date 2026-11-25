@@ -46903,8 +46903,14 @@ declare namespace $ {
     };
     export class $bog_id_key_store extends $bog_id_key_store_base {
     }
+    /** Store of app key in granted Land. Null while Land is not synced or not writable */
+    export function $bog_id_key_ready(this: $, pointer: string): $bog_id_key_store | null;
     /** Own key of app, the same on all devices: the first device puts it to granted Land. Empty while Land is not synced */
     export function $bog_id_key(this: $, pointer: string, own: string): string;
+    /** Key of app from granted Land without putting own one. Null while Land is not synced, empty when there is no key yet */
+    export function $bog_id_key_peek(this: $, pointer: string): string | null;
+    /** Puts key to granted Land if it is vacant, waits for master and tells whether it has the key */
+    export function $bog_id_key_put(this: $, pointer: string, key: string): Promise<boolean>;
     export {};
 }
 

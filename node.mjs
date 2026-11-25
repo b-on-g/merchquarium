@@ -20087,7 +20087,7 @@ var $;
                 socket.close();
                 done(faces);
             };
-            const timer = setTimeout(() => finish(null), 3000);
+            const timer = setTimeout(() => finish(null), 6000);
             socket.onopen = () => socket.send(land.face_pack().asArray());
             socket.onerror = () => finish(null);
             socket.onmessage = event => {
@@ -20106,11 +20106,13 @@ var $;
         const yard = this.$giper_baza_glob.yard();
         for (let i = 0; i < 4; ++i) {
             await Promise.all(lands.map(land => $mol_wire_async(land).units_saving()));
-            const master = yard.master_current();
+            const master = await $mol_wire_async(yard).master_current();
             const faces = await Promise.all(lands.map(land => this.$bog_id_land_ask(master, land)));
             if (lands.every((land, at) => faces[at] && $bog_id_land_covers(faces[at], land.faces)))
                 return true;
-            if (i)
+            if (!faces.every(Boolean))
+                await $mol_wire_async(yard).master_next();
+            else if (i)
                 yard.reconnects(null);
             await new Promise(done => setTimeout(done, 800));
         }
@@ -20135,29 +20137,51 @@ var $;
     }) {
     }
     $.$bog_id_key_store = $bog_id_key_store;
-    /** Own key of app, the same on all devices: the first device puts it to granted Land. Empty while Land is not synced */
-    function $bog_id_key(pointer, own) {
+    /** Store of app key in granted Land. Null while Land is not synced or not writable */
+    function $bog_id_key_ready(pointer) {
         const land = this.$bog_id_land(pointer);
         if (!land)
-            return '';
+            return null;
         const tines = land.Tine().items_vary()
             .map(tine => $giper_baza_link_schema.cast(tine)?.str)
             .filter($mol_guard_defined);
         const synced = [pointer, land.link().str, ...tines].map(link => this.$bog_id_land_synced(link));
         if (!synced.every(Boolean))
-            return '';
+            return null;
         const rank = land.lord_rank(land.auth().pass().lord());
         if (rank < $giper_baza_rank_post('late'))
+            return null;
+        return land.Data($bog_id_key_store);
+    }
+    $.$bog_id_key_ready = $bog_id_key_ready;
+    /** Own key of app, the same on all devices: the first device puts it to granted Land. Empty while Land is not synced */
+    function $bog_id_key(pointer, own) {
+        const store = this.$bog_id_key_ready(pointer);
+        if (!store)
             return '';
-        const store = land.Data($bog_id_key_store);
         const key = store.Key()?.val();
         if (key)
             return key;
         store.Key('auto').val(own);
-        land.units_saving();
+        store.land().units_saving();
         return own;
     }
     $.$bog_id_key = $bog_id_key;
+    /** Key of app from granted Land without putting own one. Null while Land is not synced, empty when there is no key yet */
+    function $bog_id_key_peek(pointer) {
+        const store = this.$bog_id_key_ready(pointer);
+        return store && (store.Key()?.val() ?? '');
+    }
+    $.$bog_id_key_peek = $bog_id_key_peek;
+    /** Puts key to granted Land if it is vacant, waits for master and tells whether it has the key */
+    async function $bog_id_key_put(pointer, key) {
+        const actual = await $mol_wire_async(this).$bog_id_key(pointer, key);
+        if (actual !== key)
+            return false;
+        const land = await $mol_wire_async(this).$bog_id_land(pointer);
+        return this.$bog_id_land_push([land]);
+    }
+    $.$bog_id_key_put = $bog_id_key_put;
 })($ || ($ = {}));
 
 ;
